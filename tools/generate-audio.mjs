@@ -99,6 +99,16 @@ const VOICES = {
   it: 'XB0fDUnXU5powFXDhCwa'    // Charlotte
 };
 
+/**
+ * Voce da usare per una lingua, in ordine di precedenza:
+ *   ELEVENLABS_VOICE_EN / _IT   una voce diversa per lingua
+ *   VOICE_ID                    la stessa voce per tutto (caso piu' comune)
+ *   default                     le voci di riferimento qui sopra
+ */
+function voiceFor(env, lang) {
+  return env[`ELEVENLABS_VOICE_${lang.toUpperCase()}`] || env.VOICE_ID || VOICES[lang];
+}
+
 async function synthViaProxy(env, job) {
   const res = await fetch(env.TTS_PROXY_URL, {
     method: 'POST',
@@ -109,7 +119,7 @@ async function synthViaProxy(env, job) {
     body: JSON.stringify({
       text: job.text,
       lang: job.lang,
-      voiceId: env[`ELEVENLABS_VOICE_${job.lang.toUpperCase()}`] || VOICES[job.lang]
+      voiceId: voiceFor(env, job.lang)
     })
   });
   if (!res.ok) throw new Error(`proxy HTTP ${res.status}: ${await res.text()}`);
@@ -117,7 +127,7 @@ async function synthViaProxy(env, job) {
 }
 
 async function synthDirect(env, job) {
-  const voiceId = env[`ELEVENLABS_VOICE_${job.lang.toUpperCase()}`] || VOICES[job.lang];
+  const voiceId = voiceFor(env, job.lang);
   const url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`;
   const res = await fetch(url, {
     method: 'POST',

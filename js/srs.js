@@ -8,7 +8,16 @@
  */
 
 import { CONFIG } from './config.js';
+import { content } from './content-loader.js';
 import { save, persist, dayIndex } from './state.js';
+
+/**
+ * Box da cui un item conta come padroneggiato. Il curriculum in content.json
+ * ha l'ultima parola; CONFIG e' solo il ripiego.
+ */
+function masteryBox() {
+  return content.raw?.curriculum?.masteryBox ?? CONFIG.masteryBox;
+}
 
 /** Restituisce (creandolo se serve) lo stato SRS di un item. */
 export function trackOf(itemId) {
@@ -22,30 +31,57 @@ export function trackOf(itemId) {
 
 /**
  * Registra una risposta.
- * @returns {{box:number, mastered:boolean, firstTime:boolean}}
+ *
+ * Nota importante sulla promozione: il box sale solo se l'item era
+ * effettivamente "scaduto". Se il bambino incontra la stessa parola due volte
+ * nella stessa partita e la indovina entrambe le volte, il box sale una volta
+ * sola. Senza questa regola bastava una sessione fortunata per dichiarare
+ * padroneggiata mezza fase, e la soglia dell'80% non varrebbe nulla.
+ *
+ * L'errore invece retrocede sempre: se sbagli, sbagli.
+ *
+ * @returns {{box:number, mastered:boolean, firstTime:boolean, promoted:boolean}}
  */
 export function recordAnswer(itemId, correct) {
   const rec = trackOf(itemId);
+  const today = dayIndex();
   const firstTime = rec.seen === 0;
-  rec.seen += 1;
-  rec.lastSeen = dayIndex();
+  const wasDue = firstTime || rec.due <= today;
 
+  rec.seen += 1;
+  rec.lastSeen = today;
+
+  let promoted = false;
   if (correct) {
     rec.correct += 1;
-    rec.box = Math.min(rec.box + 1, CONFIG.srsIntervals.length - 1);
+    if (wasDue) {
+      rec.box = Math.min(rec.box + 1, CONFIG.srsIntervals.length - 1);
+      rec.due = today + CONFIG.srsIntervals[rec.box];
+      promoted = true;
+    }
   } else {
     rec.wrong += 1;
     rec.box = 0;   // torna in cima alla coda: la rivedra' subito
+    rec.due = today + CONFIG.srsIntervals[0];
   }
-  rec.due = rec.lastSeen + CONFIG.srsIntervals[rec.box];
   persist();
 
-  return { box: rec.box, mastered: isMastered(itemId), firstTime };
+  return { box: rec.box, mastered: isMastered(itemId), firstTime, promoted };
 }
 
 export function isMastered(itemId) {
   const rec = save.progress.srs[itemId];
-  return Boolean(rec && rec.box >= CONFIG.masteryBox);
+  return Boolean(rec && rec.box >= masteryBox());
+}
+
+/** L'item e' gia' comparso almeno una volta. */
+export function hasBeenSeen(itemId) {
+  return (save.progress.srs[itemId]?.seen || 0) > 0;
+}
+
+/** Quante volte l'item e' stato indovinato in totale. */
+export function timesCorrect(itemId) {
+  return save.progress.srs[itemId]?.correct || 0;
 }
 
 export function masteredCount() {

@@ -27,8 +27,9 @@ Per provarlo sul tablet, apri lo stesso indirizzo usando l'IP del computer
 ```
 index.html               markup e schermate
 style.css                stile, temi, animazioni
-game.js                  avvio, navigazione, costruzione delle partite
-js/config.js             configurazione (nessuna chiave API)
+game.js                  avvio, navigazione, composizione delle partite
+js/config.js             configurazione tecnica (nessuna chiave API)
+js/curriculum.js         regole didattiche: padronanza, sblocchi, mix nuovo/ripasso
 js/state.js              salvataggio localStorage versionato + export/import
 js/content-loader.js     caricamento di content.json, strings.json, sprite
 js/audio.js              voce, effetti sonori, musica
@@ -37,14 +38,15 @@ js/mascot.js             Zibo: disegno, evoluzione, battute
 js/effects.js            coriandoli, stelle, messaggi
 js/minigames.js          i 6 mini-giochi
 js/missions.js           missione del giorno
-js/screens.js            home, album, riepilogo, onboarding
+js/screens.js            home a blocchi di fase, album, riepilogo, onboarding
 js/parents.js            area genitori protetta da PIN
-content.json             parole, frasi, mondi, creature, mini-ebook, film
+content.json             il curriculum: unita', strutture, parole, frasi, creature
 strings.json             testi dell'interfaccia in italiano
 assets/img/sprites.svg   tutte le illustrazioni (sprite SVG unico)
 assets/audio/            audio pre-generati (+ index.json)
 sw.js                    cache offline
 tools/generate-audio.mjs generazione offline degli audio
+tools/curriculum-test.html  test delle regole didattiche
 tools/smoke-test.html    test di sfoglio automatico
 proxy/cloudflare-worker.js  proxy che custodisce la chiave ElevenLabs
 ```
@@ -74,19 +76,35 @@ anche con repository pubblico:
   (`proxy/cloudflare-worker.js`); in `.env` metti solo `TTS_PROXY_URL` e `TTS_PROXY_TOKEN`;
 - **diretto**: `ELEVENLABS_API_KEY` nel `.env` locale, escluso da git.
 
+## Il curriculum
+
+`content.json` non e' un elenco di parole: e' un corso a 8 unita', ognuna con un
+obiettivo linguistico dichiarato (non "colori" ma "il colore va prima del nome"),
+con revisione sistematica delle unita' precedenti in ogni partita e una soglia
+di padronanza dell'80% per passare di fase.
+
+La logica completa e il perche' di ogni scelta stanno in `PROGRESS.md`, sezione
+**Logica del curriculum**. Le regole vivono in `js/curriculum.js`, i parametri
+in `content.json` sotto `curriculum`.
+
 ## Aggiungere contenuti
 
-Si modifica solo `content.json`. Aggiungere parole, frasi o mondi **non rompe i
+Si modifica solo `content.json`. Aggiungere parole, frasi o unita' **non rompe i
 salvataggi**: il progresso e' indicizzato per `id`, e lo schema del salvataggio
 ha un numero di versione con migrazioni in `js/state.js`.
+
+> **Gli id sono permanenti.** Rinominare l'id di una parola equivale a
+> cancellare quello che il bambino ha imparato su quella parola. Si aggiunge,
+> non si rinomina.
 
 Per una parola nuova servono tre cose:
 
 1. una voce in `words` (con `id`, `en`, `it`, `phase`, `theme`, `sprite`);
 2. un `<symbol id="sp-...">` in `assets/img/sprites.svg`;
-3. il suo `id` dentro `items` di un mondo.
+3. il suo `id` dentro `newItems` di un'unita'.
 
-Poi `node tools/generate-audio.mjs` per la voce inglese.
+Poi `node tools/generate-audio.mjs` per la voce inglese, e
+`tools/curriculum-test.html` per controllare che il curriculum resti coerente.
 
 ## Area genitori
 
@@ -104,13 +122,19 @@ perche' una pulizia della cache cancella `localStorage` senza preavviso.
 
 ```bash
 python3 -m http.server 8080
-# apri http://localhost:8080/tools/smoke-test.html        (solo partita)
-# apri http://localhost:8080/tools/smoke-test.html#full   (anche album e genitori)
+# regole didattiche: http://localhost:8080/tools/curriculum-test.html
+# sfoglio a caso:    http://localhost:8080/tools/smoke-test.html
+#                    http://localhost:8080/tools/smoke-test.html#full
 ```
 
-Tocca a caso i comandi del gioco per qualche minuto e riporta gli errori:
-serve a verificare che nessun percorso si rompa, compresi quelli assurdi
-che un bambino di 7 anni prende davvero.
+**`curriculum-test.html`** verifica le regole che il gioco non lascia vedere:
+la soglia di padronanza fra le fasi, il fatto che la padronanza non sia
+accumulabile in una sola sessione, la presenza del ripasso in ogni partita e
+l'integrita' del curriculum (nessun item orfano, nessun riferimento rotto).
+
+**`smoke-test.html`** tocca a caso i comandi per qualche minuto e riporta gli
+errori: verifica che nessun percorso si rompa, compresi quelli assurdi che un
+bambino di 7 anni prende davvero.
 
 ## Stato del progetto
 

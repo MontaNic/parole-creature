@@ -249,8 +249,17 @@ svg.ico, .icon-btn svg { fill: none; }
 .world-card .world-art svg { width: 100%; height: 100%; fill: none; }
 .world-card .world-name { font-weight: 800; font-size: 16px; text-align: center; line-height: 1.2; }
 .world-card .world-meta { font-size: 13px; color: #6b6383; }
-.world-card .world-bar { width: 100%; height: 10px; border-radius: 999px; background: var(--paper-2); overflow: hidden; }
-.world-card .world-bar > i { display: block; height: 100%; background: var(--world-color, var(--brand)); border-radius: 999px; }
+.world-card .world-bar {
+  position: relative; width: 100%; height: 10px;
+  border-radius: 999px; background: var(--paper-2); overflow: hidden;
+}
+.world-card .world-bar > i {
+  position: absolute; left: 0; top: 0; height: 100%;
+  background: var(--world-color, var(--brand)); border-radius: 999px;
+}
+/* Barra scura sopra quella chiara: quanta parte dell'unita' e' gia' solida
+   (padroneggiata), non solo incontrata. */
+.world-card .world-bar > i.mastery { background: var(--ink); opacity: .5; }
 .world-card.is-locked { background: #4a4270; color: rgba(255,255,255,.8); box-shadow: var(--shadow-soft); }
 .world-card.is-locked .world-art { opacity: .28; filter: grayscale(1); }
 .world-card.is-locked .world-meta { color: rgba(255,255,255,.7); }
@@ -262,6 +271,40 @@ svg.ico, .icon-btn svg { fill: none; }
 .world-done-badge svg { width: 100%; height: 100%; fill: none; }
 
 .home-footer { margin-top: 22px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+
+/* ---------------- Blocchi di fase ---------------- */
+.phase-list { display: flex; flex-direction: column; gap: 26px; }
+.phase-block.is-locked .worlds { opacity: .75; }
+
+.phase-head { margin-bottom: 12px; }
+.phase-title-row { display: flex; align-items: center; gap: 10px; }
+.phase-badge {
+  background: rgba(255,255,255,.16); border-radius: 999px;
+  padding: 4px 12px; font-size: 12px; font-weight: 800;
+  letter-spacing: .06em; text-transform: uppercase; flex: none;
+}
+.phase-title { margin: 0; font-size: 18px; font-weight: 800; }
+.phase-lock { width: 22px; height: 22px; margin-left: auto; flex: none; }
+.phase-lock svg { width: 100%; height: 100%; fill: none; }
+
+/* Barra di padronanza della fase, con la tacca della soglia da superare:
+   il traguardo si deve vedere, non solo raggiungere. */
+.phase-meter {
+  position: relative; height: 10px; border-radius: 999px;
+  background: rgba(0,0,0,.3); overflow: hidden; margin: 8px 0 6px;
+}
+.phase-meter > i {
+  position: absolute; left: 0; top: 0; height: 100%;
+  background: var(--brand); border-radius: 999px;
+  transition: width .4s ease;
+}
+.phase-meter > i.is-reached { background: var(--good); }
+.phase-meter > .phase-tick {
+  position: absolute; top: -3px; width: 2px; height: 16px;
+  background: rgba(255,255,255,.85); border-radius: 2px;
+}
+.phase-meta { margin: 0; font-size: 13px; color: #cfc6ea; }
+.phase-hint { margin: 4px 0 0; font-size: 13px; color: var(--brand); font-weight: 700; }
 
 /* ---------------- Album ---------------- */
 .album-grid {
@@ -536,6 +579,12 @@ svg.ico, .icon-btn svg { fill: none; }
 .stat span { font-size: 12px; color: #cfc6ea; }
 .list-plain { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
 .list-plain li { background: rgba(255,255,255,.08); border-radius: var(--radius-s); padding: 12px 14px; font-size: 15px; }
+.hint.mono { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; }
+.phase-report { margin-top: 14px; }
+.phase-report-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px; margin-bottom: 6px;
+}
 .badge {
   display: inline-block; border-radius: 999px; padding: 3px 10px;
   font-size: 12px; font-weight: 800;

@@ -1,31 +1,49 @@
 {
-  "_comment": "Contenuti didattici di 'Draghetti & Parole'. Separati dalla logica di gioco e dai testi UI (strings.json). Aggiungere parole/mondi qui NON rompe i salvataggi: il progresso e' indicizzato per id.",
-  "schemaVersion": 1,
-  "contentVersion": "1.0.0",
+  "_comment": "Curriculum di 'Draghetti & Parole'. NON e' un elenco di parole per tema: e' un corso a unita', ognuna con un obiettivo linguistico esplicito, revisione sistematica delle unita' precedenti e una soglia di padronanza da superare per cambiare fase. Vedi PROGRESS.md, sezione 'Logica del curriculum'.",
+  "schemaVersion": 2,
+  "contentVersion": "2.0.0",
   "audioBasePath": "assets/audio/",
+
+  "_ids_comment": "REGOLA: gli id di parole, frasi e unita' sono PERMANENTI. Il progresso del bambino e' indicizzato per id: rinominarli equivale a cancellare quello che ha imparato. Si aggiunge, non si rinomina.",
+
+  "curriculum": {
+    "masteryBox": 3,
+    "masteryBox_note_it": "Un item e' padroneggiato quando raggiunge il box 3 della ripetizione spaziata, cioe' dopo 3 risposte corrette date in giorni diversi. Rispondere bene tre volte di fila nella stessa sessione non basta.",
+    "unitMasteryRatio": 0.8,
+    "phaseUnlockRatio": 0.8,
+    "phaseUnlockRatio_note_it": "Per aprire una fase serve avere padroneggiato l'80% degli item di tutte le unita' della fase precedente.",
+    "reviewWeight": 0.35,
+    "reviewWeight_note_it": "Quota di domande di ogni partita pescate dalle unita' precedenti (interleaving), oltre alla ripetizione spaziata che agisce dentro ciascun gruppo.",
+    "minReviewItems": 2,
+    "maxBuildWords": 6
+  },
 
   "phases": [
     {
       "id": 1,
-      "title_it": "Parole con immagini e voce",
-      "desc_it": "Riconoscimento visivo e sonoro. Nessuna lettura richiesta: la parola scritta non viene mai mostrata.",
+      "title_it": "Ascolto e riconoscimento",
+      "goal_it": "Collegare suono e immagine senza passare dalla lettura. Le prime strutture entrano come formule intere, ascoltate e riconosciute, non analizzate.",
+      "desc_it": "La parola scritta non compare mai. Il bambino sente e indica.",
       "showWrittenWord": false
     },
     {
       "id": 2,
-      "title_it": "Parole scritte brevi",
-      "desc_it": "La forma scritta compare accanto a immagine e audio, per iniziare a collegare suono e lettere.",
+      "title_it": "La parola scritta",
+      "goal_it": "Rendere visibile cio' che l'orecchio ha gia' imparato, e usare la forma scritta per far notare quello che l'audio nasconde: la -s del plurale e la differenza fra is e are.",
+      "desc_it": "La forma scritta compare accanto a immagine e audio.",
       "showWrittenWord": true
     },
     {
       "id": 3,
-      "title_it": "Frasi semplici",
+      "title_it": "Frasi e mini-dialoghi",
+      "goal_it": "Passare dal riconoscere al costruire: mettere insieme una frase di 4-6 parole e reggere un piccolo scambio di domanda e risposta.",
       "desc_it": "Frasi cortissime e mini-dialoghi, sempre con audio.",
       "showWrittenWord": true
     },
     {
       "id": 4,
       "title_it": "Mini-ebook (graded reader)",
+      "goal_it": "Rivedere lo stesso lessico fuori dal gioco, in un testo continuo.",
       "desc_it": "Libretti originali da generare e inviare su Kindle. Gestiti dai genitori.",
       "showWrittenWord": true,
       "parentOnly": true
@@ -33,9 +51,61 @@
     {
       "id": 5,
       "title_it": "Cartoni e film in inglese",
+      "goal_it": "Esporsi a inglese vero, piu' veloce e disordinato di quello del gioco.",
       "desc_it": "Suggerimenti audiovisivi progressivi. Gestiti dai genitori.",
       "showWrittenWord": true,
       "parentOnly": true
+    }
+  ],
+
+  "structures": [
+    {
+      "id": "st_what_is_it", "phase": 1, "unit": 1,
+      "pattern": "What is it? — A dragon.",
+      "focus_it": "Capire la domanda che introduce ogni esercizio e rispondere con il nome.",
+      "why_it": "E' la formula che il bambino sentira' centinaia di volte nel gioco: impararla subito come blocco unico rende trasparente tutto il resto."
+    },
+    {
+      "id": "st_a_an", "phase": 1, "unit": 2,
+      "pattern": "It's a tooth. / It's an egg.",
+      "focus_it": "L'articolo cambia davanti a vocale: a / an.",
+      "why_it": "In italiano l'articolo non si comporta cosi'. Va sentito presto e spesso, molto prima di poterlo spiegare."
+    },
+    {
+      "id": "st_adj_noun", "phase": 1, "unit": 3,
+      "pattern": "It's a red egg.",
+      "focus_it": "In inglese il colore va PRIMA del nome.",
+      "why_it": "E' l'errore piu' frequente e piu' duraturo degli italiani ('a dragon red'). Si previene facendolo ascoltare come formula, non correggendolo dopo."
+    },
+    {
+      "id": "st_how_many", "phase": 1, "unit": 4,
+      "pattern": "How many? — Three.",
+      "focus_it": "Contare da uno a dieci rispondendo a una domanda.",
+      "why_it": "I numeri restano isolati se non hanno una domanda che li chiama."
+    },
+    {
+      "id": "st_this_these", "phase": 2, "unit": 5,
+      "pattern": "This is a cat. / These are cats.",
+      "focus_it": "This / these e la -s del plurale.",
+      "why_it": "La -s finale in inglese parlato e' quasi impercettibile per un orecchio italiano: si introduce quando la parola scritta la rende visibile."
+    },
+    {
+      "id": "st_be_sing_plur", "phase": 2, "unit": 6,
+      "pattern": "The cat is small. / The cats are small.",
+      "focus_it": "is per uno, are per piu' di uno.",
+      "why_it": "Prima vera regola grammaticale del corso: arriva solo dopo che singolare e plurale sono gia' familiari all'occhio."
+    },
+    {
+      "id": "st_i_have_see", "phase": 3, "unit": 7,
+      "pattern": "I have a sword. / I can see a monster.",
+      "focus_it": "Frasi con soggetto 'io': dire cosa si ha e cosa si vede.",
+      "why_it": "Il primo passo dal riconoscere al dire qualcosa di proprio."
+    },
+    {
+      "id": "st_questions", "phase": 3, "unit": 8,
+      "pattern": "Is it red? — Yes, it is. / What is your name?",
+      "focus_it": "Fare una domanda e dare una risposta breve.",
+      "why_it": "Chiude il cerchio: il bambino usa la stessa struttura con cui il gioco lo interroga dall'unita' 1."
     }
   ],
 
@@ -57,6 +127,7 @@
     { "id": "w_claw",     "en": "claw",     "it": "artiglio",   "phase": 1, "theme": "dino", "sprite": "sp-claw" },
     { "id": "w_bone",     "en": "bone",     "it": "osso",       "phase": 1, "theme": "dino", "sprite": "sp-bone" },
     { "id": "w_nest",     "en": "nest",     "it": "nido",       "phase": 1, "theme": "dino", "sprite": "sp-nest" },
+    { "id": "w_eye",      "en": "eye",      "it": "occhio",     "phase": 1, "theme": "dino", "sprite": "sp-eye" },
 
     { "id": "w_red",      "en": "red",      "it": "rosso",      "phase": 1, "theme": "colori", "sprite": "sp-color-red" },
     { "id": "w_blue",     "en": "blue",     "it": "blu",        "phase": 1, "theme": "colori", "sprite": "sp-color-blue" },
@@ -98,75 +169,170 @@
   ],
 
   "phrases": [
-    { "id": "p_dragon_big",  "en": "The dragon is big.",   "it": "Il drago e' grande.",      "phase": 3, "sprite": "sp-dragon",   "wordIds": ["w_dragon", "w_big"] },
-    { "id": "p_see_monster", "en": "I see a monster!",     "it": "Vedo un mostro!",          "phase": 3, "sprite": "sp-monster",  "wordIds": ["w_monster"] },
-    { "id": "p_knight_happy","en": "The knight is happy.", "it": "Il cavaliere e' felice.",  "phase": 3, "sprite": "sp-knight",   "wordIds": ["w_knight", "w_happy"] },
-    { "id": "p_my_egg",      "en": "This is my egg.",      "it": "Questo e' il mio uovo.",   "phase": 3, "sprite": "sp-egg",      "wordIds": ["w_egg"] },
-    { "id": "p_dino_fast",   "en": "The dinosaur is fast.","it": "Il dinosauro e' veloce.",  "phase": 3, "sprite": "sp-dinosaur", "wordIds": ["w_dinosaur", "w_fast"] },
-    { "id": "p_red_star",    "en": "I see a red star.",    "it": "Vedo una stella rossa.",   "phase": 3, "sprite": "sp-star",     "wordIds": ["w_red", "w_star"] },
+    { "id": "p_q_dragon",  "en": "What is it? A dragon.",  "it": "Che cos'e'? Un drago.",      "phase": 1, "theme": "creature", "structure": "st_what_is_it", "sprite": "sp-dragon", "wordIds": ["w_dragon"] },
+    { "id": "p_q_knight",  "en": "What is it? A knight.",  "it": "Che cos'e'? Un cavaliere.",  "phase": 1, "theme": "creature", "structure": "st_what_is_it", "sprite": "sp-knight", "wordIds": ["w_knight"] },
+    { "id": "p_q_castle",  "en": "What is it? A castle.",  "it": "Che cos'e'? Un castello.",   "phase": 1, "theme": "creature", "structure": "st_what_is_it", "sprite": "sp-castle", "wordIds": ["w_castle"] },
 
-    { "id": "p_hello",       "en": "Hello! I am Zibo.",        "it": "Ciao! Io sono Zibo.",            "phase": 3, "sprite": "sp-zibo",    "wordIds": [] },
-    { "id": "p_your_name",   "en": "What is your name?",       "it": "Come ti chiami?",                "phase": 3, "sprite": "sp-knight",  "wordIds": [] },
-    { "id": "p_how_are_you", "en": "How are you? I am happy.", "it": "Come stai? Io sono felice.",     "phase": 3, "sprite": "sp-happy",   "wordIds": ["w_happy"] },
-    { "id": "p_look_dragon", "en": "Look! A blue dragon!",     "it": "Guarda! Un drago blu!",          "phase": 3, "sprite": "sp-dragon",  "wordIds": ["w_blue", "w_dragon"] },
-    { "id": "p_come_with_me","en": "Come with me, friend!",    "it": "Vieni con me, amico!",           "phase": 3, "sprite": "sp-castle",  "wordIds": [] },
-    { "id": "p_thank_you",   "en": "Thank you! Good night.",   "it": "Grazie! Buona notte.",           "phase": 3, "sprite": "sp-moon",    "wordIds": ["w_moon"] }
+    { "id": "p_an_egg",    "en": "It's an egg.",   "it": "E' un uovo.",     "phase": 1, "theme": "dino", "structure": "st_a_an", "sprite": "sp-egg",   "wordIds": ["w_egg"] },
+    { "id": "p_an_eye",    "en": "It's an eye.",   "it": "E' un occhio.",   "phase": 1, "theme": "dino", "structure": "st_a_an", "sprite": "sp-eye",   "wordIds": ["w_eye"] },
+    { "id": "p_a_tooth",   "en": "It's a tooth.",  "it": "E' un dente.",    "phase": 1, "theme": "dino", "structure": "st_a_an", "sprite": "sp-tooth", "wordIds": ["w_tooth"] },
+    { "id": "p_a_nest",    "en": "It's a nest.",   "it": "E' un nido.",     "phase": 1, "theme": "dino", "structure": "st_a_an", "sprite": "sp-nest",  "wordIds": ["w_nest"] },
+
+    { "id": "p_adj_red",    "en": "It's a red egg.",    "it": "E' un uovo rosso.",  "phase": 1, "theme": "colori", "structure": "st_adj_noun", "sprite": "sp-color-red",    "wordIds": ["w_red", "w_egg"] },
+    { "id": "p_adj_blue",   "en": "It's a blue egg.",   "it": "E' un uovo blu.",    "phase": 1, "theme": "colori", "structure": "st_adj_noun", "sprite": "sp-color-blue",   "wordIds": ["w_blue", "w_egg"] },
+    { "id": "p_adj_green",  "en": "It's a green egg.",  "it": "E' un uovo verde.",  "phase": 1, "theme": "colori", "structure": "st_adj_noun", "sprite": "sp-color-green",  "wordIds": ["w_green", "w_egg"] },
+    { "id": "p_adj_yellow", "en": "It's a yellow egg.", "it": "E' un uovo giallo.", "phase": 1, "theme": "colori", "structure": "st_adj_noun", "sprite": "sp-color-yellow", "wordIds": ["w_yellow", "w_egg"] },
+
+    { "id": "p_hm_one",   "en": "How many? One.",   "it": "Quanti sono? Uno.",   "phase": 1, "theme": "numeri", "structure": "st_how_many", "sprite": "sp-num-1",  "wordIds": ["w_one"] },
+    { "id": "p_hm_three", "en": "How many? Three.", "it": "Quanti sono? Tre.",   "phase": 1, "theme": "numeri", "structure": "st_how_many", "sprite": "sp-num-3",  "wordIds": ["w_three"] },
+    { "id": "p_hm_five",  "en": "How many? Five.",  "it": "Quanti sono? Cinque.","phase": 1, "theme": "numeri", "structure": "st_how_many", "sprite": "sp-num-5",  "wordIds": ["w_five"] },
+    { "id": "p_hm_ten",   "en": "How many? Ten.",   "it": "Quanti sono? Dieci.", "phase": 1, "theme": "numeri", "structure": "st_how_many", "sprite": "sp-num-10", "wordIds": ["w_ten"] },
+
+    { "id": "p_this_cat",    "en": "This is a cat.",    "it": "Questo e' un gatto.",   "phase": 2, "theme": "natura", "structure": "st_this_these", "sprite": "sp-cat",   "wordIds": ["w_cat"] },
+    { "id": "p_these_cats",  "en": "These are cats.",   "it": "Questi sono gatti.",    "phase": 2, "theme": "natura", "structure": "st_this_these", "sprite": "sp-cats",  "wordIds": ["w_cat"] },
+    { "id": "p_this_tree",   "en": "This is a tree.",   "it": "Questo e' un albero.",  "phase": 2, "theme": "natura", "structure": "st_this_these", "sprite": "sp-tree",  "wordIds": ["w_tree"] },
+    { "id": "p_this_star",   "en": "This is a star.",   "it": "Questa e' una stella.", "phase": 2, "theme": "natura", "structure": "st_this_these", "sprite": "sp-star",  "wordIds": ["w_star"] },
+    { "id": "p_these_stars", "en": "These are stars.",  "it": "Queste sono stelle.",   "phase": 2, "theme": "natura", "structure": "st_this_these", "sprite": "sp-stars", "wordIds": ["w_star"] },
+
+    { "id": "p_be_dragon",  "en": "The dragon is big.",      "it": "Il drago e' grande.",         "phase": 2, "theme": "aggettivi", "structure": "st_be_sing_plur", "sprite": "sp-dragon",    "wordIds": ["w_dragon", "w_big"] },
+    { "id": "p_be_dragons", "en": "The dragons are big.",    "it": "I draghi sono grandi.",       "phase": 2, "theme": "aggettivi", "structure": "st_be_sing_plur", "sprite": "sp-dragons",   "wordIds": ["w_dragon", "w_big"] },
+    { "id": "p_be_cat",     "en": "The cat is small.",       "it": "Il gatto e' piccolo.",        "phase": 2, "theme": "aggettivi", "structure": "st_be_sing_plur", "sprite": "sp-cat",       "wordIds": ["w_cat", "w_small"] },
+    { "id": "p_be_cats",    "en": "The cats are small.",     "it": "I gatti sono piccoli.",       "phase": 2, "theme": "aggettivi", "structure": "st_be_sing_plur", "sprite": "sp-cats",      "wordIds": ["w_cat", "w_small"] },
+    { "id": "p_be_dog",     "en": "The dog is happy.",       "it": "Il cane e' felice.",          "phase": 2, "theme": "aggettivi", "structure": "st_be_sing_plur", "sprite": "sp-dog",       "wordIds": ["w_dog", "w_happy"] },
+    { "id": "p_be_dinos",   "en": "The dinosaurs are fast.", "it": "I dinosauri sono veloci.",    "phase": 2, "theme": "aggettivi", "structure": "st_be_sing_plur", "sprite": "sp-dinosaurs", "wordIds": ["w_dinosaur", "w_fast"] },
+
+    { "id": "p_i_sword",   "en": "I have a sword.",        "it": "Io ho una spada.",        "phase": 3, "structure": "st_i_have_see", "sprite": "sp-sword",     "wordIds": ["w_sword"] },
+    { "id": "p_i_monster", "en": "I can see a monster.",   "it": "Io vedo un mostro.",      "phase": 3, "structure": "st_i_have_see", "sprite": "sp-monster",   "wordIds": ["w_monster"] },
+    { "id": "p_i_eggs",    "en": "I have two eggs.",       "it": "Io ho due uova.",         "phase": 3, "structure": "st_i_have_see", "sprite": "sp-eggs",      "wordIds": ["w_two", "w_egg"] },
+    { "id": "p_i_red_egg", "en": "I can see a red egg.",   "it": "Io vedo un uovo rosso.",  "phase": 3, "structure": "st_i_have_see", "sprite": "sp-color-red", "wordIds": ["w_red", "w_egg"] },
+    { "id": "p_i_shield",  "en": "I have a big shield.",   "it": "Io ho uno scudo grande.", "phase": 3, "structure": "st_i_have_see", "sprite": "sp-shield",    "wordIds": ["w_shield", "w_big"] },
+    { "id": "p_i_stars",   "en": "I can see three stars.", "it": "Io vedo tre stelle.",     "phase": 3, "structure": "st_i_have_see", "sprite": "sp-stars",     "wordIds": ["w_three", "w_star"] },
+
+    { "id": "p_ask_name", "en": "What is your name?",   "it": "Come ti chiami?",        "phase": 3, "structure": "st_questions", "sprite": "sp-zibo",        "wordIds": [] },
+    { "id": "p_my_name",  "en": "My name is Zibo.",     "it": "Mi chiamo Zibo.",        "phase": 3, "structure": "st_questions", "sprite": "sp-zibo",        "wordIds": [] },
+    { "id": "p_ask_how",  "en": "How are you? I am happy.", "it": "Come stai? Sto bene.", "phase": 3, "structure": "st_questions", "sprite": "sp-happy",    "wordIds": ["w_happy"] },
+    { "id": "p_ask_red",  "en": "Is it red? Yes, it is.",   "it": "E' rosso? Si', lo e'.", "phase": 3, "structure": "st_questions", "sprite": "sp-color-red", "wordIds": ["w_red"] },
+    { "id": "p_ask_blue", "en": "Is it blue? No, it is green.", "it": "E' blu? No, e' verde.", "phase": 3, "structure": "st_questions", "sprite": "sp-color-green", "wordIds": ["w_blue", "w_green"] },
+    { "id": "p_thanks",   "en": "Thank you! Good night.",   "it": "Grazie! Buona notte.", "phase": 3, "structure": "st_questions", "sprite": "sp-moon",     "wordIds": ["w_moon"] }
   ],
 
   "worlds": [
     {
-      "id": "world_dragons", "order": 1, "phase": 1,
-      "title_it": "La Valle dei Draghi", "sprite": "sp-castle", "color": "#ff7a4d",
-      "items": ["w_dragon", "w_monster", "w_knight", "w_wizard", "w_castle", "w_sword", "w_shield", "w_egg"],
+      "id": "world_dragons", "unit": 1, "order": 1, "phase": 1,
+      "title_it": "La Valle dei Draghi",
+      "objective_it": "Nominare 8 creature e oggetti fantasy, e riconoscere la domanda What is it?",
+      "canDo_it": "So indicare il drago, il cavaliere e il castello quando li sento nominare.",
+      "structureIds": ["st_what_is_it"],
+      "sprite": "sp-castle", "color": "#ff7a4d",
+      "newItems": [
+        "w_dragon", "w_monster", "w_knight", "w_wizard", "w_castle", "w_sword", "w_shield", "w_egg",
+        "p_q_dragon", "p_q_knight", "p_q_castle"
+      ],
+      "reviewFrom": [],
       "minigames": ["match", "listen", "quiz", "hunt"],
       "reward": "c_flamup"
     },
     {
-      "id": "world_dinos", "order": 2, "phase": 1,
-      "title_it": "La Giungla dei Dinosauri", "sprite": "sp-dinosaur", "color": "#3fbf7f",
-      "items": ["w_dinosaur", "w_tail", "w_wing", "w_horn", "w_tooth", "w_claw", "w_bone", "w_nest"],
+      "id": "world_dinos", "unit": 2, "order": 2, "phase": 1,
+      "title_it": "La Giungla dei Dinosauri",
+      "objective_it": "Le parti del corpo dei dinosauri, e l'articolo che cambia: a tooth ma an egg.",
+      "canDo_it": "So dire It's a... e It's an... senza sbagliare l'articolo.",
+      "structureIds": ["st_a_an"],
+      "sprite": "sp-dinosaur", "color": "#3fbf7f",
+      "newItems": [
+        "w_dinosaur", "w_tail", "w_wing", "w_horn", "w_tooth", "w_claw", "w_bone", "w_nest", "w_eye",
+        "p_an_egg", "p_an_eye", "p_a_tooth", "p_a_nest"
+      ],
+      "reviewFrom": ["world_dragons"],
       "minigames": ["match", "listen", "quiz", "hunt"],
       "reward": "c_rocktail"
     },
     {
-      "id": "world_colors", "order": 3, "phase": 1,
-      "title_it": "La Grotta dei Colori", "sprite": "sp-color-purple", "color": "#9a6cf5",
-      "items": ["w_red", "w_blue", "w_green", "w_yellow", "w_orange", "w_purple", "w_black", "w_white"],
+      "id": "world_colors", "unit": 3, "order": 3, "phase": 1,
+      "title_it": "La Grotta dei Colori",
+      "objective_it": "Gli 8 colori e l'ordine inglese: il colore va prima del nome (a red egg, non a egg red).",
+      "canDo_it": "So scegliere l'uovo giusto quando sento colore e nome insieme.",
+      "structureIds": ["st_adj_noun"],
+      "sprite": "sp-color-purple", "color": "#9a6cf5",
+      "newItems": [
+        "w_red", "w_blue", "w_green", "w_yellow", "w_orange", "w_purple", "w_black", "w_white",
+        "p_adj_red", "p_adj_blue", "p_adj_green", "p_adj_yellow"
+      ],
+      "reviewFrom": ["world_dragons", "world_dinos"],
       "minigames": ["match", "quiz", "hunt", "listen"],
       "reward": "c_prisma"
     },
     {
-      "id": "world_numbers", "order": 4, "phase": 1,
-      "title_it": "La Montagna dei Numeri", "sprite": "sp-num-5", "color": "#2f9df5",
-      "items": ["w_one", "w_two", "w_three", "w_four", "w_five", "w_six", "w_seven", "w_eight", "w_nine", "w_ten"],
+      "id": "world_numbers", "unit": 4, "order": 4, "phase": 1,
+      "title_it": "La Montagna dei Numeri",
+      "objective_it": "Contare da uno a dieci rispondendo alla domanda How many?",
+      "canDo_it": "So contare fino a dieci e rispondere quando mi chiedono quanti sono.",
+      "structureIds": ["st_how_many"],
+      "sprite": "sp-num-5", "color": "#2f9df5",
+      "newItems": [
+        "w_one", "w_two", "w_three", "w_four", "w_five", "w_six", "w_seven", "w_eight", "w_nine", "w_ten",
+        "p_hm_one", "p_hm_three", "p_hm_five", "p_hm_ten"
+      ],
+      "reviewFrom": ["world_dragons", "world_dinos", "world_colors"],
       "minigames": ["match", "quiz", "hunt", "listen"],
       "reward": "c_numo"
     },
     {
-      "id": "world_forest", "order": 5, "phase": 2,
-      "title_it": "La Foresta delle Parole", "sprite": "sp-tree", "color": "#25a86a",
-      "items": ["w_cat", "w_dog", "w_fish", "w_bird", "w_tree", "w_star", "w_moon", "w_sun"],
+      "id": "world_forest", "unit": 5, "order": 5, "phase": 2,
+      "title_it": "La Foresta delle Parole",
+      "objective_it": "Animali e natura, con la prima forma scritta: this is a cat / these are cats e la -s del plurale.",
+      "canDo_it": "So vedere la differenza fra una parola singolare e una plurale.",
+      "structureIds": ["st_this_these"],
+      "sprite": "sp-tree", "color": "#25a86a",
+      "newItems": [
+        "w_cat", "w_dog", "w_fish", "w_bird", "w_tree", "w_star", "w_moon", "w_sun",
+        "p_this_cat", "p_these_cats", "p_this_tree", "p_this_star", "p_these_stars"
+      ],
+      "reviewFrom": ["world_dragons", "world_dinos", "world_colors", "world_numbers"],
       "minigames": ["match", "dragdrop", "quiz", "listen"],
       "reward": "c_barky"
     },
     {
-      "id": "world_lake", "order": 6, "phase": 2,
-      "title_it": "Il Lago Magico", "sprite": "sp-fish", "color": "#12b6c9",
-      "items": ["w_big", "w_small", "w_happy", "w_sad", "w_hot", "w_cold", "w_fast", "w_slow"],
+      "id": "world_lake", "unit": 6, "order": 6, "phase": 2,
+      "title_it": "Il Lago Magico",
+      "objective_it": "Gli aggettivi e la prima regola vera: is per uno, are per piu' di uno.",
+      "canDo_it": "So scegliere fra is e are guardando se la cosa e' una o tante.",
+      "structureIds": ["st_be_sing_plur"],
+      "sprite": "sp-fish", "color": "#12b6c9",
+      "newItems": [
+        "w_big", "w_small", "w_happy", "w_sad", "w_hot", "w_cold", "w_fast", "w_slow",
+        "p_be_dragon", "p_be_dragons", "p_be_cat", "p_be_cats", "p_be_dog", "p_be_dinos"
+      ],
+      "reviewFrom": ["world_dragons", "world_dinos", "world_colors", "world_numbers", "world_forest"],
       "minigames": ["match", "dragdrop", "quiz", "hunt"],
       "reward": "c_splashy"
     },
     {
-      "id": "world_bridge", "order": 7, "phase": 3,
-      "title_it": "Il Ponte delle Frasi", "sprite": "sp-sword", "color": "#f2b134",
-      "items": ["p_dragon_big", "p_see_monster", "p_knight_happy", "p_my_egg", "p_dino_fast", "p_red_star"],
+      "id": "world_bridge", "unit": 7, "order": 7, "phase": 3,
+      "title_it": "Il Ponte delle Frasi",
+      "objective_it": "Costruire frasi intere con soggetto io: I have... e I can see...",
+      "canDo_it": "So rimettere in ordine una frase di cinque parole e leggerla.",
+      "structureIds": ["st_i_have_see"],
+      "sprite": "sp-sword", "color": "#f2b134",
+      "newItems": ["p_i_sword", "p_i_monster", "p_i_eggs", "p_i_red_egg", "p_i_shield", "p_i_stars"],
+      "reviewFrom": ["world_dragons", "world_dinos", "world_colors", "world_numbers", "world_forest", "world_lake"],
+      "reviewWeight": 0.45,
       "minigames": ["match", "listen", "build", "quiz"],
       "reward": "c_glimmer"
     },
     {
-      "id": "world_tower", "order": 8, "phase": 3,
-      "title_it": "La Torre dei Dialoghi", "sprite": "sp-wizard", "color": "#e4638f",
-      "items": ["p_hello", "p_your_name", "p_how_are_you", "p_look_dragon", "p_come_with_me", "p_thank_you"],
+      "id": "world_tower", "unit": 8, "order": 8, "phase": 3,
+      "title_it": "La Torre dei Dialoghi",
+      "objective_it": "Fare una domanda e dare una risposta breve: Is it red? Yes, it is.",
+      "canDo_it": "So rispondere quando qualcuno mi chiede come mi chiamo o come sto.",
+      "structureIds": ["st_questions"],
+      "sprite": "sp-wizard", "color": "#e4638f",
+      "newItems": ["p_ask_name", "p_my_name", "p_ask_how", "p_ask_red", "p_ask_blue", "p_thanks"],
+      "reviewFrom": [
+        "world_dragons", "world_dinos", "world_colors", "world_numbers",
+        "world_forest", "world_lake", "world_bridge"
+      ],
+      "reviewWeight": 0.45,
       "minigames": ["listen", "build", "quiz", "match"],
       "reward": "c_torrek"
     }
@@ -182,7 +348,7 @@
     { "id": "c_splashy", "name_it": "Sciazzo",  "sprite": "sp-splashy", "unlock": { "type": "world", "value": "world_lake" },    "fact_it": "Fa bolle a forma di lettera." },
     { "id": "c_glimmer", "name_it": "Baluce",   "sprite": "sp-glimmer", "unlock": { "type": "world", "value": "world_bridge" },  "fact_it": "Si accende quando qualcuno dice una frase intera." },
     { "id": "c_torrek",  "name_it": "Torrek",   "sprite": "sp-torrek",  "unlock": { "type": "world", "value": "world_tower" },   "fact_it": "Custode della torre: risponde solo in inglese." },
-    { "id": "c_stellina","name_it": "Stellina", "sprite": "sp-stellina","unlock": { "type": "mastered", "value": 10 },  "fact_it": "Compare quando padroneggi 10 parole." },
+    { "id": "c_stellina","name_it": "Stellina", "sprite": "sp-stellina","unlock": { "type": "phase", "value": 1 },      "fact_it": "Arriva quando hai finito davvero la prima fase." },
     { "id": "c_umbra",   "name_it": "Umbra",    "sprite": "sp-umbra",   "unlock": { "type": "mastered", "value": 25 },  "fact_it": "Timida: esce dall'ombra a 25 parole padroneggiate." },
     { "id": "c_goldwing","name_it": "Aladoro",  "sprite": "sp-goldwing","unlock": { "type": "streak", "value": 7 },     "fact_it": "Il drago d'oro: arriva dopo 7 giorni di fila." }
   ],
@@ -207,85 +373,61 @@
 
   "miniEbooks": [
     {
-      "id": "ebook_01",
-      "order": 1,
-      "title": "Zibo and the Red Egg",
-      "phase": 4,
-      "unlockAfterWorld": "world_dragons",
-      "status": "da generare",
-      "targetWords": 60,
-      "newWordsPerPage": 1,
-      "vocabularyUsed": ["w_dragon", "w_egg", "w_red", "w_big", "w_castle"],
-      "synopsis_it": "Zibo trova un uovo rosso davanti al castello e aspetta che si schiuda."
+      "id": "ebook_01", "order": 1, "title": "Zibo and the Red Egg", "phase": 4,
+      "unlockAfterWorld": "world_dragons", "status": "da generare",
+      "targetWords": 60, "newWordsPerPage": 1,
+      "structures": ["st_what_is_it"],
+      "vocabularyUsed": ["w_dragon", "w_egg", "w_castle", "w_knight", "w_monster"],
+      "synopsis_it": "Zibo trova un uovo davanti al castello e aspetta che si schiuda."
     },
     {
-      "id": "ebook_02",
-      "order": 2,
-      "title": "The Dinosaur with One Horn",
-      "phase": 4,
-      "unlockAfterWorld": "world_dinos",
-      "status": "da generare",
-      "targetWords": 70,
-      "newWordsPerPage": 1,
-      "vocabularyUsed": ["w_dinosaur", "w_horn", "w_tail", "w_one", "w_nest"],
+      "id": "ebook_02", "order": 2, "title": "The Dinosaur with One Horn", "phase": 4,
+      "unlockAfterWorld": "world_dinos", "status": "da generare",
+      "targetWords": 70, "newWordsPerPage": 1,
+      "structures": ["st_what_is_it", "st_a_an"],
+      "vocabularyUsed": ["w_dinosaur", "w_horn", "w_tail", "w_nest", "w_eye", "w_egg"],
       "synopsis_it": "Un dinosauro con un solo corno cerca il suo nido nella giungla."
     },
     {
-      "id": "ebook_03",
-      "order": 3,
-      "title": "Colors in the Cave",
-      "phase": 4,
-      "unlockAfterWorld": "world_colors",
-      "status": "da generare",
-      "targetWords": 80,
-      "newWordsPerPage": 1,
-      "vocabularyUsed": ["w_red", "w_blue", "w_green", "w_yellow", "w_purple", "w_dragon"],
+      "id": "ebook_03", "order": 3, "title": "Colors in the Cave", "phase": 4,
+      "unlockAfterWorld": "world_colors", "status": "da generare",
+      "targetWords": 80, "newWordsPerPage": 1,
+      "structures": ["st_a_an", "st_adj_noun"],
+      "vocabularyUsed": ["w_red", "w_blue", "w_green", "w_yellow", "w_purple", "w_egg", "w_dragon"],
       "synopsis_it": "Prisma il camaleonte accende la grotta con un colore alla volta."
     },
     {
-      "id": "ebook_04",
-      "order": 4,
-      "title": "Ten Little Stars",
-      "phase": 4,
-      "unlockAfterWorld": "world_numbers",
-      "status": "da generare",
-      "targetWords": 90,
-      "newWordsPerPage": 1,
+      "id": "ebook_04", "order": 4, "title": "Ten Little Stars", "phase": 4,
+      "unlockAfterWorld": "world_numbers", "status": "da generare",
+      "targetWords": 90, "newWordsPerPage": 1,
+      "structures": ["st_adj_noun", "st_how_many"],
       "vocabularyUsed": ["w_one", "w_two", "w_three", "w_ten", "w_star", "w_moon"],
       "synopsis_it": "Numo il gufo conta le stelle da uno a dieci prima di dormire."
     },
     {
-      "id": "ebook_05",
-      "order": 5,
-      "title": "The Happy Knight",
-      "phase": 4,
-      "unlockAfterWorld": "world_forest",
-      "status": "da generare",
-      "targetWords": 110,
-      "newWordsPerPage": 2,
-      "vocabularyUsed": ["w_knight", "w_happy", "w_sad", "w_dog", "w_tree", "w_sun"],
+      "id": "ebook_05", "order": 5, "title": "The Happy Knight", "phase": 4,
+      "unlockAfterWorld": "world_forest", "status": "da generare",
+      "targetWords": 110, "newWordsPerPage": 2,
+      "structures": ["st_this_these", "st_be_sing_plur"],
+      "vocabularyUsed": ["w_knight", "w_happy", "w_sad", "w_dog", "w_tree", "w_sun", "w_cat"],
       "synopsis_it": "Un cavaliere triste ritrova il sorriso grazie a un cane nella foresta."
     },
     {
-      "id": "ebook_06",
-      "order": 6,
-      "title": "Hello, Friend!",
-      "phase": 4,
-      "unlockAfterWorld": "world_bridge",
-      "status": "da generare",
-      "targetWords": 130,
-      "newWordsPerPage": 2,
-      "vocabularyUsed": ["p_hello", "p_your_name", "p_how_are_you", "p_come_with_me", "p_thank_you"],
+      "id": "ebook_06", "order": 6, "title": "Hello, Friend!", "phase": 4,
+      "unlockAfterWorld": "world_bridge", "status": "da generare",
+      "targetWords": 130, "newWordsPerPage": 2,
+      "structures": ["st_i_have_see", "st_questions"],
+      "vocabularyUsed": ["p_ask_name", "p_my_name", "p_ask_how", "p_i_sword", "p_i_monster", "p_thanks"],
       "synopsis_it": "Zibo attraversa il ponte e presenta se stesso a ogni creatura che incontra."
     }
   ],
 
   "mediaRecommendations": [
-    { "title": "Peppa Pig (inglese, sottotitoli italiani)", "phase": 5, "level_it": "Livello 1 — dopo i primi 2 mondi", "note": "Episodi di 5 minuti, lessico quotidiano semplicissimo e molto ripetuto." },
-    { "title": "Bluey (inglese, sottotitoli italiani)", "phase": 5, "level_it": "Livello 1-2", "note": "Frasi brevi e situazioni familiari. Accento australiano chiaro." },
-    { "title": "Ben and Holly's Little Kingdom (inglese, sottotitoli italiani)", "phase": 5, "level_it": "Livello 2 — tema magia", "note": "Perfetto per chi ama fate, folletti e re: lessico fantasy semplice." },
-    { "title": "Dragons: Rescue Riders (inglese, sottotitoli inglesi)", "phase": 5, "level_it": "Livello 3 — tema draghi", "note": "Draghi parlanti, frasi piu' lunghe. Passare ai sottotitoli inglesi qui." },
-    { "title": "Gigantosaurus (inglese, sottotitoli inglesi)", "phase": 5, "level_it": "Livello 3 — tema dinosauri", "note": "Dinosauri e avventura, ritmo dei dialoghi ancora gestibile." },
-    { "title": "How to Train Your Dragon — film (inglese, sottotitoli inglesi)", "phase": 5, "level_it": "Livello 4 — traguardo", "note": "Da tenere come 'premio' quando le frasi della fase 3 sono solide." }
+    { "title": "Peppa Pig (inglese, sottotitoli italiani)", "phase": 5, "level_it": "Dopo la fase 1", "note": "Episodi di 5 minuti, lessico quotidiano semplicissimo e molto ripetuto." },
+    { "title": "Bluey (inglese, sottotitoli italiani)", "phase": 5, "level_it": "Dopo la fase 1", "note": "Frasi brevi e situazioni familiari. Accento australiano chiaro." },
+    { "title": "Ben and Holly's Little Kingdom (inglese, sottotitoli italiani)", "phase": 5, "level_it": "Durante la fase 2 — tema magia", "note": "Perfetto per chi ama fate e folletti: lessico fantasy semplice." },
+    { "title": "Dragons: Rescue Riders (inglese, sottotitoli inglesi)", "phase": 5, "level_it": "Durante la fase 3 — tema draghi", "note": "Draghi parlanti, frasi piu' lunghe. Passare ai sottotitoli inglesi qui." },
+    { "title": "Gigantosaurus (inglese, sottotitoli inglesi)", "phase": 5, "level_it": "Durante la fase 3 — tema dinosauri", "note": "Dinosauri e avventura, ritmo dei dialoghi ancora gestibile." },
+    { "title": "How to Train Your Dragon — film (inglese, sottotitoli inglesi)", "phase": 5, "level_it": "Dopo la fase 3 — traguardo", "note": "Da tenere come premio quando le frasi della fase 3 sono solide." }
   ]
 }

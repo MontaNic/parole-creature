@@ -16,6 +16,9 @@ export const content = {
   ebooks: [],
   media: [],
   mascotStages: [],
+  structures: [],
+  /** structureId -> struttura linguistica */
+  structureById: new Map(),
   /** id -> parola o frase, per accesso diretto */
   byId: new Map(),
   /** worldId -> mondo */
@@ -51,6 +54,7 @@ export async function loadAll() {
   content.ebooks = (contentJson.miniEbooks || []).slice().sort((a, b) => a.order - b.order);
   content.media = contentJson.mediaRecommendations || [];
   content.mascotStages = (contentJson.mascotStages || []).slice().sort((a, b) => a.level - b.level);
+  content.structures = contentJson.structures || [];
 
   content.byId.clear();
   for (const w of content.words) content.byId.set(w.id, { ...w, kind: 'word' });
@@ -58,6 +62,9 @@ export async function loadAll() {
 
   content.worldById.clear();
   for (const w of content.worlds) content.worldById.set(w.id, w);
+
+  content.structureById.clear();
+  for (const st of content.structures) content.structureById.set(st.id, st);
 
   // Lo sprite e' opzionale: se manca, il gioco resta usabile (senza disegni).
   await injectSprites().catch(err => console.warn('[content] sprite non caricato:', err));
@@ -129,25 +136,25 @@ export function englishOf(item) {
   return item ? item.en : '';
 }
 
-/** Mondi effettivamente disponibili viste le impostazioni dei genitori. */
-export function availableWorlds(settings) {
-  const disabled = new Set(settings.themesDisabled || []);
-  return content.worlds.filter(w => {
-    if (settings.phasesEnabled && settings.phasesEnabled[w.phase] === false) return false;
-    // Un mondo e' nascosto se tutti i suoi item appartengono a temi disattivati.
-    const items = w.items.map(getItem).filter(Boolean);
-    if (!items.length) return false;
-    return items.some(it => !disabled.has(it.theme));
-  });
+/**
+ * Nota: quali unita' siano giocabili, quali item entrino in una partita e
+ * quando si apre una fase NON si decide qui. Sono regole di curriculum e
+ * stanno in js/curriculum.js.
+ */
+
+/** Struttura linguistica per id. */
+export function getStructure(id) {
+  return content.structureById.get(id) || null;
 }
 
-/** Item di un mondo, filtrati per temi attivi. */
-export function worldItems(world, settings) {
-  const disabled = new Set(settings.themesDisabled || []);
-  return world.items
-    .map(getItem)
-    .filter(Boolean)
-    .filter(it => !it.theme || !disabled.has(it.theme));
+/** Le strutture linguistiche insegnate da un'unita'. */
+export function structuresOf(world) {
+  return (world.structureIds || []).map(getStructure).filter(Boolean);
+}
+
+/** Descrizione della fase. */
+export function getPhase(id) {
+  return content.phases.find(p => p.id === id) || null;
 }
 
 /** Elenco dei temi presenti nei contenuti (per l'area genitori). */

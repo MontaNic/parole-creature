@@ -1,39 +1,133 @@
 {
-  "_comment": "Schema di riferimento per content.json — Claude Code lo popolerà con i contenuti reali",
-  "schemaVersion": 1,
+  "_comment": "Schema di riferimento di content.json. Non e' un JSON Schema formale: e' un esempio commentato della forma attesa, da tenere allineato al file reale. Le regole che lo interpretano stanno in js/curriculum.js.",
+  "schemaVersion": 2,
+  "contentVersion": "x.y.z",
+
+  "_ids_comment": "REGOLA: gli id sono PERMANENTI. Il progresso del bambino e' indicizzato per id: rinominarne uno equivale a cancellare quello che ha imparato su quell'item. Si aggiunge, non si rinomina.",
+
+  "curriculum": {
+    "_comment": "Parametri globali del corso.",
+    "masteryBox": "box SRS da cui un item conta come padroneggiato (3 = tre risposte giuste in giorni diversi)",
+    "unitMasteryRatio": "quota di item padroneggiati per dire che un'unita' e' solida",
+    "phaseUnlockRatio": "quota di item della fase precedente da padroneggiare per aprire la fase successiva (0.8 = 80%)",
+    "reviewWeight": "quota di domande di ogni partita pescate dalle unita' precedenti",
+    "minReviewItems": "minimo di domande di ripasso per partita",
+    "maxBuildWords": "oltre questa lunghezza una frase non va al gioco 'ricomponi la frase'"
+  },
+
+  "phases": [
+    {
+      "id": 1,
+      "title_it": "Titolo della fase",
+      "goal_it": "Che cosa la fase vuole ottenere, e perche' in quest'ordine",
+      "desc_it": "Descrizione breve",
+      "showWrittenWord": false,
+      "parentOnly": false
+    }
+  ],
+
+  "structures": [
+    {
+      "id": "st_esempio",
+      "phase": 1,
+      "unit": 1,
+      "pattern": "It's a red egg.",
+      "focus_it": "Che cosa si impara",
+      "why_it": "Perche' vale la pena insegnarlo a un bambino italiano"
+    }
+  ],
+
   "words": [
     {
-      "id": "dragon_01",
+      "id": "w_dragon",
       "en": "dragon",
       "it": "drago",
       "phase": 1,
-      "image": "assets/img/dragon.webp",
-      "audio": "assets/audio/dragon.mp3"
+      "theme": "creature",
+      "sprite": "sp-dragon"
     }
   ],
+
   "phrases": [
     {
-      "id": "phrase_01",
-      "en": "The dragon is big",
-      "it": "Il drago è grande",
-      "phase": 3,
-      "audio": "assets/audio/phrase_01.mp3"
+      "id": "p_adj_red",
+      "en": "It's a red egg.",
+      "it": "E' un uovo rosso.",
+      "phase": 1,
+      "theme": "colori",
+      "structure": "st_adj_noun",
+      "sprite": "sp-color-red",
+      "wordIds": ["w_red", "w_egg"]
     }
   ],
+
+  "worlds": [
+    {
+      "_comment": "Un 'world' e' un'unita' didattica. Ordine, obiettivo e ripasso sono obbligatori: sono il curriculum.",
+      "id": "world_esempio",
+      "unit": 1,
+      "order": 1,
+      "phase": 1,
+      "title_it": "Nome del mondo",
+      "objective_it": "Obiettivo linguistico esplicito, non solo il tema",
+      "canDo_it": "Quello che il bambino sa fare alla fine, detto con parole sue",
+      "structureIds": ["st_esempio"],
+      "sprite": "sp-castle",
+      "color": "#ff7a4d",
+      "newItems": ["w_dragon", "p_adj_red"],
+      "reviewFrom": ["world_precedente"],
+      "reviewWeight": "opzionale: sovrascrive curriculum.reviewWeight per questa unita'",
+      "minigames": ["match", "listen", "quiz", "hunt", "dragdrop", "build"],
+      "reward": "c_flamup"
+    }
+  ],
+
+  "creatures": [
+    {
+      "id": "c_esempio",
+      "name_it": "Nome",
+      "sprite": "sp-flamup",
+      "unlock": {
+        "_comment": "type: start | world (value = id unita') | phase (value = numero fase) | mastered (value = n parole) | streak (value = giorni)",
+        "type": "world",
+        "value": "world_esempio"
+      },
+      "fact_it": "Una frase simpatica"
+    }
+  ],
+
+  "mascotStages": [
+    { "level": 1, "label_it": "Cucciolo", "scale": 1.0, "accessory": "none | scarf | hat | crown" }
+  ],
+
+  "dailyMissions": [
+    {
+      "id": "m_esempio",
+      "type": "correctAnswers | repeats | themeCorrect | lessons | reviewCorrect",
+      "target": 5,
+      "theme": "solo per themeCorrect",
+      "sprite": "sp-star",
+      "text_it": "Testo mostrato al bambino"
+    }
+  ],
+
   "miniEbooks": [
     {
       "id": "ebook_01",
-      "title": "TBD",
+      "order": 1,
+      "title": "Titolo in inglese",
       "phase": 4,
+      "unlockAfterWorld": "world_esempio",
       "status": "da generare",
-      "vocabularyUsed": []
+      "targetWords": 60,
+      "newWordsPerPage": 1,
+      "structures": ["st_esempio"],
+      "vocabularyUsed": ["w_dragon"],
+      "synopsis_it": "Trama in una riga"
     }
   ],
+
   "mediaRecommendations": [
-    {
-      "title": "TBD",
-      "phase": 5,
-      "note": ""
-    }
+    { "title": "Titolo", "phase": 5, "level_it": "Quando proporlo", "note": "Perche'" }
   ]
 }

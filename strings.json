@@ -38,6 +38,10 @@
     "error_no_content_hint": "Avvia il gioco da un server locale: nella cartella del progetto esegui  python3 -m http.server 8080  e apri http://localhost:8080",
     "offline_badge": "Modalita' offline",
     "unknown_creature": "???",
+    "phase_label": "Fase",
+    "mastered_label": "padroneggiate",
+    "phase_locked_hint": "Ancora {n} parole da padroneggiare per aprire questa fase",
+    "phase_unlocked": "Fase completata!",
     "replay_world": "Rigioca",
     "play_world": "Gioca"
   },
@@ -98,6 +102,14 @@
     "themes_enabled": "Temi attivi",
     "vacation_mode": "Pausa vacanza",
     "vacation_hint": "Sospende il gioco senza perdere i progressi.",
+    "unlock_all_phases": "Sblocca tutte le fasi",
+    "unlock_all_phases_hint": "Scavalca la soglia di padronanza e rende subito accessibili tutte le fasi. Utile se il bambino e' gia' piu' avanti del corso o se una fase lo sta annoiando. Da spento, per aprire una fase serve aver padroneggiato l'80% di quella precedente.",
+    "curriculum_title": "Curriculum",
+    "curriculum_intro": "Il corso e' diviso in unita', ognuna con un obiettivo linguistico preciso. Ogni unita' ripassa sistematicamente le precedenti, e per cambiare fase serve una soglia di padronanza dimostrata.",
+    "objective_label": "Obiettivo",
+    "structure_label": "Struttura",
+    "phase_threshold_label": "Soglia per aprire la fase successiva",
+    "mastery_explained": "Una parola conta come padroneggiata quando viene indovinata piu' volte in giorni diversi. Rispondere bene tre volte nella stessa sessione non basta: il conteggio sale al massimo una volta al giorno per parola.",
     "vacation_active_message": "Il gioco e' in pausa. Torna presto!",
     "child_name": "Nome del bambino",
     "kindle_email_label": "Email Send-to-Kindle",
@@ -157,6 +169,9 @@
     "session_end": "Per oggi basta cosi'. Ci vediamo domani{name}!",
     "idle_1": "Tocca un mondo per iniziare.",
     "idle_2": "Vuoi ripassare qualche parola?",
-    "streak_kept": "Anche oggi ci siamo! La nostra striscia continua."
+    "streak_kept": "Anche oggi ci siamo! La nostra striscia continua.",
+    "locked_phase": "Ripassiamo ancora un pochino! Ci mancano {n} parole e poi apriamo il mondo nuovo.",
+    "locked_unit": "Finiamo prima il mondo qui accanto, poi tocca a questo!",
+    "phase_done": "Abbiamo finito un'intera fase! Guarda quante cose sai dire adesso."
   }
 }

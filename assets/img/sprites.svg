@@ -512,4 +512,52 @@
 <symbol id="sp-icon-mission" viewBox="0 0 100 100"><g class="o" fill="none"><rect x="22" y="14" width="56" height="72" rx="8" fill="#ffffff"/><path d="M34 36 h32 M34 52 h32 M34 68 h20" class="o-thin"/><circle cx="72" cy="70" r="16" fill="#facc15"/><path d="M64 70 l6 6 l12 -12" stroke-width="5"/></g></symbol>
 <symbol id="sp-icon-replay" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M78 50 a28 28 0 1 1 -10 -21" stroke-width="8"/><path d="M74 12 v18 h-18" stroke-width="8"/></g></symbol>
 <symbol id="sp-icon-star" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M50 12 L61 38 L88 40 L67 58 L74 86 L50 70 L26 86 L33 58 L12 40 L39 38Z" fill="#facc15"/></g></symbol>
+
+<!-- ============ AGGIUNTE DEL CURRICULUM v2 ============ -->
+
+<!-- "an eye": serve alla contrapposizione a / an dell'unita' 2 -->
+<symbol id="sp-eye" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M8 50 C26 24 74 24 92 50 C74 76 26 76 8 50Z" fill="#ffffff"/>
+    <circle cx="50" cy="50" r="18" fill="#38bdf8"/>
+    <circle cx="50" cy="50" r="8" fill="#2b2140" stroke="none"/>
+    <circle cx="44" cy="44" r="3.5" fill="#ffffff" stroke="none"/>
+  </g>
+</symbol>
+
+<!--
+  Plurali. Sono composti riusando i simboli singolari con <use>: nessun
+  disegno nuovo, e il plurale resta visibilmente "la stessa cosa, ma tante".
+  E' esattamente il contrasto che serve per far notare la -s (unita' 5 e 6).
+-->
+<symbol id="sp-cats" viewBox="0 0 100 100">
+  <use href="#sp-cat" transform="translate(2 8) scale(0.46)"/>
+  <use href="#sp-cat" transform="translate(52 8) scale(0.46)"/>
+  <use href="#sp-cat" transform="translate(27 48) scale(0.46)"/>
+</symbol>
+
+<symbol id="sp-stars" viewBox="0 0 100 100">
+  <use href="#sp-star" transform="translate(2 8) scale(0.46)"/>
+  <use href="#sp-star" transform="translate(52 8) scale(0.46)"/>
+  <use href="#sp-star" transform="translate(27 48) scale(0.46)"/>
+</symbol>
+
+<symbol id="sp-dragons" viewBox="0 0 100 100">
+  <use href="#sp-dragon" transform="translate(2 8) scale(0.46)"/>
+  <use href="#sp-dragon" transform="translate(52 8) scale(0.46)"/>
+  <use href="#sp-dragon" transform="translate(27 48) scale(0.46)"/>
+</symbol>
+
+<symbol id="sp-dinosaurs" viewBox="0 0 100 100">
+  <use href="#sp-dinosaur" transform="translate(2 8) scale(0.46)"/>
+  <use href="#sp-dinosaur" transform="translate(52 8) scale(0.46)"/>
+  <use href="#sp-dinosaur" transform="translate(27 48) scale(0.46)"/>
+</symbol>
+
+<!-- "two eggs": due, non tre, perche' la frase dice esattamente two -->
+<symbol id="sp-eggs" viewBox="0 0 100 100">
+  <use href="#sp-egg" transform="translate(0 22) scale(0.55)"/>
+  <use href="#sp-egg" transform="translate(45 22) scale(0.55)"/>
+</symbol>
+
 </svg>

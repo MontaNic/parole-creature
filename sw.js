@@ -12,7 +12,7 @@
  * Alzare CACHE_VERSION a ogni release per invalidare le vecchie cache.
  */
 
-const CACHE_VERSION = 'v1.0.0';
+const CACHE_VERSION = 'v1.1.0';
 const SHELL_CACHE = `dp-shell-${CACHE_VERSION}`;
 const AUDIO_CACHE = `dp-audio-${CACHE_VERSION}`;
 
@@ -30,6 +30,7 @@ const SHELL_ASSETS = [
   'js/content-loader.js',
   'js/audio.js',
   'js/srs.js',
+  'js/curriculum.js',
   'js/mascot.js',
   'js/effects.js',
   'js/minigames.js',

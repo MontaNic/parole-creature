@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<!-- La pagina sta in tools/ ma i moduli e i dati vivono nella radice. -->
+<base href="../">
+<title>Test del curriculum — Draghetti &amp; Parole</title>
+<style>
+  body { font: 14px ui-monospace, Menlo, monospace; background: #111; color: #ddd; padding: 20px; line-height: 1.6; }
+  h1 { font-size: 16px }
+  .ok { color: #7ee787 } .ko { color: #ff7b72 } .note { color: #8b949e }
+  #verdict { font-size: 18px; font-weight: bold; margin-top: 18px }
+</style>
+</head>
+<body>
+<h1>Test delle regole del curriculum</h1>
+<div id="out">esecuzione...</div>
+
+<!-- loadAll cerca questo contenitore per iniettare lo sprite -->
+<div id="sprite-host" hidden></div>
+
+<script type="module">
+/*
+ * Verifica le regole didattiche che il click a caso non puo' controllare:
+ * la soglia di padronanza fra le fasi, il fatto che la padronanza non sia
+ * accumulabile in una sola sessione, e la presenza del ripasso sistematico.
+ *
+ * Uso:
+ *   python3 -m http.server 8080
+ *   apri http://localhost:8080/tools/curriculum-test.html
+ */
+import { loadAll, content, getItem } from './js/content-loader.js';
+import { save, resetSave, dayIndex } from './js/state.js';
+import { recordAnswer, isMastered } from './js/srs.js';
+import {
+  phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
+  splitRound, unitItems, unitReviewItems, curriculumConfig, playablePhases
+} from './js/curriculum.js';
+
+const out = document.getElementById('out');
+let pass = 0, fail = 0;
+
+function check(label, condition, detail = '') {
+  const ok = Boolean(condition);
+  ok ? pass++ : fail++;
+  const line = document.createElement('div');
+  line.className = ok ? 'ok' : 'ko';
+  line.textContent = `${ok ? 'OK  ' : 'KO  '} ${label}${detail ? '  — ' + detail : ''}`;
+  out.appendChild(line);
+}
+
+function note(text) {
+  const n = document.createElement('div');
+  n.className = 'note';
+  n.textContent = '    ' + text;
+  out.appendChild(n);
+}
+
+/** Porta un item al box indicato scrivendo direttamente lo stato SRS. */
+function forceBox(itemId, box) {
+  save.progress.srs[itemId] = {
+    box, due: dayIndex() + 1, seen: box, correct: box, wrong: 0, lastSeen: dayIndex()
+  };
+}
+
+async function run() {
+  out.innerHTML = '';
+  await loadAll();
+  const cfg = curriculumConfig();
+  const phases = playablePhases();
+
+  /* ---------------------------------------------------------------- */
+  note(`masteryBox=${cfg.masteryBox}  soglia fase=${cfg.phaseUnlockRatio * 100}%  ripasso=${cfg.reviewWeight * 100}%`);
+
+  /* --- 1. Ogni unita' ha un obiettivo linguistico esplicito -------- */
+  const senzaObiettivo = content.worlds.filter(w => !w.objective_it || !w.structureIds?.length);
+  check("ogni unita' dichiara obiettivo e struttura linguistica",
+    senzaObiettivo.length === 0,
+    senzaObiettivo.map(w => w.id).join(', '));
+
+  /* --- 2. Ogni unita' (tranne la prima) ripassa le precedenti ------ */
+  const senzaRipasso = content.worlds
+    .filter((w, i) => i > 0 && (!w.reviewFrom || !w.reviewFrom.length));
+  check("ogni unita' dopo la prima ha unita' da ripassare",
+    senzaRipasso.length === 0,
+    senzaRipasso.map(w => w.id).join(', '));
+
+  /* --- 3. Partenza pulita: solo la fase 1 e' aperta ---------------- */
+  resetSave();
+  check("la fase 1 e' subito aperta", isPhaseUnlocked(phases[0]));
+  check("la fase 2 e' chiusa a inizio gioco", !isPhaseUnlocked(phases[1]));
+  check("la prima unita' e' subito giocabile", isUnitUnlocked(content.worlds[0]));
+  check("la seconda unita' e' chiusa a inizio gioco", !isUnitUnlocked(content.worlds[1]));
+
+  /* --- 4. La padronanza non si accumula in una sola sessione ------- */
+  resetSave();
+  const probe = content.worlds[0].newItems[0];
+  recordAnswer(probe, true);
+  recordAnswer(probe, true);
+  recordAnswer(probe, true);
+  const box = save.progress.srs[probe].box;
+  check('tre risposte giuste di fila nello stesso giorno valgono un solo box',
+    box === 1, `box=${box}`);
+  check("e quindi l'item NON risulta padroneggiato", !isMastered(probe));
+
+  /* --- 5. Un errore riporta l'item in cima alla coda --------------- */
+  forceBox(probe, 3);
+  check("con box 3 l'item e' padroneggiato", isMastered(probe));
+  recordAnswer(probe, false);
+  check("sbagliando torna al box 0", save.progress.srs[probe].box === 0);
+  check('e smette di essere padroneggiato', !isMastered(probe));
+
+  /* --- 6. La fase 2 si apre solo alla soglia dell'80% -------------- */
+  resetSave();
+  const phase1Items = content.worlds
+    .filter(w => w.phase === phases[0])
+    .flatMap(w => unitItems(w))
+    .map(it => it.id);
+
+  // Appena sotto la soglia: deve restare chiusa.
+  const needed = Math.ceil(phase1Items.length * cfg.phaseUnlockRatio);
+  phase1Items.slice(0, needed - 1).forEach(id => forceBox(id, cfg.masteryBox));
+  const under = phaseProgress(phases[0]);
+  check('sotto la soglia la fase 2 resta chiusa',
+    !isPhaseUnlocked(phases[1]),
+    `${under.mastered}/${under.total} = ${Math.round(under.ratio * 100)}%`);
+  check('il gioco sa quante parole mancano', under.missing === 1, `missing=${under.missing}`);
+
+  // Raggiunta la soglia: si apre.
+  forceBox(phase1Items[needed - 1], cfg.masteryBox);
+  const over = phaseProgress(phases[0]);
+  check('raggiunta la soglia la fase 2 si apre',
+    isPhaseUnlocked(phases[1]),
+    `${over.mastered}/${over.total} = ${Math.round(over.ratio * 100)}%`);
+
+  /* --- 7. Completare non basta: serve padroneggiare ---------------- */
+  resetSave();
+  // Una risposta giusta per ogni item della fase 1: unita' tutte
+  // "completate", ma nessuna parola ancora padroneggiata.
+  phase1Items.forEach(id => forceBox(id, 1));
+  const unita = content.worlds.filter(w => w.phase === phases[0]);
+  check("con una risposta giusta le unita' risultano completate",
+    unita.every(w => unitProgress(w).completed));
+  check("ma la fase 2 resta chiusa: completare non e' padroneggiare",
+    !isPhaseUnlocked(phases[1]));
+
+  /* --- 8. I genitori possono scavalcare la soglia ------------------ */
+  save.settings.unlockAllPhases = true;
+  check("l'interruttore dei genitori apre comunque le fasi", isPhaseUnlocked(phases[1]));
+  save.settings.unlockAllPhases = false;
+
+  /* --- 9. Il ripasso entra davvero in ogni partita ----------------- */
+  resetSave();
+  const u2 = content.worlds[1];
+  unitItems(content.worlds[0]).forEach(it => forceBox(it.id, 1));   // unita' 1 "vista"
+  const split = splitRound(u2, 8);
+  check("la partita dell'unita' 2 include domande di ripasso",
+    split.reviewCount >= cfg.minReviewItems,
+    `nuovi=${split.newCount} ripasso=${split.reviewCount}`);
+
+  const idsUnita1 = new Set(unitItems(content.worlds[0]).map(i => i.id));
+  check("il ripasso pesca dalle unita' precedenti, non da quella corrente",
+    split.reviewItems.length > 0 && split.reviewItems.every(it => idsUnita1.has(it.id)));
+
+  check('nuovi + ripasso coprono tutte le domande della partita',
+    split.newCount + split.reviewCount === 8,
+    `${split.newCount} + ${split.reviewCount}`);
+
+  /* --- 10. L'ultima unita' ripassa l'intero corso ------------------ */
+  const last = content.worlds[content.worlds.length - 1];
+  content.worlds.slice(0, -1).forEach(w => unitItems(w).forEach(it => forceBox(it.id, 1)));
+  const rev = unitReviewItems(last);
+  const coperte = new Set(rev.map(it => {
+    const w = content.worlds.find(x => (x.newItems || []).includes(it.id));
+    return w?.id;
+  }));
+  check("l'ultima unita' ripassa tutte le unita' precedenti",
+    coperte.size === content.worlds.length - 1,
+    `${coperte.size}/${content.worlds.length - 1} unita'`);
+
+  /* --- 11. Nessun item orfano ------------------------------------- */
+  const assegnati = new Set(content.worlds.flatMap(w => w.newItems));
+  const tutti = [...content.words, ...content.phrases].map(i => i.id);
+  const orfani = tutti.filter(id => !assegnati.has(id));
+  check('nessuna parola o frase resta fuori dal curriculum',
+    orfani.length === 0, orfani.join(', '));
+
+  const rotti = [...assegnati].filter(id => !getItem(id));
+  check("nessuna unita' punta a item inesistenti", rotti.length === 0, rotti.join(', '));
+
+  resetSave();
+
+  const v = document.createElement('div');
+  v.id = 'verdict';
+  v.className = fail === 0 ? 'ok' : 'ko';
+  v.textContent = fail === 0 ? `PASS — ${pass} controlli` : `FAIL — ${fail} su ${pass + fail}`;
+  out.appendChild(v);
+}
+
+run().catch(err => {
+  out.innerHTML = `<div class="ko">ERRORE: ${err.message}</div><pre>${err.stack}</pre>
+    <div id="verdict" class="ko">FAIL</div>`;
+});
+</script>
+</body>
+</html>

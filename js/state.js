@@ -50,6 +50,8 @@ function defaultSave() {
       worlds: {},
       /** creatureId -> ISO string di sblocco */
       creatures: {},
+      /** numero di fase -> ISO string di quando la soglia e' stata superata */
+      phasesReached: {},
       /** itemId (parola o frase) -> stato di ripetizione spaziata */
       srs: {}
     },
@@ -85,6 +87,9 @@ function defaultSave() {
       phasesEnabled: { 1: true, 2: true, 3: true, 4: true, 5: true },
       themesDisabled: [],      // temi messi in pausa dai genitori
       vacation: false,
+      /* Scavalca la soglia di padronanza fra le fasi. Da usare con criterio:
+         serve se il bambino e' gia' avanti o se una fase lo sta annoiando. */
+      unlockAllPhases: false,
       kindleEmail: '',
       music: true,
       sfx: true,

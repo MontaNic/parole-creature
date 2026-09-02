@@ -3,9 +3,13 @@
  * Qui c'e' solo presentazione; le regole di gioco stanno in game.js.
  */
 
-import { content, t, availableWorlds, worldItems, getItem } from './content-loader.js';
+import { content, t, getItem, getPhase } from './content-loader.js';
 import { save, persist } from './state.js';
 import { trackOf, masteredCount, isMastered } from './srs.js';
+import {
+  unitProgress, phaseProgress, playableUnits, playablePhases,
+  isPhaseUnlocked, lockInfo, curriculumConfig
+} from './curriculum.js';
 import { renderMascot, mascotSay, mascotCheer } from './mascot.js';
 import { spriteSvg } from './minigames.js';
 import { speakItem, sfxTap, sfxUnlock } from './audio.js';
@@ -31,38 +35,6 @@ function el(tag, cls, text) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Stato di avanzamento dei mondi                                      */
-/* ------------------------------------------------------------------ */
-
-/**
- * Un mondo e' "completato" quando ogni suo elemento e' stato indovinato
- * almeno una volta. Niente punteggi minimi da superare: si avanza sempre.
- */
-export function worldProgress(world) {
-  const items = worldItems(world, save.settings);
-  const done = items.filter(it => (save.progress.srs[it.id]?.correct || 0) > 0).length;
-  const rec = save.progress.worlds[world.id] || { plays: 0 };
-  return {
-    total: items.length,
-    done,
-    ratio: items.length ? done / items.length : 0,
-    completed: items.length > 0 && done === items.length,
-    plays: rec.plays || 0
-  };
-}
-
-/** Il primo mondo e' sempre aperto; gli altri seguono quello precedente. */
-export function isWorldUnlocked(world, list) {
-  const idx = list.findIndex(w => w.id === world.id);
-  if (idx <= 0) return true;
-  const prev = list[idx - 1];
-  const p = worldProgress(prev);
-  // Si apre completando il mondo precedente oppure dopo 3 partite:
-  // nessun vicolo cieco se una parola resta ostica.
-  return p.completed || p.plays >= 3;
-}
-
-/* ------------------------------------------------------------------ */
 /* Creature                                                            */
 /* ------------------------------------------------------------------ */
 
@@ -72,8 +44,10 @@ export function isCreatureUnlocked(creature) {
   if (u.type === 'start') return true;
   if (u.type === 'world') {
     const w = content.worldById.get(u.value);
-    return Boolean(w && worldProgress(w).completed);
+    return Boolean(w && unitProgress(w).completed);
   }
+  // Ricompensa per aver superato davvero la soglia di padronanza di una fase.
+  if (u.type === 'phase') return phaseProgress(u.value).reached;
   if (u.type === 'mastered') return masteredCount() >= u.value;
   if (u.type === 'streak') return save.streak.current >= u.value;
   return false;
@@ -100,8 +74,6 @@ export function syncCreatures() {
 /* ------------------------------------------------------------------ */
 
 export function renderHome(handlers) {
-  const list = availableWorlds(save.settings);
-
   // HUD
   document.getElementById('hud-streak').textContent = save.streak.current;
   document.getElementById('hud-words').textContent = masteredCount();
@@ -118,8 +90,7 @@ export function renderHome(handlers) {
   const card = document.getElementById('mission-card');
   if (mission) {
     document.getElementById('mission-text').textContent = mission.text_it;
-    const fill = document.getElementById('mission-fill');
-    fill.style.width = `${Math.round(missionRatio() * 100)}%`;
+    document.getElementById('mission-fill').style.width = `${Math.round(missionRatio() * 100)}%`;
     card.classList.toggle('is-done', save.daily.missionDone);
     card.querySelector('.mission-icon').innerHTML = '';
     card.querySelector('.mission-icon').appendChild(spriteSvg(mission.sprite || 'sp-icon-mission'));
@@ -128,49 +99,24 @@ export function renderHome(handlers) {
     card.style.display = 'none';
   }
 
-  // Mondi
-  const grid = document.getElementById('worlds-grid');
-  grid.innerHTML = '';
-  list.forEach(world => {
-    const unlocked = isWorldUnlocked(world, list);
-    const p = worldProgress(world);
+  // Mappa: le unita' sono raggruppate per fase, perche' la fase e' l'unita'
+  // di misura del curriculum ed e' li' che sta la soglia da superare.
+  const host = document.getElementById('worlds-grid');
+  host.className = 'phase-list';
+  host.innerHTML = '';
 
-    const btn = el('button', 'world-card' + (unlocked ? '' : ' is-locked'));
-    btn.type = 'button';
-    btn.style.setProperty('--world-color', world.color || '#ffb02e');
-
-    const art = el('div', 'world-art');
-    art.appendChild(spriteSvg(world.sprite));
-    btn.appendChild(art);
-    btn.appendChild(el('div', 'world-name', world.title_it));
-    btn.appendChild(el('div', 'world-meta', `${p.done}/${p.total}`));
-
-    const bar = el('div', 'world-bar');
-    const fill = el('i');
-    fill.style.width = `${Math.round(p.ratio * 100)}%`;
-    bar.appendChild(fill);
-    btn.appendChild(bar);
-
-    if (!unlocked) {
-      const lock = el('div', 'world-lock');
-      lock.appendChild(spriteSvg('sp-icon-lock'));
-      btn.appendChild(lock);
-    } else if (p.completed) {
-      const badge = el('div', 'world-done-badge');
-      badge.appendChild(spriteSvg('sp-icon-check'));
-      btn.appendChild(badge);
-    }
-
-    btn.addEventListener('click', () => {
-      sfxTap();
-      if (!unlocked) {
-        mascotSay('idle_1', { bubble, avatar: mascotHost });
-        return;
-      }
-      handlers.onWorld(world);
-    });
-    grid.appendChild(btn);
-  });
+  const units = playableUnits(save.settings);
+  let hintShown = false;
+  for (const phase of playablePhases()) {
+    const phaseUnits = units.filter(w => w.phase === phase);
+    if (!phaseUnits.length) continue;
+    // L'avviso "ancora N parole" si mostra solo sulla prima fase chiusa:
+    // sulle successive sarebbe un traguardo che non e' ancora il suo turno.
+    const showHint = !isPhaseUnlocked(phase) && !hintShown;
+    if (showHint) hintShown = true;
+    host.appendChild(
+      renderPhaseBlock(phase, phaseUnits, { bubble, mascotHost }, handlers, showHint));
+  }
 
   document.getElementById('btn-free-review').onclick = () => { sfxTap(); handlers.onReview(); };
   document.getElementById('btn-album').onclick = () => { sfxTap(); handlers.onAlbum(); };
@@ -178,6 +124,109 @@ export function renderHome(handlers) {
 
   showScreen('home');
   return { bubble, mascotHost };
+}
+
+/**
+ * Un blocco di fase: intestazione con la barra di padronanza e, sotto, le
+ * sue unita'. La barra ha una tacca all'80%: e' la soglia da superare per
+ * aprire la fase successiva, ed e' bene che si veda dove si sta arrivando.
+ */
+function renderPhaseBlock(phase, units, refs, handlers, showHint = false) {
+  const info = getPhase(phase);
+  const prog = phaseProgress(phase);
+  const unlocked = isPhaseUnlocked(phase);
+  const cfg = curriculumConfig();
+
+  const block = el('section', 'phase-block' + (unlocked ? '' : ' is-locked'));
+
+  const head = el('header', 'phase-head');
+  const row = el('div', 'phase-title-row');
+  row.appendChild(el('span', 'phase-badge', `${t('ui.phase_label')} ${phase}`));
+  row.appendChild(el('h3', 'phase-title', info?.title_it || ''));
+  if (!unlocked) {
+    const lock = el('span', 'phase-lock');
+    lock.appendChild(spriteSvg('sp-icon-lock'));
+    row.appendChild(lock);
+  }
+  head.appendChild(row);
+
+  const meter = el('div', 'phase-meter');
+  const fill = el('i');
+  fill.style.width = `${Math.round(prog.ratio * 100)}%`;
+  if (prog.reached) fill.classList.add('is-reached');
+  meter.appendChild(fill);
+  const tick = el('u', 'phase-tick');
+  tick.style.left = `${Math.round(cfg.phaseUnlockRatio * 100)}%`;
+  meter.appendChild(tick);
+  head.appendChild(meter);
+
+  head.appendChild(el('p', 'phase-meta',
+    `${prog.mastered}/${prog.total} ${t('ui.mastered_label')}`));
+
+  if (showHint) {
+    const phases = playablePhases();
+    const prev = phases[phases.indexOf(phase) - 1];
+    const missing = phaseProgress(prev).missing;
+    head.appendChild(el('p', 'phase-hint',
+      t('ui.phase_locked_hint').replace('{n}', missing)));
+  }
+
+  block.appendChild(head);
+
+  const grid = el('div', 'worlds');
+  units.forEach(w => grid.appendChild(unitCard(w, refs, handlers)));
+  block.appendChild(grid);
+  return block;
+}
+
+/** La card di una singola unita'. */
+function unitCard(world, refs, handlers) {
+  const lock = lockInfo(world);
+  const p = unitProgress(world);
+
+  const btn = el('button', 'world-card' + (lock.locked ? ' is-locked' : ''));
+  btn.type = 'button';
+  btn.style.setProperty('--world-color', world.color || '#ffb02e');
+  // L'obiettivo linguistico non si mostra al bambino, ma resta a portata di
+  // mano per il genitore che gli sta accanto.
+  if (world.objective_it) btn.title = world.objective_it;
+
+  const art = el('div', 'world-art');
+  art.appendChild(spriteSvg(world.sprite));
+  btn.appendChild(art);
+  btn.appendChild(el('div', 'world-name', world.title_it));
+  btn.appendChild(el('div', 'world-meta', `${p.done}/${p.total}`));
+
+  const bar = el('div', 'world-bar');
+  const fill = el('i');
+  fill.style.width = `${Math.round(p.ratio * 100)}%`;
+  bar.appendChild(fill);
+  // Seconda barretta piu' scura: quanto di quell'unita' e' davvero solido.
+  const mastery = el('i', 'mastery');
+  mastery.style.width = `${Math.round(p.masteryRatio * 100)}%`;
+  bar.appendChild(mastery);
+  btn.appendChild(bar);
+
+  if (lock.locked) {
+    const ico = el('div', 'world-lock');
+    ico.appendChild(spriteSvg('sp-icon-lock'));
+    btn.appendChild(ico);
+  } else if (p.completed) {
+    const badge = el('div', 'world-done-badge');
+    badge.appendChild(spriteSvg('sp-icon-check'));
+    btn.appendChild(badge);
+  }
+
+  btn.addEventListener('click', () => {
+    sfxTap();
+    if (lock.locked) {
+      mascotSay(lock.reason === 'phase' ? 'locked_phase' : 'locked_unit',
+        { bubble: refs.bubble, avatar: refs.mascotHost, vars: { n: lock.missing } });
+      return;
+    }
+    handlers.onWorld(world);
+  });
+  return btn;
 }
 
 /* ------------------------------------------------------------------ */
@@ -219,7 +268,7 @@ export function renderAlbum() {
 
 /**
  * @param {{correct:number, total:number, newCreatures:Array, levelUp:boolean,
- *          missionDone:boolean, endSession:boolean}} result
+ *          phaseUnlocked:?number, missionDone:boolean, endSession:boolean}} result
  */
 export async function renderSummary(result, handlers) {
   const body = document.getElementById('summary-body');
@@ -249,17 +298,27 @@ export async function renderSummary(result, handlers) {
   const line = el('p', 'h-sub', `${result.correct}/${result.total}`);
   body.appendChild(line);
 
-  // Nuove creature: momento clou, con festeggiamento
-  if (result.newCreatures.length) {
+  // Superare una fase e' il traguardo piu' grande del gioco: viene prima
+  // di tutto il resto.
+  if (result.phaseUnlocked) {
     sfxUnlock();
     celebrate();
+    body.appendChild(el('p', 'h-title', t('ui.phase_unlocked')));
+  }
+
+  // Nuove creature: momento clou, con festeggiamento
+  if (result.newCreatures.length) {
+    if (!result.phaseUnlocked) { sfxUnlock(); celebrate(); }
     for (const c of result.newCreatures) {
       const wrap = el('div', 'reward-creature');
       wrap.appendChild(spriteSvg(c.sprite));
       body.appendChild(wrap);
       body.appendChild(el('p', 'h-sub', c.name_it));
     }
-    await mascotSay('new_creature', { bubble, avatar: mascotHost });
+    await mascotSay(result.phaseUnlocked ? 'phase_done' : 'new_creature',
+      { bubble, avatar: mascotHost });
+  } else if (result.phaseUnlocked) {
+    await mascotSay('phase_done', { bubble, avatar: mascotHost });
   } else if (result.missionDone) {
     celebrate();
     await mascotSay('mission_done', { bubble, avatar: mascotHost });

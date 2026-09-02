@@ -45,9 +45,19 @@ export const CONFIG = {
     sessionWarnRatio: 0.8        // a che punto della sessione avvisare
   },
 
-  /** Ripetizione spaziata: intervalli in giorni per ciascun box di Leitner. */
-  srsIntervals: [0, 1, 2, 4, 8, 16],
+  /**
+   * Ripetizione spaziata: intervalli in giorni per ciascun box di Leitner.
+   * Il primo intervallo e' 1 e non 0 di proposito: cosi' un item puo' salire
+   * di box al massimo una volta al giorno, e "padroneggiato" significa
+   * davvero "indovinato piu' volte in giorni diversi", non tre volte di fila
+   * nella stessa sessione.
+   */
+  srsIntervals: [1, 1, 2, 4, 8, 16],
 
-  /** Numero di volte che una parola va indovinata per considerarla "padroneggiata". */
-  masteryBox: 4
+  /**
+   * Box da cui un item conta come "padroneggiato".
+   * Il valore vero arriva da content.json (curriculum.masteryBox): questo e'
+   * solo il ripiego se il file non lo specifica.
+   */
+  masteryBox: 3
 };

@@ -11,13 +11,16 @@
  */
 
 import { CONFIG } from './config.js';
-import { content, t, allThemes, audioIndex, getItem } from './content-loader.js';
+import { content, t, allThemes, audioIndex, getItem, getPhase, structuresOf } from './content-loader.js';
 import {
   save, persist, setPin, checkPin, hasPin,
   exportSaveFile, importSaveFile, resetSave
 } from './state.js';
 import { masteredCount, seenCount, overallAccuracy, hardestItems } from './srs.js';
-import { showScreen, worldProgress } from './screens.js';
+import { showScreen } from './screens.js';
+import {
+  unitProgress, phaseProgress, playablePhases, curriculumConfig
+} from './curriculum.js';
 import { setMusicEnabled } from './audio.js';
 
 function el(tag, cls, text) {
@@ -281,6 +284,11 @@ function panelSettings() {
     save.settings.sfx = on; persist(true);
   }));
 
+  // Scavalcare la soglia di padronanza fra le fasi
+  p.appendChild(switchRow(t('parents.unlock_all_phases'), save.settings.unlockAllPhases, (on) => {
+    save.settings.unlockAllPhases = on; persist(true);
+  }, t('parents.unlock_all_phases_hint')));
+
   // Pausa vacanza
   p.appendChild(switchRow(t('parents.vacation_mode'), save.settings.vacation, (on) => {
     save.settings.vacation = on; persist(true);
@@ -339,18 +347,48 @@ function panelProgress() {
   grid.appendChild(stat(Math.round(save.stats.totalMinutes), t('parents.stats_minutes')));
   p.appendChild(grid);
 
-  // Avanzamento per mondo
-  const worldsBox = el('div', 'card-box');
-  worldsBox.appendChild(el('h3', null, t('ui.progress_label')));
-  const ul = el('ul', 'list-plain');
-  content.worlds.forEach(w => {
-    const pr = worldProgress(w);
-    const li = el('li', null, `${w.title_it} — ${pr.done}/${pr.total}`);
-    if (pr.completed) li.appendChild(el('span', 'badge badge-sent', ' ✓'));
-    ul.appendChild(li);
+  // Curriculum: avanzamento per fase, con la soglia che apre la successiva
+  const cfg = curriculumConfig();
+  const curr = el('div', 'card-box');
+  curr.appendChild(el('h3', null, t('parents.curriculum_title')));
+  curr.appendChild(el('div', 'hint', t('parents.curriculum_intro')));
+  curr.appendChild(el('div', 'hint',
+    `${t('parents.phase_threshold_label')}: ${Math.round(cfg.phaseUnlockRatio * 100)}%`));
+  curr.appendChild(el('div', 'hint', t('parents.mastery_explained')));
+
+  playablePhases().forEach(phase => {
+    const info = getPhase(phase);
+    const pr = phaseProgress(phase);
+
+    const box = el('div', 'phase-report');
+    const head = el('div', 'phase-report-head');
+    head.appendChild(el('b', null, `${t('ui.phase_label')} ${phase} — ${info?.title_it || ''}`));
+    head.appendChild(el('span', 'badge ' + (pr.reached ? 'badge-sent' : 'badge-todo'),
+      `${pr.mastered}/${pr.total} · ${Math.round(pr.ratio * 100)}%`));
+    box.appendChild(head);
+    if (info?.goal_it) box.appendChild(el('div', 'hint', info.goal_it));
+
+    const ul = el('ul', 'list-plain');
+    content.worlds.filter(w => w.phase === phase).forEach(w => {
+      const u = unitProgress(w);
+      const li = el('li');
+      const line = el('div');
+      line.appendChild(el('b', null, `${w.unit}. ${w.title_it}`));
+      line.appendChild(el('span', 'hint',
+        `  ${u.done}/${u.total} incontrate · ${u.mastered}/${u.total} ${t('ui.mastered_label')}`));
+      li.appendChild(line);
+      if (w.objective_it) {
+        li.appendChild(el('div', 'hint', `${t('parents.objective_label')}: ${w.objective_it}`));
+      }
+      const st = structuresOf(w).map(x => x.pattern).join('  ·  ');
+      if (st) li.appendChild(el('div', 'hint mono', `${t('parents.structure_label')}: ${st}`));
+      if (u.completed) li.appendChild(el('span', 'badge badge-sent', ' completata'));
+      ul.appendChild(li);
+    });
+    box.appendChild(ul);
+    curr.appendChild(box);
   });
-  worldsBox.appendChild(ul);
-  p.appendChild(worldsBox);
+  p.appendChild(curr);
 
   // Parole piu' difficili: utile per ripassare insieme a voce
   const hard = hardestItems(6);
@@ -383,7 +421,7 @@ const EBOOK_STATUS = {
 function ebookUnlocked(ebook) {
   if (!ebook.unlockAfterWorld) return true;
   const w = content.worldById.get(ebook.unlockAfterWorld);
-  return Boolean(w && worldProgress(w).completed);
+  return Boolean(w && unitProgress(w).completed);
 }
 
 /**

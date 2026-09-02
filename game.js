@@ -11,14 +11,17 @@
 
 import { CONFIG } from './js/config.js';
 import {
-  loadAll, content, t, applyStaticStrings,
-  availableWorlds, worldItems, getItem
+  loadAll, content, t, applyStaticStrings, getItem, getPhase
 } from './js/content-loader.js';
 import {
   save, loadSave, persist, rolloverDay, registerPlayToday,
   addXp, checkAccessWindow
 } from './js/state.js';
-import { recordAnswer, pickRoundItems, dueItems, shuffle } from './js/srs.js';
+import { recordAnswer, pickRoundItems, shuffle } from './js/srs.js';
+import {
+  splitRound, freeReviewPool, unitProgress, currentUnit,
+  curriculumConfig, phaseProgress, playablePhases
+} from './js/curriculum.js';
 import {
   initAudioUnlock, sfxCorrect, sfxRetry, stopVoice, startMusic
 } from './js/audio.js';
@@ -27,7 +30,7 @@ import { renderMascot, mascotSay, mascotCheer, stageChangedAt } from './js/masco
 import { GAMES, itemsPerStep } from './js/minigames.js';
 import {
   showScreen, renderHome, renderAlbum, renderSummary,
-  renderBlocked, runOnboarding, syncCreatures, worldProgress
+  renderBlocked, runOnboarding, syncCreatures
 } from './js/screens.js';
 import { openParents } from './js/parents.js';
 import { ensureTodayMission, trackMissionEvent } from './js/missions.js';
@@ -125,52 +128,104 @@ async function greet(firstTime) {
 /* ------------------------------------------------------------------ */
 
 /**
- * Sceglie gli item e li distribuisce fra i mini-giochi del mondo.
+ * Costruisce una partita.
+ *
+ * Ogni partita e' composta da due sorgenti:
+ *   - il materiale NUOVO dell'unita' corrente;
+ *   - un ripasso delle unita' precedenti (interleaving), nella quota indicata
+ *     dal curriculum.
+ *
+ * La ripetizione spaziata ordina dentro ciascuna delle due sorgenti, ma non
+ * potrebbe da sola garantire che le unita' vecchie tornino: la quota di
+ * ripasso serve esattamente a questo.
+ *
  * @param {{world?: object, review?: boolean}} opts
  */
 function buildRound(opts) {
   const settings = save.settings;
-  const unlockedWorlds = availableWorlds(settings);
+  const total = CONFIG.game.questionsPerRound;
 
   let world = opts.world;
-  let pool;
+  let picked = [];
+  let reviewIds = new Set();
+  let pool = [];
 
   if (opts.review) {
-    // Ripasso libero: pesca fra tutto quello che il bambino ha gia' visto,
-    // dando la precedenza a cio' che la ripetizione spaziata segnala scaduto.
-    const seen = unlockedWorlds.flatMap(w => worldItems(w, settings));
-    const due = dueItems(seen);
-    pool = (due.length >= 4 ? due : seen.filter(i => save.progress.srs[i.id]));
-    if (!pool.length) pool = seen;
+    // Ripasso libero: tutto quello che il bambino ha gia' incontrato, con la
+    // precedenza a cio' che non e' ancora solido.
+    pool = freeReviewPool(settings);
+    if (!pool.length) return null;
     world = {
       id: '__review__',
       title_it: t('ui.free_review'),
-      phase: 1,
+      phase: currentUnit(settings)?.phase || 1,
       minigames: ['match', 'listen', 'quiz', 'hunt'],
       color: '#38bdf8'
     };
+    picked = pickRoundItems(pool, Math.min(total, Math.max(5, pool.length)));
+    picked.forEach(it => reviewIds.add(it.id));
   } else {
-    pool = worldItems(world, settings);
+    const split = splitRound(world, total, settings);
+    if (!split.newItems.length && !split.reviewItems.length) return null;
+
+    const fresh = pickRoundItems(split.newItems, split.newCount);
+    const review = split.reviewCount > 0
+      ? pickRoundItems(split.reviewItems, split.reviewCount)
+      : [];
+    review.forEach(it => reviewIds.add(it.id));
+
+    picked = interleave(fresh, review);
+    pool = dedupeById([...split.newItems, ...split.reviewItems]);
   }
 
-  if (!pool.length) return null;
+  if (!picked.length) return null;
 
-  // Se il mondo ha pochi item si accorcia la partita invece di ripeterli:
-  // meglio finire con la sensazione di aver chiuso qualcosa.
-  const count = Math.min(CONFIG.game.questionsPerRound, Math.max(5, pool.length));
-  const items = pickRoundItems(pool, count);
-  const phase = content.phases.find(p => p.id === (world.phase || 1));
+  // Il testo scritto dipende dalla FASE che si sta giocando, non dal singolo
+  // item: arrivato alla fase 2, anche le parole vecchie vanno riviste scritte.
+  const phase = getPhase(world.phase);
   const showWritten = Boolean(phase?.showWrittenWord);
 
-  const pr = opts.review ? { ratio: 1, plays: 3 } : worldProgress(world);
+  const pr = opts.review ? { ratio: 1, plays: 3 } : unitProgress(world, settings);
   const difficulty = pr.ratio > 0.6 ? 3 : pr.plays > 0 ? 2 : 1;
 
-  return { world, pool, items, showWritten, difficulty, steps: buildSteps(world, items, pool) };
+  return {
+    world, pool, items: picked, reviewIds, showWritten, difficulty,
+    steps: buildSteps(world, picked, pool)
+  };
 }
 
-/** Alterna i mini-giochi previsti dal mondo, rispettando quanti item servono. */
+/**
+ * Distribuisce gli item di ripasso fra quelli nuovi invece di accodarli:
+ * alternare fa lavorare il richiamo, metterli tutti in fondo no.
+ */
+function interleave(fresh, review) {
+  if (!review.length) return fresh.slice();
+  if (!fresh.length) return review.slice();
+
+  const out = [];
+  const gap = (fresh.length + review.length) / review.length;
+  let ri = 0;
+  let next = Math.max(1, Math.round(gap) - 1);
+
+  fresh.forEach((item, idx) => {
+    out.push(item);
+    if (ri < review.length && out.length >= next) {
+      out.push(review[ri++]);
+      next = out.length + Math.max(1, Math.round(gap) - 1);
+    }
+  });
+  while (ri < review.length) out.push(review[ri++]);
+  return out;
+}
+
+function dedupeById(items) {
+  return [...new Map(items.map(it => [it.id, it])).values()];
+}
+
+/** Alterna i mini-giochi previsti dall'unita', rispettando quanti item servono. */
 function buildSteps(world, items, pool) {
   const types = (world.minigames || ['match']).slice();
+  const maxBuildWords = curriculumConfig().maxBuildWords;
   const steps = [];
   let i = 0;
   let ti = 0;
@@ -179,9 +234,13 @@ function buildSteps(world, items, pool) {
     let type = types[ti++ % types.length];
     const item = items[i];
 
-    // Vincoli di buon senso: "ricomponi la frase" ha senso solo sulle frasi,
-    // la caccia serve almeno 3 item e un pool abbastanza grande.
-    if (type === 'build' && item.kind !== 'phrase') type = 'quiz';
+    // Vincoli di buon senso.
+    // "Ricomponi la frase" solo su frasi, e solo se sono abbastanza corte:
+    // otto tessere da riordinare sono un rompicapo, non un esercizio.
+    if (type === 'build') {
+      const words = item.kind === 'phrase' ? item.en.split(/\s+/).length : 0;
+      if (!words || words > maxBuildWords) type = 'quiz';
+    }
     if (type === 'hunt') {
       const slice = items.slice(i, i + CONFIG.game.huntTargets);
       const distinct = new Set(slice.map(x => x.id)).size === CONFIG.game.huntTargets;
@@ -257,7 +316,7 @@ async function startRound(opts) {
     if (trackMissionEvent({
       correct: firstTry,
       theme: item?.theme,
-      review: Boolean(opts.review)
+      review: round.reviewIds.has(itemId)
     })) missionJustDone = true;
 
     scoreEl.textContent = String(correct);
@@ -298,18 +357,18 @@ function pointOf(ev) {
 async function finishRound({ round, correct, total, levelUp, missionJustDone, opts }) {
   session.roundActive = false;
 
-  // Statistiche del mondo
+  // Statistiche dell'unita'
   if (round.world.id !== '__review__') {
     const rec = save.progress.worlds[round.world.id] || { plays: 0, completed: false };
     rec.plays = (rec.plays || 0) + 1;
     rec.lastPlayed = new Date().toISOString();
-    const pr = worldProgress(round.world);
-    rec.completed = pr.completed;
+    rec.completed = unitProgress(round.world).completed;
     save.progress.worlds[round.world.id] = rec;
   }
   save.stats.totalRounds += 1;
   if (trackMissionEvent({ roundDone: true })) missionJustDone = true;
 
+  const phaseUnlocked = checkPhaseUnlock();
   const newCreatures = syncCreatures();
   persist(true);
 
@@ -322,13 +381,35 @@ async function finishRound({ round, correct, total, levelUp, missionJustDone, op
     && save.daily.minutesPlayed >= save.settings.sessionMinutes;
 
   await renderSummary(
-    { correct, total, newCreatures, levelUp, missionDone: missionJustDone, endSession: overLimit },
+    { correct, total, newCreatures, levelUp, phaseUnlocked,
+      missionDone: missionJustDone, endSession: overLimit },
     {
       onHome: () => goHome(),
       onAgain: () => startRound(opts),
       onContinueAnyway: () => { session.ignoreSessionLimit = true; startRound(opts); }
     }
   );
+}
+
+/**
+ * Verifica se una fase ha appena superato la soglia di padronanza.
+ * E' il traguardo piu' importante del gioco: va segnato una volta sola,
+ * perche' la seconda volta non e' piu' una notizia.
+ *
+ * @returns {number|null} numero della fase appena aperta
+ */
+function checkPhaseUnlock() {
+  let unlocked = null;
+  for (const phase of playablePhases()) {
+    const reached = phaseProgress(phase).reached;
+    const already = save.progress.phasesReached[phase];
+    if (reached && !already) {
+      save.progress.phasesReached[phase] = new Date().toISOString();
+      unlocked = phase;
+    }
+  }
+  if (unlocked !== null) persist(true);
+  return unlocked;
 }
 
 /* ------------------------------------------------------------------ */
