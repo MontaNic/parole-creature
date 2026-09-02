@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Smoke test — Draghetti &amp; Parole</title>
+<style>
+  body { font: 14px ui-monospace, Menlo, monospace; background: #111; color: #eee; margin: 0; display: flex; }
+  #log { width: 460px; padding: 16px; overflow: auto; height: 100vh; box-sizing: border-box; }
+  iframe { flex: 1; height: 100vh; border: 0; border-left: 2px solid #333; }
+  .ok { color: #7ee787 } .ko { color: #ff7b72 } h1 { font-size: 15px }
+</style>
+</head>
+<body>
+<div id="log"><h1>Smoke test</h1><div id="out">avvio...</div></div>
+<iframe id="frame" src="../index.html"></iframe>
+
+<script>
+/*
+ * Test di sfoglio automatico: tocca a caso i comandi del gioco e verifica
+ * che non esploda nulla e che si arrivi alla schermata di riepilogo.
+ *
+ * Uso:
+ *   python3 -m http.server 8080
+ *   apri http://localhost:8080/tools/smoke-test.html
+ *
+ * Non e' una suite di test unitari: e' una rete di sicurezza per i percorsi
+ * "a caso" che un bambino di 7 anni prende davvero.
+ */
+const out = document.getElementById('out');
+const frame = document.getElementById('frame');
+const errors = [];
+const screensSeen = new Set();
+let clicks = 0;
+
+// Salta l'onboarding: qui interessa la partita.
+try {
+  localStorage.setItem('draghetti_parole_save', JSON.stringify({
+    schemaVersion: 1,
+    child: { name: 'Test' },
+    settings: { onboardingDone: true, sessionMinutes: 999, music: false, sfx: false }
+  }));
+} catch (e) { errors.push('localStorage: ' + e.message); }
+
+/*
+ * Due profili: quello di base resta dentro la partita (percorso del bambino),
+ * con "#full" si tocca anche album e area genitori.
+ * Il pulsante "indietro" e' escluso: altrimenti nessuna partita finirebbe mai.
+ */
+const BASE = [
+  '#screen-play button:not([disabled]):not([data-nav])',
+  '#screen-play .drop-target',
+  '#screen-summary button',
+  '#screen-home .world-card',
+  '#screen-home #btn-free-review'
+];
+const FULL = [
+  '#screen-home #btn-album',
+  '#screen-home #btn-parents',
+  '#screen-album button',
+  '#screen-parents button:not([data-nav])',
+  '#screen-parents .tab',
+  '#screen-parents .chip-toggle',
+  '.screen.is-active [data-nav="home"]'
+];
+const SELECTOR = (location.hash === '#full' ? [...BASE, ...FULL] : BASE).join(',');
+
+frame.addEventListener('load', () => {
+  const w = frame.contentWindow;
+  w.addEventListener('error', e => errors.push('error: ' + e.message));
+  w.addEventListener('unhandledrejection', e => errors.push('rejection: ' + (e.reason?.stack || e.reason?.message || e.reason)));
+
+  let ticks = 0;
+  const timer = setInterval(() => {
+    ticks += 1;
+    const d = frame.contentDocument;
+    const active = d.querySelector('.screen.is-active');
+    if (active) screensSeen.add(active.id);
+
+    const targets = [...d.querySelectorAll(SELECTOR)]
+      .filter(el => el.offsetParent !== null);
+    if (targets.length) {
+      targets[Math.floor(Math.random() * targets.length)].click();
+      clicks += 1;
+    }
+
+    render();
+    if (ticks > 260) { clearInterval(timer); render(true); }
+  }, 180);
+});
+
+function render(done) {
+  const ok = errors.length === 0;
+  out.innerHTML = `
+    <p>click: <b>${clicks}</b></p>
+    <p>schermate viste:<br>${[...screensSeen].join('<br>') || '—'}</p>
+    <p class="${ok ? 'ok' : 'ko'}">errori: ${errors.length}</p>
+    <pre>${errors.slice(0, 3).join('\n\n')}</pre>
+    <p id="verdict" class="${ok ? 'ok' : 'ko'}">${done ? (ok ? 'PASS' : 'FAIL') : '...'}</p>`;
+}
+</script>
+</body>
+</html>

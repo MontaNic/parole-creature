@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#1b1636">
+<meta name="description" content="Gioco per imparare l'inglese, pensato per bambini di 6-8 anni.">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Draghetti &amp; Parole</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Contenitore in cui viene iniettato assets/img/sprites.svg -->
+<div id="sprite-host" aria-hidden="true"></div>
+
+<div id="app">
+
+  <!-- ============ CARICAMENTO ============ -->
+  <section class="screen is-active" id="screen-loading">
+    <div class="center-stack">
+      <div class="loader-egg"><svg><use href="#sp-egg"></use></svg></div>
+      <p class="loading-text" data-str="ui.loading">Caricamento...</p>
+    </div>
+  </section>
+
+  <!-- ============ ERRORE DI CARICAMENTO ============ -->
+  <section class="screen" id="screen-error">
+    <div class="center-stack pad">
+      <h1 class="h-title" data-str="ui.error_no_content">Non riesco a leggere i contenuti del gioco.</h1>
+      <p class="muted" data-str="ui.error_no_content_hint">Avvia il gioco da un server locale: nella cartella del progetto esegui il comando qui sotto e apri http://localhost:8080</p>
+      <pre class="code-hint">python3 -m http.server 8080</pre>
+    </div>
+  </section>
+
+  <!-- ============ BLOCCO (fascia oraria / pausa vacanza) ============ -->
+  <section class="screen" id="screen-blocked">
+    <div class="center-stack pad">
+      <div class="blocked-mascot" id="blocked-mascot"></div>
+      <h1 class="h-title" id="blocked-title"></h1>
+      <p class="muted" id="blocked-message"></p>
+      <button class="btn btn-ghost btn-parent-small" id="blocked-parents">
+        <svg class="ico"><use href="#sp-icon-parent"></use></svg>
+        <span data-str="ui.parents_area"></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ ONBOARDING (guidato a voce, senza testo da leggere) ============ -->
+  <section class="screen" id="screen-onboarding">
+    <div class="onb-wrap">
+      <div class="onb-mascot" id="onb-mascot"></div>
+      <div class="onb-body" id="onb-body"></div>
+    </div>
+    <button class="btn-skip" id="onb-skip" data-str="onboarding.skip"></button>
+  </section>
+
+  <!-- ============ HOME / MAPPA DEI MONDI ============ -->
+  <section class="screen" id="screen-home">
+    <header class="topbar">
+      <div class="hud">
+        <div class="hud-chip" title="Streak">
+          <svg class="ico"><use href="#sp-icon-flame"></use></svg>
+          <b id="hud-streak">0</b>
+        </div>
+        <div class="hud-chip" title="Parole">
+          <svg class="ico"><use href="#sp-icon-star"></use></svg>
+          <b id="hud-words">0</b>
+        </div>
+        <div class="hud-chip hud-level">
+          <span data-str="ui.level_label"></span> <b id="hud-level">1</b>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn" id="btn-album" aria-label="Album">
+          <svg class="ico"><use href="#sp-icon-album"></use></svg>
+        </button>
+        <button class="icon-btn" id="btn-parents" aria-label="Area genitori">
+          <svg class="ico"><use href="#sp-icon-parent"></use></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="home-scroll">
+      <div class="mascot-band">
+        <div class="mascot-slot" id="home-mascot"></div>
+        <div class="speech" id="home-speech"></div>
+      </div>
+
+      <div class="mission-card" id="mission-card">
+        <div class="mission-icon"><svg><use href="#sp-icon-mission"></use></svg></div>
+        <div class="mission-body">
+          <div class="mission-label" data-str="ui.mission_of_the_day"></div>
+          <div class="mission-text" id="mission-text"></div>
+          <div class="mission-bar"><i id="mission-fill"></i></div>
+        </div>
+      </div>
+
+      <div class="worlds" id="worlds-grid"></div>
+
+      <div class="home-footer">
+        <button class="btn btn-ghost" id="btn-free-review">
+          <svg class="ico"><use href="#sp-icon-replay"></use></svg>
+          <span data-str="ui.free_review"></span>
+        </button>
+        <p class="tiny muted" data-str="ui.free_review_hint"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ALBUM DELLE CREATURE ============ -->
+  <section class="screen" id="screen-album">
+    <header class="topbar">
+      <button class="icon-btn" data-nav="home" aria-label="Indietro">
+        <svg class="ico"><use href="#sp-icon-back"></use></svg>
+      </button>
+      <h2 class="topbar-title" data-str="album.title"></h2>
+      <div class="hud-chip"><b id="album-count">0</b></div>
+    </header>
+    <div class="album-scroll">
+      <p class="muted center tiny" data-str="album.subtitle"></p>
+      <div class="album-grid" id="album-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============ PARTITA (mini-giochi) ============ -->
+  <section class="screen" id="screen-play">
+    <header class="topbar">
+      <button class="icon-btn" data-nav="home" aria-label="Indietro">
+        <svg class="ico"><use href="#sp-icon-back"></use></svg>
+      </button>
+      <div class="progress-track"><i id="play-progress"></i></div>
+      <div class="hud-chip"><svg class="ico"><use href="#sp-icon-star"></use></svg><b id="play-score">0</b></div>
+    </header>
+    <div class="play-area" id="play-area"></div>
+    <div class="mascot-corner" id="play-mascot"></div>
+  </section>
+
+  <!-- ============ RIEPILOGO DI FINE PARTITA ============ -->
+  <section class="screen" id="screen-summary">
+    <div class="center-stack pad" id="summary-body"></div>
+  </section>
+
+  <!-- ============ AREA GENITORI ============ -->
+  <section class="screen" id="screen-parents">
+    <header class="topbar">
+      <button class="icon-btn" data-nav="home" aria-label="Indietro">
+        <svg class="ico"><use href="#sp-icon-back"></use></svg>
+      </button>
+      <h2 class="topbar-title" data-str="parents.title"></h2>
+      <span class="topbar-spacer"></span>
+    </header>
+    <div class="parents-scroll" id="parents-body"></div>
+  </section>
+
+</div>
+
+<!-- Livello per coriandoli/scintille: non intercetta i tocchi -->
+<canvas id="fx-canvas" aria-hidden="true"></canvas>
+
+<!-- Regione per annunci accessibili -->
+<p class="sr-only" aria-live="polite" id="live-region"></p>
+
+<script type="module" src="game.js"></script>
+</body>
+</html>

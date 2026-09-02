@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="512" height="512">
+  <!-- Icona dell'app: Zibo su fondo notte. Autonoma, non usa lo sprite. -->
+  <rect width="100" height="100" rx="22" fill="#241c47"/>
+  <g stroke="#2b2140" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none"
+     transform="translate(6 8) scale(0.88)">
+    <path d="M16 58 C4 52 10 34 22 36 C16 48 26 54 32 52Z" fill="#0891b2"/>
+    <ellipse cx="50" cy="62" rx="30" ry="26" fill="#22d3ee"/>
+    <ellipse cx="50" cy="70" rx="18" ry="15" fill="#cffafe"/>
+    <path d="M38 42 L33 20 L49 34" fill="#facc15"/>
+    <path d="M62 42 L67 20 L51 34" fill="#facc15"/>
+    <circle cx="38" cy="52" r="8" fill="#fff"/>
+    <circle cx="62" cy="52" r="8" fill="#fff"/>
+    <circle cx="39" cy="53" r="3.6" fill="#2b2140" stroke="none"/>
+    <circle cx="63" cy="53" r="3.6" fill="#2b2140" stroke="none"/>
+    <path d="M44 66 c3 4 9 4 12 0"/>
+  </g>
+</svg>

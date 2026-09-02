@@ -1,0 +1,291 @@
+{
+  "_comment": "Contenuti didattici di 'Draghetti & Parole'. Separati dalla logica di gioco e dai testi UI (strings.json). Aggiungere parole/mondi qui NON rompe i salvataggi: il progresso e' indicizzato per id.",
+  "schemaVersion": 1,
+  "contentVersion": "1.0.0",
+  "audioBasePath": "assets/audio/",
+
+  "phases": [
+    {
+      "id": 1,
+      "title_it": "Parole con immagini e voce",
+      "desc_it": "Riconoscimento visivo e sonoro. Nessuna lettura richiesta: la parola scritta non viene mai mostrata.",
+      "showWrittenWord": false
+    },
+    {
+      "id": 2,
+      "title_it": "Parole scritte brevi",
+      "desc_it": "La forma scritta compare accanto a immagine e audio, per iniziare a collegare suono e lettere.",
+      "showWrittenWord": true
+    },
+    {
+      "id": 3,
+      "title_it": "Frasi semplici",
+      "desc_it": "Frasi cortissime e mini-dialoghi, sempre con audio.",
+      "showWrittenWord": true
+    },
+    {
+      "id": 4,
+      "title_it": "Mini-ebook (graded reader)",
+      "desc_it": "Libretti originali da generare e inviare su Kindle. Gestiti dai genitori.",
+      "showWrittenWord": true,
+      "parentOnly": true
+    },
+    {
+      "id": 5,
+      "title_it": "Cartoni e film in inglese",
+      "desc_it": "Suggerimenti audiovisivi progressivi. Gestiti dai genitori.",
+      "showWrittenWord": true,
+      "parentOnly": true
+    }
+  ],
+
+  "words": [
+    { "id": "w_dragon",   "en": "dragon",   "it": "drago",      "phase": 1, "theme": "creature", "sprite": "sp-dragon" },
+    { "id": "w_monster",  "en": "monster",  "it": "mostro",     "phase": 1, "theme": "creature", "sprite": "sp-monster" },
+    { "id": "w_knight",   "en": "knight",   "it": "cavaliere",  "phase": 1, "theme": "creature", "sprite": "sp-knight" },
+    { "id": "w_wizard",   "en": "wizard",   "it": "mago",       "phase": 1, "theme": "creature", "sprite": "sp-wizard" },
+    { "id": "w_castle",   "en": "castle",   "it": "castello",   "phase": 1, "theme": "creature", "sprite": "sp-castle" },
+    { "id": "w_sword",    "en": "sword",    "it": "spada",      "phase": 1, "theme": "creature", "sprite": "sp-sword" },
+    { "id": "w_shield",   "en": "shield",   "it": "scudo",      "phase": 1, "theme": "creature", "sprite": "sp-shield" },
+    { "id": "w_egg",      "en": "egg",      "it": "uovo",       "phase": 1, "theme": "creature", "sprite": "sp-egg" },
+
+    { "id": "w_dinosaur", "en": "dinosaur", "it": "dinosauro",  "phase": 1, "theme": "dino", "sprite": "sp-dinosaur" },
+    { "id": "w_tail",     "en": "tail",     "it": "coda",       "phase": 1, "theme": "dino", "sprite": "sp-tail" },
+    { "id": "w_wing",     "en": "wing",     "it": "ala",        "phase": 1, "theme": "dino", "sprite": "sp-wing" },
+    { "id": "w_horn",     "en": "horn",     "it": "corno",      "phase": 1, "theme": "dino", "sprite": "sp-horn" },
+    { "id": "w_tooth",    "en": "tooth",    "it": "dente",      "phase": 1, "theme": "dino", "sprite": "sp-tooth" },
+    { "id": "w_claw",     "en": "claw",     "it": "artiglio",   "phase": 1, "theme": "dino", "sprite": "sp-claw" },
+    { "id": "w_bone",     "en": "bone",     "it": "osso",       "phase": 1, "theme": "dino", "sprite": "sp-bone" },
+    { "id": "w_nest",     "en": "nest",     "it": "nido",       "phase": 1, "theme": "dino", "sprite": "sp-nest" },
+
+    { "id": "w_red",      "en": "red",      "it": "rosso",      "phase": 1, "theme": "colori", "sprite": "sp-color-red" },
+    { "id": "w_blue",     "en": "blue",     "it": "blu",        "phase": 1, "theme": "colori", "sprite": "sp-color-blue" },
+    { "id": "w_green",    "en": "green",    "it": "verde",      "phase": 1, "theme": "colori", "sprite": "sp-color-green" },
+    { "id": "w_yellow",   "en": "yellow",   "it": "giallo",     "phase": 1, "theme": "colori", "sprite": "sp-color-yellow" },
+    { "id": "w_orange",   "en": "orange",   "it": "arancione",  "phase": 1, "theme": "colori", "sprite": "sp-color-orange" },
+    { "id": "w_purple",   "en": "purple",   "it": "viola",      "phase": 1, "theme": "colori", "sprite": "sp-color-purple" },
+    { "id": "w_black",    "en": "black",    "it": "nero",       "phase": 1, "theme": "colori", "sprite": "sp-color-black" },
+    { "id": "w_white",    "en": "white",    "it": "bianco",     "phase": 1, "theme": "colori", "sprite": "sp-color-white" },
+
+    { "id": "w_one",      "en": "one",      "it": "uno",        "phase": 1, "theme": "numeri", "sprite": "sp-num-1" },
+    { "id": "w_two",      "en": "two",      "it": "due",        "phase": 1, "theme": "numeri", "sprite": "sp-num-2" },
+    { "id": "w_three",    "en": "three",    "it": "tre",        "phase": 1, "theme": "numeri", "sprite": "sp-num-3" },
+    { "id": "w_four",     "en": "four",     "it": "quattro",    "phase": 1, "theme": "numeri", "sprite": "sp-num-4" },
+    { "id": "w_five",     "en": "five",     "it": "cinque",     "phase": 1, "theme": "numeri", "sprite": "sp-num-5" },
+    { "id": "w_six",      "en": "six",      "it": "sei",        "phase": 1, "theme": "numeri", "sprite": "sp-num-6" },
+    { "id": "w_seven",    "en": "seven",    "it": "sette",      "phase": 1, "theme": "numeri", "sprite": "sp-num-7" },
+    { "id": "w_eight",    "en": "eight",    "it": "otto",       "phase": 1, "theme": "numeri", "sprite": "sp-num-8" },
+    { "id": "w_nine",     "en": "nine",     "it": "nove",       "phase": 1, "theme": "numeri", "sprite": "sp-num-9" },
+    { "id": "w_ten",      "en": "ten",      "it": "dieci",      "phase": 1, "theme": "numeri", "sprite": "sp-num-10" },
+
+    { "id": "w_cat",      "en": "cat",      "it": "gatto",      "phase": 2, "theme": "natura", "sprite": "sp-cat" },
+    { "id": "w_dog",      "en": "dog",      "it": "cane",       "phase": 2, "theme": "natura", "sprite": "sp-dog" },
+    { "id": "w_fish",     "en": "fish",     "it": "pesce",      "phase": 2, "theme": "natura", "sprite": "sp-fish" },
+    { "id": "w_bird",     "en": "bird",     "it": "uccello",    "phase": 2, "theme": "natura", "sprite": "sp-bird" },
+    { "id": "w_tree",     "en": "tree",     "it": "albero",     "phase": 2, "theme": "natura", "sprite": "sp-tree" },
+    { "id": "w_star",     "en": "star",     "it": "stella",     "phase": 2, "theme": "natura", "sprite": "sp-star" },
+    { "id": "w_moon",     "en": "moon",     "it": "luna",       "phase": 2, "theme": "natura", "sprite": "sp-moon" },
+    { "id": "w_sun",      "en": "sun",      "it": "sole",       "phase": 2, "theme": "natura", "sprite": "sp-sun" },
+
+    { "id": "w_big",      "en": "big",      "it": "grande",     "phase": 2, "theme": "aggettivi", "sprite": "sp-big" },
+    { "id": "w_small",    "en": "small",    "it": "piccolo",    "phase": 2, "theme": "aggettivi", "sprite": "sp-small" },
+    { "id": "w_happy",    "en": "happy",    "it": "felice",     "phase": 2, "theme": "aggettivi", "sprite": "sp-happy" },
+    { "id": "w_sad",      "en": "sad",      "it": "triste",     "phase": 2, "theme": "aggettivi", "sprite": "sp-sad" },
+    { "id": "w_hot",      "en": "hot",      "it": "caldo",      "phase": 2, "theme": "aggettivi", "sprite": "sp-hot" },
+    { "id": "w_cold",     "en": "cold",     "it": "freddo",     "phase": 2, "theme": "aggettivi", "sprite": "sp-cold" },
+    { "id": "w_fast",     "en": "fast",     "it": "veloce",     "phase": 2, "theme": "aggettivi", "sprite": "sp-fast" },
+    { "id": "w_slow",     "en": "slow",     "it": "lento",      "phase": 2, "theme": "aggettivi", "sprite": "sp-slow" }
+  ],
+
+  "phrases": [
+    { "id": "p_dragon_big",  "en": "The dragon is big.",   "it": "Il drago e' grande.",      "phase": 3, "sprite": "sp-dragon",   "wordIds": ["w_dragon", "w_big"] },
+    { "id": "p_see_monster", "en": "I see a monster!",     "it": "Vedo un mostro!",          "phase": 3, "sprite": "sp-monster",  "wordIds": ["w_monster"] },
+    { "id": "p_knight_happy","en": "The knight is happy.", "it": "Il cavaliere e' felice.",  "phase": 3, "sprite": "sp-knight",   "wordIds": ["w_knight", "w_happy"] },
+    { "id": "p_my_egg",      "en": "This is my egg.",      "it": "Questo e' il mio uovo.",   "phase": 3, "sprite": "sp-egg",      "wordIds": ["w_egg"] },
+    { "id": "p_dino_fast",   "en": "The dinosaur is fast.","it": "Il dinosauro e' veloce.",  "phase": 3, "sprite": "sp-dinosaur", "wordIds": ["w_dinosaur", "w_fast"] },
+    { "id": "p_red_star",    "en": "I see a red star.",    "it": "Vedo una stella rossa.",   "phase": 3, "sprite": "sp-star",     "wordIds": ["w_red", "w_star"] },
+
+    { "id": "p_hello",       "en": "Hello! I am Zibo.",        "it": "Ciao! Io sono Zibo.",            "phase": 3, "sprite": "sp-zibo",    "wordIds": [] },
+    { "id": "p_your_name",   "en": "What is your name?",       "it": "Come ti chiami?",                "phase": 3, "sprite": "sp-knight",  "wordIds": [] },
+    { "id": "p_how_are_you", "en": "How are you? I am happy.", "it": "Come stai? Io sono felice.",     "phase": 3, "sprite": "sp-happy",   "wordIds": ["w_happy"] },
+    { "id": "p_look_dragon", "en": "Look! A blue dragon!",     "it": "Guarda! Un drago blu!",          "phase": 3, "sprite": "sp-dragon",  "wordIds": ["w_blue", "w_dragon"] },
+    { "id": "p_come_with_me","en": "Come with me, friend!",    "it": "Vieni con me, amico!",           "phase": 3, "sprite": "sp-castle",  "wordIds": [] },
+    { "id": "p_thank_you",   "en": "Thank you! Good night.",   "it": "Grazie! Buona notte.",           "phase": 3, "sprite": "sp-moon",    "wordIds": ["w_moon"] }
+  ],
+
+  "worlds": [
+    {
+      "id": "world_dragons", "order": 1, "phase": 1,
+      "title_it": "La Valle dei Draghi", "sprite": "sp-castle", "color": "#ff7a4d",
+      "items": ["w_dragon", "w_monster", "w_knight", "w_wizard", "w_castle", "w_sword", "w_shield", "w_egg"],
+      "minigames": ["match", "listen", "quiz", "hunt"],
+      "reward": "c_flamup"
+    },
+    {
+      "id": "world_dinos", "order": 2, "phase": 1,
+      "title_it": "La Giungla dei Dinosauri", "sprite": "sp-dinosaur", "color": "#3fbf7f",
+      "items": ["w_dinosaur", "w_tail", "w_wing", "w_horn", "w_tooth", "w_claw", "w_bone", "w_nest"],
+      "minigames": ["match", "listen", "quiz", "hunt"],
+      "reward": "c_rocktail"
+    },
+    {
+      "id": "world_colors", "order": 3, "phase": 1,
+      "title_it": "La Grotta dei Colori", "sprite": "sp-color-purple", "color": "#9a6cf5",
+      "items": ["w_red", "w_blue", "w_green", "w_yellow", "w_orange", "w_purple", "w_black", "w_white"],
+      "minigames": ["match", "quiz", "hunt", "listen"],
+      "reward": "c_prisma"
+    },
+    {
+      "id": "world_numbers", "order": 4, "phase": 1,
+      "title_it": "La Montagna dei Numeri", "sprite": "sp-num-5", "color": "#2f9df5",
+      "items": ["w_one", "w_two", "w_three", "w_four", "w_five", "w_six", "w_seven", "w_eight", "w_nine", "w_ten"],
+      "minigames": ["match", "quiz", "hunt", "listen"],
+      "reward": "c_numo"
+    },
+    {
+      "id": "world_forest", "order": 5, "phase": 2,
+      "title_it": "La Foresta delle Parole", "sprite": "sp-tree", "color": "#25a86a",
+      "items": ["w_cat", "w_dog", "w_fish", "w_bird", "w_tree", "w_star", "w_moon", "w_sun"],
+      "minigames": ["match", "dragdrop", "quiz", "listen"],
+      "reward": "c_barky"
+    },
+    {
+      "id": "world_lake", "order": 6, "phase": 2,
+      "title_it": "Il Lago Magico", "sprite": "sp-fish", "color": "#12b6c9",
+      "items": ["w_big", "w_small", "w_happy", "w_sad", "w_hot", "w_cold", "w_fast", "w_slow"],
+      "minigames": ["match", "dragdrop", "quiz", "hunt"],
+      "reward": "c_splashy"
+    },
+    {
+      "id": "world_bridge", "order": 7, "phase": 3,
+      "title_it": "Il Ponte delle Frasi", "sprite": "sp-sword", "color": "#f2b134",
+      "items": ["p_dragon_big", "p_see_monster", "p_knight_happy", "p_my_egg", "p_dino_fast", "p_red_star"],
+      "minigames": ["match", "listen", "build", "quiz"],
+      "reward": "c_glimmer"
+    },
+    {
+      "id": "world_tower", "order": 8, "phase": 3,
+      "title_it": "La Torre dei Dialoghi", "sprite": "sp-wizard", "color": "#e4638f",
+      "items": ["p_hello", "p_your_name", "p_how_are_you", "p_look_dragon", "p_come_with_me", "p_thank_you"],
+      "minigames": ["listen", "build", "quiz", "match"],
+      "reward": "c_torrek"
+    }
+  ],
+
+  "creatures": [
+    { "id": "c_zibo",    "name_it": "Zibo",     "sprite": "sp-zibo",    "unlock": { "type": "start" },                     "fact_it": "Il tuo compagno di avventure. Adora le parole nuove." },
+    { "id": "c_flamup",  "name_it": "Fiammino", "sprite": "sp-flamup",  "unlock": { "type": "world", "value": "world_dragons" }, "fact_it": "Sputa scintille quando sente una parola giusta." },
+    { "id": "c_rocktail","name_it": "Codasso",  "sprite": "sp-rocktail","unlock": { "type": "world", "value": "world_dinos" },   "fact_it": "Ha la coda di roccia: la usa come tamburo." },
+    { "id": "c_prisma",  "name_it": "Prisma",   "sprite": "sp-prisma",  "unlock": { "type": "world", "value": "world_colors" },  "fact_it": "Cambia colore in base a come si sente." },
+    { "id": "c_numo",    "name_it": "Numo",     "sprite": "sp-numo",    "unlock": { "type": "world", "value": "world_numbers" }, "fact_it": "Conta le stelle ogni notte e non sbaglia mai." },
+    { "id": "c_barky",   "name_it": "Rametto",  "sprite": "sp-barky",   "unlock": { "type": "world", "value": "world_forest" },  "fact_it": "Gli cresce una fogliolina per ogni parola imparata." },
+    { "id": "c_splashy", "name_it": "Sciazzo",  "sprite": "sp-splashy", "unlock": { "type": "world", "value": "world_lake" },    "fact_it": "Fa bolle a forma di lettera." },
+    { "id": "c_glimmer", "name_it": "Baluce",   "sprite": "sp-glimmer", "unlock": { "type": "world", "value": "world_bridge" },  "fact_it": "Si accende quando qualcuno dice una frase intera." },
+    { "id": "c_torrek",  "name_it": "Torrek",   "sprite": "sp-torrek",  "unlock": { "type": "world", "value": "world_tower" },   "fact_it": "Custode della torre: risponde solo in inglese." },
+    { "id": "c_stellina","name_it": "Stellina", "sprite": "sp-stellina","unlock": { "type": "mastered", "value": 10 },  "fact_it": "Compare quando padroneggi 10 parole." },
+    { "id": "c_umbra",   "name_it": "Umbra",    "sprite": "sp-umbra",   "unlock": { "type": "mastered", "value": 25 },  "fact_it": "Timida: esce dall'ombra a 25 parole padroneggiate." },
+    { "id": "c_goldwing","name_it": "Aladoro",  "sprite": "sp-goldwing","unlock": { "type": "streak", "value": 7 },     "fact_it": "Il drago d'oro: arriva dopo 7 giorni di fila." }
+  ],
+
+  "mascotStages": [
+    { "level": 1, "label_it": "Cucciolo",   "scale": 1.00, "accessory": "none" },
+    { "level": 4, "label_it": "Esploratore","scale": 1.06, "accessory": "scarf" },
+    { "level": 8, "label_it": "Avventuriero","scale": 1.12, "accessory": "hat" },
+    { "level": 13, "label_it": "Guardiano", "scale": 1.18, "accessory": "crown" }
+  ],
+
+  "dailyMissions": [
+    { "id": "m_words5",   "type": "correctAnswers", "target": 5,  "sprite": "sp-star",     "text_it": "Rispondi bene a 5 domande" },
+    { "id": "m_words10",  "type": "correctAnswers", "target": 10, "sprite": "sp-star",     "text_it": "Rispondi bene a 10 domande" },
+    { "id": "m_repeat5",  "type": "repeats",        "target": 5,  "sprite": "sp-zibo",     "text_it": "Ripeti 5 parole a Zibo" },
+    { "id": "m_creature", "type": "themeCorrect",   "target": 3,  "sprite": "sp-dinosaur", "text_it": "Trova 3 creature", "theme": "dino" },
+    { "id": "m_colors",   "type": "themeCorrect",   "target": 3,  "sprite": "sp-color-red","text_it": "Indovina 3 colori", "theme": "colori" },
+    { "id": "m_numbers",  "type": "themeCorrect",   "target": 3,  "sprite": "sp-num-3",    "text_it": "Indovina 3 numeri", "theme": "numeri" },
+    { "id": "m_lesson",   "type": "lessons",        "target": 1,  "sprite": "sp-castle",   "text_it": "Finisci una partita intera" },
+    { "id": "m_review",   "type": "reviewCorrect",  "target": 4,  "sprite": "sp-shield",   "text_it": "Ripassa 4 parole gia' viste" }
+  ],
+
+  "miniEbooks": [
+    {
+      "id": "ebook_01",
+      "order": 1,
+      "title": "Zibo and the Red Egg",
+      "phase": 4,
+      "unlockAfterWorld": "world_dragons",
+      "status": "da generare",
+      "targetWords": 60,
+      "newWordsPerPage": 1,
+      "vocabularyUsed": ["w_dragon", "w_egg", "w_red", "w_big", "w_castle"],
+      "synopsis_it": "Zibo trova un uovo rosso davanti al castello e aspetta che si schiuda."
+    },
+    {
+      "id": "ebook_02",
+      "order": 2,
+      "title": "The Dinosaur with One Horn",
+      "phase": 4,
+      "unlockAfterWorld": "world_dinos",
+      "status": "da generare",
+      "targetWords": 70,
+      "newWordsPerPage": 1,
+      "vocabularyUsed": ["w_dinosaur", "w_horn", "w_tail", "w_one", "w_nest"],
+      "synopsis_it": "Un dinosauro con un solo corno cerca il suo nido nella giungla."
+    },
+    {
+      "id": "ebook_03",
+      "order": 3,
+      "title": "Colors in the Cave",
+      "phase": 4,
+      "unlockAfterWorld": "world_colors",
+      "status": "da generare",
+      "targetWords": 80,
+      "newWordsPerPage": 1,
+      "vocabularyUsed": ["w_red", "w_blue", "w_green", "w_yellow", "w_purple", "w_dragon"],
+      "synopsis_it": "Prisma il camaleonte accende la grotta con un colore alla volta."
+    },
+    {
+      "id": "ebook_04",
+      "order": 4,
+      "title": "Ten Little Stars",
+      "phase": 4,
+      "unlockAfterWorld": "world_numbers",
+      "status": "da generare",
+      "targetWords": 90,
+      "newWordsPerPage": 1,
+      "vocabularyUsed": ["w_one", "w_two", "w_three", "w_ten", "w_star", "w_moon"],
+      "synopsis_it": "Numo il gufo conta le stelle da uno a dieci prima di dormire."
+    },
+    {
+      "id": "ebook_05",
+      "order": 5,
+      "title": "The Happy Knight",
+      "phase": 4,
+      "unlockAfterWorld": "world_forest",
+      "status": "da generare",
+      "targetWords": 110,
+      "newWordsPerPage": 2,
+      "vocabularyUsed": ["w_knight", "w_happy", "w_sad", "w_dog", "w_tree", "w_sun"],
+      "synopsis_it": "Un cavaliere triste ritrova il sorriso grazie a un cane nella foresta."
+    },
+    {
+      "id": "ebook_06",
+      "order": 6,
+      "title": "Hello, Friend!",
+      "phase": 4,
+      "unlockAfterWorld": "world_bridge",
+      "status": "da generare",
+      "targetWords": 130,
+      "newWordsPerPage": 2,
+      "vocabularyUsed": ["p_hello", "p_your_name", "p_how_are_you", "p_come_with_me", "p_thank_you"],
+      "synopsis_it": "Zibo attraversa il ponte e presenta se stesso a ogni creatura che incontra."
+    }
+  ],
+
+  "mediaRecommendations": [
+    { "title": "Peppa Pig (inglese, sottotitoli italiani)", "phase": 5, "level_it": "Livello 1 — dopo i primi 2 mondi", "note": "Episodi di 5 minuti, lessico quotidiano semplicissimo e molto ripetuto." },
+    { "title": "Bluey (inglese, sottotitoli italiani)", "phase": 5, "level_it": "Livello 1-2", "note": "Frasi brevi e situazioni familiari. Accento australiano chiaro." },
+    { "title": "Ben and Holly's Little Kingdom (inglese, sottotitoli italiani)", "phase": 5, "level_it": "Livello 2 — tema magia", "note": "Perfetto per chi ama fate, folletti e re: lessico fantasy semplice." },
+    { "title": "Dragons: Rescue Riders (inglese, sottotitoli inglesi)", "phase": 5, "level_it": "Livello 3 — tema draghi", "note": "Draghi parlanti, frasi piu' lunghe. Passare ai sottotitoli inglesi qui." },
+    { "title": "Gigantosaurus (inglese, sottotitoli inglesi)", "phase": 5, "level_it": "Livello 3 — tema dinosauri", "note": "Dinosauri e avventura, ritmo dei dialoghi ancora gestibile." },
+    { "title": "How to Train Your Dragon — film (inglese, sottotitoli inglesi)", "phase": 5, "level_it": "Livello 4 — traguardo", "note": "Da tenere come 'premio' quando le frasi della fase 3 sono solide." }
+  ]
+}

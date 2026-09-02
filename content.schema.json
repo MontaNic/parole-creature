@@ -1,0 +1,39 @@
+{
+  "_comment": "Schema di riferimento per content.json — Claude Code lo popolerà con i contenuti reali",
+  "schemaVersion": 1,
+  "words": [
+    {
+      "id": "dragon_01",
+      "en": "dragon",
+      "it": "drago",
+      "phase": 1,
+      "image": "assets/img/dragon.webp",
+      "audio": "assets/audio/dragon.mp3"
+    }
+  ],
+  "phrases": [
+    {
+      "id": "phrase_01",
+      "en": "The dragon is big",
+      "it": "Il drago è grande",
+      "phase": 3,
+      "audio": "assets/audio/phrase_01.mp3"
+    }
+  ],
+  "miniEbooks": [
+    {
+      "id": "ebook_01",
+      "title": "TBD",
+      "phase": 4,
+      "status": "da generare",
+      "vocabularyUsed": []
+    }
+  ],
+  "mediaRecommendations": [
+    {
+      "title": "TBD",
+      "phase": 5,
+      "note": ""
+    }
+  ]
+}

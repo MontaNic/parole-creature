@@ -1,0 +1,14 @@
+# Segreti: mai committare
+.env
+
+# Sistema / editor
+.DS_Store
+node_modules/
+*.log
+
+# File temporanei di prova
+_shot*.html
+
+# NOTA: assets/audio/*.mp3 va invece committato.
+# Sono file statici pre-generati: servono per il funzionamento offline
+# e per la pubblicazione su GitHub Pages.

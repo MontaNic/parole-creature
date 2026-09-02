@@ -1,0 +1,515 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+<!--
+  Sprite unico di "Draghetti & Parole".
+  Stile condiviso: viewBox 0 0 100 100, contorno #2b2140 spesso, fill piatti,
+  palette limitata (vedi style.css). Nessun asset generato a runtime.
+  Viene iniettato nel DOM al boot e usato con <use href="#sp-...">.
+-->
+<defs>
+  <style>
+    .o { stroke:#2b2140; stroke-width:3.2; stroke-linecap:round; stroke-linejoin:round; }
+    .o-thin { stroke:#2b2140; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; }
+  </style>
+</defs>
+
+<!-- ============ MONDO 1 — CREATURE ============ -->
+
+<symbol id="sp-dragon" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M18 72 C6 66 8 50 20 48 C16 62 28 66 32 64Z" fill="#16a34a"/>
+    <path d="M40 30 C34 12 58 10 60 26" fill="#4ade80"/>
+    <ellipse cx="46" cy="60" rx="27" ry="21" fill="#22c55e"/>
+    <path d="M28 74 C22 84 30 90 38 84" fill="#22c55e"/>
+    <circle cx="70" cy="42" r="17" fill="#34d399"/>
+    <path d="M64 27 L60 15 L72 22Z" fill="#facc15"/>
+    <path d="M82 46 C92 46 92 56 84 56" fill="#34d399"/>
+    <circle cx="72" cy="38" r="5" fill="#fff"/>
+    <circle cx="73" cy="38.5" r="2.2" fill="#2b2140" stroke="none"/>
+    <path d="M78 52 h8" />
+  </g>
+</symbol>
+
+<symbol id="sp-monster" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M20 62 C20 34 80 34 80 62 C80 82 68 88 50 88 C32 88 20 82 20 62Z" fill="#a855f7"/>
+    <path d="M28 54 L24 28 L42 44Z" fill="#c084fc"/>
+    <path d="M72 54 L76 28 L58 44Z" fill="#c084fc"/>
+    <circle cx="40" cy="56" r="8" fill="#fff"/>
+    <circle cx="62" cy="56" r="8" fill="#fff"/>
+    <circle cx="41" cy="57" r="3.4" fill="#2b2140" stroke="none"/>
+    <circle cx="63" cy="57" r="3.4" fill="#2b2140" stroke="none"/>
+    <path d="M38 72 L44 78 L50 72 L56 78 L62 72" />
+  </g>
+</symbol>
+
+<symbol id="sp-knight" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M50 14 C66 14 74 26 74 42 C74 60 64 70 50 70 C36 70 26 60 26 42 C26 26 34 14 50 14Z" fill="#94a3b8"/>
+    <path d="M50 8 C54 8 56 12 56 16 L44 16 C44 12 46 8 50 8Z" fill="#ef4444"/>
+    <rect x="34" y="34" width="32" height="12" rx="5" fill="#2b2140"/>
+    <path d="M40 54 h20" />
+    <path d="M28 78 C34 70 66 70 72 78 L74 92 H26Z" fill="#3b82f6"/>
+  </g>
+</symbol>
+
+<symbol id="sp-wizard" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M50 6 L74 44 H26Z" fill="#6366f1"/>
+    <circle cx="50" cy="16" r="3" fill="#facc15"/>
+    <circle cx="62" cy="30" r="3" fill="#facc15"/>
+    <circle cx="50" cy="54" r="16" fill="#fcd9b6"/>
+    <circle cx="44" cy="52" r="2.6" fill="#2b2140" stroke="none"/>
+    <circle cx="56" cy="52" r="2.6" fill="#2b2140" stroke="none"/>
+    <path d="M38 62 C42 76 58 76 62 62 L66 92 H34Z" fill="#e5e7eb"/>
+    <path d="M46 60 C48 64 52 64 54 60" />
+  </g>
+</symbol>
+
+<symbol id="sp-castle" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <rect x="20" y="46" width="60" height="42" rx="4" fill="#cbd5e1"/>
+    <path d="M20 46 v-12 h10 v8 h10 v-8 h10 v8 h10 v-8 h10 v8 h10 v-8 h10 v12" fill="#cbd5e1"/>
+    <path d="M30 34 L30 20 L42 26" fill="#ef4444"/>
+    <rect x="42" y="64" width="16" height="24" rx="8" fill="#7c3aed"/>
+    <rect x="28" y="56" width="10" height="10" rx="2" fill="#60a5fa"/>
+    <rect x="62" y="56" width="10" height="10" rx="2" fill="#60a5fa"/>
+  </g>
+</symbol>
+
+<symbol id="sp-sword" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M50 8 L60 24 L60 62 H40 V24Z" fill="#e2e8f0"/>
+    <rect x="26" y="62" width="48" height="10" rx="5" fill="#f59e0b"/>
+    <rect x="44" y="72" width="12" height="20" rx="4" fill="#a16207"/>
+    <circle cx="50" cy="92" r="5" fill="#facc15"/>
+  </g>
+</symbol>
+
+<symbol id="sp-shield" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M50 10 L82 22 C82 58 68 82 50 92 C32 82 18 58 18 22Z" fill="#3b82f6"/>
+    <path d="M50 22 L70 29 C70 55 60 72 50 79 C40 72 30 55 30 29Z" fill="#facc15"/>
+    <path d="M50 34 L56 48 H44Z" fill="#ef4444"/>
+  </g>
+</symbol>
+
+<symbol id="sp-egg" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M50 10 C70 10 80 40 80 58 A30 30 0 0 1 20 58 C20 40 30 10 50 10Z" fill="#fef3c7"/>
+    <path d="M34 50 h32" stroke-dasharray="6 5"/>
+    <circle cx="40" cy="66" r="5" fill="#fbbf24"/>
+    <circle cx="60" cy="72" r="4" fill="#fbbf24"/>
+  </g>
+</symbol>
+
+<!-- ============ MONDO 2 — DINOSAURI ============ -->
+
+<symbol id="sp-dinosaur" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M12 74 C16 58 26 56 34 58" fill="#0d9488"/>
+    <ellipse cx="48" cy="62" rx="26" ry="19" fill="#14b8a6"/>
+    <path d="M34 78 v10 M62 78 v10" />
+    <circle cx="72" cy="38" r="16" fill="#2dd4bf"/>
+    <path d="M36 46 L42 34 L48 46 L54 32 L60 46" fill="#f59e0b"/>
+    <circle cx="74" cy="34" r="4.4" fill="#fff"/>
+    <circle cx="75" cy="34.5" r="2" fill="#2b2140" stroke="none"/>
+    <path d="M80 46 h6" />
+  </g>
+</symbol>
+
+<symbol id="sp-tail" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M84 30 C56 26 30 40 16 72 C34 84 62 78 78 58 C86 48 88 38 84 30Z" fill="#14b8a6"/>
+    <path d="M78 30 L84 18 L90 32" fill="#f59e0b"/>
+    <path d="M60 34 L66 22 L72 36" fill="#f59e0b"/>
+    <path d="M30 62 c8 4 18 4 26 0" class="o-thin"/>
+  </g>
+</symbol>
+
+<symbol id="sp-wing" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M14 78 C10 40 40 12 82 14 C86 44 66 76 30 86 Z" fill="#c084fc"/>
+    <path d="M40 80 C44 52 56 32 76 20" />
+    <path d="M26 82 C34 58 42 42 58 26" />
+  </g>
+</symbol>
+
+<symbol id="sp-horn" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M24 86 C22 46 44 14 76 10 C74 46 58 76 24 86Z" fill="#fcd34d"/>
+    <path d="M36 74 C40 50 52 30 68 20" class="o-thin"/>
+    <path d="M44 80 C48 58 58 40 72 30" class="o-thin"/>
+  </g>
+</symbol>
+
+<symbol id="sp-tooth" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M26 18 H74 C78 44 68 58 62 82 C56 66 44 66 38 82 C32 58 22 44 26 18Z" fill="#ffffff"/>
+    <path d="M40 30 c6 -4 14 -4 20 0" class="o-thin"/>
+  </g>
+</symbol>
+
+<symbol id="sp-claw" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M22 84 C18 56 26 30 44 16 C46 40 42 62 32 82Z" fill="#f8fafc"/>
+    <path d="M46 88 C44 58 50 32 66 18 C70 44 64 68 56 88Z" fill="#f8fafc"/>
+    <path d="M70 86 C70 60 76 40 88 30 C90 52 84 72 78 88Z" fill="#f8fafc"/>
+  </g>
+</symbol>
+
+<symbol id="sp-bone" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M28 34 a11 11 0 1 1 8 18 L64 66 a11 11 0 1 1 8 18 a11 11 0 1 1 -18 -8 L26 44 a11 11 0 1 1 2 -10Z" fill="#f1f5f9"/>
+  </g>
+</symbol>
+
+<symbol id="sp-nest" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <ellipse cx="38" cy="56" rx="13" ry="16" fill="#fef3c7"/>
+    <ellipse cx="60" cy="58" rx="13" ry="16" fill="#fde68a"/>
+    <path d="M12 66 C12 88 88 88 88 66 C88 60 78 58 70 60 C60 54 40 54 30 60 C22 58 12 60 12 66Z" fill="#b45309"/>
+    <path d="M22 70 c14 6 42 6 56 0" class="o-thin"/>
+  </g>
+</symbol>
+
+<!-- ============ MONDO 3 — COLORI (uovo di drago colorato) ============ -->
+
+<symbol id="sp-color-red" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M50 12 C70 12 80 40 80 58 A30 30 0 0 1 20 58 C20 40 30 12 50 12Z" fill="#ef4444"/><path d="M36 30 c4 -8 12 -12 18 -12" stroke="#fff" stroke-width="5" opacity=".55"/></g></symbol>
+<symbol id="sp-color-blue" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M50 12 C70 12 80 40 80 58 A30 30 0 0 1 20 58 C20 40 30 12 50 12Z" fill="#3b82f6"/><path d="M36 30 c4 -8 12 -12 18 -12" stroke="#fff" stroke-width="5" opacity=".55"/></g></symbol>
+<symbol id="sp-color-green" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M50 12 C70 12 80 40 80 58 A30 30 0 0 1 20 58 C20 40 30 12 50 12Z" fill="#22c55e"/><path d="M36 30 c4 -8 12 -12 18 -12" stroke="#fff" stroke-width="5" opacity=".55"/></g></symbol>
+<symbol id="sp-color-yellow" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M50 12 C70 12 80 40 80 58 A30 30 0 0 1 20 58 C20 40 30 12 50 12Z" fill="#facc15"/><path d="M36 30 c4 -8 12 -12 18 -12" stroke="#fff" stroke-width="5" opacity=".55"/></g></symbol>
+<symbol id="sp-color-orange" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M50 12 C70 12 80 40 80 58 A30 30 0 0 1 20 58 C20 40 30 12 50 12Z" fill="#f97316"/><path d="M36 30 c4 -8 12 -12 18 -12" stroke="#fff" stroke-width="5" opacity=".55"/></g></symbol>
+<symbol id="sp-color-purple" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M50 12 C70 12 80 40 80 58 A30 30 0 0 1 20 58 C20 40 30 12 50 12Z" fill="#a855f7"/><path d="M36 30 c4 -8 12 -12 18 -12" stroke="#fff" stroke-width="5" opacity=".55"/></g></symbol>
+<symbol id="sp-color-black" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M50 12 C70 12 80 40 80 58 A30 30 0 0 1 20 58 C20 40 30 12 50 12Z" fill="#1f2937"/><path d="M36 30 c4 -8 12 -12 18 -12" stroke="#fff" stroke-width="5" opacity=".55"/></g></symbol>
+<symbol id="sp-color-white" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M50 12 C70 12 80 40 80 58 A30 30 0 0 1 20 58 C20 40 30 12 50 12Z" fill="#ffffff"/><path d="M36 30 c4 -8 12 -12 18 -12" stroke="#cbd5e1" stroke-width="5"/></g></symbol>
+
+<!-- ============ MONDO 4 — NUMERI (gemme da contare) ============ -->
+
+<symbol id="sp-num-1" viewBox="0 0 100 100"><g class="o"><circle cx="50" cy="50" r="14" fill="#3b82f6"/></g></symbol>
+<symbol id="sp-num-2" viewBox="0 0 100 100"><g class="o"><circle cx="32" cy="50" r="13" fill="#3b82f6"/><circle cx="68" cy="50" r="13" fill="#3b82f6"/></g></symbol>
+<symbol id="sp-num-3" viewBox="0 0 100 100"><g class="o"><circle cx="50" cy="28" r="12" fill="#3b82f6"/><circle cx="30" cy="66" r="12" fill="#3b82f6"/><circle cx="70" cy="66" r="12" fill="#3b82f6"/></g></symbol>
+<symbol id="sp-num-4" viewBox="0 0 100 100"><g class="o"><circle cx="32" cy="32" r="12" fill="#3b82f6"/><circle cx="68" cy="32" r="12" fill="#3b82f6"/><circle cx="32" cy="68" r="12" fill="#3b82f6"/><circle cx="68" cy="68" r="12" fill="#3b82f6"/></g></symbol>
+<symbol id="sp-num-5" viewBox="0 0 100 100"><g class="o"><circle cx="28" cy="28" r="11" fill="#3b82f6"/><circle cx="72" cy="28" r="11" fill="#3b82f6"/><circle cx="50" cy="50" r="11" fill="#3b82f6"/><circle cx="28" cy="72" r="11" fill="#3b82f6"/><circle cx="72" cy="72" r="11" fill="#3b82f6"/></g></symbol>
+<symbol id="sp-num-6" viewBox="0 0 100 100"><g class="o"><circle cx="26" cy="34" r="11" fill="#3b82f6"/><circle cx="50" cy="34" r="11" fill="#3b82f6"/><circle cx="74" cy="34" r="11" fill="#3b82f6"/><circle cx="26" cy="66" r="11" fill="#3b82f6"/><circle cx="50" cy="66" r="11" fill="#3b82f6"/><circle cx="74" cy="66" r="11" fill="#3b82f6"/></g></symbol>
+<symbol id="sp-num-7" viewBox="0 0 100 100"><g class="o"><circle cx="30" cy="32" r="10" fill="#3b82f6"/><circle cx="50" cy="32" r="10" fill="#3b82f6"/><circle cx="70" cy="32" r="10" fill="#3b82f6"/><circle cx="20" cy="66" r="10" fill="#3b82f6"/><circle cx="40" cy="66" r="10" fill="#3b82f6"/><circle cx="60" cy="66" r="10" fill="#3b82f6"/><circle cx="80" cy="66" r="10" fill="#3b82f6"/></g></symbol>
+<symbol id="sp-num-8" viewBox="0 0 100 100"><g class="o"><circle cx="20" cy="34" r="10" fill="#3b82f6"/><circle cx="40" cy="34" r="10" fill="#3b82f6"/><circle cx="60" cy="34" r="10" fill="#3b82f6"/><circle cx="80" cy="34" r="10" fill="#3b82f6"/><circle cx="20" cy="66" r="10" fill="#3b82f6"/><circle cx="40" cy="66" r="10" fill="#3b82f6"/><circle cx="60" cy="66" r="10" fill="#3b82f6"/><circle cx="80" cy="66" r="10" fill="#3b82f6"/></g></symbol>
+<symbol id="sp-num-9" viewBox="0 0 100 100"><g class="o"><circle cx="24" cy="24" r="9.5" fill="#3b82f6"/><circle cx="50" cy="24" r="9.5" fill="#3b82f6"/><circle cx="76" cy="24" r="9.5" fill="#3b82f6"/><circle cx="24" cy="50" r="9.5" fill="#3b82f6"/><circle cx="50" cy="50" r="9.5" fill="#3b82f6"/><circle cx="76" cy="50" r="9.5" fill="#3b82f6"/><circle cx="24" cy="76" r="9.5" fill="#3b82f6"/><circle cx="50" cy="76" r="9.5" fill="#3b82f6"/><circle cx="76" cy="76" r="9.5" fill="#3b82f6"/></g></symbol>
+<symbol id="sp-num-10" viewBox="0 0 100 100"><g class="o-thin"><circle cx="16" cy="34" r="8.5" fill="#3b82f6"/><circle cx="33" cy="34" r="8.5" fill="#3b82f6"/><circle cx="50" cy="34" r="8.5" fill="#3b82f6"/><circle cx="67" cy="34" r="8.5" fill="#3b82f6"/><circle cx="84" cy="34" r="8.5" fill="#3b82f6"/><circle cx="16" cy="66" r="8.5" fill="#3b82f6"/><circle cx="33" cy="66" r="8.5" fill="#3b82f6"/><circle cx="50" cy="66" r="8.5" fill="#3b82f6"/><circle cx="67" cy="66" r="8.5" fill="#3b82f6"/><circle cx="84" cy="66" r="8.5" fill="#3b82f6"/></g></symbol>
+
+<!-- ============ MONDO 5 — NATURA ============ -->
+
+<symbol id="sp-cat" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M26 40 L22 18 L40 30" fill="#f59e0b"/>
+    <path d="M74 40 L78 18 L60 30" fill="#f59e0b"/>
+    <circle cx="50" cy="52" r="28" fill="#fbbf24"/>
+    <circle cx="40" cy="48" r="4" fill="#2b2140" stroke="none"/>
+    <circle cx="60" cy="48" r="4" fill="#2b2140" stroke="none"/>
+    <path d="M50 58 l-4 4 h8Z" fill="#ef4444"/>
+    <path d="M46 66 c2 4 6 4 8 0" />
+    <path d="M22 56 h-12 M22 62 h-12 M78 56 h12 M78 62 h12" class="o-thin"/>
+  </g>
+</symbol>
+
+<symbol id="sp-dog" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M22 34 C10 40 12 64 24 68Z" fill="#92400e"/>
+    <path d="M78 34 C90 40 88 64 76 68Z" fill="#92400e"/>
+    <circle cx="50" cy="52" r="27" fill="#d97706"/>
+    <circle cx="40" cy="46" r="4" fill="#2b2140" stroke="none"/>
+    <circle cx="60" cy="46" r="4" fill="#2b2140" stroke="none"/>
+    <ellipse cx="50" cy="62" rx="13" ry="11" fill="#fde68a"/>
+    <ellipse cx="50" cy="58" rx="5" ry="4" fill="#2b2140" stroke="none"/>
+    <path d="M50 62 v6" />
+  </g>
+</symbol>
+
+<symbol id="sp-fish" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M88 32 L88 68 L62 50Z" fill="#0ea5e9"/>
+    <ellipse cx="42" cy="50" rx="30" ry="22" fill="#38bdf8"/>
+    <path d="M42 28 C48 20 56 22 56 30" fill="#0ea5e9"/>
+    <circle cx="26" cy="44" r="5" fill="#fff"/>
+    <circle cx="25" cy="44" r="2.2" fill="#2b2140" stroke="none"/>
+    <path d="M46 40 c6 6 6 14 0 20" class="o-thin"/>
+  </g>
+</symbol>
+
+<symbol id="sp-bird" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M70 76 C40 84 16 68 18 46 C20 26 44 16 62 26 C78 34 82 60 70 76Z" fill="#60a5fa"/>
+    <path d="M40 46 C52 40 66 46 68 58 C56 66 44 60 40 46Z" fill="#93c5fd"/>
+    <path d="M62 34 L78 30 L64 42" fill="#f59e0b"/>
+    <circle cx="56" cy="34" r="3.4" fill="#2b2140" stroke="none"/>
+    <path d="M34 78 v8 M48 80 v8" class="o-thin"/>
+  </g>
+</symbol>
+
+<symbol id="sp-tree" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <rect x="43" y="56" width="14" height="34" rx="4" fill="#a16207"/>
+    <circle cx="50" cy="34" r="22" fill="#22c55e"/>
+    <circle cx="30" cy="48" r="15" fill="#16a34a"/>
+    <circle cx="70" cy="48" r="15" fill="#16a34a"/>
+  </g>
+</symbol>
+
+<symbol id="sp-star" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M50 8 L62 38 L94 40 L69 60 L78 92 L50 74 L22 92 L31 60 L6 40 L38 38Z" fill="#facc15"/>
+  </g>
+</symbol>
+
+<symbol id="sp-moon" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M62 10 A42 42 0 1 0 62 90 A34 34 0 0 1 62 10Z" fill="#fde68a"/>
+    <circle cx="46" cy="34" r="5" fill="#fbbf24"/>
+    <circle cx="38" cy="58" r="7" fill="#fbbf24"/>
+  </g>
+</symbol>
+
+<symbol id="sp-sun" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <circle cx="50" cy="50" r="24" fill="#fbbf24"/>
+    <path d="M50 8 v10 M50 82 v10 M8 50 h10 M82 50 h10 M20 20 l7 7 M73 73 l7 7 M80 20 l-7 7 M27 73 l-7 7"/>
+  </g>
+</symbol>
+
+<!-- ============ MONDO 6 — AGGETTIVI ============ -->
+
+<symbol id="sp-big" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <circle cx="50" cy="54" r="34" fill="#22c55e"/>
+    <path d="M12 20 h16 M12 20 v16 M88 20 h-16 M88 20 v16" stroke-width="5"/>
+  </g>
+</symbol>
+
+<symbol id="sp-small" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <circle cx="50" cy="56" r="13" fill="#22c55e"/>
+    <path d="M28 34 h12 M28 34 v12 M72 34 h-12 M72 34 v12" stroke-width="4"/>
+  </g>
+</symbol>
+
+<symbol id="sp-happy" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <circle cx="50" cy="50" r="36" fill="#facc15"/>
+    <path d="M32 40 c4 -6 10 -6 14 0" stroke-width="5"/>
+    <path d="M54 40 c4 -6 10 -6 14 0" stroke-width="5"/>
+    <path d="M30 58 c8 16 32 16 40 0" fill="#fff"/>
+  </g>
+</symbol>
+
+<symbol id="sp-sad" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <circle cx="50" cy="50" r="36" fill="#93c5fd"/>
+    <circle cx="38" cy="44" r="3.6" fill="#2b2140" stroke="none"/>
+    <circle cx="62" cy="44" r="3.6" fill="#2b2140" stroke="none"/>
+    <path d="M34 72 c8 -12 24 -12 32 0"/>
+    <path d="M38 52 c0 8 -6 8 -6 14" stroke="#3b82f6"/>
+  </g>
+</symbol>
+
+<symbol id="sp-hot" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M50 8 C64 28 78 38 78 58 A28 28 0 0 1 22 58 C22 40 34 34 40 22 C44 34 50 30 50 8Z" fill="#f97316"/>
+    <path d="M50 46 C58 56 60 62 60 66 A10 10 0 0 1 40 66 C40 60 46 56 50 46Z" fill="#fde68a"/>
+  </g>
+</symbol>
+
+<symbol id="sp-cold" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M50 8 v84 M14 29 l72 42 M86 29 l-72 42" stroke="#38bdf8" stroke-width="6"/>
+    <path d="M40 20 l10 10 l10 -10 M40 80 l10 -10 l10 10" stroke="#38bdf8" stroke-width="5"/>
+  </g>
+</symbol>
+
+<symbol id="sp-fast" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M58 6 L28 52 H50 L42 94 L76 44 H54Z" fill="#facc15"/>
+    <path d="M6 30 h14 M6 50 h10 M6 70 h14" stroke-width="5" stroke="#38bdf8"/>
+  </g>
+</symbol>
+
+<symbol id="sp-slow" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M22 68 C22 44 78 44 78 68 Z" fill="#16a34a"/>
+    <path d="M22 68 h56 v6 H22Z" fill="#fde68a"/>
+    <path d="M40 56 h20 M34 62 c10 -10 22 -10 32 0" class="o-thin"/>
+    <circle cx="86" cy="60" r="9" fill="#22c55e"/>
+    <circle cx="88" cy="58" r="2" fill="#2b2140" stroke="none"/>
+    <path d="M30 74 v8 M66 74 v8" class="o-thin"/>
+  </g>
+</symbol>
+
+<!-- ============ CREATURE DELL'ALBUM ============ -->
+
+<symbol id="sp-zibo" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M16 58 C4 52 10 34 22 36 C16 48 26 54 32 52Z" fill="#0891b2"/>
+    <ellipse cx="50" cy="62" rx="30" ry="26" fill="#22d3ee"/>
+    <ellipse cx="50" cy="70" rx="18" ry="15" fill="#cffafe"/>
+    <path d="M38 42 L33 20 L49 34" fill="#facc15"/>
+    <path d="M62 42 L67 20 L51 34" fill="#facc15"/>
+    <circle cx="38" cy="52" r="8" fill="#fff"/>
+    <circle cx="62" cy="52" r="8" fill="#fff"/>
+    <circle cx="39" cy="53" r="3.6" fill="#2b2140" stroke="none"/>
+    <circle cx="63" cy="53" r="3.6" fill="#2b2140" stroke="none"/>
+    <path d="M44 66 c3 4 9 4 12 0"/>
+  </g>
+</symbol>
+
+<symbol id="sp-flamup" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <ellipse cx="50" cy="62" rx="28" ry="25" fill="#f97316"/>
+    <path d="M50 10 C58 26 66 30 66 42 A16 16 0 0 1 34 42 C34 32 44 28 50 10Z" fill="#fbbf24"/>
+    <circle cx="40" cy="58" r="6" fill="#fff"/>
+    <circle cx="60" cy="58" r="6" fill="#fff"/>
+    <circle cx="41" cy="59" r="2.8" fill="#2b2140" stroke="none"/>
+    <circle cx="61" cy="59" r="2.8" fill="#2b2140" stroke="none"/>
+    <path d="M42 72 c4 5 12 5 16 0"/>
+  </g>
+</symbol>
+
+<symbol id="sp-rocktail" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M10 78 C14 60 26 58 34 62" fill="#78716c"/>
+    <ellipse cx="52" cy="62" rx="27" ry="22" fill="#a8a29e"/>
+    <path d="M34 44 L42 30 L50 44 L58 30 L66 44" fill="#57534e"/>
+    <circle cx="44" cy="60" r="6" fill="#fff"/>
+    <circle cx="64" cy="60" r="6" fill="#fff"/>
+    <circle cx="45" cy="61" r="2.8" fill="#2b2140" stroke="none"/>
+    <circle cx="65" cy="61" r="2.8" fill="#2b2140" stroke="none"/>
+    <path d="M46 74 h16"/>
+  </g>
+</symbol>
+
+<symbol id="sp-prisma" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M18 74 C10 66 18 54 26 60" fill="#a855f7"/>
+    <ellipse cx="54" cy="58" rx="28" ry="24" fill="#22c55e"/>
+    <path d="M40 40 a14 14 0 0 1 28 0 Z" fill="#facc15"/>
+    <path d="M32 62 a12 12 0 0 0 24 0Z" fill="#3b82f6"/>
+    <circle cx="66" cy="48" r="8" fill="#fff"/>
+    <circle cx="67" cy="48" r="3.4" fill="#2b2140" stroke="none"/>
+    <path d="M74 66 c8 2 10 10 4 12"/>
+  </g>
+</symbol>
+
+<symbol id="sp-numo" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M26 30 L20 14 L38 24" fill="#92400e"/>
+    <path d="M74 30 L80 14 L62 24" fill="#92400e"/>
+    <ellipse cx="50" cy="56" rx="30" ry="32" fill="#b45309"/>
+    <circle cx="38" cy="48" r="12" fill="#fff"/>
+    <circle cx="62" cy="48" r="12" fill="#fff"/>
+    <circle cx="38" cy="48" r="5" fill="#2b2140" stroke="none"/>
+    <circle cx="62" cy="48" r="5" fill="#2b2140" stroke="none"/>
+    <path d="M50 60 l-6 8 h12Z" fill="#facc15"/>
+  </g>
+</symbol>
+
+<symbol id="sp-barky" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <rect x="34" y="46" width="32" height="40" rx="12" fill="#a16207"/>
+    <circle cx="34" cy="34" r="14" fill="#22c55e"/>
+    <circle cx="66" cy="34" r="14" fill="#22c55e"/>
+    <circle cx="50" cy="24" r="16" fill="#16a34a"/>
+    <circle cx="43" cy="60" r="4" fill="#2b2140" stroke="none"/>
+    <circle cx="57" cy="60" r="4" fill="#2b2140" stroke="none"/>
+    <path d="M44 70 c3 4 9 4 12 0"/>
+  </g>
+</symbol>
+
+<symbol id="sp-splashy" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M86 34 L86 66 L64 50Z" fill="#0284c7"/>
+    <ellipse cx="44" cy="52" rx="28" ry="24" fill="#38bdf8"/>
+    <path d="M44 28 L40 12 L54 24" fill="#facc15"/>
+    <circle cx="32" cy="46" r="7" fill="#fff"/>
+    <circle cx="31" cy="46" r="3" fill="#2b2140" stroke="none"/>
+    <path d="M34 62 c6 5 14 5 18 0"/>
+    <circle cx="18" cy="24" r="5" fill="#bae6fd"/>
+  </g>
+</symbol>
+
+<symbol id="sp-glimmer" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M28 34 C10 30 8 54 26 58" fill="#f0abfc"/>
+    <path d="M72 34 C90 30 92 54 74 58" fill="#f0abfc"/>
+    <circle cx="50" cy="52" r="24" fill="#facc15"/>
+    <circle cx="42" cy="48" r="3.6" fill="#2b2140" stroke="none"/>
+    <circle cx="58" cy="48" r="3.6" fill="#2b2140" stroke="none"/>
+    <path d="M42 60 c5 6 11 6 16 0"/>
+    <path d="M50 12 v10 M22 76 l6 -6 M78 76 l-6 -6" stroke="#fbbf24" stroke-width="5"/>
+  </g>
+</symbol>
+
+<symbol id="sp-torrek" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M26 88 V32 h48 v56Z" fill="#94a3b8"/>
+    <path d="M26 32 v-10 h10 v6 h8 v-6 h12 v6 h8 v-6 h10 v10" fill="#cbd5e1"/>
+    <circle cx="40" cy="52" r="6" fill="#fff"/>
+    <circle cx="60" cy="52" r="6" fill="#fff"/>
+    <circle cx="41" cy="53" r="2.8" fill="#2b2140" stroke="none"/>
+    <circle cx="61" cy="53" r="2.8" fill="#2b2140" stroke="none"/>
+    <path d="M40 68 h20" />
+    <path d="M14 60 h12 M74 60 h12" stroke-width="6"/>
+  </g>
+</symbol>
+
+<symbol id="sp-stellina" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M50 6 L60 34 L90 36 L67 55 L75 86 L50 68 L25 86 L33 55 L10 36 L40 34Z" fill="#fde68a"/>
+    <circle cx="42" cy="46" r="3.4" fill="#2b2140" stroke="none"/>
+    <circle cx="58" cy="46" r="3.4" fill="#2b2140" stroke="none"/>
+    <path d="M43 56 c4 5 10 5 14 0"/>
+    <path d="M50 20 l4 8 h-8Z" fill="#f472b6"/>
+  </g>
+</symbol>
+
+<symbol id="sp-umbra" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M22 60 C22 34 78 34 78 60 C78 78 70 90 50 90 C30 90 22 78 22 60Z" fill="#4c1d95"/>
+    <path d="M30 44 L26 26 L40 36Z" fill="#6d28d9"/>
+    <path d="M70 44 L74 26 L60 36Z" fill="#6d28d9"/>
+    <circle cx="40" cy="56" r="7" fill="#facc15"/>
+    <circle cx="62" cy="56" r="7" fill="#facc15"/>
+    <circle cx="41" cy="56" r="2.6" fill="#2b2140" stroke="none"/>
+    <circle cx="63" cy="56" r="2.6" fill="#2b2140" stroke="none"/>
+    <path d="M40 72 c6 -4 14 -4 20 0"/>
+  </g>
+</symbol>
+
+<symbol id="sp-goldwing" viewBox="0 0 100 100">
+  <g class="o" fill="none">
+    <path d="M18 40 C4 26 22 12 34 26" fill="#fde68a"/>
+    <path d="M82 40 C96 26 78 12 66 26" fill="#fde68a"/>
+    <ellipse cx="50" cy="60" rx="28" ry="26" fill="#f59e0b"/>
+    <ellipse cx="50" cy="68" rx="16" ry="13" fill="#fde68a"/>
+    <path d="M36 26 L34 12 L46 22" fill="#facc15"/>
+    <path d="M64 26 L66 12 L54 22" fill="#facc15"/>
+    <circle cx="40" cy="52" r="7" fill="#fff"/>
+    <circle cx="60" cy="52" r="7" fill="#fff"/>
+    <circle cx="41" cy="53" r="3" fill="#2b2140" stroke="none"/>
+    <circle cx="61" cy="53" r="3" fill="#2b2140" stroke="none"/>
+    <path d="M44 66 c3 4 9 4 12 0"/>
+  </g>
+</symbol>
+
+<!-- ============ ICONE DI INTERFACCIA ============ -->
+
+<symbol id="sp-icon-play" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M32 20 L80 50 L32 80Z" fill="#ffffff"/></g></symbol>
+<symbol id="sp-icon-sound" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M18 38 h14 L52 20 v60 L32 62 H18Z" fill="#ffffff"/><path d="M64 36 c8 8 8 20 0 28 M76 26 c14 14 14 34 0 48"/></g></symbol>
+<symbol id="sp-icon-lock" viewBox="0 0 100 100"><g class="o" fill="none"><rect x="24" y="46" width="52" height="40" rx="8" fill="#94a3b8"/><path d="M36 46 V34 a14 14 0 0 1 28 0 v12"/><circle cx="50" cy="64" r="6" fill="#2b2140"/></g></symbol>
+<symbol id="sp-icon-back" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M62 22 L34 50 L62 78" stroke-width="9"/></g></symbol>
+<symbol id="sp-icon-close" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M28 28 L72 72 M72 28 L28 72" stroke-width="9"/></g></symbol>
+<symbol id="sp-icon-home" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M14 50 L50 18 L86 50" /><path d="M26 46 v38 h48 v-38" fill="#ffffff"/><rect x="42" y="60" width="16" height="24" rx="4" fill="#38bdf8"/></g></symbol>
+<symbol id="sp-icon-album" viewBox="0 0 100 100"><g class="o" fill="none"><rect x="16" y="18" width="68" height="64" rx="8" fill="#ffffff"/><path d="M50 18 v64" /><path d="M26 34 h16 M58 34 h16 M26 50 h16 M58 50 h16" class="o-thin"/></g></symbol>
+<symbol id="sp-icon-parent" viewBox="0 0 100 100"><g class="o" fill="none"><circle cx="50" cy="34" r="16" fill="#ffffff"/><path d="M20 86 c0 -18 14 -28 30 -28 s30 10 30 28" fill="#ffffff"/></g></symbol>
+<symbol id="sp-icon-check" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M20 52 L42 74 L82 26" stroke-width="11" stroke="#16a34a"/></g></symbol>
+<symbol id="sp-icon-flame" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M50 8 C64 30 80 40 80 60 A30 30 0 0 1 20 60 C20 42 34 36 40 22 C44 36 50 32 50 8Z" fill="#f97316"/><path d="M50 48 C58 58 62 64 62 68 A12 12 0 0 1 38 68 C38 62 46 58 50 48Z" fill="#fde68a"/></g></symbol>
+<symbol id="sp-icon-mission" viewBox="0 0 100 100"><g class="o" fill="none"><rect x="22" y="14" width="56" height="72" rx="8" fill="#ffffff"/><path d="M34 36 h32 M34 52 h32 M34 68 h20" class="o-thin"/><circle cx="72" cy="70" r="16" fill="#facc15"/><path d="M64 70 l6 6 l12 -12" stroke-width="5"/></g></symbol>
+<symbol id="sp-icon-replay" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M78 50 a28 28 0 1 1 -10 -21" stroke-width="8"/><path d="M74 12 v18 h-18" stroke-width="8"/></g></symbol>
+<symbol id="sp-icon-star" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M50 12 L61 38 L88 40 L67 58 L74 86 L50 70 L26 86 L33 58 L12 40 L39 38Z" fill="#facc15"/></g></symbol>
+</svg>

@@ -1,0 +1,5 @@
+{
+  "_comment": "Elenco degli audio pre-generati presenti. Finche' e' vuoto, il gioco usa la sintesi vocale del browser. Rigenerare con: node tools/generate-audio.mjs",
+  "generatedAt": null,
+  "files": []
+}

@@ -1,0 +1,11 @@
+{
+  "_comment": "Schema di riferimento per strings.json — testi UI in italiano, separati dai contenuti didattici",
+  "schemaVersion": 1,
+  "ui": {
+    "start_button": "Inizia",
+    "settings_title": "Impostazioni",
+    "parent_dashboard_title": "Area genitori",
+    "kindle_email_label": "Email Kindle per l'invio dei libri",
+    "session_end_message": "Ci vediamo domani!"
+  }
+}

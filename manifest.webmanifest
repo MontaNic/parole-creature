@@ -1,0 +1,20 @@
+{
+  "name": "Draghetti & Parole",
+  "short_name": "Draghetti",
+  "description": "Gioco per imparare l'inglese, pensato per bambini di 6-8 anni.",
+  "lang": "it",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#241c47",
+  "theme_color": "#1b1636",
+  "icons": [
+    {
+      "src": "assets/img/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

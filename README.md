@@ -1,0 +1,117 @@
+# Draghetti & Parole
+
+Gioco browser per imparare l'inglese, pensato su misura per Pietro (7 anni):
+sessioni brevi, mascotte che guida a voce, mostri e draghi originali da
+collezionare. Interfaccia in italiano, contenuti didattici in inglese.
+
+- Nessun build step, nessun framework: HTML/CSS/JS vanilla con ES modules.
+- Funziona offline (service worker) e su tablet, Safari iOS incluso.
+- Nessun dato esce dal dispositivo: niente account, niente tracciamento, niente pubblicita'.
+
+## Avviare il gioco
+
+Serve un piccolo server statico (i browser bloccano `fetch` su `file://`,
+e i contenuti stanno in file `.json` separati dalla logica):
+
+```bash
+cd gioco-inglese-pietro
+python3 -m http.server 8080
+# poi apri http://localhost:8080
+```
+
+Per provarlo sul tablet, apri lo stesso indirizzo usando l'IP del computer
+(es. `http://192.168.1.20:8080`) con tablet e computer sulla stessa rete.
+
+## Struttura
+
+```
+index.html               markup e schermate
+style.css                stile, temi, animazioni
+game.js                  avvio, navigazione, costruzione delle partite
+js/config.js             configurazione (nessuna chiave API)
+js/state.js              salvataggio localStorage versionato + export/import
+js/content-loader.js     caricamento di content.json, strings.json, sprite
+js/audio.js              voce, effetti sonori, musica
+js/srs.js                ripetizione spaziata (Leitner)
+js/mascot.js             Zibo: disegno, evoluzione, battute
+js/effects.js            coriandoli, stelle, messaggi
+js/minigames.js          i 6 mini-giochi
+js/missions.js           missione del giorno
+js/screens.js            home, album, riepilogo, onboarding
+js/parents.js            area genitori protetta da PIN
+content.json             parole, frasi, mondi, creature, mini-ebook, film
+strings.json             testi dell'interfaccia in italiano
+assets/img/sprites.svg   tutte le illustrazioni (sprite SVG unico)
+assets/audio/            audio pre-generati (+ index.json)
+sw.js                    cache offline
+tools/generate-audio.mjs generazione offline degli audio
+tools/smoke-test.html    test di sfoglio automatico
+proxy/cloudflare-worker.js  proxy che custodisce la chiave ElevenLabs
+```
+
+## Audio
+
+Il gioco parla in due modi:
+
+1. **File MP3 pre-generati** con ElevenLabs, dentro `assets/audio/`.
+   Vengono creati una volta sola, offline, e poi cachati: nessuna chiamata
+   all'API mentre il bambino gioca.
+2. **Sintesi vocale del browser** come ripiego, per le tracce mancanti.
+
+Appena clonato il progetto non ci sono mp3: il gioco funziona lo stesso con la
+sintesi vocale. Per generare le voci ElevenLabs:
+
+```bash
+cp .env.example .env       # poi compila .env (non viene mai committato)
+node tools/generate-audio.mjs --dry-run   # mostra cosa farebbe
+node tools/generate-audio.mjs             # genera i file mancanti
+```
+
+La chiave ElevenLabs **non sta mai nel codice client**. Due modi, entrambi sicuri
+anche con repository pubblico:
+
+- **con proxy** (consigliato): la chiave vive dentro un Cloudflare Worker
+  (`proxy/cloudflare-worker.js`); in `.env` metti solo `TTS_PROXY_URL` e `TTS_PROXY_TOKEN`;
+- **diretto**: `ELEVENLABS_API_KEY` nel `.env` locale, escluso da git.
+
+## Aggiungere contenuti
+
+Si modifica solo `content.json`. Aggiungere parole, frasi o mondi **non rompe i
+salvataggi**: il progresso e' indicizzato per `id`, e lo schema del salvataggio
+ha un numero di versione con migrazioni in `js/state.js`.
+
+Per una parola nuova servono tre cose:
+
+1. una voce in `words` (con `id`, `en`, `it`, `phase`, `theme`, `sprite`);
+2. un `<symbol id="sp-...">` in `assets/img/sprites.svg`;
+3. il suo `id` dentro `items` di un mondo.
+
+Poi `node tools/generate-audio.mjs` per la voce inglese.
+
+## Area genitori
+
+Si apre dall'icona in alto a destra ed e' protetta da un PIN di 4 cifre.
+**Il PIN non e' una misura di sicurezza informatica**: serve solo a impedire che
+un bambino ci entri per sbaglio. Chi conosce gli strumenti del browser lo aggira.
+
+Da li' si impostano: durata della sessione, fasce orarie e giorni consentiti,
+fasi didattiche e temi attivi, pausa vacanza, musica ed effetti, email
+Send-to-Kindle, e si vedono progressi, mini-ebook da generare e film consigliati.
+C'e' anche **export/import del salvataggio**: conviene esportare ogni tanto,
+perche' una pulizia della cache cancella `localStorage` senza preavviso.
+
+## Test
+
+```bash
+python3 -m http.server 8080
+# apri http://localhost:8080/tools/smoke-test.html        (solo partita)
+# apri http://localhost:8080/tools/smoke-test.html#full   (anche album e genitori)
+```
+
+Tocca a caso i comandi del gioco per qualche minuto e riporta gli errori:
+serve a verificare che nessun percorso si rompa, compresi quelli assurdi
+che un bambino di 7 anni prende davvero.
+
+## Stato del progetto
+
+Vedi `PROGRESS.md` — va tenuto aggiornato a ogni modifica sostanziale.
