@@ -20,7 +20,7 @@
  *   VOICE_ID_ENGLISH    il MODELLO di pronuncia. Dice tutto il contenuto
  *                       didattico in inglese: parole e frasi da imparare.
  *                       E' la voce che il bambino deve imitare.
- *   VOICE_ID_NARRATOR   la GUIDA. Dice le battute italiane di Zibo:
+ *   VOICE_ID_NARRATOR   la GUIDA. Dice le battute italiane di Pepe:
  *                       accoglienza, istruzioni, incoraggiamenti.
  *
  * La separazione non e' estetica: al bambino deve essere sempre chiaro,
@@ -33,10 +33,15 @@
  *   node tools/generate-audio.mjs --plan      solo il riepilogo per voce
  *   node tools/generate-audio.mjs --dry-run   riepilogo + elenco delle tracce
  *   node tools/generate-audio.mjs --index     riscrive solo assets/audio/index.json
+ *
+ * Nota rete: se sei dietro un proxy che rifirma i certificati TLS, Node
+ * fallisce dove curl funziona (curl usa il portachiavi di sistema, Node no).
+ * Lo script se ne accorge e si rilancia da solo con --use-system-ca.
  */
 
 import { readFile, writeFile, mkdir, readdir, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -136,7 +141,7 @@ const VOICE_ROLES = {
     env: 'VOICE_ID_NARRATOR',
     legacyEnv: 'ELEVENLABS_VOICE_IT',
     fallback: 'XB0fDUnXU5powFXDhCwa',      // Charlotte
-    role: 'voce guida italiana (Zibo)'
+    role: 'voce guida italiana (Pepe)'
   }
 };
 
@@ -155,7 +160,7 @@ function voiceConfigured(env, lang) {
  * Parametri di sintesi per tipo di traccia.
  * Le parole singole vogliono stabilita' alta e zero espressivita': devono
  * suonare identiche a ogni riascolto, perche' sono un modello da imitare.
- * Le battute di Zibo possono permettersi piu' calore.
+ * Le battute di Pepe possono permettersi piu' calore.
  */
 function voiceSettings(kind) {
   if (kind === 'word') return { stability: 0.70, similarity_boost: 0.85, style: 0.0, use_speaker_boost: true };
@@ -202,13 +207,64 @@ async function synthDirect(env, job) {
 }
 
 /* ------------------------------------------------------------------ */
+/* Rete: proxy TLS aziendali e simili                                  */
+/* ------------------------------------------------------------------ */
+
+/** Errori TLS tipici di una connessione intercettata da un proxy. */
+const TLS_ERRORS = new Set([
+  'SELF_SIGNED_CERT_IN_CHAIN',
+  'UNABLE_TO_VERIFY_LEAF_SIGNATURE',
+  'DEPTH_ZERO_SELF_SIGNED_CERT',
+  'CERT_SIGNATURE_FAILURE'
+]);
+
+function isTlsInterception(err) {
+  const code = err?.cause?.code || err?.code;
+  return TLS_ERRORS.has(code);
+}
+
+/**
+ * Se la rete e' dietro un proxy che rifirma i certificati, Node fallisce
+ * dove curl funziona: curl usa il portachiavi di sistema, Node il suo
+ * elenco di CA interno. Invece di lasciare 113 righe di "fetch failed",
+ * lo script si rilancia una volta sola con --use-system-ca.
+ */
+function reexecWithSystemCa() {
+  if (process.execArgv.includes('--use-system-ca') || process.env.DP_CA_RETRY) return false;
+  console.log('\nCertificato non verificabile: probabile proxy TLS.');
+  console.log('Rilancio con --use-system-ca (portachiavi di sistema).\n');
+  const r = spawnSync(process.execPath, ['--use-system-ca', ...process.argv.slice(1)], {
+    stdio: 'inherit',
+    env: { ...process.env, DP_CA_RETRY: '1' }
+  });
+  process.exit(r.status ?? 1);
+}
+
+/** Controlla la raggiungibilita' prima di lanciare 113 richieste. */
+async function preflight(url) {
+  try {
+    await fetch(url, { method: 'GET', signal: AbortSignal.timeout(15000) });
+    return true;
+  } catch (err) {
+    if (isTlsInterception(err)) {
+      reexecWithSystemCa();
+      console.error('\nAncora un errore di certificato anche con le CA di sistema.');
+      console.error('Prova:  NODE_EXTRA_CA_CERTS=/percorso/della/ca.pem node tools/generate-audio.mjs\n');
+      return false;
+    }
+    console.error(`\nRete non raggiungibile: ${err.message}`);
+    return false;
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /* Riepilogo: quale voce dice cosa                                     */
 /* ------------------------------------------------------------------ */
 
 const KIND_LABEL = {
   word: 'parole singole',
   phrase: 'frasi e mini-dialoghi',
-  mascot: 'battute di Zibo'
+  mascot: 'battute di Pepe'
 };
 
 /**
@@ -323,7 +379,11 @@ async function main() {
     return;
   }
 
-  console.log(`Modalita: ${useProxy ? 'proxy' : 'chiamata diretta a ElevenLabs'}\n`);
+  console.log(`Modalita: ${useProxy ? 'proxy' : 'chiamata diretta a ElevenLabs'}`);
+
+  const probe = useProxy ? env.TTS_PROXY_URL : 'https://api.elevenlabs.io/v1/models';
+  if (!await preflight(probe)) { process.exitCode = 1; return; }
+  console.log('');
 
   let done = 0;
   let failed = 0;

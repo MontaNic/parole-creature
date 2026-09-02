@@ -1,8 +1,8 @@
 # Draghetti & Parole
 
 Gioco browser per imparare l'inglese, pensato su misura per Pietro (7 anni):
-sessioni brevi, mascotte che guida a voce, mostri e draghi originali da
-collezionare. Interfaccia in italiano, contenuti didattici in inglese.
+sessioni brevi, Pepe (una cucciola di Jack Russell) che guida a voce, mostri e
+draghi originali da collezionare. Interfaccia in italiano, contenuti didattici in inglese.
 
 - Nessun build step, nessun framework: HTML/CSS/JS vanilla con ES modules.
 - Funziona offline (service worker) e su tablet, Safari iOS incluso.
@@ -34,7 +34,7 @@ js/state.js              salvataggio localStorage versionato + export/import
 js/content-loader.js     caricamento di content.json, strings.json, sprite
 js/audio.js              voce, effetti sonori, musica
 js/srs.js                ripetizione spaziata (Leitner)
-js/mascot.js             Zibo: disegno, evoluzione, battute
+js/mascot.js             Pepe: disegno, evoluzione, battute
 js/effects.js            coriandoli, stelle, messaggi
 js/minigames.js          i 6 mini-giochi
 js/missions.js           missione del giorno
@@ -60,8 +60,8 @@ Il gioco parla in due modi:
    all'API mentre il bambino gioca.
 2. **Sintesi vocale del browser** come ripiego, per le tracce mancanti.
 
-Appena clonato il progetto non ci sono mp3: il gioco funziona lo stesso con la
-sintesi vocale. Per generare le voci ElevenLabs:
+Il progetto include gia' **113 tracce generate** (2,5 MB): 89 inglesi e 24
+italiane. Per rigenerarle o aggiungerne di nuove:
 
 ```bash
 cp .env.example .env       # poi compila .env (non viene mai committato)
@@ -69,12 +69,28 @@ node tools/generate-audio.mjs --dry-run   # mostra cosa farebbe
 node tools/generate-audio.mjs             # genera i file mancanti
 ```
 
+```bash
+node tools/generate-audio.mjs --plan      # riepilogo per voce, senza generare
+```
+
+**Due voci, due ruoli.** In `.env`:
+
+- `VOICE_ID_ENGLISH` — il modello di pronuncia: dice tutte le parole e le frasi
+  inglesi del curriculum. E' la voce che il bambino deve imitare.
+- `VOICE_ID_NARRATOR` — Pepe: dice le battute italiane, istruzioni e incoraggiamenti.
+
+La separazione non e' estetica: al bambino deve bastare il timbro per capire se
+quello che sente e' inglese da imparare o italiano da capire.
+
 La chiave ElevenLabs **non sta mai nel codice client**. Due modi, entrambi sicuri
 anche con repository pubblico:
 
 - **con proxy** (consigliato): la chiave vive dentro un Cloudflare Worker
   (`proxy/cloudflare-worker.js`); in `.env` metti solo `TTS_PROXY_URL` e `TTS_PROXY_TOKEN`;
 - **diretto**: `ELEVENLABS_API_KEY` nel `.env` locale, escluso da git.
+
+> Dietro un proxy che rifirma i certificati TLS, Node fallisce dove `curl`
+> funziona. Lo script se ne accorge e si rilancia da solo con `--use-system-ca`.
 
 ## Il curriculum
 

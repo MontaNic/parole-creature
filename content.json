@@ -208,8 +208,8 @@
     { "id": "p_i_shield",  "en": "I have a big shield.",   "it": "Io ho uno scudo grande.", "phase": 3, "structure": "st_i_have_see", "sprite": "sp-shield",    "wordIds": ["w_shield", "w_big"] },
     { "id": "p_i_stars",   "en": "I can see three stars.", "it": "Io vedo tre stelle.",     "phase": 3, "structure": "st_i_have_see", "sprite": "sp-stars",     "wordIds": ["w_three", "w_star"] },
 
-    { "id": "p_ask_name", "en": "What is your name?",   "it": "Come ti chiami?",        "phase": 3, "structure": "st_questions", "sprite": "sp-zibo",        "wordIds": [] },
-    { "id": "p_my_name",  "en": "My name is Zibo.",     "it": "Mi chiamo Zibo.",        "phase": 3, "structure": "st_questions", "sprite": "sp-zibo",        "wordIds": [] },
+    { "id": "p_ask_name", "en": "What is your name?",   "it": "Come ti chiami?",        "phase": 3, "structure": "st_questions", "sprite": "sp-pepe",        "wordIds": [] },
+    { "id": "p_my_name",  "en": "My name is Pepe.",     "it": "Mi chiamo Pepe.",        "phase": 3, "structure": "st_questions", "sprite": "sp-pepe",        "wordIds": [] },
     { "id": "p_ask_how",  "en": "How are you? I am happy.", "it": "Come stai? Sto bene.", "phase": 3, "structure": "st_questions", "sprite": "sp-happy",    "wordIds": ["w_happy"] },
     { "id": "p_ask_red",  "en": "Is it red? Yes, it is.",   "it": "E' rosso? Si', lo e'.", "phase": 3, "structure": "st_questions", "sprite": "sp-color-red", "wordIds": ["w_red"] },
     { "id": "p_ask_blue", "en": "Is it blue? No, it is green.", "it": "E' blu? No, e' verde.", "phase": 3, "structure": "st_questions", "sprite": "sp-color-green", "wordIds": ["w_blue", "w_green"] },
@@ -339,7 +339,7 @@
   ],
 
   "creatures": [
-    { "id": "c_zibo",    "name_it": "Zibo",     "sprite": "sp-zibo",    "unlock": { "type": "start" },                     "fact_it": "Il tuo compagno di avventure. Adora le parole nuove." },
+    { "id": "c_pepe",    "name_it": "Pepe",     "sprite": "sp-pepe",    "unlock": { "type": "start" },                     "fact_it": "La tua cucciola di Jack Russell. Adora le parole nuove." },
     { "id": "c_flamup",  "name_it": "Fiammino", "sprite": "sp-flamup",  "unlock": { "type": "world", "value": "world_dragons" }, "fact_it": "Sputa scintille quando sente una parola giusta." },
     { "id": "c_rocktail","name_it": "Codasso",  "sprite": "sp-rocktail","unlock": { "type": "world", "value": "world_dinos" },   "fact_it": "Ha la coda di roccia: la usa come tamburo." },
     { "id": "c_prisma",  "name_it": "Prisma",   "sprite": "sp-prisma",  "unlock": { "type": "world", "value": "world_colors" },  "fact_it": "Cambia colore in base a come si sente." },
@@ -363,7 +363,7 @@
   "dailyMissions": [
     { "id": "m_words5",   "type": "correctAnswers", "target": 5,  "sprite": "sp-star",     "text_it": "Rispondi bene a 5 domande" },
     { "id": "m_words10",  "type": "correctAnswers", "target": 10, "sprite": "sp-star",     "text_it": "Rispondi bene a 10 domande" },
-    { "id": "m_repeat5",  "type": "repeats",        "target": 5,  "sprite": "sp-zibo",     "text_it": "Ripeti 5 parole a Zibo" },
+    { "id": "m_repeat5",  "type": "repeats",        "target": 5,  "sprite": "sp-pepe",     "text_it": "Ripeti 5 parole a Pepe" },
     { "id": "m_creature", "type": "themeCorrect",   "target": 3,  "sprite": "sp-dinosaur", "text_it": "Trova 3 creature", "theme": "dino" },
     { "id": "m_colors",   "type": "themeCorrect",   "target": 3,  "sprite": "sp-color-red","text_it": "Indovina 3 colori", "theme": "colori" },
     { "id": "m_numbers",  "type": "themeCorrect",   "target": 3,  "sprite": "sp-num-3",    "text_it": "Indovina 3 numeri", "theme": "numeri" },
@@ -373,12 +373,12 @@
 
   "miniEbooks": [
     {
-      "id": "ebook_01", "order": 1, "title": "Zibo and the Red Egg", "phase": 4,
+      "id": "ebook_01", "order": 1, "title": "Pepe and the Red Egg", "phase": 4,
       "unlockAfterWorld": "world_dragons", "status": "da generare",
       "targetWords": 60, "newWordsPerPage": 1,
       "structures": ["st_what_is_it"],
       "vocabularyUsed": ["w_dragon", "w_egg", "w_castle", "w_knight", "w_monster"],
-      "synopsis_it": "Zibo trova un uovo davanti al castello e aspetta che si schiuda."
+      "synopsis_it": "Pepe trova un uovo davanti al castello e aspetta che si schiuda."
     },
     {
       "id": "ebook_02", "order": 2, "title": "The Dinosaur with One Horn", "phase": 4,
@@ -418,7 +418,7 @@
       "targetWords": 130, "newWordsPerPage": 2,
       "structures": ["st_i_have_see", "st_questions"],
       "vocabularyUsed": ["p_ask_name", "p_my_name", "p_ask_how", "p_i_sword", "p_i_monster", "p_thanks"],
-      "synopsis_it": "Zibo attraversa il ponte e presenta se stesso a ogni creatura che incontra."
+      "synopsis_it": "Pepe attraversa il ponte e presenta se stesso a ogni creatura che incontra."
     }
   ],
 

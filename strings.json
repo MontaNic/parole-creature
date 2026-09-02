@@ -147,16 +147,16 @@
     "blocked_time_message": "Il gioco si riapre piu' tardi. Chiedi a mamma o papa'!"
   },
 
-  "_mascotSpoken_comment": "Versione da PRONUNCIARE delle battute che contengono un segnaposto. Il fumetto continua a mostrare il testo personalizzato (col nome del bambino), ma l'audio pre-generato usa questa forma neutra. Meglio la voce vera di Zibo senza il nome che una voce robotica col nome.",
+  "_mascotSpoken_comment": "Versione da PRONUNCIARE delle battute che contengono un segnaposto. Il fumetto continua a mostrare il testo personalizzato (col nome del bambino), ma l'audio pre-generato usa questa forma neutra. Meglio la voce vera di Pepe senza il nome che una voce robotica col nome.",
   "mascotSpoken": {
     "session_end": "Per oggi basta cosi'. Ci vediamo domani!",
     "locked_phase": "Ripassiamo ancora un pochino! Ci mancano poche parole e poi apriamo il mondo nuovo."
   },
 
   "mascot": {
-    "name": "Zibo",
-    "welcome_first": "Ciao! Io sono Zibo. Giochiamo insieme con l'inglese?",
-    "welcome_back": "Bentornato! Sono contento di rivederti.",
+    "name": "Pepe",
+    "welcome_first": "Ciao! Io sono Pepe. Giochiamo insieme con l'inglese?",
+    "welcome_back": "Bentornato! Sono contenta di rivederti.",
     "ask_name": "Come ti chiami?",
     "nice_to_meet": "Che bel nome! Andiamo a esplorare.",
     "tutorial_listen": "Tocca l'altoparlante e ascolta la parola.",
@@ -171,7 +171,7 @@
     "world_complete": "Abbiamo finito questo mondo! Guarda chi e' arrivato.",
     "new_creature": "Guarda! Una nuova creatura per il tuo album.",
     "mission_done": "Missione di oggi completata! Sei un campione.",
-    "level_up": "Sono cresciuto anche io! Guardami.",
+    "level_up": "Sono cresciuta anche io! Guardami.",
     "session_end": "Per oggi basta cosi'. Ci vediamo domani{name}!",
     "idle_1": "Tocca un mondo per iniziare.",
     "idle_2": "Vuoi ripassare qualche parola?",

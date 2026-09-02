@@ -344,18 +344,32 @@
 
 <!-- ============ CREATURE DELL'ALBUM ============ -->
 
-<symbol id="sp-zibo" viewBox="0 0 100 100">
+<symbol id="sp-pepe" viewBox="0 0 100 100">
+  <!--
+    Pepe: cucciola di Jack Russell, bianca con una macchia marrone attorno
+    a un occhio e l'orecchio nero dall'altro lato. Testa grande e occhi bassi
+    e distanti: sono le proporzioni che leggiamo come "cucciolo".
+    L'ordine di disegno conta: le macchie stanno sotto agli occhi e al muso.
+  -->
   <g class="o" fill="none">
-    <path d="M16 58 C4 52 10 34 22 36 C16 48 26 54 32 52Z" fill="#0891b2"/>
-    <ellipse cx="50" cy="62" rx="30" ry="26" fill="#22d3ee"/>
-    <ellipse cx="50" cy="70" rx="18" ry="15" fill="#cffafe"/>
-    <path d="M38 42 L33 20 L49 34" fill="#facc15"/>
-    <path d="M62 42 L67 20 L51 34" fill="#facc15"/>
-    <circle cx="38" cy="52" r="8" fill="#fff"/>
-    <circle cx="62" cy="52" r="8" fill="#fff"/>
-    <circle cx="39" cy="53" r="3.6" fill="#2b2140" stroke="none"/>
-    <circle cx="63" cy="53" r="3.6" fill="#2b2140" stroke="none"/>
-    <path d="M44 66 c3 4 9 4 12 0"/>
+    <path d="M71 84 C84 82 85 69 76 68" fill="#ffffff"/>
+    <path d="M28 94 C24 74 34 61 50 61 C66 61 76 74 72 94Z" fill="#ffffff"/>
+    <path d="M33 90 C30 78 37 70 45 73 C47 81 43 89 37 92Z" fill="#3f3f46"/>
+    <ellipse cx="37" cy="92" rx="9" ry="5.5" fill="#ffffff"/>
+    <ellipse cx="63" cy="92" rx="9" ry="5.5" fill="#ffffff"/>
+    <path d="M31 28 C15 33 14 53 27 59 C33 51 34 36 31 28Z" fill="#3f3f46"/>
+    <path d="M69 28 C85 33 86 53 73 59 C67 51 66 36 69 28Z" fill="#a16207"/>
+    <ellipse cx="50" cy="44" rx="26" ry="23" fill="#ffffff"/>
+    <path d="M60 24 C72 27 75 40 70 49 C62 51 56 44 55 36 C54 30 57 25 60 24Z" fill="#a16207"/>
+    <ellipse cx="50" cy="55" rx="15" ry="11" fill="#ffffff"/>
+    <path d="M50 54 C46 54 44 51 44 49 C44 47 56 47 56 49 C56 51 54 54 50 54Z" fill="#2b2140"/>
+    <path d="M50 54 v3" />
+    <path d="M50 57 c-3 3.5 -7 2.5 -8 -0.5" />
+    <path d="M50 57 c3 3.5 7 2.5 8 -0.5" />
+    <circle cx="39" cy="41" r="4.8" fill="#2b2140" stroke="none"/>
+    <circle cx="61" cy="41" r="4.8" fill="#2b2140" stroke="none"/>
+    <circle cx="40.8" cy="39.3" r="1.7" fill="#ffffff" stroke="none"/>
+    <circle cx="62.8" cy="39.3" r="1.7" fill="#ffffff" stroke="none"/>
   </g>
 </symbol>
 

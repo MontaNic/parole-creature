@@ -199,7 +199,7 @@ svg.ico, .icon-btn svg { fill: none; }
   border: 10px solid transparent; border-right-color: var(--paper); border-left: 0;
 }
 .speech:empty { display: none; }
-/* Quando Zibo sta sopra al fumetto (onboarding, riepilogo) la codina laterale
+/* Quando Pepe sta sopra al fumetto (onboarding, riepilogo) la codina laterale
    non ha senso: si toglie. */
 .speech.no-tail::before { display: none; }
 

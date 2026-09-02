@@ -1,8 +1,8 @@
 /**
- * Zibo, la mascotte.
+ * Pepe, la mascotte: una cucciola di Jack Russell.
  *
  * E' il filo conduttore del gioco: accoglie, spiega, incoraggia e cresce
- * insieme al bambino. Gli accessori (sciarpa, cappello, corona) compaiono
+ * insieme al bambino. Gli accessori (bandana, cappello, corona) compaiono
  * al salire del livello, cosi' il progresso si vede addosso al compagno
  * e non solo in un numero.
  */
@@ -29,7 +29,7 @@ export function stageChangedAt(level) {
 }
 
 /**
- * Disegna Zibo dentro un contenitore.
+ * Disegna Pepe dentro un contenitore.
  * @param {HTMLElement} host
  */
 export function renderMascot(host) {
@@ -41,7 +41,7 @@ export function renderMascot(host) {
   svg.setAttribute('viewBox', '0 0 100 108');
   svg.setAttribute('class', 'mascot-anim');
   svg.setAttribute('role', 'img');
-  svg.setAttribute('aria-label', t('mascot.name', 'Zibo'));
+  svg.setAttribute('aria-label', t('mascot.name', 'Pepe'));
 
   const group = document.createElementNS(SVG_NS, 'g');
   const s = stage.scale || 1;
@@ -49,7 +49,7 @@ export function renderMascot(host) {
   group.setAttribute('transform', `translate(${50 - 50 * s}, ${100 - 100 * s}) scale(${s})`);
 
   const use = document.createElementNS(SVG_NS, 'use');
-  use.setAttribute('href', '#sp-zibo');
+  use.setAttribute('href', '#sp-pepe');
   group.appendChild(use);
 
   const acc = accessory(stage.accessory);
@@ -68,21 +68,23 @@ function accessory(kind) {
   g.setAttribute('stroke-linejoin', 'round');
   g.setAttribute('stroke-linecap', 'round');
 
+  // Il bandana rosso al collo: sta fra la testa (che finisce a y 67) e il
+  // corpo, dove un cane porterebbe davvero il collare.
+  const bandana = `
+      <path d="M31 70 c12 7 26 7 38 0 l3 8 c-13 8 -31 8 -44 0Z" fill="#ef4444"/>
+      <path d="M67 77 l10 13 -10 3 -5 -13Z" fill="#dc2626"/>`;
+
   if (kind === 'scarf') {
-    g.innerHTML = `
-      <path d="M30 74 c12 8 28 8 40 0 l3 9 c-14 9 -32 9 -46 0Z" fill="#ef4444"/>
-      <path d="M66 82 l10 14 -10 3 -5 -14Z" fill="#dc2626"/>`;
+    g.innerHTML = bandana;
   } else if (kind === 'hat') {
-    g.innerHTML = `
-      <path d="M30 74 c12 8 28 8 40 0 l3 9 c-14 9 -32 9 -46 0Z" fill="#ef4444"/>
-      <path d="M22 46 h56 l-6 -8 H28Z" fill="#7c3aed"/>
-      <path d="M32 38 c0 -14 36 -14 36 0Z" fill="#8b5cf6"/>
-      <circle cx="50" cy="24" r="4" fill="#facc15"/>`;
+    g.innerHTML = bandana + `
+      <path d="M22 34 h56 l-6 -8 H28Z" fill="#7c3aed"/>
+      <path d="M50 2 L68 26 H32Z" fill="#8b5cf6"/>
+      <circle cx="50" cy="9" r="3" fill="#facc15"/>`;
   } else if (kind === 'crown') {
-    g.innerHTML = `
-      <path d="M30 74 c12 8 28 8 40 0 l3 9 c-14 9 -32 9 -46 0Z" fill="#ef4444"/>
-      <path d="M28 46 L34 26 L42 38 L50 22 L58 38 L66 26 L72 46Z" fill="#facc15"/>
-      <circle cx="50" cy="32" r="3" fill="#ef4444"/>`;
+    g.innerHTML = bandana + `
+      <path d="M27 30 L33 12 L41 23 L50 8 L59 23 L67 12 L73 30Z" fill="#facc15"/>
+      <circle cx="50" cy="18" r="3" fill="#ef4444"/>`;
   }
   return g;
 }
@@ -94,7 +96,7 @@ function accessory(kind) {
 let speakToken = 0;
 
 /**
- * Fa parlare Zibo: mostra il fumetto (poche parole, il bambino non legge
+ * Fa parlare Pepe: mostra il fumetto (poche parole, il bambino non legge
  * ancora bene) e riproduce la voce italiana.
  *
  * @param {string} key chiave dentro strings.mascot

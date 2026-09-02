@@ -99,14 +99,27 @@ function playFile(url) {
       el.preload = 'auto';
       audioCache.set(url, el);
     }
+
+    let timer = null;
     const cleanup = () => {
+      clearTimeout(timer);
       el.removeEventListener('ended', onEnd);
       el.removeEventListener('error', onErr);
     };
     const onEnd = () => { cleanup(); resolve(); };
     const onErr = () => { cleanup(); reject(new Error('audio non disponibile')); };
+
     el.addEventListener('ended', onEnd);
     el.addEventListener('error', onErr);
+
+    // Rete di sicurezza: se 'ended' non arriva mai (traccia che non parte,
+    // decodifica bloccata, scheda messa in pausa dal sistema) il mini-gioco
+    // resterebbe appeso in attesa. Meglio proseguire senza audio.
+    const ceiling = Number.isFinite(el.duration) && el.duration > 0
+      ? (el.duration + 1) * 1000
+      : 12000;
+    timer = setTimeout(onEnd, ceiling);
+
     el.currentTime = 0;
     const p = el.play();
     if (p && typeof p.catch === 'function') p.catch(onErr);
