@@ -17,12 +17,12 @@ superare per cambiare fase.
 **Audio generato**: 113 tracce ElevenLabs su tre voci, 2,4 MB. Il gioco parla
 con voci vere, non piu' con la sintesi del browser.
 
-**Design system**: definito in `design-system.css` e documentato in
-`design-system.md`. Anteprima in `tools/design-preview.html`.
-**In attesa di via libera prima di convertire le schermate del gioco.**
+**Design system applicato a tutte le schermate.** Definito in
+`design-system.css`, documentato in `design-system.md`, guida viva in
+`tools/design-preview.html`.
 
-Non ancora fatto: conversione delle schermate al nuovo stile, playtest reale
-con Pietro su tablet, nuove illustrazioni (messaggio 3).
+Non ancora fatto: playtest reale con Pietro su tablet, nuove illustrazioni
+(messaggio 3).
 
 ## Come si avvia
 
@@ -375,6 +375,18 @@ quello che il gioco ha appena insegnato.
   battute si sentono davvero. Rimosso il codice morto: `encouragementKey()`
   era definita e mai chiamata, ora ruota sia gli incoraggiamenti sia i
   complimenti.
+- **2026-09-03** — **Design system applicato a tutte le schermate.**
+  `index.html` carica `design-system.css`; `style.css` ha perso i token e i
+  componenti duplicati (`.btn`, `.icon-btn`, `.badge`, `.chip-toggle`) e tiene
+  solo il layout delle schermate. Andika applicata **solo** ai cinque punti in
+  cui compare inglese da imparare (`.word-written`, `.phrase-written`,
+  `.choice-text`, `.drag-token`, `.build-chip`): il nome del bambino e i
+  numeri dell'HUD restano in Fredoka, perche' il segnale "questo e' inglese"
+  vale solo se resta esclusivo. Font e CSS aggiunti alla cache offline.
+  Due correzioni emerse solo guardando le schermate vere: la barra
+  "padroneggiate" era inchiostro al 50% sopra l'ambra e risultava marrone —
+  ed e' poi risultata invisibile sui due mondi che hanno gia' un colore verde;
+  e l'ombra delle card spariva sul fondo notte.
 - **2026-09-03** — **Design system definito** (`design-system.css`,
   `design-system.md`, anteprima in `tools/design-preview.html`). Due font
   self-hosted scelti dopo un confronto visivo su cinque candidati; palette a
@@ -429,9 +441,7 @@ messaggio 3, cosi' le immagini generate nasceranno gia' dentro questo stile.
 
 ## Prossimi passi
 
-1. **Convertire le schermate del gioco** al design system (in attesa di via
-   libera sull'anteprima).
-2. **Pipeline immagini** con Gemini Imagen 4 Fast + rembg per lo sfondo
+1. **Pipeline immagini** con Gemini Imagen 4 Fast + rembg per lo sfondo
    trasparente, con validazione dello stile su 3-4 campioni prima del batch.
 3. **Riascoltare le 113 tracce generate** e rigenerare quelle che non
    convincono (`--force` dopo aver cancellato il file, oppure cambiare voce

@@ -129,7 +129,7 @@
   /* Ombre. Piene e senza sfocatura: gli sprite sono piatti, un'ombra
      sfumata li farebbe sembrare incollati sopra a un'altra grafica. */
   --sh-raised: 0 var(--lift) 0 var(--ink);
-  --sh-card:   0 4px 0 rgba(43, 33, 64, .35);
+  --sh-card:   0 5px 0 rgba(12, 7, 32, .55);
   --sh-float:  0 10px 28px rgba(10, 6, 30, .40);
 
   --ease-pop:  cubic-bezier(.2, 1.4, .4, 1);

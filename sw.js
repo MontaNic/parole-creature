@@ -12,14 +12,18 @@
  * Alzare CACHE_VERSION a ogni release per invalidare le vecchie cache.
  */
 
-const CACHE_VERSION = 'v1.1.0';
+const CACHE_VERSION = 'v1.2.0';
 const SHELL_CACHE = `dp-shell-${CACHE_VERSION}`;
 const AUDIO_CACHE = `dp-audio-${CACHE_VERSION}`;
 
 const SHELL_ASSETS = [
   './',
   'index.html',
+  'design-system.css',
   'style.css',
+  'assets/fonts/fredoka-variable.woff2',
+  'assets/fonts/andika-400.woff2',
+  'assets/fonts/andika-700.woff2',
   'game.js',
   'manifest.webmanifest',
   'content.json',

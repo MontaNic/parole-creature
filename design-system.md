@@ -132,6 +132,17 @@ card è premibile e si comporta come un bottone.
 Pillole con contorno 2px. Sul fondo notte il contorno diventa bianco al 22-28%
 invece che inchiostro: l'inchiostro su notte non si vedrebbe.
 
+### Le due barre della card di unità
+Colore del mondo = parole **incontrate**, inchiostro = parole
+**padroneggiate**. Il verde sembrava la scelta ovvia — è già il colore del
+"giusto" — ma non funziona: due mondi su otto hanno un colore verde, e lì le
+due barre diventavano indistinguibili. L'inchiostro è l'unico tono che si
+stacca da tutti e otto i colori dei mondi, e *"più scuro = più solido"* si
+legge senza spiegazioni.
+
+Lezione generale: **un colore di stato non può collidere con i colori dei
+contenuti**. Vale anche per le illustrazioni del messaggio 3.
+
 ### Barre `.meter`
 Contorno inchiostro, riempimento a pillola. `.meter-dark` per il fondo notte.
 `.tick` marca una soglia da superare — la usa la barra di padronanza della
@@ -186,7 +197,12 @@ conservato anche con le nuove illustrazioni.
 ## 5. Cosa non fare
 
 - Non introdurre un terzo font. Il tono si cambia con peso e colore.
-- Non usare `--ink` come bordo su fondo notte: sparisce.
+- Non usare `--ink` come bordo di una superficie **notte**: sparisce. Sulle
+  superfici chiare invece è giusto — il contorno scuro forma il bordo della
+  carta, ed è quello che tiene insieme l'identità con gli sprite.
+- Non usare ombre semitrasparenti chiare sul fondo notte: `--sh-card` è
+  volutamente scura e opaca (`rgba(12,7,32,.55)`), altrimenti le card
+  perdono l'aria da adesivo e sembrano ritagli piatti.
 - Non aggiungere `hover` fuori dalla media query: rompe il tablet.
 - Non usare ombre sfocate sui componenti di gioco: appartengono a un'altra
   grammatica visiva (`--sh-float` esiste solo per gli elementi che

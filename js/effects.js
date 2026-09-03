@@ -8,7 +8,9 @@
  * Tutto su un unico canvas a tutto schermo che non intercetta i tocchi.
  */
 
-const COLORS = ['#ffb02e', '#ff7a4d', '#22c55e', '#38bdf8', '#a855f7', '#facc15', '#f472b6'];
+/* Gli stessi accenti del design system: i coriandoli non possono essere
+   di un'altra palette rispetto a tutto il resto. Vedi design-system.md. */
+const COLORS = ['#FFB02E', '#FF7A4D', '#2FB865', '#38BDF8', '#A855F7', '#FACC15', '#F4628F'];
 
 let canvas = null;
 let ctx = null;
@@ -157,7 +159,8 @@ export function toast(text, good = true, ms = 1500) {
   clearTimeout(toastTimer);
 
   const el = document.createElement('div');
-  el.className = 'feedback-toast' + (good ? ' is-good' : '');
+  // .toast e' il componente del design system; .feedback-toast posiziona.
+  el.className = 'feedback-toast toast ' + (good ? 'toast-good' : 'toast-retry');
   el.textContent = text;
   document.body.appendChild(el);
   toastTimer = setTimeout(() => el.remove(), ms);

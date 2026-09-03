@@ -382,7 +382,7 @@ function panelProgress() {
       }
       const st = structuresOf(w).map(x => x.pattern).join('  ·  ');
       if (st) li.appendChild(el('div', 'hint mono', `${t('parents.structure_label')}: ${st}`));
-      if (u.completed) li.appendChild(el('span', 'badge badge-sent', ' completata'));
+      if (u.completed) li.appendChild(el('span', 'badge badge-good', ' completata'));
       ul.appendChild(li);
     });
     box.appendChild(ul);
@@ -480,9 +480,9 @@ function panelEbooks() {
     head.style.gap = '10px';
     head.appendChild(el('h3', null, `${ebook.order}. ${ebook.title}`));
 
-    const badgeCls = !unlocked ? 'badge badge-locked'
-      : rec.status === 'sent' ? 'badge badge-sent'
-      : rec.status === 'generated' ? 'badge badge-generated' : 'badge badge-todo';
+    const badgeCls = !unlocked ? 'badge badge-quiet'
+      : rec.status === 'sent' ? 'badge badge-good'
+      : rec.status === 'generated' ? 'badge badge-warn' : 'badge';
     head.appendChild(el('span', badgeCls,
       unlocked ? t(EBOOK_STATUS[rec.status] || EBOOK_STATUS.todo) : t('parents.ebooks_locked')));
     box.appendChild(head);
