@@ -171,7 +171,9 @@ async function main() {
     for (const [b, ids] of Object.entries(perBatch)) {
       console.log(`  gruppo ${b}  (${ids.length})  ${ids.join(' ')}`);
     }
+    // Le chiavi che iniziano con _ sono commenti, non elenchi di sprite.
     const esclusi = Object.entries(doc.esclusi)
+      .filter(([k, v]) => !k.startsWith('_') && Array.isArray(v))
       .map(([k, v]) => `${k} ${v.length}`).join(', ');
     console.log(`\n  esclusi di proposito: ${esclusi} — vedi il commento in image-subjects.json\n`);
     return;
