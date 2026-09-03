@@ -1,4 +1,4 @@
-# Draghetti & Parole
+# Parole & Creature
 
 Gioco browser per imparare l'inglese, pensato su misura per Pietro (7 anni):
 sessioni brevi, Pepe (una cucciola di Jack Russell) che guida a voce, mostri e
@@ -70,17 +70,26 @@ node tools/generate-audio.mjs             # genera i file mancanti
 ```
 
 ```bash
-node tools/generate-audio.mjs --plan      # riepilogo per voce, senza generare
+node tools/generate-audio.mjs --plan             # riepilogo per voce, senza generare
+node tools/generate-audio.mjs --force --only it/ # rigenera solo l'italiano
 ```
 
-**Due voci, due ruoli.** In `.env`:
+**Tre voci, tre ruoli.** In `.env`:
 
 - `VOICE_ID_ENGLISH` — il modello di pronuncia: dice tutte le parole e le frasi
-  inglesi del curriculum. E' la voce che il bambino deve imitare.
-- `VOICE_ID_NARRATOR` — Pepe: dice le battute italiane, istruzioni e incoraggiamenti.
+  inglesi del curriculum. E' la voce che il bambino deve imitare. (89 tracce)
+- `VOICE_ID_PEPE` — la mascotte quando parla in prima persona: accoglienza,
+  istruzioni, incoraggiamenti, saluti. (21 tracce)
+- `VOICE_ID_NARRATOR` — voce epica in terza persona, riservata ai tre traguardi
+  rari: mondo superato, nuova creatura, fase completata. (3 tracce)
 
-La separazione non e' estetica: al bambino deve bastare il timbro per capire se
-quello che sente e' inglese da imparare o italiano da capire.
+Chi dice cosa e' dichiarato in `strings.mascotVoices`. Se sposti una battuta al
+narratore, **riscrivi il testo in terza persona**: la voce epica che dice
+"abbiamo finito" suona sbagliata.
+
+Le separazioni non sono estetiche. Fra inglese e italiano, al bambino deve
+bastare il timbro per capire se quello che sente e' da imparare o da capire.
+Fra Pepe e narratore, l'epico funziona solo se resta raro.
 
 La chiave ElevenLabs **non sta mai nel codice client**. Due modi, entrambi sicuri
 anche con repository pubblico:

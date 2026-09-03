@@ -4,7 +4,7 @@
   "lang": "it",
 
   "ui": {
-    "game_title": "Draghetti & Parole",
+    "game_title": "Parole & Creature",
     "start_button": "Gioca",
     "continue_button": "Continua",
     "back": "Indietro",
@@ -175,8 +175,8 @@
     "retry_1": "Riproviamo insieme, ascolta bene.",
     "retry_2": "Quasi! Ti aiuto io.",
     "retry_3": "Non fa niente, ci riprovo con te.",
-    "world_complete": "Abbiamo finito questo mondo! Guarda chi e' arrivato.",
-    "new_creature": "Guarda! Una nuova creatura per il tuo album.",
+    "world_complete": "Un altro mondo e' stato superato! L'avventura continua.",
+    "new_creature": "Una nuova creatura si unisce alla squadra!",
     "mission_done": "Missione di oggi completata! Sei un campione.",
     "level_up": "Sono cresciuta anche io! Guardami.",
     "session_end": "Per oggi basta cosi'. Ci vediamo domani{name}!",
@@ -185,6 +185,6 @@
     "streak_kept": "Anche oggi ci siamo! La nostra striscia continua.",
     "locked_phase": "Ripassiamo ancora un pochino! Ci mancano {n} parole e poi apriamo il mondo nuovo.",
     "locked_unit": "Finiamo prima il mondo qui accanto, poi tocca a questo!",
-    "phase_done": "Abbiamo finito un'intera fase! Guarda quante cose sai dire adesso."
+    "phase_done": "Un'intera fase completata! Il viaggio entra in un capitolo nuovo."
   }
 }

@@ -12,6 +12,12 @@
 
 import { CONFIG } from './config.js';
 
+/*
+ * ATTENZIONE: questa chiave NON va rinominata, mai, nemmeno se il gioco
+ * cambia titolo. E' l'indirizzo del salvataggio dentro il browser:
+ * cambiarla equivale a cancellare tutti i progressi di chi gia' gioca.
+ * Il gioco si chiamava "Draghetti & Parole": il nome resta qui per questo.
+ */
 const STORAGE_KEY = 'draghetti_parole_save';
 export const SAVE_SCHEMA_VERSION = 1;
 
@@ -223,7 +229,7 @@ export function exportSaveFile() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `draghetti-parole-backup-${todayKey()}.json`;
+  a.download = `parole-creature-backup-${todayKey()}.json`;
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -320,6 +326,8 @@ export function addXp(amount) {
  */
 export async function hashPin(pin) {
   if (!globalThis.crypto?.subtle) return '';
+  // Anche questo prefisso e' congelato: cambiarlo cambierebbe l'hash e
+  // renderebbe il PIN gia' impostato dai genitori impossibile da indovinare.
   const data = new TextEncoder().encode(`draghetti:${pin}`);
   const digest = await crypto.subtle.digest('SHA-256', data);
   return [...new Uint8Array(digest)].map(b => b.toString(16).padStart(2, '0')).join('');

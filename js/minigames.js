@@ -121,8 +121,7 @@ async function gameMatch(api) {
           firstTry = false;
           btn.classList.add('is-wrong');
           btn.disabled = true;
-          fx.bad();
-          await pause(500);
+          await fx.bad();
           btn.classList.remove('is-wrong');
           btn.classList.add('is-dim');
           orb._play();
@@ -203,8 +202,7 @@ async function gameQuiz(api) {
           firstTry = false;
           btn.classList.add('is-wrong');
           btn.disabled = true;
-          fx.bad();
-          await pause(400);
+          await fx.bad();
           await speakItem(item);
         }
       });
@@ -337,8 +335,7 @@ async function gameHunt(api) {
       } else {
         firstTry = false;
         btn.classList.add('is-wrong');
-        fx.bad();
-        await pause(450);
+        await fx.bad();
         btn.classList.remove('is-wrong');
         orb._play();
       }
@@ -402,8 +399,7 @@ async function gameDragDrop(api) {
       if (finished) return;
       firstTry = false;
       box?.classList.add('is-wrong');
-      fx.bad();
-      await pause(450);
+      await fx.bad();
       box?.classList.remove('is-wrong');
       speakItem(item);
     };
@@ -532,8 +528,7 @@ async function gameBuild(api) {
       } else {
         firstTry = false;
         line.classList.add('is-wrong');
-        fx.bad();
-        await pause(600);
+        await fx.bad();
         line.classList.remove('is-wrong');
         // Si rimette tutto nel mazzo e si riascolta: nessuna penalita'.
         line.innerHTML = '';

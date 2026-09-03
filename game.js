@@ -1,5 +1,5 @@
 /**
- * Draghetti & Parole — punto di ingresso.
+ * Parole & Creature — punto di ingresso.
  *
  * Qui vivono: avvio dell'app, navigazione fra le schermate, costruzione di
  * una partita (quali item, quali mini-giochi, in che ordine) e il "clock"
@@ -26,7 +26,9 @@ import {
   initAudioUnlock, sfxCorrect, sfxRetry, stopVoice, startMusic
 } from './js/audio.js';
 import { initEffects, celebrateCorrect, toast } from './js/effects.js';
-import { renderMascot, mascotSay, mascotCheer, stageChangedAt } from './js/mascot.js';
+import {
+  renderMascot, mascotSay, mascotCheer, stageChangedAt, encouragementKey
+} from './js/mascot.js';
 import { GAMES, itemsPerStep } from './js/minigames.js';
 import {
   showScreen, renderHome, renderAlbum, renderSummary,
@@ -41,6 +43,8 @@ import { ensureTodayMission, trackMissionEvent } from './js/missions.js';
 
 const session = {
   correctStreakVisual: 0,   // usato per ruotare suoni e animazioni
+  retryCount: 0,            // ruota le battute di incoraggiamento
+  greetCount: 0,            // alterna le frasi di Pepe sulla home
   roundActive: false,
   homeRefs: null,
   ignoreSessionLimit: false // il genitore/bambino ha scelto di continuare
@@ -117,9 +121,11 @@ function goHome(firstTime = false) {
 async function greet(firstTime) {
   const refs = session.homeRefs;
   if (!refs) return;
+  // Tornando sulla home Pepe alterna le due frasi di attesa: sentire sempre
+  // la stessa, dieci volte al giorno, la fa diventare rumore.
   const key = firstTime
     ? (save.streak.current > 1 ? 'streak_kept' : 'welcome_back')
-    : 'idle_1';
+    : (session.greetCount++ % 2 === 0 ? 'idle_1' : 'idle_2');
   await mascotSay(key, { bubble: refs.bubble, avatar: refs.mascotHost });
 }
 
@@ -290,10 +296,21 @@ async function startRound(opts) {
       toast(t(`games.correct_${variant + 1}`), true, 1200);
       mascotCheer(document.getElementById('play-mascot'));
     },
-    bad: () => {
-      const variant = Math.floor(Math.random() * 3);
+    /**
+     * Risposta sbagliata.
+     *
+     * Il messaggio a schermo da solo non basta: a 7 anni, e senza saper
+     * leggere, un errore in silenzio sembra un muro. Pepe deve sempre dire
+     * qualcosa, e deve finire di parlare PRIMA che il mini-gioco riproponga
+     * la parola, altrimenti le due voci si accavallano.
+     *
+     * @returns {Promise<void>} si risolve quando Pepe ha finito.
+     */
+    bad: async () => {
+      const key = encouragementKey('retry', session.retryCount++);
       sfxRetry();
-      toast(t(`games.retry_${variant + 1}`), false, 1400);
+      toast(t(`games.${key}`), false, 1600);
+      await mascotSay(key, { avatar: document.getElementById('play-mascot') });
     }
   };
 
@@ -357,12 +374,16 @@ function pointOf(ev) {
 async function finishRound({ round, correct, total, levelUp, missionJustDone, opts }) {
   session.roundActive = false;
 
-  // Statistiche dell'unita'
+  // Statistiche dell'unita'. Interessa sapere se e' stata chiusa PROPRIO
+  // ora: e' l'evento che merita l'annuncio, non il fatto di essere chiusa.
+  let worldJustCompleted = false;
   if (round.world.id !== '__review__') {
     const rec = save.progress.worlds[round.world.id] || { plays: 0, completed: false };
+    const wasCompleted = Boolean(rec.completed);
     rec.plays = (rec.plays || 0) + 1;
     rec.lastPlayed = new Date().toISOString();
     rec.completed = unitProgress(round.world).completed;
+    worldJustCompleted = rec.completed && !wasCompleted;
     save.progress.worlds[round.world.id] = rec;
   }
   save.stats.totalRounds += 1;
@@ -382,6 +403,7 @@ async function finishRound({ round, correct, total, levelUp, missionJustDone, op
 
   await renderSummary(
     { correct, total, newCreatures, levelUp, phaseUnlocked,
+      worldCompleted: worldJustCompleted,
       missionDone: missionJustDone, endSession: overLimit },
     {
       onHome: () => goHome(),

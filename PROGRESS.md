@@ -1,4 +1,4 @@
-# PROGRESS — Draghetti & Parole (gioco inglese per Pietro)
+# PROGRESS — Parole & Creature (gioco inglese per Pietro)
 
 > Questo file e' lo specchio dello stato reale del progetto.
 > Va aggiornato **prima** di ogni modifica sostanziale al codice.
@@ -14,8 +14,8 @@ e' un corso a 8 unita', ognuna con un obiettivo linguistico dichiarato, con
 revisione sistematica delle unita' precedenti e una soglia di padronanza da
 superare per cambiare fase.
 
-**Audio generato**: 113 tracce ElevenLabs, 2,5 MB. Il gioco ora parla con voci
-vere, non piu' con la sintesi del browser.
+**Audio generato**: 113 tracce ElevenLabs su tre voci, 2,4 MB. Il gioco parla
+con voci vere, non piu' con la sintesi del browser.
 
 Non ancora fatto: playtest reale con Pietro su tablet, design system e nuove
 immagini (messaggi 2 e 3).
@@ -143,34 +143,57 @@ E soprattutto: la mappa mostra la barra di padronanza della fase **con una tacca
 all'80%**, e Pepe dice quante parole mancano. Un traguardo visibile e' un
 obiettivo; un cancello muto e' una frustrazione.
 
-### Le due voci
+### Le tre voci
 
-Il progetto usa **due** voci ElevenLabs, con ruoli separati:
+| Voce (`.env`) | Ruolo | Tracce | Caratteri | Sintesi |
+|---|---|---|---|---|
+| `VOICE_ID_ENGLISH` | **modello di pronuncia**: tutto il contenuto didattico inglese | 89 (51 parole + 38 frasi) | 893 | `stability 0.70/0.55` |
+| `VOICE_ID_PEPE` | **la compagna**: Pepe in prima persona — accoglienza, istruzioni, incoraggiamenti | 21 | 755 | `stability 0.45, style 0.25` |
+| `VOICE_ID_NARRATOR` | **il narratore**: annunci epici in terza persona, solo per i traguardi rari | 3 | 162 | `stability 0.60, style 0.35` |
 
-| Voce (`.env`) | Ruolo | Tracce | Caratteri |
-|---|---|---|---|
-| `VOICE_ID_ENGLISH` | modello di pronuncia: tutto il contenuto didattico inglese | 89 (51 parole + 38 frasi) | 893 |
-| `VOICE_ID_NARRATOR` | Pepe: battute italiane, accoglienza, istruzioni | 24 | 917 |
+Le separazioni non sono estetiche, e sono due, con due ragioni diverse.
 
-La separazione non e' estetica. Al bambino deve bastare il **timbro** per
-capire se quello che sente e' inglese da imparare o italiano da capire:
-cambiare voce e' il segnale piu' immediato che esista, e non richiede lettura.
+**Inglese contro italiano.** Al bambino deve bastare il timbro per capire se
+quello che sente e' da imparare o da capire. E' il segnale piu' immediato che
+esista e non richiede lettura. Per questo `p_my_name` ("My name is Pepe."),
+dove la mascotte si presenta in inglese, resta sulla voce inglese e non su
+quella di Pepe: e' contenuto dell'unita' 8, una pronuncia da **imitare**.
 
-Per lo stesso motivo **non** c'e' una terza voce. L'unico caso di confine e'
-`p_my_name` ("My name is Pepe."), dove la mascotte si presenta in inglese:
-resta sulla voce inglese perche' e' contenuto dell'unita' 8, cioe' una
-pronuncia da **imitare**, non una narrazione da ascoltare. Una terza voce
-annacquerebbe la regola in cambio di poco.
+**Pepe contro narratore.** L'epico funziona solo se e' raro. Il narratore ha
+tre sole battute — mondo superato, nuova creatura, fase completata — perche'
+sono gli unici eventi abbastanza rari perche' l'annuncio resti un evento.
+`mission_done` capita ogni giorno e resta a Pepe: darlo al narratore lo
+consumerebbe in una settimana.
 
-I parametri di sintesi cambiano per tipo di traccia: le parole singole vanno a
-`stability 0.70, style 0` perche' sono un modello e devono suonare identiche a
-ogni riascolto; le battute di Pepe restano piu' calde (`0.45, style 0.25`).
+Chi dice cosa e' dichiarato in `strings.mascotVoices`: dato, non codice.
+Default `pepe`, si elencano solo le eccezioni. Spostare una battuta da una
+voce all'altra e' una riga — ma se passa al narratore il **testo va riscritto
+in terza persona**, altrimenti la voce epica dice "abbiamo" e suona sbagliata.
+E' esattamente quello che e' successo alle tre battute attuali.
 
 Le due battute con segnaposto (`session_end` con `{name}`, `locked_phase` con
 `{n}`) non sono pre-generabili come sono: `strings.mascotSpoken` contiene la
 forma neutra da registrare. Il fumetto continua a mostrare il nome del bambino,
 l'audio resta nella voce di Pepe. Meglio la voce vera senza il nome che una
 voce robotica col nome.
+
+### Il bambino deve sempre sentire una voce quando sbaglia
+
+Fino alla v1.1 le battute di incoraggiamento (`retry_1/2/3`) esistevano in
+`strings.json` ma **non erano collegate a niente**: sbagliando, il gioco
+mostrava solo un messaggio di testo. Per un bambino che non sa ancora leggere,
+un errore in silenzio non e' feedback neutro: somiglia a un muro. Ed e' il
+momento esatto in cui si decide se continuare o mollare.
+
+Ora `fx.bad()` in `game.js` fa parlare Pepe a ogni errore, ruotando fra tre
+battute diverse, e i mini-giochi **aspettano** che abbia finito prima di
+riproporre la parola. Senza quell'attesa le due voci si sovrapporrebbero.
+
+Per la stessa ragione la riproduzione vocale e' ora **esclusiva**: ogni nuova
+battuta interrompe la precedente (`stopVoice()` dentro `playVoice`), e chi
+stava aspettando la traccia interrotta prosegue invece di restare appeso. In
+un gioco dove la voce *e'* il contenuto, due voci insieme sono peggio del
+silenzio.
 
 ### Parametri, tutti in un posto
 
@@ -223,6 +246,8 @@ proxy/cloudflare-worker.js  proxy che custodisce la chiave ElevenLabs
 - [x] Interruttore genitori per scavalcare la soglia
 - [x] Onboarding senza testo da leggere (voce + icone, con tutorial giocato)
 - [x] Mascotte Pepe che parla, si anima e evolve in 4 stadi (livelli 1/4/8/13)
+- [x] Voce di Pepe a ogni errore, con tre battute a rotazione: mai un errore muto
+- [x] Voce narrante separata per i tre traguardi rari (mondo, creatura, fase)
 - [x] 6 mini-giochi: abbinamento, ascolta e ripeti, quiz audio, caccia alla parola,
       trascina la parola, ricomponi la frase (solo su frasi fino a 6 parole)
 - [x] Modalita' ripasso libero, che punta agli item non ancora solidi
@@ -326,6 +351,25 @@ quello che il gioco ha appena insegnato.
   dell'evoluzione (bandana, cappello a punta, corona) sulla nuova testa;
   ridisegnata `assets/img/icon.svg`. Accordo al femminile nelle due battute in
   cui Pepe parla di se' ("Sono contenta", "Sono cresciuta").
+- **2026-09-03** — **Titolo cambiato in "Parole & Creature".** Il vecchio
+  "Draghetti & Parole" era legato alla mascotte drago. Restano invariate tre
+  stringhe che contengono ancora "draghetti" e che NON vanno mai rinominate:
+  la chiave di `localStorage` (rinominarla cancella i progressi), il sale
+  dell'hash del PIN (renderebbe irrecuperabile il PIN dei genitori) e il
+  marcatore dei file di backup. Nel codice ci sono commenti che lo spiegano.
+- **2026-09-03** — **Tre voci** al posto di due: `VOICE_ID_PEPE` per la
+  mascotte in prima persona, `VOICE_ID_NARRATOR` ridefinita come voce epica
+  in terza persona per i soli traguardi rari. Le tre battute passate al
+  narratore sono state riscritte in terza persona. Rigenerate le sole 24
+  tracce italiane (`--force --only it/`), le 89 inglesi non toccate.
+- **2026-09-03** — **Collegate 6 battute che il gioco non usava.** In
+  particolare `retry_1/2/3`: sbagliando, Pepe non diceva niente e restava solo
+  un messaggio di testo. Collegate anche `nice_to_meet` (dopo il nome
+  nell'onboarding, solo se il nome c'e'), `world_complete` (fine unita',
+  narratore), `idle_2` (alternata a `idle_1` sulla home). Ora tutte e 24 le
+  battute si sentono davvero. Rimosso il codice morto: `encouragementKey()`
+  era definita e mai chiamata, ora ruota sia gli incoraggiamenti sia i
+  complimenti.
 - **2026-09-03** — **Generate tutte le 113 tracce audio**: 89 inglesi
   (`VOICE_ID_ENGLISH`, 1,6 MB) e 24 italiane (`VOICE_ID_NARRATOR`, 1,1 MB),
   2,5 MB totali, 23 kB di media. Zero errori. Verificato: tutti file MP3

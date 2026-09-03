@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
 <!--
-  Sprite unico di "Draghetti & Parole".
+  Sprite unico di "Parole & Creature".
   Stile condiviso: viewBox 0 0 100 100, contorno #2b2140 spesso, fill piatti,
   palette limitata (vedi style.css). Nessun asset generato a runtime.
   Viene iniettato nel DOM al boot e usato con <use href="#sp-...">.

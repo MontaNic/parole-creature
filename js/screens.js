@@ -10,7 +10,7 @@ import {
   unitProgress, phaseProgress, playableUnits, playablePhases,
   isPhaseUnlocked, lockInfo, curriculumConfig
 } from './curriculum.js';
-import { renderMascot, mascotSay, mascotCheer } from './mascot.js';
+import { renderMascot, mascotSay, mascotCheer, encouragementKey } from './mascot.js';
 import { spriteSvg } from './minigames.js';
 import { speakItem, sfxTap, sfxUnlock } from './audio.js';
 import { celebrate } from './effects.js';
@@ -268,7 +268,8 @@ export function renderAlbum() {
 
 /**
  * @param {{correct:number, total:number, newCreatures:Array, levelUp:boolean,
- *          phaseUnlocked:?number, missionDone:boolean, endSession:boolean}} result
+ *          phaseUnlocked:?number, worldCompleted:boolean, missionDone:boolean,
+ *          endSession:boolean}} result
  */
 export async function renderSummary(result, handlers) {
   const body = document.getElementById('summary-body');
@@ -298,35 +299,42 @@ export async function renderSummary(result, handlers) {
   const line = el('p', 'h-sub', `${result.correct}/${result.total}`);
   body.appendChild(line);
 
-  // Superare una fase e' il traguardo piu' grande del gioco: viene prima
-  // di tutto il resto.
-  if (result.phaseUnlocked) {
-    sfxUnlock();
-    celebrate();
-    body.appendChild(el('p', 'h-title', t('ui.phase_unlocked')));
+  /*
+   * Annunci, dal traguardo piu' raro al piu' comune.
+   * Le tre battute affidate al narratore (fase superata, mondo chiuso, nuova
+   * creatura) capitano solo qui: e' l'unico punto del gioco in cui una voce
+   * diversa da Pepe ha senso, ed e' anche l'unico abbastanza raro perche'
+   * l'effetto "annuncio di fine episodio" non si consumi.
+   */
+  const bigMoment = result.phaseUnlocked || result.worldCompleted || result.newCreatures.length;
+  if (bigMoment) { sfxUnlock(); celebrate(); }
+  if (result.phaseUnlocked) body.appendChild(el('p', 'h-title', t('ui.phase_unlocked')));
+
+  for (const c of result.newCreatures) {
+    const wrap = el('div', 'reward-creature');
+    wrap.appendChild(spriteSvg(c.sprite));
+    body.appendChild(wrap);
+    body.appendChild(el('p', 'h-sub', c.name_it));
   }
 
-  // Nuove creature: momento clou, con festeggiamento
-  if (result.newCreatures.length) {
-    if (!result.phaseUnlocked) { sfxUnlock(); celebrate(); }
-    for (const c of result.newCreatures) {
-      const wrap = el('div', 'reward-creature');
-      wrap.appendChild(spriteSvg(c.sprite));
-      body.appendChild(wrap);
-      body.appendChild(el('p', 'h-sub', c.name_it));
-    }
-    await mascotSay(result.phaseUnlocked ? 'phase_done' : 'new_creature',
-      { bubble, avatar: mascotHost });
-  } else if (result.phaseUnlocked) {
+  if (result.phaseUnlocked) {
     await mascotSay('phase_done', { bubble, avatar: mascotHost });
-  } else if (result.missionDone) {
-    celebrate();
-    await mascotSay('mission_done', { bubble, avatar: mascotHost });
-  } else if (result.levelUp) {
-    celebrate();
-    await mascotSay('level_up', { bubble, avatar: mascotHost });
-  } else {
-    await mascotSay(`correct_${1 + (result.correct % 3)}`, { bubble, avatar: mascotHost });
+  } else if (result.worldCompleted) {
+    await mascotSay('world_complete', { bubble, avatar: mascotHost });
+  }
+
+  if (result.newCreatures.length) {
+    await mascotSay('new_creature', { bubble, avatar: mascotHost });
+  } else if (!bigMoment) {
+    if (result.missionDone) {
+      celebrate();
+      await mascotSay('mission_done', { bubble, avatar: mascotHost });
+    } else if (result.levelUp) {
+      celebrate();
+      await mascotSay('level_up', { bubble, avatar: mascotHost });
+    } else {
+      await mascotSay(encouragementKey('correct', result.correct), { bubble, avatar: mascotHost });
+    }
   }
 
   const actions = el('div', 'row');
@@ -424,10 +432,14 @@ export function runOnboarding() {
       input.placeholder = t('onboarding.step_name_placeholder');
       input.value = save.child.name || '';
       const ok = el('button', 'btn btn-lg btn-good', t('ui.ok'));
-      ok.onclick = () => {
+      ok.onclick = async () => {
         sfxTap();
-        save.child.name = input.value.trim().slice(0, 16);
+        ok.disabled = true;
+        const name = input.value.trim().slice(0, 16);
+        save.child.name = name;
         persist(true);
+        // "Che bel nome!" ha senso solo se un nome e' stato scritto davvero.
+        if (name) await mascotSay('nice_to_meet', { bubble, avatar: mascotHost });
         stepTutorial();
       };
       body.appendChild(input);

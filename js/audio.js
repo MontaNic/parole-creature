@@ -24,6 +24,13 @@ let unlocked = false;
 /** Cache degli elementi <audio> gia' creati, per non riscaricare i file. */
 const audioCache = new Map();
 
+/**
+ * Come interrompere la traccia in corso. Due voci sovrapposte, in un gioco
+ * dove la voce E' il contenuto, sono peggio del silenzio: ogni nuova battuta
+ * interrompe la precedente invece di accavallarcisi.
+ */
+let stopCurrent = null;
+
 /* ------------------------------------------------------------------ */
 /* Sblocco su iOS/Safari: serve un gesto dell'utente                   */
 /* ------------------------------------------------------------------ */
@@ -79,6 +86,7 @@ export function speakMascot(key, text) {
 }
 
 async function playVoice(relPath, text, lang) {
+  stopVoice();   // una voce alla volta
   const hasFile = !audioIndex.loaded || audioIndex.files.has(relPath);
   if (hasFile) {
     try {
@@ -103,11 +111,16 @@ function playFile(url) {
     let timer = null;
     const cleanup = () => {
       clearTimeout(timer);
+      if (stopCurrent === stopper) stopCurrent = null;
       el.removeEventListener('ended', onEnd);
       el.removeEventListener('error', onErr);
     };
     const onEnd = () => { cleanup(); resolve(); };
     const onErr = () => { cleanup(); reject(new Error('audio non disponibile')); };
+
+    // Interrompere non e' un errore: chi aspettava questa traccia prosegue.
+    const stopper = () => { cleanup(); el.pause(); el.currentTime = 0; resolve(); };
+    stopCurrent = stopper;
 
     el.addEventListener('ended', onEnd);
     el.addEventListener('error', onErr);
@@ -165,6 +178,9 @@ if ('speechSynthesis' in window) {
 
 export function stopVoice() {
   try { speechSynthesis.cancel(); } catch { /* ignorato */ }
+  const stopper = stopCurrent;
+  stopCurrent = null;
+  if (stopper) stopper();
   for (const el of audioCache.values()) {
     if (!el.paused) { el.pause(); el.currentTime = 0; }
   }
