@@ -216,7 +216,8 @@ Le regole che li applicano stanno tutte in `js/curriculum.js`.
 
 ```
 index.html               markup e schermate
-style.css                stile, temi, animazioni
+design-system.css        token e componenti (font, palette, bottoni, card)
+style.css                layout delle schermate, temi, animazioni
 game.js                  avvio, navigazione, composizione della partita, clock di sessione
 js/config.js             configurazione tecnica (intervalli SRS, parametri di gioco)
 js/curriculum.js         REGOLE DIDATTICHE: padronanza, sblocchi, mix nuovo/ripasso
@@ -374,6 +375,11 @@ quello che il gioco ha appena insegnato.
   battute si sentono davvero. Rimosso il codice morto: `encouragementKey()`
   era definita e mai chiamata, ora ruota sia gli incoraggiamenti sia i
   complimenti.
+- **2026-09-03** — **Design system definito** (`design-system.css`,
+  `design-system.md`, anteprima in `tools/design-preview.html`). Due font
+  self-hosted scelti dopo un confronto visivo su cinque candidati; palette a
+  12 token ancorata al colore di contorno degli sprite; componenti con
+  contorno e ombra piena. Il gioco non e' ancora stato convertito.
 - **2026-09-03** — **Generate tutte le 113 tracce audio**: 89 inglesi
   (`VOICE_ID_ENGLISH`, 1,6 MB) e 24 italiane (`VOICE_ID_NARRATOR`, 1,1 MB),
   2,5 MB totali, 23 kB di media. Zero errori. Verificato: tutti file MP3
@@ -388,9 +394,43 @@ quello che il gioco ha appena insegnato.
   arrivato, il mini-gioco sarebbe rimasto appeso in attesa. Ora c'e' un tetto
   massimo basato sulla durata della traccia.
 
+## Design system
+
+Scelte e razionale completi in **`design-system.md`**. In sintesi:
+
+- **Due font**: Fredoka per l'interfaccia italiana, **Andika solo per
+  l'inglese da imparare**. Andika e' disegnata da SIL per chi impara a
+  leggere: nella sequenza `Il1` gli altri candidati (Fredoka, Nunito, Baloo 2,
+  il font di sistema) producono tre bastoncini identici, Andika tre forme
+  distinte, e ha `a` e `g` a un piano come la scrittura a mano. E' la
+  differenza fra riconoscere una parola a colpo d'occhio e decodificarla
+  lettera per lettera — cioe' quello che il gioco chiede dalla fase 2.
+  Verificato con uno specimen a confronto su cinque candidati prima di
+  scegliere, non deciso a memoria.
+- Entrambi **self-hosted** in `assets/fonts/` (80 kB, licenza OFL): il gioco
+  deve funzionare offline, e nessun dato del bambino deve uscire verso un CDN.
+- **Palette ancorata a `#2B2140`**, che non e' un colore nuovo ma il contorno
+  gia' presente in tutti e 81 gli sprite. Estenderlo a bottoni e card fa
+  sembrare l'interfaccia disegnata dalla stessa mano di Pepe.
+- **Tre stati, tre colori**: ambra = cosa toccare, brace = riprova, foglia =
+  giusto. Un primo `--coral` per la riprova e' stato eliminato perche' era
+  indistinguibile dalla brace, e i due comparivano nella stessa schermata.
+- **La riprova non e' rossa**: qui non si perde mai. E la distinzione dal
+  verde non e' solo di tinta — giusto rimbalza, riprova trema, il che aiuta
+  anche chi confonde i due colori.
+- Componenti con **contorno spesso e ombra piena senza sfocatura**: gli sprite
+  sono piatti, un'ombra sfumata li farebbe sembrare incollati sopra.
+- `hover` solo dietro `@media (hover: hover)`: su tablet resterebbe appiccicato.
+- Area genitori: stessa identita', tono sobrio via colore e peso, **senza un
+  terzo font**.
+
+`design-system.md` include anche le **regole per le illustrazioni** del
+messaggio 3, cosi' le immagini generate nasceranno gia' dentro questo stile.
+
 ## Prossimi passi
 
-1. **Design system** (font a tema, palette, componenti) → `design-system.md`.
+1. **Convertire le schermate del gioco** al design system (in attesa di via
+   libera sull'anteprima).
 2. **Pipeline immagini** con Gemini Imagen 4 Fast + rembg per lo sfondo
    trasparente, con validazione dello stile su 3-4 campioni prima del batch.
 3. **Riascoltare le 113 tracce generate** e rigenerare quelle che non
