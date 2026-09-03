@@ -165,9 +165,29 @@ export function shuffle(arr) {
   return arr;
 }
 
-/** Elementi casuali diversi da quello dato: servono come distrattori. */
+/**
+ * Elementi casuali da usare come distrattori.
+ *
+ * Si escludono per SPRITE, non solo per id. Nel curriculum una parola e la
+ * frase che la insegna condividono di proposito la stessa illustrazione —
+ * "egg" e "It's an egg." mostrano lo stesso uovo — quindi filtrare per id
+ * lasciava passare due immagini identiche nella stessa griglia, con una sola
+ * risposta contata come giusta. Il bambino non ha modo di indovinare, e
+ * l'errore risulta suo.
+ */
 export function distractors(pool, exclude, howMany) {
-  const candidates = pool.filter(it => it.id !== exclude.id);
+  const candidates = pool.filter(it =>
+    it.id !== exclude.id && it.sprite !== exclude.sprite);
   shuffle(candidates);
   return candidates.slice(0, howMany);
+}
+
+/** Sottoinsieme senza due item che mostrino la stessa illustrazione. */
+export function distinctBySprite(items) {
+  const visti = new Set();
+  return items.filter(it => {
+    if (visti.has(it.sprite)) return false;
+    visti.add(it.sprite);
+    return true;
+  });
 }

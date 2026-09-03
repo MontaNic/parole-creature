@@ -183,7 +183,25 @@ def main():
             print(f"  ko  {src.stem:<16} {err}")
             falliti += 1
 
+    scrivi_indice()
     print(f"\nPronte {fatti}, fallite {falliti}.")
+
+
+def scrivi_indice():
+    """
+    Elenco delle illustrazioni disponibili.
+
+    Il gioco lo legge per sapere quali sprite hanno un'immagine e quali
+    restano simboli SVG (numeri, colori, icone, plurali). Senza indice
+    dovrebbe tentare il caricamento e gestire il 404 di 38 file.
+    """
+    import json
+    nomi = sorted(p.stem for p in OUT.glob("*.png"))
+    (OUT / "index.json").write_text(json.dumps({
+        "_comment": "Generato da tools/remove-bg.py. Sprite con illustrazione; tutti gli altri restano simboli in sprites.svg.",
+        "sprites": nomi
+    }, indent=2) + "\n")
+    print(f"\nassets/img/art/index.json aggiornato: {len(nomi)} illustrazioni.")
 
 
 if __name__ == "__main__":

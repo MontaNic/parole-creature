@@ -31,7 +31,7 @@
  */
 import { loadAll, content, getItem } from './js/content-loader.js';
 import { save, resetSave, dayIndex } from './js/state.js';
-import { recordAnswer, isMastered } from './js/srs.js';
+import { recordAnswer, isMastered, distractors, distinctBySprite } from './js/srs.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
   splitRound, unitItems, unitReviewItems, curriculumConfig, playablePhases
@@ -178,7 +178,33 @@ async function run() {
     coperte.size === content.worlds.length - 1,
     `${coperte.size}/${content.worlds.length - 1} unita'`);
 
-  /* --- 11. Nessun item orfano ------------------------------------- */
+  /* --- 11. Mai due immagini uguali nella stessa domanda ------------ */
+  // Nel curriculum una parola e la frase che la insegna condividono di
+  // proposito la stessa illustrazione. Se i distrattori si escludessero solo
+  // per id, la griglia mostrerebbe due immagini identiche con una sola
+  // risposta giusta: il bambino non puo' indovinare e l'errore risulta suo.
+  const tuttiItem = [...content.words, ...content.phrases].map(x => getItem(x.id));
+  let collisioni = 0;
+  for (const bersaglio of tuttiItem) {
+    for (const d of distractors(tuttiItem, bersaglio, 4)) {
+      if (d.sprite === bersaglio.sprite) collisioni++;
+    }
+  }
+  check('nessun distrattore mostra la stessa immagine del bersaglio',
+    collisioni === 0, `${collisioni} collisioni`);
+
+  const conDoppioni = [...content.words, ...content.phrases].filter(
+    (x, _i, a) => a.some(y => y.id !== x.id && y.sprite === x.sprite));
+  note(`${conDoppioni.length} item condividono un'illustrazione con un altro: e' voluto, ` +
+       `ma e' proprio cio' che rende necessario il filtro qui sopra`);
+
+  const doppi = distinctBySprite([
+    getItem('w_dragon'), getItem('p_q_dragon'), getItem('w_castle')
+  ]);
+  check('distinctBySprite elimina il doppione ma tiene il resto',
+    doppi.length === 2, `${doppi.length} su 3`);
+
+  /* --- 12. Nessun item orfano ------------------------------------- */
   const assegnati = new Set(content.worlds.flatMap(w => w.newItems));
   const tutti = [...content.words, ...content.phrases].map(i => i.id);
   const orfani = tutti.filter(id => !assegnati.has(id));

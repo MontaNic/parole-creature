@@ -30,6 +30,12 @@ export let strings = {};
 /** Insieme dei file audio realmente presenti in assets/audio/. */
 export const audioIndex = { files: new Set(), loaded: false };
 
+/**
+ * Sprite che hanno un'illustrazione in assets/img/art/.
+ * Gli altri — numeri, colori, icone, plurali — restano simboli SVG.
+ */
+export const artIndex = { sprites: new Set(), loaded: false };
+
 async function fetchJson(url) {
   const res = await fetch(url, { cache: 'no-cache' });
   if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
@@ -72,6 +78,10 @@ export async function loadAll() {
   // L'indice audio e' opzionale: se manca si usa sempre la sintesi vocale.
   await loadAudioIndex().catch(() => { /* nessun audio pre-generato */ });
 
+  // Anche l'indice delle illustrazioni e' opzionale: senza, si disegna tutto
+  // con i simboli SVG, che restano nel progetto come rete di sicurezza.
+  await loadArtIndex().catch(() => { /* nessuna illustrazione generata */ });
+
   return { content, strings };
 }
 
@@ -90,6 +100,14 @@ async function loadAudioIndex() {
   const files = Array.isArray(data) ? data : (data.files || []);
   audioIndex.files = new Set(files);
   audioIndex.loaded = true;
+}
+
+async function loadArtIndex() {
+  const res = await fetch(CONFIG.artIndexUrl, { cache: 'no-cache' });
+  if (!res.ok) throw new Error('nessun indice illustrazioni');
+  const data = await res.json();
+  artIndex.sprites = new Set(data.sprites || []);
+  artIndex.loaded = true;
 }
 
 /* ------------------------------------------------------------------ */

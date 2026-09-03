@@ -12,9 +12,9 @@
  */
 
 import { CONFIG } from './config.js';
-import { t } from './content-loader.js';
+import { t, artIndex } from './content-loader.js';
 import { speakItem, sfxTap } from './audio.js';
-import { shuffle, distractors } from './srs.js';
+import { shuffle, distractors, distinctBySprite } from './srs.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
@@ -29,8 +29,26 @@ function el(tag, cls, text) {
   return node;
 }
 
-/** <svg><use href="#id"></svg> per uno sprite del foglio unico. */
+/**
+ * L'elemento grafico di uno sprite.
+ *
+ * Chi ha un'illustrazione generata riceve un <img>; tutti gli altri — numeri,
+ * colori, icone di interfaccia, plurali — restano <svg><use>, perche' per
+ * loro il disegno vettoriale e' la scelta giusta e non un ripiego: il conteggio
+ * delle gemme dev'essere esatto, la tinta dei colori dev'essere quella della
+ * palette, le icone appartengono al design system.
+ *
+ * Il nome resta spriteSvg per non toccare venti punti di chiamata, ma quello
+ * che torna non e' sempre un SVG: il CSS che li veste seleziona `svg, img`.
+ */
 export function spriteSvg(spriteId) {
+  if (artIndex.sprites.has(spriteId)) {
+    const img = document.createElement('img');
+    img.src = `${CONFIG.artBase}${spriteId}.png`;
+    img.alt = '';
+    img.decoding = 'async';
+    return img;
+  }
   const svg = document.createElementNS(SVG_NS, 'svg');
   svg.setAttribute('viewBox', '0 0 100 100');
   svg.setAttribute('aria-hidden', 'true');
@@ -267,15 +285,17 @@ async function gameListen(api) {
 
 async function gameHunt(api) {
   const { host, items, pool, report, fx } = api;
-  const targets = items.slice(0, CONFIG.game.huntTargets);
+  // Due bersagli con la stessa illustrazione renderebbero la caccia
+  // impossibile: il bambino ne tocca uno giusto e sembra sbagliato.
+  const targets = distinctBySprite(items).slice(0, CONFIG.game.huntTargets);
 
   host.innerHTML = '';
   host.appendChild(el('p', 'game-prompt', t('games.hunt_prompt')));
 
   const extras = Math.max(0, 6 - targets.length);
-  const fillers = pool
-    .filter(p => !targets.some(tg => tg.id === p.id))
-    .slice(0, extras);
+  const fillers = distinctBySprite(
+    pool.filter(p => !targets.some(tg => tg.sprite === p.sprite))
+  ).slice(0, extras);
   const options = shuffle([...targets, ...shuffle(fillers).slice(0, extras)]);
 
   const grid = el('div', 'choice-grid cols-3');

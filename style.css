@@ -69,10 +69,10 @@ body::before {
 
 /* ---------------- Tipografia ---------------- */
 .h-title { font-size: clamp(22px, 5vw, 34px); margin: 0; line-height: 1.15; font-weight: 600; }
-.h-sub   { font-size: clamp(17px, 3.4vw, 22px); margin: 0; opacity: .92; font-weight: 500; }
-.muted   { color: var(--muted-night); margin: 0; max-width: 46ch; line-height: 1.5; font-weight: 400; }
-.tiny    { font-size: 13px; }
-.center  { text-align: center; }
+.h-sub { font-size: clamp(17px, 3.4vw, 22px); margin: 0; opacity: .92; font-weight: 500; }
+.muted { color: var(--muted-night); margin: 0; max-width: 46ch; line-height: 1.5; font-weight: 400; }
+.tiny { font-size: 13px; }
+.center { text-align: center; }
 .sr-only {
   position: absolute; width: 1px; height: 1px; overflow: hidden;
   clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
@@ -89,7 +89,7 @@ body::before {
 .btn-parent-small { font-size: 16px; min-height: 52px; padding: 0 20px; --lift: 4px; }
 
 .ico { width: 30px; height: 30px; display: block; }
-svg.ico, .icon-btn svg { fill: none; }
+svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 
 .btn-skip {
   position: absolute; right: 16px; bottom: calc(16px + var(--safe-bottom));
@@ -139,7 +139,7 @@ svg.ico, .icon-btn svg { fill: none; }
   margin-bottom: 16px;
 }
 .mascot-slot { width: 110px; flex: none; }
-.mascot-slot svg { width: 100%; height: auto; display: block; }
+.mascot-slot svg, .mascot-slot img { width: 100%; height: auto; display: block; }
 .speech {
   position: relative; flex: 1;
   background: var(--paper); color: var(--ink);
@@ -173,7 +173,7 @@ svg.ico, .icon-btn svg { fill: none; }
 }
 .mission-card.is-done { border-color: var(--leaf); }
 .mission-icon { width: 52px; height: 52px; flex: none; }
-.mission-icon svg { width: 100%; height: 100%; fill: none; }
+.mission-icon svg, .mission-icon img { width: 100%; height: 100%; fill: none; }
 .mission-body { flex: 1; min-width: 0; }
 .mission-label { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; opacity: .7; }
 .mission-text { font-size: 18px; font-weight: 600; margin: 2px 0 8px; }
@@ -209,7 +209,7 @@ svg.ico, .icon-btn svg { fill: none; }
 }
 .world-card:active { transform: translateY(4px); box-shadow: 0 0 0 rgba(12,7,32,.55); }
 .world-card .world-art { width: 76px; height: 76px; }
-.world-card .world-art svg { width: 100%; height: 100%; fill: none; }
+.world-card .world-art svg, .world-card .world-art img { width: 100%; height: 100%; fill: none; }
 .world-card .world-name { font-weight: 600; font-size: 16px; text-align: center; line-height: 1.2; }
 .world-card .world-meta { font-size: 13px; color: var(--ink-soft); }
 .world-card .world-bar {
@@ -238,11 +238,11 @@ svg.ico, .icon-btn svg { fill: none; }
 .world-card.is-locked .world-meta { color: rgba(255,255,255,.7); }
 .world-card.is-locked .world-bar { background: rgba(0,0,0,.3); border-color: rgba(255,255,255,.22); }
 .world-lock { position: absolute; right: 10px; top: 16px; width: 26px; height: 26px; }
-.world-lock svg { width: 100%; height: 100%; fill: none; }
+.world-lock svg, .world-lock img { width: 100%; height: 100%; fill: none; }
 .world-done-badge {
   position: absolute; left: 10px; top: 16px; width: 26px; height: 26px;
 }
-.world-done-badge svg { width: 100%; height: 100%; fill: none; }
+.world-done-badge svg, .world-done-badge img { width: 100%; height: 100%; fill: none; }
 
 .home-footer { margin-top: 22px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
 
@@ -260,7 +260,7 @@ svg.ico, .icon-btn svg { fill: none; }
 }
 .phase-title { margin: 0; font-size: 18px; font-weight: 600; }
 .phase-lock { width: 22px; height: 22px; margin-left: auto; flex: none; }
-.phase-lock svg { width: 100%; height: 100%; fill: none; }
+.phase-lock svg, .phase-lock img { width: 100%; height: 100%; fill: none; }
 
 /* Barra di padronanza della fase, con la tacca della soglia da superare:
    il traguardo si deve vedere, non solo raggiungere. */
@@ -296,7 +296,7 @@ svg.ico, .icon-btn svg { fill: none; }
   display: flex; flex-direction: column; align-items: center; gap: 6px;
 }
 .creature-card .creature-art { width: 88px; height: 88px; }
-.creature-card .creature-art svg { width: 100%; height: 100%; fill: none; }
+.creature-card .creature-art svg, .creature-card .creature-art img { width: 100%; height: 100%; fill: none; }
 .creature-card .creature-name { font-weight: 600; font-size: 15px; }
 .creature-card .creature-fact { font-size: 12px; color: var(--ink-soft); line-height: 1.35; }
 .creature-card.is-locked {
@@ -304,7 +304,7 @@ svg.ico, .icon-btn svg { fill: none; }
   border-color: var(--night-600); box-shadow: none;
 }
 /* silhouette: nessun asset aggiuntivo, solo filtro */
-.creature-card.is-locked .creature-art svg { filter: brightness(0) invert(1); opacity: .22; }
+.creature-card.is-locked .creature-art svg, .creature-card.is-locked .creature-art img { filter: brightness(0) invert(1); opacity: .22; }
 .creature-card.is-new { animation: pop-in .5s cubic-bezier(.2,1.4,.4,1) both; }
 @keyframes pop-in { from { transform: scale(.5); opacity: 0 } to { transform: none; opacity: 1 } }
 
@@ -325,7 +325,7 @@ svg.ico, .icon-btn svg { fill: none; }
   display: grid; place-items: center; cursor: pointer;
   animation: orb-breathe 2.6s ease-in-out infinite;
 }
-.audio-orb svg { width: 46%; height: 46%; fill: none; stroke: var(--ink); stroke-width: 4; }
+.audio-orb svg, .audio-orb img { width: 46%; height: 46%; fill: none; stroke: var(--ink); stroke-width: 4; }
 .audio-orb:active { transform: translateY(6px); box-shadow: 0 2px 0 var(--amber-deep); }
 .audio-orb.is-playing { animation: orb-pulse .6s ease-in-out infinite; }
 @keyframes orb-breathe { 0%,100% { transform: scale(1) } 50% { transform: scale(1.04) } }
@@ -367,16 +367,16 @@ svg.ico, .icon-btn svg { fill: none; }
   cursor: pointer; font: inherit;
   transition: transform .1s ease, box-shadow .15s ease;
 }
-.choice svg { width: 82%; height: 82%; fill: none; }
+.choice svg, .choice img { width: 82%; height: 82%; fill: none; }
 .choice:active { transform: translateY(4px); box-shadow: 0 0 0 rgba(12,7,32,.55); }
 .choice .choice-label {
   position: absolute; bottom: 8px; left: 8px; right: 8px;
   color: var(--ink); font-weight: 600; font-size: 17px; text-align: center;
 }
-.choice.has-label svg { width: 66%; height: 66%; margin-bottom: 14px; }
+.choice.has-label svg, .choice.has-label img { width: 66%; height: 66%; margin-bottom: 14px; }
 .choice.is-correct { box-shadow: 0 0 0 5px var(--leaf), var(--sh-card); animation: bounce-ok .5s ease; }
 .choice.is-found { box-shadow: 0 0 0 4px var(--leaf), var(--sh-card); }
-.choice.is-wrong  { box-shadow: 0 0 0 5px var(--retry), var(--sh-card); animation: shake .4s ease; }
+.choice.is-wrong { box-shadow: 0 0 0 5px var(--retry), var(--sh-card); animation: shake .4s ease; }
 .choice.is-dim { opacity: .35; }
 .choice.is-found { opacity: .45; box-shadow: 0 0 0 4px var(--leaf); }
 @keyframes bounce-ok { 0%,100% { transform: none } 40% { transform: scale(1.08) } }
@@ -407,7 +407,7 @@ svg.ico, .icon-btn svg { fill: none; }
   display: grid; place-items: center; padding: 10px;
   transition: box-shadow .12s ease, transform .12s ease;
 }
-.drop-target svg { width: 82%; height: 82%; fill: none; }
+.drop-target svg, .drop-target img { width: 82%; height: 82%; fill: none; }
 .drop-target.is-over { box-shadow: 0 0 0 5px var(--sky), var(--sh-card); transform: scale(1.03); }
 .drop-target.is-wrong { box-shadow: 0 0 0 5px var(--retry), var(--sh-card); animation: shake .4s ease; }
 .drop-target.is-correct { box-shadow: 0 0 0 5px var(--leaf), var(--sh-card); }
@@ -447,7 +447,7 @@ svg.ico, .icon-btn svg { fill: none; }
 /* Ascolta e ripeti */
 .repeat-stage { display: flex; flex-direction: column; align-items: center; gap: 16px; }
 .repeat-mouth { width: 120px; height: 120px; }
-.repeat-mouth svg { width: 100%; height: 100%; fill: none; }
+.repeat-mouth svg, .repeat-mouth img { width: 100%; height: 100%; fill: none; }
 
 /* Overlay di feedback */
 /* Posizione e ingresso; l'aspetto viene da .toast in design-system.css. */
@@ -463,7 +463,7 @@ svg.ico, .icon-btn svg { fill: none; }
   position: absolute; left: 10px; bottom: calc(8px + var(--safe-bottom));
   width: 92px; pointer-events: none; opacity: .95;
 }
-.mascot-corner svg { width: 100%; height: auto; }
+.mascot-corner svg, .mascot-corner img { width: 100%; height: auto; }
 
 /* Animazioni della mascotte */
 .mascot-anim { animation: mascot-idle 3.2s ease-in-out infinite; transform-origin: 50% 90%; }
@@ -479,7 +479,7 @@ svg.ico, .icon-btn svg { fill: none; }
   align-items: center; justify-content: center; gap: 20px; padding: 24px;
 }
 .onb-mascot { width: min(200px, 45vw); }
-.onb-mascot svg { width: 100%; height: auto; }
+.onb-mascot svg, .onb-mascot img { width: 100%; height: auto; }
 .onb-body { display: flex; flex-direction: column; align-items: center; gap: 18px; width: 100%; }
 /* Il nome del bambino e' italiano: resta in Fredoka. Andika compare solo
    sull'inglese, ed e' proprio l'esclusivita' a renderla un segnale. */
@@ -493,14 +493,14 @@ svg.ico, .icon-btn svg { fill: none; }
 
 /* ---------------- Riepilogo ---------------- */
 .summary-stars { display: flex; gap: 10px; }
-.summary-stars svg { width: 56px; height: 56px; fill: none; }
+.summary-stars svg, .summary-stars img { width: 56px; height: 56px; fill: none; }
 .summary-stars .star-off { opacity: .25; filter: grayscale(1); }
-.summary-stars svg { animation: star-pop .5s cubic-bezier(.2,1.5,.4,1) both; }
+.summary-stars svg, .summary-stars img { animation: star-pop .5s cubic-bezier(.2,1.5,.4,1) both; }
 .summary-stars svg:nth-child(2) { animation-delay: .12s }
 .summary-stars svg:nth-child(3) { animation-delay: .24s }
 @keyframes star-pop { from { transform: scale(0) rotate(-40deg) } to { transform: none } }
 .reward-creature { width: min(220px, 55vw); }
-.reward-creature svg { width: 100%; height: auto; fill: none; animation: pop-in .6s cubic-bezier(.2,1.4,.4,1) both; }
+.reward-creature svg, .reward-creature img { width: 100%; height: auto; fill: none; animation: pop-in .6s cubic-bezier(.2,1.4,.4,1) both; }
 
 /* ---------------- Area genitori ---------------- */
 .parents-scroll { max-width: 720px; width: 100%; margin: 0 auto; }
@@ -592,10 +592,10 @@ svg.ico, .icon-btn svg { fill: none; }
 
 /* ---------------- Caricamento / errore ---------------- */
 .loader-egg { width: 110px; animation: mascot-idle 2s ease-in-out infinite; }
-.loader-egg svg { width: 100%; height: 110px; fill: none; }
+.loader-egg svg, .loader-egg img { width: 100%; height: 110px; fill: none; }
 .loading-text { color: var(--muted-night); }
 .blocked-mascot { width: min(180px, 45vw); }
-.blocked-mascot svg { width: 100%; height: auto; }
+.blocked-mascot svg, .blocked-mascot img { width: 100%; height: auto; }
 
 /* ---------------- Canvas effetti ---------------- */
 #fx-canvas {
@@ -605,25 +605,25 @@ svg.ico, .icon-btn svg { fill: none; }
 
 /* ---------------- Tablet / schermi larghi ---------------- */
 @media (min-width: 720px) {
-  .choice-grid { gap: 20px; }
-  .home-scroll, .album-scroll, .parents-scroll { padding-left: 32px; padding-right: 32px; }
-  .worlds { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
-  .mascot-slot { width: 140px; }
-  .speech { font-size: 19px; }
+.choice-grid { gap: 20px; }
+.home-scroll, .album-scroll, .parents-scroll { padding-left: 32px; padding-right: 32px; }
+.worlds { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+.mascot-slot { width: 140px; }
+.speech { font-size: 19px; }
 }
 @media (min-width: 1000px) {
-  .home-scroll, .album-scroll { max-width: 980px; margin: 0 auto; width: 100%; }
+.home-scroll, .album-scroll { max-width: 980px; margin: 0 auto; width: 100%; }
 }
 
 /* Orizzontale basso: comprimi l'orb per non far scrollare */
 @media (max-height: 560px) and (orientation: landscape) {
-  .audio-orb { width: 120px; height: 120px; }
-  .mascot-corner { display: none; }
+.audio-orb { width: 120px; height: 120px; }
+.mascot-corner { display: none; }
 }
 
 /* Rispetta la preferenza di sistema per il movimento ridotto */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+*, *::before, *::after {
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;

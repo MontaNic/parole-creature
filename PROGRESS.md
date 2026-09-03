@@ -17,12 +17,14 @@ superare per cambiare fase.
 **Audio generato**: 113 tracce ElevenLabs su tre voci, 2,4 MB. Il gioco parla
 con voci vere, non piu' con la sintesi del browser.
 
-**Design system applicato a tutte le schermate.** Definito in
-`design-system.css`, documentato in `design-system.md`, guida viva in
-`tools/design-preview.html`.
+**Design system applicato a tutte le schermate** (`design-system.css`,
+documentato in `design-system.md`, guida viva in `tools/design-preview.html`).
 
-Non ancora fatto: playtest reale con Pietro su tablet, nuove illustrazioni
-(messaggio 3).
+**43 illustrazioni generate** con Gemini e in uso nel gioco. I 38 sprite
+restanti restano simboli SVG per scelta: numeri, colori, icone di interfaccia
+e plurali.
+
+Non ancora fatto: playtest reale con Pietro su tablet.
 
 ## Come si avvia
 
@@ -233,7 +235,8 @@ js/screens.js            home a blocchi di fase, album, riepilogo, onboarding, b
 js/parents.js            area genitori con PIN e 5 pannelli
 content.json             il curriculum (unita', strutture, lessico, frasi, ricompense)
 strings.json             testi UI in italiano
-assets/img/sprites.svg   81 illustrazioni in un solo file
+assets/img/art/          43 illustrazioni generate (+ index.json)
+assets/img/sprites.svg   81 simboli; 38 ancora in uso (numeri, colori, icone, plurali)
 assets/audio/index.json  elenco degli mp3 realmente presenti
 sw.js                    cache offline
 tools/generate-audio.mjs generazione offline degli audio
@@ -375,6 +378,20 @@ quello che il gioco ha appena insegnato.
   battute si sentono davvero. Rimosso il codice morto: `encouragementKey()`
   era definita e mai chiamata, ora ruota sia gli incoraggiamenti sia i
   complimenti.
+- **2026-09-03** — **43 illustrazioni generate e messe in uso.**
+  `spriteSvg()` restituisce un `<img>` per gli sprite che hanno
+  un'illustrazione e resta `<svg><use>` per gli altri 38; il CSS che li veste
+  seleziona ora `svg, img`. Le immagini entrano nella cache offline
+  all'installazione, a differenza degli audio: se manca un audio il gioco
+  ripiega sulla sintesi vocale, se manca un'illustrazione la card resta vuota
+  e la domanda diventa impossibile.
+  Mettendo le immagini vere nel gioco e' emerso un **bug latente serio**: la
+  stessa illustrazione compariva due volte nella stessa griglia di risposte.
+  Nel curriculum una parola e la frase che la insegna condividono di proposito
+  il disegno (`egg` e `It's an egg.`), ma i distrattori si escludevano per
+  `id` invece che per sprite. 18 combinazioni potevano finire nella stessa
+  unita'. Corretto in `distractors()`, nella caccia alla parola e in
+  `buildSteps`; aggiunta una prova di regressione.
 - **2026-09-03** — **Design system applicato a tutte le schermate.**
   `index.html` carica `design-system.css`; `style.css` ha perso i token e i
   componenti duplicati (`.btn`, `.icon-btn`, `.badge`, `.chip-toggle`) e tiene
@@ -439,10 +456,39 @@ Scelte e razionale completi in **`design-system.md`**. In sintesi:
 `design-system.md` include anche le **regole per le illustrazioni** del
 messaggio 3, cosi' le immagini generate nasceranno gia' dentro questo stile.
 
-## Prossimi passi
+## Illustrazioni
 
-1. **Pipeline immagini** con Gemini Imagen 4 Fast + rembg per lo sfondo
-   trasparente, con validazione dello stile su 3-4 campioni prima del batch.
+43 immagini in `assets/img/art/`, generate offline e in uso nel gioco.
+Pipeline: `tools/generate-images.mjs` (prompt) e `tools/remove-bg.py`
+(sfondo, ritaglio, alleggerimento). Revisione: `tools/art-review.html`.
+
+- **Modello**: `gemini-3.1-flash-lite-image`. Imagen 4 Fast non e'
+  raggiungibile con questa chiave — i tre endpoint `imagen-*:predict`
+  rispondono 404. Lo script accetta `--model`, quindi passare a Imagen
+  quando fosse abilitato e' una parola sola.
+- **Prompt**: lo stile fisso e' la trascrizione delle 8 regole di
+  `design-system.md`, commentata regola per regola. L'unica parte variabile
+  e' la descrizione del soggetto in `tools/image-subjects.json`.
+- **Sfondo**: **non** rembg. Il modello di matting fotografico ha cancellato
+  meta' del corpo di Pepe, che e' un cane bianco su fondo bianco (misurato:
+  la meta' inferiore conservava il 20% dei pixel opachi della superiore,
+  contro 1.06 sul drago verde). Il metodo `flood` considera sfondo solo il
+  quasi-bianco **connesso al bordo**, quindi il bianco dentro la sagoma
+  sopravvive. rembg resta con `--metodo rembg`.
+- **38 sprite non si generano**: numeri (l'immagine E' il contenuto da
+  contare), colori (il contenuto e' la tinta esatta), icone di interfaccia
+  (appartengono al design system), plurali (composti dal singolare, ed e'
+  quel "la stessa cosa ma tante" a rendere visibile la -s), e `big`/`small`
+  (concetti relativi che un riquadro di dimensione fissa non puo' rendere).
+- **Distinguibilita' verificata a coppie**, non a occhio. Due misure: la
+  distanza di colore trova chi si somiglia, quella di sagoma dice se e' un
+  problema vero o solo tinta condivisa. Ha trovato drago e dinosauro a 38 su
+  mediana 75 — due parole che il gioco puo' mettere nella stessa griglia — e
+  ha evitato di rifare `tree`/`slow`, vicini solo perche' entrambi verdi.
+- **Le creature hanno una faccia, gli oggetti no**: e' la regola che tiene
+  separate Rametto da `tree` e Fiammino da `hot`.
+
+## Prossimi passi
 3. **Riascoltare le 113 tracce generate** e rigenerare quelle che non
    convincono (`--force` dopo aver cancellato il file, oppure cambiare voce
    in `.env` e rilanciare).

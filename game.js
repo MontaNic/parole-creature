@@ -249,7 +249,9 @@ function buildSteps(world, items, pool) {
     }
     if (type === 'hunt') {
       const slice = items.slice(i, i + CONFIG.game.huntTargets);
-      const distinct = new Set(slice.map(x => x.id)).size === CONFIG.game.huntTargets;
+      // Distinti per illustrazione, non per id: due item diversi possono
+      // mostrare la stessa immagine.
+      const distinct = new Set(slice.map(x => x.sprite)).size === CONFIG.game.huntTargets;
       if (slice.length < CONFIG.game.huntTargets || !distinct || pool.length < 4) type = 'match';
     }
     if ((type === 'match' || type === 'dragdrop' || type === 'quiz') && pool.length < 2) type = 'listen';

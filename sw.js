@@ -12,7 +12,7 @@
  * Alzare CACHE_VERSION a ogni release per invalidare le vecchie cache.
  */
 
-const CACHE_VERSION = 'v1.2.0';
+const CACHE_VERSION = 'v1.3.0';
 const SHELL_CACHE = `dp-shell-${CACHE_VERSION}`;
 const AUDIO_CACHE = `dp-audio-${CACHE_VERSION}`;
 
@@ -29,6 +29,7 @@ const SHELL_ASSETS = [
   'content.json',
   'strings.json',
   'assets/img/sprites.svg',
+  'assets/img/art/index.json',
   'js/config.js',
   'js/state.js',
   'js/content-loader.js',
@@ -44,16 +45,33 @@ const SHELL_ASSETS = [
 ];
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(SHELL_CACHE)
-      // addAll fallisce in blocco se un file manca: si aggiunge uno per uno.
-      .then(cache => Promise.all(
-        SHELL_ASSETS.map(url => cache.add(url).catch(err =>
-          console.warn('[sw] non cachato:', url, err)))
-      ))
-      .then(() => self.skipWaiting())
-  );
+  event.waitUntil(precache().then(() => self.skipWaiting()));
 });
+
+async function precache() {
+  const cache = await caches.open(SHELL_CACHE);
+  // addAll fallisce in blocco se un file manca: si aggiunge uno per uno.
+  const salva = (url) => cache.add(url).catch(err =>
+    console.warn('[sw] non cachato:', url, err));
+
+  await Promise.all(SHELL_ASSETS.map(salva));
+
+  /*
+   * Le illustrazioni entrano in cache subito, non al primo uso come gli
+   * audio. La differenza e' che se manca un audio il gioco ripiega sulla
+   * sintesi vocale, mentre se manca un'illustrazione la card resta vuota e
+   * la domanda diventa impossibile. Sono ~2,4 MB una volta sola.
+   */
+  try {
+    const res = await fetch('assets/img/art/index.json', { cache: 'no-cache' });
+    if (res.ok) {
+      const { sprites = [] } = await res.json();
+      await Promise.all(sprites.map(id => salva(`assets/img/art/${id}.png`)));
+    }
+  } catch (err) {
+    console.warn('[sw] indice illustrazioni non raggiungibile:', err);
+  }
+}
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(

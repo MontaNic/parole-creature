@@ -351,6 +351,18 @@ body {
 .field-input:focus { outline: 3px solid var(--gold); outline-offset: 2px; }
 
 /* ---------------------------------------------------------------- */
+/* Illustrazioni                                                     */
+/* ---------------------------------------------------------------- */
+
+/*
+  Le illustrazioni sono PNG quadrati con il soggetto gia' centrato e col suo
+  margine. object-fit evita che un contenitore non perfettamente quadrato le
+  schiacci: nel gioco sono l'unica cosa che il bambino guarda davvero.
+  L'unico <img> del gioco e' uno sprite, quindi la regola puo' essere globale.
+*/
+img { object-fit: contain; }
+
+/* ---------------------------------------------------------------- */
 /* Micro-animazioni condivise                                        */
 /* ---------------------------------------------------------------- */
 

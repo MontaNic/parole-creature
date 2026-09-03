@@ -20,6 +20,10 @@ export const CONFIG = {
   audioBase: 'assets/audio/',
   audioIndexUrl: 'assets/audio/index.json',
 
+  /** Illustrazioni generate e indice di quali sprite ne hanno una. */
+  artBase: 'assets/img/art/',
+  artIndexUrl: 'assets/img/art/index.json',
+
   /**
    * Endpoint del proxy TTS. Usato SOLO da tools/generate-audio.mjs
    * (generazione offline), mai dal gioco. Lasciare vuoto qui e' corretto:
