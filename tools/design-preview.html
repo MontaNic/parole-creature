@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<!-- La pagina sta in tools/ ma font e sprite vivono nella radice. -->
+<base href="../">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design system — Parole &amp; Creature</title>
+<link rel="stylesheet" href="design-system.css">
+<style>
+  /*
+    Guida di stile viva: mostra i componenti reali di design-system.css.
+    Non e' una maquette con stili inventati — se un componente cambia li',
+    cambia qui. Serve a validare la direzione prima di toccare il gioco, e
+    poi resta come riferimento quando genereremo le illustrazioni.
+    Uso: python3 -m http.server 8080 -> /tools/design-preview.html
+  */
+  body {
+    margin: 0; padding: 34px 28px 60px;
+    background: radial-gradient(120% 90% at 50% 0%, #3a2d6e 0%, var(--night-800) 45%, var(--night-900) 100%) fixed;
+    color: var(--on-night);
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; }
+  h1 { font-size: 30px; margin: 0 0 4px; font-weight: 600; }
+  .sub { color: var(--muted-night); margin: 0 0 34px; font-weight: 400; }
+  section { margin: 0 0 38px; }
+  h2 {
+    font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted-night); font-weight: 600;
+    border-bottom: 2px solid rgba(255,255,255,.14);
+    padding-bottom: 8px; margin: 0 0 18px;
+  }
+  .row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .note { color: var(--muted-night); font-size: 14px; font-weight: 400; line-height: 1.55; max-width: 68ch; margin: 0 0 16px; }
+  .grid { display: grid; gap: 16px; }
+
+  /* palette */
+  .sw { border: var(--stroke) solid var(--ink); border-radius: var(--r-m); overflow: hidden; width: 152px; }
+  .sw i { display: block; height: 62px; }
+  .sw b { display: block; padding: 8px 10px 3px; font-size: 13px; background: var(--paper); color: var(--ink); }
+  .sw small { display: block; padding: 0 10px 9px; font-size: 11px; background: var(--paper); color: var(--ink-soft); font-family: ui-monospace, Menlo, monospace; }
+
+  /* specimen */
+  .spec { background: var(--paper); color: var(--ink); border: var(--stroke) solid var(--ink); border-radius: var(--r-l); padding: 22px 24px; }
+  .spec .big { font-size: 44px; margin: 6px 0 2px; }
+  .spec .lbl { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* mock schermate */
+  .screen-mock {
+    background: linear-gradient(180deg, #2e2559, var(--night-900));
+    border: var(--stroke) solid var(--ink); border-radius: var(--r-l);
+    padding: 20px; box-shadow: var(--sh-float);
+  }
+  .orb {
+    width: 128px; height: 128px; border-radius: 50%;
+    border: var(--stroke) solid var(--ink);
+    background: radial-gradient(circle at 35% 30%, #FFE0A3, var(--amber));
+    box-shadow: 0 7px 0 var(--amber-deep);
+    display: grid; place-items: center; margin: 0 auto 18px; cursor: pointer;
+    animation: breathe 2.6s ease-in-out infinite;
+  }
+  .orb svg { width: 46%; height: 46%; fill: none; stroke: var(--ink); stroke-width: 4; }
+  .choices { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .choice {
+    aspect-ratio: 1/1; display: grid; place-items: center; padding: 10px;
+    background: var(--paper); border: var(--stroke) solid var(--ink);
+    border-radius: var(--r-l); box-shadow: var(--sh-card); cursor: pointer;
+  }
+  .choice svg { width: 78%; height: 78%; fill: none; }
+  .choice.ok    { box-shadow: 0 0 0 5px var(--success), var(--sh-card); }
+  .choice.retry { box-shadow: 0 0 0 5px var(--retry), var(--sh-card); }
+
+  .world-card {
+    background: var(--paper); color: var(--ink);
+    border: var(--stroke) solid var(--ink); border-radius: var(--r-l);
+    box-shadow: var(--sh-card); padding: 16px 12px 14px; width: 176px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    position: relative; overflow: hidden; cursor: pointer;
+  }
+  .world-card::after { content:""; position:absolute; inset:0 0 auto; height:9px; background: var(--wc, var(--amber)); }
+  .world-card .art { width: 74px; height: 74px; margin-top: 4px; }
+  .world-card .art svg { width: 100%; height: 100%; fill: none; }
+  .world-card .nm { font-weight: 600; font-size: 16px; text-align: center; line-height: 1.2; }
+  .world-card .mt { font-size: 13px; color: var(--ink-soft); }
+  .world-card.locked { background: var(--night-700); color: rgba(255,255,255,.82); border-color: var(--night-600); }
+  .world-card.locked .art { opacity: .3; filter: grayscale(1) brightness(2); }
+
+  .mascot { width: 108px; flex: none; }
+  .mascot svg { width: 100%; height: auto; }
+  .bubble {
+    background: var(--paper); color: var(--ink);
+    border: var(--stroke) solid var(--ink); border-radius: var(--r-m);
+    padding: 14px 17px; font-weight: 500; font-size: 17px;
+    position: relative; flex: 1;
+  }
+  .bubble::before {
+    content:""; position:absolute; left:-13px; top:24px;
+    border:11px solid transparent; border-right-color: var(--ink); border-left:0;
+  }
+  .bubble::after {
+    content:""; position:absolute; left:-8px; top:26px;
+    border:9px solid transparent; border-right-color: var(--paper); border-left:0;
+  }
+  .switch-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    background: var(--night-700); border: 2px solid var(--night-600);
+    border-radius: var(--r-m); padding: 14px 16px;
+  }
+  .sw-ui { width: 62px; height: 34px; border-radius: 999px; border: 2px solid var(--ink); background: var(--success); position: relative; flex: none; }
+  .sw-ui::after { content:""; position:absolute; top:3px; right:3px; width:24px; height:24px; border-radius:50%; background: var(--paper); border: 2px solid var(--ink); }
+  .caption { font-size: 12px; color: var(--muted-night); margin-top: 8px; font-weight: 400; }
+</style>
+</head>
+<body>
+<div id="sprite-host" hidden></div>
+<div class="wrap">
+
+  <h1>Parole &amp; Creature — design system</h1>
+  <p class="sub">Anteprima dei componenti reali di <code>design-system.css</code>. Il gioco non e' ancora stato convertito.</p>
+
+  <!-- ============ TIPOGRAFIA ============ -->
+  <section>
+    <h2>1 · Tipografia — due font, due ruoli</h2>
+    <p class="note">
+      <b>Fredoka</b> per l'interfaccia italiana: geometrica e arrotondata, le stesse forme morbide del disegno di Pepe.
+      <b>Andika</b> solo per l'inglese da imparare: e' disegnata da SIL per chi sta imparando a leggere.
+      La differenza si vede su <code>Il1</code> — nei font di interfaccia sono tre bastoncini identici.
+    </p>
+    <div class="split">
+      <div class="spec">
+        <div class="lbl">Fredoka · interfaccia</div>
+        <div class="big">Il1 bdpq ag</div>
+        <div style="font-size:22px;font-weight:600">Tocca l'immagine giusta</div>
+        <div style="font-size:16px;font-weight:400;margin-top:6px">Ripassiamo ancora un pochino, ci manca poco!</div>
+      </div>
+      <div class="spec">
+        <div class="lbl">Andika · inglese da imparare</div>
+        <div class="big t-en">Il1 bdpq ag</div>
+        <div class="t-en" style="font-size:30px">dinosaur</div>
+        <div class="t-en" style="font-size:21px;margin-top:6px">It's a red egg.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PALETTE ============ -->
+  <section>
+    <h2>2 · Palette</h2>
+    <p class="note">
+      L'inchiostro <code>#2B2140</code> non e' una scelta nuova: e' gia' il colore del contorno di tutti e 81 gli sprite.
+      Tutto il resto e' costruito intorno.
+    </p>
+    <div class="row" id="palette"></div>
+  </section>
+
+  <!-- ============ BOTTONI ============ -->
+  <section>
+    <h2>3 · Bottoni</h2>
+    <div class="row">
+      <button class="btn btn-lg">Gioca</button>
+      <button class="btn">Continua</button>
+      <button class="btn btn-good">Fatto!</button>
+      <button class="btn btn-cool">Ripasso</button>
+      <button class="btn btn-ghost">Indietro</button>
+      <button class="btn btn-sm">Esporta</button>
+      <button class="btn" disabled>Bloccato</button>
+      <button class="icon-btn" aria-label="Album"><svg style="width:30px;height:30px;fill:none"><use href="#sp-icon-album"></use></svg></button>
+    </div>
+    <p class="caption">Contorno scuro + ombra piena senza sfocatura: premendo, il bottone scende di 5px e l'ombra sparisce. Su desktop si solleva al passaggio del mouse; su tablet no, perche' l'hover resterebbe appiccicato dopo il tocco.</p>
+  </section>
+
+  <!-- ============ INDICATORI ============ -->
+  <section>
+    <h2>4 · Badge, chip, barre</h2>
+    <div class="row" style="margin-bottom:16px">
+      <span class="badge">Da generare</span>
+      <span class="badge badge-warn">Generato</span>
+      <span class="badge badge-good">Inviato</span>
+      <span class="badge badge-quiet">Ancora chiuso</span>
+      <span class="chip"><svg style="width:20px;height:20px;fill:none"><use href="#sp-icon-flame"></use></svg><b>7</b></span>
+      <span class="chip"><svg style="width:20px;height:20px;fill:none"><use href="#sp-icon-star"></use></svg><b>24</b></span>
+      <button class="chip-toggle on">Lun</button>
+      <button class="chip-toggle">Sab</button>
+    </div>
+    <div style="max-width:520px">
+      <div class="meter meter-dark" style="margin-bottom:10px"><i style="width:62%"></i><u class="tick" style="left:80%"></u></div>
+      <div class="meter"><i class="is-good" style="width:100%"></i></div>
+      <p class="caption">La tacca bianca marca la soglia dell'80% che apre la fase successiva: il traguardo si deve vedere, non solo raggiungere.</p>
+    </div>
+  </section>
+
+  <!-- ============ SCHERMATE ============ -->
+  <section>
+    <h2>5 · In contesto</h2>
+    <div class="grid" style="grid-template-columns: 1fr 1fr">
+
+      <div class="screen-mock">
+        <div style="display:flex;gap:14px;align-items:center;margin-bottom:18px">
+          <div class="mascot" id="pepe"></div>
+          <div class="bubble">Bentornato! Sono contenta di rivederti.</div>
+        </div>
+        <div class="row" style="gap:12px">
+          <div class="world-card" style="--wc:var(--ember)">
+            <div class="art"><svg><use href="#sp-castle"></use></svg></div>
+            <div class="nm">La Valle dei Draghi</div>
+            <div class="mt">10/11</div>
+            <div class="meter" style="width:100%;height:11px"><i style="width:90%"></i></div>
+          </div>
+          <div class="world-card locked" style="--wc:var(--violet)">
+            <div class="art"><svg><use href="#sp-color-purple"></use></svg></div>
+            <div class="nm">La Grotta dei Colori</div>
+            <div class="mt">0/12</div>
+            <div class="meter meter-dark" style="width:100%;height:11px"><i style="width:0"></i></div>
+          </div>
+        </div>
+        <p class="caption">Home: card premibili, mondo chiuso in tono notte.</p>
+      </div>
+
+      <div class="screen-mock">
+        <div class="orb"><svg><use href="#sp-icon-sound"></use></svg></div>
+        <div class="choices">
+          <div class="choice ok anim-ok"><svg><use href="#sp-dragon"></use></svg></div>
+          <div class="choice"><svg><use href="#sp-monster"></use></svg></div>
+          <div class="choice retry"><svg><use href="#sp-shield"></use></svg></div>
+          <div class="choice"><svg><use href="#sp-egg"></use></svg></div>
+        </div>
+        <p class="caption">Partita: giusto in verde, riprova in brace — non un rosso d'allarme, perche' qui non si perde mai.</p>
+      </div>
+
+      <div class="screen-mock">
+        <div class="row" style="gap:12px;margin-bottom:14px">
+          <span class="toast toast-good">Bravissimo!</span>
+          <span class="toast toast-retry">Quasi! Riproviamo</span>
+        </div>
+        <p class="caption">Messaggi a comparsa.</p>
+      </div>
+
+      <div class="screen-mock">
+        <div class="switch-row" style="margin-bottom:12px">
+          <div>
+            <div style="font-weight:600">Pausa vacanza</div>
+            <div style="font-size:13px;color:var(--muted-night);font-weight:400">Sospende il gioco senza perdere i progressi.</div>
+          </div>
+          <div class="sw-ui"></div>
+        </div>
+        <input class="field-input" value="pietro@kindle.com">
+        <p class="caption">Area genitori: stessa identita', tono piu' sobrio — superfici notte al posto della carta, raggi minori, niente ombre giocattolo.</p>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<script type="module">
+  import { loadAll } from './js/content-loader.js';
+  import { renderMascot } from './js/mascot.js';
+  await loadAll();
+  renderMascot(document.getElementById('pepe'));
+
+  const COLORI = [
+    ['--ink','Inchiostro','#2B2140'], ['--night-800','Notte','#241C47'],
+    ['--night-700','Notte alta','#332A5E'], ['--paper','Carta','#FFFDF7'],
+    ['--paper-2','Carta 2','#F4EDDE'], ['--amber','Ambra · azione','#FFB02E'],
+     ['--leaf','Foglia · giusto','#2FB865'],
+    ['--sky','Cielo · acqua','#38BDF8'], ['--violet','Viola · magia','#A855F7'],
+    ['--rose','Rosa · dialoghi','#F4628F'], ['--gold','Oro · premi','#FACC15'],
+    ['--ember','Brace · riprova','#FF7A4D']
+  ];
+  document.getElementById('palette').innerHTML = COLORI.map(([v,n,hex]) =>
+    `<div class="sw"><i style="background:var(${v})"></i><b>${n}</b><small>${hex}</small></div>`).join('');
+</script>
+</body>
+</html>

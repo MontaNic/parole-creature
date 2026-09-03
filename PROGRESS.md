@@ -17,8 +17,12 @@ superare per cambiare fase.
 **Audio generato**: 113 tracce ElevenLabs su tre voci, 2,4 MB. Il gioco parla
 con voci vere, non piu' con la sintesi del browser.
 
-Non ancora fatto: playtest reale con Pietro su tablet, design system e nuove
-immagini (messaggi 2 e 3).
+**Design system**: definito in `design-system.css` e documentato in
+`design-system.md`. Anteprima in `tools/design-preview.html`.
+**In attesa di via libera prima di convertire le schermate del gioco.**
+
+Non ancora fatto: conversione delle schermate al nuovo stile, playtest reale
+con Pietro su tablet, nuove illustrazioni (messaggio 3).
 
 ## Come si avvia
 

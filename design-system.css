@@ -1,0 +1,368 @@
+/* =========================================================================
+   Parole & Creature — design system
+   Token e componenti. Nessuna regola di layout specifica di una schermata:
+   quelle stanno in style.css.
+
+   L'idea portante e' una sola: tutto nell'interfaccia porta lo stesso
+   contorno scuro degli sprite. #2B2140 e' gia' dentro tutti e 81 i simboli
+   SVG, quindi l'identita' visiva non e' inventata da zero — e' estesa dal
+   disegno di Pepe al resto dello schermo. Bottoni, card e badge diventano
+   oggetti disegnati con lo stesso pennarello con cui e' disegnata lei.
+
+   Documentazione e razionale: design-system.md
+   ========================================================================= */
+
+/* ---------------------------------------------------------------- */
+/* Tipografia                                                        */
+/* ---------------------------------------------------------------- */
+
+/*
+  Fredoka — interfaccia italiana, titoli, bottoni.
+  Geometrica e arrotondata: le stesse forme morbide del disegno di Pepe.
+  Variabile: un solo file copre i pesi 300-600.
+*/
+@font-face {
+  font-family: 'Fredoka';
+  src: url('assets/fonts/fredoka-variable.woff2') format('woff2-variations');
+  font-weight: 300 600;
+  font-display: swap;
+}
+
+/*
+  Andika — SOLO le parole e le frasi inglesi da imparare.
+  Disegnato da SIL International per chi sta imparando a leggere: la I
+  maiuscola, la l minuscola e il numero 1 hanno tre forme diverse, la a e la
+  g sono a un piano come nella scrittura a mano. Nei font di interfaccia
+  "Il1" sono tre bastoncini identici: accettabile per un adulto che riconosce
+  le parole a colpo d'occhio, non per un bambino che le decodifica lettera
+  per lettera. E' esattamente quello che Pietro deve fare dalla fase 2.
+*/
+@font-face {
+  font-family: 'Andika';
+  src: url('assets/fonts/andika-400.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Andika';
+  src: url('assets/fonts/andika-700.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --font-ui: 'Fredoka', ui-rounded, 'SF Pro Rounded', system-ui, sans-serif;
+  --font-en: 'Andika', 'Fredoka', Georgia, serif;
+
+  /* ---------------------------------------------------------------- */
+  /* Colore                                                            */
+  /* ---------------------------------------------------------------- */
+
+  /* Inchiostro: identico al contorno degli sprite. Non cambiarlo senza
+     ridisegnare sprites.svg. */
+  --ink:        #2B2140;
+  --ink-soft:   #6B6383;
+
+  /* Notte — il fondo avventura */
+  --night-900:  #17123A;
+  --night-800:  #241C47;
+  --night-700:  #332A5E;
+  --night-600:  #443A72;
+
+  /* Carta — superfici chiare, calde e non bianche da ufficio */
+  --paper:      #FFFDF7;
+  --paper-2:    #F4EDDE;
+  --paper-3:    #E4D9C2;
+
+  /* Accenti del mondo */
+  --amber:      #FFB02E;   --amber-deep:  #C9821A;   /* azione, tesoro */
+  --ember:      #FF7A4D;   --ember-deep:  #C6512C;   /* fuoco, draghi */
+  --leaf:       #2FB865;   --leaf-deep:   #1B8046;   /* giusto, natura */
+  --sky:        #38BDF8;   --sky-deep:    #0B84C4;   /* acqua, info */
+  --violet:     #A855F7;   --violet-deep: #7A32C4;   /* magia, mostri */
+  --rose:       #F4628F;   --rose-deep:   #C43A66;   /* dialoghi */
+  --gold:       #FACC15;                             /* stelle, premi */
+
+  /* La palette si ferma qui di proposito. Un primo tentativo aveva un
+     "corallo" dedicato allo stato riprova, ma affiancato alla brace era
+     lo stesso colore — e i due comparivano insieme nella stessa schermata.
+     Ora i ruoli sono tre e ben distinti: ambra = cosa toccare,
+     brace = riprova, foglia = giusto. */
+
+  /* ---------------------------------------------------------------- */
+  /* Semantica                                                         */
+  /* ---------------------------------------------------------------- */
+  --bg:            var(--night-800);
+  --surface:       var(--paper);
+  --surface-sunk:  var(--paper-2);
+  --on-surface:    var(--ink);
+  --on-night:      var(--paper);
+  --muted-night:   #CFC6EA;
+
+  --primary:       var(--amber);
+  --primary-deep:  var(--amber-deep);
+  --on-primary:    var(--ink);
+  --success:       var(--leaf);
+  --success-deep:  var(--leaf-deep);
+  /* Riprova: brace, non rosso d'allarme. In questo gioco non si perde mai
+     e il colore non deve dire il contrario. La distinzione dal verde non e'
+     affidata alla sola tinta: c'e' anche l'animazione (rimbalzo contro
+     scossa), utile anche a chi confonde rosso e verde. */
+  --retry:         var(--ember);
+  --retry-deep:    var(--ember-deep);
+
+  /* ---------------------------------------------------------------- */
+  /* Forma                                                             */
+  /* ---------------------------------------------------------------- */
+  --r-l:    26px;
+  --r-m:    18px;
+  --r-s:    12px;
+  --r-pill: 999px;
+
+  /* Spessore del contorno: lo stesso peso ottico del tratto degli sprite. */
+  --stroke: 3px;
+  /* Altezza dell'ombra piena: e' quella che rende gli oggetti "premibili". */
+  --lift:   5px;
+
+  --tap:    64px;
+
+  /* Ombre. Piene e senza sfocatura: gli sprite sono piatti, un'ombra
+     sfumata li farebbe sembrare incollati sopra a un'altra grafica. */
+  --sh-raised: 0 var(--lift) 0 var(--ink);
+  --sh-card:   0 4px 0 rgba(43, 33, 64, .35);
+  --sh-float:  0 10px 28px rgba(10, 6, 30, .40);
+
+  --ease-pop:  cubic-bezier(.2, 1.4, .4, 1);
+  --ease-out:  cubic-bezier(.2, .8, .3, 1);
+}
+
+/* ---------------------------------------------------------------- */
+/* Base tipografica                                                  */
+/* ---------------------------------------------------------------- */
+
+body {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  letter-spacing: .005em;
+}
+
+.t-display { font-weight: 600; letter-spacing: -.01em; line-height: 1.12; }
+.t-body    { font-weight: 400; line-height: 1.55; }
+
+/* Inglese da imparare: sempre Andika, sempre con un filo d'aria in piu'
+   fra le lettere, perche' vanno lette una per una. */
+.t-en {
+  font-family: var(--font-en);
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+
+/* ---------------------------------------------------------------- */
+/* Bottoni                                                           */
+/* ---------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: var(--tap); padding: 0 28px;
+  border: var(--stroke) solid var(--ink);
+  border-radius: var(--r-pill);
+  font: inherit; font-weight: 600; font-size: 19px;
+  color: var(--on-primary);
+  background: var(--primary);
+  box-shadow: 0 var(--lift) 0 var(--primary-deep);
+  cursor: pointer;
+  transition: transform .09s var(--ease-out), box-shadow .09s var(--ease-out), filter .15s;
+}
+.btn:active { transform: translateY(var(--lift)); box-shadow: 0 0 0 var(--primary-deep); }
+.btn[disabled] {
+  background: var(--paper-3); color: var(--ink-soft);
+  border-color: var(--ink-soft);
+  box-shadow: 0 var(--lift) 0 rgba(43,33,64,.22);
+  pointer-events: none;
+}
+
+.btn-lg    { min-height: 78px; font-size: 24px; padding: 0 40px; }
+.btn-sm    { min-height: 48px; font-size: 16px; padding: 0 20px; --lift: 4px; }
+
+.btn-good  { background: var(--success); box-shadow: 0 var(--lift) 0 var(--success-deep); }
+.btn-good:active { box-shadow: 0 0 0 var(--success-deep); }
+.btn-cool  { background: var(--sky); box-shadow: 0 var(--lift) 0 var(--sky-deep); }
+.btn-cool:active { box-shadow: 0 0 0 var(--sky-deep); }
+
+/* Ghost: sul fondo notte, dove un bottone pieno ruberebbe la scena */
+.btn-ghost {
+  background: rgba(255,255,255,.10);
+  border-color: rgba(255,255,255,.30);
+  color: var(--on-night);
+  box-shadow: 0 var(--lift) 0 rgba(0,0,0,.28);
+}
+.btn-ghost:active { box-shadow: 0 0 0 rgba(0,0,0,.28); }
+
+/* Il sollevamento col mouse esiste solo dove c'e' un mouse: su tablet
+   lo stato hover resta appiccicato dopo il tocco. */
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover:not([disabled]) { transform: translateY(-2px); filter: brightness(1.05); }
+  .btn:hover:active { transform: translateY(var(--lift)); }
+}
+
+.icon-btn {
+  width: var(--tap); height: var(--tap);
+  display: grid; place-items: center; flex: none;
+  border: var(--stroke) solid rgba(255,255,255,.28);
+  border-radius: 20px;
+  background: rgba(255,255,255,.10);
+  cursor: pointer;
+  transition: transform .09s var(--ease-out), background .15s;
+}
+.icon-btn:active { transform: scale(.93); }
+@media (hover: hover) and (pointer: fine) {
+  .icon-btn:hover { background: rgba(255,255,255,.18); }
+}
+
+/* Accessibilita' da tastiera: l'anello si vede su fondo chiaro e scuro. */
+:where(button, [tabindex], input, select, a):focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------- */
+/* Superfici: card, pannelli                                         */
+/* ---------------------------------------------------------------- */
+
+.card {
+  background: var(--surface);
+  color: var(--on-surface);
+  border: var(--stroke) solid var(--ink);
+  border-radius: var(--r-l);
+  box-shadow: var(--sh-card);
+}
+
+/* Card premibile: si comporta come un bottone, quindi lo dichiara. */
+.card-press {
+  cursor: pointer;
+  transition: transform .09s var(--ease-out), box-shadow .09s var(--ease-out);
+}
+.card-press:active { transform: translateY(4px); box-shadow: 0 0 0 rgba(43,33,64,.35); }
+
+/* Pannello sul fondo notte: piu' sobrio, per l'area genitori */
+.panel-dark {
+  background: var(--night-700);
+  color: var(--on-night);
+  border: 2px solid var(--night-600);
+  border-radius: var(--r-m);
+}
+
+/* ---------------------------------------------------------------- */
+/* Badge                                                             */
+/* ---------------------------------------------------------------- */
+
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  padding: 4px 12px;
+  font-size: 13px; font-weight: 600;
+  background: var(--paper-2); color: var(--ink);
+}
+.badge-good  { background: var(--success); color: #06301A; }
+.badge-warn  { background: var(--amber); }
+.badge-quiet { background: rgba(255,255,255,.14); color: var(--on-night); border-color: rgba(255,255,255,.28); }
+
+/* Chip HUD sul fondo notte */
+.chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  border: 2px solid rgba(255,255,255,.22);
+  border-radius: var(--r-pill);
+  padding: 8px 15px;
+  background: rgba(255,255,255,.10);
+  color: var(--on-night);
+  font-weight: 600; font-size: 16px;
+}
+
+.chip-toggle {
+  border: 2px solid rgba(255,255,255,.22);
+  border-radius: var(--r-pill);
+  padding: 10px 17px;
+  background: rgba(255,255,255,.08);
+  color: var(--on-night);
+  font: inherit; font-weight: 500; font-size: 15px;
+  cursor: pointer;
+  transition: background .15s, transform .09s var(--ease-out);
+}
+.chip-toggle:active { transform: scale(.96); }
+.chip-toggle.on { background: var(--success); color: #06301A; border-color: var(--ink); }
+
+/* ---------------------------------------------------------------- */
+/* Barre di avanzamento                                              */
+/* ---------------------------------------------------------------- */
+
+.meter {
+  position: relative;
+  height: 14px;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--paper-3);
+  overflow: hidden;
+}
+.meter > i {
+  position: absolute; left: 0; top: 0; height: 100%;
+  border-radius: var(--r-pill);
+  background: var(--primary);
+  transition: width .45s var(--ease-out);
+}
+.meter > i.is-good { background: var(--success); }
+
+/* Variante sul fondo notte */
+.meter-dark { border-color: rgba(255,255,255,.25); background: rgba(0,0,0,.32); }
+
+/* Tacca di una soglia da superare */
+.meter > .tick {
+  position: absolute; top: -3px; width: 3px; height: calc(100% + 6px);
+  background: var(--paper); border-radius: 2px;
+  box-shadow: 0 0 0 1px var(--ink);
+}
+
+/* ---------------------------------------------------------------- */
+/* Messaggi a comparsa                                               */
+/* ---------------------------------------------------------------- */
+
+.toast {
+  border: var(--stroke) solid var(--ink);
+  border-radius: var(--r-pill);
+  padding: 14px 28px;
+  background: var(--paper); color: var(--ink);
+  font-weight: 600; font-size: 20px;
+  box-shadow: var(--sh-float);
+}
+.toast-good  { background: var(--success); color: #06301A; }
+.toast-retry { background: var(--retry); color: #FFF6F1; }
+
+/* ---------------------------------------------------------------- */
+/* Campi (area genitori)                                             */
+/* ---------------------------------------------------------------- */
+
+.field-input {
+  font: inherit; font-size: 17px; font-weight: 500;
+  padding: 12px 15px; min-height: 52px; width: 100%;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-s);
+  background: var(--paper); color: var(--ink);
+}
+.field-input:focus { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+/* ---------------------------------------------------------------- */
+/* Micro-animazioni condivise                                        */
+/* ---------------------------------------------------------------- */
+
+@keyframes pop-in   { from { transform: scale(.6); opacity: 0 } to { transform: none; opacity: 1 } }
+@keyframes bounce-ok{ 0%,100% { transform: none } 40% { transform: scale(1.07) } }
+@keyframes shake    { 0%,100% { transform: none } 20% { transform: translateX(-8px) } 60% { transform: translateX(8px) } }
+@keyframes breathe  { 0%,100% { transform: scale(1) } 50% { transform: scale(1.04) } }
+
+.anim-pop    { animation: pop-in .45s var(--ease-pop) both; }
+.anim-ok     { animation: bounce-ok .5s var(--ease-out); }
+.anim-retry  { animation: shake .4s var(--ease-out); }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-pop, .anim-ok, .anim-retry { animation: none; }
+}
