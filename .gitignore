@@ -12,3 +12,13 @@ _shot*.html
 # NOTA: assets/audio/*.mp3 va invece committato.
 # Sono file statici pre-generati: servono per il funzionamento offline
 # e per la pubblicazione su GitHub Pages.
+
+# Ambiente Python per gli strumenti (rembg, Pillow): si ricrea con
+#   python3 -m venv .venv-tools && .venv-tools/bin/pip install 'rembg[cli]' onnxruntime pillow scipy
+.venv-tools/
+
+# Immagini grezze appena uscite dal modello, prima della rimozione dello
+# sfondo. Restano sul disco per poter riprovare la lavorazione senza
+# rigenerarle, ma non nel repo: sono ~300 kB l'una e il file buono e' quello
+# lavorato in assets/img/art/.
+assets/img/art/raw/
