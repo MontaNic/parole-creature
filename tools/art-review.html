@@ -3,102 +3,120 @@
 <head>
 <meta charset="utf-8">
 <base href="../">
-<title>Illustrazioni — confronto</title>
+<title>Illustrazioni — revisione</title>
 <link rel="stylesheet" href="design-system.css">
 <style>
   /*
-    Confronto fra le illustrazioni generate e gli sprite SVG attuali, sulle
-    superfici vere del gioco. Serve a validare lo stile prima di generare
-    tutto il resto, e resta come banco di prova per i gruppi successivi.
-    Uso: python3 -m http.server 8080 -> /tools/art-review.html
+    Revisione di un gruppo di illustrazioni, sulle superfici vere del gioco.
+    Le due domande a cui deve rispondere:
+      1. sembrano disegnate dalla stessa mano?
+      2. reggono a 80 px, che e' la dimensione reale nell'album?
+    Uso: python3 -m http.server 8080 -> /tools/art-review.html?gruppo=1
   */
   body {
-    margin: 0; padding: 30px 26px 60px; color: var(--on-night);
+    margin: 0; padding: 28px 24px 60px; color: var(--on-night);
     background: radial-gradient(120% 90% at 50% 0%, #3a2d6e 0%, var(--night-800) 45%, var(--night-900) 100%) fixed;
   }
-  .wrap { max-width: 1180px; margin: 0 auto; }
-  h1 { font-size: 27px; margin: 0 0 4px; font-weight: 600; }
-  .sub { color: var(--muted-night); margin: 0 0 30px; font-weight: 400; }
+  .wrap { max-width: 1400px; margin: 0 auto; }
+  h1 { font-size: 26px; margin: 0 0 4px; font-weight: 600; }
+  .sub { color: var(--muted-night); margin: 0 0 26px; font-weight: 400; }
   h2 { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-night);
-       border-bottom: 2px solid rgba(255,255,255,.14); padding-bottom: 8px; margin: 30px 0 16px; font-weight: 600; }
-  table { border-collapse: collapse; width: 100%; }
-  td, th { padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,.1); vertical-align: middle; text-align: center; }
-  th { font-size: 11px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted-night); font-weight: 600; }
-  td.nome { text-align: left; font-weight: 600; font-size: 14px; width: 110px; }
+       border-bottom: 2px solid rgba(255,255,255,.14); padding-bottom: 8px; margin: 26px 0 16px; font-weight: 600; }
+  .cap { font-size: 13px; color: var(--muted-night); margin: 10px 0 0; font-weight: 400; max-width: 90ch; }
+
+  .griglia { display: flex; flex-wrap: wrap; gap: 12px; }
+  .cella { text-align: center; }
   .tile {
-    width: 128px; height: 128px; margin: 0 auto; display: grid; place-items: center;
+    width: 118px; height: 118px; display: grid; place-items: center; padding: 8px;
     background: var(--paper); border: var(--stroke) solid var(--ink);
-    border-radius: var(--r-l); box-shadow: var(--sh-card); padding: 8px;
+    border-radius: var(--r-l); box-shadow: var(--sh-card);
   }
-  .tile svg, .tile img { width: 100%; height: 100%; object-fit: contain; fill: none; }
-  .mini { width: 80px; height: 80px; }
-  .onnight { background: transparent; border: 0; box-shadow: none; }
-  .strip { display: flex; gap: 14px; align-items: flex-end; flex-wrap: wrap; }
-  .cap { font-size: 12px; color: var(--muted-night); margin-top: 8px; font-weight: 400; }
-  .alpha {
-    background-image: linear-gradient(45deg,#555 25%,transparent 25%),linear-gradient(-45deg,#555 25%,transparent 25%),
-                      linear-gradient(45deg,transparent 75%,#555 75%),linear-gradient(-45deg,transparent 75%,#555 75%);
-    background-size: 16px 16px; background-position: 0 0,0 8px,8px -8px,-8px 0;
-    border: var(--stroke) solid var(--ink); border-radius: var(--r-l); padding: 8px;
-    width: 128px; height: 128px; display: grid; place-items: center; margin: 0 auto;
+  .tile img, .tile svg { width: 100%; height: 100%; object-fit: contain; fill: none; }
+  .tile.p80 { width: 80px; height: 80px; padding: 5px; border-width: 2px; border-radius: 16px; }
+  .nome { font-size: 11px; color: var(--muted-night); margin-top: 6px; font-weight: 400; }
+
+  /* Album vero: card come le vede il bambino */
+  .album { display: flex; flex-wrap: wrap; gap: 12px; }
+  .creature-card {
+    background: var(--paper); color: var(--ink); width: 132px;
+    border: var(--stroke) solid var(--ink); border-radius: var(--r-l);
+    box-shadow: var(--sh-card); padding: 12px 8px;
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
   }
-  .alpha img { width: 100%; height: 100%; object-fit: contain; }
+  .creature-card .art { width: 84px; height: 84px; }
+  .creature-card .art img { width: 100%; height: 100%; object-fit: contain; }
+  .creature-card b { font-size: 13px; font-weight: 600; }
+
+  table { border-collapse: collapse; width: 100%; }
+  td, th { padding: 8px 6px; border-bottom: 1px solid rgba(255,255,255,.09); text-align: center; }
+  th { font-size: 11px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted-night); font-weight: 600; }
+  td.n { text-align: left; font-size: 12px; font-weight: 600; width: 96px; }
 </style>
 </head>
 <body>
 <div id="sprite-host" hidden></div>
 <div class="wrap">
-  <h1>Illustrazioni generate — confronto con gli sprite attuali</h1>
-  <p class="sub">Quattro campioni, sfondo gia' rimosso. Le superfici sono quelle vere del gioco.</p>
+  <h1 id="titolo">Illustrazioni — revisione</h1>
+  <p class="sub" id="sottotitolo"></p>
 
-  <h2>1 · Nuovo contro vecchio, sulla card del gioco</h2>
-  <table>
-    <tr><th></th><th>SVG attuale</th><th>Generata</th><th>Trasparenza</th><th>A 80&nbsp;px<br><span style="text-transform:none;font-weight:400">(regola 6)</span></th></tr>
-    <tbody id="righe"></tbody>
-  </table>
+  <h2>1 · Tutte insieme — sembrano disegnate dalla stessa mano?</h2>
+  <div class="griglia" id="tutte"></div>
+  <p class="cap">Da guardare: spessore del contorno, saturazione dei fill, dimensione degli occhi, quanto ogni soggetto riempie il riquadro. Una sola che stona si vede subito qui.</p>
 
-  <h2>2 · Pepe accanto alle creature, come nell'album</h2>
-  <div class="strip" id="album"></div>
-  <p class="cap">Il contorno e i fill devono sembrare disegnati dalla stessa mano. Il confronto vero e' fra la Pepe generata e le altre tre.</p>
+  <h2>2 · A 80 px — la dimensione reale nell'album</h2>
+  <div class="griglia" id="piccole"></div>
+  <p class="cap">Regola 6 del design system. Se a questa dimensione un soggetto diventa una macchia indistinta, va rifatto con forme piu' grosse.</p>
 
-  <h2>3 · Sulla schermata di gioco</h2>
-  <div class="strip" id="gioco"></div>
-  <p class="cap">Le quattro illustrazioni nelle card di scelta, alla dimensione reale.</p>
+  <h2>3 · Nuovo contro SVG attuale</h2>
+  <table><thead><tr id="intestazione"></tr></thead><tbody id="confronto"></tbody></table>
+
+  <h2>4 · Come appaiono nell'album</h2>
+  <div class="album" id="album"></div>
 </div>
 
 <script type="module">
-  import { loadAll } from './js/content-loader.js';
+  import { loadAll, content } from './js/content-loader.js';
   await loadAll();
 
-  const CAMPIONI = [
-    ['sp-pepe',   'Pepe'],
-    ['sp-dragon', 'Drago'],
-    ['sp-castle', 'Castello'],
-    ['sp-big',    '"big"']
-  ];
+  const gruppo = new URLSearchParams(location.search).get('gruppo') || '1';
+  const doc = await (await fetch('tools/image-subjects.json')).json();
+  const soggetti = doc.soggetti.filter(s => String(s.batch) === gruppo);
 
-  const svgTag = (id, cls = '') =>
-    `<svg class="${cls}" viewBox="0 0 100 100"><use href="#${id}"></use></svg>`;
-  const imgTag = (id) => `<img src="assets/img/art/${id}.png" alt="">`;
+  document.getElementById('titolo').textContent =
+    `Illustrazioni — gruppo ${gruppo} (${soggetti.length})`;
+  document.getElementById('sottotitolo').textContent =
+    'Sfondo gia’ rimosso, ritagliate e centrate. Le superfici sono quelle vere del gioco.';
 
-  document.getElementById('righe').innerHTML = CAMPIONI.map(([id, nome]) => `
-    <tr>
-      <td class="nome">${nome}<br><span style="font-weight:400;font-size:11px;color:var(--muted-night)">${id}</span></td>
-      <td><div class="tile">${svgTag(id)}</div></td>
-      <td><div class="tile">${imgTag(id)}</div></td>
-      <td><div class="alpha">${imgTag(id)}</div></td>
-      <td><div class="tile mini">${imgTag(id)}</div></td>
-    </tr>`).join('');
+  const img = (id, cls = '') => `<img class="${cls}" src="assets/img/art/${id}.png" alt="">`;
+  const svg = (id) => `<svg viewBox="0 0 100 100"><use href="#${id}"></use></svg>`;
 
-  // Album: Pepe generata accanto a creature ancora in SVG.
-  document.getElementById('album').innerHTML = `
-    <div><div class="tile">${imgTag('sp-pepe')}</div><div class="cap">Pepe · generata</div></div>
-    <div><div class="tile">${svgTag('sp-flamup')}</div><div class="cap">Fiammino · SVG</div></div>
-    <div><div class="tile">${svgTag('sp-numo')}</div><div class="cap">Numo · SVG</div></div>
-    <div><div class="tile">${imgTag('sp-dragon')}</div><div class="cap">Drago · generato</div></div>`;
+  document.getElementById('tutte').innerHTML = soggetti.map(s =>
+    `<div class="cella"><div class="tile">${img(s.id)}</div>
+     <div class="nome">${s.id.replace('sp-', '')}</div></div>`).join('');
 
-  document.getElementById('gioco').innerHTML = CAMPIONI
-    .map(([id]) => `<div class="tile">${imgTag(id)}</div>`).join('');
+  document.getElementById('piccole').innerHTML = soggetti.map(s =>
+    `<div class="cella"><div class="tile p80">${img(s.id)}</div>
+     <div class="nome">${s.id.replace('sp-', '')}</div></div>`).join('');
+
+  // Confronto a coppie, su piu' righe da cinque per stare nello schermo.
+  const PER_RIGA = 6;
+  const righe = [];
+  for (let i = 0; i < soggetti.length; i += PER_RIGA) righe.push(soggetti.slice(i, i + PER_RIGA));
+  document.getElementById('intestazione').innerHTML = '';
+  document.getElementById('confronto').innerHTML = righe.map(riga => `
+    <tr><td class="n">SVG attuale</td>${riga.map(s => `<td><div class="tile">${svg(s.id)}</div></td>`).join('')}</tr>
+    <tr><td class="n">generata</td>${riga.map(s => `<td><div class="tile">${img(s.id)}</div>
+        <div class="nome">${s.id.replace('sp-', '')}</div></td>`).join('')}</tr>
+  `).join('');
+
+  // Album: solo le creature che hanno davvero una card, col loro nome vero.
+  const conNome = content.creatures
+    .filter(c => soggetti.some(s => s.id === c.sprite));
+  document.getElementById('album').innerHTML = conNome.map(c => `
+    <div class="creature-card">
+      <div class="art">${img(c.sprite)}</div>
+      <b>${c.name_it}</b>
+    </div>`).join('');
 </script>
 </body>
 </html>
