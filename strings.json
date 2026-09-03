@@ -147,6 +147,13 @@
     "blocked_time_message": "Il gioco si riapre piu' tardi. Chiedi a mamma o papa'!"
   },
 
+  "_mascotVoices_comment": "Chi pronuncia ogni battuta. Default: 'pepe' (la mascotte che parla in prima persona). Si elencano qui solo le eccezioni affidate al 'narrator', la voce epica che annuncia i traguardi grossi, in stile narratore di fine episodio. Il narratore parla in terza persona e non dice mai 'io': se una battuta passa al narratore, il testo va riscritto di conseguenza.",
+  "mascotVoices": {
+    "world_complete": "narrator",
+    "new_creature": "narrator",
+    "phase_done": "narrator"
+  },
+
   "_mascotSpoken_comment": "Versione da PRONUNCIARE delle battute che contengono un segnaposto. Il fumetto continua a mostrare il testo personalizzato (col nome del bambino), ma l'audio pre-generato usa questa forma neutra. Meglio la voce vera di Pepe senza il nome che una voce robotica col nome.",
   "mascotSpoken": {
     "session_end": "Per oggi basta cosi'. Ci vediamo domani!",

@@ -15,17 +15,21 @@
  *   2) diretto (piu' semplice per una sola persona): imposta
  *      ELEVENLABS_API_KEY nel file .env locale, che e' escluso da git.
  *
- * Due voci, due ruoli distinti (in .env):
+ * Tre voci, tre ruoli distinti (in .env):
  *
  *   VOICE_ID_ENGLISH    il MODELLO di pronuncia. Dice tutto il contenuto
  *                       didattico in inglese: parole e frasi da imparare.
  *                       E' la voce che il bambino deve imitare.
- *   VOICE_ID_NARRATOR   la GUIDA. Dice le battute italiane di Pepe:
- *                       accoglienza, istruzioni, incoraggiamenti.
+ *   VOICE_ID_PEPE       la COMPAGNA. E' Pepe che parla in prima persona:
+ *                       accoglienza, istruzioni, incoraggiamenti, saluti.
+ *   VOICE_ID_NARRATOR   il NARRATORE. Voce epica in terza persona, riservata
+ *                       ai traguardi grossi e rari, in stile annuncio di fine
+ *                       episodio. Chi la usa e' deciso in strings.mascotVoices.
  *
- * La separazione non e' estetica: al bambino deve essere sempre chiaro,
- * dal solo timbro, se quello che sente e' inglese da imparare o italiano
- * da capire. Cambiare voce e' il segnale piu' immediato che esista.
+ * La separazione non e' estetica. Fra inglese e italiano: al bambino deve
+ * bastare il timbro per capire se quello che sente e' da imparare o da
+ * capire. Fra Pepe e narratore: l'epico funziona solo se e' raro, quindi il
+ * narratore interviene di rado e Pepe resta la voce di tutti i giorni.
  *
  * Uso:
  *   node tools/generate-audio.mjs             genera solo i file mancanti
@@ -33,6 +37,7 @@
  *   node tools/generate-audio.mjs --plan      solo il riepilogo per voce
  *   node tools/generate-audio.mjs --dry-run   riepilogo + elenco delle tracce
  *   node tools/generate-audio.mjs --index     riscrive solo assets/audio/index.json
+ *   node tools/generate-audio.mjs --force --only it/    rigenera solo l'italiano
  *
  * Nota rete: se sei dietro un proxy che rifirma i certificati TLS, Node
  * fallisce dove curl funziona (curl usa il portachiavi di sistema, Node no).
@@ -53,6 +58,16 @@ const FORCE = args.has('--force');
 const DRY = args.has('--dry-run');
 const PLAN = args.has('--plan');
 const ONLY_INDEX = args.has('--index');
+/**
+ * --only <prefisso>  limita l'operazione alle tracce il cui percorso inizia
+ * cosi'. Serve a rigenerare le sole voci italiane (--only it/) senza toccare
+ * le 89 inglesi, che costano caratteri e non sono cambiate.
+ */
+const ONLY_PREFIX = (() => {
+  const argv = process.argv.slice(2);
+  const i = argv.indexOf('--only');
+  return i >= 0 && argv[i + 1] ? argv[i + 1] : '';
+})();
 
 /* ------------------------------------------------------------------ */
 /* .env minimale (niente dipendenze esterne)                           */
@@ -90,14 +105,15 @@ async function buildJobList() {
 
   // Contenuto didattico da imparare: sempre in inglese, voce VOICE_ID_ENGLISH.
   for (const w of content.words || []) {
-    jobs.push({ rel: `en/${w.id}.mp3`, text: w.en, lang: 'en', kind: 'word' });
+    jobs.push({ rel: `en/${w.id}.mp3`, text: w.en, role: 'english', kind: 'word' });
   }
   for (const p of content.phrases || []) {
-    jobs.push({ rel: `en/${p.id}.mp3`, text: p.en, lang: 'en', kind: 'phrase' });
+    jobs.push({ rel: `en/${p.id}.mp3`, text: p.en, role: 'english', kind: 'phrase' });
   }
 
-  // Battute della mascotte: in italiano, voce VOICE_ID_NARRATOR.
+  // Battute italiane: Pepe di default, narratore dove lo dice mascotVoices.
   const spoken = strings.mascotSpoken || {};
+  const voices = strings.mascotVoices || {};
   for (const [key, text] of Object.entries(strings.mascot || {})) {
     if (key === 'name') continue;
     if (typeof text !== 'string') continue;
@@ -116,7 +132,11 @@ async function buildJobList() {
       }
       line = spoken[key];
     }
-    jobs.push({ rel: `it/mascot.${key}.mp3`, text: line, lang: 'it', kind: 'mascot' });
+    const role = voices[key] === 'narrator' ? 'narrator' : 'pepe';
+    jobs.push({
+      rel: `it/mascot.${key}.mp3`, text: line, role,
+      kind: role === 'narrator' ? 'narrator' : 'mascot'
+    });
   }
 
   return { jobs, content };
@@ -127,33 +147,42 @@ async function buildJobList() {
 /* ------------------------------------------------------------------ */
 
 /**
- * Le due voci del progetto. Il campo `env` e' il nome della variabile in .env,
+ * Le tre voci del progetto. `env` e' il nome della variabile in .env,
  * `fallback` una voce pubblica di ElevenLabs usata solo se non e' configurata.
  */
 const VOICE_ROLES = {
-  en: {
+  english: {
     env: 'VOICE_ID_ENGLISH',
     legacyEnv: 'ELEVENLABS_VOICE_EN',
-    fallback: '21m00Tcm4TlvDq8ikWAM',      // Rachel
-    role: 'modello di pronuncia inglese'
+    fallback: '21m00Tcm4TlvDq8ikWAM',
+    label: 'modello di pronuncia inglese',
+    lang: 'en'
   },
-  it: {
-    env: 'VOICE_ID_NARRATOR',
+  pepe: {
+    env: 'VOICE_ID_PEPE',
     legacyEnv: 'ELEVENLABS_VOICE_IT',
-    fallback: 'XB0fDUnXU5powFXDhCwa',      // Charlotte
-    role: 'voce guida italiana (Pepe)'
+    fallback: 'XB0fDUnXU5powFXDhCwa',
+    label: 'Pepe, la compagna (prima persona)',
+    lang: 'it'
+  },
+  narrator: {
+    env: 'VOICE_ID_NARRATOR',
+    legacyEnv: '',
+    fallback: 'XB0fDUnXU5powFXDhCwa',
+    label: 'narratore epico (traguardi rari)',
+    lang: 'it'
   }
 };
 
-function voiceFor(env, lang) {
-  const r = VOICE_ROLES[lang];
-  return env[r.env] || env[r.legacyEnv] || r.fallback;
+function voiceFor(env, role) {
+  const r = VOICE_ROLES[role];
+  return env[r.env] || (r.legacyEnv && env[r.legacyEnv]) || r.fallback;
 }
 
-/** Vero se la voce di quella lingua e' configurata davvero in .env. */
-function voiceConfigured(env, lang) {
-  const r = VOICE_ROLES[lang];
-  return Boolean(env[r.env] || env[r.legacyEnv]);
+/** Vero se quella voce e' configurata davvero in .env. */
+function voiceConfigured(env, role) {
+  const r = VOICE_ROLES[role];
+  return Boolean(env[r.env] || (r.legacyEnv && env[r.legacyEnv]));
 }
 
 /**
@@ -165,6 +194,8 @@ function voiceConfigured(env, lang) {
 function voiceSettings(kind) {
   if (kind === 'word') return { stability: 0.70, similarity_boost: 0.85, style: 0.0, use_speaker_boost: true };
   if (kind === 'phrase') return { stability: 0.55, similarity_boost: 0.85, style: 0.1, use_speaker_boost: true };
+  // Il narratore deve suonare solenne e uguale a se stesso ogni volta.
+  if (kind === 'narrator') return { stability: 0.60, similarity_boost: 0.85, style: 0.35, use_speaker_boost: true };
   return { stability: 0.45, similarity_boost: 0.80, style: 0.25, use_speaker_boost: true };
 }
 
@@ -177,8 +208,8 @@ async function synthViaProxy(env, job) {
     },
     body: JSON.stringify({
       text: job.text,
-      lang: job.lang,
-      voiceId: voiceFor(env, job.lang),
+      lang: VOICE_ROLES[job.role].lang,
+      voiceId: voiceFor(env, job.role),
       voiceSettings: voiceSettings(job.kind)
     })
   });
@@ -187,7 +218,7 @@ async function synthViaProxy(env, job) {
 }
 
 async function synthDirect(env, job) {
-  const voiceId = voiceFor(env, job.lang);
+  const voiceId = voiceFor(env, job.role);
   const url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`;
   const res = await fetch(url, {
     method: 'POST',
@@ -264,7 +295,8 @@ async function preflight(url) {
 const KIND_LABEL = {
   word: 'parole singole',
   phrase: 'frasi e mini-dialoghi',
-  mascot: 'battute di Pepe'
+  mascot: 'battute di Pepe',
+  narrator: 'annunci del narratore'
 };
 
 /**
@@ -280,17 +312,22 @@ function printPlan(env, jobs, todo) {
   let totChars = 0;
   let todoChars = 0;
 
-  for (const lang of ['en', 'it']) {
-    const role = VOICE_ROLES[lang];
-    const mine = jobs.filter(j => j.lang === lang);
+  for (const roleId of Object.keys(VOICE_ROLES)) {
+    const role = VOICE_ROLES[roleId];
+    const mine = jobs.filter(j => j.role === roleId);
+    if (!mine.length) {
+      console.log(`\n${role.env}   (${role.label})`);
+      console.log('  nessuna traccia assegnata');
+      continue;
+    }
     const mineTodo = mine.filter(j => todoSet.has(j.rel));
     const chars = mine.reduce((n, j) => n + j.text.length, 0);
     const charsTodo = mineTodo.reduce((n, j) => n + j.text.length, 0);
     totChars += chars;
     todoChars += charsTodo;
 
-    const configured = voiceConfigured(env, lang);
-    console.log(`\n${role.env}   (${role.role})`);
+    const configured = voiceConfigured(env, roleId);
+    console.log(`\n${role.env}   (${role.label})`);
     console.log(`  stato voce      ${configured ? 'configurata in .env' : 'NON configurata — userei la voce di riserva'}`);
     console.log(`  tracce totali   ${mine.length}   (${chars} caratteri)`);
     console.log(`  da generare     ${mineTodo.length}   (${charsTodo} caratteri)`);
@@ -352,10 +389,12 @@ async function main() {
 
   const todo = [];
   for (const job of jobs) {
+    if (ONLY_PREFIX && !job.rel.startsWith(ONLY_PREFIX)) continue;
     const dest = path.join(AUDIO_DIR, job.rel);
     if (!FORCE && existsSync(dest)) continue;
     todo.push({ ...job, dest });
   }
+  if (ONLY_PREFIX) console.log(`Filtro --only "${ONLY_PREFIX}" attivo.`);
 
   printPlan(env, jobs, todo);
 
