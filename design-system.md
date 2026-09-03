@@ -187,6 +187,36 @@ rispetta, stona con l'interfaccia — che ormai è costruita su queste regole.
 8. **Niente spavento**: nessuna zanna aggressiva, nessun sangue, nessuna
    espressione minacciosa. I mostri di questo gioco sono simpatici.
 
+### La regola che tiene separate creature e oggetti
+
+Diverse creature dell'album sono per progetto l'eco di una parola del
+vocabolario: Rametto e `tree`, Baluce e `sun`, Fiammino e `hot`, Stellina e
+`star`, Sciazzo e `fish`. Con illustrazioni tutte nello stesso stile curato,
+quella parentela rischia di diventare confusione.
+
+Quello che le separa è una regola sola: **le creature hanno una faccia e un
+corpo, gli oggetti no.** Rametto è un albero *con gli occhi e le gambe*, e
+`tree` è un albero. Vale anche per le illustrazioni future: se una creatura
+nuova assomiglia a una parola, non serve cambiarle colore, serve darle una
+faccia.
+
+### Verificare la distinguibilità, non fidarsi dell'occhio
+
+Due misure, e servono entrambe perché dicono cose diverse.
+
+**Distanza di colore** (immagini ridotte a 32×32, confronto RGB premoltiplicato
+per l'alpha): trova le coppie che a colpo d'occhio si somigliano. È così che è
+emerso che il drago generato e il dinosauro generato distavano 38 su una
+mediana di 75 — ed erano due parole del vocabolario che il gioco può mettere
+come distrattori nella stessa griglia.
+
+**Distanza di sagoma** (solo il canale alpha): dice se la vicinanza è di forma
+o soltanto di tinta. Serve a non rifare immagini che vanno bene: `tree` e
+`slow` risultavano vicini di colore — sono entrambi verdi — ma le sagome sono
+lontanissime, e un albero non si confonde con una tartaruga.
+
+Una coppia è un problema vero solo quando **entrambe** le distanze sono basse.
+
 I plurali (`sp-cats`, `sp-dragons`…) sono composti riusando il simbolo
 singolare: il plurale deve restare visibilmente **la stessa cosa, ma tante**.
 È il contrasto che rende visibile la `-s` nelle unità 5 e 6, quindi va
