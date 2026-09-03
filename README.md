@@ -146,6 +146,8 @@ perche' una pulizia della cache cancella `localStorage` senza preavviso.
 ## Test
 
 ```bash
+node tools/check-assets.mjs        # integrita' degli asset grafici, senza browser
+
 python3 -m http.server 8080
 # regole didattiche: http://localhost:8080/tools/curriculum-test.html
 # sfoglio a caso:    http://localhost:8080/tools/smoke-test.html

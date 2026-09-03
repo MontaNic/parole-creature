@@ -183,8 +183,53 @@ def main():
             print(f"  ko  {src.stem:<16} {err}")
             falliti += 1
 
+    print(f"\nPronte {fatti}, fallite {falliti}.\n")
+    componi_plurali()
     scrivi_indice()
-    print(f"\nPronte {fatti}, fallite {falliti}.")
+
+
+# I plurali sono composti dal singolare, non disegnati a parte: il confronto
+# "la stessa cosa, ma tante" e' cio' che rende visibile la -s nelle unita' 5 e
+# 6. Le posizioni ricalcano quelle dei simboli in sprites.svg.
+PLURALI = {
+    "sp-cats":      ("sp-cat",      [(0.02, 0.08), (0.52, 0.08), (0.27, 0.48)], 0.46),
+    "sp-stars":     ("sp-star",     [(0.02, 0.08), (0.52, 0.08), (0.27, 0.48)], 0.46),
+    "sp-dragons":   ("sp-dragon",   [(0.02, 0.08), (0.52, 0.08), (0.27, 0.48)], 0.46),
+    "sp-dinosaurs": ("sp-dinosaur", [(0.02, 0.08), (0.52, 0.08), (0.27, 0.48)], 0.46),
+    # "two eggs": due, non tre, perche' la frase dice esattamente two
+    "sp-eggs":      ("sp-egg",      [(0.00, 0.22), (0.45, 0.22)], 0.55),
+}
+
+
+def componi_plurali():
+    """
+    Costruisce i plurali incollando piu' volte l'illustrazione del singolare.
+
+    Se il singolare passa a PNG e il plurale resta un simbolo SVG, il bambino
+    vede due disegni diversi per la stessa cosa e il confronto salta. Va
+    rifatto ogni volta che il singolare cambia.
+    """
+    fatti = 0
+    for plurale, (singolare, posizioni, scala) in PLURALI.items():
+        src = OUT / f"{singolare}.png"
+        if not src.exists():
+            continue
+        base = Image.open(src).convert("RGBA")
+        lato = base.width
+        piccola = base.resize((round(lato * scala), round(lato * scala)), Image.LANCZOS)
+        tela = Image.new("RGBA", (lato, lato), (0, 0, 0, 0))
+        for x, y in posizioni:
+            tela.paste(piccola, (round(x * lato), round(y * lato)), piccola)
+        finita = ritaglia_e_centra(tela)
+        if finita is None:
+            continue
+        dest = OUT / f"{plurale}.png"
+        alleggerisci(finita).save(dest, "PNG", optimize=True)
+        print(f"  ok  {plurale:<16} {dest.stat().st_size / 1024:6.1f} kB  (da {singolare})")
+        fatti += 1
+    if fatti:
+        print(f"\nComposti {fatti} plurali.")
+    return fatti
 
 
 def scrivi_indice():
@@ -202,6 +247,26 @@ def scrivi_indice():
         "sprites": nomi
     }, indent=2) + "\n")
     print(f"\nassets/img/art/index.json aggiornato: {len(nomi)} illustrazioni.")
+
+    # Lista esplicita per il service worker.
+    #
+    # Prima il worker leggeva index.json durante l'installazione e cachava
+    # quello che ci trovava. Sembrava equivalente e non lo era: se quella
+    # fetch falliva — rete lenta, server occupato, installazione interrotta —
+    # il gioco restava senza illustrazioni offline e nessuno se ne accorgeva,
+    # perche' online continuavano ad arrivare dalla rete.
+    # Una lista scritta nel file non puo' fallire a meta'.
+    righe = ",\n  ".join(f"'assets/img/art/{n}.png'" for n in nomi)
+    (ROOT / "sw-art.js").write_text(
+        "/*\n"
+        " * GENERATO da tools/remove-bg.py — non modificare a mano.\n"
+        " * Elenco delle illustrazioni da mettere in cache all'installazione.\n"
+        " * Verificato da tools/check-assets.mjs, che fallisce se un PNG\n"
+        " * esiste ma non compare qui.\n"
+        " */\n"
+        f"self.ART_ASSETS = [\n  {righe}\n];\n"
+    )
+    print(f"sw-art.js aggiornato: {len(nomi)} file da pre-cachare.")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<base href="../">
+<title>Cache offline — verifica</title>
+<style>
+  body { font: 14px ui-monospace, Menlo, monospace; background: #17123a; color: #ddd; padding: 22px; line-height: 1.6; }
+  .ok { color: #7ee787 } .ko { color: #ff7b72 } .note { color: #8b949e }
+  h1 { font-size: 16px } pre { white-space: pre-wrap }
+  #verdetto { font-size: 18px; font-weight: bold; margin-top: 16px }
+</style>
+</head>
+<body>
+<h1>Cosa c'e' davvero nella cache del service worker</h1>
+<div id="out">controllo...</div>
+
+<script>
+/*
+ * Diagnostica: confronta cio' che il gioco dichiara di avere (index.json,
+ * content.json) con cio' che e' davvero dentro le Cache Storage.
+ *
+ * Serve perche' "funziona offline" non e' verificabile guardando il codice:
+ * l'installazione puo' fallire in silenzio su singoli file.
+ *
+ * Uso: aprire una volta il gioco (per far installare il worker), poi questa.
+ */
+const out = document.getElementById('out');
+const riga = (cls, txt) => {
+  const d = document.createElement('div');
+  d.className = cls; d.textContent = txt; out.appendChild(d);
+};
+
+(async () => {
+  out.innerHTML = '';
+
+  const reg = await navigator.serviceWorker.getRegistration();
+  riga(reg ? 'ok' : 'ko', reg ? `service worker registrato, stato: ${reg.active ? 'attivo' : 'non attivo'}`
+                              : 'NESSUN service worker registrato');
+
+  const nomi = await caches.keys();
+  riga('note', `cache presenti: ${nomi.join(', ') || 'nessuna'}`);
+
+  // Tutto cio' che il gioco si aspetta di poter caricare senza rete.
+  const attesi = [];
+  const idx = await (await fetch('assets/img/art/index.json')).json();
+  for (const id of idx.sprites) attesi.push(`assets/img/art/${id}.png`);
+
+  // In parallelo: in sequenza su 43 file la pagina restava in esecuzione
+  // troppo a lungo per essere ispezionata.
+  const esiti = await Promise.all(attesi.map(async url =>
+    [url, Boolean(await caches.match(new URL(url, location.origin).href))]));
+  const mancanti = esiti.filter(([, c]) => !c).map(([u]) => u.split('/').pop());
+  const dentro = esiti.length - mancanti.length;
+
+  riga(mancanti.length ? 'ko' : 'ok',
+    `illustrazioni in cache: ${dentro}/${attesi.length}`);
+  if (mancanti.length) {
+    riga('ko', 'mancanti: ' + mancanti.join(' '));
+  }
+
+  // Anche la shell, che senza il gioco non parte proprio.
+  const shell = ['index.html', 'game.js', 'design-system.css', 'style.css',
+                 'content.json', 'strings.json', 'assets/img/sprites.svg',
+                 'assets/img/art/index.json', 'assets/fonts/andika-400.woff2'];
+  const shellEsiti = await Promise.all(shell.map(async url =>
+    [url, Boolean(await caches.match(new URL(url, location.origin).href))]));
+  const shellMancanti = shellEsiti.filter(([, c]) => !c).map(([u]) => u);
+  riga(shellMancanti.length ? 'ko' : 'ok',
+    `shell in cache: ${shell.length - shellMancanti.length}/${shell.length}` +
+    (shellMancanti.length ? ' — mancano: ' + shellMancanti.join(' ') : ''));
+
+  const v = document.createElement('div');
+  const tutto = !mancanti.length && !shellMancanti.length && reg;
+  v.id = 'verdetto'; v.className = tutto ? 'ok' : 'ko';
+  v.textContent = tutto ? 'PASS — il gioco funziona senza rete' : 'FAIL — offline mancherebbe qualcosa';
+  out.appendChild(v);
+  // Il titolo e' il modo piu' affidabile per leggere l'esito da fuori.
+  document.title = `${tutto ? 'PASS' : 'FAIL'} art ${dentro}/${attesi.length} shell ${shell.length - shellMancanti.length}/${shell.length}`;
+})().catch(e => {
+  out.innerHTML = `<div class="ko">ERRORE: ${e.message}</div>`;
+  document.title = 'FAIL ' + e.message;
+});
+</script>
+</body>
+</html>

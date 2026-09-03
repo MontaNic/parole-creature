@@ -12,7 +12,14 @@
  * Alzare CACHE_VERSION a ogni release per invalidare le vecchie cache.
  */
 
-const CACHE_VERSION = 'v1.3.0';
+/*
+ * Elenco delle illustrazioni, generato da tools/remove-bg.py.
+ * importScripts e' sincrono e avviene prima dell'evento install: quando
+ * serve, self.ART_ASSETS c'e' gia'.
+ */
+importScripts('sw-art.js');
+
+const CACHE_VERSION = 'v1.4.0';
 const SHELL_CACHE = `dp-shell-${CACHE_VERSION}`;
 const AUDIO_CACHE = `dp-audio-${CACHE_VERSION}`;
 
@@ -30,6 +37,7 @@ const SHELL_ASSETS = [
   'strings.json',
   'assets/img/sprites.svg',
   'assets/img/art/index.json',
+  'sw-art.js',
   'js/config.js',
   'js/state.js',
   'js/content-loader.js',
@@ -48,29 +56,47 @@ self.addEventListener('install', (event) => {
   event.waitUntil(precache().then(() => self.skipWaiting()));
 });
 
+/** Quante richieste tenere in volo insieme durante il precache. */
+const PARALLELE = 6;
+
+/**
+ * Scarica in cache a piccoli gruppi invece che tutto insieme.
+ *
+ * Con una Promise.all su una settantina di file il browser apre decine di
+ * connessioni contemporanee. Su un tablet in wifi, contro un server casalingo,
+ * questo non solo rallenta l'installazione: affama anche le richieste che la
+ * pagina sta facendo in quel momento per mostrare le sue immagini, che
+ * scadono e diventano l'icona di immagine rotta.
+ * Sei alla volta e' abbastanza per essere veloce e poco per dare fastidio.
+ */
+async function inCoda(cache, urls) {
+  let falliti = 0;
+  for (let i = 0; i < urls.length; i += PARALLELE) {
+    await Promise.all(urls.slice(i, i + PARALLELE).map(url =>
+      cache.add(url).catch(err => {
+        falliti++;
+        console.warn('[sw] non cachato:', url, err);
+      })
+    ));
+  }
+  return falliti;
+}
+
 async function precache() {
   const cache = await caches.open(SHELL_CACHE);
-  // addAll fallisce in blocco se un file manca: si aggiunge uno per uno.
-  const salva = (url) => cache.add(url).catch(err =>
-    console.warn('[sw] non cachato:', url, err));
 
-  await Promise.all(SHELL_ASSETS.map(salva));
+  // Prima la shell: senza, il gioco non parte proprio.
+  await inCoda(cache, SHELL_ASSETS);
 
   /*
-   * Le illustrazioni entrano in cache subito, non al primo uso come gli
-   * audio. La differenza e' che se manca un audio il gioco ripiega sulla
-   * sintesi vocale, mentre se manca un'illustrazione la card resta vuota e
-   * la domanda diventa impossibile. Sono ~2,4 MB una volta sola.
+   * Poi le illustrazioni, tutte, dalla lista generata in sw-art.js.
+   * Entrano in cache all'installazione e non al primo uso come gli audio: se
+   * manca un audio il gioco ripiega sulla sintesi vocale, se manca
+   * un'illustrazione la card resta vuota e la domanda diventa impossibile.
    */
-  try {
-    const res = await fetch('assets/img/art/index.json', { cache: 'no-cache' });
-    if (res.ok) {
-      const { sprites = [] } = await res.json();
-      await Promise.all(sprites.map(id => salva(`assets/img/art/${id}.png`)));
-    }
-  } catch (err) {
-    console.warn('[sw] indice illustrazioni non raggiungibile:', err);
-  }
+  const arte = self.ART_ASSETS || [];
+  const falliti = await inCoda(cache, arte);
+  console.log(`[sw] illustrazioni in cache: ${arte.length - falliti}/${arte.length}`);
 }
 
 self.addEventListener('activate', (event) => {

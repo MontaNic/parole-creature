@@ -239,6 +239,10 @@ assets/img/art/          43 illustrazioni generate (+ index.json)
 assets/img/sprites.svg   81 simboli; 38 ancora in uso (numeri, colori, icone, plurali)
 assets/audio/index.json  elenco degli mp3 realmente presenti
 sw.js                    cache offline
+sw-art.js                GENERATO: elenco delle illustrazioni da pre-cachare
+tools/check-assets.mjs   integrita' degli asset grafici (6 controlli, senza browser)
+tools/generate-images.mjs generazione offline delle illustrazioni
+tools/remove-bg.py       sfondo, ritaglio, plurali, indice, lista di precache
 tools/generate-audio.mjs generazione offline degli audio
 tools/curriculum-test.html  test delle regole didattiche
 tools/smoke-test.html    test di sfoglio automatico
@@ -378,6 +382,36 @@ quello che il gioco ha appena insegnato.
   battute si sentono davvero. Rimosso il codice morto: `encouragementKey()`
   era definita e mai chiamata, ora ruota sia gli incoraggiamenti sia i
   complimenti.
+- **2026-09-03** — **Correzioni dopo il playtest su iPad.**
+  Due bug segnalati, tre trovati.
+
+  *Offline.* Il worker leggeva `index.json` durante l'installazione e cachava
+  quello che ci trovava. Sembrava equivalente a una lista e non lo era: se
+  quella fetch falliva — rete lenta, installazione interrotta — il gioco
+  restava senza illustrazioni offline, e online nessuno se ne accorgeva
+  perche' continuavano ad arrivare dalla rete. Ora `sw-art.js`, generato
+  insieme alle immagini, contiene l'elenco esplicito. Verificato dal log del
+  server: con un profilo nuovo il worker richiede tutte e 48 in una sola
+  apertura.
+
+  *Immagini rotte anche online.* Non sono riuscito a riprodurlo: in locale
+  nessun 404, tutti i 48 file servono, ogni riferimento si risolve. La causa
+  probabile e' che il precache apriva ~70 connessioni contemporanee, che su
+  un tablet in wifi affamano le richieste che la pagina sta facendo in quel
+  momento per le sue immagini, fino a farle scadere. Ora si scarica a gruppi
+  di sei. E' una correzione per meccanismo, non per riproduzione: se il
+  sintomo tornasse, il sospetto successivo e' un worker vecchio rimasto
+  attivo, e si azzera da Impostazioni Safari.
+
+  *Plurali rimasti indietro.* Trovato mentre indagavo: `sp-cats` e gli altri
+  quattro erano simboli SVG che riusavano i vecchi disegni, mentre i
+  singolari erano diventati PNG. Il bambino vedeva due disegni diversi per la
+  stessa cosa, e il confronto "la stessa cosa, ma tante" — cioe' la lezione
+  della -s nelle unita' 5 e 6 — non funzionava piu'. Ora i plurali sono
+  composti dalle nuove illustrazioni.
+
+  Aggiunto `tools/check-assets.mjs`, che verifica staticamente tutti e tre i
+  casi e fallisce se anche un solo riferimento e' rotto.
 - **2026-09-03** — **43 illustrazioni generate e messe in uso.**
   `spriteSvg()` restituisce un `<img>` per gli sprite che hanno
   un'illustrazione e resta `<svg><use>` per gli altri 38; il CSS che li veste
@@ -487,6 +521,10 @@ Pipeline: `tools/generate-images.mjs` (prompt) e `tools/remove-bg.py`
   ha evitato di rifare `tree`/`slow`, vicini solo perche' entrambi verdi.
 - **Le creature hanno una faccia, gli oggetti no**: e' la regola che tiene
   separate Rametto da `tree` e Fiammino da `hot`.
+- **Integrita' verificata staticamente** da `node tools/check-assets.mjs`:
+  sei controlli in un secondo, senza browser. Esce con codice 1 se un solo
+  riferimento e' rotto. E' il controllo che avrebbe fermato prima del
+  playtest i due bug trovati sull'iPad.
 
 ## Prossimi passi
 3. **Riascoltare le 113 tracce generate** e rigenerare quelle che non
