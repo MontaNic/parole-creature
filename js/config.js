@@ -8,8 +8,13 @@
  * dentro assets/audio/ e, se manca un file, la sintesi vocale del browser.
  */
 export const CONFIG = {
-  /** Versione dell'applicazione (mostrata nell'area genitori). */
-  appVersion: '1.0.0',
+  /**
+   * Versione e data, mostrate in fondo all'area genitori.
+   * Servono a chi segnala un problema per dire "ce l'ho con questa".
+   * Vanno alzate a mano a ogni rilascio: il progetto non ha un build step.
+   */
+  appVersion: '1.4.0',
+  buildDate: '2026-09-04',
 
   /** Percorsi dei dati. */
   contentUrl: 'content.json',

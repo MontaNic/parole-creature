@@ -11,7 +11,9 @@
  */
 
 import { CONFIG } from './config.js';
-import { content, t, allThemes, audioIndex, getItem, getPhase, structuresOf } from './content-loader.js';
+import {
+  content, t, allThemes, audioIndex, artIndex, getItem, getPhase, structuresOf
+} from './content-loader.js';
 import {
   save, persist, setPin, checkPin, hasPin,
   exportSaveFile, importSaveFile, resetSave
@@ -21,7 +23,7 @@ import { showScreen } from './screens.js';
 import {
   unitProgress, phaseProgress, playablePhases, curriculumConfig
 } from './curriculum.js';
-import { setMusicEnabled } from './audio.js';
+import { applyVolumes, sfxTap, speakMascot } from './audio.js';
 
 function el(tag, cls, text) {
   const n = document.createElement(tag);
@@ -125,6 +127,7 @@ const TABS = [
   { id: 'progress', label: 'parents.tab_progress', render: panelProgress },
   { id: 'ebooks',   label: 'parents.tab_ebooks',   render: panelEbooks },
   { id: 'media',    label: 'parents.tab_media',    render: panelMedia },
+  { id: 'general',  label: 'parents.tab_general',  render: panelGeneral },
   { id: 'data',     label: 'parents.tab_data',     render: panelData }
 ];
 
@@ -274,15 +277,6 @@ function panelSettings() {
     themesBox.appendChild(c);
   });
   p.appendChild(field(t('parents.themes_enabled'), themesBox));
-
-  // Audio
-  p.appendChild(switchRow(t('parents.music'), save.settings.music, (on) => {
-    setMusicEnabled(on);
-    persist(true);
-  }));
-  p.appendChild(switchRow(t('parents.sfx'), save.settings.sfx, (on) => {
-    save.settings.sfx = on; persist(true);
-  }));
 
   // Scavalcare la soglia di padronanza fra le fasi
   p.appendChild(switchRow(t('parents.unlock_all_phases'), save.settings.unlockAllPhases, (on) => {
@@ -556,6 +550,215 @@ function panelMedia() {
 }
 
 /* ------------------------------------------------------------------ */
+/* Pannello: impostazioni generali                                     */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Un cursore di volume.
+ *
+ * Il valore si sente mentre lo si muove: senza un riscontro udibile il
+ * genitore sposta un cursore alla cieca. Per la voce si fa parlare Pepe,
+ * per gli effetti si suona un tocco, per la musica basta che stia suonando.
+ */
+function volumeRow(etichetta, chiave, onMove, hintText) {
+  const f = el('div', 'field');
+
+  const testa = el('div', 'volume-head');
+  testa.appendChild(el('label', null, etichetta));
+  const valore = el('b', 'volume-value');
+  f.appendChild(testa);
+  testa.appendChild(valore);
+
+  const input = document.createElement('input');
+  input.type = 'range';
+  input.min = '0'; input.max = '100'; input.step = '5';
+  input.className = 'volume-range';
+  input.value = String(save.settings[chiave] ?? 100);
+  input.setAttribute('aria-label', etichetta);
+
+  const mostra = () => {
+    const v = Number(input.value);
+    valore.textContent = v === 0 ? t('parents.muted') : `${v}%`;
+    f.classList.toggle('is-muted', v === 0);
+  };
+  mostra();
+
+  input.oninput = () => {
+    save.settings[chiave] = Number(input.value);
+    mostra();
+    applyVolumes();
+    persist();
+  };
+  // L'anteprima solo a cursore rilasciato: mentre si trascina sarebbe un
+  // fuoco di fila di suoni sovrapposti.
+  input.onchange = () => { persist(true); onMove?.(); };
+
+  f.appendChild(input);
+  if (hintText) f.appendChild(el('div', 'hint', hintText));
+  return f;
+}
+
+function panelGeneral() {
+  const p = el('div', 'panel');
+
+  /* --- volumi --- */
+  const vol = el('div', 'card-box');
+  vol.appendChild(el('h3', null, t('parents.volumes_title')));
+  vol.appendChild(el('div', 'hint', t('parents.volumes_hint')));
+  vol.appendChild(volumeRow(t('parents.volume_music'), 'musicVolume'));
+  vol.appendChild(volumeRow(t('parents.volume_voice'), 'voiceVolume',
+    () => speakMascot('correct_1', t('mascot.correct_1')),
+    t('parents.volume_voice_hint')));
+  vol.appendChild(volumeRow(t('parents.volume_sfx'), 'sfxVolume', () => sfxTap()));
+  p.appendChild(vol);
+
+  /* --- verifica offline --- */
+  const off = el('div', 'card-box');
+  off.appendChild(el('h3', null, t('parents.offline_title')));
+  off.appendChild(el('div', 'hint', t('parents.offline_hint')));
+  const esito = el('div', 'offline-result');
+  const bottone = el('button', 'btn btn-cool btn-parent-small', t('parents.offline_check'));
+  bottone.onclick = async () => {
+    bottone.disabled = true;
+    esito.className = 'offline-result';
+    esito.textContent = t('parents.offline_checking');
+    try {
+      mostraEsitoOffline(esito, await verificaOffline());
+    } catch (err) {
+      esito.classList.add('is-bad');
+      esito.textContent = `${t('parents.offline_error')}: ${err.message}`;
+    }
+    bottone.disabled = false;
+  };
+  off.appendChild(bottone);
+  off.appendChild(esito);
+  p.appendChild(off);
+
+  /* --- informazioni --- */
+  const info = el('div', 'card-box');
+  info.appendChild(el('h3', null, t('parents.app_info')));
+  const dl = el('div', 'app-info');
+  dl.appendChild(el('span', null, `${t('parents.app_version')} ${CONFIG.appVersion}`));
+  dl.appendChild(el('span', null, `${t('parents.app_build')} ${CONFIG.buildDate}`));
+  dl.appendChild(el('span', null, `${t('parents.app_content')} ${content.raw?.contentVersion || '?'}`));
+  info.appendChild(dl);
+  p.appendChild(info);
+
+  /* --- azzeramento, in fondo e staccato --- */
+  p.appendChild(resetBox());
+  return p;
+}
+
+/**
+ * Azzeramento con doppia conferma.
+ *
+ * Non un confirm() del browser: su iPad e' un foglio che si tocca via per
+ * sbaglio insieme a tutto il resto. Qui il primo tocco cambia il bottone in
+ * una domanda e fa comparire un Annulla; solo il secondo cancella. E dopo
+ * dieci secondi senza risposta si torna indietro da solo.
+ */
+function resetBox() {
+  const box = el('div', 'card-box is-danger');
+  box.appendChild(el('h3', null, t('parents.reset_title')));
+  box.appendChild(el('div', 'hint', t('parents.reset_hint')));
+
+  const riga = el('div', 'row');
+  const azione = el('button', 'btn btn-ghost btn-parent-small', t('parents.reset_step1'));
+  const annulla = el('button', 'btn btn-ghost btn-parent-small', t('parents.reset_cancel'));
+  annulla.style.display = 'none';
+
+  let armato = false;
+  let timer = null;
+  const disarma = () => {
+    armato = false;
+    clearTimeout(timer);
+    azione.textContent = t('parents.reset_step1');
+    azione.classList.remove('is-danger');
+    annulla.style.display = 'none';
+  };
+
+  azione.onclick = () => {
+    if (!armato) {
+      armato = true;
+      azione.textContent = t('parents.reset_step2');
+      azione.classList.add('is-danger');
+      annulla.style.display = '';
+      timer = setTimeout(disarma, 10000);
+      return;
+    }
+    resetSave();
+    location.reload();
+  };
+  annulla.onclick = disarma;
+
+  riga.appendChild(azione);
+  riga.appendChild(annulla);
+  box.appendChild(riga);
+  return box;
+}
+
+/**
+ * Controlla che il necessario sia davvero in cache.
+ *
+ * E' la versione lato client di tools/check-assets.mjs: quello verifica che i
+ * file esistano nel progetto, questo che siano gia' scesi sul dispositivo.
+ */
+async function verificaOffline() {
+  if (!('caches' in window)) return { supportato: false };
+  const reg = await navigator.serviceWorker?.getRegistration?.();
+
+  const dentro = async (url) =>
+    Boolean(await caches.match(new URL(url, location.href).href));
+
+  const shell = ['index.html', 'game.js', 'design-system.css', 'style.css',
+                 'content.json', 'strings.json', 'assets/img/sprites.svg'];
+  const immagini = [...artIndex.sprites].map(id => `${CONFIG.artBase}${id}.png`);
+  const audio = [...audioIndex.files].map(f => `${CONFIG.audioBase}${f}`);
+
+  const conta = async (elenco) => {
+    const esiti = await Promise.all(elenco.map(dentro));
+    return { totale: elenco.length, presenti: esiti.filter(Boolean).length };
+  };
+
+  return {
+    supportato: true,
+    installato: Boolean(reg?.active),
+    shell: await conta(shell),
+    immagini: await conta(immagini),
+    audio: await conta(audio)
+  };
+}
+
+function mostraEsitoOffline(host, r) {
+  host.innerHTML = '';
+  if (!r.supportato || !r.installato) {
+    host.classList.add('is-bad');
+    host.appendChild(el('b', null, t('parents.offline_no_sw')));
+    return;
+  }
+
+  const manca = (x) => x.totale - x.presenti;
+  const bloccanti = manca(r.shell) + manca(r.immagini);
+  const audioMancante = manca(r.audio);
+
+  host.classList.add(bloccanti ? 'is-bad' : audioMancante ? 'is-warn' : 'is-good');
+  host.appendChild(el('b', null,
+    bloccanti ? t('parents.offline_missing')
+      : audioMancante ? t('parents.offline_partial')
+      : t('parents.offline_ok')));
+
+  const riga = (etichetta, x) =>
+    el('div', 'offline-line', `${etichetta}: ${x.presenti}/${x.totale}`);
+  host.appendChild(riga(t('parents.offline_shell'), r.shell));
+  host.appendChild(riga(t('parents.offline_images'), r.immagini));
+  host.appendChild(riga(t('parents.offline_audio'), r.audio));
+
+  // Le tracce audio non sono pre-cachate di proposito: senza, il gioco
+  // ripiega sulla sintesi vocale e resta giocabile.
+  if (audioMancante) host.appendChild(el('div', 'hint', t('parents.offline_audio_note')));
+}
+
+/* ------------------------------------------------------------------ */
 /* Pannello: dati e backup                                             */
 /* ------------------------------------------------------------------ */
 
@@ -591,17 +794,6 @@ function panelData() {
   importBox.appendChild(file);
   importBox.appendChild(msg);
   p.appendChild(importBox);
-
-  const dangerBox = el('div', 'card-box');
-  dangerBox.appendChild(el('h3', null, t('parents.reset')));
-  const reset = el('button', 'btn btn-ghost btn-parent-small', t('parents.reset'));
-  reset.onclick = () => {
-    if (!confirm(t('parents.reset_confirm'))) return;
-    resetSave();
-    location.reload();
-  };
-  dangerBox.appendChild(reset);
-  p.appendChild(dangerBox);
 
   // Nota sulla privacy: e' un'informazione utile, non un dettaglio legale.
   const privacy = el('div', 'card-box');

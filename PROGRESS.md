@@ -382,6 +382,22 @@ quello che il gioco ha appena insegnato.
   battute si sentono davvero. Rimosso il codice morto: `encouragementKey()`
   era definita e mai chiamata, ora ruota sia gli incoraggiamenti sia i
   complimenti.
+- **2026-09-04** — **Impostazioni generali e aiuto scritto progressivo.**
+  Nuova scheda "Generali" nell'area genitori con tre cursori di volume
+  (musica, voce, effetti), un controllo del funzionamento offline, versione e
+  data di build, e l'azzeramento dei progressi con doppia conferma.
+  Lo schema del salvataggio passa a **v2**: gli interruttori audio diventano
+  volumi 0-100, con migrazione provata sui tre casi possibili.
+  Il controllo offline e' la versione lato client di `check-assets.mjs`:
+  quello verifica che i file esistano nel progetto, questo che siano gia'
+  scesi sul dispositivo. Distingue cio' che blocca (illustrazioni, file del
+  gioco) da cio' che non blocca (le tracce audio, che si scaricano giocando e
+  senza le quali il gioco ripiega sulla sintesi vocale).
+  L'azzeramento non usa `confirm()`: su iPad e' un foglio che si tocca via
+  insieme a tutto il resto. Il primo tocco arma il bottone e fa comparire un
+  Annulla, il secondo cancella, e dopo dieci secondi si disarma da solo.
+  Aggiunto l'**aiuto scritto dopo due errori** sullo stesso item.
+  `tools/curriculum-test.html` passa da 25 a 30 controlli.
 - **2026-09-03** — **Correzioni dopo il playtest su iPad.**
   Due bug segnalati, tre trovati.
 
@@ -525,6 +541,54 @@ Pipeline: `tools/generate-images.mjs` (prompt) e `tools/remove-bg.py`
   sei controlli in un secondo, senza browser. Esce con codice 1 se un solo
   riferimento e' rotto. E' il controllo che avrebbe fermato prima del
   playtest i due bug trovati sull'iPad.
+
+## Audio: volumi, non interruttori
+
+Lo schema del salvataggio e' passato a **v2**. `settings.music` e
+`settings.sfx`, che erano booleani, sono diventati tre volumi 0-100:
+`musicVolume`, `voiceVolume`, `sfxVolume`.
+
+Tre e non due perche' prima la voce non era regolabile affatto, ed e' la cosa
+che in questo gioco si sente di piu'. Un cursore solo per tutte le voci —
+Pepe, narratore, pronuncia inglese — perche' un genitore ragiona per "quanto
+parla forte il gioco", non per ruoli.
+
+I default non sono uguali di proposito: **voce 100** perche' e' il contenuto
+(se non si sente, il gioco non insegna), **musica 50** che corrisponde
+esattamente al volume con cui era stata progettata (sottofondo, non
+protagonista) e lascia margine per alzarla, **effetti 70**.
+
+**Migrazione**: chi aveva la musica accesa la ritrova a 50, cioe' com'era;
+chi l'aveva spenta la ritrova a 0. La voce parte al massimo. La migrazione e'
+in `MIGRATIONS[1]` di `js/state.js` ed e' stata provata sui tre casi
+possibili prima di essere usata.
+
+## L'aiuto scritto dopo due errori
+
+Sbagliando due volte lo stesso item, compare la forma scritta inglese in
+Andika — anche in fase 1, che di testo non ne mostra mai.
+
+La regola vive in una funzione sola, `serveAiutoScritto(errori, showWritten)`
+in `js/minigames.js`, esportata e verificata da quattro controlli del test.
+Non e' pedanteria: e' una **deroga a una regola didattica**, e una deroga
+scritta in mezzo a tre mini-giochi diversi diventa in fretta una regola
+diversa. Isolata, si vede a colpo d'occhio che scatta a due errori e mai
+prima, e un test fallisce se qualcuno la sposta.
+
+Il perche' della soglia: se il testo comparisse al primo tentativo
+diventerebbe un modo per abituarsi a leggere invece che ad ascoltare, proprio
+mentre l'ascolto e' cio' che la fase 1 allena. Compare solo dopo una
+difficolta' dimostrata.
+
+L'aiuto e' legato all'item e al tentativo: sparisce quando si passa
+all'elemento successivo, e nella caccia alla parola viene tolto anche al
+cambio di bersaglio dentro lo stesso turno, perche' resterebbe a suggerire la
+parola sbagliata.
+
+Applicato ad abbinamento, quiz e caccia. **Non** ad "ascolta e ripeti**": li'
+non esiste un percorso di errore — si ascolta e si tocca "Fatto!" — quindi non
+c'e' una difficolta' da rilevare. Aggiungerlo avrebbe voluto dire mostrare il
+testo sempre, che e' esattamente cio' che la regola vuole evitare.
 
 ## Prossimi passi
 3. **Riascoltare le 113 tracce generate** e rigenerare quelle che non

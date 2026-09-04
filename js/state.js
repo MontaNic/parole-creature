@@ -19,7 +19,7 @@ import { CONFIG } from './config.js';
  * Il gioco si chiamava "Draghetti & Parole": il nome resta qui per questo.
  */
 const STORAGE_KEY = 'draghetti_parole_save';
-export const SAVE_SCHEMA_VERSION = 1;
+export const SAVE_SCHEMA_VERSION = 2;
 
 /* ------------------------------------------------------------------ */
 /* Utilita' di data                                                    */
@@ -93,6 +93,21 @@ function defaultSave() {
       phasesEnabled: { 1: true, 2: true, 3: true, 4: true, 5: true },
       themesDisabled: [],      // temi messi in pausa dai genitori
       vacation: false,
+
+      /*
+       * Volumi 0-100, non piu' interruttori.
+       * Un genitore ragiona per "quanto parla forte il gioco", non per ruoli:
+       * un solo cursore copre Pepe, il narratore e la pronuncia inglese.
+       *
+       * I default non sono tutti uguali di proposito. La voce sta a 100
+       * perche' e' il contenuto: se non si sente, il gioco non insegna. La
+       * musica sta a 50, che corrisponde esattamente al volume con cui e'
+       * stata progettata — sfondo, non protagonista — e lascia margine per
+       * alzarla. Gli effetti stanno in mezzo.
+       */
+      musicVolume: 50,
+      voiceVolume: 100,
+      sfxVolume: 70,
       /* Scavalca la soglia di padronanza fra le fasi. Da usare con criterio:
          serve se il bambino e' gia' avanti o se una fase lo sta annoiando. */
       unlockAllPhases: false,
@@ -117,7 +132,23 @@ function defaultSave() {
  *   2: (save) => { save.progress.badges = {}; return save; }
  */
 const MIGRATIONS = {
-  // 1: (save) => { ... ; return save; }
+  /*
+   * 1 -> 2: gli interruttori audio diventano volumi.
+   *
+   * Chi aveva la musica accesa la ritrova allo stesso volume di prima (50,
+   * che e' il livello con cui e' stata progettata), chi l'aveva spenta la
+   * ritrova a zero. La voce non aveva un interruttore e parte al massimo:
+   * e' il contenuto del gioco.
+   */
+  1: (save) => {
+    const s = save.settings || (save.settings = {});
+    if (s.musicVolume === undefined) s.musicVolume = s.music === false ? 0 : 50;
+    if (s.sfxVolume === undefined) s.sfxVolume = s.sfx === false ? 0 : 70;
+    if (s.voiceVolume === undefined) s.voiceVolume = 100;
+    delete s.music;
+    delete s.sfx;
+    return save;
+  }
 };
 
 function migrate(save) {

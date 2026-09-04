@@ -23,7 +23,7 @@ import {
   curriculumConfig, phaseProgress, playablePhases
 } from './js/curriculum.js';
 import {
-  initAudioUnlock, sfxCorrect, sfxRetry, stopVoice, startMusic
+  initAudioUnlock, sfxCorrect, sfxRetry, stopVoice, startMusic, musicVolume
 } from './js/audio.js';
 import { initEffects, celebrateCorrect, toast } from './js/effects.js';
 import {
@@ -453,7 +453,7 @@ function startSessionClock() {
 
   // Riprendere la musica quando si torna sull'app dopo un cambio di scheda.
   document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible' && save.settings.music) startMusic();
+    if (document.visibilityState === 'visible' && musicVolume() > 0) startMusic();
     else stopVoice();
   });
 }

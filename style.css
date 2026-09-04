@@ -590,6 +590,63 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
   gap: 10px; margin-bottom: 6px;
 }
 
+/*
+  Aiuto scritto: compare solo dopo due errori sullo stesso item.
+  Ha un fondo suo perche' deve leggersi come un suggerimento comparso
+  adesso, non come una parte della schermata che c'era gia'.
+*/
+.written-help {
+  background: var(--paper); color: var(--ink);
+  border: var(--stroke) solid var(--ink);
+  border-radius: var(--r-m);
+  padding: 8px 20px; margin: 0;
+  box-shadow: var(--sh-card);
+  text-shadow: none;
+}
+
+/* ---------------- Impostazioni generali ---------------- */
+
+.volume-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.volume-value { font-size: 15px; color: var(--amber); font-variant-numeric: tabular-nums; }
+.field.is-muted .volume-value { color: var(--muted-night); }
+
+/*
+  Il cursore e' grosso: si regola col dito su un tablet, e chi lo usa spesso
+  lo fa con il bambino in braccio.
+*/
+.volume-range {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 14px; margin: 10px 0 2px;
+  border-radius: 999px; border: 2px solid var(--ink);
+  background: var(--paper-3);
+  cursor: pointer;
+}
+.volume-range::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--amber); border: 3px solid var(--ink);
+  box-shadow: 0 3px 0 var(--amber-deep);
+  cursor: grab;
+}
+.volume-range::-moz-range-thumb {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--amber); border: 3px solid var(--ink);
+}
+.field.is-muted .volume-range::-webkit-slider-thumb { background: var(--paper-3); box-shadow: none; }
+
+.offline-result { margin-top: 12px; font-size: 14px; line-height: 1.5; }
+.offline-result b { display: block; font-size: 16px; margin-bottom: 6px; }
+.offline-result.is-good b { color: var(--leaf); }
+.offline-result.is-warn b { color: var(--amber); }
+.offline-result.is-bad  b { color: var(--ember); }
+.offline-line { color: var(--muted-night); font-variant-numeric: tabular-nums; }
+
+.app-info { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted-night); }
+
+/* L'azzeramento e' l'unica azione irreversibile: si vede che lo e'. */
+.card-box.is-danger { border-color: var(--ember); }
+.btn.is-danger { background: var(--ember); color: var(--paper); border-color: var(--ink); box-shadow: 0 var(--lift) 0 var(--ember-deep); }
+
 /* ---------------- Caricamento / errore ---------------- */
 .loader-egg { width: 110px; animation: mascot-idle 2s ease-in-out infinite; }
 .loader-egg svg, .loader-egg img { width: 100%; height: 110px; fill: none; }

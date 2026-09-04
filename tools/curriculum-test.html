@@ -32,6 +32,7 @@
 import { loadAll, content, getItem } from './js/content-loader.js';
 import { save, resetSave, dayIndex } from './js/state.js';
 import { recordAnswer, isMastered, distractors, distinctBySprite } from './js/srs.js';
+import { serveAiutoScritto, SOGLIA_AIUTO } from './js/minigames.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
   splitRound, unitItems, unitReviewItems, curriculumConfig, playablePhases
@@ -178,7 +179,24 @@ async function run() {
     coperte.size === content.worlds.length - 1,
     `${coperte.size}/${content.worlds.length - 1} unita'`);
 
-  /* --- 11. Mai due immagini uguali nella stessa domanda ------------ */
+  /* --- 11. L'aiuto scritto arriva solo dopo una difficolta' -------- */
+  // La parola scritta come aiuto e' una deroga alla regola della fase 1, che
+  // di testo non ne mostra. Deve restare una deroga: se scattasse al primo
+  // tentativo diventerebbe un modo per abituarsi a leggere invece che ad
+  // ascoltare, proprio mentre l'ascolto e' cio' che si sta allenando.
+  check('con zero errori nessun aiuto scritto', serveAiutoScritto(0, false) === false);
+  check('con un errore nessun aiuto scritto', serveAiutoScritto(1, false) === false);
+  check(`al secondo errore l'aiuto compare (soglia ${SOGLIA_AIUTO})`,
+    serveAiutoScritto(2, false) === true);
+  check('dove il testo c\'e\' gia\' non si aggiunge nulla',
+    serveAiutoScritto(5, true) === false);
+
+  // E la deroga non tocca la regola generale: la fase 1 resta senza testo.
+  const fase1 = content.phases.find(f => f.id === 1);
+  check('la fase 1 continua a non prevedere la parola scritta',
+    fase1.showWrittenWord === false);
+
+  /* --- 12. Mai due immagini uguali nella stessa domanda ------------ */
   // Nel curriculum una parola e la frase che la insegna condividono di
   // proposito la stessa illustrazione. Se i distrattori si escludessero solo
   // per id, la griglia mostrerebbe due immagini identiche con una sola
@@ -204,7 +222,7 @@ async function run() {
   check('distinctBySprite elimina il doppione ma tiene il resto',
     doppi.length === 2, `${doppi.length} su 3`);
 
-  /* --- 12. Nessun item orfano ------------------------------------- */
+  /* --- 13. Nessun item orfano ------------------------------------- */
   const assegnati = new Set(content.worlds.flatMap(w => w.newItems));
   const tutti = [...content.words, ...content.phrases].map(i => i.id);
   const orfani = tutti.filter(id => !assegnati.has(id));

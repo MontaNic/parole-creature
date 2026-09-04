@@ -90,6 +90,46 @@ function pause(ms) {
 }
 
 /* ------------------------------------------------------------------ */
+/* Aiuto scritto dopo una difficolta' dimostrata                       */
+/* ------------------------------------------------------------------ */
+
+/** Errori consecutivi sullo stesso item prima di mostrare la parola scritta. */
+export const SOGLIA_AIUTO = 2;
+
+/**
+ * Se mostrare la forma scritta come aiuto.
+ *
+ * La regola sta qui, isolata e verificata da un test, perche' e' una scelta
+ * didattica e non un dettaglio di resa: la parola scritta compare SOLO dopo
+ * due errori sullo stesso item, mai prima. Se comparisse al primo tentativo
+ * diventerebbe un modo per abituarsi a leggere invece che ad ascoltare, e
+ * nella fase 1 l'ascolto e' esattamente cio' che si sta allenando.
+ *
+ * Dove il testo c'e' gia' (fasi 2 e 3) non c'e' niente da aggiungere.
+ */
+export function serveAiutoScritto(errori, showWritten) {
+  return !showWritten && errori >= SOGLIA_AIUTO;
+}
+
+/**
+ * Mostra la parola scritta accanto al soggetto.
+ * L'aiuto vive quanto l'item: al successivo il contenitore viene ricostruito.
+ */
+function mostraAiuto(host, item, showWritten, errori) {
+  if (!serveAiutoScritto(errori, showWritten)) return;
+  if (!host || host.querySelector('.written-help')) return;
+  const cls = item.kind === 'phrase' ? 'phrase-written' : 'word-written';
+  const aiuto = el('p', `${cls} written-help anim-pop`, item.en);
+  aiuto.setAttribute('aria-live', 'polite');
+  host.appendChild(aiuto);
+}
+
+/** Toglie l'aiuto: serve alla caccia, dove il bersaglio cambia nello stesso turno. */
+function togliAiuto(host) {
+  host?.querySelector('.written-help')?.remove();
+}
+
+/* ------------------------------------------------------------------ */
 /* 1. Abbinamento parola -> immagine                                   */
 /* ------------------------------------------------------------------ */
 
@@ -118,6 +158,7 @@ async function gameMatch(api) {
 
   return new Promise(resolve => {
     let firstTry = true;
+    let errori = 0;
 
     options.forEach(opt => {
       const btn = el('button', 'choice');
@@ -137,11 +178,13 @@ async function gameMatch(api) {
           resolve();
         } else {
           firstTry = false;
+          errori += 1;
           btn.classList.add('is-wrong');
           btn.disabled = true;
           await fx.bad();
           btn.classList.remove('is-wrong');
           btn.classList.add('is-dim');
+          mostraAiuto(host, item, showWritten, errori);
           orb._play();
         }
       });
@@ -178,6 +221,7 @@ async function gameQuiz(api) {
 
   return new Promise(resolve => {
     let firstTry = true;
+    let errori = 0;
 
     options.forEach(opt => {
       const btn = el('button', 'choice-text');
@@ -218,9 +262,13 @@ async function gameQuiz(api) {
           resolve();
         } else {
           firstTry = false;
+          errori += 1;
           btn.classList.add('is-wrong');
           btn.disabled = true;
           await fx.bad();
+          // L'aiuto va sotto l'immagine, non fra le scelte: e' un
+          // suggerimento sul bersaglio, non una quinta opzione.
+          mostraAiuto(host, item, showWritten, errori);
           await speakItem(item);
         }
       });
@@ -313,6 +361,7 @@ async function gameHunt(api) {
 
   let index = 0;
   let firstTry = true;
+  let errori = 0;
 
   // L'orb pronuncia sempre il bersaglio corrente della caccia.
   const orb = audioOrb(() => targets[index]);
@@ -344,6 +393,10 @@ async function gameHunt(api) {
         report(current.id, firstTry);
         index += 1;
         firstTry = true;
+        // Il bersaglio cambia dentro lo stesso turno: l'aiuto era del
+        // precedente e non deve restare a suggerire la parola sbagliata.
+        errori = 0;
+        togliAiuto(host);
         if (index >= targets.length) {
           finished = true;
           await pause(600);
@@ -354,9 +407,11 @@ async function gameHunt(api) {
         }
       } else {
         firstTry = false;
+        errori += 1;
         btn.classList.add('is-wrong');
         await fx.bad();
         btn.classList.remove('is-wrong');
+        mostraAiuto(host, current, api.showWritten, errori);
         orb._play();
       }
     });

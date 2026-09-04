@@ -16,6 +16,25 @@ import { CONFIG } from './config.js';
 import { audioIndex } from './content-loader.js';
 import { save } from './state.js';
 
+/*
+ * Volumi.
+ *
+ * I tre cursori dell'area genitori vanno da 0 a 100, ma non finiscono tutti
+ * allo stesso posto: la musica ha un tetto molto piu' basso perche' e'
+ * sottofondo, e al 50% suona esattamente come e' stata progettata.
+ * Il volume 0 non e' "piano": e' silenzio, e conviene non generare affatto
+ * il suono invece di generarlo a zero.
+ */
+const TETTO_MUSICA = 0.09;
+
+const volume = (chiave) => {
+  const v = save.settings[chiave];
+  return Math.max(0, Math.min(100, typeof v === 'number' ? v : 100)) / 100;
+};
+export const musicVolume = () => volume('musicVolume');
+export const voiceVolume = () => volume('voiceVolume');
+export const sfxVolume   = () => volume('sfxVolume');
+
 let ctx = null;
 let musicGain = null;
 let musicTimer = null;
@@ -46,7 +65,7 @@ export function initAudioUnlock() {
       const u = new SpeechSynthesisUtterance('');
       speechSynthesis.speak(u);
     } catch { /* ignorato */ }
-    if (save.settings.music) startMusic();
+    if (musicVolume() > 0) startMusic();
   };
   ['pointerdown', 'touchstart', 'keydown'].forEach(ev =>
     document.addEventListener(ev, unlock, { once: true, passive: true })
@@ -134,6 +153,7 @@ function playFile(url) {
     timer = setTimeout(onEnd, ceiling);
 
     el.currentTime = 0;
+    el.volume = voiceVolume();
     const p = el.play();
     if (p && typeof p.catch === 'function') p.catch(onErr);
   });
@@ -148,6 +168,7 @@ function speakSynth(text, lang) {
       u.lang = lang;
       u.rate = lang.startsWith('en') ? 0.82 : 0.95;   // piu' lento in inglese
       u.pitch = 1.05;
+      u.volume = voiceVolume();
       const voice = pickVoice(lang);
       if (voice) u.voice = voice;
       u.onend = () => resolve();
@@ -192,7 +213,9 @@ export function stopVoice() {
 
 function tone({ freq = 440, dur = 0.16, type = 'sine', gain = 0.18, delay = 0, slideTo = null }) {
   const c = getCtx();
-  if (!c || !save.settings.sfx) return;
+  const vol = sfxVolume();
+  if (!c || vol <= 0) return;
+  gain *= vol;
   const osc = c.createOscillator();
   const g = c.createGain();
   const t0 = c.currentTime + delay;
@@ -248,13 +271,13 @@ let musicStep = 0;
 
 export function startMusic() {
   const c = getCtx();
-  if (!c || musicTimer || !save.settings.music) return;
+  if (!c || musicTimer || musicVolume() <= 0) return;
   musicGain = c.createGain();
-  musicGain.gain.value = 0.045;          // molto basso: sfondo, non protagonista
+  musicGain.gain.value = TETTO_MUSICA * musicVolume();
   musicGain.connect(c.destination);
 
   musicTimer = setInterval(() => {
-    if (!save.settings.music) return;
+    if (musicVolume() <= 0) return;
     const now = c.currentTime;
     const freq = MUSIC_NOTES[musicStep % MUSIC_NOTES.length];
     musicStep += 1;
@@ -276,7 +299,17 @@ export function stopMusic() {
   musicTimer = null;
 }
 
-export function setMusicEnabled(on) {
-  save.settings.music = on;
-  if (on) startMusic(); else stopMusic();
+/**
+ * Applica subito un volume cambiato.
+ *
+ * Il cursore deve sentirsi mentre lo si muove, altrimenti il genitore non ha
+ * modo di sapere dove lo sta mettendo. Per la musica basta aggiornare il nodo
+ * di guadagno gia' collegato; solo passando da e verso lo zero serve
+ * avviarla o fermarla davvero.
+ */
+export function applyVolumes() {
+  const vol = musicVolume();
+  if (vol <= 0) { stopMusic(); return; }
+  if (!musicTimer) { startMusic(); return; }
+  if (musicGain) musicGain.gain.value = TETTO_MUSICA * vol;
 }
