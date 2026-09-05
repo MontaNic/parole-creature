@@ -382,6 +382,15 @@ quello che il gioco ha appena insegnato.
   battute si sentono davvero. Rimosso il codice morto: `encouragementKey()`
   era definita e mai chiamata, ora ruota sia gli incoraggiamenti sia i
   complimenti.
+- **2026-09-05** — **CACHE_VERSION alzata a v1.5.0, e un controllo perche' non
+  succeda piu'.** Otto file di codice erano cambiati senza invalidare la cache
+  del service worker: su un dispositivo che ha gia' installato il gioco, il
+  primo avvio avrebbe servito dalla cache la build precedente, e chi provava
+  le novita' non le avrebbe viste. E' un difetto invisibile in sviluppo —
+  dove si apre sempre un profilo pulito — e sistematico al playtest, che e'
+  l'unico posto dove fa danno. `tools/check-assets.mjs` ora confronta l'ultimo
+  commit che ha toccato CACHE_VERSION con i file di codice cambiati dopo, e
+  fallisce se il codice e' piu' recente della cache.
 - **2026-09-04** — **Impostazioni generali e aiuto scritto progressivo.**
   Nuova scheda "Generali" nell'area genitori con tre cursori di volume
   (musica, voce, effetti), un controllo del funzionamento offline, versione e

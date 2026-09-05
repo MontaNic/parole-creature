@@ -18,7 +18,12 @@
  *      e' cio' che rende vera la promessa "funziona offline";
  *   5. nessuno sprite e' rimasto a meta' strada, con il singolare in PNG e il
  *      plurale ancora in SVG, che romperebbe il confronto "la stessa cosa,
- *      ma tante" su cui si regge la lezione della -s.
+ *      ma tante" su cui si regge la lezione della -s;
+ *   6. CACHE_VERSION e' stata alzata dopo l'ultima modifica al codice. Senza,
+ *      il dispositivo continua a servire dalla cache la build precedente e
+ *      chi prova le novita' non le vede — succede solo su un device che ha
+ *      gia' installato il gioco, quindi mai in sviluppo e sempre al
+ *      playtest.
  *
  * Uso:  node tools/check-assets.mjs
  * Esce con codice 1 se anche un solo riferimento e' rotto.
@@ -112,11 +117,40 @@ disallineati.length
        disallineati.map(([p, s]) => `${s} e ${p}`).join(', '))
   : ok('ogni plurale e disegnato come il suo singolare');
 
+/* --- 6. la cache e' stata invalidata dopo l'ultima modifica -------- */
+
+try {
+  const { execFileSync } = await import('node:child_process');
+  const git = (...a) => execFileSync('git', a, { cwd: ROOT, encoding: 'utf8' }).trim();
+
+  // Ultimo commit che ha toccato la riga CACHE_VERSION.
+  const ultimoBump = git('log', '-1', '--format=%H', '-S', 'CACHE_VERSION = ', '--', 'sw.js');
+  const sorgenti = ['index.html', 'game.js', 'style.css', 'design-system.css',
+                    'content.json', 'strings.json', 'js'];
+  const dopo = ultimoBump
+    ? git('diff', '--name-only', `${ultimoBump}..HEAD`, '--', ...sorgenti).split('\n').filter(Boolean)
+    : [];
+
+  // Un bump appena fatto e non ancora committato vale come fatto: altrimenti
+  // il controllo fallirebbe sempre nel momento in cui lo si sta sistemando.
+  const bumpInCorso = /^[+-].*CACHE_VERSION = /m.test(
+    git('diff', 'HEAD', '--', 'sw.js'));
+
+  (dopo.length && !bumpInCorso)
+    ? ko(`${dopo.length} file cambiati senza alzare CACHE_VERSION`,
+         dopo.slice(0, 6).join(' ') + (dopo.length > 6 ? ' …' : ''))
+    : ok('CACHE_VERSION aggiornata dopo l\'ultima modifica al codice' +
+         (bumpInCorso ? ' (bump non ancora committato)' : ''));
+} catch {
+  console.log('  --  controllo della cache saltato (git non disponibile)');
+}
+
 /* ------------------------------------------------------------------ */
 
 console.log();
 if (problemi) {
-  console.log(`${problemi} problemi. Il gioco mostrerebbe immagini rotte o non funzionerebbe offline.\n`);
+  console.log(`${problemi} problemi: immagini rotte, gioco non funzionante offline, ` +
+              `o novita' che sul dispositivo non si vedrebbero.\n`);
   process.exitCode = 1;
 } else {
   console.log('Tutti gli asset grafici sono integri.\n');
