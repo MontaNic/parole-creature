@@ -124,7 +124,9 @@ try {
   const git = (...a) => execFileSync('git', a, { cwd: ROOT, encoding: 'utf8' }).trim();
 
   // Ultimo commit che ha toccato la riga CACHE_VERSION.
-  const ultimoBump = git('log', '-1', '--format=%H', '-S', 'CACHE_VERSION = ', '--', 'sw.js');
+  // -G e non -S: -S conta le occorrenze, e sostituire v1.4.0 con v1.5.0 non
+  // ne cambia il numero, quindi il bump risultava invisibile.
+  const ultimoBump = git('log', '-1', '--format=%H', '-G', 'CACHE_VERSION = ', '--', 'sw.js');
   const sorgenti = ['index.html', 'game.js', 'style.css', 'design-system.css',
                     'content.json', 'strings.json', 'js'];
   const dopo = ultimoBump
