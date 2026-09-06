@@ -229,7 +229,7 @@
         "p_q_dragon", "p_q_knight", "p_q_castle"
       ],
       "reviewFrom": [],
-      "minigames": ["match", "listen", "quiz", "hunt"],
+      "minigames": ["match", "listen", "quiz", "hunt", "truefalse"],
       "reward": "c_flamup"
     },
     {
@@ -244,7 +244,7 @@
         "p_an_egg", "p_an_eye", "p_a_tooth", "p_a_nest"
       ],
       "reviewFrom": ["world_dragons"],
-      "minigames": ["match", "listen", "quiz", "hunt"],
+      "minigames": ["match", "listen", "quiz", "hunt", "truefalse"],
       "reward": "c_rocktail"
     },
     {
@@ -259,7 +259,7 @@
         "p_adj_red", "p_adj_blue", "p_adj_green", "p_adj_yellow"
       ],
       "reviewFrom": ["world_dragons", "world_dinos"],
-      "minigames": ["match", "quiz", "hunt", "listen"],
+      "minigames": ["match", "quiz", "hunt", "listen", "truefalse"],
       "reward": "c_prisma"
     },
     {
@@ -274,7 +274,7 @@
         "p_hm_one", "p_hm_three", "p_hm_five", "p_hm_ten"
       ],
       "reviewFrom": ["world_dragons", "world_dinos", "world_colors"],
-      "minigames": ["match", "quiz", "hunt", "listen"],
+      "minigames": ["match", "quiz", "hunt", "listen", "truefalse"],
       "reward": "c_numo"
     },
     {
@@ -289,7 +289,7 @@
         "p_this_cat", "p_these_cats", "p_this_tree", "p_this_star", "p_these_stars"
       ],
       "reviewFrom": ["world_dragons", "world_dinos", "world_colors", "world_numbers"],
-      "minigames": ["match", "dragdrop", "quiz", "listen"],
+      "minigames": ["match", "dragdrop", "quiz", "listen", "truefalse"],
       "reward": "c_barky"
     },
     {
@@ -304,7 +304,7 @@
         "p_be_dragon", "p_be_dragons", "p_be_cat", "p_be_cats", "p_be_dog", "p_be_dinos"
       ],
       "reviewFrom": ["world_dragons", "world_dinos", "world_colors", "world_numbers", "world_forest"],
-      "minigames": ["match", "dragdrop", "quiz", "hunt"],
+      "minigames": ["match", "dragdrop", "quiz", "hunt", "truefalse"],
       "reward": "c_splashy"
     },
     {
@@ -317,7 +317,7 @@
       "newItems": ["p_i_sword", "p_i_monster", "p_i_eggs", "p_i_red_egg", "p_i_shield", "p_i_stars"],
       "reviewFrom": ["world_dragons", "world_dinos", "world_colors", "world_numbers", "world_forest", "world_lake"],
       "reviewWeight": 0.45,
-      "minigames": ["match", "listen", "build", "quiz"],
+      "minigames": ["listen", "build", "quiz", "truefalse"],
       "reward": "c_glimmer"
     },
     {
@@ -333,7 +333,7 @@
         "world_forest", "world_lake", "world_bridge"
       ],
       "reviewWeight": 0.45,
-      "minigames": ["listen", "build", "quiz", "match"],
+      "minigames": ["listen", "build", "quiz", "truefalse"],
       "reward": "c_torrek"
     }
   ],

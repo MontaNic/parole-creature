@@ -138,7 +138,7 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
   display: flex; align-items: center; gap: 14px;
   margin-bottom: 16px;
 }
-.mascot-slot { width: 110px; flex: none; }
+.mascot-slot { width: 92px; flex: none; }
 .mascot-slot svg, .mascot-slot img { width: 100%; height: auto; display: block; }
 .speech {
   position: relative; flex: 1;
@@ -165,7 +165,7 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 
 /* Missione del giorno */
 .mission-card {
-  display: flex; align-items: center; gap: 14px;
+  display: flex; align-items: center; gap: 12px;
   background: var(--night-700);
   border: 2px solid var(--night-600);
   border-radius: var(--r-m);
@@ -189,8 +189,8 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 
 /* Griglia dei mondi */
 .worlds {
-  display: grid; gap: 14px;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  display: grid; gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 }
 .world-card {
   position: relative;
@@ -208,7 +208,7 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
   background: var(--world-color, var(--amber));
 }
 .world-card:active { transform: translateY(4px); box-shadow: 0 0 0 rgba(12,7,32,.55); }
-.world-card .world-art { width: 76px; height: 76px; }
+.world-card .world-art { width: 66px; height: 66px; }
 .world-card .world-art svg, .world-card .world-art img { width: 100%; height: 100%; fill: none; }
 .world-card .world-name { font-weight: 600; font-size: 16px; text-align: center; line-height: 1.2; }
 .world-card .world-meta { font-size: 13px; color: var(--ink-soft); }
@@ -281,6 +281,19 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
   background: rgba(255,255,255,.85); border-radius: 2px;
 }
 .phase-meta { margin: 0; font-size: 13px; color: var(--muted-night); }
+
+/*
+  Le fasi che non si stanno giocando restano chiuse: solo intestazione e
+  barra. E' cio' che permette alla home di stare in uno schermo da tablet
+  senza scorrere — e a un bambino di vedere subito dove deve andare.
+*/
+.phase-block.is-collapsed .worlds { display: none; }
+.phase-block.is-collapsed .phase-head { cursor: pointer; opacity: .8; }
+.phase-block.is-collapsed .phase-head:active { opacity: 1; }
+.phase-toggle {
+  margin-left: auto; font-size: 12px; color: var(--muted-night);
+  background: none; border: 0; font: inherit; cursor: pointer; padding: 4px 8px;
+}
 .phase-hint { margin: 4px 0 0; font-size: 13px; color: var(--amber); font-weight: 700; }
 
 /* ---------------- Album ---------------- */
@@ -309,16 +322,26 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 @keyframes pop-in { from { transform: scale(.5); opacity: 0 } to { transform: none; opacity: 1 } }
 
 /* ---------------- Area di gioco ---------------- */
+/*
+  L'area di gioco NON scrolla, per costruzione: su tablet un bambino che deve
+  scorrere per vedere la quarta scelta non capisce che esiste. Tutte le misure
+  qui sotto derivano dall'altezza disponibile, non solo dalla larghezza.
+  --quota e' lo spazio che prompt, orb e margini si prendono; il resto e' per
+  la griglia. dvh segue la barra di Safari che appare e sparisce.
+*/
 .play-area {
-  flex: 1; overflow-y: auto;
-  display: flex; flex-direction: column; align-items: center;
-  gap: 18px; padding: 8px 16px 24px;
+  flex: 1; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 14px; padding: 4px 16px 12px;
+  --vh: 100vh;
+  --vh: 100dvh;
+  --quota: 365px;
 }
 .game-prompt { font-size: 19px; font-weight: 600; text-align: center; opacity: .95; margin: 0; }
 
 /* Grande pulsante audio: cuore della fase 1 */
 .audio-orb {
-  width: min(180px, 46vw); height: min(180px, 46vw);
+  width: min(180px, 46vw, 24dvh); height: min(180px, 46vw, 24dvh);
   border-radius: 50%; border: var(--stroke) solid var(--ink);
   background: radial-gradient(circle at 35% 30%, #FFE0A3, var(--amber));
   box-shadow: 0 8px 0 var(--amber-deep), var(--sh-float);
@@ -350,13 +373,22 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
   text-align: center; margin: 0; line-height: 1.35;
 }
 
-/* Griglia di scelte immagine */
+/*
+  Griglia di scelte. La tessera e' il minimo fra quanto concede la larghezza
+  e quanto concede l'altezza: cosi' 2x2 e 3x2 stanno sempre nello schermo.
+  --cols e --rows li imposta il mini-gioco.
+*/
 .choice-grid {
-  display: grid; gap: 14px; width: 100%;
-  max-width: 680px;
-  grid-template-columns: repeat(2, 1fr);
+  --cols: 2; --rows: 2; --gap: 14px;
+  --tile: min(
+    calc((min(100vw, 680px) - 32px - var(--gap) * (var(--cols) - 1)) / var(--cols)),
+    calc((var(--vh, 100vh) - var(--quota, 330px) - var(--gap) * (var(--rows) - 1)) / var(--rows))
+  );
+  display: grid; gap: var(--gap);
+  grid-template-columns: repeat(var(--cols), var(--tile));
+  justify-content: center;
 }
-.choice-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+.choice-grid.cols-3 { --cols: 3; }
 .choice {
   position: relative;
   aspect-ratio: 1 / 1;
@@ -381,6 +413,26 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 .choice.is-found { opacity: .45; box-shadow: 0 0 0 4px var(--leaf); }
 @keyframes bounce-ok { 0%,100% { transform: none } 40% { transform: scale(1.08) } }
 @keyframes shake { 0%,100% { transform: none } 20% { transform: translateX(-8px) } 60% { transform: translateX(8px) } }
+
+/* Vero o falso */
+.tf-art { width: min(220px, 40vw, 28dvh); pointer-events: none; }
+.tf-row { display: flex; gap: 18px; justify-content: center; }
+.tf-btn {
+  width: min(150px, 34vw); aspect-ratio: 1 / 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  border: var(--stroke) solid var(--ink); border-radius: var(--r-l);
+  background: var(--paper); cursor: pointer; font: inherit;
+  box-shadow: var(--sh-card);
+  transition: transform .09s var(--ease-out);
+}
+.tf-btn svg, .tf-btn img { width: 46%; height: 46%; fill: none; }
+.tf-btn .tf-label { font-weight: 600; font-size: 16px; color: var(--ink); }
+.tf-yes { background: #DDF7E6; }
+.tf-no  { background: #FFE3D8; }
+.tf-btn:active { transform: translateY(4px); box-shadow: 0 0 0 rgba(12,7,32,.55); }
+.tf-btn.is-correct { box-shadow: 0 0 0 5px var(--leaf), var(--sh-card); animation: bounce-ok .5s ease; }
+.tf-btn.is-wrong { box-shadow: 0 0 0 5px var(--retry), var(--sh-card); animation: shake .4s ease; }
+.tf-btn[disabled] { pointer-events: none; }
 
 /* Scelte testuali (quiz parola/frase) */
 .choice-list { display: grid; gap: 12px; width: 100%; max-width: 620px; }
@@ -603,6 +655,8 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
   box-shadow: var(--sh-card);
   text-shadow: none;
 }
+/* La conferma e' verde: e' un premio, non un suggerimento. */
+.written-help.is-confirm { background: var(--leaf); color: #06301A; border-color: var(--ink); }
 
 /* ---------------- Impostazioni generali ---------------- */
 
@@ -664,7 +718,7 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 @media (min-width: 720px) {
 .choice-grid { gap: 20px; }
 .home-scroll, .album-scroll, .parents-scroll { padding-left: 32px; padding-right: 32px; }
-.worlds { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+.worlds { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
 .mascot-slot { width: 140px; }
 .speech { font-size: 19px; }
 }

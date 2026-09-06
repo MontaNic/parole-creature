@@ -25,11 +25,11 @@ import {
 import {
   initAudioUnlock, sfxCorrect, sfxRetry, stopVoice, startMusic, musicVolume
 } from './js/audio.js';
-import { initEffects, celebrateCorrect, toast } from './js/effects.js';
+import { initEffects, celebrateCorrect, celebrate, toast } from './js/effects.js';
 import {
   renderMascot, mascotSay, mascotCheer, stageChangedAt, encouragementKey
 } from './js/mascot.js';
-import { GAMES, itemsPerStep } from './js/minigames.js';
+import { GAMES, mostraConferma } from './js/minigames.js';
 import {
   showScreen, renderHome, renderAlbum, renderSummary,
   renderBlocked, runOnboarding, syncCreatures
@@ -196,7 +196,7 @@ function buildRound(opts) {
 
   return {
     world, pool, items: picked, reviewIds, showWritten, difficulty,
-    steps: buildSteps(world, picked, pool)
+    steps: buildSteps(world, picked, pool, difficulty)
   };
 }
 
@@ -228,38 +228,100 @@ function dedupeById(items) {
   return [...new Map(items.map(it => [it.id, it])).values()];
 }
 
-/** Alterna i mini-giochi previsti dall'unita', rispettando quanti item servono. */
-function buildSteps(world, items, pool) {
-  const types = (world.minigames || ['match']).slice();
-  const maxBuildWords = curriculumConfig().maxBuildWords;
+/*
+ * Quale gioco puo' ospitare quale item.
+ *
+ * Le frasi NON entrano nei giochi a immagini. "What is it? A dragon." con il
+ * disegno del drago e' la stessa domanda di "dragon", solo piu' lunga: al
+ * bambino arrivava a volte la parola e a volte la frase per lo stesso
+ * disegno, e sembrava incoerenza. Le frasi vanno dove la loro forma conta —
+ * ascolto, quiz col testo, costruzione, vero o falso.
+ */
+const GIOCHI_PER_PAROLA = ['match', 'hunt', 'quiz', 'truefalse', 'dragdrop', 'listen'];
+const GIOCHI_PER_FRASE  = ['listen', 'quiz', 'build', 'truefalse'];
+
+/**
+ * Compone i passi della partita.
+ *
+ * Tre principi, tutti nati dal playtest:
+ *
+ *  1. Ogni item va in un gioco che sa distinguerlo (vedi sopra).
+ *  2. L'ordine dei giochi e' mescolato e non ripete mai lo stesso due volte
+ *     di fila. Prima ciclava sempre nella stessa sequenza: ogni partita era
+ *     uguale alla precedente, e si sentiva.
+ *  3. La difficolta' sale DENTRO la partita — le prime domande sono facili,
+ *     l'ultima e' la sfida finale con il massimo delle scelte — e sale anche
+ *     con la padronanza dell'unita'. Prima era un solo numero per tutta la
+ *     partita, e nel primo round di ogni unita' erano due scelte fisse dalla
+ *     prima domanda all'ultima.
+ */
+function buildSteps(world, items, pool, baseDifficulty) {
+  const cfg = curriculumConfig();
+  const disponibili = new Set(world.minigames || ['match']);
   const steps = [];
   let i = 0;
-  let ti = 0;
+  let precedente = null;
+
+  const parolaDistinte = (da, n) => {
+    // Le prossime n PAROLE con illustrazioni diverse, saltando le frasi.
+    const out = [];
+    const viste = new Set();
+    for (let k = da; k < items.length && out.length < n; k++) {
+      const it = items[k];
+      if (it.kind !== 'word' || viste.has(it.sprite)) continue;
+      viste.add(it.sprite);
+      out.push(it);
+    }
+    return out;
+  };
 
   while (i < items.length) {
-    let type = types[ti++ % types.length];
     const item = items[i];
+    const base = item.kind === 'phrase' ? GIOCHI_PER_FRASE : GIOCHI_PER_PAROLA;
 
-    // Vincoli di buon senso.
-    // "Ricomponi la frase" solo su frasi, e solo se sono abbastanza corte:
-    // otto tessere da riordinare sono un rompicapo, non un esercizio.
-    if (type === 'build') {
-      const words = item.kind === 'phrase' ? item.en.split(/\s+/).length : 0;
-      if (!words || words > maxBuildWords) type = 'quiz';
-    }
+    let candidati = base.filter(tp => disponibili.has(tp)).filter(tp => {
+      if (tp === 'build') {
+        const parole = item.en.split(/\s+/).length;
+        return parole >= 2 && parole <= cfg.maxBuildWords;
+      }
+      if (tp === 'hunt') return pool.length >= 4 && parolaDistinte(i, CONFIG.game.huntTargets).length === CONFIG.game.huntTargets;
+      if (tp === 'match' || tp === 'quiz' || tp === 'dragdrop' || tp === 'truefalse') return pool.length >= 2;
+      return true;
+    });
+    if (!candidati.length) candidati = ['listen'];
+
+    // Mai lo stesso gioco due volte di fila, se c'e' alternativa.
+    const diversi = candidati.filter(tp => tp !== precedente);
+    const type = shuffle(diversi.length ? diversi : candidati)[0];
+
+    let presi;
     if (type === 'hunt') {
-      const slice = items.slice(i, i + CONFIG.game.huntTargets);
-      // Distinti per illustrazione, non per id: due item diversi possono
-      // mostrare la stessa immagine.
-      const distinct = new Set(slice.map(x => x.sprite)).size === CONFIG.game.huntTargets;
-      if (slice.length < CONFIG.game.huntTargets || !distinct || pool.length < 4) type = 'match';
+      presi = parolaDistinte(i, CONFIG.game.huntTargets);
+      // Le parole della caccia possono non essere contigue: si tolgono dal
+      // resto per non riproporle.
+      const ids = new Set(presi.map(x => x.id));
+      const resto = items.slice(i).filter(x => !ids.has(x.id));
+      items = [...items.slice(0, i), ...presi, ...resto];
+      i += presi.length;
+    } else {
+      presi = [item];
+      i += 1;
     }
-    if ((type === 'match' || type === 'dragdrop' || type === 'quiz') && pool.length < 2) type = 'listen';
 
-    const n = Math.min(itemsPerStep(type), items.length - i);
-    steps.push({ type, items: items.slice(i, i + n) });
-    i += n;
+    steps.push({ type, items: presi });
+    precedente = type;
   }
+
+  // Difficolta' a salire: il primo terzo un gradino sotto la base, l'ultimo
+  // un gradino sopra, e l'ultima domanda e' sempre la piu' difficile.
+  const n = steps.length;
+  steps.forEach((st, k) => {
+    const pos = n > 1 ? k / (n - 1) : 1;
+    let d = baseDifficulty + (pos < 0.34 ? -1 : pos > 0.66 ? 1 : 0);
+    st.isFinal = k === n - 1;
+    if (st.isFinal) d = 3;
+    st.difficulty = Math.max(1, Math.min(3, d));
+  });
   return steps;
 }
 
@@ -289,14 +351,33 @@ async function startRound(opts) {
   scoreEl.textContent = '0';
   progressEl.style.width = '0%';
 
+  let serie = 0;   // risposte giuste al primo colpo, di fila
+
   const fx = {
-    good: (ev) => {
+    /**
+     * Risposta giusta.
+     *
+     * Oltre a suono e coriandoli, mostra la PAROLA SCRITTA: senza, il
+     * bambino non aveva mai una conferma visibile di cosa avesse indovinato
+     * — vedeva solo che la partita andava avanti. Qui la lettura non e' un
+     * aiuto ma un premio, quindi vale anche in fase 1: arriva DOPO la
+     * risposta, non prima.
+     *
+     * Ogni tre giuste di fila, una festa piu' grande e una battuta di Pepe.
+     */
+    good: (ev, firstTry, item) => {
       const variant = session.correctStreakVisual++ % 3;
       sfxCorrect(variant);
-      const point = pointOf(ev);
-      celebrateCorrect(variant, point);
+      celebrateCorrect(variant, pointOf(ev));
       toast(t(`games.correct_${variant + 1}`), true, 1200);
       mascotCheer(document.getElementById('play-mascot'));
+      if (item) mostraConferma(host, item);
+
+      serie = firstTry ? serie + 1 : 0;
+      if (firstTry && serie > 0 && serie % 3 === 0) {
+        celebrate();
+        mascotSay(encouragementKey('streak', serie / 3 - 1), { avatar: document.getElementById('play-mascot') });
+      }
     },
     /**
      * Risposta sbagliata.
@@ -346,12 +427,20 @@ async function startRound(opts) {
   for (const step of round.steps) {
     if (!session.roundActive) return;   // il bambino e' uscito con "indietro"
     const play = GAMES[step.type] || GAMES.match;
+
+    // L'ultima domanda e' annunciata: dare una forma alla partita — inizio
+    // facile, sfida in fondo — e' cio' che la distingue da una lista.
+    if (step.isFinal && round.steps.length > 2) {
+      await mascotSay('final_challenge', { avatar: document.getElementById('play-mascot') });
+    }
+
     await play({
       host,
       items: step.items,
       pool: round.pool,
       showWritten: round.showWritten,
-      difficulty: round.difficulty,
+      difficulty: step.difficulty,
+      isFinal: step.isFinal,
       report,
       fx,
       onRepeat: () => {

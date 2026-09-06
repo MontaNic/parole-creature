@@ -8,13 +8,16 @@ import { save, persist } from './state.js';
 import { trackOf, masteredCount, isMastered } from './srs.js';
 import {
   unitProgress, phaseProgress, playableUnits, playablePhases,
-  isPhaseUnlocked, lockInfo, curriculumConfig
+  isPhaseUnlocked, lockInfo, curriculumConfig, currentUnit
 } from './curriculum.js';
 import { renderMascot, mascotSay, mascotCheer, encouragementKey } from './mascot.js';
 import { spriteSvg } from './minigames.js';
 import { speakItem, sfxTap, sfxUnlock } from './audio.js';
 import { celebrate } from './effects.js';
 import { ensureTodayMission, currentMission, missionRatio } from './missions.js';
+
+/* Fasi aperte a mano dal bambino, oltre a quella corrente. */
+const fasiAperte = new Set();
 
 /* ------------------------------------------------------------------ */
 /* Router minimale                                                     */
@@ -106,6 +109,10 @@ export function renderHome(handlers) {
   host.innerHTML = '';
 
   const units = playableUnits(save.settings);
+  // Solo la fase in corso mostra le sue unita'. Le altre restano una riga:
+  // e' cosi' che la home sta in uno schermo da tablet senza scorrere, ed e'
+  // cosi' che un bambino vede subito dove deve andare.
+  const faseCorrente = currentUnit(save.settings)?.phase ?? playablePhases()[0];
   let hintShown = false;
   for (const phase of playablePhases()) {
     const phaseUnits = units.filter(w => w.phase === phase);
@@ -114,8 +121,9 @@ export function renderHome(handlers) {
     // sulle successive sarebbe un traguardo che non e' ancora il suo turno.
     const showHint = !isPhaseUnlocked(phase) && !hintShown;
     if (showHint) hintShown = true;
+    const aperta = phase === faseCorrente || fasiAperte.has(phase);
     host.appendChild(
-      renderPhaseBlock(phase, phaseUnits, { bubble, mascotHost }, handlers, showHint));
+      renderPhaseBlock(phase, phaseUnits, { bubble, mascotHost }, handlers, showHint, aperta));
   }
 
   document.getElementById('btn-free-review').onclick = () => { sfxTap(); handlers.onReview(); };
@@ -131,15 +139,25 @@ export function renderHome(handlers) {
  * sue unita'. La barra ha una tacca all'80%: e' la soglia da superare per
  * aprire la fase successiva, ed e' bene che si veda dove si sta arrivando.
  */
-function renderPhaseBlock(phase, units, refs, handlers, showHint = false) {
+function renderPhaseBlock(phase, units, refs, handlers, showHint = false, aperta = true) {
   const info = getPhase(phase);
   const prog = phaseProgress(phase);
   const unlocked = isPhaseUnlocked(phase);
   const cfg = curriculumConfig();
 
-  const block = el('section', 'phase-block' + (unlocked ? '' : ' is-locked'));
+  const block = el('section',
+    'phase-block' + (unlocked ? '' : ' is-locked') + (aperta ? '' : ' is-collapsed'));
 
   const head = el('header', 'phase-head');
+  if (!aperta) {
+    // Toccando l'intestazione la fase si apre, e resta aperta finche' si
+    // torna alla home.
+    head.addEventListener('click', () => {
+      sfxTap();
+      fasiAperte.add(phase);
+      block.classList.remove('is-collapsed');
+    });
+  }
   const row = el('div', 'phase-title-row');
   row.appendChild(el('span', 'phase-badge', `${t('ui.phase_label')} ${phase}`));
   row.appendChild(el('h3', 'phase-title', info?.title_it || ''));
@@ -147,6 +165,8 @@ function renderPhaseBlock(phase, units, refs, handlers, showHint = false) {
     const lock = el('span', 'phase-lock');
     lock.appendChild(spriteSvg('sp-icon-lock'));
     row.appendChild(lock);
+  } else if (!aperta) {
+    row.appendChild(el('span', 'phase-toggle', t('ui.phase_show')));
   }
   head.appendChild(row);
 

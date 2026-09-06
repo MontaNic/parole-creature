@@ -1,0 +1,10 @@
+<!DOCTYPE html><meta charset="utf-8"><title>x</title>
+<script>
+const r = {
+  origine: location.origin,
+  contestoSicuro: window.isSecureContext,
+  serviceWorker: 'serviceWorker' in navigator,
+  caches: 'caches' in window
+};
+document.title = JSON.stringify(r);
+</script>

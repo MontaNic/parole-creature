@@ -42,6 +42,7 @@
     "mastered_label": "padroneggiate",
     "phase_locked_hint": "Ancora {n} parole da padroneggiare per aprire questa fase",
     "phase_unlocked": "Fase completata!",
+    "phase_show": "mostra",
     "replay_world": "Rigioca",
     "play_world": "Gioca"
   },
@@ -65,6 +66,9 @@
     "hunt_prompt": "Trova tutte quelle che senti",
     "dragdrop_prompt": "Trascina la parola sull'immagine",
     "build_prompt": "Rimetti la frase in ordine",
+    "truefalse_prompt": "E' la parola giusta?",
+    "truefalse_yes": "Si'",
+    "truefalse_no": "No",
     "check": "Controlla",
     "correct_1": "Bravissimo!",
     "correct_2": "Perfetto!",
@@ -219,6 +223,10 @@
     "streak_kept": "Anche oggi ci siamo! La nostra striscia continua.",
     "locked_phase": "Ripassiamo ancora un pochino! Ci mancano {n} parole e poi apriamo il mondo nuovo.",
     "locked_unit": "Finiamo prima il mondo qui accanto, poi tocca a questo!",
-    "phase_done": "Un'intera fase completata! Il viaggio entra in un capitolo nuovo."
+    "phase_done": "Un'intera fase completata! Il viaggio entra in un capitolo nuovo.",
+    "final_challenge": "Ultima domanda: la piu' difficile! Ce la fai?",
+    "streak_1": "Tre di fila! Sei in forma!",
+    "streak_2": "Sei di fila! Non ti ferma nessuno!",
+    "streak_3": "Nove di fila! Sei un campione!"
   }
 }

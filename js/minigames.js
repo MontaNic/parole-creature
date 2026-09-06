@@ -78,7 +78,10 @@ function audioOrb(source, label) {
   return btn;
 }
 
-/** Quante scelte mostrare: si parte facili e si sale col numero di item visti. */
+/**
+ * Quante scelte mostrare. `level` e' la difficolta' del singolo passo, che
+ * sale dentro la partita: 1 = due scelte, 2 = tre, 3 = quattro.
+ */
 function choiceCount(pool, level) {
   const max = Math.min(CONFIG.game.maxChoices, Math.max(CONFIG.game.minChoices, pool.length));
   const wanted = level >= 3 ? 4 : level >= 2 ? 3 : 2;
@@ -129,6 +132,23 @@ function togliAiuto(host) {
   host?.querySelector('.written-help')?.remove();
 }
 
+/**
+ * Conferma scritta dopo una risposta giusta.
+ *
+ * E' il feedback visivo che mancava: il bambino sentiva un suono e vedeva i
+ * coriandoli, ma non aveva mai davanti la parola che aveva appena indovinato.
+ * Compare in verde, in Andika, e vive quanto la pausa prima del passo dopo.
+ * Vale anche in fase 1: qui la lettura e' un premio che arriva DOPO la
+ * risposta, non un aiuto che la precede.
+ */
+export function mostraConferma(host, item) {
+  if (!host || !item) return;
+  togliAiuto(host);
+  const cls = item.kind === 'phrase' ? 'phrase-written' : 'word-written';
+  const c = el('p', `${cls} written-help is-confirm anim-pop`, item.en);
+  host.appendChild(c);
+}
+
 /* ------------------------------------------------------------------ */
 /* 1. Abbinamento parola -> immagine                                   */
 /* ------------------------------------------------------------------ */
@@ -151,6 +171,9 @@ async function gameMatch(api) {
   const options = shuffle([item, ...distractors(pool, item, n - 1)]);
 
   const grid = el('div', 'choice-grid' + (options.length === 3 ? ' cols-3' : ''));
+  const cols = options.length === 3 ? 3 : 2;
+  grid.style.setProperty('--cols', cols);
+  grid.style.setProperty('--rows', Math.ceil(options.length / cols));
   host.appendChild(grid);
 
   await pause(250);
@@ -172,9 +195,9 @@ async function gameMatch(api) {
         if (opt.id === item.id) {
           grid.querySelectorAll('button').forEach(b => b.disabled = true);
           btn.classList.add('is-correct');
-          fx.good(ev, firstTry);
+          fx.good(ev, firstTry, item);
           report(item.id, firstTry);
-          await pause(750);
+          await pause(1100);
           resolve();
         } else {
           firstTry = false;
@@ -256,9 +279,9 @@ async function gameQuiz(api) {
           list.querySelectorAll('button').forEach(b => b.disabled = true);
           btn.classList.add('is-correct');
           await speakItem(item);
-          fx.good(ev, firstTry);
+          fx.good(ev, firstTry, item);
           report(item.id, firstTry);
-          await pause(600);
+          await pause(1000);
           resolve();
         } else {
           firstTry = false;
@@ -318,10 +341,10 @@ async function gameListen(api) {
     done.addEventListener('click', async (ev) => {
       done.disabled = true;
       onRepeat?.();
-      fx.good(ev, true);
+      fx.good(ev, true, item);
       // Ripetere non e' un test: conta come esposizione positiva.
       report(item.id, true);
-      await pause(500);
+      await pause(900);
       resolve();
     });
   });
@@ -347,6 +370,8 @@ async function gameHunt(api) {
   const options = shuffle([...targets, ...shuffle(fillers).slice(0, extras)]);
 
   const grid = el('div', 'choice-grid cols-3');
+  grid.style.setProperty('--cols', 3);
+  grid.style.setProperty('--rows', Math.ceil(options.length / 3));
   host.appendChild(grid);
 
   const buttons = new Map();
@@ -389,7 +414,7 @@ async function gameHunt(api) {
       if (buttons.get(current.id) === btn) {
         btn.disabled = true;
         btn.classList.add('is-found');
-        fx.good(ev, firstTry);
+        fx.good(ev, firstTry, current);
         report(current.id, firstTry);
         index += 1;
         firstTry = true;
@@ -464,9 +489,9 @@ async function gameDragDrop(api) {
       box.classList.add('is-correct');
       token.style.visibility = 'hidden';
       await speakItem(item);
-      fx.good(ev, firstTry);
+      fx.good(ev, firstTry, item);
       report(item.id, firstTry);
-      await pause(600);
+      await pause(1000);
       resolve();
     };
 
@@ -596,9 +621,9 @@ async function gameBuild(api) {
         line.classList.add('is-correct');
         line.querySelectorAll('button').forEach(b => b.disabled = true);
         await speakItem(item);
-        fx.good(null, firstTry);
+        fx.good(null, firstTry, item);
         report(item.id, firstTry);
-        await pause(700);
+        await pause(1000);
         resolve();
       } else {
         firstTry = false;
@@ -616,8 +641,86 @@ async function gameBuild(api) {
 }
 
 /* ------------------------------------------------------------------ */
+/* 7. Vero o falso                                                     */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Si vede un'immagine, si sente una parola: e' quella giusta?
+ *
+ * E' un atto mentale diverso dallo scegliere fra quattro: qui si VERIFICA,
+ * e meta' delle volte la risposta giusta e' "no". Spezza il ritmo del "tocca
+ * l'immagine" e insegna a non fidarsi del primo suono che arriva. Due bottoni
+ * grandi con icona, niente da leggere.
+ */
+async function gameTrueFalse(api) {
+  const { host, items, pool, showWritten, report, fx } = api;
+  const item = items[0];
+  const bugia = distractors(pool, item, 1)[0];
+  // Senza un distrattore valido non c'e' niente da verificare.
+  if (!bugia) return gameMatch(api);
+
+  const vero = Math.random() < 0.5;
+  const detto = vero ? item : bugia;
+
+  host.innerHTML = '';
+  host.appendChild(el('p', 'game-prompt', t('games.truefalse_prompt')));
+
+  const art = el('div', 'choice tf-art');
+  art.style.pointerEvents = 'none';
+  art.appendChild(spriteSvg(item.sprite));
+  host.appendChild(art);
+
+  const orb = audioOrb(detto);
+  host.appendChild(orb);
+
+  const riga = el('div', 'tf-row');
+  const si = el('button', 'tf-btn tf-yes');
+  si.type = 'button'; si.setAttribute('aria-label', t('games.truefalse_yes'));
+  si.appendChild(spriteSvg('sp-icon-check'));
+  si.appendChild(el('span', 'tf-label', t('games.truefalse_yes')));
+  const no = el('button', 'tf-btn tf-no');
+  no.type = 'button'; no.setAttribute('aria-label', t('games.truefalse_no'));
+  no.appendChild(spriteSvg('sp-icon-close'));
+  no.appendChild(el('span', 'tf-label', t('games.truefalse_no')));
+  riga.appendChild(si); riga.appendChild(no);
+  host.appendChild(riga);
+
+  await pause(300);
+  orb._play();
+
+  return new Promise(resolve => {
+    let firstTry = true;
+    let errori = 0;
+    const rispondi = async (scelta, btn, ev) => {
+      if (si.disabled) return;
+      sfxTap();
+      if (scelta === vero) {
+        si.disabled = no.disabled = true;
+        btn.classList.add('is-correct');
+        // La conferma mostra cio' che si e' SENTITO: e' quello da imparare.
+        fx.good(ev, firstTry, detto);
+        report(item.id, firstTry);
+        await pause(1100);
+        resolve();
+      } else {
+        firstTry = false;
+        errori += 1;
+        btn.classList.add('is-wrong');
+        await fx.bad();
+        btn.classList.remove('is-wrong');
+        mostraAiuto(host, detto, showWritten, errori);
+        orb._play();
+      }
+    };
+    si.addEventListener('click', ev => rispondi(true, si, ev));
+    no.addEventListener('click', ev => rispondi(false, no, ev));
+  });
+}
+
+/* ------------------------------------------------------------------ */
 
 export const GAMES = {
+  truefalse: gameTrueFalse,
   match: gameMatch,
   quiz: gameQuiz,
   listen: gameListen,

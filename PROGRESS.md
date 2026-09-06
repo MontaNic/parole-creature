@@ -382,6 +382,14 @@ quello che il gioco ha appena insegnato.
   battute si sentono davvero. Rimosso il codice morto: `encouragementKey()`
   era definita e mai chiamata, ora ruota sia gli incoraggiamenti sia i
   complimenti.
+- **2026-09-06** — **Giocabilita' dopo il secondo playtest.** Frasi fuori
+  dai giochi a immagini (audio coerente), conferma scritta in verde dopo ogni
+  risposta giusta, ordine dei giochi mescolato, difficolta' a salire dentro la
+  partita con sfida finale annunciata, nuovo gioco "vero o falso" in tutte e
+  otto le unita', serie ogni tre giuste. Schermata di gioco che sta nello
+  schermo per costruzione; home con la sola fase corrente aperta. Quattro
+  battute nuove di Pepe generate. Cache a v1.6.0.
+  Vedi la sezione "Giocabilita'" per l'analisi.
 - **2026-09-05** — **CACHE_VERSION alzata a v1.5.0, e un controllo perche' non
   succeda piu'.** Otto file di codice erano cambiati senza invalidare la cache
   del service worker: su un dispositivo che ha gia' installato il gioco, il
@@ -550,6 +558,52 @@ Pipeline: `tools/generate-images.mjs` (prompt) e `tools/remove-bg.py`
   sei controlli in un secondo, senza browser. Esce con codice 1 se un solo
   riferimento e' rotto. E' il controllo che avrebbe fermato prima del
   playtest i due bug trovati sull'iPad.
+
+## Giocabilita': cosa ha detto il playtest e cosa e' cambiato
+
+Il secondo playtest ha riportato tre cose: audio incoerente, nessuna
+conferma visibile, gioco ripetitivo. Analizzando il codice con quei tre
+sintomi in mano, le cause erano precise.
+
+**Audio incoerente.** Per lo stesso disegno del drago il bambino sentiva a
+volte "dragon" e a volte "What is it? A dragon.": erano due item diversi
+(`w_dragon` e `p_q_dragon`) che finivano entrambi nell'abbinamento a
+immagini, dove la frase e' solo una versione lunga della parola. Ora ogni
+item va in un gioco che sa distinguerlo: le **frasi non entrano** in
+abbinamento e caccia, vanno in ascolto, quiz col testo, costruzione e vero o
+falso. Nessun audio rigenerato: cambia dove si usa, non cosa dice.
+
+**Nessuna conferma.** Dopo la risposta giusta c'erano suono e coriandoli,
+ma mai la parola. Ora compare in verde, in Andika, e vale anche in fase 1:
+qui la lettura arriva DOPO la risposta come premio, non prima come aiuto —
+e' la stessa distinzione dell'aiuto scritto dopo due errori, dall'altro lato.
+
+**Ripetitivo.** Misurato, non sentito: `buildSteps` ciclava i giochi nello
+stesso ordine fisso (abbinamento, ascolto, quiz, caccia, abbinamento…), ogni
+partita era identica alla precedente; e la difficolta' era un solo numero
+per tutta la partita, quindi nel primo round di ogni unita' erano due scelte
+dalla prima domanda all'ultima. Quattro cambiamenti:
+
+- **ordine mescolato**, mai lo stesso gioco due volte di fila;
+- **difficolta' a salire dentro la partita**: primo terzo un gradino sotto la
+  base, ultimo terzo un gradino sopra, e l'ultima domanda e' sempre la
+  **sfida finale** a quattro scelte, annunciata da Pepe. La partita ha una
+  forma — inizio facile, culmine in fondo — invece di essere una lista;
+- **un gioco nuovo, "vero o falso"**: si vede un'immagine, si sente una
+  parola, si decide se e' quella. E' un atto mentale diverso dallo scegliere
+  fra quattro — si verifica invece di cercare — e meta' delle volte la
+  risposta giusta e' "no";
+- **serie**: ogni tre giuste di fila una festa piu' grande e una battuta di
+  Pepe. Ritmo senza pressione: niente timer, niente penalita'.
+
+**Scrolling.** Misurato a 768x884 (iPad con la barra di Safari): la
+schermata di gioco NON scrollava con due scelte ma si', con quattro o con la
+caccia. Ora la tessera e' il minimo fra quanto concede la larghezza e quanto
+concede l'altezza (`--tile` in `style.css`, con `--cols`/`--rows` impostati
+dal gioco): 2x2 e 3x2 stanno sempre nello schermo, per costruzione. La home
+scrollava sempre: ora solo la fase in corso mostra le sue unita', le altre
+sono una riga toccabile, e su tablet le quattro unita' stanno su una riga
+sola.
 
 ## Audio: volumi, non interruttori
 

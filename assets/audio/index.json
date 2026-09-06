@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-03T06:33:39.255Z",
+  "generatedAt": "2026-09-06T21:03:39.668Z",
   "files": [
     "en/p_a_nest.mp3",
     "en/p_a_tooth.mp3",
@@ -94,6 +94,7 @@
     "it/mascot.correct_1.mp3",
     "it/mascot.correct_2.mp3",
     "it/mascot.correct_3.mp3",
+    "it/mascot.final_challenge.mp3",
     "it/mascot.idle_1.mp3",
     "it/mascot.idle_2.mp3",
     "it/mascot.level_up.mp3",
@@ -107,6 +108,9 @@
     "it/mascot.retry_2.mp3",
     "it/mascot.retry_3.mp3",
     "it/mascot.session_end.mp3",
+    "it/mascot.streak_1.mp3",
+    "it/mascot.streak_2.mp3",
+    "it/mascot.streak_3.mp3",
     "it/mascot.streak_kept.mp3",
     "it/mascot.tutorial_choose.mp3",
     "it/mascot.tutorial_done.mp3",
