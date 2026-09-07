@@ -42,6 +42,18 @@ Il motivo tecnico: su `http://IP` il browser nega service worker,
 `getUserMedia` e `navigator.share`. HTTPS sblocca l'offline e due feature
 della fase 2 in un colpo.
 
+**Verificato in HTTPS il 2026-09-07**, da un profilo Chrome nuovo: il
+service worker si installa, e la verifica riporta `PASS art 48/48 shell
+9/9`. E' la prova che il bug dell'iPad ("niente offline") era davvero il
+contesto insicuro di `http://IP` e non il codice.
+
+La prova si ripete con `node tools/cache-check-remote.mjs` (Chrome headless
+guidato via DevTools). Non usare `--dump-dom --virtual-time-budget` per
+questo: sotto il tempo virtuale CacheStorage non risponde e la verifica si
+ferma a meta', simulando un guasto. E' anche saltato fuori che
+`cache-check.html` risolveva gli URL contro `location` invece che contro
+`<base>`: alla radice passava, sotto `/parole-creature/` no. Corretto.
+
 ## Come si avvia
 
 ```bash
