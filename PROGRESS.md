@@ -677,7 +677,15 @@ testo sempre, che e' esattamente cio' che la regola vuole evitare.
 - Palette verificata per il daltonismo.
 - Criteri di successo misurabili (uso quotidiano per 2 settimane, N parole acquisite).
 
-### Fase 2 — da valutare dopo aver visto la reazione di Pietro
+### Fase 2 — disegno in `docs/fase-2.md`
+
+Ordine deciso dopo il secondo playtest: (0) GitHub Pages, perche' su
+`http://IP` offline, registrazione della voce e condivisione sono negati dal
+browser; (1) la storia a episodi — *l'isola dove le creature hanno perso le
+parole*, un capitolo per unita', le creature dell'album come personaggi;
+(2) scrigni a sorpresa; (3) voce; (4) condivisione; (5) tana.
+
+### Fase 2 — le idee originali
 
 - Micro-narrativa a episodi ogni 3-4 livelli.
 - Base/tana personale da decorare con le ricompense.
