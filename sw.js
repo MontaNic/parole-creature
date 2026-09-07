@@ -19,7 +19,7 @@
  */
 importScripts('sw-art.js');
 
-const CACHE_VERSION = 'v1.7.2';
+const CACHE_VERSION = 'v1.7.3';
 const SHELL_CACHE = `dp-shell-${CACHE_VERSION}`;
 const AUDIO_CACHE = `dp-audio-${CACHE_VERSION}`;
 

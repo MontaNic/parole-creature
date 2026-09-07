@@ -160,11 +160,16 @@ bordi 2px invece di 3, raggi minori, niente ombre giocattolo. Nessun font
 diverso — il tono adulto viene da colore e peso, non da un terzo carattere.
 
 ### Accessibilità
-- Area toccabile minima **64px** (`--tap`).
-- `:focus-visible` con anello oro a 3px, visibile su carta e su notte.
-- `prefers-reduced-motion` disattiva le animazioni.
 
----
+Misurata, non presunta: `node tools/palette-check.mjs` simula protanopia,
+deuteranopia e tritanopia e controlla contrasto e distinguibilità delle
+coppie che contano. Da quella misura sono nati `--ring-good` e
+`--ring-retry`: gli anelli attorno alle risposte sono foglia (giusto) e
+brace scura **tratteggiata** (riprova), perché foglia e brace piena per un
+protanope sono lo stesso colore. Regola generale: il colore non è mai
+l'unico segnale, c'è sempre testo, icona, forma o animazione accanto.
+I contrasti testo/fondo reggono tutti anche in simulazione (minimo 3.6 sui
+bottoni cielo, 5.4 sul resto).
 
 ## 4. Regole per le illustrazioni
 

@@ -61,6 +61,7 @@ python3 -m http.server 8080     # dalla cartella del progetto
 # gioco:            http://localhost:8080
 # test logica:      http://localhost:8080/tools/curriculum-test.html
 # test di sfoglio:  http://localhost:8080/tools/smoke-test.html
+# palette (daltonismo): node tools/palette-check.mjs
 ```
 
 ---
@@ -935,6 +936,25 @@ si annunciano nel riepilogo (fila di distintivi nuovi + una battuta di Pepe,
 `badge_new`); si rivedono nell'album, sotto gli adesivi, con quelli non
 ancora presi in ombra e la loro descrizione, cosi' il bambino sa cosa
 inseguire. Nessuna icona nuova: si usano quelle del gioco.
+
+### 5. La palette per chi confonde i colori
+
+`tools/palette-check.mjs` legge i token da design-system.css, simula
+protanopia, deuteranopia e tritanopia (matrici di Machado 2009) e misura
+il contrasto WCAG delle coppie testo/fondo usate davvero e la
+distinguibilita' (Delta E) delle coppie di colori che portano significati
+diversi nella stessa schermata. Prima corsa: contrasti tutti a posto;
+**giusto contro riprova (foglia contro brace) in protanopia Delta E 10**,
+cioe' lo stesso colore. Erano gli anelli attorno alle risposte, che possono
+comparire nella stessa griglia a pochi decimi di distanza.
+
+Correzione senza toccare la palette approvata: due token semantici,
+`--ring-good` (foglia) e `--ring-retry` (brace *scura*), e l'anello riprova
+diventa **tratteggiato**: si distingue per luminosita' e per forma, non
+solo per tinta. Delta E in protanopia da 10 a 26. Foglia contro cielo in
+tritanopia resta a 15, ma sono stati sequenziali (trascina-qui, poi giusto)
+con anche una scala diversa: misurato e riportato, non bloccante.
+Il check e' esce con 1 se una soglia salta ed entra fra i controlli.
 
 ## Prossimi passi
 

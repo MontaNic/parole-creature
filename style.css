@@ -406,11 +406,11 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
   color: var(--ink); font-weight: 600; font-size: 17px; text-align: center;
 }
 .choice.has-label svg, .choice.has-label img { width: 66%; height: 66%; margin-bottom: 14px; }
-.choice.is-correct { box-shadow: 0 0 0 5px var(--leaf), var(--sh-card); animation: bounce-ok .5s ease; }
-.choice.is-found { box-shadow: 0 0 0 4px var(--leaf), var(--sh-card); }
-.choice.is-wrong { box-shadow: 0 0 0 5px var(--retry), var(--sh-card); animation: shake .4s ease; }
+.choice.is-correct { box-shadow: 0 0 0 5px var(--ring-good), var(--sh-card); animation: bounce-ok .5s ease; }
+.choice.is-found { box-shadow: 0 0 0 4px var(--ring-good), var(--sh-card); }
+.choice.is-wrong { box-shadow: var(--sh-card); outline: 5px dashed var(--ring-retry); outline-offset: -2px; animation: shake .4s ease; }
 .choice.is-dim { opacity: .35; }
-.choice.is-found { opacity: .45; box-shadow: 0 0 0 4px var(--leaf); }
+.choice.is-found { opacity: .45; box-shadow: 0 0 0 4px var(--ring-good); }
 @keyframes bounce-ok { 0%,100% { transform: none } 40% { transform: scale(1.08) } }
 @keyframes shake { 0%,100% { transform: none } 20% { transform: translateX(-8px) } 60% { transform: translateX(8px) } }
 
@@ -430,8 +430,8 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 .tf-yes { background: #DDF7E6; }
 .tf-no  { background: #FFE3D8; }
 .tf-btn:active { transform: translateY(4px); box-shadow: 0 0 0 rgba(12,7,32,.55); }
-.tf-btn.is-correct { box-shadow: 0 0 0 5px var(--leaf), var(--sh-card); animation: bounce-ok .5s ease; }
-.tf-btn.is-wrong { box-shadow: 0 0 0 5px var(--retry), var(--sh-card); animation: shake .4s ease; }
+.tf-btn.is-correct { box-shadow: 0 0 0 5px var(--ring-good), var(--sh-card); animation: bounce-ok .5s ease; }
+.tf-btn.is-wrong { box-shadow: var(--sh-card); outline: 5px dashed var(--ring-retry); outline-offset: -2px; animation: shake .4s ease; }
 .tf-btn[disabled] { pointer-events: none; }
 
 /* Scelte testuali (quiz parola/frase) */
@@ -446,8 +446,8 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
   padding: 14px 18px; cursor: pointer; box-shadow: var(--sh-card);
 }
 .choice-text:active { transform: translateY(4px); box-shadow: 0 0 0 rgba(12,7,32,.55); }
-.choice-text.is-correct { box-shadow: 0 0 0 5px var(--leaf), var(--sh-card); }
-.choice-text.is-wrong { box-shadow: 0 0 0 5px var(--retry), var(--sh-card); animation: shake .4s ease; }
+.choice-text.is-correct { box-shadow: 0 0 0 5px var(--ring-good), var(--sh-card); }
+.choice-text.is-wrong { box-shadow: var(--sh-card); outline: 5px dashed var(--ring-retry); outline-offset: -2px; animation: shake .4s ease; }
 
 /* Drag & drop */
 .dnd-stage { display: flex; flex-direction: column; align-items: center; gap: 18px; width: 100%; }
@@ -461,8 +461,8 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 }
 .drop-target svg, .drop-target img { width: 82%; height: 82%; fill: none; }
 .drop-target.is-over { box-shadow: 0 0 0 5px var(--sky), var(--sh-card); transform: scale(1.03); }
-.drop-target.is-wrong { box-shadow: 0 0 0 5px var(--retry), var(--sh-card); animation: shake .4s ease; }
-.drop-target.is-correct { box-shadow: 0 0 0 5px var(--leaf), var(--sh-card); }
+.drop-target.is-wrong { box-shadow: var(--sh-card); outline: 5px dashed var(--ring-retry); outline-offset: -2px; animation: shake .4s ease; }
+.drop-target.is-correct { box-shadow: 0 0 0 5px var(--ring-good), var(--sh-card); }
 .drag-token {
   background: var(--amber); color: var(--ink);
   border: var(--stroke) solid var(--ink);

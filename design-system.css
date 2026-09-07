@@ -110,6 +110,14 @@
      scossa), utile anche a chi confonde rosso e verde. */
   --retry:         var(--ember);
   --retry-deep:    var(--ember-deep);
+  /* Gli anelli attorno alle risposte: giusto e riprova possono comparire
+     nella stessa griglia a pochi decimi di distanza. Per chi confonde
+     rosso e verde (protanopia) brace e foglia sono quasi lo stesso colore:
+     l'anello "riprova" usa la brace scura, che si distingue per luminosita',
+     ed e' tratteggiato, che si distingue per forma. Misurato da
+     tools/palette-check.mjs. */
+  --ring-good:     var(--leaf);
+  --ring-retry:    var(--ember-deep);
 
   /* ---------------------------------------------------------------- */
   /* Forma                                                             */
