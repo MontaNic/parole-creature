@@ -551,6 +551,12 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 }
 
 /* ---------------- Riepilogo ---------------- */
+/* Il riepilogo puo' essere piu' alto dello schermo (iPad orizzontale con una
+   creatura nuova): deve scorrere, e i bottoni devono restare raggiungibili.
+   margin auto centra quando c'e' spazio e non taglia mai quando manca —
+   justify-content: center invece tagliava la cima. */
+#screen-summary { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+#summary-body { flex: 0 0 auto; margin-top: auto; margin-bottom: auto; }
 .summary-stars { display: flex; gap: 10px; }
 .summary-stars svg, .summary-stars img { width: 56px; height: 56px; fill: none; }
 .summary-stars .star-off { opacity: .25; filter: grayscale(1); }
@@ -558,7 +564,7 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 .summary-stars svg:nth-child(2) { animation-delay: .12s }
 .summary-stars svg:nth-child(3) { animation-delay: .24s }
 @keyframes star-pop { from { transform: scale(0) rotate(-40deg) } to { transform: none } }
-.reward-creature { width: min(220px, 55vw); }
+.reward-creature { width: min(220px, 55vw, 26vh); }
 .reward-creature svg, .reward-creature img { width: 100%; height: auto; fill: none; animation: pop-in .6s cubic-bezier(.2,1.4,.4,1) both; }
 
 /* ---------------- Storia a episodi ---------------- */

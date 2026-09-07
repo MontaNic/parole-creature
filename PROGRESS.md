@@ -832,6 +832,12 @@ e' un errore: il gioco tace. La carta si costruisce in `js/share.js`
 immagini di Pepe e delle creature sono i PNG gia' in cache, quindi funziona
 anche senza rete. Nessun audio nuovo: il tocco e' del genitore accanto.
 
+Misurando dove finisse il bottone e' saltato fuori un bug piu' vecchio:
+su iPad orizzontale (viewport ~680px) il riepilogo con una creatura nuova
+era alto ~970px e la schermata non scorreva, quindi "Continua" e "Home"
+stavano sotto il bordo. In verticale non si vedeva. Ora `#screen-summary`
+scorre e il corpo si centra con `margin: auto`, che non taglia mai la cima.
+
 ## Prossimi passi
 3. **Riascoltare le 113 tracce generate** e rigenerare quelle che non
    convincono (`--force` dopo aver cancellato il file, oppure cambiare voce
