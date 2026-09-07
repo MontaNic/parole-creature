@@ -690,6 +690,14 @@ Due correzioni, una di esperienza e una di robustezza:
    alla sintesi. La battuta resta scritta nel fumetto. La sintesi rimane
    solo per un file davvero mancante, che oggi non esiste.
 
+Verificato con un click vero (protocollo DevTools, non `.click()` da JS,
+che non conta come gesto): dopo il tocco `welcome_first.mp3` e `ask_name.mp3`
+partono, nessuna chiamata alla sintesi. Due lezioni da harness, per non
+ripeterle: la finestra headless di default e' 756x417 e un bottone centrato
+puo' cadere fuori viewport (il click colpisce `<html>` e sembra un bug del
+gioco: passare `--window-size=1180,820`); e lo smoke test deve conoscere
+l'ingresso, altrimenti fa zero click e passa a vuoto.
+
 ## L'aiuto scritto dopo due errori
 
 Sbagliando due volte lo stesso item, compare la forma scritta inglese in
