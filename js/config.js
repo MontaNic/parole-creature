@@ -14,7 +14,7 @@ export const CONFIG = {
    * Vanno alzate a mano a ogni rilascio: il progetto non ha un build step.
    */
   appVersion: '1.4.0',
-  buildDate: '2026-09-04',
+  buildDate: '2026-09-07',
 
   /** Percorsi dei dati. */
   contentUrl: 'content.json',
