@@ -660,6 +660,36 @@ chi l'aveva spenta la ritrova a 0. La voce parte al massimo. La migrazione e'
 in `MIGRATIONS[1]` di `js/state.js` ed e' stata provata sui tre casi
 possibili prima di essere usata.
 
+## Un tocco prima della prima parola
+
+Il 2026-09-07, al primo accesso al sito pubblico, Pepe ha salutato con la
+voce sintetica del sistema invece che con la sua. Tutte le 28 battute hanno
+il loro mp3 e Pages li serve: non mancava una voce. Strumentando la pagina
+sul sito vero e' uscito il motivo:
+
+```
+play RIFIUTATO NotAllowedError it/mascot.welcome_first.mp3
+SINTESI "Ciao! Io sono Pepe. Giochiamo insieme co"
+```
+
+Il saluto partiva al caricamento, prima di qualsiasi tocco, e il browser
+rifiuta `play()` senza un gesto dell'utente. Il codice trattava quel rifiuto
+come "file mancante" e ripiegava sulla sintesi. Dopo un tocco vero l'mp3
+successivo partiva regolarmente. Succedeva a ogni avvio (anche
+`welcome_back`), quindi era la prima cosa che il bambino sentiva ogni volta.
+
+Due correzioni, una di esperienza e una di robustezza:
+
+1. **Schermata d'ingresso**: Pepe e un solo bottone, "Tocca per iniziare".
+   Il tocco sblocca AudioContext, sintesi e un elemento audio silenzioso
+   (per iOS, che sblocca gli `<audio>` solo dentro un gesto); da li' in poi
+   ogni `play()` e' consentito. Costa un tocco per avvio; e' la pratica di
+   tutte le app per bambini, e con motivo.
+2. **Un rifiuto per permesso non e' un file assente**: `playFile` marca
+   `NotAllowedError` come `blocked` e `playVoice` in quel caso non passa
+   alla sintesi. La battuta resta scritta nel fumetto. La sintesi rimane
+   solo per un file davvero mancante, che oggi non esiste.
+
 ## L'aiuto scritto dopo due errori
 
 Sbagliando due volte lo stesso item, compare la forma scritta inglese in

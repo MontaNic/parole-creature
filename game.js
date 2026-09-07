@@ -23,7 +23,8 @@ import {
   curriculumConfig, phaseProgress, playablePhases
 } from './js/curriculum.js';
 import {
-  initAudioUnlock, sfxCorrect, sfxRetry, stopVoice, startMusic, musicVolume
+  initAudioUnlock, sfxCorrect, sfxRetry, stopVoice, startMusic, musicVolume,
+  isAudioUnlocked
 } from './js/audio.js';
 import { initEffects, celebrateCorrect, celebrate, toast } from './js/effects.js';
 import {
@@ -32,7 +33,8 @@ import {
 import { GAMES, mostraConferma } from './js/minigames.js';
 import {
   showScreen, renderHome, renderAlbum, renderSummary,
-  renderBlocked, runOnboarding, syncCreatures
+  renderBlocked, runOnboarding, syncCreatures,
+  runStartGate
 } from './js/screens.js';
 import { openParents } from './js/parents.js';
 import { ensureTodayMission, trackMissionEvent } from './js/missions.js';
@@ -69,6 +71,10 @@ async function boot() {
 
   applyStaticStrings();
   initAudioUnlock();
+  // Nessuna voce prima di un tocco: senza, il browser rifiuta play() e Pepe
+  // parlerebbe con la voce sintetica del sistema. Se un gesto c'e' gia'
+  // stato durante il caricamento, la schermata non serve.
+  if (!isAudioUnlocked()) await runStartGate();
   rolloverDay();
   ensureTodayMission();
   syncCreatures();

@@ -39,6 +39,11 @@ let ctx = null;
 let musicGain = null;
 let musicTimer = null;
 let unlocked = false;
+// Wav di pochi campioni muti: basta a contare come riproduzione.
+const SILENZIO = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA';
+
+/** Vero dopo il primo gesto dell'utente: da li' in poi play() e' consentito. */
+export function isAudioUnlocked() { return unlocked; }
 
 /** Cache degli elementi <audio> gia' creati, per non riscaricare i file. */
 const audioCache = new Map();
@@ -64,6 +69,14 @@ export function initAudioUnlock() {
     try {
       const u = new SpeechSynthesisUtterance('');
       speechSynthesis.speak(u);
+    } catch { /* ignorato */ }
+    // Un <audio> riprodotto dentro il gesto sblocca anche gli altri <audio>
+    // su iOS, che fuori da un tocco rifiuta play() elemento per elemento.
+    try {
+      const a = new Audio(SILENZIO);
+      a.volume = 0;
+      const p = a.play();
+      if (p && typeof p.catch === 'function') p.catch(() => {});
     } catch { /* ignorato */ }
     if (musicVolume() > 0) startMusic();
   };
@@ -111,8 +124,12 @@ async function playVoice(relPath, text, lang) {
     try {
       await playFile(CONFIG.audioBase + relPath);
       return;
-    } catch {
-      // file assente o non riproducibile: si prosegue con la sintesi
+    } catch (err) {
+      // Il browser ha rifiutato play() perche' manca un gesto: la battuta
+      // resta scritta nel fumetto e NON si passa alla sintesi, che con la
+      // voce del sistema tradirebbe quella di Pepe. Solo un file davvero
+      // assente o non riproducibile si legge con la sintesi.
+      if (err?.blocked) return;
     }
   }
   await speakSynth(text, lang);
@@ -135,7 +152,13 @@ function playFile(url) {
       el.removeEventListener('error', onErr);
     };
     const onEnd = () => { cleanup(); resolve(); };
-    const onErr = () => { cleanup(); reject(new Error('audio non disponibile')); };
+    const onErr = (err) => {
+      cleanup();
+      const e = new Error('audio non disponibile');
+      // Un rifiuto per mancanza di gesto non e' un file mancante.
+      e.blocked = err?.name === 'NotAllowedError';
+      reject(e);
+    };
 
     // Interrompere non e' un errore: chi aspettava questa traccia prosegue.
     const stopper = () => { cleanup(); el.pause(); el.currentTime = 0; resolve(); };

@@ -406,6 +406,28 @@ export function renderBlocked(reason, onParents) {
 }
 
 /* ------------------------------------------------------------------ */
+/* Ingresso: un tocco prima di tutto                                   */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Serve al browser, non al bambino: senza un gesto dell'utente play() viene
+ * rifiutato, e la prima battuta di Pepe uscirebbe con la voce sintetica del
+ * sistema. Il tocco qui sblocca l'audio (vedi initAudioUnlock) prima che
+ * qualcuno parli.
+ */
+export function runStartGate() {
+  return new Promise(resolve => {
+    showScreen('start');
+    const host = document.getElementById('start-mascot');
+    renderMascot(host);
+    let fatto = false;
+    const via = () => { if (fatto) return; fatto = true; sfxTap(); resolve(); };
+    document.getElementById('start-btn').addEventListener('click', via);
+    host.addEventListener('click', via);
+  });
+}
+
+/* ------------------------------------------------------------------ */
 /* Onboarding senza lettura                                            */
 /* ------------------------------------------------------------------ */
 

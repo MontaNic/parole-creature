@@ -6,6 +6,7 @@
   "ui": {
     "game_title": "Parole & Creature",
     "start_button": "Gioca",
+    "tap_to_start": "Tocca per iniziare",
     "continue_button": "Continua",
     "back": "Indietro",
     "close": "Chiudi",

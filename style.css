@@ -532,6 +532,9 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 }
 .onb-mascot { width: min(200px, 45vw); }
 .onb-mascot svg, .onb-mascot img { width: 100%; height: auto; }
+/* Ingresso: Pepe grande e un solo bottone. Si tocca anche Pepe. */
+.start-mascot { width: min(260px, 50vw, 38vh); cursor: pointer; }
+.start-mascot svg, .start-mascot img { width: 100%; height: auto; }
 .onb-body { display: flex; flex-direction: column; align-items: center; gap: 18px; width: 100%; }
 /* Il nome del bambino e' italiano: resta in Fredoka. Andika compare solo
    sull'inglese, ed e' proprio l'esclusivita' a renderla un segnale. */
