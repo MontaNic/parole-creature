@@ -923,6 +923,19 @@ capitolo della storia, al tocco su "Continua". Due battute di Pepe
 stesso contratto: `playX({ items, showWritten })` che si risolve a fine
 partita.
 
+### 4. I distintivi
+
+Dieci traguardi di lungo periodo, per dare un motivo che duri oltre la
+partita: prima partita, 3 e 7 giorni di fila, 10/25/50 parole
+padroneggiate, le quattro creature della fase 1, il primo scrigno, tutti
+gli adesivi, la storia finita, la prima registrazione. Definiti in
+`js/badges.js` con una condizione pura sul salvataggio (testata), con id
+`bd_*` permanenti in `save.progress.badges`. Si valutano a fine partita e
+si annunciano nel riepilogo (fila di distintivi nuovi + una battuta di Pepe,
+`badge_new`); si rivedono nell'album, sotto gli adesivi, con quelli non
+ancora presi in ombra e la loro descrizione, cosi' il bambino sa cosa
+inseguire. Nessuna icona nuova: si usano quelle del gioco.
+
 ## Prossimi passi
 
 **Stato al 2026-09-07**: la fase 2 e' completa e pubblicata — storia a

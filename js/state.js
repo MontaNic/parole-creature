@@ -62,6 +62,8 @@ function defaultSave() {
       storySeen: {},
       /** adesivo degli scrigni -> ISO string di quando e' stato trovato */
       stickers: {},
+      /** distintivo -> ISO string di quando e' stato preso */
+      badges: {},
       /** itemId (parola o frase) -> stato di ripetizione spaziata */
       srs: {}
     },

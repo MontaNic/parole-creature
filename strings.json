@@ -92,6 +92,22 @@
     "put_back": "Riponi",
     "wall": "Parete"
   },
+  "badges": {
+    "title": "I miei distintivi",
+    "subtitle": "Traguardi da raggiungere giocando",
+    "new_label": "Nuovo distintivo!",
+    "bd_first_round": { "name": "Primo passo", "desc": "Hai finito la tua prima partita" },
+    "bd_streak_3": { "name": "Tre giorni", "desc": "Hai giocato tre giorni di fila" },
+    "bd_streak_7": { "name": "Una settimana", "desc": "Hai giocato sette giorni di fila" },
+    "bd_mastered_10": { "name": "Dieci parole", "desc": "Dieci parole imparate davvero" },
+    "bd_mastered_25": { "name": "Venticinque parole", "desc": "Venticinque parole imparate davvero" },
+    "bd_mastered_50": { "name": "Cinquanta parole", "desc": "Cinquanta parole imparate davvero" },
+    "bd_phase1_creatures": { "name": "La prima squadra", "desc": "Hai trovato le quattro creature della fase 1" },
+    "bd_first_chest": { "name": "Cercatore", "desc": "Hai aperto il tuo primo scrigno" },
+    "bd_all_stickers": { "name": "Collezionista", "desc": "Hai trovato tutti gli adesivi" },
+    "bd_story_done": { "name": "La nebbia si alza", "desc": "Hai visto la fine della storia" },
+    "bd_first_record": { "name": "La tua voce", "desc": "Ti sei registrato per la prima volta" }
+  },
   "bonus": {
     "title": "Gioco bonus!",
     "bubbles_prompt": "Scoppia la bolla giusta!",
@@ -282,6 +298,7 @@
     "den_welcome": "Questa è la nostra tana! Mettici quello che vuoi.",
     "bonus_start": "Te lo sei meritato! Un gioco bonus!",
     "bonus_end": "Che scoppiettio! Torniamo alle parole.",
+    "badge_new": "Un distintivo nuovo! Guardalo nell'album.",
     "level_up": "Sono cresciuta anche io! Guardami.",
     "session_end": "Per oggi basta cosi'. Ci vediamo domani{name}!",
     "idle_1": "Tocca un mondo per iniziare.",

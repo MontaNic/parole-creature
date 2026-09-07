@@ -18,6 +18,7 @@ import { ensureTodayMission, currentMission, missionRatio } from './missions.js'
 import { renderStoryStrip, chapterForCreature, isAvailable as chapterAvailable, playChapter } from './story.js';
 import { renderStickers } from './chests.js';
 import { canShare, shareSummary } from './share.js';
+import { renderBadges, renderNewBadges } from './badges.js';
 
 /* Fasi aperte a mano dal bambino, oltre a quella corrente. */
 const fasiAperte = new Set();
@@ -304,6 +305,15 @@ export function renderAlbum() {
   }
   renderStickers(stickers);
 
+  // I distintivi, in fondo.
+  let badges = document.getElementById('album-badges');
+  if (!badges) {
+    badges = el('div');
+    badges.id = 'album-badges';
+    grid.parentElement.appendChild(badges);
+  }
+  renderBadges(badges);
+
   document.getElementById('album-count').textContent = `${found}/${content.creatures.length}`;
   showScreen('album');
 }
@@ -363,6 +373,8 @@ export async function renderSummary(result, handlers) {
     body.appendChild(el('p', 'h-sub', c.name_it));
   }
 
+  if (result.newBadges?.length) body.appendChild(renderNewBadges(result.newBadges));
+
   if (result.phaseUnlocked) {
     await mascotSay('phase_done', { bubble, avatar: mascotHost });
   } else if (result.worldCompleted) {
@@ -371,6 +383,8 @@ export async function renderSummary(result, handlers) {
 
   if (result.newCreatures.length) {
     await mascotSay('new_creature', { bubble, avatar: mascotHost });
+  } else if (result.newBadges?.length) {
+    await mascotSay('badge_new', { bubble, avatar: mascotHost });
   } else if (!bigMoment) {
     if (result.missionDone) {
       celebrate();

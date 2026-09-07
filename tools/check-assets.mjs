@@ -78,6 +78,7 @@ for (const s of contenuti.stickers?.items || []) {
 }
 cita('sp-chest', 'scrigno'); cita('sp-chest-open', 'scrigno aperto');
 cita('sp-icon-mic', 'microfono'); cita('sp-icon-share', 'condividi'); cita('sp-icon-den', 'tana');
+for (const id of ['sp-icon-play', 'sp-icon-flame', 'sp-icon-star', 'sp-icon-album', 'sp-chest-open', 'sp-icon-mission', 'sp-torrek', 'sp-icon-mic']) cita(id, 'distintivo');
 
 const irrisolti = [...citati].filter(([id]) => !suDisco.has(id) && !simboli.has(id));
 irrisolti.length

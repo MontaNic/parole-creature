@@ -36,6 +36,7 @@ import { planChest, openChest } from './js/chests.js';
 import { renderDen } from './js/den.js';
 import { bumpToday } from './js/history.js';
 import { planBonus, bubblePool, playBubbles } from './js/bonus.js';
+import { checkBadges } from './js/badges.js';
 import { masteredCount } from './js/srs.js';
 import {
   showScreen, renderHome, renderAlbum, renderSummary,
@@ -513,6 +514,7 @@ async function finishRound({ round, correct, total, levelUp, missionJustDone, op
 
   const phaseUnlocked = checkPhaseUnlock();
   const newCreatures = syncCreatures();
+  const newBadges = checkBadges();
   persist(true);
 
   // La creatura appena trovata ha un capitolo: si vede dopo il riepilogo con
@@ -552,6 +554,7 @@ async function finishRound({ round, correct, total, levelUp, missionJustDone, op
     { correct, total, newCreatures, levelUp, phaseUnlocked,
       worldCompleted: worldJustCompleted,
       world: round.world,
+      newBadges,
       missionDone: missionJustDone, endSession: overLimit },
     {
       onHome: poi(() => goHome()),

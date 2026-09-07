@@ -40,6 +40,7 @@ import { buildSummaryCard, canShare } from './js/share.js';
 import { denItems, placeItem, removeItem, isPlaced, clamp, setWall, WALLS } from './js/den.js';
 import { bumpToday, lastDays, accuracyOf, successReport, prune } from './js/history.js';
 import { planBonus, BubbleWorld, bubblePool } from './js/bonus.js';
+import { checkBadges, BADGES } from './js/badges.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
   splitRound, unitItems, unitReviewItems, curriculumConfig, playablePhases
@@ -370,6 +371,19 @@ async function run() {
   check('sotto il dito si prende la bolla disegnata sopra', bolle.hit(200, 150) === c && bolle.hit(5, 5) === null);
   bolle.pop(c.id);
   check('scoppiare toglie la bolla', bolle.bubbles.length === 1 && bolle.hit(200, 150) === b);
+
+  /* --- i distintivi ------------------------------------------------- */
+  resetSave();
+  const strs = await (await fetch('strings.json')).json();
+  check('ogni distintivo ha nome e descrizione in strings.json',
+    BADGES.every(b => strs.badges?.[b.id]?.name && strs.badges?.[b.id]?.desc) && new Set(BADGES.map(b => b.id)).size === BADGES.length);
+  const fresco = { progress: { creatures: {}, stickers: {}, storySeen: {}, badges: {} }, stats: {}, streak: {} };
+  check('a inizio gioco nessun distintivo', checkBadges(fresco, { mastered: 0, stickerCount: 12 }).length === 0);
+  const s1 = { progress: { creatures: { c_flamup: 1, c_rocktail: 1, c_prisma: 1, c_numo: 1 }, stickers: {}, storySeen: { st_epilogue: 'x' }, badges: {} }, stats: { totalRounds: 1, chestsOpened: 1 }, streak: { best: 7 } };
+  const presi = checkBadges(s1, { mastered: 26, stickerCount: 12 }).map(b => b.id).sort();
+  check('le condizioni si valutano sul salvataggio',
+    presi.join(',') === 'bd_first_chest,bd_first_round,bd_mastered_10,bd_mastered_25,bd_phase1_creatures,bd_story_done,bd_streak_3,bd_streak_7', presi.join(','));
+  check('un distintivo preso non si riprende', checkBadges(s1, { mastered: 26, stickerCount: 12 }).length === 0 && Object.keys(s1.progress.badges).length === 8);
 
   resetSave();
 
