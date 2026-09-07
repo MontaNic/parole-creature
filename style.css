@@ -608,6 +608,9 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 .story-dot.is-locked { background: var(--night-700); border-color: var(--night-600); box-shadow: none; cursor: default; }
 .story-dot.is-locked svg, .story-dot.is-locked img { filter: brightness(0) invert(1); opacity: .22; }
 
+/* Condividi, a fine partita: piccolo, sotto le azioni principali. */
+.share-btn { margin-top: 6px; }
+
 /* ---------------- Scrigni a sorpresa ---------------- */
 .chest-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
 .chest-btn {

@@ -100,6 +100,7 @@ function defaultSave() {
       phasesEnabled: { 1: true, 2: true, 3: true, 4: true, 5: true },
       themesDisabled: [],      // temi messi in pausa dai genitori
       voiceRecording: true,    // microfono in 'ascolta e ripeti'
+      familySharing: true,     // 'Condividi' a fine partita
       vacation: false,
 
       /*

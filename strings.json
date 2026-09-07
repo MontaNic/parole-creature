@@ -83,6 +83,16 @@
     "retry_3": "Nessun problema, riproviamo"
   },
 
+  "share": {
+    "button": "Condividi",
+    "title": "Parole & Creature",
+    "played": "{name} ha giocato!",
+    "played_anon": "Partita finita!",
+    "found": "Ha trovato {creature}!",
+    "review": "Ripasso libero",
+    "streak": "{n} giorni di fila",
+    "text": "Guarda com'è andata la partita di oggi!"
+  },
   "album": {
     "stickers_title": "I miei adesivi",
     "stickers_subtitle": "Gli adesivi si trovano negli scrigni a sorpresa",
@@ -147,6 +157,8 @@
     "themes_enabled": "Temi attivi",
     "vacation_mode": "Pausa vacanza",
     "vacation_hint": "Sospende il gioco senza perdere i progressi.",
+    "family_sharing": "Condivisione in famiglia",
+    "family_sharing_hint": "A fine partita compare \"Condividi\": il riepilogo diventa un'immagine da mandare con le app del dispositivo. Nessun server: passa solo dal foglio di condivisione. Spegnilo se preferisci che il bambino non abbia quel bottone.",
     "voice_recording": "Registrazione della voce",
     "voice_recording_hint": "Nel gioco \"ascolta e ripeti\" il bambino può registrarsi e riascoltarsi. Nulla viene salvato né inviato: la registrazione sparisce alla domanda successiva.",
     "unlock_all_phases": "Sblocca tutte le fasi",

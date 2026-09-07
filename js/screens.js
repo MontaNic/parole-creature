@@ -17,6 +17,7 @@ import { celebrate } from './effects.js';
 import { ensureTodayMission, currentMission, missionRatio } from './missions.js';
 import { renderStoryStrip, chapterForCreature, isAvailable as chapterAvailable, playChapter } from './story.js';
 import { renderStickers } from './chests.js';
+import { canShare, shareSummary } from './share.js';
 
 /* Fasi aperte a mano dal bambino, oltre a quella corrente. */
 const fasiAperte = new Set();
@@ -407,6 +408,23 @@ export async function renderSummary(result, handlers) {
     actions.appendChild(home);
   }
   body.appendChild(actions);
+
+  // Condivisione in famiglia: solo dove il browser sa condividere un file
+  // e se i genitori lo vogliono. Il tocco e' del genitore accanto.
+  if (canShare()) {
+    const share = el('button', 'btn btn-ghost btn-parent-small share-btn');
+    const ico = spriteSvg('sp-icon-share');
+    ico.classList.add('ico');
+    share.appendChild(ico);
+    share.appendChild(el('span', null, t('share.button')));
+    share.onclick = async () => {
+      sfxTap();
+      share.disabled = true;
+      await shareSummary(result);
+      share.disabled = false;
+    };
+    body.appendChild(share);
+  }
 }
 
 /* ------------------------------------------------------------------ */

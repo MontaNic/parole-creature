@@ -813,6 +813,25 @@ continua come prima. Formato scelto a runtime fra `audio/mp4` (Safari) e
 Una battuta nuova di Pepe (`record_done`), detta la prima volta per
 sessione. `stats.totalRecordings` conta quante volte e' successo.
 
+## La condivisione in famiglia (fase 2, punto 4)
+
+A fine partita, sotto "Continua", un bottone "Condividi": il riepilogo
+diventa un'immagine (1200x630, disegnata su canvas con Pepe, le stelle, il
+punteggio, l'unita', la creatura trovata se c'e', la striscia di giorni) e
+passa al foglio di condivisione del sistema con `navigator.share` e un
+file. Nessun server, nessun account: da li' in poi e' Messaggi, WhatsApp,
+Mail, quello che c'e' sul dispositivo.
+
+Il bottone compare solo dove funziona: `navigator.canShare({ files })`
+(iOS 15+, Android Chrome, non Safari desktop) e con l'interruttore dei
+genitori acceso (`settings.familySharing`, default acceso: un bambino con
+un foglio di condivisione in mano puo' anche mandare l'immagine a chi
+capita, e un genitore deve poterlo spegnere). Annullare la condivisione non
+e' un errore: il gioco tace. La carta si costruisce in `js/share.js`
+(`buildSummaryCard`, testata in headless: dimensioni e PNG valido); le
+immagini di Pepe e delle creature sono i PNG gia' in cache, quindi funziona
+anche senza rete. Nessun audio nuovo: il tocco e' del genitore accanto.
+
 ## Prossimi passi
 3. **Riascoltare le 113 tracce generate** e rigenerare quelle che non
    convincono (`--force` dopo aver cancellato il file, oppure cambiare voce

@@ -524,6 +524,7 @@ async function finishRound({ round, correct, total, levelUp, missionJustDone, op
   await renderSummary(
     { correct, total, newCreatures, levelUp, phaseUnlocked,
       worldCompleted: worldJustCompleted,
+      world: round.world,
       missionDone: missionJustDone, endSession: overLimit },
     {
       onHome: poi(() => goHome()),

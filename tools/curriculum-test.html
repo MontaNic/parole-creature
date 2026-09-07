@@ -36,6 +36,7 @@ import { serveAiutoScritto, SOGLIA_AIUTO } from './js/minigames.js';
 import { chapters, chapterForCreature, pendingAfterRound, pendingAtStart, isAvailable, lineAudio } from './js/story.js';
 import { planChest, nextSticker, stickers } from './js/chests.js';
 import { pickMimeType, canRecord } from './js/recorder.js';
+import { buildSummaryCard, canShare } from './js/share.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
   splitRound, unitItems, unitReviewItems, curriculumConfig, playablePhases
@@ -300,6 +301,18 @@ async function run() {
   check("l'interruttore dei genitori spegne il microfono", canRecord() === false);
   save.settings.voiceRecording = true;
   check("riacceso, il microfono torna com'era (dipende dal browser: " + prima + ')', canRecord() === prima);
+
+  /* --- la condivisione in famiglia ---------------------------------- */
+  resetSave();
+  save.child.name = 'Test';
+  const mondo = content.worlds[0];
+  const carta = await buildSummaryCard({ correct: 7, total: 8, newCreatures: [content.creatures[1]], world: mondo });
+  check('la carta del riepilogo e\' un PNG 1200x630',
+    carta.width === 1200 && carta.height === 630 && carta.toDataURL('image/png').startsWith('data:image/png'));
+  const vuota = await buildSummaryCard({ correct: 0, total: 0, newCreatures: [], world: null });
+  check('la carta regge anche una partita vuota (ripasso, nessuna creatura)', vuota.width === 1200);
+  save.settings.familySharing = false;
+  check("l'interruttore dei genitori spegne 'Condividi'", canShare() === false);
 
   resetSave();
 
