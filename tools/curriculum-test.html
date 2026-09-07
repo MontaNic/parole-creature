@@ -38,6 +38,7 @@ import { planChest, nextSticker, stickers } from './js/chests.js';
 import { pickMimeType, canRecord } from './js/recorder.js';
 import { buildSummaryCard, canShare } from './js/share.js';
 import { denItems, placeItem, removeItem, isPlaced, clamp, setWall, WALLS } from './js/den.js';
+import { bumpToday, lastDays, accuracyOf, successReport, prune } from './js/history.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
   splitRound, unitItems, unitReviewItems, curriculumConfig, playablePhases
@@ -329,6 +330,26 @@ async function run() {
   check('riporre toglie dalla stanza', !isPlaced('c_pepe') && isPlaced('c_flamup'));
   setWall(WALLS.length + 1);
   check('il colore della parete gira sui quattro', save.den.wall === 1);
+
+  /* --- lo storico giornaliero ---------------------------------------- */
+  resetSave();
+  bumpToday({ correct: 3, wrong: 1, minutes: 4.5 }, '2026-09-07');
+  bumpToday({ correct: 2, rounds: 1, mastered: 12 }, '2026-09-07');
+  const oggi = save.history['2026-09-07'];
+  check('i contatori del giorno si sommano, la foto delle padroneggiate no',
+    oggi.correct === 5 && oggi.wrong === 1 && oggi.rounds === 1 && oggi.minutes === 4.5 && oggi.mastered === 12);
+  check("la precisione del giorno e' giusta (5/6)", accuracyOf(oggi) === 83 && accuracyOf({ correct: 0, wrong: 0 }) === null);
+  const finestra = lastDays(14, '2026-09-07');
+  check("gli ultimi 14 giorni sono 14, in ordine, con zeri dove non si e' giocato",
+    finestra.length === 14 && finestra[0].day === '2026-08-25' && finestra[13].day === '2026-09-07' && finestra[0].rounds === 0 && finestra[13].correct === 5);
+  bumpToday({ rounds: 1 }, '2026-05-01');
+  prune('2026-09-07', 90);
+  check("lo storico non tiene piu' di 90 giorni", !save.history['2026-05-01'] && save.history['2026-09-07']);
+  for (let i = 0; i < 10; i++) bumpToday({ rounds: 1 }, `2026-09-${String(i + 1).padStart(2, '0')}`);
+  const rep = successReport(41, '2026-09-10');
+  check('i criteri di successo contano giorni giocati e parole padroneggiate',
+    rep.days.value === 10 && rep.days.ok === true && rep.mastered.value === 41 && rep.mastered.ok === true);
+  check("sotto soglia il criterio non e' raggiunto", successReport(5, '2026-09-10').mastered.ok === false);
 
   resetSave();
 

@@ -68,6 +68,9 @@ function defaultSave() {
 
     streak: { current: 0, best: 0, lastPlayDay: '' },
 
+    /** giorno (YYYY-MM-DD) -> { correct, wrong, minutes, rounds, mastered } */
+    history: {},
+
     /** La tana: cose disposte nella stanza (x, y in % della stanza) e colore della parete. */
     den: { placed: {}, wall: 0 },
 

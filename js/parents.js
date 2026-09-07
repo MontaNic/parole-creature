@@ -24,6 +24,7 @@ import {
   unitProgress, phaseProgress, playablePhases, curriculumConfig
 } from './curriculum.js';
 import { applyVolumes, sfxTap, speakMascot } from './audio.js';
+import { lastDays, accuracyOf, successReport } from './history.js';
 
 function el(tag, cls, text) {
   const n = document.createElement(tag);
@@ -384,6 +385,10 @@ function panelProgress() {
   });
   p.appendChild(curr);
 
+  // Storico degli ultimi 14 giorni e criteri di successo
+  p.appendChild(historyCard());
+  p.appendChild(successCard());
+
   // Parole piu' difficili: utile per ripassare insieme a voce
   const hard = hardestItems(6);
   if (hard.length) {
@@ -644,6 +649,19 @@ function panelGeneral() {
   off.appendChild(esito);
   p.appendChild(off);
 
+  /* --- aggiungi a Home: solo se non gira gia' installato --- */
+  const installato = window.matchMedia?.('(display-mode: standalone)').matches || navigator.standalone === true;
+  if (!installato) {
+    const inst = el('div', 'card-box');
+    inst.appendChild(el('h3', null, t('parents.install_title')));
+    inst.appendChild(el('div', 'hint', t('parents.install_hint')));
+    const ol = el('ol', 'list-steps');
+    ol.appendChild(el('li', null, t('parents.install_step_1')));
+    ol.appendChild(el('li', null, t('parents.install_step_2')));
+    inst.appendChild(ol);
+    p.appendChild(inst);
+  }
+
   /* --- informazioni --- */
   const info = el('div', 'card-box');
   info.appendChild(el('h3', null, t('parents.app_info')));
@@ -816,4 +834,77 @@ function panelData() {
   p.appendChild(privacy);
 
   return p;
+}
+
+
+/* ------------------------------------------------------------------ */
+/* Storico e criteri di successo                                       */
+/* ------------------------------------------------------------------ */
+
+const SVG_NS = 'http://www.w3.org/2000/svg';
+function svgEl(tag, attrs) {
+  const n = document.createElementNS(SVG_NS, tag);
+  for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
+  return n;
+}
+
+function historyCard() {
+  const box = el('div', 'card-box');
+  box.appendChild(el('h3', null, t('parents.history_title')));
+  box.appendChild(el('div', 'hint', t('parents.history_hint')));
+  const giorni = lastDays();
+  if (!giorni.some(d => d.rounds || d.minutes >= 1)) {
+    box.appendChild(el('div', 'hint', t('parents.history_empty')));
+    return box;
+  }
+  const W = 560, H = 150, top = 26, base = 118, gap = 6;
+  const bw = (W - gap * (giorni.length - 1)) / giorni.length;
+  const max = Math.max(5, ...giorni.map(d => d.minutes));
+  const svg = svgEl('svg', { viewBox: `0 0 ${W} ${H}`, class: 'history-chart', role: 'img' });
+  svg.appendChild(svgEl('line', { x1: 0, y1: base, x2: W, y2: base, stroke: 'rgba(255,255,255,.25)', 'stroke-width': 1 }));
+  const nomi = ['L', 'M', 'M', 'G', 'V', 'S', 'D'];
+  giorni.forEach((d, i) => {
+    const x = i * (bw + gap);
+    const h = Math.max(d.minutes > 0 ? 3 : 0, (d.minutes / max) * (base - top));
+    svg.appendChild(svgEl('rect', { x, y: base - h, width: bw, height: h, rx: 4, fill: d.minutes > 0 ? '#FFB03A' : 'rgba(255,255,255,.08)' }));
+    const acc = accuracyOf(d);
+    if (acc !== null) {
+      const tx = svgEl('text', { x: x + bw / 2, y: base - h - 6, 'text-anchor': 'middle', 'font-size': 11, fill: acc >= 70 ? '#7ee787' : '#ff9a76' });
+      tx.textContent = `${acc}%`;
+      svg.appendChild(tx);
+    }
+    const dow = (new Date(d.day + 'T12:00:00').getDay() + 6) % 7;
+    const lab = svgEl('text', { x: x + bw / 2, y: base + 16, 'text-anchor': 'middle', 'font-size': 11, fill: 'rgba(255,255,255,.6)' });
+    lab.textContent = nomi[dow];
+    svg.appendChild(lab);
+    const mn = svgEl('text', { x: x + bw / 2, y: base + 32, 'text-anchor': 'middle', 'font-size': 10, fill: 'rgba(255,255,255,.45)' });
+    mn.textContent = d.minutes >= 1 ? `${Math.round(d.minutes)}'` : '';
+    svg.appendChild(mn);
+  });
+  box.appendChild(svg);
+  return box;
+}
+
+function successCard() {
+  const box = el('div', 'card-box');
+  box.appendChild(el('h3', null, t('parents.success_title')));
+  box.appendChild(el('div', 'hint', t('parents.success_hint')));
+  const rep = successReport(masteredCount());
+  const riga = (label, m) => {
+    const r = el('div', 'success-row');
+    const head = el('div', 'success-head');
+    head.appendChild(el('span', null, label));
+    head.appendChild(el('span', 'badge ' + (m.ok ? 'badge-good' : 'badge-todo'),
+      `${m.value}/${m.target} · ${t(m.ok ? 'parents.success_ok' : 'parents.success_todo')}`));
+    r.appendChild(head);
+    const bar = el('div', 'success-bar');
+    const fill = el('i');
+    fill.style.width = `${Math.min(100, Math.round((m.value / m.target) * 100))}%`;
+    bar.appendChild(fill);
+    r.appendChild(bar);
+    return r;
+  };
+  box.appendChild(riga(t('parents.success_days').replace('{window}', rep.days.window), rep.days));
+  box.appendChild(riga(t('parents.success_mastered'), rep.mastered));
+  return box;
 }

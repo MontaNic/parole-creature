@@ -54,6 +54,13 @@ export const CONFIG = {
     sessionWarnRatio: 0.8        // a che punto della sessione avvisare
   },
 
+  /**
+   * Criteri di successo del progetto, misurabili nel pannello genitori:
+   * giocare con regolarita' (giorni su una finestra) e imparare davvero
+   * (parole padroneggiate). Prima taratura, da rivedere con i dati.
+   */
+  success: { windowDays: 14, daysTarget: 10, masteredTarget: 40, historyKeepDays: 90 },
+
   /** Scrigni a sorpresa: probabilita' per partita, e stelle quando gli adesivi sono finiti. */
   chest: { chance: 0.2, xpBonus: 30 },
 

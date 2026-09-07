@@ -34,6 +34,8 @@ import { GAMES, mostraConferma } from './js/minigames.js';
 import { pendingAtStart, pendingAfterRound, playChapters } from './js/story.js';
 import { planChest, openChest } from './js/chests.js';
 import { renderDen } from './js/den.js';
+import { bumpToday } from './js/history.js';
+import { masteredCount } from './js/srs.js';
 import {
   showScreen, renderHome, renderAlbum, renderSummary,
   renderBlocked, runOnboarding, syncCreatures,
@@ -423,6 +425,7 @@ async function startRound(opts) {
     const item = getItem(itemId);
 
     recordAnswer(itemId, firstTry);
+    bumpToday(firstTry ? { correct: 1 } : { wrong: 1 });
     if (firstTry) {
       correct += 1;
       save.stats.totalCorrect += 1;
@@ -504,6 +507,7 @@ async function finishRound({ round, correct, total, levelUp, missionJustDone, op
     save.progress.worlds[round.world.id] = rec;
   }
   save.stats.totalRounds += 1;
+  bumpToday({ rounds: 1, mastered: masteredCount() });
   if (trackMissionEvent({ roundDone: true })) missionJustDone = true;
 
   const phaseUnlocked = checkPhaseUnlock();
@@ -569,7 +573,7 @@ function startSessionClock() {
     rolloverDay();
     save.daily.minutesPlayed += TICK_MS / 60000;
     save.stats.totalMinutes += TICK_MS / 60000;
-    persist();
+    bumpToday({ minutes: TICK_MS / 60000 });
   }, TICK_MS);
 
   // Riprendere la musica quando si torna sull'app dopo un cambio di scheda.

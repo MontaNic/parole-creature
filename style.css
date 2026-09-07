@@ -802,7 +802,15 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 /* La conferma e' verde: e' un premio, non un suggerimento. */
 .written-help.is-confirm { background: var(--leaf); color: #06301A; border-color: var(--ink); }
 
+/* Storico e criteri di successo (area genitori) */
+.history-chart { width: 100%; height: auto; display: block; margin-top: 8px; font-family: inherit; }
+.success-row { margin-top: 10px; }
+.success-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 14px; }
+.success-bar { height: 10px; border-radius: 6px; background: rgba(255,255,255,.12); margin-top: 6px; overflow: hidden; }
+.success-bar i { display: block; height: 100%; background: var(--leaf); border-radius: 6px; }
+
 /* ---------------- Impostazioni generali ---------------- */
+.list-steps { margin: 6px 0 0; padding-left: 22px; font-size: 14px; line-height: 1.5; }
 
 .volume-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
 .volume-value { font-size: 15px; color: var(--amber); font-variant-numeric: tabular-nums; }

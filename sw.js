@@ -19,7 +19,7 @@
  */
 importScripts('sw-art.js');
 
-const CACHE_VERSION = 'v1.6.9';
+const CACHE_VERSION = 'v1.7.0';
 const SHELL_CACHE = `dp-shell-${CACHE_VERSION}`;
 const AUDIO_CACHE = `dp-audio-${CACHE_VERSION}`;
 
@@ -38,6 +38,12 @@ const SHELL_ASSETS = [
   'assets/img/sprites.svg',
   'assets/img/art/index.json',
   'sw-art.js',
+  'manifest.webmanifest',
+  'assets/img/icon.svg',
+  'assets/img/icons/apple-touch-icon.png',
+  'assets/img/icons/icon-192.png',
+  'assets/img/icons/icon-512.png',
+  'assets/img/icons/icon-512-maskable.png',
   'js/config.js',
   'js/state.js',
   'js/content-loader.js',

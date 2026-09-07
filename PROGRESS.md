@@ -859,6 +859,45 @@ Una battuta di Pepe (`den_welcome`), la prima volta per sessione.
 E' la piu' incerta delle cinque: a 7 anni il senso di possesso puo'
 funzionare molto o per niente. Da guardare al playtest: ci torna da solo?
 
+## Fase 3 — la roadmap del prompt master
+
+Dopo il terzo playtest (2026-09-07, "benissimo") si passa alle voci della
+roadmap: PWA installabile, dashboard con grafici nel tempo, badge, palette
+per il daltonismo, criteri di successo. Ogni punto con il suo check.
+
+### 1. PWA installabile con icone vere
+
+Il manifest aveva una sola icona SVG. Safari su iPad ignora il manifest per
+l'icona della Home e vuole `<link rel="apple-touch-icon">` con un PNG
+quadrato: senza, l'icona sulla Home era uno screenshot. Ora ci sono quattro
+PNG in `assets/img/icons/` (180 Apple, 192, 512, 512 "maskable" con il
+soggetto al 78% nella zona sicura di Android), rasterizzati da `icon.svg`
+con Chrome headless (nessun rasterizzatore installato sul Mac). Il PNG
+Apple ha il fondo pieno: angoli trasparenti su iOS diventano neri.
+Manifest e `index.html` aggiornati; icone e manifest entrano nella
+precache. Nell'area genitori, sotto le impostazioni generali, un riquadro
+"Aggiungi alla schermata Home" con i due passi, che sparisce quando il
+gioco gira gia' installato (`display-mode: standalone`).
+
+### 2. Storico giornaliero, grafico e criteri di successo
+
+Finora il salvataggio aveva solo totali: impossibile dire se il bambino
+gioca *con regolarita'*, che e' l'unica cosa che conta per una lingua. Ora
+`save.history[giorno]` accumula risposte giuste e sbagliate, minuti,
+partite e una foto delle parole padroneggiate a fine partita
+(`js/history.js`, funzioni pure con la data iniettabile, testate; si
+tengono 90 giorni). Nel pannello progressi dei genitori:
+
+- **Ultimi 14 giorni**: un grafico SVG disegnato a mano (nessuna libreria):
+  barre dei minuti per giorno, e sopra ogni barra la precisione del giorno.
+  I giorni senza gioco restano vuoti, ed e' proprio quello che si deve
+  vedere.
+- **Criteri di successo**, come chiedeva il prompt master, resi misurabili
+  in `CONFIG.success`: almeno 10 giorni giocati su 14, e 40 parole
+  padroneggiate (poco piu' di meta' del lessico). Due barre con l'esito.
+  I numeri sono una prima taratura, non un verdetto: si cambiano in
+  config.js.
+
 ## Prossimi passi
 
 **Stato al 2026-09-07**: la fase 2 e' completa e pubblicata — storia a
