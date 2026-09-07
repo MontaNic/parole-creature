@@ -111,6 +111,8 @@
   "bonus": {
     "title": "Gioco bonus!",
     "bubbles_prompt": "Scoppia la bolla giusta!",
+    "moles_prompt": "Tocca chi spunta!",
+    "hits": "{n} prese",
     "done": "Fine!",
     "popped": "{n} bolle scoppiate",
     "skip": "Salta"

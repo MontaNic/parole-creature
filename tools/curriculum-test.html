@@ -39,7 +39,7 @@ import { pickMimeType, canRecord } from './js/recorder.js';
 import { buildSummaryCard, canShare } from './js/share.js';
 import { denItems, placeItem, removeItem, isPlaced, clamp, setWall, WALLS } from './js/den.js';
 import { bumpToday, lastDays, accuracyOf, successReport, prune } from './js/history.js';
-import { planBonus, BubbleWorld, bubblePool } from './js/bonus.js';
+import { planBonus, BubbleWorld, bubblePool, MoleWorld, pickBonus } from './js/bonus.js';
 import { checkBadges, BADGES } from './js/badges.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
@@ -371,6 +371,21 @@ async function run() {
   check('sotto il dito si prende la bolla disegnata sopra', bolle.hit(200, 150) === c && bolle.hit(5, 5) === null);
   bolle.pop(c.id);
   check('scoppiare toglie la bolla', bolle.bubbles.length === 1 && bolle.hit(200, 150) === b);
+
+  /* --- Spunta! ------------------------------------------------------- */
+  const sei = conPng.slice(0, 6);
+  const talpe = new MoleWorld({ w: 600, h: 400, items: sei, rng: () => 0.5, guarantee: 2 });
+  talpe.setTarget(sei[0]);
+  check('nove buchi, tutti liberi all\'inizio', talpe.holes.length === 9 && talpe.freeHoles().length === 9);
+  let spunte = 0, primaVolta = -1;
+  for (let k = 0; k < 6; k++) { const h = talpe.next(); spunte++; if (h && h.mole.item === sei[0] && primaVolta < 0) primaVolta = k; talpe.take(h); }
+  check('il bersaglio spunta entro due spunte', primaVolta >= 0 && primaVolta <= 1, String(primaVolta));
+  const h1 = talpe.next(); h1.mole.up = 1;
+  const r = talpe.radius(); const cx = h1.cx * 600, cy = h1.cy * 400 - r;
+  check('una figura spuntata si prende toccandola, non altrove', talpe.hit(cx, cy) === h1 && talpe.hit(5, 5) === null);
+  h1.mole.up = 0.2;
+  check('una figura ancora nel buco non si prende', talpe.hit(cx, h1.cy * 400 - r * 0.2) === null);
+  check('il gioco bonus non si ripete due volte di fila', pickBonus('bubbles', () => 0) === 'moles' && pickBonus('moles', () => 0) === 'bubbles');
 
   /* --- i distintivi ------------------------------------------------- */
   resetSave();

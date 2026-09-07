@@ -976,6 +976,37 @@ anglofono, giocando; il secondo gioco bonus lo scelgo io con una classifica.
   Whac-A-Mole: la voce dice la parola prima che la figura spunti, e
   l'attesa diventa ascolto. Poi "Il cestino".
 
+### "Spunta!", il secondo gioco bonus
+
+Il Whac-A-Mole della classifica: nove buchi, le figure spuntano una alla
+volta e restano un secondo; la voce dice la parola *prima* che la figura
+giusta spunti, cosi' l'attesa e' ascolto. Tocco secco, nessuna punizione:
+una spunta persa non costa nulla, il bersaglio ricompare entro due spunte
+(`MoleWorld.next`, garantito e testato). Stesso contratto di Bolle
+(`play({ items, showWritten })`), stesso schermo, stesse immagini. Fra i
+due si alterna a caso senza ripetere l'ultimo (`save.stats.lastBonus`).
+
+### Anno 2, lotto 1: la fase 6 "Io e i miei" (unita' 9-12)
+
+Fatto e pubblicato (contentVersion 2.1.0, app 1.7.0): 32 parole, 24 frasi,
+4 strutture (`st_this_is_my`, `st_touch_your`, `st_put_on`,
+`st_feelings`), 4 unita' con 4 creature nuove (Nonnetta, Gigione,
+Sartina, Nuvolo), le fasi 6-7-8 dichiarate (7 e 8 ancora senza unita',
+quindi non compaiono in home). Ogni unita' nuova ripassa *tutte* le
+precedenti, come la regola dell'anno 1 (il test lo pretende).
+
+Illustrazioni: 36 generate con Gemini in un batch (una rifiutata per
+carico e rifatta), sfondo tolto col metodo flood, 84 PNG in precache.
+La misura delle coppie confondibili ha segnalato tre casi reali, rifatti
+con prompt diversi: naso di profilo (era un uovo color pelle), Gigione
+verde (era la palette di Fiammino), annoiato rosa (era viola come
+spaventato). Le facce delle emozioni seguono lo stile di happy/sad
+(faccine tonde), non Pepe. Audio: 56 tracce inglesi nuove, nessuna
+rigenerata, indice a 219.
+
+Da guardare al playtest: la parola scritta sempre mostrata in fase 6 e'
+un aiuto o una distrazione? "friend" (due bambini) si legge a 80px?
+
 ## Prossimi passi
 
 **Stato al 2026-09-07, sera**: fase 3 completa e pubblicata (versione

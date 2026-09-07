@@ -1,11 +1,9 @@
 {
   "_comment": "Curriculum di 'Parole & Creature'. NON e' un elenco di parole per tema: e' un corso a unita', ognuna con un obiettivo linguistico esplicito, revisione sistematica delle unita' precedenti e una soglia di padronanza da superare per cambiare fase. Vedi PROGRESS.md, sezione 'Logica del curriculum'.",
   "schemaVersion": 2,
-  "contentVersion": "2.0.0",
+  "contentVersion": "2.1.0",
   "audioBasePath": "assets/audio/",
-
   "_ids_comment": "REGOLA: gli id di parole, frasi e unita' sono PERMANENTI. Il progresso del bambino e' indicizzato per id: rinominarli equivale a cancellare quello che ha imparato. Si aggiunge, non si rinomina.",
-
   "curriculum": {
     "masteryBox": 3,
     "masteryBox_note_it": "Un item e' padroneggiato quando raggiunge il box 3 della ripetizione spaziata, cioe' dopo 3 risposte corrette date in giorni diversi. Rispondere bene tre volte di fila nella stessa sessione non basta.",
@@ -17,7 +15,6 @@
     "minReviewItems": 2,
     "maxBuildWords": 6
   },
-
   "phases": [
     {
       "id": 1,
@@ -55,304 +52,2235 @@
       "desc_it": "Suggerimenti audiovisivi progressivi. Gestiti dai genitori.",
       "showWrittenWord": true,
       "parentOnly": true
+    },
+    {
+      "id": 6,
+      "title_it": "Io e i miei",
+      "goal_it": "Parlare di sé: chi c'è in famiglia, il corpo e le istruzioni da eseguire, i vestiti, come sto. Le parole ad alta frequenza (my, have, am, are) entrano dentro formule usate cento volte.",
+      "desc_it": "La parola scritta è sempre mostrata: leggere parole già imparate a orecchio è l'obiettivo di questo anno.",
+      "showWrittenWord": true
+    },
+    {
+      "id": 7,
+      "title_it": "Ogni giorno",
+      "goal_it": "Il quotidiano: cibo e gusti (I like / I don't like), casa e posizioni (on, in, under), scuola e comandi di classe, azioni (I can jump).",
+      "desc_it": "Frasi di 4-6 parole, sempre con audio e testo.",
+      "showWrittenWord": true
+    },
+    {
+      "id": 8,
+      "title_it": "Il mio mondo",
+      "goal_it": "Tempo e giorni, ore e routine, luoghi e mezzi, la festa: l'ingresso nell'A1.",
+      "desc_it": "Domande e risposte brevi su tutto quello che è stato imparato.",
+      "showWrittenWord": true
     }
   ],
-
   "structures": [
     {
-      "id": "st_what_is_it", "phase": 1, "unit": 1,
+      "id": "st_what_is_it",
+      "phase": 1,
+      "unit": 1,
       "pattern": "What is it? — A dragon.",
       "focus_it": "Capire la domanda che introduce ogni esercizio e rispondere con il nome.",
       "why_it": "E' la formula che il bambino sentira' centinaia di volte nel gioco: impararla subito come blocco unico rende trasparente tutto il resto."
     },
     {
-      "id": "st_a_an", "phase": 1, "unit": 2,
+      "id": "st_a_an",
+      "phase": 1,
+      "unit": 2,
       "pattern": "It's a tooth. / It's an egg.",
       "focus_it": "L'articolo cambia davanti a vocale: a / an.",
       "why_it": "In italiano l'articolo non si comporta cosi'. Va sentito presto e spesso, molto prima di poterlo spiegare."
     },
     {
-      "id": "st_adj_noun", "phase": 1, "unit": 3,
+      "id": "st_adj_noun",
+      "phase": 1,
+      "unit": 3,
       "pattern": "It's a red egg.",
       "focus_it": "In inglese il colore va PRIMA del nome.",
       "why_it": "E' l'errore piu' frequente e piu' duraturo degli italiani ('a dragon red'). Si previene facendolo ascoltare come formula, non correggendolo dopo."
     },
     {
-      "id": "st_how_many", "phase": 1, "unit": 4,
+      "id": "st_how_many",
+      "phase": 1,
+      "unit": 4,
       "pattern": "How many? — Three.",
       "focus_it": "Contare da uno a dieci rispondendo a una domanda.",
       "why_it": "I numeri restano isolati se non hanno una domanda che li chiama."
     },
     {
-      "id": "st_this_these", "phase": 2, "unit": 5,
+      "id": "st_this_these",
+      "phase": 2,
+      "unit": 5,
       "pattern": "This is a cat. / These are cats.",
       "focus_it": "This / these e la -s del plurale.",
       "why_it": "La -s finale in inglese parlato e' quasi impercettibile per un orecchio italiano: si introduce quando la parola scritta la rende visibile."
     },
     {
-      "id": "st_be_sing_plur", "phase": 2, "unit": 6,
+      "id": "st_be_sing_plur",
+      "phase": 2,
+      "unit": 6,
       "pattern": "The cat is small. / The cats are small.",
       "focus_it": "is per uno, are per piu' di uno.",
       "why_it": "Prima vera regola grammaticale del corso: arriva solo dopo che singolare e plurale sono gia' familiari all'occhio."
     },
     {
-      "id": "st_i_have_see", "phase": 3, "unit": 7,
+      "id": "st_i_have_see",
+      "phase": 3,
+      "unit": 7,
       "pattern": "I have a sword. / I can see a monster.",
       "focus_it": "Frasi con soggetto 'io': dire cosa si ha e cosa si vede.",
       "why_it": "Il primo passo dal riconoscere al dire qualcosa di proprio."
     },
     {
-      "id": "st_questions", "phase": 3, "unit": 8,
+      "id": "st_questions",
+      "phase": 3,
+      "unit": 8,
       "pattern": "Is it red? — Yes, it is. / What is your name?",
       "focus_it": "Fare una domanda e dare una risposta breve.",
       "why_it": "Chiude il cerchio: il bambino usa la stessa struttura con cui il gioco lo interroga dall'unita' 1."
+    },
+    {
+      "id": "st_this_is_my",
+      "phase": 6,
+      "unit": 9,
+      "pattern": "This is my mum. / I have a sister.",
+      "focus_it": "Presentare i propri cari: 'this is my' per indicare, 'I have a' per dire chi c'e' in famiglia.",
+      "why_it": "E' la prima cosa che un bambino dice di se' in qualunque lingua: chi sono i miei. 'my' e 'have' sono fra le parole piu' frequenti dell'inglese e da qui in poi tornano ovunque."
+    },
+    {
+      "id": "st_touch_your",
+      "phase": 6,
+      "unit": 10,
+      "pattern": "Touch your nose! / I have two hands.",
+      "focus_it": "Capire un'istruzione col corpo (Total Physical Response) e contare le parti del corpo: two hands, two feet.",
+      "why_it": "Le Indicazioni chiedono di capire istruzioni; il corpo e' il modo con cui un bambino anglofono le impara davvero, muovendosi. 'feet' e' il primo plurale irregolare, sentito e basta."
+    },
+    {
+      "id": "st_put_on",
+      "phase": 6,
+      "unit": 11,
+      "pattern": "Put on your hat! / I am wearing a red hat.",
+      "focus_it": "Un comando quotidiano (put on) e la prima frase al presente progressivo (I am wearing), con il colore prima del nome come gia' imparato.",
+      "why_it": "Vestirsi e' un rito di ogni mattina: la lingua che ci sta attaccata si ricorda da sola. 'I am -ing' entra come formula, senza spiegazioni."
+    },
+    {
+      "id": "st_feelings",
+      "phase": 6,
+      "unit": 12,
+      "pattern": "How are you? I am hungry. / Are you tired? Yes, I am. No, I am not.",
+      "focus_it": "Dire come si sta e rispondere si'/no a una domanda con are you.",
+      "why_it": "'How are you?' era gia' nella Torre con 'happy': qui la risposta si allarga a otto stati e arriva la risposta breve negativa, che chiude il cerchio delle domande si'/no."
     }
   ],
-
   "words": [
-    { "id": "w_dragon",   "en": "dragon",   "it": "drago",      "phase": 1, "theme": "creature", "sprite": "sp-dragon" },
-    { "id": "w_monster",  "en": "monster",  "it": "mostro",     "phase": 1, "theme": "creature", "sprite": "sp-monster" },
-    { "id": "w_knight",   "en": "knight",   "it": "cavaliere",  "phase": 1, "theme": "creature", "sprite": "sp-knight" },
-    { "id": "w_wizard",   "en": "wizard",   "it": "mago",       "phase": 1, "theme": "creature", "sprite": "sp-wizard" },
-    { "id": "w_castle",   "en": "castle",   "it": "castello",   "phase": 1, "theme": "creature", "sprite": "sp-castle" },
-    { "id": "w_sword",    "en": "sword",    "it": "spada",      "phase": 1, "theme": "creature", "sprite": "sp-sword" },
-    { "id": "w_shield",   "en": "shield",   "it": "scudo",      "phase": 1, "theme": "creature", "sprite": "sp-shield" },
-    { "id": "w_egg",      "en": "egg",      "it": "uovo",       "phase": 1, "theme": "creature", "sprite": "sp-egg" },
-
-    { "id": "w_dinosaur", "en": "dinosaur", "it": "dinosauro",  "phase": 1, "theme": "dino", "sprite": "sp-dinosaur" },
-    { "id": "w_tail",     "en": "tail",     "it": "coda",       "phase": 1, "theme": "dino", "sprite": "sp-tail" },
-    { "id": "w_wing",     "en": "wing",     "it": "ala",        "phase": 1, "theme": "dino", "sprite": "sp-wing" },
-    { "id": "w_horn",     "en": "horn",     "it": "corno",      "phase": 1, "theme": "dino", "sprite": "sp-horn" },
-    { "id": "w_tooth",    "en": "tooth",    "it": "dente",      "phase": 1, "theme": "dino", "sprite": "sp-tooth" },
-    { "id": "w_claw",     "en": "claw",     "it": "artiglio",   "phase": 1, "theme": "dino", "sprite": "sp-claw" },
-    { "id": "w_bone",     "en": "bone",     "it": "osso",       "phase": 1, "theme": "dino", "sprite": "sp-bone" },
-    { "id": "w_nest",     "en": "nest",     "it": "nido",       "phase": 1, "theme": "dino", "sprite": "sp-nest" },
-    { "id": "w_eye",      "en": "eye",      "it": "occhio",     "phase": 1, "theme": "dino", "sprite": "sp-eye" },
-
-    { "id": "w_red",      "en": "red",      "it": "rosso",      "phase": 1, "theme": "colori", "sprite": "sp-color-red" },
-    { "id": "w_blue",     "en": "blue",     "it": "blu",        "phase": 1, "theme": "colori", "sprite": "sp-color-blue" },
-    { "id": "w_green",    "en": "green",    "it": "verde",      "phase": 1, "theme": "colori", "sprite": "sp-color-green" },
-    { "id": "w_yellow",   "en": "yellow",   "it": "giallo",     "phase": 1, "theme": "colori", "sprite": "sp-color-yellow" },
-    { "id": "w_orange",   "en": "orange",   "it": "arancione",  "phase": 1, "theme": "colori", "sprite": "sp-color-orange" },
-    { "id": "w_purple",   "en": "purple",   "it": "viola",      "phase": 1, "theme": "colori", "sprite": "sp-color-purple" },
-    { "id": "w_black",    "en": "black",    "it": "nero",       "phase": 1, "theme": "colori", "sprite": "sp-color-black" },
-    { "id": "w_white",    "en": "white",    "it": "bianco",     "phase": 1, "theme": "colori", "sprite": "sp-color-white" },
-
-    { "id": "w_one",      "en": "one",      "it": "uno",        "phase": 1, "theme": "numeri", "sprite": "sp-num-1" },
-    { "id": "w_two",      "en": "two",      "it": "due",        "phase": 1, "theme": "numeri", "sprite": "sp-num-2" },
-    { "id": "w_three",    "en": "three",    "it": "tre",        "phase": 1, "theme": "numeri", "sprite": "sp-num-3" },
-    { "id": "w_four",     "en": "four",     "it": "quattro",    "phase": 1, "theme": "numeri", "sprite": "sp-num-4" },
-    { "id": "w_five",     "en": "five",     "it": "cinque",     "phase": 1, "theme": "numeri", "sprite": "sp-num-5" },
-    { "id": "w_six",      "en": "six",      "it": "sei",        "phase": 1, "theme": "numeri", "sprite": "sp-num-6" },
-    { "id": "w_seven",    "en": "seven",    "it": "sette",      "phase": 1, "theme": "numeri", "sprite": "sp-num-7" },
-    { "id": "w_eight",    "en": "eight",    "it": "otto",       "phase": 1, "theme": "numeri", "sprite": "sp-num-8" },
-    { "id": "w_nine",     "en": "nine",     "it": "nove",       "phase": 1, "theme": "numeri", "sprite": "sp-num-9" },
-    { "id": "w_ten",      "en": "ten",      "it": "dieci",      "phase": 1, "theme": "numeri", "sprite": "sp-num-10" },
-
-    { "id": "w_cat",      "en": "cat",      "it": "gatto",      "phase": 2, "theme": "natura", "sprite": "sp-cat" },
-    { "id": "w_dog",      "en": "dog",      "it": "cane",       "phase": 2, "theme": "natura", "sprite": "sp-dog" },
-    { "id": "w_fish",     "en": "fish",     "it": "pesce",      "phase": 2, "theme": "natura", "sprite": "sp-fish" },
-    { "id": "w_bird",     "en": "bird",     "it": "uccello",    "phase": 2, "theme": "natura", "sprite": "sp-bird" },
-    { "id": "w_tree",     "en": "tree",     "it": "albero",     "phase": 2, "theme": "natura", "sprite": "sp-tree" },
-    { "id": "w_star",     "en": "star",     "it": "stella",     "phase": 2, "theme": "natura", "sprite": "sp-star" },
-    { "id": "w_moon",     "en": "moon",     "it": "luna",       "phase": 2, "theme": "natura", "sprite": "sp-moon" },
-    { "id": "w_sun",      "en": "sun",      "it": "sole",       "phase": 2, "theme": "natura", "sprite": "sp-sun" },
-
-    { "id": "w_big",      "en": "big",      "it": "grande",     "phase": 2, "theme": "aggettivi", "sprite": "sp-big" },
-    { "id": "w_small",    "en": "small",    "it": "piccolo",    "phase": 2, "theme": "aggettivi", "sprite": "sp-small" },
-    { "id": "w_happy",    "en": "happy",    "it": "felice",     "phase": 2, "theme": "aggettivi", "sprite": "sp-happy" },
-    { "id": "w_sad",      "en": "sad",      "it": "triste",     "phase": 2, "theme": "aggettivi", "sprite": "sp-sad" },
-    { "id": "w_hot",      "en": "hot",      "it": "caldo",      "phase": 2, "theme": "aggettivi", "sprite": "sp-hot" },
-    { "id": "w_cold",     "en": "cold",     "it": "freddo",     "phase": 2, "theme": "aggettivi", "sprite": "sp-cold" },
-    { "id": "w_fast",     "en": "fast",     "it": "veloce",     "phase": 2, "theme": "aggettivi", "sprite": "sp-fast" },
-    { "id": "w_slow",     "en": "slow",     "it": "lento",      "phase": 2, "theme": "aggettivi", "sprite": "sp-slow" }
+    {
+      "id": "w_dragon",
+      "en": "dragon",
+      "it": "drago",
+      "phase": 1,
+      "theme": "creature",
+      "sprite": "sp-dragon"
+    },
+    {
+      "id": "w_monster",
+      "en": "monster",
+      "it": "mostro",
+      "phase": 1,
+      "theme": "creature",
+      "sprite": "sp-monster"
+    },
+    {
+      "id": "w_knight",
+      "en": "knight",
+      "it": "cavaliere",
+      "phase": 1,
+      "theme": "creature",
+      "sprite": "sp-knight"
+    },
+    {
+      "id": "w_wizard",
+      "en": "wizard",
+      "it": "mago",
+      "phase": 1,
+      "theme": "creature",
+      "sprite": "sp-wizard"
+    },
+    {
+      "id": "w_castle",
+      "en": "castle",
+      "it": "castello",
+      "phase": 1,
+      "theme": "creature",
+      "sprite": "sp-castle"
+    },
+    {
+      "id": "w_sword",
+      "en": "sword",
+      "it": "spada",
+      "phase": 1,
+      "theme": "creature",
+      "sprite": "sp-sword"
+    },
+    {
+      "id": "w_shield",
+      "en": "shield",
+      "it": "scudo",
+      "phase": 1,
+      "theme": "creature",
+      "sprite": "sp-shield"
+    },
+    {
+      "id": "w_egg",
+      "en": "egg",
+      "it": "uovo",
+      "phase": 1,
+      "theme": "creature",
+      "sprite": "sp-egg"
+    },
+    {
+      "id": "w_dinosaur",
+      "en": "dinosaur",
+      "it": "dinosauro",
+      "phase": 1,
+      "theme": "dino",
+      "sprite": "sp-dinosaur"
+    },
+    {
+      "id": "w_tail",
+      "en": "tail",
+      "it": "coda",
+      "phase": 1,
+      "theme": "dino",
+      "sprite": "sp-tail"
+    },
+    {
+      "id": "w_wing",
+      "en": "wing",
+      "it": "ala",
+      "phase": 1,
+      "theme": "dino",
+      "sprite": "sp-wing"
+    },
+    {
+      "id": "w_horn",
+      "en": "horn",
+      "it": "corno",
+      "phase": 1,
+      "theme": "dino",
+      "sprite": "sp-horn"
+    },
+    {
+      "id": "w_tooth",
+      "en": "tooth",
+      "it": "dente",
+      "phase": 1,
+      "theme": "dino",
+      "sprite": "sp-tooth"
+    },
+    {
+      "id": "w_claw",
+      "en": "claw",
+      "it": "artiglio",
+      "phase": 1,
+      "theme": "dino",
+      "sprite": "sp-claw"
+    },
+    {
+      "id": "w_bone",
+      "en": "bone",
+      "it": "osso",
+      "phase": 1,
+      "theme": "dino",
+      "sprite": "sp-bone"
+    },
+    {
+      "id": "w_nest",
+      "en": "nest",
+      "it": "nido",
+      "phase": 1,
+      "theme": "dino",
+      "sprite": "sp-nest"
+    },
+    {
+      "id": "w_eye",
+      "en": "eye",
+      "it": "occhio",
+      "phase": 1,
+      "theme": "dino",
+      "sprite": "sp-eye"
+    },
+    {
+      "id": "w_red",
+      "en": "red",
+      "it": "rosso",
+      "phase": 1,
+      "theme": "colori",
+      "sprite": "sp-color-red"
+    },
+    {
+      "id": "w_blue",
+      "en": "blue",
+      "it": "blu",
+      "phase": 1,
+      "theme": "colori",
+      "sprite": "sp-color-blue"
+    },
+    {
+      "id": "w_green",
+      "en": "green",
+      "it": "verde",
+      "phase": 1,
+      "theme": "colori",
+      "sprite": "sp-color-green"
+    },
+    {
+      "id": "w_yellow",
+      "en": "yellow",
+      "it": "giallo",
+      "phase": 1,
+      "theme": "colori",
+      "sprite": "sp-color-yellow"
+    },
+    {
+      "id": "w_orange",
+      "en": "orange",
+      "it": "arancione",
+      "phase": 1,
+      "theme": "colori",
+      "sprite": "sp-color-orange"
+    },
+    {
+      "id": "w_purple",
+      "en": "purple",
+      "it": "viola",
+      "phase": 1,
+      "theme": "colori",
+      "sprite": "sp-color-purple"
+    },
+    {
+      "id": "w_black",
+      "en": "black",
+      "it": "nero",
+      "phase": 1,
+      "theme": "colori",
+      "sprite": "sp-color-black"
+    },
+    {
+      "id": "w_white",
+      "en": "white",
+      "it": "bianco",
+      "phase": 1,
+      "theme": "colori",
+      "sprite": "sp-color-white"
+    },
+    {
+      "id": "w_one",
+      "en": "one",
+      "it": "uno",
+      "phase": 1,
+      "theme": "numeri",
+      "sprite": "sp-num-1"
+    },
+    {
+      "id": "w_two",
+      "en": "two",
+      "it": "due",
+      "phase": 1,
+      "theme": "numeri",
+      "sprite": "sp-num-2"
+    },
+    {
+      "id": "w_three",
+      "en": "three",
+      "it": "tre",
+      "phase": 1,
+      "theme": "numeri",
+      "sprite": "sp-num-3"
+    },
+    {
+      "id": "w_four",
+      "en": "four",
+      "it": "quattro",
+      "phase": 1,
+      "theme": "numeri",
+      "sprite": "sp-num-4"
+    },
+    {
+      "id": "w_five",
+      "en": "five",
+      "it": "cinque",
+      "phase": 1,
+      "theme": "numeri",
+      "sprite": "sp-num-5"
+    },
+    {
+      "id": "w_six",
+      "en": "six",
+      "it": "sei",
+      "phase": 1,
+      "theme": "numeri",
+      "sprite": "sp-num-6"
+    },
+    {
+      "id": "w_seven",
+      "en": "seven",
+      "it": "sette",
+      "phase": 1,
+      "theme": "numeri",
+      "sprite": "sp-num-7"
+    },
+    {
+      "id": "w_eight",
+      "en": "eight",
+      "it": "otto",
+      "phase": 1,
+      "theme": "numeri",
+      "sprite": "sp-num-8"
+    },
+    {
+      "id": "w_nine",
+      "en": "nine",
+      "it": "nove",
+      "phase": 1,
+      "theme": "numeri",
+      "sprite": "sp-num-9"
+    },
+    {
+      "id": "w_ten",
+      "en": "ten",
+      "it": "dieci",
+      "phase": 1,
+      "theme": "numeri",
+      "sprite": "sp-num-10"
+    },
+    {
+      "id": "w_cat",
+      "en": "cat",
+      "it": "gatto",
+      "phase": 2,
+      "theme": "natura",
+      "sprite": "sp-cat"
+    },
+    {
+      "id": "w_dog",
+      "en": "dog",
+      "it": "cane",
+      "phase": 2,
+      "theme": "natura",
+      "sprite": "sp-dog"
+    },
+    {
+      "id": "w_fish",
+      "en": "fish",
+      "it": "pesce",
+      "phase": 2,
+      "theme": "natura",
+      "sprite": "sp-fish"
+    },
+    {
+      "id": "w_bird",
+      "en": "bird",
+      "it": "uccello",
+      "phase": 2,
+      "theme": "natura",
+      "sprite": "sp-bird"
+    },
+    {
+      "id": "w_tree",
+      "en": "tree",
+      "it": "albero",
+      "phase": 2,
+      "theme": "natura",
+      "sprite": "sp-tree"
+    },
+    {
+      "id": "w_star",
+      "en": "star",
+      "it": "stella",
+      "phase": 2,
+      "theme": "natura",
+      "sprite": "sp-star"
+    },
+    {
+      "id": "w_moon",
+      "en": "moon",
+      "it": "luna",
+      "phase": 2,
+      "theme": "natura",
+      "sprite": "sp-moon"
+    },
+    {
+      "id": "w_sun",
+      "en": "sun",
+      "it": "sole",
+      "phase": 2,
+      "theme": "natura",
+      "sprite": "sp-sun"
+    },
+    {
+      "id": "w_big",
+      "en": "big",
+      "it": "grande",
+      "phase": 2,
+      "theme": "aggettivi",
+      "sprite": "sp-big"
+    },
+    {
+      "id": "w_small",
+      "en": "small",
+      "it": "piccolo",
+      "phase": 2,
+      "theme": "aggettivi",
+      "sprite": "sp-small"
+    },
+    {
+      "id": "w_happy",
+      "en": "happy",
+      "it": "felice",
+      "phase": 2,
+      "theme": "aggettivi",
+      "sprite": "sp-happy"
+    },
+    {
+      "id": "w_sad",
+      "en": "sad",
+      "it": "triste",
+      "phase": 2,
+      "theme": "aggettivi",
+      "sprite": "sp-sad"
+    },
+    {
+      "id": "w_hot",
+      "en": "hot",
+      "it": "caldo",
+      "phase": 2,
+      "theme": "aggettivi",
+      "sprite": "sp-hot"
+    },
+    {
+      "id": "w_cold",
+      "en": "cold",
+      "it": "freddo",
+      "phase": 2,
+      "theme": "aggettivi",
+      "sprite": "sp-cold"
+    },
+    {
+      "id": "w_fast",
+      "en": "fast",
+      "it": "veloce",
+      "phase": 2,
+      "theme": "aggettivi",
+      "sprite": "sp-fast"
+    },
+    {
+      "id": "w_slow",
+      "en": "slow",
+      "it": "lento",
+      "phase": 2,
+      "theme": "aggettivi",
+      "sprite": "sp-slow"
+    },
+    {
+      "id": "w_mum",
+      "en": "mum",
+      "it": "mamma",
+      "phase": 6,
+      "theme": "famiglia",
+      "sprite": "sp-mum"
+    },
+    {
+      "id": "w_dad",
+      "en": "dad",
+      "it": "papà",
+      "phase": 6,
+      "theme": "famiglia",
+      "sprite": "sp-dad"
+    },
+    {
+      "id": "w_brother",
+      "en": "brother",
+      "it": "fratello",
+      "phase": 6,
+      "theme": "famiglia",
+      "sprite": "sp-brother"
+    },
+    {
+      "id": "w_sister",
+      "en": "sister",
+      "it": "sorella",
+      "phase": 6,
+      "theme": "famiglia",
+      "sprite": "sp-sister"
+    },
+    {
+      "id": "w_grandma",
+      "en": "grandma",
+      "it": "nonna",
+      "phase": 6,
+      "theme": "famiglia",
+      "sprite": "sp-grandma"
+    },
+    {
+      "id": "w_grandpa",
+      "en": "grandpa",
+      "it": "nonno",
+      "phase": 6,
+      "theme": "famiglia",
+      "sprite": "sp-grandpa"
+    },
+    {
+      "id": "w_baby",
+      "en": "baby",
+      "it": "bebè",
+      "phase": 6,
+      "theme": "famiglia",
+      "sprite": "sp-baby"
+    },
+    {
+      "id": "w_friend",
+      "en": "friend",
+      "it": "amico",
+      "phase": 6,
+      "theme": "famiglia",
+      "sprite": "sp-friend"
+    },
+    {
+      "id": "w_head",
+      "en": "head",
+      "it": "testa",
+      "phase": 6,
+      "theme": "corpo",
+      "sprite": "sp-head"
+    },
+    {
+      "id": "w_hand",
+      "en": "hand",
+      "it": "mano",
+      "phase": 6,
+      "theme": "corpo",
+      "sprite": "sp-hand"
+    },
+    {
+      "id": "w_foot",
+      "en": "foot",
+      "it": "piede",
+      "phase": 6,
+      "theme": "corpo",
+      "sprite": "sp-foot"
+    },
+    {
+      "id": "w_arm",
+      "en": "arm",
+      "it": "braccio",
+      "phase": 6,
+      "theme": "corpo",
+      "sprite": "sp-arm"
+    },
+    {
+      "id": "w_leg",
+      "en": "leg",
+      "it": "gamba",
+      "phase": 6,
+      "theme": "corpo",
+      "sprite": "sp-leg"
+    },
+    {
+      "id": "w_nose",
+      "en": "nose",
+      "it": "naso",
+      "phase": 6,
+      "theme": "corpo",
+      "sprite": "sp-nose"
+    },
+    {
+      "id": "w_mouth",
+      "en": "mouth",
+      "it": "bocca",
+      "phase": 6,
+      "theme": "corpo",
+      "sprite": "sp-mouth"
+    },
+    {
+      "id": "w_ear",
+      "en": "ear",
+      "it": "orecchio",
+      "phase": 6,
+      "theme": "corpo",
+      "sprite": "sp-ear"
+    },
+    {
+      "id": "w_hat",
+      "en": "hat",
+      "it": "cappello",
+      "phase": 6,
+      "theme": "vestiti",
+      "sprite": "sp-hat"
+    },
+    {
+      "id": "w_shoes",
+      "en": "shoes",
+      "it": "scarpe",
+      "phase": 6,
+      "theme": "vestiti",
+      "sprite": "sp-shoes"
+    },
+    {
+      "id": "w_tshirt",
+      "en": "T-shirt",
+      "it": "maglietta",
+      "phase": 6,
+      "theme": "vestiti",
+      "sprite": "sp-tshirt"
+    },
+    {
+      "id": "w_dress",
+      "en": "dress",
+      "it": "vestito",
+      "phase": 6,
+      "theme": "vestiti",
+      "sprite": "sp-dress"
+    },
+    {
+      "id": "w_jacket",
+      "en": "jacket",
+      "it": "giacca",
+      "phase": 6,
+      "theme": "vestiti",
+      "sprite": "sp-jacket"
+    },
+    {
+      "id": "w_socks",
+      "en": "socks",
+      "it": "calzini",
+      "phase": 6,
+      "theme": "vestiti",
+      "sprite": "sp-socks"
+    },
+    {
+      "id": "w_trousers",
+      "en": "trousers",
+      "it": "pantaloni",
+      "phase": 6,
+      "theme": "vestiti",
+      "sprite": "sp-trousers"
+    },
+    {
+      "id": "w_scarf",
+      "en": "scarf",
+      "it": "sciarpa",
+      "phase": 6,
+      "theme": "vestiti",
+      "sprite": "sp-scarf"
+    },
+    {
+      "id": "w_angry",
+      "en": "angry",
+      "it": "arrabbiato",
+      "phase": 6,
+      "theme": "emozioni",
+      "sprite": "sp-angry"
+    },
+    {
+      "id": "w_scared",
+      "en": "scared",
+      "it": "spaventato",
+      "phase": 6,
+      "theme": "emozioni",
+      "sprite": "sp-scared"
+    },
+    {
+      "id": "w_tired",
+      "en": "tired",
+      "it": "stanco",
+      "phase": 6,
+      "theme": "emozioni",
+      "sprite": "sp-tired"
+    },
+    {
+      "id": "w_hungry",
+      "en": "hungry",
+      "it": "affamato",
+      "phase": 6,
+      "theme": "emozioni",
+      "sprite": "sp-hungry"
+    },
+    {
+      "id": "w_thirsty",
+      "en": "thirsty",
+      "it": "assetato",
+      "phase": 6,
+      "theme": "emozioni",
+      "sprite": "sp-thirsty"
+    },
+    {
+      "id": "w_sick",
+      "en": "sick",
+      "it": "malato",
+      "phase": 6,
+      "theme": "emozioni",
+      "sprite": "sp-sick"
+    },
+    {
+      "id": "w_bored",
+      "en": "bored",
+      "it": "annoiato",
+      "phase": 6,
+      "theme": "emozioni",
+      "sprite": "sp-bored"
+    },
+    {
+      "id": "w_surprised",
+      "en": "surprised",
+      "it": "sorpreso",
+      "phase": 6,
+      "theme": "emozioni",
+      "sprite": "sp-surprised"
+    }
   ],
-
   "phrases": [
-    { "id": "p_q_dragon",  "en": "What is it? A dragon.",  "it": "Che cos'e'? Un drago.",      "phase": 1, "theme": "creature", "structure": "st_what_is_it", "sprite": "sp-dragon", "wordIds": ["w_dragon"] },
-    { "id": "p_q_knight",  "en": "What is it? A knight.",  "it": "Che cos'e'? Un cavaliere.",  "phase": 1, "theme": "creature", "structure": "st_what_is_it", "sprite": "sp-knight", "wordIds": ["w_knight"] },
-    { "id": "p_q_castle",  "en": "What is it? A castle.",  "it": "Che cos'e'? Un castello.",   "phase": 1, "theme": "creature", "structure": "st_what_is_it", "sprite": "sp-castle", "wordIds": ["w_castle"] },
-
-    { "id": "p_an_egg",    "en": "It's an egg.",   "it": "E' un uovo.",     "phase": 1, "theme": "dino", "structure": "st_a_an", "sprite": "sp-egg",   "wordIds": ["w_egg"] },
-    { "id": "p_an_eye",    "en": "It's an eye.",   "it": "E' un occhio.",   "phase": 1, "theme": "dino", "structure": "st_a_an", "sprite": "sp-eye",   "wordIds": ["w_eye"] },
-    { "id": "p_a_tooth",   "en": "It's a tooth.",  "it": "E' un dente.",    "phase": 1, "theme": "dino", "structure": "st_a_an", "sprite": "sp-tooth", "wordIds": ["w_tooth"] },
-    { "id": "p_a_nest",    "en": "It's a nest.",   "it": "E' un nido.",     "phase": 1, "theme": "dino", "structure": "st_a_an", "sprite": "sp-nest",  "wordIds": ["w_nest"] },
-
-    { "id": "p_adj_red",    "en": "It's a red egg.",    "it": "E' un uovo rosso.",  "phase": 1, "theme": "colori", "structure": "st_adj_noun", "sprite": "sp-color-red",    "wordIds": ["w_red", "w_egg"] },
-    { "id": "p_adj_blue",   "en": "It's a blue egg.",   "it": "E' un uovo blu.",    "phase": 1, "theme": "colori", "structure": "st_adj_noun", "sprite": "sp-color-blue",   "wordIds": ["w_blue", "w_egg"] },
-    { "id": "p_adj_green",  "en": "It's a green egg.",  "it": "E' un uovo verde.",  "phase": 1, "theme": "colori", "structure": "st_adj_noun", "sprite": "sp-color-green",  "wordIds": ["w_green", "w_egg"] },
-    { "id": "p_adj_yellow", "en": "It's a yellow egg.", "it": "E' un uovo giallo.", "phase": 1, "theme": "colori", "structure": "st_adj_noun", "sprite": "sp-color-yellow", "wordIds": ["w_yellow", "w_egg"] },
-
-    { "id": "p_hm_one",   "en": "How many? One.",   "it": "Quanti sono? Uno.",   "phase": 1, "theme": "numeri", "structure": "st_how_many", "sprite": "sp-num-1",  "wordIds": ["w_one"] },
-    { "id": "p_hm_three", "en": "How many? Three.", "it": "Quanti sono? Tre.",   "phase": 1, "theme": "numeri", "structure": "st_how_many", "sprite": "sp-num-3",  "wordIds": ["w_three"] },
-    { "id": "p_hm_five",  "en": "How many? Five.",  "it": "Quanti sono? Cinque.","phase": 1, "theme": "numeri", "structure": "st_how_many", "sprite": "sp-num-5",  "wordIds": ["w_five"] },
-    { "id": "p_hm_ten",   "en": "How many? Ten.",   "it": "Quanti sono? Dieci.", "phase": 1, "theme": "numeri", "structure": "st_how_many", "sprite": "sp-num-10", "wordIds": ["w_ten"] },
-
-    { "id": "p_this_cat",    "en": "This is a cat.",    "it": "Questo e' un gatto.",   "phase": 2, "theme": "natura", "structure": "st_this_these", "sprite": "sp-cat",   "wordIds": ["w_cat"] },
-    { "id": "p_these_cats",  "en": "These are cats.",   "it": "Questi sono gatti.",    "phase": 2, "theme": "natura", "structure": "st_this_these", "sprite": "sp-cats",  "wordIds": ["w_cat"] },
-    { "id": "p_this_tree",   "en": "This is a tree.",   "it": "Questo e' un albero.",  "phase": 2, "theme": "natura", "structure": "st_this_these", "sprite": "sp-tree",  "wordIds": ["w_tree"] },
-    { "id": "p_this_star",   "en": "This is a star.",   "it": "Questa e' una stella.", "phase": 2, "theme": "natura", "structure": "st_this_these", "sprite": "sp-star",  "wordIds": ["w_star"] },
-    { "id": "p_these_stars", "en": "These are stars.",  "it": "Queste sono stelle.",   "phase": 2, "theme": "natura", "structure": "st_this_these", "sprite": "sp-stars", "wordIds": ["w_star"] },
-
-    { "id": "p_be_dragon",  "en": "The dragon is big.",      "it": "Il drago e' grande.",         "phase": 2, "theme": "aggettivi", "structure": "st_be_sing_plur", "sprite": "sp-dragon",    "wordIds": ["w_dragon", "w_big"] },
-    { "id": "p_be_dragons", "en": "The dragons are big.",    "it": "I draghi sono grandi.",       "phase": 2, "theme": "aggettivi", "structure": "st_be_sing_plur", "sprite": "sp-dragons",   "wordIds": ["w_dragon", "w_big"] },
-    { "id": "p_be_cat",     "en": "The cat is small.",       "it": "Il gatto e' piccolo.",        "phase": 2, "theme": "aggettivi", "structure": "st_be_sing_plur", "sprite": "sp-cat",       "wordIds": ["w_cat", "w_small"] },
-    { "id": "p_be_cats",    "en": "The cats are small.",     "it": "I gatti sono piccoli.",       "phase": 2, "theme": "aggettivi", "structure": "st_be_sing_plur", "sprite": "sp-cats",      "wordIds": ["w_cat", "w_small"] },
-    { "id": "p_be_dog",     "en": "The dog is happy.",       "it": "Il cane e' felice.",          "phase": 2, "theme": "aggettivi", "structure": "st_be_sing_plur", "sprite": "sp-dog",       "wordIds": ["w_dog", "w_happy"] },
-    { "id": "p_be_dinos",   "en": "The dinosaurs are fast.", "it": "I dinosauri sono veloci.",    "phase": 2, "theme": "aggettivi", "structure": "st_be_sing_plur", "sprite": "sp-dinosaurs", "wordIds": ["w_dinosaur", "w_fast"] },
-
-    { "id": "p_i_sword",   "en": "I have a sword.",        "it": "Io ho una spada.",        "phase": 3, "structure": "st_i_have_see", "sprite": "sp-sword",     "wordIds": ["w_sword"] },
-    { "id": "p_i_monster", "en": "I can see a monster.",   "it": "Io vedo un mostro.",      "phase": 3, "structure": "st_i_have_see", "sprite": "sp-monster",   "wordIds": ["w_monster"] },
-    { "id": "p_i_eggs",    "en": "I have two eggs.",       "it": "Io ho due uova.",         "phase": 3, "structure": "st_i_have_see", "sprite": "sp-eggs",      "wordIds": ["w_two", "w_egg"] },
-    { "id": "p_i_red_egg", "en": "I can see a red egg.",   "it": "Io vedo un uovo rosso.",  "phase": 3, "structure": "st_i_have_see", "sprite": "sp-color-red", "wordIds": ["w_red", "w_egg"] },
-    { "id": "p_i_shield",  "en": "I have a big shield.",   "it": "Io ho uno scudo grande.", "phase": 3, "structure": "st_i_have_see", "sprite": "sp-shield",    "wordIds": ["w_shield", "w_big"] },
-    { "id": "p_i_stars",   "en": "I can see three stars.", "it": "Io vedo tre stelle.",     "phase": 3, "structure": "st_i_have_see", "sprite": "sp-stars",     "wordIds": ["w_three", "w_star"] },
-
-    { "id": "p_ask_name", "en": "What is your name?",   "it": "Come ti chiami?",        "phase": 3, "structure": "st_questions", "sprite": "sp-pepe",        "wordIds": [] },
-    { "id": "p_my_name",  "en": "My name is Pepe.",     "it": "Mi chiamo Pepe.",        "phase": 3, "structure": "st_questions", "sprite": "sp-pepe",        "wordIds": [] },
-    { "id": "p_ask_how",  "en": "How are you? I am happy.", "it": "Come stai? Sto bene.", "phase": 3, "structure": "st_questions", "sprite": "sp-happy",    "wordIds": ["w_happy"] },
-    { "id": "p_ask_red",  "en": "Is it red? Yes, it is.",   "it": "E' rosso? Si', lo e'.", "phase": 3, "structure": "st_questions", "sprite": "sp-color-red", "wordIds": ["w_red"] },
-    { "id": "p_ask_blue", "en": "Is it blue? No, it is green.", "it": "E' blu? No, e' verde.", "phase": 3, "structure": "st_questions", "sprite": "sp-color-green", "wordIds": ["w_blue", "w_green"] },
-    { "id": "p_thanks",   "en": "Thank you! Good night.",   "it": "Grazie! Buona notte.", "phase": 3, "structure": "st_questions", "sprite": "sp-moon",     "wordIds": ["w_moon"] }
+    {
+      "id": "p_q_dragon",
+      "en": "What is it? A dragon.",
+      "it": "Che cos'e'? Un drago.",
+      "phase": 1,
+      "theme": "creature",
+      "structure": "st_what_is_it",
+      "sprite": "sp-dragon",
+      "wordIds": [
+        "w_dragon"
+      ]
+    },
+    {
+      "id": "p_q_knight",
+      "en": "What is it? A knight.",
+      "it": "Che cos'e'? Un cavaliere.",
+      "phase": 1,
+      "theme": "creature",
+      "structure": "st_what_is_it",
+      "sprite": "sp-knight",
+      "wordIds": [
+        "w_knight"
+      ]
+    },
+    {
+      "id": "p_q_castle",
+      "en": "What is it? A castle.",
+      "it": "Che cos'e'? Un castello.",
+      "phase": 1,
+      "theme": "creature",
+      "structure": "st_what_is_it",
+      "sprite": "sp-castle",
+      "wordIds": [
+        "w_castle"
+      ]
+    },
+    {
+      "id": "p_an_egg",
+      "en": "It's an egg.",
+      "it": "E' un uovo.",
+      "phase": 1,
+      "theme": "dino",
+      "structure": "st_a_an",
+      "sprite": "sp-egg",
+      "wordIds": [
+        "w_egg"
+      ]
+    },
+    {
+      "id": "p_an_eye",
+      "en": "It's an eye.",
+      "it": "E' un occhio.",
+      "phase": 1,
+      "theme": "dino",
+      "structure": "st_a_an",
+      "sprite": "sp-eye",
+      "wordIds": [
+        "w_eye"
+      ]
+    },
+    {
+      "id": "p_a_tooth",
+      "en": "It's a tooth.",
+      "it": "E' un dente.",
+      "phase": 1,
+      "theme": "dino",
+      "structure": "st_a_an",
+      "sprite": "sp-tooth",
+      "wordIds": [
+        "w_tooth"
+      ]
+    },
+    {
+      "id": "p_a_nest",
+      "en": "It's a nest.",
+      "it": "E' un nido.",
+      "phase": 1,
+      "theme": "dino",
+      "structure": "st_a_an",
+      "sprite": "sp-nest",
+      "wordIds": [
+        "w_nest"
+      ]
+    },
+    {
+      "id": "p_adj_red",
+      "en": "It's a red egg.",
+      "it": "E' un uovo rosso.",
+      "phase": 1,
+      "theme": "colori",
+      "structure": "st_adj_noun",
+      "sprite": "sp-color-red",
+      "wordIds": [
+        "w_red",
+        "w_egg"
+      ]
+    },
+    {
+      "id": "p_adj_blue",
+      "en": "It's a blue egg.",
+      "it": "E' un uovo blu.",
+      "phase": 1,
+      "theme": "colori",
+      "structure": "st_adj_noun",
+      "sprite": "sp-color-blue",
+      "wordIds": [
+        "w_blue",
+        "w_egg"
+      ]
+    },
+    {
+      "id": "p_adj_green",
+      "en": "It's a green egg.",
+      "it": "E' un uovo verde.",
+      "phase": 1,
+      "theme": "colori",
+      "structure": "st_adj_noun",
+      "sprite": "sp-color-green",
+      "wordIds": [
+        "w_green",
+        "w_egg"
+      ]
+    },
+    {
+      "id": "p_adj_yellow",
+      "en": "It's a yellow egg.",
+      "it": "E' un uovo giallo.",
+      "phase": 1,
+      "theme": "colori",
+      "structure": "st_adj_noun",
+      "sprite": "sp-color-yellow",
+      "wordIds": [
+        "w_yellow",
+        "w_egg"
+      ]
+    },
+    {
+      "id": "p_hm_one",
+      "en": "How many? One.",
+      "it": "Quanti sono? Uno.",
+      "phase": 1,
+      "theme": "numeri",
+      "structure": "st_how_many",
+      "sprite": "sp-num-1",
+      "wordIds": [
+        "w_one"
+      ]
+    },
+    {
+      "id": "p_hm_three",
+      "en": "How many? Three.",
+      "it": "Quanti sono? Tre.",
+      "phase": 1,
+      "theme": "numeri",
+      "structure": "st_how_many",
+      "sprite": "sp-num-3",
+      "wordIds": [
+        "w_three"
+      ]
+    },
+    {
+      "id": "p_hm_five",
+      "en": "How many? Five.",
+      "it": "Quanti sono? Cinque.",
+      "phase": 1,
+      "theme": "numeri",
+      "structure": "st_how_many",
+      "sprite": "sp-num-5",
+      "wordIds": [
+        "w_five"
+      ]
+    },
+    {
+      "id": "p_hm_ten",
+      "en": "How many? Ten.",
+      "it": "Quanti sono? Dieci.",
+      "phase": 1,
+      "theme": "numeri",
+      "structure": "st_how_many",
+      "sprite": "sp-num-10",
+      "wordIds": [
+        "w_ten"
+      ]
+    },
+    {
+      "id": "p_this_cat",
+      "en": "This is a cat.",
+      "it": "Questo e' un gatto.",
+      "phase": 2,
+      "theme": "natura",
+      "structure": "st_this_these",
+      "sprite": "sp-cat",
+      "wordIds": [
+        "w_cat"
+      ]
+    },
+    {
+      "id": "p_these_cats",
+      "en": "These are cats.",
+      "it": "Questi sono gatti.",
+      "phase": 2,
+      "theme": "natura",
+      "structure": "st_this_these",
+      "sprite": "sp-cats",
+      "wordIds": [
+        "w_cat"
+      ]
+    },
+    {
+      "id": "p_this_tree",
+      "en": "This is a tree.",
+      "it": "Questo e' un albero.",
+      "phase": 2,
+      "theme": "natura",
+      "structure": "st_this_these",
+      "sprite": "sp-tree",
+      "wordIds": [
+        "w_tree"
+      ]
+    },
+    {
+      "id": "p_this_star",
+      "en": "This is a star.",
+      "it": "Questa e' una stella.",
+      "phase": 2,
+      "theme": "natura",
+      "structure": "st_this_these",
+      "sprite": "sp-star",
+      "wordIds": [
+        "w_star"
+      ]
+    },
+    {
+      "id": "p_these_stars",
+      "en": "These are stars.",
+      "it": "Queste sono stelle.",
+      "phase": 2,
+      "theme": "natura",
+      "structure": "st_this_these",
+      "sprite": "sp-stars",
+      "wordIds": [
+        "w_star"
+      ]
+    },
+    {
+      "id": "p_be_dragon",
+      "en": "The dragon is big.",
+      "it": "Il drago e' grande.",
+      "phase": 2,
+      "theme": "aggettivi",
+      "structure": "st_be_sing_plur",
+      "sprite": "sp-dragon",
+      "wordIds": [
+        "w_dragon",
+        "w_big"
+      ]
+    },
+    {
+      "id": "p_be_dragons",
+      "en": "The dragons are big.",
+      "it": "I draghi sono grandi.",
+      "phase": 2,
+      "theme": "aggettivi",
+      "structure": "st_be_sing_plur",
+      "sprite": "sp-dragons",
+      "wordIds": [
+        "w_dragon",
+        "w_big"
+      ]
+    },
+    {
+      "id": "p_be_cat",
+      "en": "The cat is small.",
+      "it": "Il gatto e' piccolo.",
+      "phase": 2,
+      "theme": "aggettivi",
+      "structure": "st_be_sing_plur",
+      "sprite": "sp-cat",
+      "wordIds": [
+        "w_cat",
+        "w_small"
+      ]
+    },
+    {
+      "id": "p_be_cats",
+      "en": "The cats are small.",
+      "it": "I gatti sono piccoli.",
+      "phase": 2,
+      "theme": "aggettivi",
+      "structure": "st_be_sing_plur",
+      "sprite": "sp-cats",
+      "wordIds": [
+        "w_cat",
+        "w_small"
+      ]
+    },
+    {
+      "id": "p_be_dog",
+      "en": "The dog is happy.",
+      "it": "Il cane e' felice.",
+      "phase": 2,
+      "theme": "aggettivi",
+      "structure": "st_be_sing_plur",
+      "sprite": "sp-dog",
+      "wordIds": [
+        "w_dog",
+        "w_happy"
+      ]
+    },
+    {
+      "id": "p_be_dinos",
+      "en": "The dinosaurs are fast.",
+      "it": "I dinosauri sono veloci.",
+      "phase": 2,
+      "theme": "aggettivi",
+      "structure": "st_be_sing_plur",
+      "sprite": "sp-dinosaurs",
+      "wordIds": [
+        "w_dinosaur",
+        "w_fast"
+      ]
+    },
+    {
+      "id": "p_i_sword",
+      "en": "I have a sword.",
+      "it": "Io ho una spada.",
+      "phase": 3,
+      "structure": "st_i_have_see",
+      "sprite": "sp-sword",
+      "wordIds": [
+        "w_sword"
+      ]
+    },
+    {
+      "id": "p_i_monster",
+      "en": "I can see a monster.",
+      "it": "Io vedo un mostro.",
+      "phase": 3,
+      "structure": "st_i_have_see",
+      "sprite": "sp-monster",
+      "wordIds": [
+        "w_monster"
+      ]
+    },
+    {
+      "id": "p_i_eggs",
+      "en": "I have two eggs.",
+      "it": "Io ho due uova.",
+      "phase": 3,
+      "structure": "st_i_have_see",
+      "sprite": "sp-eggs",
+      "wordIds": [
+        "w_two",
+        "w_egg"
+      ]
+    },
+    {
+      "id": "p_i_red_egg",
+      "en": "I can see a red egg.",
+      "it": "Io vedo un uovo rosso.",
+      "phase": 3,
+      "structure": "st_i_have_see",
+      "sprite": "sp-color-red",
+      "wordIds": [
+        "w_red",
+        "w_egg"
+      ]
+    },
+    {
+      "id": "p_i_shield",
+      "en": "I have a big shield.",
+      "it": "Io ho uno scudo grande.",
+      "phase": 3,
+      "structure": "st_i_have_see",
+      "sprite": "sp-shield",
+      "wordIds": [
+        "w_shield",
+        "w_big"
+      ]
+    },
+    {
+      "id": "p_i_stars",
+      "en": "I can see three stars.",
+      "it": "Io vedo tre stelle.",
+      "phase": 3,
+      "structure": "st_i_have_see",
+      "sprite": "sp-stars",
+      "wordIds": [
+        "w_three",
+        "w_star"
+      ]
+    },
+    {
+      "id": "p_ask_name",
+      "en": "What is your name?",
+      "it": "Come ti chiami?",
+      "phase": 3,
+      "structure": "st_questions",
+      "sprite": "sp-pepe",
+      "wordIds": []
+    },
+    {
+      "id": "p_my_name",
+      "en": "My name is Pepe.",
+      "it": "Mi chiamo Pepe.",
+      "phase": 3,
+      "structure": "st_questions",
+      "sprite": "sp-pepe",
+      "wordIds": []
+    },
+    {
+      "id": "p_ask_how",
+      "en": "How are you? I am happy.",
+      "it": "Come stai? Sto bene.",
+      "phase": 3,
+      "structure": "st_questions",
+      "sprite": "sp-happy",
+      "wordIds": [
+        "w_happy"
+      ]
+    },
+    {
+      "id": "p_ask_red",
+      "en": "Is it red? Yes, it is.",
+      "it": "E' rosso? Si', lo e'.",
+      "phase": 3,
+      "structure": "st_questions",
+      "sprite": "sp-color-red",
+      "wordIds": [
+        "w_red"
+      ]
+    },
+    {
+      "id": "p_ask_blue",
+      "en": "Is it blue? No, it is green.",
+      "it": "E' blu? No, e' verde.",
+      "phase": 3,
+      "structure": "st_questions",
+      "sprite": "sp-color-green",
+      "wordIds": [
+        "w_blue",
+        "w_green"
+      ]
+    },
+    {
+      "id": "p_thanks",
+      "en": "Thank you! Good night.",
+      "it": "Grazie! Buona notte.",
+      "phase": 3,
+      "structure": "st_questions",
+      "sprite": "sp-moon",
+      "wordIds": [
+        "w_moon"
+      ]
+    },
+    {
+      "id": "p_my_mum",
+      "en": "This is my mum.",
+      "it": "Questa è la mia mamma.",
+      "phase": 6,
+      "theme": "famiglia",
+      "structure": "st_this_is_my",
+      "sprite": "sp-mum",
+      "wordIds": [
+        "w_mum"
+      ]
+    },
+    {
+      "id": "p_my_dad",
+      "en": "This is my dad.",
+      "it": "Questo è il mio papà.",
+      "phase": 6,
+      "theme": "famiglia",
+      "structure": "st_this_is_my",
+      "sprite": "sp-dad",
+      "wordIds": [
+        "w_dad"
+      ]
+    },
+    {
+      "id": "p_my_grandma",
+      "en": "This is my grandma.",
+      "it": "Questa è la mia nonna.",
+      "phase": 6,
+      "theme": "famiglia",
+      "structure": "st_this_is_my",
+      "sprite": "sp-grandma",
+      "wordIds": [
+        "w_grandma"
+      ]
+    },
+    {
+      "id": "p_have_sister",
+      "en": "I have a sister.",
+      "it": "Ho una sorella.",
+      "phase": 6,
+      "theme": "famiglia",
+      "structure": "st_this_is_my",
+      "sprite": "sp-sister",
+      "wordIds": [
+        "w_sister"
+      ]
+    },
+    {
+      "id": "p_have_brother",
+      "en": "I have a brother.",
+      "it": "Ho un fratello.",
+      "phase": 6,
+      "theme": "famiglia",
+      "structure": "st_this_is_my",
+      "sprite": "sp-brother",
+      "wordIds": [
+        "w_brother"
+      ]
+    },
+    {
+      "id": "p_my_friend",
+      "en": "This is my friend.",
+      "it": "Questo è il mio amico.",
+      "phase": 6,
+      "theme": "famiglia",
+      "structure": "st_this_is_my",
+      "sprite": "sp-friend",
+      "wordIds": [
+        "w_friend"
+      ]
+    },
+    {
+      "id": "p_touch_nose",
+      "en": "Touch your nose!",
+      "it": "Tocca il naso!",
+      "phase": 6,
+      "theme": "corpo",
+      "structure": "st_touch_your",
+      "sprite": "sp-nose",
+      "wordIds": [
+        "w_nose"
+      ]
+    },
+    {
+      "id": "p_touch_head",
+      "en": "Touch your head!",
+      "it": "Tocca la testa!",
+      "phase": 6,
+      "theme": "corpo",
+      "structure": "st_touch_your",
+      "sprite": "sp-head",
+      "wordIds": [
+        "w_head"
+      ]
+    },
+    {
+      "id": "p_touch_ear",
+      "en": "Touch your ear!",
+      "it": "Tocca l'orecchio!",
+      "phase": 6,
+      "theme": "corpo",
+      "structure": "st_touch_your",
+      "sprite": "sp-ear",
+      "wordIds": [
+        "w_ear"
+      ]
+    },
+    {
+      "id": "p_two_hands",
+      "en": "I have two hands.",
+      "it": "Ho due mani.",
+      "phase": 6,
+      "theme": "corpo",
+      "structure": "st_touch_your",
+      "sprite": "sp-hand",
+      "wordIds": [
+        "w_hand",
+        "w_two"
+      ]
+    },
+    {
+      "id": "p_two_feet",
+      "en": "I have two feet.",
+      "it": "Ho due piedi.",
+      "phase": 6,
+      "theme": "corpo",
+      "structure": "st_touch_your",
+      "sprite": "sp-foot",
+      "wordIds": [
+        "w_foot",
+        "w_two"
+      ]
+    },
+    {
+      "id": "p_open_mouth",
+      "en": "Open your mouth!",
+      "it": "Apri la bocca!",
+      "phase": 6,
+      "theme": "corpo",
+      "structure": "st_touch_your",
+      "sprite": "sp-mouth",
+      "wordIds": [
+        "w_mouth"
+      ]
+    },
+    {
+      "id": "p_put_hat",
+      "en": "Put on your hat!",
+      "it": "Mettiti il cappello!",
+      "phase": 6,
+      "theme": "vestiti",
+      "structure": "st_put_on",
+      "sprite": "sp-hat",
+      "wordIds": [
+        "w_hat"
+      ]
+    },
+    {
+      "id": "p_put_shoes",
+      "en": "Put on your shoes!",
+      "it": "Mettiti le scarpe!",
+      "phase": 6,
+      "theme": "vestiti",
+      "structure": "st_put_on",
+      "sprite": "sp-shoes",
+      "wordIds": [
+        "w_shoes"
+      ]
+    },
+    {
+      "id": "p_put_jacket",
+      "en": "Put on your jacket!",
+      "it": "Mettiti la giacca!",
+      "phase": 6,
+      "theme": "vestiti",
+      "structure": "st_put_on",
+      "sprite": "sp-jacket",
+      "wordIds": [
+        "w_jacket"
+      ]
+    },
+    {
+      "id": "p_wear_red_hat",
+      "en": "I am wearing a red hat.",
+      "it": "Indosso un cappello rosso.",
+      "phase": 6,
+      "theme": "vestiti",
+      "structure": "st_put_on",
+      "sprite": "sp-hat",
+      "wordIds": [
+        "w_hat",
+        "w_red"
+      ]
+    },
+    {
+      "id": "p_wear_blue_tshirt",
+      "en": "I am wearing a blue T-shirt.",
+      "it": "Indosso una maglietta blu.",
+      "phase": 6,
+      "theme": "vestiti",
+      "structure": "st_put_on",
+      "sprite": "sp-tshirt",
+      "wordIds": [
+        "w_tshirt",
+        "w_blue"
+      ]
+    },
+    {
+      "id": "p_wear_socks",
+      "en": "I am wearing socks.",
+      "it": "Indosso i calzini.",
+      "phase": 6,
+      "theme": "vestiti",
+      "structure": "st_put_on",
+      "sprite": "sp-socks",
+      "wordIds": [
+        "w_socks"
+      ]
+    },
+    {
+      "id": "p_i_am_hungry",
+      "en": "How are you? I am hungry.",
+      "it": "Come stai? Ho fame.",
+      "phase": 6,
+      "theme": "emozioni",
+      "structure": "st_feelings",
+      "sprite": "sp-hungry",
+      "wordIds": [
+        "w_hungry"
+      ]
+    },
+    {
+      "id": "p_i_am_tired",
+      "en": "How are you? I am tired.",
+      "it": "Come stai? Sono stanco.",
+      "phase": 6,
+      "theme": "emozioni",
+      "structure": "st_feelings",
+      "sprite": "sp-tired",
+      "wordIds": [
+        "w_tired"
+      ]
+    },
+    {
+      "id": "p_i_am_scared",
+      "en": "I am scared!",
+      "it": "Ho paura!",
+      "phase": 6,
+      "theme": "emozioni",
+      "structure": "st_feelings",
+      "sprite": "sp-scared",
+      "wordIds": [
+        "w_scared"
+      ]
+    },
+    {
+      "id": "p_are_you_tired_yes",
+      "en": "Are you tired? Yes, I am.",
+      "it": "Sei stanco? Sì.",
+      "phase": 6,
+      "theme": "emozioni",
+      "structure": "st_feelings",
+      "sprite": "sp-tired",
+      "wordIds": [
+        "w_tired"
+      ]
+    },
+    {
+      "id": "p_are_you_angry_no",
+      "en": "Are you angry? No, I am not.",
+      "it": "Sei arrabbiato? No.",
+      "phase": 6,
+      "theme": "emozioni",
+      "structure": "st_feelings",
+      "sprite": "sp-angry",
+      "wordIds": [
+        "w_angry"
+      ]
+    },
+    {
+      "id": "p_are_you_sick",
+      "en": "Are you sick? No, I am not.",
+      "it": "Sei malato? No.",
+      "phase": 6,
+      "theme": "emozioni",
+      "structure": "st_feelings",
+      "sprite": "sp-sick",
+      "wordIds": [
+        "w_sick"
+      ]
+    }
   ],
-
   "worlds": [
     {
-      "id": "world_dragons", "unit": 1, "order": 1, "phase": 1,
+      "id": "world_dragons",
+      "unit": 1,
+      "order": 1,
+      "phase": 1,
       "title_it": "La Valle dei Draghi",
       "objective_it": "Nominare 8 creature e oggetti fantasy, e riconoscere la domanda What is it?",
       "canDo_it": "So indicare il drago, il cavaliere e il castello quando li sento nominare.",
-      "structureIds": ["st_what_is_it"],
-      "sprite": "sp-castle", "color": "#ff7a4d",
+      "structureIds": [
+        "st_what_is_it"
+      ],
+      "sprite": "sp-castle",
+      "color": "#ff7a4d",
       "newItems": [
-        "w_dragon", "w_monster", "w_knight", "w_wizard", "w_castle", "w_sword", "w_shield", "w_egg",
-        "p_q_dragon", "p_q_knight", "p_q_castle"
+        "w_dragon",
+        "w_monster",
+        "w_knight",
+        "w_wizard",
+        "w_castle",
+        "w_sword",
+        "w_shield",
+        "w_egg",
+        "p_q_dragon",
+        "p_q_knight",
+        "p_q_castle"
       ],
       "reviewFrom": [],
-      "minigames": ["match", "listen", "quiz", "hunt", "truefalse"],
+      "minigames": [
+        "match",
+        "listen",
+        "quiz",
+        "hunt",
+        "truefalse"
+      ],
       "reward": "c_flamup"
     },
     {
-      "id": "world_dinos", "unit": 2, "order": 2, "phase": 1,
+      "id": "world_dinos",
+      "unit": 2,
+      "order": 2,
+      "phase": 1,
       "title_it": "La Giungla dei Dinosauri",
       "objective_it": "Le parti del corpo dei dinosauri, e l'articolo che cambia: a tooth ma an egg.",
       "canDo_it": "So dire It's a... e It's an... senza sbagliare l'articolo.",
-      "structureIds": ["st_a_an"],
-      "sprite": "sp-dinosaur", "color": "#3fbf7f",
-      "newItems": [
-        "w_dinosaur", "w_tail", "w_wing", "w_horn", "w_tooth", "w_claw", "w_bone", "w_nest", "w_eye",
-        "p_an_egg", "p_an_eye", "p_a_tooth", "p_a_nest"
+      "structureIds": [
+        "st_a_an"
       ],
-      "reviewFrom": ["world_dragons"],
-      "minigames": ["match", "listen", "quiz", "hunt", "truefalse"],
+      "sprite": "sp-dinosaur",
+      "color": "#3fbf7f",
+      "newItems": [
+        "w_dinosaur",
+        "w_tail",
+        "w_wing",
+        "w_horn",
+        "w_tooth",
+        "w_claw",
+        "w_bone",
+        "w_nest",
+        "w_eye",
+        "p_an_egg",
+        "p_an_eye",
+        "p_a_tooth",
+        "p_a_nest"
+      ],
+      "reviewFrom": [
+        "world_dragons"
+      ],
+      "minigames": [
+        "match",
+        "listen",
+        "quiz",
+        "hunt",
+        "truefalse"
+      ],
       "reward": "c_rocktail"
     },
     {
-      "id": "world_colors", "unit": 3, "order": 3, "phase": 1,
+      "id": "world_colors",
+      "unit": 3,
+      "order": 3,
+      "phase": 1,
       "title_it": "La Grotta dei Colori",
       "objective_it": "Gli 8 colori e l'ordine inglese: il colore va prima del nome (a red egg, non a egg red).",
       "canDo_it": "So scegliere l'uovo giusto quando sento colore e nome insieme.",
-      "structureIds": ["st_adj_noun"],
-      "sprite": "sp-color-purple", "color": "#9a6cf5",
-      "newItems": [
-        "w_red", "w_blue", "w_green", "w_yellow", "w_orange", "w_purple", "w_black", "w_white",
-        "p_adj_red", "p_adj_blue", "p_adj_green", "p_adj_yellow"
+      "structureIds": [
+        "st_adj_noun"
       ],
-      "reviewFrom": ["world_dragons", "world_dinos"],
-      "minigames": ["match", "quiz", "hunt", "listen", "truefalse"],
+      "sprite": "sp-color-purple",
+      "color": "#9a6cf5",
+      "newItems": [
+        "w_red",
+        "w_blue",
+        "w_green",
+        "w_yellow",
+        "w_orange",
+        "w_purple",
+        "w_black",
+        "w_white",
+        "p_adj_red",
+        "p_adj_blue",
+        "p_adj_green",
+        "p_adj_yellow"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "hunt",
+        "listen",
+        "truefalse"
+      ],
       "reward": "c_prisma"
     },
     {
-      "id": "world_numbers", "unit": 4, "order": 4, "phase": 1,
+      "id": "world_numbers",
+      "unit": 4,
+      "order": 4,
+      "phase": 1,
       "title_it": "La Montagna dei Numeri",
       "objective_it": "Contare da uno a dieci rispondendo alla domanda How many?",
       "canDo_it": "So contare fino a dieci e rispondere quando mi chiedono quanti sono.",
-      "structureIds": ["st_how_many"],
-      "sprite": "sp-num-5", "color": "#2f9df5",
-      "newItems": [
-        "w_one", "w_two", "w_three", "w_four", "w_five", "w_six", "w_seven", "w_eight", "w_nine", "w_ten",
-        "p_hm_one", "p_hm_three", "p_hm_five", "p_hm_ten"
+      "structureIds": [
+        "st_how_many"
       ],
-      "reviewFrom": ["world_dragons", "world_dinos", "world_colors"],
-      "minigames": ["match", "quiz", "hunt", "listen", "truefalse"],
+      "sprite": "sp-num-5",
+      "color": "#2f9df5",
+      "newItems": [
+        "w_one",
+        "w_two",
+        "w_three",
+        "w_four",
+        "w_five",
+        "w_six",
+        "w_seven",
+        "w_eight",
+        "w_nine",
+        "w_ten",
+        "p_hm_one",
+        "p_hm_three",
+        "p_hm_five",
+        "p_hm_ten"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "hunt",
+        "listen",
+        "truefalse"
+      ],
       "reward": "c_numo"
     },
     {
-      "id": "world_forest", "unit": 5, "order": 5, "phase": 2,
+      "id": "world_forest",
+      "unit": 5,
+      "order": 5,
+      "phase": 2,
       "title_it": "La Foresta delle Parole",
       "objective_it": "Animali e natura, con la prima forma scritta: this is a cat / these are cats e la -s del plurale.",
       "canDo_it": "So vedere la differenza fra una parola singolare e una plurale.",
-      "structureIds": ["st_this_these"],
-      "sprite": "sp-tree", "color": "#25a86a",
-      "newItems": [
-        "w_cat", "w_dog", "w_fish", "w_bird", "w_tree", "w_star", "w_moon", "w_sun",
-        "p_this_cat", "p_these_cats", "p_this_tree", "p_this_star", "p_these_stars"
+      "structureIds": [
+        "st_this_these"
       ],
-      "reviewFrom": ["world_dragons", "world_dinos", "world_colors", "world_numbers"],
-      "minigames": ["match", "dragdrop", "quiz", "listen", "truefalse"],
+      "sprite": "sp-tree",
+      "color": "#25a86a",
+      "newItems": [
+        "w_cat",
+        "w_dog",
+        "w_fish",
+        "w_bird",
+        "w_tree",
+        "w_star",
+        "w_moon",
+        "w_sun",
+        "p_this_cat",
+        "p_these_cats",
+        "p_this_tree",
+        "p_this_star",
+        "p_these_stars"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers"
+      ],
+      "minigames": [
+        "match",
+        "dragdrop",
+        "quiz",
+        "listen",
+        "truefalse"
+      ],
       "reward": "c_barky"
     },
     {
-      "id": "world_lake", "unit": 6, "order": 6, "phase": 2,
+      "id": "world_lake",
+      "unit": 6,
+      "order": 6,
+      "phase": 2,
       "title_it": "Il Lago Magico",
       "objective_it": "Gli aggettivi e la prima regola vera: is per uno, are per piu' di uno.",
       "canDo_it": "So scegliere fra is e are guardando se la cosa e' una o tante.",
-      "structureIds": ["st_be_sing_plur"],
-      "sprite": "sp-fish", "color": "#12b6c9",
-      "newItems": [
-        "w_big", "w_small", "w_happy", "w_sad", "w_hot", "w_cold", "w_fast", "w_slow",
-        "p_be_dragon", "p_be_dragons", "p_be_cat", "p_be_cats", "p_be_dog", "p_be_dinos"
+      "structureIds": [
+        "st_be_sing_plur"
       ],
-      "reviewFrom": ["world_dragons", "world_dinos", "world_colors", "world_numbers", "world_forest"],
-      "minigames": ["match", "dragdrop", "quiz", "hunt", "truefalse"],
+      "sprite": "sp-fish",
+      "color": "#12b6c9",
+      "newItems": [
+        "w_big",
+        "w_small",
+        "w_happy",
+        "w_sad",
+        "w_hot",
+        "w_cold",
+        "w_fast",
+        "w_slow",
+        "p_be_dragon",
+        "p_be_dragons",
+        "p_be_cat",
+        "p_be_cats",
+        "p_be_dog",
+        "p_be_dinos"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest"
+      ],
+      "minigames": [
+        "match",
+        "dragdrop",
+        "quiz",
+        "hunt",
+        "truefalse"
+      ],
       "reward": "c_splashy"
     },
     {
-      "id": "world_bridge", "unit": 7, "order": 7, "phase": 3,
+      "id": "world_bridge",
+      "unit": 7,
+      "order": 7,
+      "phase": 3,
       "title_it": "Il Ponte delle Frasi",
       "objective_it": "Costruire frasi intere con soggetto io: I have... e I can see...",
       "canDo_it": "So rimettere in ordine una frase di cinque parole e leggerla.",
-      "structureIds": ["st_i_have_see"],
-      "sprite": "sp-sword", "color": "#f2b134",
-      "newItems": ["p_i_sword", "p_i_monster", "p_i_eggs", "p_i_red_egg", "p_i_shield", "p_i_stars"],
-      "reviewFrom": ["world_dragons", "world_dinos", "world_colors", "world_numbers", "world_forest", "world_lake"],
+      "structureIds": [
+        "st_i_have_see"
+      ],
+      "sprite": "sp-sword",
+      "color": "#f2b134",
+      "newItems": [
+        "p_i_sword",
+        "p_i_monster",
+        "p_i_eggs",
+        "p_i_red_egg",
+        "p_i_shield",
+        "p_i_stars"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake"
+      ],
       "reviewWeight": 0.45,
-      "minigames": ["listen", "build", "quiz", "truefalse"],
+      "minigames": [
+        "listen",
+        "build",
+        "quiz",
+        "truefalse"
+      ],
       "reward": "c_glimmer"
     },
     {
-      "id": "world_tower", "unit": 8, "order": 8, "phase": 3,
+      "id": "world_tower",
+      "unit": 8,
+      "order": 8,
+      "phase": 3,
       "title_it": "La Torre dei Dialoghi",
       "objective_it": "Fare una domanda e dare una risposta breve: Is it red? Yes, it is.",
       "canDo_it": "So rispondere quando qualcuno mi chiede come mi chiamo o come sto.",
-      "structureIds": ["st_questions"],
-      "sprite": "sp-wizard", "color": "#e4638f",
-      "newItems": ["p_ask_name", "p_my_name", "p_ask_how", "p_ask_red", "p_ask_blue", "p_thanks"],
+      "structureIds": [
+        "st_questions"
+      ],
+      "sprite": "sp-wizard",
+      "color": "#e4638f",
+      "newItems": [
+        "p_ask_name",
+        "p_my_name",
+        "p_ask_how",
+        "p_ask_red",
+        "p_ask_blue",
+        "p_thanks"
+      ],
       "reviewFrom": [
-        "world_dragons", "world_dinos", "world_colors", "world_numbers",
-        "world_forest", "world_lake", "world_bridge"
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge"
       ],
       "reviewWeight": 0.45,
-      "minigames": ["listen", "build", "quiz", "truefalse"],
+      "minigames": [
+        "listen",
+        "build",
+        "quiz",
+        "truefalse"
+      ],
       "reward": "c_torrek"
+    },
+    {
+      "id": "world_family",
+      "unit": 9,
+      "order": 9,
+      "phase": 6,
+      "title_it": "La Famiglia del Castello",
+      "objective_it": "Presentare i propri cari: otto persone della famiglia, con 'this is my' e 'I have a'.",
+      "canDo_it": "So dire chi c'è nella mia famiglia.",
+      "structureIds": [
+        "st_this_is_my"
+      ],
+      "sprite": "sp-grandma",
+      "color": "#e07a5f",
+      "newItems": [
+        "w_mum",
+        "w_dad",
+        "w_brother",
+        "w_sister",
+        "w_grandma",
+        "w_grandpa",
+        "w_baby",
+        "w_friend",
+        "p_my_mum",
+        "p_my_dad",
+        "p_my_grandma",
+        "p_have_sister",
+        "p_have_brother",
+        "p_my_friend"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_nonnetta"
+    },
+    {
+      "id": "world_body",
+      "unit": 10,
+      "order": 10,
+      "phase": 6,
+      "title_it": "Il Corpo del Gigante",
+      "objective_it": "Le parti del corpo e le istruzioni da eseguire col corpo: touch your nose, open your mouth, I have two hands.",
+      "canDo_it": "So eseguire un comando in inglese col mio corpo.",
+      "structureIds": [
+        "st_touch_your"
+      ],
+      "sprite": "sp-hand",
+      "color": "#81b29a",
+      "newItems": [
+        "w_head",
+        "w_hand",
+        "w_foot",
+        "w_arm",
+        "w_leg",
+        "w_nose",
+        "w_mouth",
+        "w_ear",
+        "p_touch_nose",
+        "p_touch_head",
+        "p_touch_ear",
+        "p_two_hands",
+        "p_two_feet",
+        "p_open_mouth"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_gigione"
+    },
+    {
+      "id": "world_clothes",
+      "unit": 11,
+      "order": 11,
+      "phase": 6,
+      "title_it": "Il Guardaroba del Mago",
+      "objective_it": "Otto vestiti, il comando 'put on' e la prima frase al presente progressivo: I am wearing a red hat.",
+      "canDo_it": "So dire cosa indosso, col suo colore.",
+      "structureIds": [
+        "st_put_on"
+      ],
+      "sprite": "sp-hat",
+      "color": "#8e7dbe",
+      "newItems": [
+        "w_hat",
+        "w_shoes",
+        "w_tshirt",
+        "w_dress",
+        "w_jacket",
+        "w_socks",
+        "w_trousers",
+        "w_scarf",
+        "p_put_hat",
+        "p_put_shoes",
+        "p_put_jacket",
+        "p_wear_red_hat",
+        "p_wear_blue_tshirt",
+        "p_wear_socks"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_sartina"
+    },
+    {
+      "id": "world_feelings",
+      "unit": 12,
+      "order": 12,
+      "phase": 6,
+      "title_it": "Le Emozioni delle Creature",
+      "objective_it": "Otto modi di stare: rispondere a 'How are you?' e dire sì o no a 'Are you tired?'.",
+      "canDo_it": "So dire come sto e rispondere sì o no.",
+      "structureIds": [
+        "st_feelings"
+      ],
+      "sprite": "sp-surprised",
+      "color": "#f2cc8f",
+      "newItems": [
+        "w_angry",
+        "w_scared",
+        "w_tired",
+        "w_hungry",
+        "w_thirsty",
+        "w_sick",
+        "w_bored",
+        "w_surprised",
+        "p_i_am_hungry",
+        "p_i_am_tired",
+        "p_i_am_scared",
+        "p_are_you_tired_yes",
+        "p_are_you_angry_no",
+        "p_are_you_sick"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_nuvolo"
     }
   ],
-
   "creatures": [
-    { "id": "c_pepe",    "name_it": "Pepe",     "sprite": "sp-pepe",    "unlock": { "type": "start" },                     "fact_it": "La tua cucciola di Jack Russell. Adora le parole nuove." },
-    { "id": "c_flamup",  "name_it": "Fiammino", "sprite": "sp-flamup",  "unlock": { "type": "world", "value": "world_dragons" }, "fact_it": "Sputa scintille quando sente una parola giusta." },
-    { "id": "c_rocktail","name_it": "Codasso",  "sprite": "sp-rocktail","unlock": { "type": "world", "value": "world_dinos" },   "fact_it": "Ha la coda di roccia: la usa come tamburo." },
-    { "id": "c_prisma",  "name_it": "Prisma",   "sprite": "sp-prisma",  "unlock": { "type": "world", "value": "world_colors" },  "fact_it": "Cambia colore in base a come si sente." },
-    { "id": "c_numo",    "name_it": "Numo",     "sprite": "sp-numo",    "unlock": { "type": "world", "value": "world_numbers" }, "fact_it": "Conta le stelle ogni notte e non sbaglia mai." },
-    { "id": "c_barky",   "name_it": "Rametto",  "sprite": "sp-barky",   "unlock": { "type": "world", "value": "world_forest" },  "fact_it": "Gli cresce una fogliolina per ogni parola imparata." },
-    { "id": "c_splashy", "name_it": "Sciazzo",  "sprite": "sp-splashy", "unlock": { "type": "world", "value": "world_lake" },    "fact_it": "Fa bolle a forma di lettera." },
-    { "id": "c_glimmer", "name_it": "Baluce",   "sprite": "sp-glimmer", "unlock": { "type": "world", "value": "world_bridge" },  "fact_it": "Si accende quando qualcuno dice una frase intera." },
-    { "id": "c_torrek",  "name_it": "Torrek",   "sprite": "sp-torrek",  "unlock": { "type": "world", "value": "world_tower" },   "fact_it": "Custode della torre: risponde solo in inglese." },
-    { "id": "c_stellina","name_it": "Stellina", "sprite": "sp-stellina","unlock": { "type": "phase", "value": 1 },      "fact_it": "Arriva quando hai finito davvero la prima fase." },
-    { "id": "c_umbra",   "name_it": "Umbra",    "sprite": "sp-umbra",   "unlock": { "type": "mastered", "value": 25 },  "fact_it": "Timida: esce dall'ombra a 25 parole padroneggiate." },
-    { "id": "c_goldwing","name_it": "Aladoro",  "sprite": "sp-goldwing","unlock": { "type": "streak", "value": 7 },     "fact_it": "Il drago d'oro: arriva dopo 7 giorni di fila." }
+    {
+      "id": "c_pepe",
+      "name_it": "Pepe",
+      "sprite": "sp-pepe",
+      "unlock": {
+        "type": "start"
+      },
+      "fact_it": "La tua cucciola di Jack Russell. Adora le parole nuove."
+    },
+    {
+      "id": "c_flamup",
+      "name_it": "Fiammino",
+      "sprite": "sp-flamup",
+      "unlock": {
+        "type": "world",
+        "value": "world_dragons"
+      },
+      "fact_it": "Sputa scintille quando sente una parola giusta."
+    },
+    {
+      "id": "c_rocktail",
+      "name_it": "Codasso",
+      "sprite": "sp-rocktail",
+      "unlock": {
+        "type": "world",
+        "value": "world_dinos"
+      },
+      "fact_it": "Ha la coda di roccia: la usa come tamburo."
+    },
+    {
+      "id": "c_prisma",
+      "name_it": "Prisma",
+      "sprite": "sp-prisma",
+      "unlock": {
+        "type": "world",
+        "value": "world_colors"
+      },
+      "fact_it": "Cambia colore in base a come si sente."
+    },
+    {
+      "id": "c_numo",
+      "name_it": "Numo",
+      "sprite": "sp-numo",
+      "unlock": {
+        "type": "world",
+        "value": "world_numbers"
+      },
+      "fact_it": "Conta le stelle ogni notte e non sbaglia mai."
+    },
+    {
+      "id": "c_barky",
+      "name_it": "Rametto",
+      "sprite": "sp-barky",
+      "unlock": {
+        "type": "world",
+        "value": "world_forest"
+      },
+      "fact_it": "Gli cresce una fogliolina per ogni parola imparata."
+    },
+    {
+      "id": "c_splashy",
+      "name_it": "Sciazzo",
+      "sprite": "sp-splashy",
+      "unlock": {
+        "type": "world",
+        "value": "world_lake"
+      },
+      "fact_it": "Fa bolle a forma di lettera."
+    },
+    {
+      "id": "c_glimmer",
+      "name_it": "Baluce",
+      "sprite": "sp-glimmer",
+      "unlock": {
+        "type": "world",
+        "value": "world_bridge"
+      },
+      "fact_it": "Si accende quando qualcuno dice una frase intera."
+    },
+    {
+      "id": "c_torrek",
+      "name_it": "Torrek",
+      "sprite": "sp-torrek",
+      "unlock": {
+        "type": "world",
+        "value": "world_tower"
+      },
+      "fact_it": "Custode della torre: risponde solo in inglese."
+    },
+    {
+      "id": "c_stellina",
+      "name_it": "Stellina",
+      "sprite": "sp-stellina",
+      "unlock": {
+        "type": "phase",
+        "value": 1
+      },
+      "fact_it": "Arriva quando hai finito davvero la prima fase."
+    },
+    {
+      "id": "c_umbra",
+      "name_it": "Umbra",
+      "sprite": "sp-umbra",
+      "unlock": {
+        "type": "mastered",
+        "value": 25
+      },
+      "fact_it": "Timida: esce dall'ombra a 25 parole padroneggiate."
+    },
+    {
+      "id": "c_goldwing",
+      "name_it": "Aladoro",
+      "sprite": "sp-goldwing",
+      "unlock": {
+        "type": "streak",
+        "value": 7
+      },
+      "fact_it": "Il drago d'oro: arriva dopo 7 giorni di fila."
+    },
+    {
+      "id": "c_nonnetta",
+      "name_it": "Nonnetta",
+      "sprite": "sp-nonnetta",
+      "unlock": {
+        "type": "world",
+        "value": "world_family"
+      },
+      "fact_it": "Una tartaruga saggia con gli occhiali. Conosce tutte le famiglie dell'isola."
+    },
+    {
+      "id": "c_gigione",
+      "name_it": "Gigione",
+      "sprite": "sp-gigione",
+      "unlock": {
+        "type": "world",
+        "value": "world_body"
+      },
+      "fact_it": "Un gigante buono, piccolo come un cucciolo. Se gli dici \"touch your nose\" lo fa."
+    },
+    {
+      "id": "c_sartina",
+      "name_it": "Sartina",
+      "sprite": "sp-sartina",
+      "unlock": {
+        "type": "world",
+        "value": "world_clothes"
+      },
+      "fact_it": "Un ragnetto sarto con otto guanti colorati. Cuce un cappello al giorno."
+    },
+    {
+      "id": "c_nuvolo",
+      "name_it": "Nuvolo",
+      "sprite": "sp-nuvolo",
+      "unlock": {
+        "type": "world",
+        "value": "world_feelings"
+      },
+      "fact_it": "Una nuvoletta che cambia faccia a seconda di come sta. Oggi è contenta."
+    }
   ],
-
   "story": {
     "_comment": "Fase 2: la storia a episodi. who = narrator | pepe | creature. narrator e pepe parlano italiano (audio it/story.<id>.<n>.mp3), la creatura inglese con la voce modello (audio en/story.<id>.mp3) e la traduzione sotto. Gli id st_* sono permanenti: entrano in storySeen dei salvataggi.",
     "title_it": "L'isola dove le creature hanno perso le parole",
@@ -651,95 +2579,319 @@
   "stickers": {
     "_comment": "Gli adesivi degli scrigni a sorpresa: parole da collezione, illustrazione e audio della parola. Gli id sk_* sono permanenti (save.progress.stickers).",
     "items": [
-      { "id": "sk_sword", "wordId": "w_sword" },
-      { "id": "sk_shield", "wordId": "w_shield" },
-      { "id": "sk_castle", "wordId": "w_castle" },
-      { "id": "sk_egg", "wordId": "w_egg" },
-      { "id": "sk_star", "wordId": "w_star" },
-      { "id": "sk_moon", "wordId": "w_moon" },
-      { "id": "sk_sun", "wordId": "w_sun" },
-      { "id": "sk_bone", "wordId": "w_bone" },
-      { "id": "sk_horn", "wordId": "w_horn" },
-      { "id": "sk_wing", "wordId": "w_wing" },
-      { "id": "sk_nest", "wordId": "w_nest" },
-      { "id": "sk_fish", "wordId": "w_fish" }
+      {
+        "id": "sk_sword",
+        "wordId": "w_sword"
+      },
+      {
+        "id": "sk_shield",
+        "wordId": "w_shield"
+      },
+      {
+        "id": "sk_castle",
+        "wordId": "w_castle"
+      },
+      {
+        "id": "sk_egg",
+        "wordId": "w_egg"
+      },
+      {
+        "id": "sk_star",
+        "wordId": "w_star"
+      },
+      {
+        "id": "sk_moon",
+        "wordId": "w_moon"
+      },
+      {
+        "id": "sk_sun",
+        "wordId": "w_sun"
+      },
+      {
+        "id": "sk_bone",
+        "wordId": "w_bone"
+      },
+      {
+        "id": "sk_horn",
+        "wordId": "w_horn"
+      },
+      {
+        "id": "sk_wing",
+        "wordId": "w_wing"
+      },
+      {
+        "id": "sk_nest",
+        "wordId": "w_nest"
+      },
+      {
+        "id": "sk_fish",
+        "wordId": "w_fish"
+      }
     ]
   },
   "mascotStages": [
-    { "level": 1, "label_it": "Cucciolo",   "scale": 1.00, "accessory": "none" },
-    { "level": 4, "label_it": "Esploratore","scale": 1.06, "accessory": "scarf" },
-    { "level": 8, "label_it": "Avventuriero","scale": 1.12, "accessory": "hat" },
-    { "level": 13, "label_it": "Guardiano", "scale": 1.18, "accessory": "crown" }
+    {
+      "level": 1,
+      "label_it": "Cucciolo",
+      "scale": 1.0,
+      "accessory": "none"
+    },
+    {
+      "level": 4,
+      "label_it": "Esploratore",
+      "scale": 1.06,
+      "accessory": "scarf"
+    },
+    {
+      "level": 8,
+      "label_it": "Avventuriero",
+      "scale": 1.12,
+      "accessory": "hat"
+    },
+    {
+      "level": 13,
+      "label_it": "Guardiano",
+      "scale": 1.18,
+      "accessory": "crown"
+    }
   ],
-
   "dailyMissions": [
-    { "id": "m_words5",   "type": "correctAnswers", "target": 5,  "sprite": "sp-star",     "text_it": "Rispondi bene a 5 domande" },
-    { "id": "m_words10",  "type": "correctAnswers", "target": 10, "sprite": "sp-star",     "text_it": "Rispondi bene a 10 domande" },
-    { "id": "m_repeat5",  "type": "repeats",        "target": 5,  "sprite": "sp-pepe",     "text_it": "Ripeti 5 parole a Pepe" },
-    { "id": "m_creature", "type": "themeCorrect",   "target": 3,  "sprite": "sp-dinosaur", "text_it": "Trova 3 creature", "theme": "dino" },
-    { "id": "m_colors",   "type": "themeCorrect",   "target": 3,  "sprite": "sp-color-red","text_it": "Indovina 3 colori", "theme": "colori" },
-    { "id": "m_numbers",  "type": "themeCorrect",   "target": 3,  "sprite": "sp-num-3",    "text_it": "Indovina 3 numeri", "theme": "numeri" },
-    { "id": "m_lesson",   "type": "lessons",        "target": 1,  "sprite": "sp-castle",   "text_it": "Finisci una partita intera" },
-    { "id": "m_review",   "type": "reviewCorrect",  "target": 4,  "sprite": "sp-shield",   "text_it": "Ripassa 4 parole gia' viste" }
+    {
+      "id": "m_words5",
+      "type": "correctAnswers",
+      "target": 5,
+      "sprite": "sp-star",
+      "text_it": "Rispondi bene a 5 domande"
+    },
+    {
+      "id": "m_words10",
+      "type": "correctAnswers",
+      "target": 10,
+      "sprite": "sp-star",
+      "text_it": "Rispondi bene a 10 domande"
+    },
+    {
+      "id": "m_repeat5",
+      "type": "repeats",
+      "target": 5,
+      "sprite": "sp-pepe",
+      "text_it": "Ripeti 5 parole a Pepe"
+    },
+    {
+      "id": "m_creature",
+      "type": "themeCorrect",
+      "target": 3,
+      "sprite": "sp-dinosaur",
+      "text_it": "Trova 3 creature",
+      "theme": "dino"
+    },
+    {
+      "id": "m_colors",
+      "type": "themeCorrect",
+      "target": 3,
+      "sprite": "sp-color-red",
+      "text_it": "Indovina 3 colori",
+      "theme": "colori"
+    },
+    {
+      "id": "m_numbers",
+      "type": "themeCorrect",
+      "target": 3,
+      "sprite": "sp-num-3",
+      "text_it": "Indovina 3 numeri",
+      "theme": "numeri"
+    },
+    {
+      "id": "m_lesson",
+      "type": "lessons",
+      "target": 1,
+      "sprite": "sp-castle",
+      "text_it": "Finisci una partita intera"
+    },
+    {
+      "id": "m_review",
+      "type": "reviewCorrect",
+      "target": 4,
+      "sprite": "sp-shield",
+      "text_it": "Ripassa 4 parole gia' viste"
+    }
   ],
-
   "miniEbooks": [
     {
-      "id": "ebook_01", "order": 1, "title": "Pepe and the Red Egg", "phase": 4,
-      "unlockAfterWorld": "world_dragons", "status": "da generare",
-      "targetWords": 60, "newWordsPerPage": 1,
-      "structures": ["st_what_is_it"],
-      "vocabularyUsed": ["w_dragon", "w_egg", "w_castle", "w_knight", "w_monster"],
+      "id": "ebook_01",
+      "order": 1,
+      "title": "Pepe and the Red Egg",
+      "phase": 4,
+      "unlockAfterWorld": "world_dragons",
+      "status": "da generare",
+      "targetWords": 60,
+      "newWordsPerPage": 1,
+      "structures": [
+        "st_what_is_it"
+      ],
+      "vocabularyUsed": [
+        "w_dragon",
+        "w_egg",
+        "w_castle",
+        "w_knight",
+        "w_monster"
+      ],
       "synopsis_it": "Pepe trova un uovo davanti al castello e aspetta che si schiuda."
     },
     {
-      "id": "ebook_02", "order": 2, "title": "The Dinosaur with One Horn", "phase": 4,
-      "unlockAfterWorld": "world_dinos", "status": "da generare",
-      "targetWords": 70, "newWordsPerPage": 1,
-      "structures": ["st_what_is_it", "st_a_an"],
-      "vocabularyUsed": ["w_dinosaur", "w_horn", "w_tail", "w_nest", "w_eye", "w_egg"],
+      "id": "ebook_02",
+      "order": 2,
+      "title": "The Dinosaur with One Horn",
+      "phase": 4,
+      "unlockAfterWorld": "world_dinos",
+      "status": "da generare",
+      "targetWords": 70,
+      "newWordsPerPage": 1,
+      "structures": [
+        "st_what_is_it",
+        "st_a_an"
+      ],
+      "vocabularyUsed": [
+        "w_dinosaur",
+        "w_horn",
+        "w_tail",
+        "w_nest",
+        "w_eye",
+        "w_egg"
+      ],
       "synopsis_it": "Un dinosauro con un solo corno cerca il suo nido nella giungla."
     },
     {
-      "id": "ebook_03", "order": 3, "title": "Colors in the Cave", "phase": 4,
-      "unlockAfterWorld": "world_colors", "status": "da generare",
-      "targetWords": 80, "newWordsPerPage": 1,
-      "structures": ["st_a_an", "st_adj_noun"],
-      "vocabularyUsed": ["w_red", "w_blue", "w_green", "w_yellow", "w_purple", "w_egg", "w_dragon"],
+      "id": "ebook_03",
+      "order": 3,
+      "title": "Colors in the Cave",
+      "phase": 4,
+      "unlockAfterWorld": "world_colors",
+      "status": "da generare",
+      "targetWords": 80,
+      "newWordsPerPage": 1,
+      "structures": [
+        "st_a_an",
+        "st_adj_noun"
+      ],
+      "vocabularyUsed": [
+        "w_red",
+        "w_blue",
+        "w_green",
+        "w_yellow",
+        "w_purple",
+        "w_egg",
+        "w_dragon"
+      ],
       "synopsis_it": "Prisma il camaleonte accende la grotta con un colore alla volta."
     },
     {
-      "id": "ebook_04", "order": 4, "title": "Ten Little Stars", "phase": 4,
-      "unlockAfterWorld": "world_numbers", "status": "da generare",
-      "targetWords": 90, "newWordsPerPage": 1,
-      "structures": ["st_adj_noun", "st_how_many"],
-      "vocabularyUsed": ["w_one", "w_two", "w_three", "w_ten", "w_star", "w_moon"],
+      "id": "ebook_04",
+      "order": 4,
+      "title": "Ten Little Stars",
+      "phase": 4,
+      "unlockAfterWorld": "world_numbers",
+      "status": "da generare",
+      "targetWords": 90,
+      "newWordsPerPage": 1,
+      "structures": [
+        "st_adj_noun",
+        "st_how_many"
+      ],
+      "vocabularyUsed": [
+        "w_one",
+        "w_two",
+        "w_three",
+        "w_ten",
+        "w_star",
+        "w_moon"
+      ],
       "synopsis_it": "Numo il gufo conta le stelle da uno a dieci prima di dormire."
     },
     {
-      "id": "ebook_05", "order": 5, "title": "The Happy Knight", "phase": 4,
-      "unlockAfterWorld": "world_forest", "status": "da generare",
-      "targetWords": 110, "newWordsPerPage": 2,
-      "structures": ["st_this_these", "st_be_sing_plur"],
-      "vocabularyUsed": ["w_knight", "w_happy", "w_sad", "w_dog", "w_tree", "w_sun", "w_cat"],
+      "id": "ebook_05",
+      "order": 5,
+      "title": "The Happy Knight",
+      "phase": 4,
+      "unlockAfterWorld": "world_forest",
+      "status": "da generare",
+      "targetWords": 110,
+      "newWordsPerPage": 2,
+      "structures": [
+        "st_this_these",
+        "st_be_sing_plur"
+      ],
+      "vocabularyUsed": [
+        "w_knight",
+        "w_happy",
+        "w_sad",
+        "w_dog",
+        "w_tree",
+        "w_sun",
+        "w_cat"
+      ],
       "synopsis_it": "Un cavaliere triste ritrova il sorriso grazie a un cane nella foresta."
     },
     {
-      "id": "ebook_06", "order": 6, "title": "Hello, Friend!", "phase": 4,
-      "unlockAfterWorld": "world_bridge", "status": "da generare",
-      "targetWords": 130, "newWordsPerPage": 2,
-      "structures": ["st_i_have_see", "st_questions"],
-      "vocabularyUsed": ["p_ask_name", "p_my_name", "p_ask_how", "p_i_sword", "p_i_monster", "p_thanks"],
+      "id": "ebook_06",
+      "order": 6,
+      "title": "Hello, Friend!",
+      "phase": 4,
+      "unlockAfterWorld": "world_bridge",
+      "status": "da generare",
+      "targetWords": 130,
+      "newWordsPerPage": 2,
+      "structures": [
+        "st_i_have_see",
+        "st_questions"
+      ],
+      "vocabularyUsed": [
+        "p_ask_name",
+        "p_my_name",
+        "p_ask_how",
+        "p_i_sword",
+        "p_i_monster",
+        "p_thanks"
+      ],
       "synopsis_it": "Pepe attraversa il ponte e presenta se stesso a ogni creatura che incontra."
     }
   ],
-
   "mediaRecommendations": [
-    { "title": "Peppa Pig (inglese, sottotitoli italiani)", "phase": 5, "level_it": "Dopo la fase 1", "note": "Episodi di 5 minuti, lessico quotidiano semplicissimo e molto ripetuto." },
-    { "title": "Bluey (inglese, sottotitoli italiani)", "phase": 5, "level_it": "Dopo la fase 1", "note": "Frasi brevi e situazioni familiari. Accento australiano chiaro." },
-    { "title": "Ben and Holly's Little Kingdom (inglese, sottotitoli italiani)", "phase": 5, "level_it": "Durante la fase 2 — tema magia", "note": "Perfetto per chi ama fate e folletti: lessico fantasy semplice." },
-    { "title": "Dragons: Rescue Riders (inglese, sottotitoli inglesi)", "phase": 5, "level_it": "Durante la fase 3 — tema draghi", "note": "Draghi parlanti, frasi piu' lunghe. Passare ai sottotitoli inglesi qui." },
-    { "title": "Gigantosaurus (inglese, sottotitoli inglesi)", "phase": 5, "level_it": "Durante la fase 3 — tema dinosauri", "note": "Dinosauri e avventura, ritmo dei dialoghi ancora gestibile." },
-    { "title": "How to Train Your Dragon — film (inglese, sottotitoli inglesi)", "phase": 5, "level_it": "Dopo la fase 3 — traguardo", "note": "Da tenere come premio quando le frasi della fase 3 sono solide." }
+    {
+      "title": "Peppa Pig (inglese, sottotitoli italiani)",
+      "phase": 5,
+      "level_it": "Dopo la fase 1",
+      "note": "Episodi di 5 minuti, lessico quotidiano semplicissimo e molto ripetuto."
+    },
+    {
+      "title": "Bluey (inglese, sottotitoli italiani)",
+      "phase": 5,
+      "level_it": "Dopo la fase 1",
+      "note": "Frasi brevi e situazioni familiari. Accento australiano chiaro."
+    },
+    {
+      "title": "Ben and Holly's Little Kingdom (inglese, sottotitoli italiani)",
+      "phase": 5,
+      "level_it": "Durante la fase 2 — tema magia",
+      "note": "Perfetto per chi ama fate e folletti: lessico fantasy semplice."
+    },
+    {
+      "title": "Dragons: Rescue Riders (inglese, sottotitoli inglesi)",
+      "phase": 5,
+      "level_it": "Durante la fase 3 — tema draghi",
+      "note": "Draghi parlanti, frasi piu' lunghe. Passare ai sottotitoli inglesi qui."
+    },
+    {
+      "title": "Gigantosaurus (inglese, sottotitoli inglesi)",
+      "phase": 5,
+      "level_it": "Durante la fase 3 — tema dinosauri",
+      "note": "Dinosauri e avventura, ritmo dei dialoghi ancora gestibile."
+    },
+    {
+      "title": "How to Train Your Dragon — film (inglese, sottotitoli inglesi)",
+      "phase": 5,
+      "level_it": "Dopo la fase 3 — traguardo",
+      "note": "Da tenere come premio quando le frasi della fase 3 sono solide."
+    }
   ]
 }

@@ -35,7 +35,7 @@ import { pendingAtStart, pendingAfterRound, playChapters } from './js/story.js';
 import { planChest, openChest } from './js/chests.js';
 import { renderDen } from './js/den.js';
 import { bumpToday } from './js/history.js';
-import { planBonus, bubblePool, playBubbles } from './js/bonus.js';
+import { planBonus, bubblePool, playBonus } from './js/bonus.js';
 import { checkBadges } from './js/badges.js';
 import { masteredCount } from './js/srs.js';
 import {
@@ -537,7 +537,7 @@ async function finishRound({ round, correct, total, levelUp, missionJustDone, op
     session.bonusDone = true;
     session.roundsSinceBonus = 0;
     await mascotSay('bonus_start', {});
-    await playBubbles({ items: shuffle(bolle), showWritten: round.showWritten });
+    await playBonus({ items: shuffle(bolle), showWritten: round.showWritten });
   };
   session.bonusDone = false;
   const poi = (fn) => async () => { await playChapters(storia); storia.length = 0; await giocaBonus(); fn(); };

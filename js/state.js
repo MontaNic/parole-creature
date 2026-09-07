@@ -96,7 +96,8 @@ function defaultSave() {
       daysPlayed: 0,
       chestsOpened: 0,
       totalRecordings: 0,
-      bonusPlayed: 0
+      bonusPlayed: 0,
+      lastBonus: ''
     },
 
     settings: {

@@ -53,6 +53,105 @@ export function bubblePool(items, extra = []) {
 }
 
 /* ------------------------------------------------------------------ */
+/* Quale gioco (puro)                                                  */
+/* ------------------------------------------------------------------ */
+
+export const BONUS_GAMES = ['bubbles', 'moles'];
+
+/** A caso fra i giochi, senza ripetere l'ultimo giocato. */
+export function pickBonus(last, rng = Math.random) {
+  const scelte = BONUS_GAMES.filter(g => g !== last);
+  return scelte[Math.floor(rng() * scelte.length)] || BONUS_GAMES[0];
+}
+
+/* ------------------------------------------------------------------ */
+/* Spunta!: il modello                                                 */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Nove buchi; le figure spuntano una alla volta, restano un attimo e
+ * rientrano. Il bersaglio ricompare entro `guarantee` spunte: l'attesa
+ * non deve mai diventare lunga.
+ */
+export class MoleWorld {
+  constructor({ w, h, items, rng = Math.random, guarantee = 2 }) {
+    this.w = w; this.h = h; this.items = items; this.rng = rng; this.guarantee = guarantee;
+    this.holes = [];
+    for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) {
+      this.holes.push({ i: r * 3 + c, cx: (c + 0.5) / 3, cy: 0.22 + r * 0.3, mole: null });
+    }
+    this.target = null;
+    this.sinceTarget = 0;
+    this.clock = 0;
+    this.nextPop = 0.4;
+    this.interval = 0.95;
+    this.upTime = 1.15;
+  }
+
+  freeHoles() { return this.holes.filter(h => !h.mole); }
+
+  /** Fa spuntare qualcosa: il bersaglio se e' ora, altrimenti una figura a caso. */
+  next() {
+    const free = this.freeHoles();
+    if (!free.length) return null;
+    const hole = free[Math.floor(this.rng() * free.length)];
+    const visibleTarget = this.holes.some(h => h.mole && h.mole.item === this.target);
+    let item;
+    if (this.target && !visibleTarget && (this.sinceTarget >= this.guarantee - 1 || this.rng() < 0.45)) {
+      item = this.target;
+      this.sinceTarget = 0;
+    } else {
+      const others = this.items.filter(it => it !== this.target);
+      item = others[Math.floor(this.rng() * others.length)] || this.target;
+      this.sinceTarget += 1;
+    }
+    hole.mole = { item, t: 0, up: 0, done: false, wobble: 0 };
+    return hole;
+  }
+
+  step(dt) {
+    this.clock += dt;
+    if (this.clock >= this.nextPop) {
+      this.next();
+      this.nextPop = this.clock + this.interval;
+      this.interval = Math.max(0.6, this.interval * 0.985);   // piano piano piu' svelto
+    }
+    for (const h of this.holes) {
+      const m = h.mole;
+      if (!m) continue;
+      m.t += dt;
+      const rise = 0.22;
+      if (m.t < rise) m.up = m.t / rise;
+      else if (m.t < rise + this.upTime) m.up = 1;
+      else m.up = Math.max(0, 1 - (m.t - rise - this.upTime) / rise);
+      if (m.t > rise * 2 + this.upTime) h.mole = null;
+      if (m.wobble > 0) m.wobble = Math.max(0, m.wobble - dt * 3);
+    }
+  }
+
+  /** Raggio di una figura, in pixel. */
+  radius() { return Math.min(this.w / 3, this.h / 3.4) * 0.36; }
+
+  /** La figura spuntata sotto il dito (solo se e' fuori dal buco). */
+  hit(x, y) {
+    const r = this.radius();
+    for (const h of this.holes) {
+      const m = h.mole;
+      if (!m || m.up < 0.5) continue;
+      const cx = h.cx * this.w, cy = h.cy * this.h - r * m.up;
+      const dx = x - cx, dy = y - cy;
+      if (dx * dx + dy * dy <= (r * 1.15) ** 2) return h;
+    }
+    return null;
+  }
+
+  /** Presa: la figura scompare subito. */
+  take(hole) { hole.mole = null; }
+
+  setTarget(item) { this.target = item; this.sinceTarget = 0; }
+}
+
+/* ------------------------------------------------------------------ */
 /* Il modello                                                          */
 /* ------------------------------------------------------------------ */
 
@@ -272,4 +371,159 @@ export async function playBubbles(o) {
   nextTarget();
   raf = requestAnimationFrame(loop);
   return done;
+}
+
+
+/* ------------------------------------------------------------------ */
+/* Spunta!: il gioco sullo schermo                                     */
+/* ------------------------------------------------------------------ */
+
+export async function playMoles(o) {
+  const items = o.items.slice(0, 6);
+  const seconds = o.seconds ?? CONFIG.bonus.seconds;
+  const rng = o.rng || Math.random;
+  const stage = document.getElementById('bonus-stage');
+  const canvas = document.getElementById('bonus-canvas');
+  const target = document.getElementById('bonus-target');
+  const scoreEl = document.getElementById('bonus-score');
+  const timeEl = document.getElementById('bonus-time');
+  const end = document.getElementById('bonus-end');
+  const skip = document.getElementById('bonus-skip');
+  const ctx = canvas.getContext('2d');
+  end.hidden = true; end.innerHTML = '';
+  scoreEl.textContent = '0';
+  timeEl.style.width = '100%';
+  showScreen('bonus');
+
+  const images = new Map(await Promise.all(items.map(async it => [it.sprite, await loadImage(it.sprite)])));
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const fit = () => {
+    const r = stage.getBoundingClientRect();
+    canvas.width = Math.floor(r.width * dpr); canvas.height = Math.floor(r.height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return r;
+  };
+  let rect = fit();
+  const world = new MoleWorld({ w: rect.width, h: rect.height, items, rng });
+  const onResize = () => { rect = fit(); world.w = rect.width; world.h = rect.height; };
+  window.addEventListener('resize', onResize);
+
+  let score = 0;
+  let current = null;
+  let finished = false;
+  const nextTarget = () => {
+    const scelte = items.filter(it => it !== current);
+    current = scelte[Math.floor(rng() * scelte.length)] || items[0];
+    world.setTarget(current);
+    target.innerHTML = '';
+    target.appendChild(audioOrb(current));
+    if (o.showWritten) target.appendChild(el('p', 'word-written', current.en));
+    else target.appendChild(el('p', 'game-prompt', t('bonus.moles_prompt')));
+    stopVoice(); speakItem(current);
+  };
+
+  const draw = () => {
+    ctx.clearRect(0, 0, rect.width, rect.height);
+    const r = world.radius();
+    for (const h of world.holes) {
+      const cx = h.cx * rect.width, cy = h.cy * rect.height;
+      // il retro del buco
+      ctx.beginPath(); ctx.ellipse(cx, cy, r * 1.25, r * 0.42, 0, 0, Math.PI * 2);
+      ctx.fillStyle = '#17123A'; ctx.fill();
+      ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(255,255,255,.25)'; ctx.stroke();
+      const m = h.mole;
+      if (m && m.up > 0) {
+        const img = images.get(m.item.sprite);
+        const d = r * 2;
+        const y = cy - r * m.up;
+        ctx.save();
+        // si vede solo cio' che sta sopra la meta' del buco
+        ctx.beginPath(); ctx.rect(cx - d, cy - d * 2, d * 2, d * 2 + r * 0.05); ctx.clip();
+        const s = 1 + Math.sin(m.wobble * 12) * 0.08 * m.wobble;
+        ctx.translate(cx, y); ctx.scale(s, 1 / s);
+        if (img) ctx.drawImage(img, -d / 2, -d / 2, d, d);
+        ctx.restore();
+      }
+      // il bordo davanti del buco
+      ctx.beginPath(); ctx.ellipse(cx, cy, r * 1.25, r * 0.42, 0, 0, Math.PI);
+      ctx.fillStyle = '#2B2140'; ctx.fill();
+      ctx.beginPath(); ctx.ellipse(cx, cy, r * 1.25, r * 0.42, 0, 0, Math.PI * 2);
+      ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.stroke();
+    }
+  };
+
+  const t0 = performance.now();
+  let last = t0;
+  let raf = 0;
+  const loop = (now) => {
+    if (finished) return;
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    world.step(dt);
+    draw();
+    const left = Math.max(0, 1 - (now - t0) / (seconds * 1000));
+    timeEl.style.width = `${left * 100}%`;
+    if (left <= 0) { fine(); return; }
+    raf = requestAnimationFrame(loop);
+  };
+
+  const onTap = (ev) => {
+    if (finished) return;
+    const r = canvas.getBoundingClientRect();
+    const h = world.hit(ev.clientX - r.left, ev.clientY - r.top);
+    if (!h) return;
+    if (h.mole.item === current) {
+      score += 1; scoreEl.textContent = String(score);
+      sfxCorrect(score % 3);
+      burstConfetti(ev.clientX, ev.clientY);
+      world.take(h);
+      nextTarget();
+    } else {
+      sfxTap();
+      h.mole.wobble = 1;
+    }
+  };
+  canvas.addEventListener('pointerdown', onTap);
+
+  let risolvi;
+  const done = new Promise(res => { risolvi = res; });
+  const fine = () => {
+    if (finished) return;
+    finished = true;
+    cancelAnimationFrame(raf);
+    canvas.removeEventListener('pointerdown', onTap);
+    window.removeEventListener('resize', onResize);
+    skip.onclick = null;
+    stopVoice();
+    save.stats.bonusPlayed = (save.stats.bonusPlayed || 0) + 1;
+    save.daily.bonusCount = (save.daily.bonusCount || 0) + 1;
+    persist(true);
+    end.innerHTML = '';
+    end.appendChild(el('p', 'h-title', t('bonus.done')));
+    end.appendChild(el('p', 'h-sub', t('bonus.hits').replace('{n}', score)));
+    const go = el('button', 'btn btn-lg', t('ui.continue_button'));
+    end.appendChild(go);
+    end.hidden = false;
+    mascotSay('bonus_end', {});
+    go.onclick = () => { sfxTap(); stopVoice(); risolvi({ popped: score }); };
+  };
+  skip.onclick = () => { sfxTap(); fine(); };
+
+  playMoles.world = world;
+  nextTarget();
+  raf = requestAnimationFrame(loop);
+  return done;
+}
+
+/* ------------------------------------------------------------------ */
+/* Il dispatcher: quale gioco bonus, e via                             */
+/* ------------------------------------------------------------------ */
+
+const GIOCHI = { bubbles: playBubbles, moles: playMoles };
+
+/** Sceglie un gioco bonus (mai lo stesso due volte di fila) e lo gioca. */
+export async function playBonus(o) {
+  const quale = pickBonus(save.stats.lastBonus || '', o.rng);
+  save.stats.lastBonus = quale;
+  persist();
+  return GIOCHI[quale](o);
 }
