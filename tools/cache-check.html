@@ -45,7 +45,7 @@ const riga = (cls, txt) => {
   const attesi = [];
   // L'indice si legge dalla cache stessa, non dalla rete: e' un controllo
   // della cache, e una fetch passerebbe dal service worker.
-  const idxUrl = new URL('assets/img/art/index.json', location.href).href;
+  const idxUrl = new URL('assets/img/art/index.json', document.baseURI).href;
   const idxRes = (await caches.match(idxUrl)) || (await fetch(idxUrl));
   const idx = await idxRes.json();
   for (const id of idx.sprites) attesi.push(`assets/img/art/${id}.png`);
@@ -53,7 +53,7 @@ const riga = (cls, txt) => {
   // In parallelo: in sequenza su 43 file la pagina restava in esecuzione
   // troppo a lungo per essere ispezionata.
   const esiti = await Promise.all(attesi.map(async url =>
-    [url, Boolean(await caches.match(new URL(url, location.origin).href))]));
+    [url, Boolean(await caches.match(new URL(url, document.baseURI).href))]));
   const mancanti = esiti.filter(([, c]) => !c).map(([u]) => u.split('/').pop());
   const dentro = esiti.length - mancanti.length;
 
@@ -68,7 +68,7 @@ const riga = (cls, txt) => {
                  'content.json', 'strings.json', 'assets/img/sprites.svg',
                  'assets/img/art/index.json', 'assets/fonts/andika-400.woff2'];
   const shellEsiti = await Promise.all(shell.map(async url =>
-    [url, Boolean(await caches.match(new URL(url, location.origin).href))]));
+    [url, Boolean(await caches.match(new URL(url, document.baseURI).href))]));
   const shellMancanti = shellEsiti.filter(([, c]) => !c).map(([u]) => u);
   riga(shellMancanti.length ? 'ko' : 'ok',
     `shell in cache: ${shell.length - shellMancanti.length}/${shell.length}` +
