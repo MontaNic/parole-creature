@@ -72,6 +72,11 @@ for (const p of contenuti.phrases) cita(p.sprite, `frase ${p.id}`);
 for (const w of contenuti.worlds) cita(w.sprite, `unita' ${w.id}`);
 for (const c of contenuti.creatures) cita(c.sprite, `creatura ${c.id}`);
 for (const m of contenuti.dailyMissions) cita(m.sprite, `missione ${m.id}`);
+for (const s of contenuti.stickers?.items || []) {
+  const w = contenuti.words.find(x => x.id === s.wordId);
+  w ? cita(w.sprite, `adesivo ${s.id}`) : ko('adesivo senza parola', s.id);
+}
+cita('sp-chest', 'scrigno'); cita('sp-chest-open', 'scrigno aperto');
 
 const irrisolti = [...citati].filter(([id]) => !suDisco.has(id) && !simboli.has(id));
 irrisolti.length

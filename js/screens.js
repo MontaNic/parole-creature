@@ -16,6 +16,7 @@ import { speakItem, sfxTap, sfxUnlock } from './audio.js';
 import { celebrate } from './effects.js';
 import { ensureTodayMission, currentMission, missionRatio } from './missions.js';
 import { renderStoryStrip, chapterForCreature, isAvailable as chapterAvailable, playChapter } from './story.js';
+import { renderStickers } from './chests.js';
 
 /* Fasi aperte a mano dal bambino, oltre a quella corrente. */
 const fasiAperte = new Set();
@@ -291,6 +292,15 @@ export function renderAlbum() {
     grid.parentElement.insertBefore(strip, grid);
   }
   renderStoryStrip(strip, chapter => playChapter(chapter).then(renderAlbum));
+
+  // Gli adesivi degli scrigni, sotto le creature.
+  let stickers = document.getElementById('album-stickers');
+  if (!stickers) {
+    stickers = el('div');
+    stickers.id = 'album-stickers';
+    grid.parentElement.appendChild(stickers);
+  }
+  renderStickers(stickers);
 
   document.getElementById('album-count').textContent = `${found}/${content.creatures.length}`;
   showScreen('album');

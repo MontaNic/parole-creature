@@ -32,6 +32,7 @@ import {
 } from './js/mascot.js';
 import { GAMES, mostraConferma } from './js/minigames.js';
 import { pendingAtStart, pendingAfterRound, playChapters } from './js/story.js';
+import { planChest, openChest } from './js/chests.js';
 import {
   showScreen, renderHome, renderAlbum, renderSummary,
   renderBlocked, runOnboarding, syncCreatures,
@@ -365,6 +366,12 @@ async function startRound(opts) {
 
   let serie = 0;   // risposte giuste al primo colpo, di fila
 
+  // Lo scrigno a sorpresa: deciso adesso, in silenzio. Il bambino non lo sa.
+  const chestAt = planChest(round.steps.length, {
+    alreadyToday: Boolean(save.daily.chestOpened),
+    roundsPlayed: save.stats.totalRounds
+  });
+
   const fx = {
     /**
      * Risposta giusta.
@@ -436,7 +443,7 @@ async function startRound(opts) {
     persist();
   };
 
-  for (const step of round.steps) {
+  for (const [i, step] of round.steps.entries()) {
     if (!session.roundActive) return;   // il bambino e' uscito con "indietro"
     const play = GAMES[step.type] || GAMES.match;
 
@@ -460,6 +467,11 @@ async function startRound(opts) {
         if (trackMissionEvent({ repeat: true })) missionJustDone = true;
       }
     });
+
+    if (i === chestAt && session.roundActive) {
+      const esito = await openChest(host, { mascotHost: document.getElementById('play-mascot') });
+      if (esito.levelUp) levelUp = true;
+    }
   }
 
   if (!session.roundActive) return;

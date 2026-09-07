@@ -648,6 +648,23 @@
       }
     ]
   },
+  "stickers": {
+    "_comment": "Gli adesivi degli scrigni a sorpresa: parole da collezione, illustrazione e audio della parola. Gli id sk_* sono permanenti (save.progress.stickers).",
+    "items": [
+      { "id": "sk_sword", "wordId": "w_sword" },
+      { "id": "sk_shield", "wordId": "w_shield" },
+      { "id": "sk_castle", "wordId": "w_castle" },
+      { "id": "sk_egg", "wordId": "w_egg" },
+      { "id": "sk_star", "wordId": "w_star" },
+      { "id": "sk_moon", "wordId": "w_moon" },
+      { "id": "sk_sun", "wordId": "w_sun" },
+      { "id": "sk_bone", "wordId": "w_bone" },
+      { "id": "sk_horn", "wordId": "w_horn" },
+      { "id": "sk_wing", "wordId": "w_wing" },
+      { "id": "sk_nest", "wordId": "w_nest" },
+      { "id": "sk_fish", "wordId": "w_fish" }
+    ]
+  },
   "mascotStages": [
     { "level": 1, "label_it": "Cucciolo",   "scale": 1.00, "accessory": "none" },
     { "level": 4, "label_it": "Esploratore","scale": 1.06, "accessory": "scarf" },

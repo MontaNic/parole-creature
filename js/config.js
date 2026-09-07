@@ -54,6 +54,9 @@ export const CONFIG = {
     sessionWarnRatio: 0.8        // a che punto della sessione avvisare
   },
 
+  /** Scrigni a sorpresa: probabilita' per partita, e stelle quando gli adesivi sono finiti. */
+  chest: { chance: 0.2, xpBonus: 30 },
+
   /**
    * Ripetizione spaziata: intervalli in giorni per ciascun box di Leitner.
    * Il primo intervallo e' 1 e non 0 di proposito: cosi' un item puo' salire

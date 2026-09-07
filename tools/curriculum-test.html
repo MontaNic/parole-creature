@@ -34,6 +34,7 @@ import { save, resetSave, dayIndex } from './js/state.js';
 import { recordAnswer, isMastered, distractors, distinctBySprite } from './js/srs.js';
 import { serveAiutoScritto, SOGLIA_AIUTO } from './js/minigames.js';
 import { chapters, chapterForCreature, pendingAfterRound, pendingAtStart, isAvailable, lineAudio } from './js/story.js';
+import { planChest, nextSticker, stickers } from './js/chests.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
   splitRound, unitItems, unitReviewItems, curriculumConfig, playablePhases
@@ -268,6 +269,24 @@ async function run() {
   check('ogni creatura della storia ha il suo capitolo', conCreatura.every(c => chapterForCreature(c.creatureId) === c));
   check('i percorsi audio della storia sono distinti',
     new Set(capitoli.flatMap(c => c.lines.map((l, n) => lineAudio(c, n)))).size === capitoli.reduce((a, c) => a + c.lines.length, 0));
+
+  /* --- gli scrigni a sorpresa ------------------------------------- */
+  const adesivi = stickers();
+  check('ci sono 12 adesivi con id unici e parole esistenti',
+    adesivi.length === 12 && new Set(adesivi.map(a => a.id)).size === 12 && adesivi.every(a => getItem(a.wordId)));
+  const sempre = () => 0;
+  check('nessuno scrigno se ne e\' gia\' uscito uno oggi', planChest(8, { rng: sempre, alreadyToday: true, roundsPlayed: 5 }) === -1);
+  check('nessuno scrigno nella primissima partita', planChest(8, { rng: sempre, alreadyToday: false, roundsPlayed: 0 }) === -1);
+  check('nessuno scrigno in una partita troppo corta', planChest(2, { rng: sempre, alreadyToday: false, roundsPlayed: 5 }) === -1);
+  check('nessuno scrigno quando il dado non e\' fortunato', planChest(8, { rng: () => 0.99, alreadyToday: false, roundsPlayed: 5 }) === -1);
+  let posti = new Set();
+  for (let k = 0; k < 200; k++) posti.add(planChest(8, { rng: Math.random, alreadyToday: false, roundsPlayed: 5, chance: 1 }));
+  check('lo scrigno non compare mai al primo passo ne\' nella sfida finale',
+    [...posti].every(p => p >= 1 && p <= 6) && posti.size > 1, [...posti].sort().join(','));
+  resetSave();
+  check('a inizio gioco c\'e\' un adesivo da trovare', Boolean(nextSticker(sempre)));
+  for (const a of adesivi) save.progress.stickers[a.id] = 'x';
+  check('finiti gli adesivi, nextSticker restituisce null', nextSticker(sempre) === null);
 
   resetSave();
 

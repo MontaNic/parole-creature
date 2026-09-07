@@ -60,6 +60,8 @@ function defaultSave() {
       phasesReached: {},
       /** capitolo della storia -> ISO string della prima visione */
       storySeen: {},
+      /** adesivo degli scrigni -> ISO string di quando e' stato trovato */
+      stickers: {},
       /** itemId (parola o frase) -> stato di ripetizione spaziata */
       srs: {}
     },
@@ -72,7 +74,8 @@ function defaultSave() {
       missionProgress: 0,
       missionDone: false,
       minutesPlayed: 0,
-      sessionEnded: false
+      sessionEnded: false,
+      chestOpened: false
     },
 
     stats: {
@@ -81,7 +84,8 @@ function defaultSave() {
       totalRepeats: 0,
       totalRounds: 0,
       totalMinutes: 0,
-      daysPlayed: 0
+      daysPlayed: 0,
+      chestsOpened: 0
     },
 
     settings: {
@@ -309,7 +313,8 @@ export function rolloverDay() {
     missionProgress: 0,
     missionDone: false,
     minutesPlayed: 0,
-    sessionEnded: false
+    sessionEnded: false,
+    chestOpened: false
   };
   persist();
   return { newDay: true, streakKept: false };

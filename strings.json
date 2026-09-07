@@ -59,6 +59,7 @@
   },
 
   "games": {
+    "chest_prompt": "Uno scrigno! Toccalo!",
     "match_prompt": "Tocca l'immagine giusta",
     "listen_prompt": "Ascolta e ripeti ad alta voce",
     "listen_done": "Fatto!",
@@ -80,6 +81,8 @@
   },
 
   "album": {
+    "stickers_title": "I miei adesivi",
+    "stickers_subtitle": "Gli adesivi si trovano negli scrigni a sorpresa",
     "title": "Le mie creature",
     "subtitle": "Le creature in ombra non le hai ancora incontrate",
     "count": "creature trovate"
@@ -226,6 +229,9 @@
     "world_complete": "Un altro mondo e' stato superato! L'avventura continua.",
     "new_creature": "Una nuova creatura si unisce alla squadra!",
     "mission_done": "Missione di oggi completata! Sei un campione.",
+    "chest_found": "Uno scrigno! Chissà cosa c'è dentro... Toccalo!",
+    "chest_sticker": "Un adesivo nuovo! Lo trovi nel tuo album.",
+    "chest_stars": "Che fortuna! Stelle in regalo!",
     "level_up": "Sono cresciuta anche io! Guardami.",
     "session_end": "Per oggi basta cosi'. Ci vediamo domani{name}!",
     "idle_1": "Tocca un mondo per iniziare.",

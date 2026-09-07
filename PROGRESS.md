@@ -770,6 +770,29 @@ per il genitore. Nessuna illustrazione nuova.
 **Persistenza**: `save.progress.storySeen[id]`, riempito dai default per i
 salvataggi vecchi (nessuna migrazione). Gli id `st_*` sono permanenti.
 
+## Gli scrigni a sorpresa (fase 2, punto 2)
+
+Uno scrigno compare di rado, senza preavviso, in mezzo a una partita: non
+nel primo passo, non nella sfida finale, mai nella primissima partita, mai
+piu' di uno al giorno (`save.daily.chestOpened`, azzerato dal cambio
+giorno), con probabilita' `CONFIG.chest.chance` (0,2) per partita.
+La decisione e' presa a inizio partita da `planChest` in `js/chests.js`,
+una funzione pura con il generatore iniettabile: cosi' il test la prova
+davvero, non a caso.
+
+Dentro c'e' un **adesivo**: una delle 12 parole-illustrazione scelte
+(spada, scudo, castello, uovo, stella, luna, sole, osso, corno, ala, nido,
+pesce). Nessuna immagine nuova: l'adesivo e' la parola da collezione, con
+la scritta inglese in Andika e la pronuncia al tocco — anche la sorpresa
+ripassa. Quando gli adesivi sono finiti, lo scrigno regala stelle
+(`CONFIG.chest.xpBonus`). La "creatura rara fuori curriculum" del disegno
+iniziale e' rimandata: vorrebbe un'illustrazione nuova, e le tre creature
+rare esistenti (Stellina, Umbra, Aladoro) hanno gia' le loro regole.
+
+Tre battute nuove di Pepe (`chest_found`, `chest_sticker`, `chest_stars`),
+generate con ElevenLabs prima di pubblicare. Gli adesivi vivono in
+`save.progress.stickers` e si vedono nell'album, sotto le creature.
+
 ## Prossimi passi
 3. **Riascoltare le 113 tracce generate** e rigenerare quelle che non
    convincono (`--force` dopo aver cancellato il file, oppure cambiare voce
