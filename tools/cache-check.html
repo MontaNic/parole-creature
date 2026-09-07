@@ -43,7 +43,11 @@ const riga = (cls, txt) => {
 
   // Tutto cio' che il gioco si aspetta di poter caricare senza rete.
   const attesi = [];
-  const idx = await (await fetch('assets/img/art/index.json')).json();
+  // L'indice si legge dalla cache stessa, non dalla rete: e' un controllo
+  // della cache, e una fetch passerebbe dal service worker.
+  const idxUrl = new URL('assets/img/art/index.json', location.href).href;
+  const idxRes = (await caches.match(idxUrl)) || (await fetch(idxUrl));
+  const idx = await idxRes.json();
   for (const id of idx.sprites) attesi.push(`assets/img/art/${id}.png`);
 
   // In parallelo: in sequenza su 43 file la pagina restava in esecuzione
