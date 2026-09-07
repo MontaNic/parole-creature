@@ -1,4 +1,4 @@
-# PROGRESS — Parole & Creature (gioco inglese per Pietro)
+# PROGRESS — Parole & Creature (gioco inglese per il bambino)
 
 > Questo file e' lo specchio dello stato reale del progetto.
 > Va aggiornato **prima** di ogni modifica sostanziale al codice.
@@ -24,7 +24,7 @@ documentato in `design-system.md`, guida viva in `tools/design-preview.html`).
 restanti restano simboli SVG per scelta: numeri, colori, icone di interfaccia
 e plurali.
 
-Non ancora fatto: playtest reale con Pietro su tablet.
+Non ancora fatto: playtest reale con il bambino su tablet.
 
 ## Come si avvia
 
@@ -143,7 +143,7 @@ Un gate rigido rischia il muro. Tre valvole di sfogo:
 - un'unita' si apre anche dopo **3 partite**, non solo completandola: una
   singola parola ostica non blocca il percorso;
 - i genitori hanno un interruttore **"Sblocca tutte le fasi"** che scavalca la
-  soglia, se Pietro e' gia' piu' avanti o se una fase lo sta annoiando.
+  soglia, se il bambino e' gia' piu' avanti o se una fase lo sta annoiando.
 
 E soprattutto: la mappa mostra la barra di padronanza della fase **con una tacca
 all'80%**, e Pepe dice quante parole mancano. Un traguardo visibile e' un
@@ -657,7 +657,7 @@ testo sempre, che e' esattamente cio' che la regola vuole evitare.
 3. **Riascoltare le 113 tracce generate** e rigenerare quelle che non
    convincono (`--force` dopo aver cancellato il file, oppure cambiare voce
    in `.env` e rilanciare).
-4. **Playtest con Pietro su tablet**, osservando senza suggerire. Da guardare:
+4. **Playtest con il bambino su tablet**, osservando senza suggerire. Da guardare:
    capisce l'onboarding da solo? nota la differenza fra `a` e `an`? la soglia di
    fase lo motiva o lo blocca?
 5. **Testare su Safari iOS reale**: sblocco audio al primo tocco, drag&drop col

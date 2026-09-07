@@ -562,7 +562,7 @@ function registerServiceWorker() {
 
 boot();
 
-// Utile in console durante lo sviluppo e per il playtest con Pietro.
+// Utile in console durante lo sviluppo e per il playtest con il bambino.
 // `save` e' una live binding del modulo: si legge con una funzione, non
 // copiandola, altrimenti si fotografa lo stato del boot.
 window.__gioco = { getSave: () => save, content, shuffle, startRound, goHome };

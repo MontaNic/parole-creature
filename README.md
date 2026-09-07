@@ -1,6 +1,6 @@
 # Parole & Creature
 
-Gioco browser per imparare l'inglese, pensato su misura per Pietro (7 anni):
+Gioco browser per imparare l'inglese, pensato su misura per un bambino di 7 anni:
 sessioni brevi, Pepe (una cucciola di Jack Russell) che guida a voce, mostri e
 draghi originali da collezionare. Interfaccia in italiano, contenuti didattici in inglese.
 
@@ -14,7 +14,7 @@ Serve un piccolo server statico (i browser bloccano `fetch` su `file://`,
 e i contenuti stanno in file `.json` separati dalla logica):
 
 ```bash
-cd gioco-inglese-pietro
+cd parole-creature
 python3 -m http.server 8080
 # poi apri http://localhost:8080
 ```

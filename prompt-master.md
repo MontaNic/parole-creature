@@ -1,4 +1,4 @@
-# PROMPT MASTER — Gioco per imparare l'inglese (Pietro, 7 anni)
+# PROMPT MASTER — Gioco per imparare l'inglese (il bambino, 7 anni)
 
 ## Ruolo
 Sei uno sviluppatore front-end esperto in game design educativo per bambini e in didattica delle lingue per l'infanzia. Devi progettare e scrivere il codice completo di un mini-videogioco browser-based per l'apprendimento dell'inglese, con standard professionali (non un prototipo casalingo).
@@ -62,7 +62,7 @@ Riferimento di gamification: **Duolingo** — non nella grafica o nei contenuti,
 1. **Fase 1 — Vocabolario per immagini/audio**: parole singole con supporto audio (pronuncia ElevenLabs), niente lettura obbligatoria, riconoscimento visivo+sonoro.
 2. **Fase 2 — Parole scritte brevi**: introduzione progressiva della forma scritta accanto a immagine+audio, mano a mano che il bambino consolida.
 3. **Fase 3 — Frasi semplici**: piccole frasi/dialoghi guidati, sempre con audio.
-4. **Fase 4 — Mini-ebook originali progressivi (graded reader)**: invece di consigliare libri esistenti, il programma tiene traccia di quale "mini-libro" andrebbe generato per il livello raggiunto. Ogni mini-ebook deve essere scritto come **graded reader**: pochissime parole nuove per pagina, uso volontariamente ripetuto solo del vocabolario/frasi già sbloccati nel gioco (pescati da `content.json`), frasi cortissime, coerente col tema fantasy/avventura del gioco. Va generato uno alla volta (non tutti insieme), con Claude, e inviato su Kindle via Send-to-Kindle — stesso workflow già collaudato per altre collane di ebook per Pietro.
+4. **Fase 4 — Mini-ebook originali progressivi (graded reader)**: invece di consigliare libri esistenti, il programma tiene traccia di quale "mini-libro" andrebbe generato per il livello raggiunto. Ogni mini-ebook deve essere scritto come **graded reader**: pochissime parole nuove per pagina, uso volontariamente ripetuto solo del vocabolario/frasi già sbloccati nel gioco (pescati da `content.json`), frasi cortissime, coerente col tema fantasy/avventura del gioco. Va generato uno alla volta (non tutti insieme), con Claude, e inviato su Kindle via Send-to-Kindle — stesso workflow già collaudato per altre collane di ebook per il bambino.
 5. **Fase 5 — Consigli audiovisivi**: suggerimenti di cartoni/film in inglese con sottotitoli (in italiano o inglese a seconda del livello), progressivi per complessità linguistica.
    - Nota: sia il tracciamento dei mini-ebook generati sia i consigli audiovisivi vanno presentati in una sezione "per i genitori" (pannello/schermata dedicata), non come contenuto che il bambino deve gestire da solo.
 
@@ -112,10 +112,10 @@ Sezione protetta, separata dal gioco vero e proprio, pensata per essere gestita 
 - **Invio automatico via email** dei mini-ebook generati all'indirizzo Send-to-Kindle inserito in dashboard (per ora si genera e invia manualmente, come già fatto per altre collane di ebook).
 - Riconoscimento vocale per esercizi di pronuncia attiva, quando la tecnologia sarà più affidabile su voci di bambini.
 - Accessibilità cromatica (palette leggibile anche in caso di daltonismo).
-- Playtest periodico osservando l'uso reale di Pietro, con aggiustamenti conseguenti — processo da ripetere, non una feature una tantum.
+- Playtest periodico osservando l'uso reale di il bambino, con aggiustamenti conseguenti — processo da ripetere, non una feature una tantum.
 - Definire criteri di successo del progetto (es. uso quotidiano continuativo per 2 settimane, numero di parole acquisite) per valutare oggettivamente se sta funzionando.
 
-## Fase 2 — Da valutare dopo aver visto la reazione di Pietro alla v1
+## Fase 2 — Da valutare dopo aver visto la reazione di il bambino alla v1
 Idee volutamente escluse dalla v1 per non allungare troppo il primo sviluppo — da riconsiderare solo dopo aver osservato l'uso reale:
 - **Micro-narrativa a episodi**: una storia che avanza a piccoli capitoli (breve scenetta ogni 3-4 livelli), per dare motivo di tornare a "vedere cosa succede dopo".
 - **Base/tana personale**: uno spazio "suo" (grotta, accampamento) da decorare con le ricompense guadagnate — senso di possesso oltre che di progresso.

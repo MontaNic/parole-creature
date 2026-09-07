@@ -18,7 +18,7 @@ browser nega le API che servono a **tre feature su cinque** della fase 2:
 Verificato in Chrome, e Safari e' piu' severo, non meno. GitHub Pages e'
 HTTPS e le sblocca tutte con un solo passo; il progetto era nato per finirci.
 
-Il gioco e' gia' pronto: sotto `/gioco-inglese-pietro/` carica, inietta gli
+Il gioco e' gia' pronto: sotto `/parole-creature/` carica, inietta gli
 81 sprite, serve 78 file senza un 404, e nel codice non c'e' un percorso
 assoluto. Manca solo il repository remoto, che e' un'azione dell'account
 GitHub e non del codice.

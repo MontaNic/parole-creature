@@ -44,7 +44,7 @@ leggere. La differenza è verificabile a occhio e l'ho verificata prima di
 scegliere: nella sequenza `Il1` — I maiuscola, l minuscola, numero uno —
 Fredoka, Nunito, Baloo 2 e il font di sistema producono **tre bastoncini
 identici**. Andika dà tre forme distinte. La `a` e la `g` sono a un piano,
-come nella scrittura a mano che Pietro sta imparando a scuola.
+come nella scrittura a mano che il bambino sta imparando a scuola.
 
 Per un adulto che riconosce le parole a colpo d'occhio l'ambiguità è
 irrilevante. Per un bambino che le decodifica lettera per lettera — cioè
