@@ -698,6 +698,11 @@ puo' cadere fuori viewport (il click colpisce `<html>` e sembra un bug del
 gioco: passare `--window-size=1180,820`); e lo smoke test deve conoscere
 l'ingresso, altrimenti fa zero click e passa a vuoto.
 
+E una regressione vera, presa da `cache-check-remote` alla prima
+esecuzione dopo l'ingresso: la registrazione del service worker stava dopo
+l'attesa del tocco, quindi senza tocco niente cache (0/48). Il worker non
+ha bisogno di gesti: ora si registra prima dell'ingresso.
+
 ## L'aiuto scritto dopo due errori
 
 Sbagliando due volte lo stesso item, compare la forma scritta inglese in

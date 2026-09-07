@@ -71,6 +71,9 @@ async function boot() {
 
   applyStaticStrings();
   initAudioUnlock();
+  // Il worker va registrato PRIMA di aspettare il tocco: non ha bisogno di
+  // un gesto, e la cache offline deve riempirsi anche se nessuno tocca.
+  registerServiceWorker();
   // Nessuna voce prima di un tocco: senza, il browser rifiuta play() e Pepe
   // parlerebbe con la voce sintetica del sistema. Se un gesto c'e' gia'
   // stato durante il caricamento, la schermata non serve.
@@ -78,7 +81,6 @@ async function boot() {
   rolloverDay();
   ensureTodayMission();
   syncCreatures();
-  registerServiceWorker();
   wireGlobalNav();
   startSessionClock();
 
