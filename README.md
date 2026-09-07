@@ -8,7 +8,19 @@ draghi originali da collezionare. Interfaccia in italiano, contenuti didattici i
 - Funziona offline (service worker) e su tablet, Safari iOS incluso.
 - Nessun dato esce dal dispositivo: niente account, niente tracciamento, niente pubblicita'.
 
-## Avviare il gioco
+## Giocare
+
+Il gioco e' pubblicato su GitHub Pages, in HTTPS:
+
+**https://montanic.github.io/parole-creature/**
+
+Sul tablet: aprilo in Safari e "Aggiungi a Home". Da li' funziona anche
+senza connessione, perche' HTTPS e' cio' che permette al service worker di
+installarsi e di tenere in cache illustrazioni e file del gioco. Su un
+indirizzo `http://` in rete locale il browser lo nega: si gioca lo stesso,
+ma non offline.
+
+## Avviare il gioco in locale (sviluppo)
 
 Serve un piccolo server statico (i browser bloccano `fetch` su `file://`,
 e i contenuti stanno in file `.json` separati dalla logica):

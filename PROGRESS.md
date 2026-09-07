@@ -26,6 +26,22 @@ e plurali.
 
 Non ancora fatto: playtest reale con il bambino su tablet.
 
+## Dove gira
+
+**Pubblico, in HTTPS**: https://montanic.github.io/parole-creature/
+(repo `MontaNic/parole-creature`, GitHub Pages da `main`).
+
+E' pubblico per necessita', non per scelta: su un piano gratuito Pages
+richiede un repo pubblico. Prima di pubblicare il nome del bambino e' stato
+rimosso da file, titoli, nome del repo e messaggi di commit — la storia e'
+stata riscritta e forzata sul remoto. Restano privati, in `.env` sul Mac, la
+chiave ElevenLabs, quella Gemini e gli ID delle voci; i progressi di gioco
+vivono solo sull'iPad.
+
+Il motivo tecnico: su `http://IP` il browser nega service worker,
+`getUserMedia` e `navigator.share`. HTTPS sblocca l'offline e due feature
+della fase 2 in un colpo.
+
 ## Come si avvia
 
 ```bash
@@ -382,6 +398,12 @@ quello che il gioco ha appena insegnato.
   battute si sentono davvero. Rimosso il codice morto: `encouragementKey()`
   era definita e mai chiamata, ora ruota sia gli incoraggiamenti sia i
   complimenti.
+- **2026-09-07** — **Pubblicato su GitHub Pages.** Repo `MontaNic/parole-creature`,
+  pubblico (Pages su piano gratuito lo richiede). Prima di pubblicare: nome
+  del bambino tolto da 8 file, dal nome del file del prompt, dal nome del repo
+  e dall'unico messaggio di commit che lo citava (storia riscritta, push
+  forzato). Verificato subito prima del push: nessun segreto nei file
+  tracciati. Fase 2 disegnata in `docs/fase-2.md`.
 - **2026-09-06** — **Giocabilita' dopo il secondo playtest.** Frasi fuori
   dai giochi a immagini (audio coerente), conferma scritta in verde dopo ogni
   risposta giusta, ordine dei giochi mescolato, difficolta' a salire dentro la
