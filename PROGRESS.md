@@ -958,6 +958,14 @@ Il check e' esce con 1 se una soglia salta ed entra fra i controlli.
 
 ## Prossimi passi
 
+**Stato al 2026-09-07, sera**: fase 3 completa e pubblicata (versione
+1.6.0): icone PWA, storico e grafico, criteri di successo, distintivi,
+palette misurata per il daltonismo, piu' il primo gioco bonus "Bolle".
+Restano dalla roadmap: piu' contenuti (nuove unita': vorrebbero
+illustrazioni e audio nuovi, e una scelta di temi), un secondo gioco bonus,
+multi-profilo (solo se servira'), invio automatico su Kindle (vorrebbe un
+server: fuori).
+
 **Stato al 2026-09-07**: la fase 2 e' completa e pubblicata — storia a
 episodi, scrigni, registrazione della voce, condivisione in famiglia, tana
 (versione 1.5.0). Il prossimo passo non e' codice: e' un playtest vero.
