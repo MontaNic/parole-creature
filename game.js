@@ -33,6 +33,7 @@ import {
 import { GAMES, mostraConferma } from './js/minigames.js';
 import { pendingAtStart, pendingAfterRound, playChapters } from './js/story.js';
 import { planChest, openChest } from './js/chests.js';
+import { renderDen } from './js/den.js';
 import {
   showScreen, renderHome, renderAlbum, renderSummary,
   renderBlocked, runOnboarding, syncCreatures,
@@ -125,6 +126,7 @@ function goHome(firstTime = false) {
     onWorld: (world) => startRound({ world }),
     onReview: () => startRound({ review: true }),
     onAlbum: () => renderAlbum(),
+    onDen: () => renderDen(),
     onParents: () => openParents(goHome)
   });
 

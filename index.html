@@ -89,6 +89,9 @@
         </div>
       </div>
       <div class="topbar-actions">
+        <button class="icon-btn" id="btn-den" aria-label="Tana">
+          <svg class="ico"><use href="#sp-icon-den"></use></svg>
+        </button>
         <button class="icon-btn" id="btn-album" aria-label="Album">
           <svg class="ico"><use href="#sp-icon-album"></use></svg>
         </button>
@@ -152,6 +155,23 @@
       <button class="btn btn-lg" id="story-next"></button>
     </div>
     <button class="btn-skip" id="story-skip" data-str="story.skip"></button>
+  </section>
+
+  <!-- ============ LA TANA ============ -->
+  <section class="screen" id="screen-den">
+    <header class="topbar">
+      <button class="icon-btn" data-nav="home" aria-label="Indietro">
+        <svg class="ico"><use href="#sp-icon-back"></use></svg>
+      </button>
+      <h2 class="topbar-title" data-str="den.title"></h2>
+      <div class="den-walls" id="den-walls"></div>
+    </header>
+    <div class="den-wrap">
+      <div class="den-room" id="den-room"></div>
+      <p class="tiny muted center" id="den-hint" data-str="den.hint"></p>
+      <div class="den-tray" id="den-tray"></div>
+    </div>
+    <div class="mascot-corner" id="den-mascot"></div>
   </section>
 
   <!-- ============ PARTITA (mini-giochi) ============ -->

@@ -131,6 +131,7 @@ export function renderHome(handlers) {
 
   document.getElementById('btn-free-review').onclick = () => { sfxTap(); handlers.onReview(); };
   document.getElementById('btn-album').onclick = () => { sfxTap(); handlers.onAlbum(); };
+  document.getElementById('btn-den').onclick = () => { sfxTap(); handlers.onDen?.(); };
   document.getElementById('btn-parents').onclick = () => { sfxTap(); handlers.onParents(); };
 
   showScreen('home');

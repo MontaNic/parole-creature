@@ -838,7 +838,37 @@ era alto ~970px e la schermata non scorreva, quindi "Continua" e "Home"
 stavano sotto il bordo. In verticale non si vedeva. Ora `#screen-summary`
 scorre e il corpo si centra con `margin: auto`, che non taglia mai la cima.
 
+## La tana (fase 2, punto 5)
+
+Uno spazio suo. Dalla home, accanto all'album, "Tana": una stanza (parete e
+pavimento disegnati in CSS, quattro colori di parete a scelta) dove il
+bambino mette le cose che ha guadagnato: Pepe, le creature trovate, gli
+adesivi degli scrigni. Sotto, un vassoio con quello che non e' ancora nella
+stanza: un tocco lo mette al centro, poi si trascina dove si vuole (pointer
+events, coordinate in percentuale della stanza, quindi la disposizione
+regge in verticale e in orizzontale). Toccare una cosa nella stanza la
+porta davanti e la fa parlare: la parola inglese per gli adesivi, il nome
+per le creature. Trascinarla sul vassoio la ripone.
+
+Tutto in `save.den` (`placed: { id: {x, y, z} }`, `wall`), riempito dai
+default per i salvataggi vecchi. La logica pura — cosa e' disponibile,
+dove si puo' mettere, il clamp — sta in `js/den.js` ed e' testata; il
+trascinamento e' provato via DevTools con eventi del mouse veri.
+Una battuta di Pepe (`den_welcome`), la prima volta per sessione.
+
+E' la piu' incerta delle cinque: a 7 anni il senso di possesso puo'
+funzionare molto o per niente. Da guardare al playtest: ci torna da solo?
+
 ## Prossimi passi
+
+**Stato al 2026-09-07**: la fase 2 e' completa e pubblicata — storia a
+episodi, scrigni, registrazione della voce, condivisione in famiglia, tana
+(versione 1.5.0). Il prossimo passo non e' codice: e' un playtest vero.
+Da guardare: preme "Avanti" prima che il narratore finisca? Capisce che il
+tondo nell'album riapre la scena? Si registra da solo o va spinto? Torna
+nella tana senza che nessuno glielo dica? L'ordine dei prossimi interventi
+lo decide quello.
+
 3. **Riascoltare le 113 tracce generate** e rigenerare quelle che non
    convincono (`--force` dopo aver cancellato il file, oppure cambiare voce
    in `.env` e rilanciare).

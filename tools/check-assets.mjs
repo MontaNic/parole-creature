@@ -77,7 +77,7 @@ for (const s of contenuti.stickers?.items || []) {
   w ? cita(w.sprite, `adesivo ${s.id}`) : ko('adesivo senza parola', s.id);
 }
 cita('sp-chest', 'scrigno'); cita('sp-chest-open', 'scrigno aperto');
-cita('sp-icon-mic', 'microfono'); cita('sp-icon-share', 'condividi');
+cita('sp-icon-mic', 'microfono'); cita('sp-icon-share', 'condividi'); cita('sp-icon-den', 'tana');
 
 const irrisolti = [...citati].filter(([id]) => !suDisco.has(id) && !simboli.has(id));
 irrisolti.length

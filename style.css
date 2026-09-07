@@ -617,6 +617,47 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 /* Condividi, a fine partita: piccolo, sotto le azioni principali. */
 .share-btn { margin-top: 6px; }
 
+/* ---------------- La tana ---------------- */
+.den-wrap { flex: 1; display: flex; flex-direction: column; gap: 8px; padding: 6px 14px calc(10px + var(--safe-bottom)); min-height: 0; max-width: 980px; width: 100%; margin: 0 auto; }
+.den-room {
+  position: relative; flex: 1; min-height: 0; overflow: hidden;
+  border: var(--stroke) solid var(--ink); border-radius: var(--r-l);
+  box-shadow: var(--sh-card);
+  /* parete sopra, pavimento sotto: tutto CSS, nessuna immagine */
+  --wall: #443A72;
+  background:
+    linear-gradient(180deg, transparent 0 62%, rgba(0,0,0,.18) 62% 63%, transparent 63%),
+    linear-gradient(180deg, var(--wall) 0 62%, #C9A36B 62%, #A8804C 100%);
+}
+.den-room::before {
+  /* una finestra: un tocco di stanza vera */
+  content: ""; position: absolute; left: 8%; top: 10%; width: 16%; aspect-ratio: 1;
+  background: radial-gradient(circle at 50% 40%, #FFF1B8 0 30%, #7FC8F5 31%);
+  border: 4px solid var(--ink); border-radius: 12px; opacity: .9;
+}
+.den-item {
+  position: absolute; width: 14%; transform: translate(-50%, -50%);
+  touch-action: none; cursor: grab; user-select: none; -webkit-user-select: none;
+  filter: drop-shadow(0 6px 4px rgba(0,0,0,.25));
+}
+.den-item.is-sticker { width: 11%; }
+.den-item svg, .den-item img { width: 100%; height: auto; display: block; fill: none; pointer-events: none; }
+.den-tray {
+  display: flex; gap: 10px; overflow-x: auto; flex: none; min-height: 84px; align-items: center;
+  padding: 8px 10px; border-radius: var(--r-m);
+  background: var(--night-700); border: var(--stroke) solid var(--night-600);
+}
+.den-tray.is-target { border-color: var(--amber); background: var(--night-600); }
+.den-tray-item {
+  flex: none; width: 66px; height: 66px; padding: 6px; border-radius: var(--r-m);
+  background: var(--paper); border: var(--stroke) solid var(--ink); box-shadow: var(--sh-card); cursor: pointer;
+}
+.den-tray-item svg, .den-tray-item img { width: 100%; height: 100%; fill: none; }
+.den-walls { display: flex; gap: 8px; }
+.den-wall { width: 34px; height: 34px; border-radius: 50%; border: 3px solid rgba(255,255,255,.35); cursor: pointer; }
+.den-wall.is-on { border-color: #fff; box-shadow: 0 0 0 3px var(--amber); }
+#screen-den .mascot-corner { pointer-events: none; }
+
 /* ---------------- Scrigni a sorpresa ---------------- */
 .chest-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
 .chest-btn {

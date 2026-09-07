@@ -530,6 +530,7 @@
 <symbol id="sp-chest-open" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M18 42 C8 18 30 6 50 6 C70 6 92 18 82 42 Z" fill="#c0703a"/><path d="M50 16 l4 9 l9 1 l-7 6 l2 9 l-8 -5 l-8 5 l2 -9 l-7 -6 l9 -1 z" fill="#fde68a"/><rect x="14" y="46" width="72" height="40" rx="6" fill="#a0522d"/><rect x="20" y="46" width="60" height="10" fill="#facc15" class="o-thin"/><path d="M30 46 v40 M70 46 v40" class="o-thin"/><rect x="41" y="52" width="18" height="12" rx="3" fill="#facc15"/></g></symbol>
 <symbol id="sp-icon-mic" viewBox="0 0 100 100"><g class="o" fill="none"><rect x="36" y="12" width="28" height="48" rx="14" fill="#ffffff"/><path d="M24 48 c0 16 12 26 26 26 s26 -10 26 -26"/><path d="M50 74 v14 M36 88 h28"/></g></symbol>
 <symbol id="sp-icon-share" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M26 44 v40 h48 v-40" fill="#ffffff"/><path d="M50 62 V14 M34 30 l16 -16 l16 16"/></g></symbol>
+<symbol id="sp-icon-den" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M14 50 L50 18 L86 50" /><path d="M24 44 v40 h52 v-40" fill="#ffffff"/><rect x="42" y="58" width="16" height="26" fill="#facc15"/></g></symbol>
 <symbol id="sp-icon-star" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M50 12 L61 38 L88 40 L67 58 L74 86 L50 70 L26 86 L33 58 L12 40 L39 38Z" fill="#facc15"/></g></symbol>
 
 <!-- ============ AGGIUNTE DEL CURRICULUM v2 ============ -->

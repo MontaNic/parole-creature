@@ -37,6 +37,7 @@ import { chapters, chapterForCreature, pendingAfterRound, pendingAtStart, isAvai
 import { planChest, nextSticker, stickers } from './js/chests.js';
 import { pickMimeType, canRecord } from './js/recorder.js';
 import { buildSummaryCard, canShare } from './js/share.js';
+import { denItems, placeItem, removeItem, isPlaced, clamp, setWall, WALLS } from './js/den.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
   splitRound, unitItems, unitReviewItems, curriculumConfig, playablePhases
@@ -313,6 +314,21 @@ async function run() {
   check('la carta regge anche una partita vuota (ripasso, nessuna creatura)', vuota.width === 1200);
   save.settings.familySharing = false;
   check("l'interruttore dei genitori spegne 'Condividi'", canShare() === false);
+
+  /* --- la tana ------------------------------------------------------ */
+  resetSave();
+  check('a inizio gioco nella tana si puo\' mettere solo Pepe', denItems().length === 1 && denItems()[0].id === 'c_pepe');
+  save.progress.creatures.c_flamup = 'x';
+  save.progress.stickers.sk_sword = 'x';
+  check('creature trovate e adesivi diventano cose da mettere', denItems().map(i => i.id).sort().join(',') === 'c_flamup,c_pepe,sk_sword');
+  const pos = placeItem('c_pepe', -30, 250);
+  check('una cosa non finisce mai oltre il bordo', pos.x === clamp(-30) && pos.y === clamp(250) && pos.x >= 6 && pos.y <= 94);
+  placeItem('c_flamup', 50, 50);
+  check("l'ultima cosa messa sta davanti", save.den.placed.c_flamup.z > save.den.placed.c_pepe.z);
+  removeItem('c_pepe');
+  check('riporre toglie dalla stanza', !isPlaced('c_pepe') && isPlaced('c_flamup'));
+  setWall(WALLS.length + 1);
+  check('il colore della parete gira sui quattro', save.den.wall === 1);
 
   resetSave();
 

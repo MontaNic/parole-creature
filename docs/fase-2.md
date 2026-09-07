@@ -1,5 +1,10 @@
 # Fase 2 — disegno
 
+> Realizzata per intero il 2026-09-07 (v1.5.0). Le differenze fra questo
+> disegno e cio' che e' stato fatto sono annotate in PROGRESS.md, sezione per
+> sezione: l'epilogo scatta dopo Torrek e non alla soglia della fase 3; gli
+> scrigni danno adesivi (parole da collezione), non creature nuove.
+
 Le cinque idee della fase 2 nel prompt originale, rimesse in ordine dopo
 quello che i due playtest hanno insegnato. L'ordine non e' di gusto: e'
 dettato da una dipendenza tecnica scoperta misurando.

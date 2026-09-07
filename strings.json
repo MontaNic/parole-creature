@@ -21,6 +21,7 @@
     "tap_to_hear": "Tocca per ascoltare",
     "home": "Casa",
     "album": "Album",
+    "den": "Tana",
     "mission": "Missione",
     "free_review": "Ripasso libero",
     "free_review_hint": "Rigioca quando vuoi i mondi che hai gia' aperto",
@@ -83,6 +84,14 @@
     "retry_3": "Nessun problema, riproviamo"
   },
 
+  "den": {
+    "title": "La tana",
+    "hint": "Tocca una cosa qui sotto per metterla nella tana, poi trascinala dove vuoi",
+    "tray": "Le tue cose",
+    "tray_empty": "Hai messo tutto nella tana!",
+    "put_back": "Riponi",
+    "wall": "Parete"
+  },
   "share": {
     "button": "Condividi",
     "title": "Parole & Creature",
@@ -250,6 +259,7 @@
     "chest_sticker": "Un adesivo nuovo! Lo trovi nel tuo album.",
     "chest_stars": "Che fortuna! Stelle in regalo!",
     "record_done": "Ti ho sentito! Che bella voce inglese!",
+    "den_welcome": "Questa è la nostra tana! Mettici quello che vuoi.",
     "level_up": "Sono cresciuta anche io! Guardami.",
     "session_end": "Per oggi basta cosi'. Ci vediamo domani{name}!",
     "idle_1": "Tocca un mondo per iniziare.",

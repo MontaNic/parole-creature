@@ -68,6 +68,9 @@ function defaultSave() {
 
     streak: { current: 0, best: 0, lastPlayDay: '' },
 
+    /** La tana: cose disposte nella stanza (x, y in % della stanza) e colore della parete. */
+    den: { placed: {}, wall: 0 },
+
     daily: {
       day: '',
       missionId: '',
