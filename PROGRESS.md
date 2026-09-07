@@ -1007,6 +1007,25 @@ rigenerata, indice a 219.
 Da guardare al playtest: la parola scritta sempre mostrata in fase 6 e'
 un aiuto o una distrazione? "friend" (due bambini) si legge a 80px?
 
+### Anno 2, lotto 2: la fase 7 "Ogni giorno" (unita' 13-16)
+
+Fatto e pubblicato (contentVersion 2.2.0, app 1.8.0): 38 parole, 24 frasi,
+5 strutture (`st_i_like`, `st_do_you_like`, `st_on_in_under`,
+`st_can_i_have`, `st_i_can`), 4 unita' (cucina, casa, scuola, azioni) con
+Pasticcio, Chiavetta, Maestrino, Saltello. Le dieci azioni sono Pepe che
+le fa (correre, saltare, nuotare...): e' la prima volta che la mascotte
+compare come soggetto di una parola, e regge. Illustrazioni: 42 in un
+batch senza errori, 126 PNG in precache; la misura ha segnalato pizza
+(tonda come le faccine: ora e' una fetta), righello (giallo come la
+matita: ora azzurro) e porta (marrone come Maestrino: ora azzurra).
+Audio: 62 tracce inglesi, indice a 281.
+
+Preparati anche i simboli schematici per la fase 8 in `sprites.svg`:
+numeri 11-20 in cornici da dieci (blu i primi dieci, ambra gli altri),
+sette fogli di calendario con l'abbreviazione inglese in Andika, dodici
+orologi con l'ora in punto. Come i numeri 1-10: schematici, non
+illustrati.
+
 ## Prossimi passi
 
 **Stato al 2026-09-07, sera**: fase 3 completa e pubblicata (versione

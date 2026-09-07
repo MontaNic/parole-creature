@@ -527,6 +527,258 @@
       "kind": "creature",
       "batch": 3,
       "prompt": "a cute small white cloud creature with a round fluffy body, two big round eyes, rosy cheeks and a happy smile, two tiny stubby arms"
+    },
+    {
+      "id": "sp-apple",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a single shiny red apple with a small brown stem and one green leaf"
+    },
+    {
+      "id": "sp-banana",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a single yellow banana, slightly curved, with small brown tips"
+    },
+    {
+      "id": "sp-bread",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a golden brown loaf of bread with three diagonal cuts on top"
+    },
+    {
+      "id": "sp-milk",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a white milk bottle with a blue cap and a small blue label with a cow silhouette"
+    },
+    {
+      "id": "sp-cheese",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a triangular wedge of yellow cheese with round holes"
+    },
+    {
+      "id": "sp-water",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a tall clear glass full of light blue water"
+    },
+    {
+      "id": "sp-pizza",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a single triangular slice of pizza seen from above, golden crust on the wide side, red tomato sauce, yellow melted cheese and two green basil leaves, the tip pointing down"
+    },
+    {
+      "id": "sp-cake",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a round pink layered cake with white cream on top and one single lit candle in the middle"
+    },
+    {
+      "id": "sp-chicken",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a golden brown roasted chicken drumstick, a single piece, seen from the side"
+    },
+    {
+      "id": "sp-carrot",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a single orange carrot with green leafy top, pointing down"
+    },
+    {
+      "id": "sp-house",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a small friendly cottage seen from the front, white walls, orange tiled roof, a brown door and two windows, a chimney"
+    },
+    {
+      "id": "sp-door",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a single sky blue painted wooden front door seen from the front, with a round yellow knob and a small arched window at the top, closed, white door frame"
+    },
+    {
+      "id": "sp-window",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a single window with a white frame and four panes showing sky blue glass, with two short orange curtains at the sides"
+    },
+    {
+      "id": "sp-bed",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a single child bed seen from the side, wooden brown frame, a white pillow and a purple blanket with yellow stars"
+    },
+    {
+      "id": "sp-table",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a round wooden table seen from the side with four legs and a green tablecloth"
+    },
+    {
+      "id": "sp-chair",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a single simple wooden chair seen from the front, with a straight back and four legs, sky blue seat"
+    },
+    {
+      "id": "sp-kitchen",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a small kitchen corner: a white stove with a red pot on top with steam, and a wall cabinet above"
+    },
+    {
+      "id": "sp-bathroom",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a small bathroom corner: a white bathtub with foam bubbles and a yellow rubber duck, and a small shower head above"
+    },
+    {
+      "id": "sp-garden",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a small garden corner: green grass, three colourful flowers, a small brown wooden fence and a bush"
+    },
+    {
+      "id": "sp-book",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a single open book seen from the front, sky blue hard cover, white pages with a few grey lines suggesting text but no letters"
+    },
+    {
+      "id": "sp-pen",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a single sky blue ballpoint pen seen diagonally, with a white clip and a dark tip"
+    },
+    {
+      "id": "sp-pencil",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a single yellow wooden pencil seen diagonally, sharpened dark tip and a pink eraser at the end"
+    },
+    {
+      "id": "sp-bag",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a single school backpack seen from the front, green with orange pockets and two straps"
+    },
+    {
+      "id": "sp-desk",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a small school desk seen from the front with a slanted wooden top and an attached chair, no objects on it"
+    },
+    {
+      "id": "sp-teacher",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a friendly cartoon teacher seen from the front, bust portrait, dark hair in a ponytail, round glasses, green dress, holding a wooden pointer stick"
+    },
+    {
+      "id": "sp-school",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a small school building seen from the front, sky blue walls, an orange roof, a round clock above the door with no numbers, a flag on top"
+    },
+    {
+      "id": "sp-ruler",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a single sky blue plastic ruler seen diagonally, with small dark tick marks along one edge and no numbers"
+    },
+    {
+      "id": "sp-scissors",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "a pair of scissors seen from the front, silver blades and orange rounded handles, slightly open"
+    },
+    {
+      "id": "sp-run",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, running fast to the right, seen from the side, legs stretched out, ears flying back, three short motion lines behind"
+    },
+    {
+      "id": "sp-jump",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, jumping high in the air, seen from the side, all four legs tucked under the body, ears up, small motion lines below"
+    },
+    {
+      "id": "sp-swim",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, swimming happily in sky blue water, only the head and front paws above the water line, small waves around"
+    },
+    {
+      "id": "sp-fly",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, flying through the air with a small red superhero cape and two tiny white wings, seen from the side, paws stretched forward"
+    },
+    {
+      "id": "sp-sing",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, standing and singing with the mouth wide open, eyes closed with joy, three music notes floating above the head"
+    },
+    {
+      "id": "sp-dance",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, dancing on the hind legs with one front paw raised, wearing a small party hat, short motion lines around"
+    },
+    {
+      "id": "sp-sleep",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, curled up asleep on a small purple pillow, eyes closed, a tiny crescent moon floating above"
+    },
+    {
+      "id": "sp-eat",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, eating from a round red bowl full of brown kibble, seen from the side, tongue out"
+    },
+    {
+      "id": "sp-drink",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, drinking water from a sky blue bowl, seen from the side, tongue lapping, small water drops"
+    },
+    {
+      "id": "sp-climb",
+      "kind": "object",
+      "batch": 4,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, climbing up a brown wooden ladder, seen from the side, paws on the rungs, looking up"
+    },
+    {
+      "id": "sp-pasticcio",
+      "kind": "creature",
+      "batch": 4,
+      "prompt": "a cute grey mouse cook sitting upright, big round ears, a white chef hat too big for the head, a small white apron, holding a wooden spoon, happy smile"
+    },
+    {
+      "id": "sp-chiavetta",
+      "kind": "creature",
+      "batch": 4,
+      "prompt": "a cute living golden key standing upright on two short legs with small shoes, a round head with big eyes and a smile on the bow of the key"
+    },
+    {
+      "id": "sp-maestrino",
+      "kind": "creature",
+      "batch": 4,
+      "prompt": "a cute round brown owl sitting upright, big round eyes behind round glasses, small wings, holding a small golden bell, wise gentle smile"
+    },
+    {
+      "id": "sp-saltello",
+      "kind": "creature",
+      "batch": 4,
+      "prompt": "a cute green frog athlete sitting upright, big round eyes, an orange headband on the forehead, small white sneakers, energetic smile"
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "_comment": "Curriculum di 'Parole & Creature'. NON e' un elenco di parole per tema: e' un corso a unita', ognuna con un obiettivo linguistico esplicito, revisione sistematica delle unita' precedenti e una soglia di padronanza da superare per cambiare fase. Vedi PROGRESS.md, sezione 'Logica del curriculum'.",
   "schemaVersion": 2,
-  "contentVersion": "2.1.0",
+  "contentVersion": "2.2.0",
   "audioBasePath": "assets/audio/",
   "_ids_comment": "REGOLA: gli id di parole, frasi e unita' sono PERMANENTI. Il progresso del bambino e' indicizzato per id: rinominarli equivale a cancellare quello che ha imparato. Si aggiunge, non si rinomina.",
   "curriculum": {
@@ -171,6 +171,46 @@
       "pattern": "How are you? I am hungry. / Are you tired? Yes, I am. No, I am not.",
       "focus_it": "Dire come si sta e rispondere si'/no a una domanda con are you.",
       "why_it": "'How are you?' era gia' nella Torre con 'happy': qui la risposta si allarga a otto stati e arriva la risposta breve negativa, che chiude il cerchio delle domande si'/no."
+    },
+    {
+      "id": "st_i_like",
+      "phase": 7,
+      "unit": 13,
+      "pattern": "I like apples. / I don't like cheese.",
+      "focus_it": "Dire cosa piace e cosa no: 'I like' e la prima negazione con 'don't'.",
+      "why_it": "E' la funzione che le Indicazioni chiamano 'esprimere preferenze', e per un bambino e' la frase piu' utile che esista. 'don't' entra come blocco, senza analisi."
+    },
+    {
+      "id": "st_do_you_like",
+      "phase": 7,
+      "unit": 13,
+      "pattern": "Do you like pizza? Yes, I do. / No, I don't.",
+      "focus_it": "Chiedere se piace e rispondere con la risposta breve: yes, I do / no, I don't.",
+      "why_it": "Dopo 'Are you tired? Yes, I am' arriva la seconda famiglia di risposte brevi, con 'do'. Sentirle insieme e' cio' che le fa distinguere."
+    },
+    {
+      "id": "st_on_in_under",
+      "phase": 7,
+      "unit": 14,
+      "pattern": "The cat is on the bed. / Where is the dog? Under the table.",
+      "focus_it": "Dire dov'e' una cosa con on, in, under, e chiedere 'Where is...?'.",
+      "why_it": "Le tre preposizioni di luogo sono fra le parole piu' frequenti dell'inglese e si imparano solo con oggetti veri in posti veri: la casa e' il posto giusto."
+    },
+    {
+      "id": "st_can_i_have",
+      "phase": 7,
+      "unit": 15,
+      "pattern": "Can I have a pencil, please? / Here you are. / Open your book!",
+      "focus_it": "Chiedere una cosa con gentilezza, darla, e capire i comandi di classe.",
+      "why_it": "E' l'inglese che serve a scuola davvero: chiedere, ringraziare, eseguire. 'please' e 'here you are' sono formule intere."
+    },
+    {
+      "id": "st_i_can",
+      "phase": 7,
+      "unit": 16,
+      "pattern": "I can jump. / Can you swim? Yes, I can. / Pepe is running.",
+      "focus_it": "Dire cosa so fare con 'can', rispondere alla domanda, e descrivere un'azione in corso con 'is -ing'.",
+      "why_it": "I verbi di movimento si imparano muovendosi (TPR): il bambino salta quando sente 'jump'. 'can' e '-ing' entrano come formule attaccate all'azione."
     }
   ],
   "words": [
@@ -837,6 +877,310 @@
       "phase": 6,
       "theme": "emozioni",
       "sprite": "sp-surprised"
+    },
+    {
+      "id": "w_apple",
+      "en": "apple",
+      "it": "mela",
+      "phase": 7,
+      "theme": "cibo",
+      "sprite": "sp-apple"
+    },
+    {
+      "id": "w_banana",
+      "en": "banana",
+      "it": "banana",
+      "phase": 7,
+      "theme": "cibo",
+      "sprite": "sp-banana"
+    },
+    {
+      "id": "w_bread",
+      "en": "bread",
+      "it": "pane",
+      "phase": 7,
+      "theme": "cibo",
+      "sprite": "sp-bread"
+    },
+    {
+      "id": "w_milk",
+      "en": "milk",
+      "it": "latte",
+      "phase": 7,
+      "theme": "cibo",
+      "sprite": "sp-milk"
+    },
+    {
+      "id": "w_cheese",
+      "en": "cheese",
+      "it": "formaggio",
+      "phase": 7,
+      "theme": "cibo",
+      "sprite": "sp-cheese"
+    },
+    {
+      "id": "w_water",
+      "en": "water",
+      "it": "acqua",
+      "phase": 7,
+      "theme": "cibo",
+      "sprite": "sp-water"
+    },
+    {
+      "id": "w_pizza",
+      "en": "pizza",
+      "it": "pizza",
+      "phase": 7,
+      "theme": "cibo",
+      "sprite": "sp-pizza"
+    },
+    {
+      "id": "w_cake",
+      "en": "cake",
+      "it": "torta",
+      "phase": 7,
+      "theme": "cibo",
+      "sprite": "sp-cake"
+    },
+    {
+      "id": "w_chicken",
+      "en": "chicken",
+      "it": "pollo",
+      "phase": 7,
+      "theme": "cibo",
+      "sprite": "sp-chicken"
+    },
+    {
+      "id": "w_carrot",
+      "en": "carrot",
+      "it": "carota",
+      "phase": 7,
+      "theme": "cibo",
+      "sprite": "sp-carrot"
+    },
+    {
+      "id": "w_house",
+      "en": "house",
+      "it": "casa",
+      "phase": 7,
+      "theme": "casa",
+      "sprite": "sp-house"
+    },
+    {
+      "id": "w_door",
+      "en": "door",
+      "it": "porta",
+      "phase": 7,
+      "theme": "casa",
+      "sprite": "sp-door"
+    },
+    {
+      "id": "w_window",
+      "en": "window",
+      "it": "finestra",
+      "phase": 7,
+      "theme": "casa",
+      "sprite": "sp-window"
+    },
+    {
+      "id": "w_bed",
+      "en": "bed",
+      "it": "letto",
+      "phase": 7,
+      "theme": "casa",
+      "sprite": "sp-bed"
+    },
+    {
+      "id": "w_table",
+      "en": "table",
+      "it": "tavolo",
+      "phase": 7,
+      "theme": "casa",
+      "sprite": "sp-table"
+    },
+    {
+      "id": "w_chair",
+      "en": "chair",
+      "it": "sedia",
+      "phase": 7,
+      "theme": "casa",
+      "sprite": "sp-chair"
+    },
+    {
+      "id": "w_kitchen",
+      "en": "kitchen",
+      "it": "cucina",
+      "phase": 7,
+      "theme": "casa",
+      "sprite": "sp-kitchen"
+    },
+    {
+      "id": "w_bathroom",
+      "en": "bathroom",
+      "it": "bagno",
+      "phase": 7,
+      "theme": "casa",
+      "sprite": "sp-bathroom"
+    },
+    {
+      "id": "w_garden",
+      "en": "garden",
+      "it": "giardino",
+      "phase": 7,
+      "theme": "casa",
+      "sprite": "sp-garden"
+    },
+    {
+      "id": "w_book",
+      "en": "book",
+      "it": "libro",
+      "phase": 7,
+      "theme": "scuola",
+      "sprite": "sp-book"
+    },
+    {
+      "id": "w_pen",
+      "en": "pen",
+      "it": "penna",
+      "phase": 7,
+      "theme": "scuola",
+      "sprite": "sp-pen"
+    },
+    {
+      "id": "w_pencil",
+      "en": "pencil",
+      "it": "matita",
+      "phase": 7,
+      "theme": "scuola",
+      "sprite": "sp-pencil"
+    },
+    {
+      "id": "w_bag",
+      "en": "bag",
+      "it": "zaino",
+      "phase": 7,
+      "theme": "scuola",
+      "sprite": "sp-bag"
+    },
+    {
+      "id": "w_desk",
+      "en": "desk",
+      "it": "banco",
+      "phase": 7,
+      "theme": "scuola",
+      "sprite": "sp-desk"
+    },
+    {
+      "id": "w_teacher",
+      "en": "teacher",
+      "it": "maestra",
+      "phase": 7,
+      "theme": "scuola",
+      "sprite": "sp-teacher"
+    },
+    {
+      "id": "w_school",
+      "en": "school",
+      "it": "scuola",
+      "phase": 7,
+      "theme": "scuola",
+      "sprite": "sp-school"
+    },
+    {
+      "id": "w_ruler",
+      "en": "ruler",
+      "it": "righello",
+      "phase": 7,
+      "theme": "scuola",
+      "sprite": "sp-ruler"
+    },
+    {
+      "id": "w_scissors",
+      "en": "scissors",
+      "it": "forbici",
+      "phase": 7,
+      "theme": "scuola",
+      "sprite": "sp-scissors"
+    },
+    {
+      "id": "w_run",
+      "en": "run",
+      "it": "correre",
+      "phase": 7,
+      "theme": "azioni",
+      "sprite": "sp-run"
+    },
+    {
+      "id": "w_jump",
+      "en": "jump",
+      "it": "saltare",
+      "phase": 7,
+      "theme": "azioni",
+      "sprite": "sp-jump"
+    },
+    {
+      "id": "w_swim",
+      "en": "swim",
+      "it": "nuotare",
+      "phase": 7,
+      "theme": "azioni",
+      "sprite": "sp-swim"
+    },
+    {
+      "id": "w_fly",
+      "en": "fly",
+      "it": "volare",
+      "phase": 7,
+      "theme": "azioni",
+      "sprite": "sp-fly"
+    },
+    {
+      "id": "w_sing",
+      "en": "sing",
+      "it": "cantare",
+      "phase": 7,
+      "theme": "azioni",
+      "sprite": "sp-sing"
+    },
+    {
+      "id": "w_dance",
+      "en": "dance",
+      "it": "ballare",
+      "phase": 7,
+      "theme": "azioni",
+      "sprite": "sp-dance"
+    },
+    {
+      "id": "w_sleep",
+      "en": "sleep",
+      "it": "dormire",
+      "phase": 7,
+      "theme": "azioni",
+      "sprite": "sp-sleep"
+    },
+    {
+      "id": "w_eat",
+      "en": "eat",
+      "it": "mangiare",
+      "phase": 7,
+      "theme": "azioni",
+      "sprite": "sp-eat"
+    },
+    {
+      "id": "w_drink",
+      "en": "drink",
+      "it": "bere",
+      "phase": 7,
+      "theme": "azioni",
+      "sprite": "sp-drink"
+    },
+    {
+      "id": "w_climb",
+      "en": "climb",
+      "it": "arrampicarsi",
+      "phase": 7,
+      "theme": "azioni",
+      "sprite": "sp-climb"
     }
   ],
   "phrases": [
@@ -1586,6 +1930,299 @@
       "wordIds": [
         "w_sick"
       ]
+    },
+    {
+      "id": "p_like_apples",
+      "en": "I like apples.",
+      "it": "Mi piacciono le mele.",
+      "phase": 7,
+      "theme": "cibo",
+      "structure": "st_i_like",
+      "sprite": "sp-apple",
+      "wordIds": [
+        "w_apple"
+      ]
+    },
+    {
+      "id": "p_like_pizza",
+      "en": "I like pizza.",
+      "it": "Mi piace la pizza.",
+      "phase": 7,
+      "theme": "cibo",
+      "structure": "st_i_like",
+      "sprite": "sp-pizza",
+      "wordIds": [
+        "w_pizza"
+      ]
+    },
+    {
+      "id": "p_dont_like_cheese",
+      "en": "I don't like cheese.",
+      "it": "Non mi piace il formaggio.",
+      "phase": 7,
+      "theme": "cibo",
+      "structure": "st_i_like",
+      "sprite": "sp-cheese",
+      "wordIds": [
+        "w_cheese"
+      ]
+    },
+    {
+      "id": "p_dont_like_carrots",
+      "en": "I don't like carrots.",
+      "it": "Non mi piacciono le carote.",
+      "phase": 7,
+      "theme": "cibo",
+      "structure": "st_i_like",
+      "sprite": "sp-carrot",
+      "wordIds": [
+        "w_carrot"
+      ]
+    },
+    {
+      "id": "p_do_you_like_pizza",
+      "en": "Do you like pizza? Yes, I do.",
+      "it": "Ti piace la pizza? Sì.",
+      "phase": 7,
+      "theme": "cibo",
+      "structure": "st_do_you_like",
+      "sprite": "sp-pizza",
+      "wordIds": [
+        "w_pizza"
+      ]
+    },
+    {
+      "id": "p_do_you_like_milk",
+      "en": "Do you like milk? No, I don't.",
+      "it": "Ti piace il latte? No.",
+      "phase": 7,
+      "theme": "cibo",
+      "structure": "st_do_you_like",
+      "sprite": "sp-milk",
+      "wordIds": [
+        "w_milk"
+      ]
+    },
+    {
+      "id": "p_cat_on_bed",
+      "en": "The cat is on the bed.",
+      "it": "Il gatto è sul letto.",
+      "phase": 7,
+      "theme": "casa",
+      "structure": "st_on_in_under",
+      "sprite": "sp-bed",
+      "wordIds": [
+        "w_cat",
+        "w_bed"
+      ]
+    },
+    {
+      "id": "p_dog_under_table",
+      "en": "The dog is under the table.",
+      "it": "Il cane è sotto il tavolo.",
+      "phase": 7,
+      "theme": "casa",
+      "structure": "st_on_in_under",
+      "sprite": "sp-table",
+      "wordIds": [
+        "w_dog",
+        "w_table"
+      ]
+    },
+    {
+      "id": "p_fish_in_kitchen",
+      "en": "The fish is in the kitchen.",
+      "it": "Il pesce è in cucina.",
+      "phase": 7,
+      "theme": "casa",
+      "structure": "st_on_in_under",
+      "sprite": "sp-kitchen",
+      "wordIds": [
+        "w_fish",
+        "w_kitchen"
+      ]
+    },
+    {
+      "id": "p_where_dog",
+      "en": "Where is the dog? In the garden.",
+      "it": "Dov'è il cane? In giardino.",
+      "phase": 7,
+      "theme": "casa",
+      "structure": "st_on_in_under",
+      "sprite": "sp-garden",
+      "wordIds": [
+        "w_dog",
+        "w_garden"
+      ]
+    },
+    {
+      "id": "p_where_cat",
+      "en": "Where is the cat? On the chair.",
+      "it": "Dov'è il gatto? Sulla sedia.",
+      "phase": 7,
+      "theme": "casa",
+      "structure": "st_on_in_under",
+      "sprite": "sp-chair",
+      "wordIds": [
+        "w_cat",
+        "w_chair"
+      ]
+    },
+    {
+      "id": "p_open_door",
+      "en": "Open the door!",
+      "it": "Apri la porta!",
+      "phase": 7,
+      "theme": "casa",
+      "structure": "st_on_in_under",
+      "sprite": "sp-door",
+      "wordIds": [
+        "w_door"
+      ]
+    },
+    {
+      "id": "p_open_book",
+      "en": "Open your book!",
+      "it": "Apri il libro!",
+      "phase": 7,
+      "theme": "scuola",
+      "structure": "st_can_i_have",
+      "sprite": "sp-book",
+      "wordIds": [
+        "w_book"
+      ]
+    },
+    {
+      "id": "p_can_i_pencil",
+      "en": "Can I have a pencil, please?",
+      "it": "Posso avere una matita, per favore?",
+      "phase": 7,
+      "theme": "scuola",
+      "structure": "st_can_i_have",
+      "sprite": "sp-pencil",
+      "wordIds": [
+        "w_pencil"
+      ]
+    },
+    {
+      "id": "p_here_you_are",
+      "en": "Here you are.",
+      "it": "Ecco a te.",
+      "phase": 7,
+      "theme": "scuola",
+      "structure": "st_can_i_have",
+      "sprite": "sp-pen",
+      "wordIds": [
+        "w_pen"
+      ]
+    },
+    {
+      "id": "p_can_i_ruler",
+      "en": "Can I have a ruler, please?",
+      "it": "Posso avere un righello, per favore?",
+      "phase": 7,
+      "theme": "scuola",
+      "structure": "st_can_i_have",
+      "sprite": "sp-ruler",
+      "wordIds": [
+        "w_ruler"
+      ]
+    },
+    {
+      "id": "p_my_bag",
+      "en": "This is my bag.",
+      "it": "Questo è il mio zaino.",
+      "phase": 7,
+      "theme": "scuola",
+      "structure": "st_can_i_have",
+      "sprite": "sp-bag",
+      "wordIds": [
+        "w_bag"
+      ]
+    },
+    {
+      "id": "p_sit_down",
+      "en": "Sit down, please!",
+      "it": "Siediti, per favore!",
+      "phase": 7,
+      "theme": "scuola",
+      "structure": "st_can_i_have",
+      "sprite": "sp-desk",
+      "wordIds": [
+        "w_desk"
+      ]
+    },
+    {
+      "id": "p_i_can_jump",
+      "en": "I can jump.",
+      "it": "So saltare.",
+      "phase": 7,
+      "theme": "azioni",
+      "structure": "st_i_can",
+      "sprite": "sp-jump",
+      "wordIds": [
+        "w_jump"
+      ]
+    },
+    {
+      "id": "p_i_can_swim",
+      "en": "I can swim.",
+      "it": "So nuotare.",
+      "phase": 7,
+      "theme": "azioni",
+      "structure": "st_i_can",
+      "sprite": "sp-swim",
+      "wordIds": [
+        "w_swim"
+      ]
+    },
+    {
+      "id": "p_can_you_fly",
+      "en": "Can you fly? No, I can't.",
+      "it": "Sai volare? No.",
+      "phase": 7,
+      "theme": "azioni",
+      "structure": "st_i_can",
+      "sprite": "sp-fly",
+      "wordIds": [
+        "w_fly"
+      ]
+    },
+    {
+      "id": "p_can_you_sing",
+      "en": "Can you sing? Yes, I can.",
+      "it": "Sai cantare? Sì.",
+      "phase": 7,
+      "theme": "azioni",
+      "structure": "st_i_can",
+      "sprite": "sp-sing",
+      "wordIds": [
+        "w_sing"
+      ]
+    },
+    {
+      "id": "p_pepe_running",
+      "en": "Pepe is running.",
+      "it": "Pepe sta correndo.",
+      "phase": 7,
+      "theme": "azioni",
+      "structure": "st_i_can",
+      "sprite": "sp-run",
+      "wordIds": [
+        "w_run"
+      ]
+    },
+    {
+      "id": "p_pepe_sleeping",
+      "en": "Pepe is sleeping.",
+      "it": "Pepe sta dormendo.",
+      "phase": 7,
+      "theme": "azioni",
+      "structure": "st_i_can",
+      "sprite": "sp-sleep",
+      "wordIds": [
+        "w_sleep"
+      ]
     }
   ],
   "worlds": [
@@ -2118,6 +2755,235 @@
         "truefalse"
       ],
       "reward": "c_nuvolo"
+    },
+    {
+      "id": "world_food",
+      "unit": 13,
+      "order": 13,
+      "phase": 7,
+      "title_it": "La Cucina del Castello",
+      "objective_it": "Dieci cibi e le preferenze: I like, I don't like, e la domanda Do you like...? con la risposta breve.",
+      "canDo_it": "So dire cosa mi piace mangiare e cosa no.",
+      "structureIds": [
+        "st_i_like",
+        "st_do_you_like"
+      ],
+      "sprite": "sp-pizza",
+      "color": "#f28482",
+      "newItems": [
+        "w_apple",
+        "w_banana",
+        "w_bread",
+        "w_milk",
+        "w_cheese",
+        "w_water",
+        "w_pizza",
+        "w_cake",
+        "w_chicken",
+        "w_carrot",
+        "p_like_apples",
+        "p_like_pizza",
+        "p_dont_like_cheese",
+        "p_dont_like_carrots",
+        "p_do_you_like_pizza",
+        "p_do_you_like_milk"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_pasticcio"
+    },
+    {
+      "id": "world_house",
+      "unit": 14,
+      "order": 14,
+      "phase": 7,
+      "title_it": "La Casa di Pepe",
+      "objective_it": "La casa e le posizioni: on, in, under, e la domanda Where is...?",
+      "canDo_it": "So dire dov'è una cosa in casa.",
+      "structureIds": [
+        "st_on_in_under"
+      ],
+      "sprite": "sp-house",
+      "color": "#84a59d",
+      "newItems": [
+        "w_house",
+        "w_door",
+        "w_window",
+        "w_bed",
+        "w_table",
+        "w_chair",
+        "w_kitchen",
+        "w_bathroom",
+        "w_garden",
+        "p_cat_on_bed",
+        "p_dog_under_table",
+        "p_fish_in_kitchen",
+        "p_where_dog",
+        "p_where_cat",
+        "p_open_door"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_chiavetta"
+    },
+    {
+      "id": "world_school",
+      "unit": 15,
+      "order": 15,
+      "phase": 7,
+      "title_it": "La Scuola delle Creature",
+      "objective_it": "Le cose di scuola, chiedere una cosa per favore, darla, e i comandi di classe.",
+      "canDo_it": "So chiedere una cosa in classe con gentilezza.",
+      "structureIds": [
+        "st_can_i_have"
+      ],
+      "sprite": "sp-book",
+      "color": "#f6bd60",
+      "newItems": [
+        "w_book",
+        "w_pen",
+        "w_pencil",
+        "w_bag",
+        "w_desk",
+        "w_teacher",
+        "w_school",
+        "w_ruler",
+        "w_scissors",
+        "p_open_book",
+        "p_can_i_pencil",
+        "p_here_you_are",
+        "p_can_i_ruler",
+        "p_my_bag",
+        "p_sit_down"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food",
+        "world_house"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_maestrino"
+    },
+    {
+      "id": "world_actions",
+      "unit": 16,
+      "order": 16,
+      "phase": 7,
+      "title_it": "Il Bosco delle Azioni",
+      "objective_it": "Dieci azioni col corpo: I can jump, Can you swim?, e Pepe is running.",
+      "canDo_it": "So dire cosa so fare e cosa sta facendo Pepe.",
+      "structureIds": [
+        "st_i_can"
+      ],
+      "sprite": "sp-jump",
+      "color": "#90be6d",
+      "newItems": [
+        "w_run",
+        "w_jump",
+        "w_swim",
+        "w_fly",
+        "w_sing",
+        "w_dance",
+        "w_sleep",
+        "w_eat",
+        "w_drink",
+        "w_climb",
+        "p_i_can_jump",
+        "p_i_can_swim",
+        "p_can_you_fly",
+        "p_can_you_sing",
+        "p_pepe_running",
+        "p_pepe_sleeping"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food",
+        "world_house",
+        "world_school"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_saltello"
     }
   ],
   "creatures": [
@@ -2279,6 +3145,46 @@
         "value": "world_feelings"
       },
       "fact_it": "Una nuvoletta che cambia faccia a seconda di come sta. Oggi è contenta."
+    },
+    {
+      "id": "c_pasticcio",
+      "name_it": "Pasticcio",
+      "sprite": "sp-pasticcio",
+      "unlock": {
+        "type": "world",
+        "value": "world_food"
+      },
+      "fact_it": "Un topino cuoco con il cappello troppo grande. Assaggia tutto due volte."
+    },
+    {
+      "id": "c_chiavetta",
+      "name_it": "Chiavetta",
+      "sprite": "sp-chiavetta",
+      "unlock": {
+        "type": "world",
+        "value": "world_house"
+      },
+      "fact_it": "Una chiave con le gambe. Apre tutte le porte della casa di Pepe, tranne quella del frigo."
+    },
+    {
+      "id": "c_maestrino",
+      "name_it": "Maestrino",
+      "sprite": "sp-maestrino",
+      "unlock": {
+        "type": "world",
+        "value": "world_school"
+      },
+      "fact_it": "Un gufo con la campanella. Sa tutte le parole, ma le dice piano."
+    },
+    {
+      "id": "c_saltello",
+      "name_it": "Saltello",
+      "sprite": "sp-saltello",
+      "unlock": {
+        "type": "world",
+        "value": "world_actions"
+      },
+      "fact_it": "Una rana atleta con la fascia in fronte. Non sta ferma un secondo."
     }
   ],
   "story": {
