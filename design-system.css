@@ -149,6 +149,9 @@ body {
 .t-display { font-weight: 600; letter-spacing: -.01em; line-height: 1.12; }
 .t-body    { font-weight: 400; line-height: 1.55; }
 
+/* hidden deve vincere sempre, anche su .btn (display: inline-flex). */
+[hidden] { display: none !important; }
+
 /* Inglese da imparare: sempre Andika, sempre con un filo d'aria in piu'
    fra le lettere, perche' vanno lette una per una. */
 .t-en {

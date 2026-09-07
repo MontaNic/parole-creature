@@ -85,7 +85,8 @@ function defaultSave() {
       totalRounds: 0,
       totalMinutes: 0,
       daysPlayed: 0,
-      chestsOpened: 0
+      chestsOpened: 0,
+      totalRecordings: 0
     },
 
     settings: {
@@ -98,6 +99,7 @@ function defaultSave() {
       allowedDays: [0, 1, 2, 3, 4, 5, 6],  // 0 = lunedi
       phasesEnabled: { 1: true, 2: true, 3: true, 4: true, 5: true },
       themesDisabled: [],      // temi messi in pausa dai genitori
+      voiceRecording: true,    // microfono in 'ascolta e ripeti'
       vacation: false,
 
       /*

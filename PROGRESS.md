@@ -793,6 +793,26 @@ Tre battute nuove di Pepe (`chest_found`, `chest_sticker`, `chest_stars`),
 generate con ElevenLabs prima di pubblicare. Gli adesivi vivono in
 `save.progress.stickers` e si vedono nell'album, sotto le creature.
 
+## La registrazione della voce (fase 2, punto 3)
+
+Nel gioco "ascolta e ripeti" — l'unico dove ripetere e' gia' l'esercizio —
+compare un microfono: il bambino si registra dicendo la parola e si
+riascolta subito. **Nessuna valutazione**, come da spec: il piacere di
+sentirsi parlare inglese. Poi puo' riascoltarsi quante volte vuole, o
+registrare di nuovo.
+
+Regole: la registrazione vive in memoria e sparisce alla domanda dopo;
+niente salvato, niente inviato, il microfono viene rilasciato appena si
+ferma (l'indicatore rosso di iOS si spegne). Massimo 4 secondi, poi si
+ferma da sola. Il bottone compare solo dove serve: contesto sicuro (HTTPS),
+`MediaRecorder` disponibile, e l'interruttore dei genitori acceso
+(`settings.voiceRecording`, acceso di default, in "Impostazioni generali").
+Se il permesso al microfono viene negato, il bottone sparisce e la partita
+continua come prima. Formato scelto a runtime fra `audio/mp4` (Safari) e
+`audio/webm` (Chrome): `pickMimeType` in `js/recorder.js`, testato.
+Una battuta nuova di Pepe (`record_done`), detta la prima volta per
+sessione. `stats.totalRecordings` conta quante volte e' successo.
+
 ## Prossimi passi
 3. **Riascoltare le 113 tracce generate** e rigenerare quelle che non
    convincono (`--force` dopo aver cancellato il file, oppure cambiare voce

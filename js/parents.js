@@ -612,6 +612,13 @@ function panelGeneral() {
   vol.appendChild(volumeRow(t('parents.volume_sfx'), 'sfxVolume', () => sfxTap()));
   p.appendChild(vol);
 
+  /* --- microfono --- */
+  const mic = el('div', 'card-box');
+  mic.appendChild(switchRow(t('parents.voice_recording'), save.settings.voiceRecording !== false, (on) => {
+    save.settings.voiceRecording = on; persist(true);
+  }, t('parents.voice_recording_hint')));
+  p.appendChild(mic);
+
   /* --- verifica offline --- */
   const off = el('div', 'card-box');
   off.appendChild(el('h3', null, t('parents.offline_title')));

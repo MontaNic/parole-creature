@@ -14,6 +14,9 @@
 import { CONFIG } from './config.js';
 import { t, artIndex } from './content-loader.js';
 import { speakItem, sfxTap } from './audio.js';
+import { canRecord, startRecording, playBlob } from './recorder.js';
+import { mascotSay } from './mascot.js';
+import { save, persist } from './state.js';
 import { shuffle, distractors, distinctBySprite } from './srs.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
@@ -322,12 +325,18 @@ async function gameListen(api) {
     stage.appendChild(el('p', item.kind === 'phrase' ? 'phrase-written' : 'word-written', item.en));
   } else {
     const art = el('div', 'choice');
-    art.style.width = 'min(190px, 46vw)';
+    // Il terzo termine tiene tutta la colonna (orb, figura, microfono, Fatto)
+    // dentro un iPad orizzontale con la barra di Safari.
+    art.style.width = 'min(190px, 46vw, 24vh)';
     art.style.pointerEvents = 'none';
     art.appendChild(spriteSvg(item.sprite));
     stage.appendChild(art);
   }
   stage.appendChild(el('p', 'word-hint-it', item.it));
+
+  // Il microfono: registrarsi e riascoltarsi, senza voto. Compare solo dove
+  // puo' funzionare (HTTPS, MediaRecorder) e se i genitori lo vogliono.
+  if (canRecord()) stage.appendChild(recRow());
 
   const done = el('button', 'btn btn-good btn-lg', t('games.listen_done'));
   done.type = 'button';
@@ -348,6 +357,70 @@ async function gameListen(api) {
       resolve();
     });
   });
+}
+
+let dettoRecord = false;   // Pepe commenta la prima registrazione della sessione
+
+function recRow() {
+  const row = el('div', 'rec-row');
+  const rec = el('button', 'btn btn-ghost btn-sm rec-btn');
+  rec.type = 'button';
+  const icona = spriteSvg('sp-icon-mic');
+  icona.classList.add('ico');
+  const label = el('span', null, t('games.record_start'));
+  rec.appendChild(icona);
+  rec.appendChild(label);
+  const again = el('button', 'btn btn-cool btn-sm rec-play');
+  again.type = 'button';
+  const ic2 = spriteSvg('sp-icon-play');
+  ic2.classList.add('ico');
+  again.appendChild(ic2);
+  again.appendChild(el('span', null, t('games.record_play')));
+  again.hidden = true;
+  row.appendChild(rec);
+  row.appendChild(again);
+
+  let corrente = null;   // registrazione in corso
+  let blob = null;       // l'ultima registrazione, solo in memoria
+
+  const riascolta = async () => {
+    rec.disabled = true; again.disabled = true;
+    await playBlob(blob);
+    rec.disabled = false; again.disabled = false;
+  };
+
+  rec.addEventListener('click', async () => {
+    sfxTap();
+    if (corrente) {
+      // Secondo tocco: ferma, poi si riascolta subito.
+      const r = corrente; corrente = null;
+      rec.classList.remove('is-rec');
+      label.textContent = t('games.record_start');
+      blob = await r.stop();
+      if (blob && blob.size) {
+        save.stats.totalRecordings = (save.stats.totalRecordings || 0) + 1;
+        persist();
+        again.hidden = false;
+        await riascolta();
+        if (!dettoRecord) {
+          dettoRecord = true;
+          mascotSay('record_done', { avatar: document.getElementById('play-mascot') });
+        }
+      }
+      return;
+    }
+    try {
+      corrente = await startRecording();
+      rec.classList.add('is-rec');
+      label.textContent = t('games.record_stop');
+    } catch {
+      // Permesso negato o microfono assente: il bottone sparisce, la
+      // partita continua come prima. Nessun errore da spiegare a 7 anni.
+      row.remove();
+    }
+  });
+  again.addEventListener('click', () => { sfxTap(); riascolta(); });
+  return row;
 }
 
 /* ------------------------------------------------------------------ */

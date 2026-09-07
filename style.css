@@ -498,6 +498,10 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 
 /* Ascolta e ripeti */
 .repeat-stage { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+/* Microfono in "ascolta e ripeti" */
+.rec-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.rec-btn.is-rec { background: var(--ember); border-color: var(--ink); color: var(--ink); animation: rec-pulse 1s ease-in-out infinite; }
+@keyframes rec-pulse { 50% { transform: scale(1.05) } }
 .repeat-mouth { width: 120px; height: 120px; }
 .repeat-mouth svg, .repeat-mouth img { width: 100%; height: 100%; fill: none; }
 

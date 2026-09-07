@@ -60,6 +60,9 @@
 
   "games": {
     "chest_prompt": "Uno scrigno! Toccalo!",
+    "record_start": "Registra la tua voce",
+    "record_stop": "Ferma",
+    "record_play": "Riascoltati",
     "match_prompt": "Tocca l'immagine giusta",
     "listen_prompt": "Ascolta e ripeti ad alta voce",
     "listen_done": "Fatto!",
@@ -144,6 +147,8 @@
     "themes_enabled": "Temi attivi",
     "vacation_mode": "Pausa vacanza",
     "vacation_hint": "Sospende il gioco senza perdere i progressi.",
+    "voice_recording": "Registrazione della voce",
+    "voice_recording_hint": "Nel gioco \"ascolta e ripeti\" il bambino può registrarsi e riascoltarsi. Nulla viene salvato né inviato: la registrazione sparisce alla domanda successiva.",
     "unlock_all_phases": "Sblocca tutte le fasi",
     "unlock_all_phases_hint": "Scavalca la soglia di padronanza e rende subito accessibili tutte le fasi. Utile se il bambino e' gia' piu' avanti del corso o se una fase lo sta annoiando. Da spento, per aprire una fase serve aver padroneggiato l'80% di quella precedente.",
     "curriculum_title": "Curriculum",
@@ -232,6 +237,7 @@
     "chest_found": "Uno scrigno! Chissà cosa c'è dentro... Toccalo!",
     "chest_sticker": "Un adesivo nuovo! Lo trovi nel tuo album.",
     "chest_stars": "Che fortuna! Stelle in regalo!",
+    "record_done": "Ti ho sentito! Che bella voce inglese!",
     "level_up": "Sono cresciuta anche io! Guardami.",
     "session_end": "Per oggi basta cosi'. Ci vediamo domani{name}!",
     "idle_1": "Tocca un mondo per iniziare.",

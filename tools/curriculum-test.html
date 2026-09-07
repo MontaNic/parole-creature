@@ -35,6 +35,7 @@ import { recordAnswer, isMastered, distractors, distinctBySprite } from './js/sr
 import { serveAiutoScritto, SOGLIA_AIUTO } from './js/minigames.js';
 import { chapters, chapterForCreature, pendingAfterRound, pendingAtStart, isAvailable, lineAudio } from './js/story.js';
 import { planChest, nextSticker, stickers } from './js/chests.js';
+import { pickMimeType, canRecord } from './js/recorder.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
   splitRound, unitItems, unitReviewItems, curriculumConfig, playablePhases
@@ -287,6 +288,18 @@ async function run() {
   check('a inizio gioco c\'e\' un adesivo da trovare', Boolean(nextSticker(sempre)));
   for (const a of adesivi) save.progress.stickers[a.id] = 'x';
   check('finiti gli adesivi, nextSticker restituisce null', nextSticker(sempre) === null);
+
+  /* --- la registrazione della voce ---------------------------------- */
+  check('su Safari si registra in mp4', pickMimeType(m => m === 'audio/mp4') === 'audio/mp4');
+  check('su Chrome si registra in webm/opus', pickMimeType(m => m.startsWith('audio/webm')) === 'audio/webm;codecs=opus');
+  check('senza formati noti il tipo resta vuoto (il browser sceglie)', pickMimeType(() => false) === '');
+  check('un isTypeSupported che esplode non blocca', pickMimeType(() => { throw new Error('x'); }) === '');
+  resetSave();
+  const prima = canRecord();
+  save.settings.voiceRecording = false;
+  check("l'interruttore dei genitori spegne il microfono", canRecord() === false);
+  save.settings.voiceRecording = true;
+  check("riacceso, il microfono torna com'era (dipende dal browser: " + prima + ')', canRecord() === prima);
 
   resetSave();
 
