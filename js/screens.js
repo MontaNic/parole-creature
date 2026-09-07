@@ -15,6 +15,7 @@ import { spriteSvg } from './minigames.js';
 import { speakItem, sfxTap, sfxUnlock } from './audio.js';
 import { celebrate } from './effects.js';
 import { ensureTodayMission, currentMission, missionRatio } from './missions.js';
+import { renderStoryStrip, chapterForCreature, isAvailable as chapterAvailable, playChapter } from './story.js';
 
 /* Fasi aperte a mano dal bambino, oltre a quella corrente. */
 const fasiAperte = new Set();
@@ -273,10 +274,23 @@ export function renderAlbum() {
 
     card.addEventListener('click', () => {
       sfxTap();
-      if (unlocked) mascotCheer(art);
+      if (!unlocked) return;
+      // Una creatura trovata e' anche un capitolo: toccarla lo riapre.
+      const chapter = chapterForCreature(c.id);
+      if (chapter && chapterAvailable(chapter)) playChapter(chapter).then(renderAlbum);
+      else mascotCheer(art);
     });
     grid.appendChild(card);
   });
+
+  // L'indice dei capitoli, sopra le creature.
+  let strip = document.getElementById('album-story');
+  if (!strip) {
+    strip = el('div');
+    strip.id = 'album-story';
+    grid.parentElement.insertBefore(strip, grid);
+  }
+  renderStoryStrip(strip, chapter => playChapter(chapter).then(renderAlbum));
 
   document.getElementById('album-count').textContent = `${found}/${content.creatures.length}`;
   showScreen('album');

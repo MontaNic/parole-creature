@@ -117,6 +117,14 @@ export function speakMascot(key, text) {
   return playVoice(`it/mascot.${key}.mp3`, text, 'it-IT');
 }
 
+/**
+ * Una riga della storia: il file registrato, o la sintesi se manca.
+ * @param {string} relPath es. "it/story.st_dragons.0.mp3"
+ */
+export function speakLine(relPath, text, lang) {
+  return playVoice(relPath, text, lang);
+}
+
 async function playVoice(relPath, text, lang) {
   stopVoice();   // una voce alla volta
   const hasFile = !audioIndex.loaded || audioIndex.files.has(relPath);

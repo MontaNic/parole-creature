@@ -31,6 +31,7 @@ import {
   renderMascot, mascotSay, mascotCheer, stageChangedAt, encouragementKey
 } from './js/mascot.js';
 import { GAMES, mostraConferma } from './js/minigames.js';
+import { pendingAtStart, pendingAfterRound, playChapters } from './js/story.js';
 import {
   showScreen, renderHome, renderAlbum, renderSummary,
   renderBlocked, runOnboarding, syncCreatures,
@@ -93,6 +94,9 @@ async function boot() {
   if (!save.settings.onboardingDone) {
     await runOnboarding();
   }
+  // Il prologo della storia: una volta sola, subito dopo l'onboarding (o al
+  // primo avvio dopo l'aggiornamento, per chi giocava gia').
+  await playChapters(pendingAtStart());
   goHome(true);
 }
 
@@ -492,6 +496,11 @@ async function finishRound({ round, correct, total, levelUp, missionJustDone, op
   const newCreatures = syncCreatures();
   persist(true);
 
+  // La creatura appena trovata ha un capitolo: si vede dopo il riepilogo con
+  // la festa, al tocco che prosegue, prima di andare avanti.
+  const storia = pendingAfterRound(newCreatures);
+  const poi = (fn) => async () => { await playChapters(storia); storia.length = 0; fn(); };
+
   if (levelUp && stageChangedAt(save.progress.level)) {
     // Il cambio di stadio della mascotte e' un evento: vale un festeggiamento.
     toast(t('mascot.level_up'), true, 2000);
@@ -505,9 +514,9 @@ async function finishRound({ round, correct, total, levelUp, missionJustDone, op
       worldCompleted: worldJustCompleted,
       missionDone: missionJustDone, endSession: overLimit },
     {
-      onHome: () => goHome(),
-      onAgain: () => startRound(opts),
-      onContinueAnyway: () => { session.ignoreSessionLimit = true; startRound(opts); }
+      onHome: poi(() => goHome()),
+      onAgain: poi(() => startRound(opts)),
+      onContinueAnyway: poi(() => { session.ignoreSessionLimit = true; startRound(opts); })
     }
   );
 }

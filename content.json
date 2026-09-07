@@ -353,6 +353,301 @@
     { "id": "c_goldwing","name_it": "Aladoro",  "sprite": "sp-goldwing","unlock": { "type": "streak", "value": 7 },     "fact_it": "Il drago d'oro: arriva dopo 7 giorni di fila." }
   ],
 
+  "story": {
+    "_comment": "Fase 2: la storia a episodi. who = narrator | pepe | creature. narrator e pepe parlano italiano (audio it/story.<id>.<n>.mp3), la creatura inglese con la voce modello (audio en/story.<id>.mp3) e la traduzione sotto. Gli id st_* sono permanenti: entrano in storySeen dei salvataggi.",
+    "title_it": "L'isola dove le creature hanno perso le parole",
+    "chapters": [
+      {
+        "id": "st_prologue",
+        "order": 0,
+        "title_it": "La Nebbia Muta",
+        "trigger": {
+          "type": "start"
+        },
+        "creatureId": "c_pepe",
+        "worldId": null,
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "C'era un'isola dove tutte le creature sapevano parlare. Poi arrivò la Nebbia Muta, e le loro parole sparirono nel grigio."
+          },
+          {
+            "who": "narrator",
+            "it": "Una mattina, dal mare, sbarcò una cucciola che adorava le parole. Si chiamava Pepe."
+          },
+          {
+            "who": "pepe",
+            "it": "Che silenzio... Non preoccupatevi, creature! Impariamo le parole insieme, e la nebbia se ne andrà!"
+          }
+        ]
+      },
+      {
+        "id": "st_dragons",
+        "order": 1,
+        "title_it": "La Valle dei Draghi",
+        "trigger": {
+          "type": "world",
+          "value": "world_dragons"
+        },
+        "creatureId": "c_flamup",
+        "worldId": "world_dragons",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Nella Valle dei Draghi il fuoco si era spento. Fiammino, il draghetto, non ricordava più nemmeno il proprio nome."
+          },
+          {
+            "who": "narrator",
+            "it": "Ma ogni parola imparata nella valle era una scintilla. E le scintille, si sa, fanno il fuoco."
+          },
+          {
+            "who": "pepe",
+            "it": "Fiammino, guarda cosa abbiamo imparato! Prova a dirlo anche tu!"
+          },
+          {
+            "who": "creature",
+            "en": "Hello, Pepe! I am a dragon!",
+            "it": "Ciao, Pepe! Io sono un drago!"
+          }
+        ]
+      },
+      {
+        "id": "st_dinos",
+        "order": 2,
+        "title_it": "La Giungla dei Dinosauri",
+        "trigger": {
+          "type": "world",
+          "value": "world_dinos"
+        },
+        "creatureId": "c_rocktail",
+        "worldId": "world_dinos",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Nella Giungla dei Dinosauri un uovo stava per schiudersi. Ma Codasso, il piccolo dinosauro, non sapeva come chiamarlo."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe glielo insegnò, una parola alla volta. E l'uovo si aprì."
+          },
+          {
+            "who": "pepe",
+            "it": "È un uovo, Codasso! Dai, dillo con me!"
+          },
+          {
+            "who": "creature",
+            "en": "It's an egg! It's my egg!",
+            "it": "È un uovo! È il mio uovo!"
+          }
+        ]
+      },
+      {
+        "id": "st_colors",
+        "order": 3,
+        "title_it": "La Grotta dei Colori",
+        "trigger": {
+          "type": "world",
+          "value": "world_colors"
+        },
+        "creatureId": "c_prisma",
+        "worldId": "world_colors",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "La Grotta dei Colori era diventata grigia come la nebbia. Prisma, che li custodiva, non riusciva più a nominarli."
+          },
+          {
+            "who": "narrator",
+            "it": "Rosso, blu, verde... A ogni colore detto ad alta voce, la grotta si riaccendeva."
+          },
+          {
+            "who": "pepe",
+            "it": "Prisma, i colori sono tornati! Diciamoli tutti, uno per uno!"
+          },
+          {
+            "who": "creature",
+            "en": "Red, blue, green and yellow! I am purple!",
+            "it": "Rosso, blu, verde e giallo! Io sono viola!"
+          }
+        ]
+      },
+      {
+        "id": "st_numbers",
+        "order": 4,
+        "title_it": "La Montagna dei Numeri",
+        "trigger": {
+          "type": "world",
+          "value": "world_numbers"
+        },
+        "creatureId": "c_numo",
+        "worldId": "world_numbers",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Sulla Montagna dei Numeri le stelle non si potevano più contare. Numo le guardava, e taceva."
+          },
+          {
+            "who": "narrator",
+            "it": "Poi Pepe contò con lui: uno, due, tre. E le stelle risposero."
+          },
+          {
+            "who": "pepe",
+            "it": "Numo, quante stelle! Contiamole insieme fino a dieci!"
+          },
+          {
+            "who": "creature",
+            "en": "How many stars? One, two, three... ten! Ten stars!",
+            "it": "Quante stelle? Una, due, tre... dieci! Dieci stelle!"
+          }
+        ]
+      },
+      {
+        "id": "st_forest",
+        "order": 5,
+        "title_it": "La Foresta delle Parole",
+        "trigger": {
+          "type": "world",
+          "value": "world_forest"
+        },
+        "creatureId": "c_barky",
+        "worldId": "world_forest",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Nella Foresta delle Parole gli alberi avevano perso le foglie, e le foglie erano parole. Rametto le raccoglieva, senza poterle leggere."
+          },
+          {
+            "who": "narrator",
+            "it": "Con Pepe imparò a dire ciò che vedeva. E la foresta tornò verde."
+          },
+          {
+            "who": "pepe",
+            "it": "Rametto, questo è un albero! E questi sono... tanti uccellini!"
+          },
+          {
+            "who": "creature",
+            "en": "This is a tree. These are birds!",
+            "it": "Questo è un albero. Questi sono uccellini!"
+          }
+        ]
+      },
+      {
+        "id": "st_lake",
+        "order": 6,
+        "title_it": "Il Lago Magico",
+        "trigger": {
+          "type": "world",
+          "value": "world_lake"
+        },
+        "creatureId": "c_splashy",
+        "worldId": "world_lake",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Il Lago Magico era piatto e muto. Sciazzo non sapeva più dire se una cosa era grande o piccola."
+          },
+          {
+            "who": "narrator",
+            "it": "Una parola per uno, un'altra per tanti: la regola più difficile dell'isola. Sciazzo la imparò con un tuffo."
+          },
+          {
+            "who": "pepe",
+            "it": "Sciazzo, il drago è grande e il pesce è... piccolo! Dillo anche tu!"
+          },
+          {
+            "who": "creature",
+            "en": "The fish is small. The dragon is big. I am fast!",
+            "it": "Il pesce è piccolo. Il drago è grande. Io sono veloce!"
+          }
+        ]
+      },
+      {
+        "id": "st_bridge",
+        "order": 7,
+        "title_it": "Il Ponte delle Frasi",
+        "trigger": {
+          "type": "world",
+          "value": "world_bridge"
+        },
+        "creatureId": "c_glimmer",
+        "worldId": "world_bridge",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Il Ponte delle Frasi era spezzato: mancava una parola a ogni asse. Baluce faceva luce, ma non poteva attraversarlo."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe costruì le frasi intere, una tavola alla volta. E il ponte tenne."
+          },
+          {
+            "who": "pepe",
+            "it": "Baluce, guarda! Io ho una spada, e vedo... il castello! Ci siamo quasi!"
+          },
+          {
+            "who": "creature",
+            "en": "I have a star! I can see the castle!",
+            "it": "Io ho una stella! Vedo il castello!"
+          }
+        ]
+      },
+      {
+        "id": "st_tower",
+        "order": 8,
+        "title_it": "La Torre dei Dialoghi",
+        "trigger": {
+          "type": "world",
+          "value": "world_tower"
+        },
+        "creatureId": "c_torrek",
+        "worldId": "world_tower",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "In cima alla Torre dei Dialoghi viveva Torrek, il guardiano. Faceva domande a cui nessuno rispondeva più."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe salì fino in cima e rispose. Per la prima volta, in tutta l'isola, due voci parlarono insieme."
+          },
+          {
+            "who": "pepe",
+            "it": "Torrek, chiedimi tutto quello che vuoi! Adesso so rispondere!"
+          },
+          {
+            "who": "creature",
+            "en": "What is your name? My name is Torrek. How are you?",
+            "it": "Come ti chiami? Il mio nome è Torrek. Come stai?"
+          }
+        ]
+      },
+      {
+        "id": "st_epilogue",
+        "order": 9,
+        "title_it": "La nebbia si alza",
+        "trigger": {
+          "type": "world",
+          "value": "world_tower"
+        },
+        "creatureId": null,
+        "worldId": null,
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "E allora tutte le creature parlarono insieme, dalla valle fino alla torre. La Nebbia Muta si alzò, e sparì nel mare."
+          },
+          {
+            "who": "narrator",
+            "it": "L'isola aveva ritrovato le parole. E una cucciola aveva trovato otto amici."
+          },
+          {
+            "who": "pepe",
+            "it": "Ce l'abbiamo fatta! Ma le parole nuove non finiscono mai... Continuiamo a giocare?"
+          }
+        ]
+      }
+    ]
+  },
   "mascotStages": [
     { "level": 1, "label_it": "Cucciolo",   "scale": 1.00, "accessory": "none" },
     { "level": 4, "label_it": "Esploratore","scale": 1.06, "accessory": "scarf" },

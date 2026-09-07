@@ -199,6 +199,15 @@
     "locked_phase": "Ripassiamo ancora un pochino! Ci mancano poche parole e poi apriamo il mondo nuovo."
   },
 
+  "story": {
+    "title": "La storia",
+    "prologue_label": "Prologo",
+    "chapter_label": "Capitolo {n}",
+    "epilogue_label": "Fine",
+    "next": "Avanti",
+    "done": "Continua",
+    "skip": "Salta"
+  },
   "mascot": {
     "name": "Pepe",
     "welcome_first": "Ciao! Io sono Pepe. Giochiamo insieme con l'inglese?",

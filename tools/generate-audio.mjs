@@ -139,6 +139,23 @@ async function buildJobList() {
     });
   }
 
+  // La storia a episodi: narratore e Pepe in italiano, la creatura in
+  // inglese con la voce modello. Un file per riga; il percorso e' lo stesso
+  // che calcola js/story.js (lineAudio).
+  for (const ch of content.story?.chapters || []) {
+    (ch.lines || []).forEach((line, n) => {
+      if (line.who === 'creature') {
+        jobs.push({ rel: `en/story.${ch.id}.mp3`, text: line.en, role: 'english', kind: 'phrase' });
+      } else {
+        const role = line.who === 'narrator' ? 'narrator' : 'pepe';
+        jobs.push({
+          rel: `it/story.${ch.id}.${n}.mp3`, text: line.it, role,
+          kind: role === 'narrator' ? 'narrator' : 'mascot'
+        });
+      }
+    });
+  }
+
   return { jobs, content };
 }
 

@@ -60,6 +60,7 @@ export async function loadAll() {
   content.ebooks = (contentJson.miniEbooks || []).slice().sort((a, b) => a.order - b.order);
   content.media = contentJson.mediaRecommendations || [];
   content.mascotStages = (contentJson.mascotStages || []).slice().sort((a, b) => a.level - b.level);
+  content.story = contentJson.story || null;
   content.structures = contentJson.structures || [];
 
   content.byId.clear();

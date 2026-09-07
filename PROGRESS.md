@@ -730,6 +730,46 @@ non esiste un percorso di errore — si ascolta e si tocca "Fatto!" — quindi n
 c'e' una difficolta' da rilevare. Aggiungerlo avrebbe voluto dire mostrare il
 testo sempre, che e' esattamente cio' che la regola vuole evitare.
 
+## La storia a episodi (fase 2, punto 1)
+
+Spina approvata il 2026-09-07: *l'isola dove le creature hanno perso le
+parole*. La Nebbia Muta ha tolto la voce alle creature; Pepe sbarca, in
+ogni mondo impara le parole di quel posto e una creatura ritrova la voce.
+Alla Torre dei Dialoghi parlano tutte insieme e la nebbia si alza.
+
+**Dati**: `content.story` in content.json, prologo + 8 capitoli + epilogo.
+Ogni riga ha `who`: `narrator` (VOICE_ID_NARRATOR, che finalmente ha il suo
+ruolo), `pepe` (VOICE_ID_PEPE) o `creature` (la prima frase della creatura,
+in inglese, voce modello VOICE_ID_ENGLISH, con la traduzione mostrata sotto).
+30 righe italiane, 8 inglesi. Le frasi inglesi usano il lessico e le
+strutture dell'unita' appena chiusa: sono inglese da imparare, non
+decorazione. Audio: `it/story.<capitolo>.<riga>.mp3` e
+`en/story.<capitolo>.mp3`, generati da `tools/generate-audio.mjs` come tutto
+il resto.
+
+**Quando scatta**: il prologo al primo avvio dopo l'onboarding (per chi ha
+gia' un salvataggio, all'avvio successivo, una volta sola). Ogni capitolo
+quando la sua creatura si sblocca: dopo il riepilogo con la festa, al tocco
+su "Continua" o "Home", prima di proseguire. L'epilogo non alla soglia della
+fase 3 come scritto nel disegno iniziale — la Torre sta *dentro* la fase 3,
+quindi sarebbe arrivato prima del capitolo 8 — ma subito dopo il capitolo
+di Torrek. Mai due volte da sole.
+
+**Dove si rivede**: nell'album, una striscia di dieci capitoli sopra le
+creature (Pepe, le otto creature, una stella per il finale); i capitoli
+delle creature non ancora trovate sono in ombra. Toccare una creatura
+trovata riapre il suo capitolo.
+
+**Come si vede**: `#screen-story`, sfondo tinto col colore del mondo,
+Pepe a sinistra e la creatura a destra (nell'epilogo, tutte e otto). Le
+battute scorrono a tocco con "Avanti"; chi parla si anima, chi ascolta si
+attenua; il narratore e' una didascalia bianca senza fumetto. L'inglese
+della creatura e' in Andika, come ogni inglese del gioco. "Salta" piccolo
+per il genitore. Nessuna illustrazione nuova.
+
+**Persistenza**: `save.progress.storySeen[id]`, riempito dai default per i
+salvataggi vecchi (nessuna migrazione). Gli id `st_*` sono permanenti.
+
 ## Prossimi passi
 3. **Riascoltare le 113 tracce generate** e rigenerare quelle che non
    convincono (`--force` dopo aver cancellato il file, oppure cambiare voce

@@ -58,6 +58,8 @@ function defaultSave() {
       creatures: {},
       /** numero di fase -> ISO string di quando la soglia e' stata superata */
       phasesReached: {},
+      /** capitolo della storia -> ISO string della prima visione */
+      storySeen: {},
       /** itemId (parola o frase) -> stato di ripetizione spaziata */
       srs: {}
     },

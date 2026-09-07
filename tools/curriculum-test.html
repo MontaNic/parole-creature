@@ -33,6 +33,7 @@ import { loadAll, content, getItem } from './js/content-loader.js';
 import { save, resetSave, dayIndex } from './js/state.js';
 import { recordAnswer, isMastered, distractors, distinctBySprite } from './js/srs.js';
 import { serveAiutoScritto, SOGLIA_AIUTO } from './js/minigames.js';
+import { chapters, chapterForCreature, pendingAfterRound, pendingAtStart, isAvailable, lineAudio } from './js/story.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
   splitRound, unitItems, unitReviewItems, curriculumConfig, playablePhases
@@ -231,6 +232,42 @@ async function run() {
 
   const rotti = [...assegnati].filter(id => !getItem(id));
   check("nessuna unita' punta a item inesistenti", rotti.length === 0, rotti.join(', '));
+
+  /* --- la storia a episodi ---------------------------------------- */
+  const capitoli = chapters();
+  check('la storia ha prologo, 8 capitoli ed epilogo', capitoli.length === 10, String(capitoli.length));
+  check('gli id dei capitoli sono unici e permanenti (st_*)',
+    new Set(capitoli.map(c => c.id)).size === 10 && capitoli.every(c => /^st_[a-z]+$/.test(c.id)));
+  const conCreatura = capitoli.filter(c => c.worldId);
+  check('ogni capitolo di mondo punta a un mondo esistente e alla sua creatura premio',
+    conCreatura.length === 8 && conCreatura.every(c => {
+      const w = content.worlds.find(x => x.id === c.worldId);
+      return w && w.reward === c.creatureId && c.trigger.value === c.worldId;
+    }));
+  check('ogni scena ha il narratore e una battuta di Pepe',
+    capitoli.every(c => c.lines.filter(l => l.who === 'narrator').length >= 1
+                     && c.lines.filter(l => l.who === 'pepe').length === 1));
+  check('ogni creatura ritrovata dice una frase in inglese, con traduzione',
+    conCreatura.every(c => c.lines.filter(l => l.who === 'creature' && l.en && l.it).length === 1)
+    && capitoli.filter(c => !c.worldId).every(c => !c.lines.some(l => l.who === 'creature')));
+  const lessico = new Set(content.words.map(w => w.en.toLowerCase()));
+  const extra = ['hello', 'pepe', 'i', 'am', 'a', 'an', 'it\'s', 'my', 'and', 'how', 'many', 'this', 'is',
+    'these', 'are', 'the', 'have', 'can', 'see', 'what', 'your', 'name', 'torrek', 'you', 'stars', 'birds'];
+  const fuoriLessico = conCreatura.flatMap(c => c.lines.filter(l => l.who === 'creature')
+    .flatMap(l => l.en.toLowerCase().replace(/[!?.,]/g, '').split(/\s+/)))
+    .filter(w => w && !lessico.has(w) && !extra.includes(w));
+  check("l'inglese delle creature usa il lessico del gioco", fuoriLessico.length === 0, fuoriLessico.join(' '));
+  check('a inizio gioco e\' in sospeso solo il prologo',
+    pendingAtStart().length === 1 && pendingAtStart()[0].id === 'st_prologue');
+  check('a inizio gioco sono disponibili solo prologo (Pepe) e nessun capitolo di mondo',
+    isAvailable(capitoli[0]) && conCreatura.every(c => !isAvailable(c)));
+  const torrek = content.creatures.find(c => c.id === 'c_torrek');
+  const dopoTorre = pendingAfterRound([torrek]).map(c => c.id);
+  check("trovare Torrek fa scattare il suo capitolo e poi l'epilogo, in quest'ordine",
+    dopoTorre.join(',') === 'st_tower,st_epilogue', dopoTorre.join(','));
+  check('ogni creatura della storia ha il suo capitolo', conCreatura.every(c => chapterForCreature(c.creatureId) === c));
+  check('i percorsi audio della storia sono distinti',
+    new Set(capitoli.flatMap(c => c.lines.map((l, n) => lineAudio(c, n)))).size === capitoli.reduce((a, c) => a + c.lines.length, 0));
 
   resetSave();
 
