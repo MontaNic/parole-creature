@@ -956,6 +956,26 @@ tritanopia resta a 15, ma sono stati sequenziali (trascina-qui, poi giusto)
 con anche una scala diversa: misurato e riportato, non bloccante.
 Il check e' esce con 1 se una soglia salta ed entra fra i controlli.
 
+## Anno 2 del curriculum e giochi bonus (2026-09-07, sera)
+
+Due decisioni del genitore: i contenuti nuovi seguono un modello di crescita
+didattica "simil ministeriale" con l'obiettivo di imparare come un bambino
+anglofono, giocando; il secondo gioco bonus lo scelgo io con una classifica.
+
+- **Curriculum, anno 2**: modello e sillabo completo in
+  `docs/curriculum-2.md`. Due bussole: i traguardi delle Indicazioni
+  nazionali (A1 a fine primaria, quattro abilita') e il modo in cui un
+  bambino anglofono accumula lessico per campi, comandi TPR e parole ad
+  alta frequenza dentro formule. Tre fasi nuove (6-7-8) da quattro unita'
+  (9-20), ~100 parole e ~65 frasi, parola scritta sempre mostrata. Si
+  costruisce a lotti di una fase, con illustrazioni Gemini, audio
+  ElevenLabs e il check dopo ognuno.
+- **Giochi bonus**: classifica di dieci meccaniche arcade in
+  `docs/giochi-bonus.md`, con criteri espliciti (dito, senza game over,
+  inglese dentro, costo, diversita' da Bolle). Vince "Spunta!", il
+  Whac-A-Mole: la voce dice la parola prima che la figura spunti, e
+  l'attesa diventa ascolto. Poi "Il cestino".
+
 ## Prossimi passi
 
 **Stato al 2026-09-07, sera**: fase 3 completa e pubblicata (versione
