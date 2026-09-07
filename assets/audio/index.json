@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T12:16:08.080Z",
+  "generatedAt": "2026-09-07T12:50:39.015Z",
   "files": [
     "en/p_a_nest.mp3",
     "en/p_a_tooth.mp3",
@@ -99,6 +99,8 @@
     "en/w_wizard.mp3",
     "en/w_yellow.mp3",
     "it/mascot.ask_name.mp3",
+    "it/mascot.bonus_end.mp3",
+    "it/mascot.bonus_start.mp3",
     "it/mascot.chest_found.mp3",
     "it/mascot.chest_stars.mp3",
     "it/mascot.chest_sticker.mp3",

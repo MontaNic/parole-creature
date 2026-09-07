@@ -658,6 +658,23 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 .den-wall.is-on { border-color: #fff; box-shadow: 0 0 0 3px var(--amber); }
 #screen-den .mascot-corner { pointer-events: none; }
 
+/* ---------------- Giochi bonus: Bolle ---------------- */
+.bonus-target { display: flex; align-items: center; justify-content: center; gap: 14px; padding: 4px 16px; min-height: 84px; }
+.bonus-target .audio-orb { width: 72px; height: 72px; box-shadow: 0 5px 0 var(--amber-deep), var(--sh-float); }
+.bonus-target .word-written { margin: 0; }
+.bonus-stage {
+  position: relative; flex: 1; min-height: 0; margin: 0 14px calc(12px + var(--safe-bottom));
+  border-radius: var(--r-l); border: var(--stroke) solid var(--ink); overflow: hidden;
+  background: radial-gradient(ellipse at 50% 100%, #3b2f7a, #17123A 70%);
+}
+.bonus-stage canvas { width: 100%; height: 100%; display: block; touch-action: none; }
+.bonus-end {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 12px; background: rgba(23,18,58,.78); color: #fff; text-align: center;
+}
+.bonus-end .h-title { margin: 0; }
+#screen-bonus .progress-track { flex: 1; }
+
 /* ---------------- Scrigni a sorpresa ---------------- */
 .chest-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
 .chest-btn {

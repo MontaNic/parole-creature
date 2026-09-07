@@ -39,6 +39,7 @@ import { pickMimeType, canRecord } from './js/recorder.js';
 import { buildSummaryCard, canShare } from './js/share.js';
 import { denItems, placeItem, removeItem, isPlaced, clamp, setWall, WALLS } from './js/den.js';
 import { bumpToday, lastDays, accuracyOf, successReport, prune } from './js/history.js';
+import { planBonus, BubbleWorld, bubblePool } from './js/bonus.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
   splitRound, unitItems, unitReviewItems, curriculumConfig, playablePhases
@@ -350,6 +351,25 @@ async function run() {
   check('i criteri di successo contano giorni giocati e parole padroneggiate',
     rep.days.value === 10 && rep.days.ok === true && rep.mastered.value === 41 && rep.mastered.ok === true);
   check("sotto soglia il criterio non e' raggiunto", successReport(5, '2026-09-10').mastered.ok === false);
+
+  /* --- i giochi bonus ------------------------------------------------ */
+  const cfgB = { everyRounds: 3, perDay: 3, seconds: 45, minPool: 4 };
+  check('il bonus scatta solo con tre stelle', planBonus(3, { roundsSince: 5, todayCount: 0, poolSize: 6, cfg: cfgB }) && !planBonus(2, { roundsSince: 5, todayCount: 0, poolSize: 6, cfg: cfgB }));
+  check('non piu\' di uno ogni tre partite', !planBonus(3, { roundsSince: 2, todayCount: 0, poolSize: 6, cfg: cfgB }));
+  check('non piu\' di tre al giorno', !planBonus(3, { roundsSince: 9, todayCount: 3, poolSize: 6, cfg: cfgB }));
+  check('senza abbastanza figure, niente bolle', !planBonus(3, { roundsSince: 9, todayCount: 0, poolSize: 3, cfg: cfgB }));
+  const conPng = bubblePool(content.words);
+  check('le bolle usano solo parole con un PNG, senza figure doppie', conPng.length >= 20 && new Set(conPng.map(w => w.sprite)).size === conPng.length && conPng.every(w => w.kind === 'word'));
+  const bolle = new BubbleWorld({ w: 400, h: 300, rng: () => 0.5 });
+  const b = bolle.spawn(conPng[0]);
+  check('una bolla nasce dentro le pareti, dal basso', b.x >= b.r && b.x <= 400 - b.r && b.y > 300);
+  b.x = b.r + 1; b.vx = -100; bolle.step(0.1);
+  check('le bolle rimbalzano sulla parete', b.vx > 0 && b.x >= b.r);
+  b.x = 200; b.y = 150;
+  const c = bolle.spawn(conPng[1]); c.x = 200; c.y = 150;
+  check('sotto il dito si prende la bolla disegnata sopra', bolle.hit(200, 150) === c && bolle.hit(5, 5) === null);
+  bolle.pop(c.id);
+  check('scoppiare toglie la bolla', bolle.bubbles.length === 1 && bolle.hit(200, 150) === b);
 
   resetSave();
 

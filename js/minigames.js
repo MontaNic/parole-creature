@@ -66,7 +66,7 @@ export function spriteSvg(spriteId) {
  * @param {object|Function} source item fisso oppure funzione che restituisce
  *        l'item corrente (serve alla caccia, dove il bersaglio cambia).
  */
-function audioOrb(source, label) {
+export function audioOrb(source, label) {
   const btn = el('button', 'audio-orb');
   btn.type = 'button';
   btn.setAttribute('aria-label', label || t('ui.tap_to_hear'));

@@ -61,6 +61,9 @@ export const CONFIG = {
    */
   success: { windowDays: 14, daysTarget: 10, masteredTarget: 40, historyKeepDays: 90 },
 
+  /** Giochi bonus: dopo tre stelle, non piu' di uno ogni N partite e M al giorno, per S secondi. */
+  bonus: { everyRounds: 3, perDay: 3, seconds: 45, minPool: 4 },
+
   /** Scrigni a sorpresa: probabilita' per partita, e stelle quando gli adesivi sono finiti. */
   chest: { chance: 0.2, xpBonus: 30 },
 

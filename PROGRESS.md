@@ -898,6 +898,31 @@ tengono 90 giorni). Nel pannello progressi dei genitori:
   I numeri sono una prima taratura, non un verdetto: si cambiano in
   config.js.
 
+### 3. I giochi bonus: "Bolle" (idea del 2026-09-07)
+
+Proposta dopo il terzo playtest: ogni tanto un giochino breve, alla Super
+Pang, come premio, contro la monotonia. Accolta con quattro regole, perche'
+un arcade puro rischia di svuotare il gioco del suo motivo:
+
+1. **breve**: 45 secondi, poi "Fine!" senza game over ne' punizioni;
+2. **raro abbastanza da restare un premio**: dopo una partita da tre
+   stelle, non piu' di uno ogni tre partite e tre al giorno (`planBonus`,
+   pura, testata);
+3. **l'inglese resta dentro, ma passivo**: la voce dice una parola e si
+   scoppia la bolla con quella figura. Nessun effetto sulla ripetizione
+   spaziata: non e' un test, e' un premio che ripassa;
+4. **niente illustrazioni nuove**: le bolle usano i PNG gia' validati
+   (31 parole ne hanno uno); se la partita ne offre meno di 4 il bonus
+   semplicemente non scatta.
+
+Il modello (`BubbleWorld`: bolle che rimbalzano sulle quattro pareti,
+hit test dall'alto) e' separato dal disegno su canvas, cosi' il test lo
+prova senza browser vero. Scatta dopo il riepilogo e dopo l'eventuale
+capitolo della storia, al tocco su "Continua". Due battute di Pepe
+(`bonus_start`, `bonus_end`). Altri giochini brevi possono entrare con lo
+stesso contratto: `playX({ items, showWritten })` che si risolve a fine
+partita.
+
 ## Prossimi passi
 
 **Stato al 2026-09-07**: la fase 2 e' completa e pubblicata — storia a

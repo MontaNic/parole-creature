@@ -92,6 +92,13 @@
     "put_back": "Riponi",
     "wall": "Parete"
   },
+  "bonus": {
+    "title": "Gioco bonus!",
+    "bubbles_prompt": "Scoppia la bolla giusta!",
+    "done": "Fine!",
+    "popped": "{n} bolle scoppiate",
+    "skip": "Salta"
+  },
   "share": {
     "button": "Condividi",
     "title": "Parole & Creature",
@@ -273,6 +280,8 @@
     "chest_stars": "Che fortuna! Stelle in regalo!",
     "record_done": "Ti ho sentito! Che bella voce inglese!",
     "den_welcome": "Questa è la nostra tana! Mettici quello che vuoi.",
+    "bonus_start": "Te lo sei meritato! Un gioco bonus!",
+    "bonus_end": "Che scoppiettio! Torniamo alle parole.",
     "level_up": "Sono cresciuta anche io! Guardami.",
     "session_end": "Per oggi basta cosi'. Ci vediamo domani{name}!",
     "idle_1": "Tocca un mondo per iniziare.",

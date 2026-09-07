@@ -81,7 +81,8 @@ function defaultSave() {
       missionDone: false,
       minutesPlayed: 0,
       sessionEnded: false,
-      chestOpened: false
+      chestOpened: false,
+      bonusCount: 0
     },
 
     stats: {
@@ -92,7 +93,8 @@ function defaultSave() {
       totalMinutes: 0,
       daysPlayed: 0,
       chestsOpened: 0,
-      totalRecordings: 0
+      totalRecordings: 0,
+      bonusPlayed: 0
     },
 
     settings: {
@@ -323,7 +325,8 @@ export function rolloverDay() {
     missionDone: false,
     minutesPlayed: 0,
     sessionEnded: false,
-    chestOpened: false
+    chestOpened: false,
+    bonusCount: 0
   };
   persist();
   return { newDay: true, streakKept: false };

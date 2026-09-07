@@ -177,6 +177,21 @@
     <div class="mascot-corner" id="den-mascot"></div>
   </section>
 
+  <!-- ============ GIOCO BONUS ============ -->
+  <section class="screen" id="screen-bonus">
+    <header class="topbar">
+      <div class="hud-chip"><svg class="ico"><use href="#sp-icon-star"></use></svg><b id="bonus-score">0</b></div>
+      <div class="progress-track"><i id="bonus-time"></i></div>
+      <h2 class="topbar-title" data-str="bonus.title"></h2>
+    </header>
+    <div class="bonus-target" id="bonus-target"></div>
+    <div class="bonus-stage" id="bonus-stage">
+      <canvas id="bonus-canvas"></canvas>
+      <div class="bonus-end" id="bonus-end" hidden></div>
+    </div>
+    <button class="btn-skip" id="bonus-skip" data-str="bonus.skip"></button>
+  </section>
+
   <!-- ============ PARTITA (mini-giochi) ============ -->
   <section class="screen" id="screen-play">
     <header class="topbar">

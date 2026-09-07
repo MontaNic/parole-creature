@@ -35,6 +35,7 @@ import { pendingAtStart, pendingAfterRound, playChapters } from './js/story.js';
 import { planChest, openChest } from './js/chests.js';
 import { renderDen } from './js/den.js';
 import { bumpToday } from './js/history.js';
+import { planBonus, bubblePool, playBubbles } from './js/bonus.js';
 import { masteredCount } from './js/srs.js';
 import {
   showScreen, renderHome, renderAlbum, renderSummary,
@@ -517,7 +518,27 @@ async function finishRound({ round, correct, total, levelUp, missionJustDone, op
   // La creatura appena trovata ha un capitolo: si vede dopo il riepilogo con
   // la festa, al tocco che prosegue, prima di andare avanti.
   const storia = pendingAfterRound(newCreatures);
-  const poi = (fn) => async () => { await playChapters(storia); storia.length = 0; fn(); };
+
+  // Il gioco bonus: dopo tre stelle, raro, breve. Dopo la storia, prima di
+  // andare avanti. Le bolle vogliono parole con un PNG: se sono poche, niente.
+  const ratio = total ? correct / total : 0;
+  const stelle = ratio >= 0.9 ? 3 : ratio >= 0.5 ? 2 : 1;
+  const bolle = bubblePool(round.pool, content.words);
+  session.roundsSinceBonus = (session.roundsSinceBonus ?? 99) + 1;
+  const bonus = planBonus(stelle, {
+    roundsSince: session.roundsSinceBonus,
+    todayCount: save.daily.bonusCount || 0,
+    poolSize: bolle.length
+  });
+  const giocaBonus = async () => {
+    if (!bonus || session.bonusDone) return;
+    session.bonusDone = true;
+    session.roundsSinceBonus = 0;
+    await mascotSay('bonus_start', {});
+    await playBubbles({ items: shuffle(bolle), showWritten: round.showWritten });
+  };
+  session.bonusDone = false;
+  const poi = (fn) => async () => { await playChapters(storia); storia.length = 0; await giocaBonus(); fn(); };
 
   if (levelUp && stageChangedAt(save.progress.level)) {
     // Il cambio di stadio della mascotte e' un evento: vale un festeggiamento.
