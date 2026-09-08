@@ -19,7 +19,7 @@
  */
 importScripts('sw-art.js');
 
-const CACHE_VERSION = 'v1.8.4';
+const CACHE_VERSION = 'v1.8.5';
 const SHELL_CACHE = `dp-shell-${CACHE_VERSION}`;
 const AUDIO_CACHE = `dp-audio-${CACHE_VERSION}`;
 
@@ -82,8 +82,12 @@ const pausa = (ms) => new Promise(r => setTimeout(r, ms));
 async function aggiungi(cache, url) {
   let ultimo = null;
   for (let t = 1; t <= TENTATIVI; t++) {
+    // Un timeout per richiesta: sulla CDN qualche fetch dal worker resta
+    // appeso per sempre, e un solo fetch appeso bloccava tutto il rabbocco.
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 12000);
     try {
-      const res = await fetch(url);
+      const res = await fetch(url, { signal: ctrl.signal });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       await cache.put(url, res);
       return true;
@@ -92,6 +96,8 @@ async function aggiungi(cache, url) {
       self.__errori = self.__errori || [];
       if (self.__errori.length < 40) self.__errori.push(`${url}: ${err && err.message}`);
       await pausa(300 * t);
+    } finally {
+      clearTimeout(timer);
     }
   }
   console.warn('[sw] non cachato:', url, ultimo);
