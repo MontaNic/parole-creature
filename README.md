@@ -1,8 +1,16 @@
 # Parole & Creature
 
-Gioco browser per imparare l'inglese, pensato su misura per un bambino di 7 anni:
-sessioni brevi, Pepe (una cucciola di Jack Russell) che guida a voce, mostri e
-draghi originali da collezionare. Interfaccia in italiano, contenuti didattici in inglese.
+Gioco browser per imparare l'inglese, pensato su misura per un bambino di 7-9 anni:
+sessioni brevi, Pepe (una cucciola di Jack Russell) che guida a voce, creature
+originali da collezionare, una storia a episodi. Interfaccia in italiano,
+contenuti didattici in inglese.
+
+**Cosa contiene** (versione 3.1.0): 32 unita' in 9 fasi, 295 parole e
+182 frasi con audio, 281 illustrazioni, 36 creature, una storia in
+tre stagioni (38 scene), 7 mini-giochi e 3 giochi bonus, scrigni, adesivi,
+distintivi, la tana, registrazione della voce, condivisione in famiglia.
+Il percorso didattico segue le Indicazioni nazionali per la primaria fino a
+un A1 pieno: `docs/curriculum-2.md` e `docs/curriculum-3.md`.
 
 - Nessun build step, nessun framework: HTML/CSS/JS vanilla con ES modules.
 - Funziona offline (service worker) e su tablet, Safari iOS incluso.
@@ -19,6 +27,8 @@ senza connessione, perche' HTTPS e' cio' che permette al service worker di
 installarsi e di tenere in cache illustrazioni e file del gioco. Su un
 indirizzo `http://` in rete locale il browser lo nega: si gioca lo stesso,
 ma non offline.
+
+Per chi accompagna il bambino: `docs/guida-genitori.md`, una pagina.
 
 ## Avviare il gioco in locale (sviluppo)
 
@@ -48,18 +58,31 @@ js/audio.js              voce, effetti sonori, musica
 js/srs.js                ripetizione spaziata (Leitner)
 js/mascot.js             Pepe: disegno, evoluzione, battute
 js/effects.js            coriandoli, stelle, messaggi
-js/minigames.js          i 6 mini-giochi
+js/minigames.js          i 7 mini-giochi
+js/story.js              la storia a episodi (tre stagioni)
+js/chests.js             scrigni a sorpresa e adesivi
+js/bonus.js              i giochi bonus: Bolle, Spunta!, Il cestino
+js/badges.js             i distintivi
+js/den.js                la tana
+js/recorder.js           registrazione della voce
+js/share.js              condivisione in famiglia
+js/history.js            storico giornaliero e criteri di successo
 js/missions.js           missione del giorno
 js/screens.js            home a blocchi di fase, album, riepilogo, onboarding
 js/parents.js            area genitori protetta da PIN
 content.json             il curriculum: unita', strutture, parole, frasi, creature
 strings.json             testi dell'interfaccia in italiano
-assets/img/sprites.svg   tutte le illustrazioni (sprite SVG unico)
+assets/img/sprites.svg   icone e simboli schematici (sprite SVG unico)
+assets/img/art/          le illustrazioni PNG generate (+ index.json)
 assets/audio/            audio pre-generati (+ index.json)
 sw.js                    cache offline
 tools/generate-audio.mjs generazione offline degli audio
-tools/curriculum-test.html  test delle regole didattiche
+tools/curriculum-test.html  test delle regole didattiche e dei moduli
 tools/smoke-test.html    test di sfoglio automatico
+tools/check-assets.mjs   integrita' degli asset e della cache
+tools/palette-check.mjs  palette per chi confonde i colori
+tools/cache-check-remote.mjs  prova dell'offline sul sito pubblicato
+tools/generate-images.mjs + remove-bg.py  pipeline delle illustrazioni (Gemini)
 proxy/cloudflare-worker.js  proxy che custodisce la chiave ElevenLabs
 ```
 
@@ -72,8 +95,8 @@ Il gioco parla in due modi:
    all'API mentre il bambino gioca.
 2. **Sintesi vocale del browser** come ripiego, per le tracce mancanti.
 
-Il progetto include gia' **113 tracce generate** (2,5 MB): 89 inglesi e 24
-italiane. Per rigenerarle o aggiungerne di nuove:
+Il progetto include gia' **659 tracce generate**: 509 inglesi e 150
+italiane (Pepe e il narratore). Per rigenerarle o aggiungerne di nuove:
 
 ```bash
 cp .env.example .env       # poi compila .env (non viene mai committato)

@@ -1191,6 +1191,21 @@ Fatto in questo giro (versione 3.1.0):
   altre rimbalzano via senza costare nulla. `BasketWorld` puro e testato;
   si alterna con Bolle e Spunta senza ripetersi. curriculum-test 91 -> 96.
 
+### Il rabbocco, versione definitiva (v1.9.0)
+
+Dopo la correzione dell'install a meta' restava un'intermittenza: la
+prova offline sul sito a volte si fermava (168/281, 123/281) mentre la
+misura con DevTools ogni 10 s arrivava sempre in fondo. La differenza era
+la pagina: il giro successivo lo chiedeva un `setTimeout` della pagina,
+che il browser rallenta quando la scheda e' ferma. Ora un solo messaggio
+`rabbocca` fa fare al worker **tutti i giri dentro un unico evento**
+(fino a 4 minuti), con limite di tempo per file (15 s, fetch e scrittura)
+e per giro (60 s); la pagina lo rilancia ogni 5 s solo se a fine corsa
+manca ancora qualcosa. Tre prove ufficiali di fila sul sito: 281/281.
+
+`docs/guida-genitori.md`: una pagina per chi accompagna il bambino.
+README aggiornato ai numeri di oggi.
+
 ## Prossimi passi
 
 **Stato al 2026-09-08, sera**: anni 2 e 3 del curriculum completi e
