@@ -25,6 +25,8 @@ import {
 } from './curriculum.js';
 import { applyVolumes, sfxTap, speakMascot } from './audio.js';
 import { lastDays, accuracyOf, successReport } from './history.js';
+import { masteredWordIds, pickCheckItems, daysSinceLastCheck, checkDue, saveCheck, itemLabel, CHECK_SIZE } from './checkup.js';
+import { speakItem } from './audio.js';
 
 function el(tag, cls, text) {
   const n = document.createElement(tag);
@@ -388,6 +390,7 @@ function panelProgress() {
   // Storico degli ultimi 14 giorni e criteri di successo
   p.appendChild(historyCard());
   p.appendChild(successCard());
+  p.appendChild(checkupCard());
 
   // Parole piu' difficili: utile per ripassare insieme a voce
   const hard = hardestItems(6);
@@ -886,6 +889,66 @@ function historyCard() {
     svg.appendChild(mn);
   });
   box.appendChild(svg);
+  return box;
+}
+
+function checkupCard() {
+  const box = el('div', 'card-box');
+  box.appendChild(el('h3', null, t('parents.checkup_title')));
+  box.appendChild(el('div', 'hint', t('parents.checkup_hint')));
+  const stato = el('div', 'hint');
+  const giorni = daysSinceLastCheck();
+  stato.textContent = giorni === null ? t('parents.checkup_never')
+    : checkDue() ? t('parents.checkup_due').replace('{n}', giorni)
+    : t('parents.checkup_recent').replace('{n}', giorni);
+  box.appendChild(stato);
+  const corpo = el('div');
+  box.appendChild(corpo);
+  const storico = el('ul', 'list-plain');
+  const disegnaStorico = () => {
+    storico.innerHTML = '';
+    for (const c of (save.checks || []).slice().reverse().slice(0, 8)) {
+      storico.appendChild(el('li', null, `${c.day}: ${t('parents.checkup_result').replace('{ok}', c.ok).replace('{n}', c.n)}`));
+    }
+  };
+  disegnaStorico();
+
+  const avvia = el('button', 'btn btn-cool btn-parent-small', t('parents.checkup_start'));
+  avvia.onclick = () => {
+    sfxTap();
+    const ids = pickCheckItems(masteredWordIds());
+    if (!ids.length) { corpo.textContent = t('parents.checkup_none'); return; }
+    avvia.disabled = true;
+    const esiti = [];
+    let i = 0;
+    const mostra = () => {
+      corpo.innerHTML = '';
+      if (i >= ids.length) {
+        const rec = saveCheck(esiti);
+        corpo.appendChild(el('p', 'h-sub', t('parents.checkup_result').replace('{ok}', rec.ok).replace('{n}', rec.n)));
+        corpo.appendChild(el('div', 'hint', t('parents.checkup_done')));
+        disegnaStorico();
+        avvia.disabled = false;
+        return;
+      }
+      const id = ids[i];
+      const lab = itemLabel(id);
+      corpo.appendChild(el('div', 'hint', `${i + 1} / ${ids.length}`));
+      corpo.appendChild(el('p', 'checkup-word', lab.it));
+      const riga = el('div', 'row');
+      const si = el('button', 'btn btn-good btn-parent-small', t('parents.checkup_said'));
+      const no = el('button', 'btn btn-ghost btn-parent-small', t('parents.checkup_not'));
+      const asc = el('button', 'btn btn-ghost btn-parent-small', t('parents.checkup_listen'));
+      si.onclick = () => { sfxTap(); esiti.push({ id, ok: true }); i += 1; mostra(); };
+      no.onclick = () => { sfxTap(); esiti.push({ id, ok: false }); i += 1; mostra(); };
+      asc.onclick = () => { sfxTap(); const it = getItem(id); if (it) speakItem(it); };
+      riga.appendChild(si); riga.appendChild(no); riga.appendChild(asc);
+      corpo.appendChild(riga);
+    };
+    mostra();
+  };
+  box.appendChild(avvia);
+  if ((save.checks || []).length) { box.appendChild(el('h3', null, t('parents.checkup_history'))); box.appendChild(storico); }
   return box;
 }
 

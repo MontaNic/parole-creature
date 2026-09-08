@@ -43,6 +43,9 @@ import { planBonus, BubbleWorld, bubblePool, MoleWorld, pickBonus, BasketWorld, 
 import { checkBadges, BADGES } from './js/badges.js';
 import { books, bookUnlocked, pageAudio } from './js/books.js';
 import { matchesTarget, normalize, canRecognize } from './js/speech.js';
+import { dialogueFor, wantsDialogue, lineAudio as dialogAudio } from './js/dialogues.js';
+import { pickCheckItems, checkDue, daysSinceLastCheck, saveCheck } from './js/checkup.js';
+import { trackMissionEvent, ensureTodayMission } from './js/missions.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
   splitRound, unitItems, unitReviewItems, curriculumConfig, playablePhases
@@ -443,6 +446,31 @@ async function run() {
   check("apostrofi e punteggiatura non contano", normalize("What's your name?") === 'what is your name');
   check('il riconoscimento vocale e\' spento di default', canRecognize() === false);
   check("'sayit' e' fra i giochi di ogni unita'", content.worlds.every(w => w.minigames.includes('sayit')));
+
+  /* --- i dialoghi ---------------------------------------------------- */
+  check("ogni unita' ha il suo dialogo, con tre scambi e tre risposte per scambio",
+    content.worlds.every(w => { const d = dialogueFor(w.id); return d && d.creatureId === w.reward && d.turns.length === 3 && d.turns.every(t => t.replies.length === 3 && t.good.en); }));
+  check('il dialogo chiude sempre le prime due partite, poi una su tre', wantsDialogue(0) && wantsDialogue(1) && !wantsDialogue(2, () => 0.9) && wantsDialogue(5, () => 0.1));
+  const dl = dialogueFor('world_dragons');
+  check('i percorsi audio dei dialoghi sono distinti', new Set([...dl.turns.flatMap((t, i) => ['say', 'r0', 'r1', 'r2', 'good'].map(k => dialogAudio(dl, i, k))), dialogAudio(dl, null, 'hm0'), dialogAudio(dl, null, 'hm1')]).size === 17);
+
+  /* --- il check del mese ------------------------------------------- */
+  resetSave();
+  const scelte = pickCheckItems(['a','b','c','d','e','f','g','h','i','j','k','l'], 10, () => 0.3);
+  check('il check pesca dieci parole senza doppioni', scelte.length === 10 && new Set(scelte).size === 10);
+  check('con meno di dieci parole le prende tutte', pickCheckItems(['a','b','c']).length === 3);
+  check('mai fatto: il check e\' dovuto', checkDue('2026-09-08') && daysSinceLastCheck('2026-09-08') === null);
+  saveCheck([{ id: 'w_dragon', ok: true }, { id: 'w_cat', ok: false }], '2026-08-01');
+  check('dopo 38 giorni e\' dovuto di nuovo, dopo 7 no', checkDue('2026-09-08') && !checkDue('2026-08-08') && save.checks[0].ok === 1 && save.checks[0].n === 2);
+
+  /* --- missioni fuori dallo schermo -------------------------------- */
+  resetSave();
+  const casa = content.missions.filter(m => m.type === 'home');
+  check('otto missioni a casa su sedici', casa.length === 8 && content.missions.length === 16);
+  ensureTodayMission();
+  save.daily.missionId = casa[0].id; save.daily.missionProgress = 0; save.daily.missionDone = false;
+  check('una risposta giusta non chiude una missione a casa', trackMissionEvent({ correct: true }) === false && !save.daily.missionDone);
+  check('la conferma di un adulto la chiude', trackMissionEvent({ home: true }) === true && save.daily.missionDone);
 
   resetSave();
 

@@ -8560,6 +8560,62 @@
       "target": 4,
       "sprite": "sp-shield",
       "text_it": "Ripassa 4 parole gia' viste"
+    },
+    {
+      "id": "m_home_howareyou",
+      "type": "home",
+      "target": 1,
+      "sprite": "sp-happy",
+      "text_it": "A casa: chiedi a un adulto \"How are you?\" e ascolta la risposta."
+    },
+    {
+      "id": "m_home_count",
+      "type": "home",
+      "target": 1,
+      "sprite": "sp-num-5",
+      "text_it": "A casa: conta le sedie in inglese, ad alta voce."
+    },
+    {
+      "id": "m_home_goodnight",
+      "type": "home",
+      "target": 1,
+      "sprite": "sp-night",
+      "text_it": "Stasera: di' \"good night\" prima di dormire."
+    },
+    {
+      "id": "m_home_colours",
+      "type": "home",
+      "target": 1,
+      "sprite": "sp-color-red",
+      "text_it": "A casa: trova tre cose rosse e di' \"red\" per ognuna."
+    },
+    {
+      "id": "m_home_family",
+      "type": "home",
+      "target": 1,
+      "sprite": "sp-mum",
+      "text_it": "A casa: presenta la tua famiglia in inglese: \"This is my mum...\""
+    },
+    {
+      "id": "m_home_food",
+      "type": "home",
+      "target": 1,
+      "sprite": "sp-apple",
+      "text_it": "A tavola: di' cosa ti piace in inglese: \"I like...\""
+    },
+    {
+      "id": "m_home_body",
+      "type": "home",
+      "target": 1,
+      "sprite": "sp-hand",
+      "text_it": "A casa: fai il gioco \"Touch your nose!\" con un adulto."
+    },
+    {
+      "id": "m_home_thankyou",
+      "type": "home",
+      "target": 1,
+      "sprite": "sp-present",
+      "text_it": "Oggi: di' \"thank you\" e \"please\" almeno tre volte."
     }
   ],
   "miniEbooks": [
@@ -8944,5 +9000,2826 @@
       "note": "Da tenere come premio quando le frasi della fase 3 sono solide."
     }
   ],
-  "_ebooks_comment": "I mini-ebook hanno le pagine dentro (pages: sprite + testo inglese) e si leggono nel gioco con audio; la scheda (targetWords, structures) resta per chi vuole rigenerarli per Kindle."
+  "_ebooks_comment": "I mini-ebook hanno le pagine dentro (pages: sprite + testo inglese) e si leggono nel gioco con audio; la scheda (targetWords, structures) resta per chi vuole rigenerarli per Kindle.",
+  "dialogues": {
+    "_comment": "I dialoghi: uno per unita', tre scambi. La creatura dice (audio, voce modello), il bambino sceglie fra tre risposte (la prima e' quella buona; il gioco le mescola), la creatura reagisce. Le risposte fuori posto ricevono una delle due reazioni hm, senza costo. Audio: en/dialog.<id>.<turno>.say|r0|r1|r2|good.mp3 e en/dialog.<id>.hm0|hm1.mp3.",
+    "items": [
+      {
+        "id": "dl_dragons",
+        "worldId": "world_dragons",
+        "creatureId": "c_flamup",
+        "title_it": "Fiammino e il drago",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "Hello! What is it?",
+              "it": "Ciao! Che cos'è?"
+            },
+            "replies": [
+              {
+                "en": "A dragon.",
+                "it": "Un drago."
+              },
+              {
+                "en": "A castle.",
+                "it": "Un castello."
+              },
+              {
+                "en": "An egg.",
+                "it": "Un uovo."
+              }
+            ],
+            "good": {
+              "en": "Yes! A dragon! It's big!",
+              "it": "Sì! Un drago! È grande!"
+            }
+          },
+          {
+            "say": {
+              "en": "And what is it?",
+              "it": "E questo cos'è?"
+            },
+            "replies": [
+              {
+                "en": "A knight.",
+                "it": "Un cavaliere."
+              },
+              {
+                "en": "A monster.",
+                "it": "Un mostro."
+              },
+              {
+                "en": "A wizard.",
+                "it": "Un mago."
+              }
+            ],
+            "good": {
+              "en": "A knight! With a sword!",
+              "it": "Un cavaliere! Con una spada!"
+            }
+          },
+          {
+            "say": {
+              "en": "Look! What is it?",
+              "it": "Guarda! Che cos'è?"
+            },
+            "replies": [
+              {
+                "en": "A castle.",
+                "it": "Un castello."
+              },
+              {
+                "en": "A shield.",
+                "it": "Uno scudo."
+              },
+              {
+                "en": "A dragon.",
+                "it": "Un drago."
+              }
+            ],
+            "good": {
+              "en": "A castle! My home!",
+              "it": "Un castello! Casa mia!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_dinos",
+        "worldId": "world_dinos",
+        "creatureId": "c_rocktail",
+        "title_it": "Codasso e l'uovo",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "What is it? An egg or a nest?",
+              "it": "Che cos'è? Un uovo o un nido?"
+            },
+            "replies": [
+              {
+                "en": "It's an egg.",
+                "it": "È un uovo."
+              },
+              {
+                "en": "It's a nest.",
+                "it": "È un nido."
+              },
+              {
+                "en": "It's a tooth.",
+                "it": "È un dente."
+              }
+            ],
+            "good": {
+              "en": "An egg! My egg!",
+              "it": "Un uovo! Il mio uovo!"
+            }
+          },
+          {
+            "say": {
+              "en": "What is it? A horn or a tail?",
+              "it": "Che cos'è? Un corno o una coda?"
+            },
+            "replies": [
+              {
+                "en": "It's a tail.",
+                "it": "È una coda."
+              },
+              {
+                "en": "It's a horn.",
+                "it": "È un corno."
+              },
+              {
+                "en": "It's a wing.",
+                "it": "È un'ala."
+              }
+            ],
+            "good": {
+              "en": "A tail! A long tail!",
+              "it": "Una coda! Una coda lunga!"
+            }
+          },
+          {
+            "say": {
+              "en": "And this? An eye?",
+              "it": "E questo? Un occhio?"
+            },
+            "replies": [
+              {
+                "en": "Yes, it's an eye.",
+                "it": "Sì, è un occhio."
+              },
+              {
+                "en": "No, it's a bone.",
+                "it": "No, è un osso."
+              },
+              {
+                "en": "No, it's a claw.",
+                "it": "No, è un artiglio."
+              }
+            ],
+            "good": {
+              "en": "An eye! A big eye!",
+              "it": "Un occhio! Un occhio grande!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_colors",
+        "worldId": "world_colors",
+        "creatureId": "c_prisma",
+        "title_it": "Prisma e i colori",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "What colour is the egg?",
+              "it": "Di che colore è l'uovo?"
+            },
+            "replies": [
+              {
+                "en": "It's a red egg.",
+                "it": "È un uovo rosso."
+              },
+              {
+                "en": "It's a blue egg.",
+                "it": "È un uovo blu."
+              },
+              {
+                "en": "It's a green egg.",
+                "it": "È un uovo verde."
+              }
+            ],
+            "good": {
+              "en": "Red! Like fire!",
+              "it": "Rosso! Come il fuoco!"
+            }
+          },
+          {
+            "say": {
+              "en": "And the dragon? What colour?",
+              "it": "E il drago? Di che colore?"
+            },
+            "replies": [
+              {
+                "en": "It's a green dragon.",
+                "it": "È un drago verde."
+              },
+              {
+                "en": "It's a yellow dragon.",
+                "it": "È un drago giallo."
+              },
+              {
+                "en": "It's a purple dragon.",
+                "it": "È un drago viola."
+              }
+            ],
+            "good": {
+              "en": "Green! Like a tree!",
+              "it": "Verde! Come un albero!"
+            }
+          },
+          {
+            "say": {
+              "en": "What colour do you like?",
+              "it": "Che colore ti piace?"
+            },
+            "replies": [
+              {
+                "en": "I like blue!",
+                "it": "Mi piace il blu!"
+              },
+              {
+                "en": "It's an egg.",
+                "it": "È un uovo."
+              },
+              {
+                "en": "A dragon.",
+                "it": "Un drago."
+              }
+            ],
+            "good": {
+              "en": "Blue! Me too!",
+              "it": "Blu! Anche a me!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_numbers",
+        "worldId": "world_numbers",
+        "creatureId": "c_numo",
+        "title_it": "Numo conta",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "How many stars?",
+              "it": "Quante stelle?"
+            },
+            "replies": [
+              {
+                "en": "Three.",
+                "it": "Tre."
+              },
+              {
+                "en": "One.",
+                "it": "Una."
+              },
+              {
+                "en": "Ten.",
+                "it": "Dieci."
+              }
+            ],
+            "good": {
+              "en": "Three stars! Good!",
+              "it": "Tre stelle! Bene!"
+            }
+          },
+          {
+            "say": {
+              "en": "How many eggs?",
+              "it": "Quante uova?"
+            },
+            "replies": [
+              {
+                "en": "Five.",
+                "it": "Cinque."
+              },
+              {
+                "en": "Two.",
+                "it": "Due."
+              },
+              {
+                "en": "Seven.",
+                "it": "Sette."
+              }
+            ],
+            "good": {
+              "en": "Five eggs! Five!",
+              "it": "Cinque uova! Cinque!"
+            }
+          },
+          {
+            "say": {
+              "en": "And how many dragons?",
+              "it": "E quanti draghi?"
+            },
+            "replies": [
+              {
+                "en": "Ten!",
+                "it": "Dieci!"
+              },
+              {
+                "en": "Four.",
+                "it": "Quattro."
+              },
+              {
+                "en": "Six.",
+                "it": "Sei."
+              }
+            ],
+            "good": {
+              "en": "Ten dragons! Wow!",
+              "it": "Dieci draghi! Wow!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_forest",
+        "worldId": "world_forest",
+        "creatureId": "c_barky",
+        "title_it": "Rametto nel bosco",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "Look! What is this?",
+              "it": "Guarda! Cos'è questo?"
+            },
+            "replies": [
+              {
+                "en": "This is a tree.",
+                "it": "Questo è un albero."
+              },
+              {
+                "en": "These are cats.",
+                "it": "Questi sono gatti."
+              },
+              {
+                "en": "This is a fish.",
+                "it": "Questo è un pesce."
+              }
+            ],
+            "good": {
+              "en": "A tree! My tree!",
+              "it": "Un albero! Il mio albero!"
+            }
+          },
+          {
+            "say": {
+              "en": "And these?",
+              "it": "E questi?"
+            },
+            "replies": [
+              {
+                "en": "These are cats.",
+                "it": "Questi sono gatti."
+              },
+              {
+                "en": "This is a cat.",
+                "it": "Questo è un gatto."
+              },
+              {
+                "en": "This is a dog.",
+                "it": "Questo è un cane."
+              }
+            ],
+            "good": {
+              "en": "Cats! Two cats!",
+              "it": "Gatti! Due gatti!"
+            }
+          },
+          {
+            "say": {
+              "en": "What is this, up in the sky?",
+              "it": "Cos'è questo, su nel cielo?"
+            },
+            "replies": [
+              {
+                "en": "This is the sun.",
+                "it": "Questo è il sole."
+              },
+              {
+                "en": "These are stars.",
+                "it": "Queste sono stelle."
+              },
+              {
+                "en": "This is a bird.",
+                "it": "Questo è un uccello."
+              }
+            ],
+            "good": {
+              "en": "The sun! It's hot!",
+              "it": "Il sole! È caldo!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_lake",
+        "worldId": "world_lake",
+        "creatureId": "c_splashy",
+        "title_it": "Sciazzo al lago",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "Is the dragon big or small?",
+              "it": "Il drago è grande o piccolo?"
+            },
+            "replies": [
+              {
+                "en": "The dragon is big.",
+                "it": "Il drago è grande."
+              },
+              {
+                "en": "The dragon is small.",
+                "it": "Il drago è piccolo."
+              },
+              {
+                "en": "The cat is small.",
+                "it": "Il gatto è piccolo."
+              }
+            ],
+            "good": {
+              "en": "Big! Very big!",
+              "it": "Grande! Grandissimo!"
+            }
+          },
+          {
+            "say": {
+              "en": "And the cats?",
+              "it": "E i gatti?"
+            },
+            "replies": [
+              {
+                "en": "The cats are small.",
+                "it": "I gatti sono piccoli."
+              },
+              {
+                "en": "The cat is small.",
+                "it": "Il gatto è piccolo."
+              },
+              {
+                "en": "The cats are big.",
+                "it": "I gatti sono grandi."
+              }
+            ],
+            "good": {
+              "en": "Small cats! Cute!",
+              "it": "Gatti piccoli! Carini!"
+            }
+          },
+          {
+            "say": {
+              "en": "Am I fast or slow?",
+              "it": "Sono veloce o lento?"
+            },
+            "replies": [
+              {
+                "en": "You are fast!",
+                "it": "Sei veloce!"
+              },
+              {
+                "en": "You are slow.",
+                "it": "Sei lento."
+              },
+              {
+                "en": "You are cold.",
+                "it": "Sei freddo."
+              }
+            ],
+            "good": {
+              "en": "Fast! Splash!",
+              "it": "Veloce! Splash!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_bridge",
+        "worldId": "world_bridge",
+        "creatureId": "c_glimmer",
+        "title_it": "Baluce sul ponte",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "What do you have?",
+              "it": "Cosa hai?"
+            },
+            "replies": [
+              {
+                "en": "I have a sword.",
+                "it": "Ho una spada."
+              },
+              {
+                "en": "I can see a monster.",
+                "it": "Vedo un mostro."
+              },
+              {
+                "en": "It's a sword.",
+                "it": "È una spada."
+              }
+            ],
+            "good": {
+              "en": "A sword! Nice!",
+              "it": "Una spada! Bella!"
+            }
+          },
+          {
+            "say": {
+              "en": "What can you see?",
+              "it": "Cosa vedi?"
+            },
+            "replies": [
+              {
+                "en": "I can see a dragon.",
+                "it": "Vedo un drago."
+              },
+              {
+                "en": "I have a dragon.",
+                "it": "Ho un drago."
+              },
+              {
+                "en": "A red egg.",
+                "it": "Un uovo rosso."
+              }
+            ],
+            "good": {
+              "en": "A dragon! Me too!",
+              "it": "Un drago! Anch'io!"
+            }
+          },
+          {
+            "say": {
+              "en": "How many eggs do you have?",
+              "it": "Quante uova hai?"
+            },
+            "replies": [
+              {
+                "en": "I have two eggs.",
+                "it": "Ho due uova."
+              },
+              {
+                "en": "I can see two eggs.",
+                "it": "Vedo due uova."
+              },
+              {
+                "en": "Two.",
+                "it": "Due."
+              }
+            ],
+            "good": {
+              "en": "Two eggs! Good!",
+              "it": "Due uova! Bene!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_tower",
+        "worldId": "world_tower",
+        "creatureId": "c_torrek",
+        "title_it": "Torrek alla torre",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "Hello! What is your name?",
+              "it": "Ciao! Come ti chiami?"
+            },
+            "replies": [
+              {
+                "en": "My name is Pepe.",
+                "it": "Mi chiamo Pepe."
+              },
+              {
+                "en": "I am happy.",
+                "it": "Sono felice."
+              },
+              {
+                "en": "Yes, it is.",
+                "it": "Sì."
+              }
+            ],
+            "good": {
+              "en": "Pepe! Nice to meet you!",
+              "it": "Pepe! Piacere!"
+            }
+          },
+          {
+            "say": {
+              "en": "How are you?",
+              "it": "Come stai?"
+            },
+            "replies": [
+              {
+                "en": "I am happy.",
+                "it": "Sono felice."
+              },
+              {
+                "en": "My name is Pepe.",
+                "it": "Mi chiamo Pepe."
+              },
+              {
+                "en": "It's red.",
+                "it": "È rosso."
+              }
+            ],
+            "good": {
+              "en": "Happy! Me too!",
+              "it": "Felice! Anch'io!"
+            }
+          },
+          {
+            "say": {
+              "en": "Is it red?",
+              "it": "È rosso?"
+            },
+            "replies": [
+              {
+                "en": "Yes, it is.",
+                "it": "Sì."
+              },
+              {
+                "en": "I am happy.",
+                "it": "Sono felice."
+              },
+              {
+                "en": "My name is Torrek.",
+                "it": "Mi chiamo Torrek."
+              }
+            ],
+            "good": {
+              "en": "Yes! Red! Well done!",
+              "it": "Sì! Rosso! Bravo!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_family",
+        "worldId": "world_family",
+        "creatureId": "c_nonnetta",
+        "title_it": "Nonnetta e la famiglia",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "Who is this?",
+              "it": "Chi è questa?"
+            },
+            "replies": [
+              {
+                "en": "This is my mum.",
+                "it": "Questa è la mia mamma."
+              },
+              {
+                "en": "This is my dad.",
+                "it": "Questo è il mio papà."
+              },
+              {
+                "en": "I have a sister.",
+                "it": "Ho una sorella."
+              }
+            ],
+            "good": {
+              "en": "Your mum! Hello, mum!",
+              "it": "La tua mamma! Ciao, mamma!"
+            }
+          },
+          {
+            "say": {
+              "en": "Do you have a brother?",
+              "it": "Hai un fratello?"
+            },
+            "replies": [
+              {
+                "en": "Yes, I have a brother.",
+                "it": "Sì, ho un fratello."
+              },
+              {
+                "en": "This is my grandma.",
+                "it": "Questa è la mia nonna."
+              },
+              {
+                "en": "This is my friend.",
+                "it": "Questo è il mio amico."
+              }
+            ],
+            "good": {
+              "en": "A brother! Big family!",
+              "it": "Un fratello! Famiglia grande!"
+            }
+          },
+          {
+            "say": {
+              "en": "And who is this?",
+              "it": "E chi è questo?"
+            },
+            "replies": [
+              {
+                "en": "This is my grandpa.",
+                "it": "Questo è il mio nonno."
+              },
+              {
+                "en": "This is my baby.",
+                "it": "Questo è il mio bebè."
+              },
+              {
+                "en": "I have a mum.",
+                "it": "Ho una mamma."
+              }
+            ],
+            "good": {
+              "en": "Grandpa! Hello!",
+              "it": "Nonno! Ciao!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_body",
+        "worldId": "world_body",
+        "creatureId": "c_gigione",
+        "title_it": "Gigione e il corpo",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "Touch your nose!",
+              "it": "Tocca il naso!"
+            },
+            "replies": [
+              {
+                "en": "This is my nose!",
+                "it": "Questo è il mio naso!"
+              },
+              {
+                "en": "This is my ear!",
+                "it": "Questo è il mio orecchio!"
+              },
+              {
+                "en": "I have two feet.",
+                "it": "Ho due piedi."
+              }
+            ],
+            "good": {
+              "en": "Your nose! Yes!",
+              "it": "Il tuo naso! Sì!"
+            }
+          },
+          {
+            "say": {
+              "en": "How many hands do you have?",
+              "it": "Quante mani hai?"
+            },
+            "replies": [
+              {
+                "en": "I have two hands.",
+                "it": "Ho due mani."
+              },
+              {
+                "en": "I have two feet.",
+                "it": "Ho due piedi."
+              },
+              {
+                "en": "I have one head.",
+                "it": "Ho una testa."
+              }
+            ],
+            "good": {
+              "en": "Two hands! Clap!",
+              "it": "Due mani! Batti!"
+            }
+          },
+          {
+            "say": {
+              "en": "Open your mouth!",
+              "it": "Apri la bocca!"
+            },
+            "replies": [
+              {
+                "en": "This is my mouth!",
+                "it": "Questa è la mia bocca!"
+              },
+              {
+                "en": "This is my leg!",
+                "it": "Questa è la mia gamba!"
+              },
+              {
+                "en": "Touch your arm!",
+                "it": "Tocca il braccio!"
+              }
+            ],
+            "good": {
+              "en": "Big mouth! Ha ha!",
+              "it": "Bocca grande! Ah ah!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_clothes",
+        "worldId": "world_clothes",
+        "creatureId": "c_sartina",
+        "title_it": "Sartina e i vestiti",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "Put on your hat!",
+              "it": "Mettiti il cappello!"
+            },
+            "replies": [
+              {
+                "en": "I am wearing a hat.",
+                "it": "Indosso un cappello."
+              },
+              {
+                "en": "I am wearing shoes.",
+                "it": "Indosso le scarpe."
+              },
+              {
+                "en": "Put on your socks!",
+                "it": "Mettiti i calzini!"
+              }
+            ],
+            "good": {
+              "en": "A hat! Nice hat!",
+              "it": "Un cappello! Bel cappello!"
+            }
+          },
+          {
+            "say": {
+              "en": "What colour is your T-shirt?",
+              "it": "Di che colore è la tua maglietta?"
+            },
+            "replies": [
+              {
+                "en": "I am wearing a blue T-shirt.",
+                "it": "Indosso una maglietta blu."
+              },
+              {
+                "en": "I am wearing a dress.",
+                "it": "Indosso un vestito."
+              },
+              {
+                "en": "Put on your jacket!",
+                "it": "Mettiti la giacca!"
+              }
+            ],
+            "good": {
+              "en": "Blue! Like me!",
+              "it": "Blu! Come me!"
+            }
+          },
+          {
+            "say": {
+              "en": "Is it cold? Put on...",
+              "it": "Fa freddo? Mettiti..."
+            },
+            "replies": [
+              {
+                "en": "My jacket and my scarf!",
+                "it": "La giacca e la sciarpa!"
+              },
+              {
+                "en": "My trousers!",
+                "it": "I pantaloni!"
+              },
+              {
+                "en": "My T-shirt!",
+                "it": "La maglietta!"
+              }
+            ],
+            "good": {
+              "en": "Jacket and scarf! Warm!",
+              "it": "Giacca e sciarpa! Caldo!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_feelings",
+        "worldId": "world_feelings",
+        "creatureId": "c_nuvolo",
+        "title_it": "Nuvolo e le emozioni",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "How are you today?",
+              "it": "Come stai oggi?"
+            },
+            "replies": [
+              {
+                "en": "I am happy.",
+                "it": "Sono felice."
+              },
+              {
+                "en": "I am a dragon.",
+                "it": "Sono un drago."
+              },
+              {
+                "en": "Yes, I am.",
+                "it": "Sì."
+              }
+            ],
+            "good": {
+              "en": "Happy! Great!",
+              "it": "Felice! Bene!"
+            }
+          },
+          {
+            "say": {
+              "en": "Are you tired?",
+              "it": "Sei stanco?"
+            },
+            "replies": [
+              {
+                "en": "No, I am not.",
+                "it": "No."
+              },
+              {
+                "en": "I am hungry.",
+                "it": "Ho fame."
+              },
+              {
+                "en": "This is my mum.",
+                "it": "Questa è la mia mamma."
+              }
+            ],
+            "good": {
+              "en": "Not tired! Good!",
+              "it": "Non stanco! Bene!"
+            }
+          },
+          {
+            "say": {
+              "en": "Are you hungry?",
+              "it": "Hai fame?"
+            },
+            "replies": [
+              {
+                "en": "Yes, I am!",
+                "it": "Sì!"
+              },
+              {
+                "en": "I am scared.",
+                "it": "Ho paura."
+              },
+              {
+                "en": "No, I am sick.",
+                "it": "No, sono malato."
+              }
+            ],
+            "good": {
+              "en": "Hungry! Let's eat!",
+              "it": "Fame! Mangiamo!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_food",
+        "worldId": "world_food",
+        "creatureId": "c_pasticcio",
+        "title_it": "Pasticcio in cucina",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "Do you like pizza?",
+              "it": "Ti piace la pizza?"
+            },
+            "replies": [
+              {
+                "en": "Yes, I do!",
+                "it": "Sì!"
+              },
+              {
+                "en": "No, I don't.",
+                "it": "No."
+              },
+              {
+                "en": "I like cheese.",
+                "it": "Mi piace il formaggio."
+              }
+            ],
+            "good": {
+              "en": "Pizza! Me too!",
+              "it": "Pizza! Anche a me!"
+            }
+          },
+          {
+            "say": {
+              "en": "What do you like?",
+              "it": "Cosa ti piace?"
+            },
+            "replies": [
+              {
+                "en": "I like apples.",
+                "it": "Mi piacciono le mele."
+              },
+              {
+                "en": "I don't like apples.",
+                "it": "Non mi piacciono le mele."
+              },
+              {
+                "en": "Yes, I do.",
+                "it": "Sì."
+              }
+            ],
+            "good": {
+              "en": "Apples! Here you are!",
+              "it": "Mele! Ecco a te!"
+            }
+          },
+          {
+            "say": {
+              "en": "Do you like milk?",
+              "it": "Ti piace il latte?"
+            },
+            "replies": [
+              {
+                "en": "No, I don't.",
+                "it": "No."
+              },
+              {
+                "en": "I like bread.",
+                "it": "Mi piace il pane."
+              },
+              {
+                "en": "Yes, I am.",
+                "it": "Sì, lo sono."
+              }
+            ],
+            "good": {
+              "en": "No milk! OK!",
+              "it": "Niente latte! Va bene!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_house",
+        "worldId": "world_house",
+        "creatureId": "c_chiavetta",
+        "title_it": "Chiavetta in casa",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "Where is the cat?",
+              "it": "Dov'è il gatto?"
+            },
+            "replies": [
+              {
+                "en": "On the bed.",
+                "it": "Sul letto."
+              },
+              {
+                "en": "Under the table.",
+                "it": "Sotto il tavolo."
+              },
+              {
+                "en": "In the kitchen.",
+                "it": "In cucina."
+              }
+            ],
+            "good": {
+              "en": "On the bed! Found it!",
+              "it": "Sul letto! Trovato!"
+            }
+          },
+          {
+            "say": {
+              "en": "Where is the dog?",
+              "it": "Dov'è il cane?"
+            },
+            "replies": [
+              {
+                "en": "Under the table.",
+                "it": "Sotto il tavolo."
+              },
+              {
+                "en": "On the chair.",
+                "it": "Sulla sedia."
+              },
+              {
+                "en": "Open the door!",
+                "it": "Apri la porta!"
+              }
+            ],
+            "good": {
+              "en": "Under the table! Ha!",
+              "it": "Sotto il tavolo! Ah!"
+            }
+          },
+          {
+            "say": {
+              "en": "And where is the fish?",
+              "it": "E dov'è il pesce?"
+            },
+            "replies": [
+              {
+                "en": "In the kitchen.",
+                "it": "In cucina."
+              },
+              {
+                "en": "In the garden.",
+                "it": "In giardino."
+              },
+              {
+                "en": "On the window.",
+                "it": "Sulla finestra."
+              }
+            ],
+            "good": {
+              "en": "In the kitchen! Yes!",
+              "it": "In cucina! Sì!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_school",
+        "worldId": "world_school",
+        "creatureId": "c_maestrino",
+        "title_it": "Maestrino a scuola",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "Open your book!",
+              "it": "Apri il libro!"
+            },
+            "replies": [
+              {
+                "en": "Here is my book!",
+                "it": "Ecco il mio libro!"
+              },
+              {
+                "en": "Can I have a pencil?",
+                "it": "Posso avere una matita?"
+              },
+              {
+                "en": "This is my bag.",
+                "it": "Questo è il mio zaino."
+              }
+            ],
+            "good": {
+              "en": "Good! Page one!",
+              "it": "Bene! Pagina uno!"
+            }
+          },
+          {
+            "say": {
+              "en": "What do you need?",
+              "it": "Di cosa hai bisogno?"
+            },
+            "replies": [
+              {
+                "en": "Can I have a pencil, please?",
+                "it": "Posso avere una matita, per favore?"
+              },
+              {
+                "en": "Here you are.",
+                "it": "Ecco a te."
+              },
+              {
+                "en": "Sit down, please.",
+                "it": "Siediti, per favore."
+              }
+            ],
+            "good": {
+              "en": "Here you are! A pencil!",
+              "it": "Ecco a te! Una matita!"
+            }
+          },
+          {
+            "say": {
+              "en": "Thank you! And now?",
+              "it": "Grazie! E ora?"
+            },
+            "replies": [
+              {
+                "en": "Sit down, please!",
+                "it": "Siediti, per favore!"
+              },
+              {
+                "en": "Can I have a ruler?",
+                "it": "Posso avere un righello?"
+              },
+              {
+                "en": "Open the door!",
+                "it": "Apri la porta!"
+              }
+            ],
+            "good": {
+              "en": "I sit down! OK!",
+              "it": "Mi siedo! OK!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_actions",
+        "worldId": "world_actions",
+        "creatureId": "c_saltello",
+        "title_it": "Saltello nel bosco",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "Can you jump?",
+              "it": "Sai saltare?"
+            },
+            "replies": [
+              {
+                "en": "Yes, I can!",
+                "it": "Sì!"
+              },
+              {
+                "en": "No, I can't.",
+                "it": "No."
+              },
+              {
+                "en": "I can swim.",
+                "it": "So nuotare."
+              }
+            ],
+            "good": {
+              "en": "Jump! Jump! Great!",
+              "it": "Salta! Salta! Bene!"
+            }
+          },
+          {
+            "say": {
+              "en": "Can you fly?",
+              "it": "Sai volare?"
+            },
+            "replies": [
+              {
+                "en": "No, I can't.",
+                "it": "No."
+              },
+              {
+                "en": "Yes, I can!",
+                "it": "Sì!"
+              },
+              {
+                "en": "I can sing.",
+                "it": "So cantare."
+              }
+            ],
+            "good": {
+              "en": "No flying! Me neither!",
+              "it": "Niente volo! Neanch'io!"
+            }
+          },
+          {
+            "say": {
+              "en": "What is Pepe doing?",
+              "it": "Cosa sta facendo Pepe?"
+            },
+            "replies": [
+              {
+                "en": "Pepe is running.",
+                "it": "Pepe sta correndo."
+              },
+              {
+                "en": "Pepe is sleeping.",
+                "it": "Pepe sta dormendo."
+              },
+              {
+                "en": "I can dance.",
+                "it": "So ballare."
+              }
+            ],
+            "good": {
+              "en": "Running! Fast!",
+              "it": "Corre! Veloce!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_weather",
+        "worldId": "world_weather",
+        "creatureId": "c_ventolino",
+        "title_it": "Ventolino e il tempo",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "What's the weather like?",
+              "it": "Che tempo fa?"
+            },
+            "replies": [
+              {
+                "en": "It's sunny.",
+                "it": "C'è il sole."
+              },
+              {
+                "en": "It's rainy.",
+                "it": "Piove."
+              },
+              {
+                "en": "Today is Monday.",
+                "it": "Oggi è lunedì."
+              }
+            ],
+            "good": {
+              "en": "Sunny! Let's go out!",
+              "it": "Sole! Usciamo!"
+            }
+          },
+          {
+            "say": {
+              "en": "What day is it today?",
+              "it": "Che giorno è oggi?"
+            },
+            "replies": [
+              {
+                "en": "Today is Friday.",
+                "it": "Oggi è venerdì."
+              },
+              {
+                "en": "It's windy.",
+                "it": "C'è vento."
+              },
+              {
+                "en": "It's cloudy.",
+                "it": "È nuvoloso."
+              }
+            ],
+            "good": {
+              "en": "Friday! Almost weekend!",
+              "it": "Venerdì! Quasi weekend!"
+            }
+          },
+          {
+            "say": {
+              "en": "And tomorrow? Saturday?",
+              "it": "E domani? Sabato?"
+            },
+            "replies": [
+              {
+                "en": "Yes! No school!",
+                "it": "Sì! Niente scuola!"
+              },
+              {
+                "en": "It's snowy.",
+                "it": "Nevica."
+              },
+              {
+                "en": "Today is Sunday.",
+                "it": "Oggi è domenica."
+              }
+            ],
+            "good": {
+              "en": "No school! Hooray!",
+              "it": "Niente scuola! Evviva!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_time",
+        "worldId": "world_time",
+        "creatureId": "c_ticchetto",
+        "title_it": "Ticchetto e l'ora",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "What time is it?",
+              "it": "Che ore sono?"
+            },
+            "replies": [
+              {
+                "en": "It's seven o'clock.",
+                "it": "Sono le sette."
+              },
+              {
+                "en": "It's twelve o'clock.",
+                "it": "Sono le dodici."
+              },
+              {
+                "en": "In the morning.",
+                "it": "La mattina."
+              }
+            ],
+            "good": {
+              "en": "Seven! Breakfast time!",
+              "it": "Sette! Ora di colazione!"
+            }
+          },
+          {
+            "say": {
+              "en": "When do you have breakfast?",
+              "it": "Quando fai colazione?"
+            },
+            "replies": [
+              {
+                "en": "In the morning.",
+                "it": "La mattina."
+              },
+              {
+                "en": "At night.",
+                "it": "Di notte."
+              },
+              {
+                "en": "It's three o'clock.",
+                "it": "Sono le tre."
+              }
+            ],
+            "good": {
+              "en": "In the morning! Yes!",
+              "it": "La mattina! Sì!"
+            }
+          },
+          {
+            "say": {
+              "en": "And what do you do at night?",
+              "it": "E cosa fai di notte?"
+            },
+            "replies": [
+              {
+                "en": "At night I sleep.",
+                "it": "Di notte dormo."
+              },
+              {
+                "en": "I have lunch.",
+                "it": "Pranzo."
+              },
+              {
+                "en": "It's evening.",
+                "it": "È sera."
+              }
+            ],
+            "good": {
+              "en": "Sleep! Good night!",
+              "it": "Dormi! Buonanotte!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_village",
+        "worldId": "world_village",
+        "creatureId": "c_rotolino",
+        "title_it": "Rotolino nel villaggio",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "Where are you going?",
+              "it": "Dove vai?"
+            },
+            "replies": [
+              {
+                "en": "To the park.",
+                "it": "Al parco."
+              },
+              {
+                "en": "By bus.",
+                "it": "In autobus."
+              },
+              {
+                "en": "It's a shop.",
+                "it": "È un negozio."
+              }
+            ],
+            "good": {
+              "en": "To the park! Let's go!",
+              "it": "Al parco! Andiamo!"
+            }
+          },
+          {
+            "say": {
+              "en": "How do you go to school?",
+              "it": "Come vai a scuola?"
+            },
+            "replies": [
+              {
+                "en": "By bus.",
+                "it": "In autobus."
+              },
+              {
+                "en": "To the beach.",
+                "it": "In spiaggia."
+              },
+              {
+                "en": "A train.",
+                "it": "Un treno."
+              }
+            ],
+            "good": {
+              "en": "By bus! Beep beep!",
+              "it": "In autobus! Bip bip!"
+            }
+          },
+          {
+            "say": {
+              "en": "Let's go to the beach!",
+              "it": "Andiamo in spiaggia!"
+            },
+            "replies": [
+              {
+                "en": "Yes! By boat!",
+                "it": "Sì! In barca!"
+              },
+              {
+                "en": "Where is the farm?",
+                "it": "Dov'è la fattoria?"
+              },
+              {
+                "en": "A car.",
+                "it": "Una macchina."
+              }
+            ],
+            "good": {
+              "en": "By boat! Splash!",
+              "it": "In barca! Splash!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_party",
+        "worldId": "world_party",
+        "creatureId": "c_festino",
+        "title_it": "Festino alla festa",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "How old are you?",
+              "it": "Quanti anni hai?"
+            },
+            "replies": [
+              {
+                "en": "I am seven.",
+                "it": "Ho sette anni."
+              },
+              {
+                "en": "I am happy.",
+                "it": "Sono felice."
+              },
+              {
+                "en": "It's summer.",
+                "it": "È estate."
+              }
+            ],
+            "good": {
+              "en": "Seven! Happy birthday!",
+              "it": "Sette! Buon compleanno!"
+            }
+          },
+          {
+            "say": {
+              "en": "When is your birthday?",
+              "it": "Quando è il tuo compleanno?"
+            },
+            "replies": [
+              {
+                "en": "In summer.",
+                "it": "In estate."
+              },
+              {
+                "en": "A present!",
+                "it": "Un regalo!"
+              },
+              {
+                "en": "Twenty balloons!",
+                "it": "Venti palloncini!"
+              }
+            ],
+            "good": {
+              "en": "Summer! Sunny birthday!",
+              "it": "Estate! Compleanno al sole!"
+            }
+          },
+          {
+            "say": {
+              "en": "A present for you!",
+              "it": "Un regalo per te!"
+            },
+            "replies": [
+              {
+                "en": "Thank you!",
+                "it": "Grazie!"
+              },
+              {
+                "en": "I am eight.",
+                "it": "Ho otto anni."
+              },
+              {
+                "en": "In winter.",
+                "it": "In inverno."
+              }
+            ],
+            "good": {
+              "en": "You're welcome!",
+              "it": "Prego!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_portrait",
+        "worldId": "world_portrait",
+        "creatureId": "c_specchietto",
+        "title_it": "Specchietto e il ritratto",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "Who is she? Long hair or short hair?",
+              "it": "Chi è lei? Capelli lunghi o corti?"
+            },
+            "replies": [
+              {
+                "en": "She has got long hair.",
+                "it": "Lei ha i capelli lunghi."
+              },
+              {
+                "en": "He has got a beard.",
+                "it": "Lui ha la barba."
+              },
+              {
+                "en": "She is tall.",
+                "it": "Lei è alta."
+              }
+            ],
+            "good": {
+              "en": "Long hair! Yes!",
+              "it": "Capelli lunghi! Sì!"
+            }
+          },
+          {
+            "say": {
+              "en": "And him? Tall or short?",
+              "it": "E lui? Alto o basso?"
+            },
+            "replies": [
+              {
+                "en": "He is tall.",
+                "it": "Lui è alto."
+              },
+              {
+                "en": "He is short.",
+                "it": "Lui è basso."
+              },
+              {
+                "en": "She has got glasses.",
+                "it": "Lei ha gli occhiali."
+              }
+            ],
+            "good": {
+              "en": "Tall! Very tall!",
+              "it": "Alto! Altissimo!"
+            }
+          },
+          {
+            "say": {
+              "en": "Have you got glasses?",
+              "it": "Hai gli occhiali?"
+            },
+            "replies": [
+              {
+                "en": "Yes, I've got glasses.",
+                "it": "Sì, ho gli occhiali."
+              },
+              {
+                "en": "I've got a moustache.",
+                "it": "Ho i baffi."
+              },
+              {
+                "en": "She is short.",
+                "it": "Lei è bassa."
+              }
+            ],
+            "good": {
+              "en": "Glasses! Nice!",
+              "it": "Occhiali! Belli!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_animals",
+        "worldId": "world_animals",
+        "creatureId": "c_chicco",
+        "title_it": "Chicco e gli animali",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "Can a duck swim?",
+              "it": "Un'anatra sa nuotare?"
+            },
+            "replies": [
+              {
+                "en": "Yes, it can.",
+                "it": "Sì."
+              },
+              {
+                "en": "No, it can't.",
+                "it": "No."
+              },
+              {
+                "en": "The lion is big.",
+                "it": "Il leone è grande."
+              }
+            ],
+            "good": {
+              "en": "Yes! Splash!",
+              "it": "Sì! Splash!"
+            }
+          },
+          {
+            "say": {
+              "en": "Can a cow fly?",
+              "it": "Una mucca sa volare?"
+            },
+            "replies": [
+              {
+                "en": "No, it can't!",
+                "it": "No!"
+              },
+              {
+                "en": "Yes, it can.",
+                "it": "Sì."
+              },
+              {
+                "en": "The monkey can climb.",
+                "it": "La scimmia sa arrampicarsi."
+              }
+            ],
+            "good": {
+              "en": "No! Ha ha! Moo!",
+              "it": "No! Ah ah! Muu!"
+            }
+          },
+          {
+            "say": {
+              "en": "Is the giraffe tall or small?",
+              "it": "La giraffa è alta o piccola?"
+            },
+            "replies": [
+              {
+                "en": "The giraffe is tall.",
+                "it": "La giraffa è alta."
+              },
+              {
+                "en": "The pig is pink.",
+                "it": "Il maiale è rosa."
+              },
+              {
+                "en": "The giraffe is small.",
+                "it": "La giraffa è piccola."
+              }
+            ],
+            "good": {
+              "en": "Tall! Very tall!",
+              "it": "Alta! Altissima!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_sport",
+        "worldId": "world_sport",
+        "creatureId": "c_golino",
+        "title_it": "Golino e lo sport",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "What do you like playing?",
+              "it": "A cosa ti piace giocare?"
+            },
+            "replies": [
+              {
+                "en": "I like playing football.",
+                "it": "Mi piace giocare a calcio."
+              },
+              {
+                "en": "My favourite sport is tennis.",
+                "it": "Il mio sport preferito è il tennis."
+              },
+              {
+                "en": "I can play the guitar.",
+                "it": "So suonare la chitarra."
+              }
+            ],
+            "good": {
+              "en": "Football! Goal!",
+              "it": "Calcio! Gol!"
+            }
+          },
+          {
+            "say": {
+              "en": "What is your favourite sport?",
+              "it": "Qual è il tuo sport preferito?"
+            },
+            "replies": [
+              {
+                "en": "My favourite sport is tennis.",
+                "it": "Il mio sport preferito è il tennis."
+              },
+              {
+                "en": "I like drawing.",
+                "it": "Mi piace disegnare."
+              },
+              {
+                "en": "Let's play chess!",
+                "it": "Giochiamo a scacchi!"
+              }
+            ],
+            "good": {
+              "en": "Tennis! Nice!",
+              "it": "Tennis! Bello!"
+            }
+          },
+          {
+            "say": {
+              "en": "Let's play! Chess or football?",
+              "it": "Giochiamo! Scacchi o calcio?"
+            },
+            "replies": [
+              {
+                "en": "Let's play chess!",
+                "it": "Giochiamo a scacchi!"
+              },
+              {
+                "en": "I like music.",
+                "it": "Mi piace la musica."
+              },
+              {
+                "en": "It's windy.",
+                "it": "C'è vento."
+              }
+            ],
+            "good": {
+              "en": "Chess! Your move!",
+              "it": "Scacchi! Tocca a te!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_jobs",
+        "worldId": "world_jobs",
+        "creatureId": "c_timbrino",
+        "title_it": "Timbrino e i mestieri",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "Who is he?",
+              "it": "Chi è lui?"
+            },
+            "replies": [
+              {
+                "en": "He is a doctor.",
+                "it": "Lui è un dottore."
+              },
+              {
+                "en": "She is a pilot.",
+                "it": "Lei è una pilota."
+              },
+              {
+                "en": "I want to be a vet.",
+                "it": "Voglio fare il veterinario."
+              }
+            ],
+            "good": {
+              "en": "A doctor! Stamp!",
+              "it": "Un dottore! Timbro!"
+            }
+          },
+          {
+            "say": {
+              "en": "What do you want to be?",
+              "it": "Cosa vuoi fare da grande?"
+            },
+            "replies": [
+              {
+                "en": "I want to be a firefighter.",
+                "it": "Voglio fare il pompiere."
+              },
+              {
+                "en": "He is a farmer.",
+                "it": "Lui è un contadino."
+              },
+              {
+                "en": "A cook works in a kitchen.",
+                "it": "Un cuoco lavora in cucina."
+              }
+            ],
+            "good": {
+              "en": "A firefighter! Brave!",
+              "it": "Un pompiere! Coraggioso!"
+            }
+          },
+          {
+            "say": {
+              "en": "Where does a farmer work?",
+              "it": "Dove lavora un contadino?"
+            },
+            "replies": [
+              {
+                "en": "A farmer works on a farm.",
+                "it": "Un contadino lavora in fattoria."
+              },
+              {
+                "en": "A cook works in a kitchen.",
+                "it": "Un cuoco lavora in cucina."
+              },
+              {
+                "en": "She is a nurse.",
+                "it": "Lei è un'infermiera."
+              }
+            ],
+            "good": {
+              "en": "On a farm! Moo!",
+              "it": "In fattoria! Muu!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_city",
+        "worldId": "world_city",
+        "creatureId": "c_semaforino",
+        "title_it": "Semaforino in città",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "Where is the library?",
+              "it": "Dov'è la biblioteca?"
+            },
+            "replies": [
+              {
+                "en": "Next to the station.",
+                "it": "Accanto alla stazione."
+              },
+              {
+                "en": "Turn left!",
+                "it": "Gira a sinistra!"
+              },
+              {
+                "en": "By bus.",
+                "it": "In autobus."
+              }
+            ],
+            "good": {
+              "en": "Next to the station! Yes!",
+              "it": "Accanto alla stazione! Sì!"
+            }
+          },
+          {
+            "say": {
+              "en": "How do I get to the hospital?",
+              "it": "Come arrivo all'ospedale?"
+            },
+            "replies": [
+              {
+                "en": "Turn left!",
+                "it": "Gira a sinistra!"
+              },
+              {
+                "en": "It's ten euros.",
+                "it": "Costa dieci euro."
+              },
+              {
+                "en": "Behind the shop.",
+                "it": "Dietro il negozio."
+              }
+            ],
+            "good": {
+              "en": "Left! Green light!",
+              "it": "Sinistra! Verde!"
+            }
+          },
+          {
+            "say": {
+              "en": "And then?",
+              "it": "E poi?"
+            },
+            "replies": [
+              {
+                "en": "Go straight on!",
+                "it": "Vai dritto!"
+              },
+              {
+                "en": "Turn right!",
+                "it": "Gira a destra!"
+              },
+              {
+                "en": "In front of the station.",
+                "it": "Davanti alla stazione."
+              }
+            ],
+            "good": {
+              "en": "Straight on! Go!",
+              "it": "Dritto! Vai!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_market",
+        "worldId": "world_market",
+        "creatureId": "c_monetina",
+        "title_it": "Monetina al mercato",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "How much is it?",
+              "it": "Quanto costa?"
+            },
+            "replies": [
+              {
+                "en": "It's ten euros.",
+                "it": "Costa dieci euro."
+              },
+              {
+                "en": "That's cheap!",
+                "it": "È economico!"
+              },
+              {
+                "en": "A ticket, please.",
+                "it": "Un biglietto, per favore."
+              }
+            ],
+            "good": {
+              "en": "Ten euros! OK!",
+              "it": "Dieci euro! OK!"
+            }
+          },
+          {
+            "say": {
+              "en": "Ten euros! Cheap or expensive?",
+              "it": "Dieci euro! Economico o caro?"
+            },
+            "replies": [
+              {
+                "en": "That's cheap!",
+                "it": "È economico!"
+              },
+              {
+                "en": "Thirty euros.",
+                "it": "Trenta euro."
+              },
+              {
+                "en": "I have a hundred coins.",
+                "it": "Ho cento monete."
+              }
+            ],
+            "good": {
+              "en": "Cheap! Buy it!",
+              "it": "Economico! Compralo!"
+            }
+          },
+          {
+            "say": {
+              "en": "What do you want?",
+              "it": "Cosa vuoi?"
+            },
+            "replies": [
+              {
+                "en": "Can I have a ticket, please?",
+                "it": "Posso avere un biglietto, per favore?"
+              },
+              {
+                "en": "Fifty cents.",
+                "it": "Cinquanta centesimi."
+              },
+              {
+                "en": "It's a toy.",
+                "it": "È un giocattolo."
+              }
+            ],
+            "good": {
+              "en": "A ticket! Here you are!",
+              "it": "Un biglietto! Ecco a te!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_doctor",
+        "worldId": "world_doctor",
+        "creatureId": "c_cerottino",
+        "title_it": "Cerottino dal dottore",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "What's the matter?",
+              "it": "Cosa c'è?"
+            },
+            "replies": [
+              {
+                "en": "I've got a headache.",
+                "it": "Ho mal di testa."
+              },
+              {
+                "en": "Get well soon!",
+                "it": "Guarisci presto!"
+              },
+              {
+                "en": "Rest in bed!",
+                "it": "Riposa a letto!"
+              }
+            ],
+            "good": {
+              "en": "A headache! Poor you!",
+              "it": "Mal di testa! Poverino!"
+            }
+          },
+          {
+            "say": {
+              "en": "Have you got a fever?",
+              "it": "Hai la febbre?"
+            },
+            "replies": [
+              {
+                "en": "Yes, and a cough.",
+                "it": "Sì, e la tosse."
+              },
+              {
+                "en": "Take this medicine.",
+                "it": "Prendi questa medicina."
+              },
+              {
+                "en": "I've got a ticket.",
+                "it": "Ho un biglietto."
+              }
+            ],
+            "good": {
+              "en": "Fever and cough! Rest!",
+              "it": "Febbre e tosse! Riposa!"
+            }
+          },
+          {
+            "say": {
+              "en": "Take this medicine!",
+              "it": "Prendi questa medicina!"
+            },
+            "replies": [
+              {
+                "en": "Thank you, doctor!",
+                "it": "Grazie, dottore!"
+              },
+              {
+                "en": "I've got a toothache.",
+                "it": "Ho mal di denti."
+              },
+              {
+                "en": "Turn left!",
+                "it": "Gira a sinistra!"
+              }
+            ],
+            "good": {
+              "en": "Get well soon!",
+              "it": "Guarisci presto!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_nature",
+        "worldId": "world_nature",
+        "creatureId": "c_sassolino",
+        "title_it": "Sassolino in montagna",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "Is there a river?",
+              "it": "C'è un fiume?"
+            },
+            "replies": [
+              {
+                "en": "Yes, there is.",
+                "it": "Sì."
+              },
+              {
+                "en": "There are three mountains.",
+                "it": "Ci sono tre montagne."
+              },
+              {
+                "en": "No, there is a lake.",
+                "it": "No, c'è un lago."
+              }
+            ],
+            "good": {
+              "en": "A river! Splash!",
+              "it": "Un fiume! Splash!"
+            }
+          },
+          {
+            "say": {
+              "en": "How many mountains are there?",
+              "it": "Quante montagne ci sono?"
+            },
+            "replies": [
+              {
+                "en": "There are three mountains.",
+                "it": "Ci sono tre montagne."
+              },
+              {
+                "en": "There is a cave.",
+                "it": "C'è una grotta."
+              },
+              {
+                "en": "The island is in the sea.",
+                "it": "L'isola è nel mare."
+              }
+            ],
+            "good": {
+              "en": "Three! High!",
+              "it": "Tre! Alte!"
+            }
+          },
+          {
+            "say": {
+              "en": "Are there flowers in the desert?",
+              "it": "Ci sono fiori nel deserto?"
+            },
+            "replies": [
+              {
+                "en": "No, there are no flowers.",
+                "it": "No, non ci sono fiori."
+              },
+              {
+                "en": "Yes, there is a river.",
+                "it": "Sì, c'è un fiume."
+              },
+              {
+                "en": "There is a forest.",
+                "it": "C'è una foresta."
+              }
+            ],
+            "good": {
+              "en": "No flowers! Only sand!",
+              "it": "Niente fiori! Solo sabbia!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_routine",
+        "worldId": "world_routine",
+        "creatureId": "c_pigiamino",
+        "title_it": "Pigiamino e la giornata",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "What time do you get up?",
+              "it": "A che ora ti alzi?"
+            },
+            "replies": [
+              {
+                "en": "I get up at seven o'clock.",
+                "it": "Mi alzo alle sette."
+              },
+              {
+                "en": "I go to bed.",
+                "it": "Vado a letto."
+              },
+              {
+                "en": "In the evening.",
+                "it": "La sera."
+              }
+            ],
+            "good": {
+              "en": "Seven! Early bird!",
+              "it": "Sette! Mattiniero!"
+            }
+          },
+          {
+            "say": {
+              "en": "What do you do in the morning?",
+              "it": "Cosa fai la mattina?"
+            },
+            "replies": [
+              {
+                "en": "I brush my teeth.",
+                "it": "Mi lavo i denti."
+              },
+              {
+                "en": "I watch TV.",
+                "it": "Guardo la TV."
+              },
+              {
+                "en": "I go to bed.",
+                "it": "Vado a letto."
+              }
+            ],
+            "good": {
+              "en": "Brush, brush! Clean!",
+              "it": "Spazzola! Puliti!"
+            }
+          },
+          {
+            "say": {
+              "en": "What time do you go to bed?",
+              "it": "A che ora vai a letto?"
+            },
+            "replies": [
+              {
+                "en": "At half past eight.",
+                "it": "Alle otto e mezza."
+              },
+              {
+                "en": "I get up.",
+                "it": "Mi alzo."
+              },
+              {
+                "en": "I do my homework.",
+                "it": "Faccio i compiti."
+              }
+            ],
+            "good": {
+              "en": "Half past eight! Good night!",
+              "it": "Otto e mezza! Buonanotte!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_doing",
+        "worldId": "world_doing",
+        "creatureId": "c_riflesso",
+        "title_it": "Riflesso e le azioni",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "What are you doing?",
+              "it": "Cosa stai facendo?"
+            },
+            "replies": [
+              {
+                "en": "I'm reading.",
+                "it": "Sto leggendo."
+              },
+              {
+                "en": "I get up.",
+                "it": "Mi alzo."
+              },
+              {
+                "en": "She is cooking.",
+                "it": "Lei sta cucinando."
+              }
+            ],
+            "good": {
+              "en": "Reading! Me too!",
+              "it": "Leggendo! Anch'io!"
+            }
+          },
+          {
+            "say": {
+              "en": "Is she cooking?",
+              "it": "Lei sta cucinando?"
+            },
+            "replies": [
+              {
+                "en": "Yes, she is.",
+                "it": "Sì."
+              },
+              {
+                "en": "No, I'm writing.",
+                "it": "No, sto scrivendo."
+              },
+              {
+                "en": "They are laughing.",
+                "it": "Stanno ridendo."
+              }
+            ],
+            "good": {
+              "en": "Cooking! Yum!",
+              "it": "Cucina! Gnam!"
+            }
+          },
+          {
+            "say": {
+              "en": "Is he sleeping?",
+              "it": "Lui sta dormendo?"
+            },
+            "replies": [
+              {
+                "en": "No, he isn't. He's painting.",
+                "it": "No. Sta dipingendo."
+              },
+              {
+                "en": "Yes, I am.",
+                "it": "Sì, io sì."
+              },
+              {
+                "en": "I'm listening to music.",
+                "it": "Sto ascoltando la musica."
+              }
+            ],
+            "good": {
+              "en": "Painting! Colours!",
+              "it": "Dipinge! Colori!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_months",
+        "worldId": "world_months",
+        "creatureId": "c_zucchetta",
+        "title_it": "Zucchetta e le feste",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "When is your birthday?",
+              "it": "Quando è il tuo compleanno?"
+            },
+            "replies": [
+              {
+                "en": "My birthday is in March.",
+                "it": "Il mio compleanno è a marzo."
+              },
+              {
+                "en": "Happy Christmas!",
+                "it": "Buon Natale!"
+              },
+              {
+                "en": "Trick or treat!",
+                "it": "Dolcetto o scherzetto!"
+              }
+            ],
+            "good": {
+              "en": "March! Spring!",
+              "it": "Marzo! Primavera!"
+            }
+          },
+          {
+            "say": {
+              "en": "When is Christmas?",
+              "it": "Quando è Natale?"
+            },
+            "replies": [
+              {
+                "en": "Christmas is in December.",
+                "it": "Natale è a dicembre."
+              },
+              {
+                "en": "In July.",
+                "it": "A luglio."
+              },
+              {
+                "en": "The Easter bunny.",
+                "it": "Il coniglietto di Pasqua."
+              }
+            ],
+            "good": {
+              "en": "December! Snow!",
+              "it": "Dicembre! Neve!"
+            }
+          },
+          {
+            "say": {
+              "en": "It's Halloween! What do you say?",
+              "it": "È Halloween! Cosa dici?"
+            },
+            "replies": [
+              {
+                "en": "Trick or treat!",
+                "it": "Dolcetto o scherzetto!"
+              },
+              {
+                "en": "Happy Christmas!",
+                "it": "Buon Natale!"
+              },
+              {
+                "en": "Happy birthday!",
+                "it": "Buon compleanno!"
+              }
+            ],
+            "good": {
+              "en": "Trick or treat! Boo!",
+              "it": "Dolcetto o scherzetto! Buh!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "dl_travel",
+        "worldId": "world_travel",
+        "creatureId": "c_valigetta",
+        "title_it": "Valigetta in viaggio",
+        "hm": [
+          {
+            "en": "Hmm... Try again!"
+          },
+          {
+            "en": "Not that one. Listen again!"
+          }
+        ],
+        "turns": [
+          {
+            "say": {
+              "en": "Where were you yesterday?",
+              "it": "Dov'eri ieri?"
+            },
+            "replies": [
+              {
+                "en": "Yesterday I was at the park.",
+                "it": "Ieri ero al parco."
+              },
+              {
+                "en": "Tomorrow I am going to the beach.",
+                "it": "Domani vado in spiaggia."
+              },
+              {
+                "en": "By plane.",
+                "it": "In aereo."
+              }
+            ],
+            "good": {
+              "en": "The park! Nice!",
+              "it": "Il parco! Bello!"
+            }
+          },
+          {
+            "say": {
+              "en": "Where are you going tomorrow?",
+              "it": "Dove vai domani?"
+            },
+            "replies": [
+              {
+                "en": "Tomorrow I am going to the beach.",
+                "it": "Domani vado in spiaggia."
+              },
+              {
+                "en": "We went to the sea.",
+                "it": "Siamo andati al mare."
+              },
+              {
+                "en": "Look at the map!",
+                "it": "Guarda la mappa!"
+              }
+            ],
+            "good": {
+              "en": "The beach! Sun!",
+              "it": "La spiaggia! Sole!"
+            }
+          },
+          {
+            "say": {
+              "en": "How do you go on holiday?",
+              "it": "Come vai in vacanza?"
+            },
+            "replies": [
+              {
+                "en": "By plane!",
+                "it": "In aereo!"
+              },
+              {
+                "en": "In a tent.",
+                "it": "In tenda."
+              },
+              {
+                "en": "Yesterday.",
+                "it": "Ieri."
+              }
+            ],
+            "good": {
+              "en": "By plane! Let's go!",
+              "it": "In aereo! Andiamo!"
+            }
+          }
+        ]
+      }
+    ]
+  }
 }

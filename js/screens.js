@@ -14,7 +14,7 @@ import { renderMascot, mascotSay, mascotCheer, encouragementKey } from './mascot
 import { spriteSvg } from './minigames.js';
 import { speakItem, sfxTap, sfxUnlock } from './audio.js';
 import { celebrate } from './effects.js';
-import { ensureTodayMission, currentMission, missionRatio } from './missions.js';
+import { ensureTodayMission, currentMission, missionRatio, trackMissionEvent } from './missions.js';
 import { renderStoryStrip, chapterForCreature, isAvailable as chapterAvailable, playChapter } from './story.js';
 import { renderStickers } from './chests.js';
 import { canShare, shareSummary } from './share.js';
@@ -102,6 +102,30 @@ export function renderHome(handlers) {
     card.classList.toggle('is-done', save.daily.missionDone);
     card.querySelector('.mission-icon').innerHTML = '';
     card.querySelector('.mission-icon').appendChild(spriteSvg(mission.sprite || 'sp-icon-mission'));
+    // Missione fuori dallo schermo: la chiude un adulto, con un secondo tocco di conferma.
+    const azioni = document.getElementById('mission-actions');
+    azioni.innerHTML = '';
+    if (mission.type === 'home' && !save.daily.missionDone) {
+      const conferma = el('button', 'btn btn-ghost btn-sm', t('ui.mission_home_confirm'));
+      conferma.onclick = () => {
+        sfxTap();
+        azioni.innerHTML = '';
+        azioni.appendChild(el('span', 'tiny', t('ui.mission_home_ask')));
+        const si = el('button', 'btn btn-good btn-sm', t('ui.mission_home_yes'));
+        const no = el('button', 'btn btn-ghost btn-sm', t('ui.mission_home_no'));
+        si.onclick = () => {
+          sfxTap();
+          if (trackMissionEvent({ home: true })) {
+            celebrate();
+            mascotSay('mission_done', { bubble: document.getElementById('home-speech'), avatar: document.getElementById('home-mascot') });
+          }
+          renderHome(handlers);
+        };
+        no.onclick = () => { sfxTap(); renderHome(handlers); };
+        azioni.appendChild(si); azioni.appendChild(no);
+      };
+      azioni.appendChild(conferma);
+    }
     card.style.display = '';
   } else {
     card.style.display = 'none';

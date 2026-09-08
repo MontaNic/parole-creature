@@ -64,6 +64,10 @@ export function trackMissionEvent(ev) {
     case 'reviewCorrect':
       if (ev.correct && ev.review) inc = 1;
       break;
+    case 'home':
+      // Fuori dallo schermo: lo conferma un adulto dalla card in home.
+      if (ev.home) inc = 1;
+      break;
   }
   if (!inc) return false;
 

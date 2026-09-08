@@ -62,6 +62,7 @@ export async function loadAll() {
   content.mascotStages = (contentJson.mascotStages || []).slice().sort((a, b) => a.level - b.level);
   content.story = contentJson.story || null;
   content.stickers = contentJson.stickers || null;
+  content.dialogues = (contentJson.dialogues && contentJson.dialogues.items) || [];
   content.structures = contentJson.structures || [];
 
   content.byId.clear();

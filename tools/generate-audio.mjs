@@ -163,6 +163,16 @@ async function buildJobList() {
     });
   }
 
+  // I dialoghi: creatura, tre risposte e reazione per ogni scambio, piu' due 'hmm' per dialogo. Voce modello.
+  for (const dl of content.dialogues?.items || []) {
+    dl.turns.forEach((tn, i) => {
+      jobs.push({ rel: `en/dialog.${dl.id}.${i}.say.mp3`, text: tn.say.en, role: 'english', kind: 'phrase' });
+      tn.replies.forEach((r, k) => jobs.push({ rel: `en/dialog.${dl.id}.${i}.r${k}.mp3`, text: r.en, role: 'english', kind: 'phrase' }));
+      jobs.push({ rel: `en/dialog.${dl.id}.${i}.good.mp3`, text: tn.good.en, role: 'english', kind: 'phrase' });
+    });
+    dl.hm.forEach((h, k) => jobs.push({ rel: `en/dialog.${dl.id}.hm${k}.mp3`, text: h.en, role: 'english', kind: 'phrase' }));
+  }
+
   return { jobs, content };
 }
 

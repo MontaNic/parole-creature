@@ -73,6 +73,9 @@ function defaultSave() {
     /** giorno (YYYY-MM-DD) -> { correct, wrong, minutes, rounds, mastered } */
     history: {},
 
+    /** i check del mese fatti dal genitore: { day, n, ok, items: [{id, ok}] } */
+    checks: [],
+
     /** La tana: cose disposte nella stanza (x, y in % della stanza) e colore della parete. */
     den: { placed: {}, wall: 0 },
 

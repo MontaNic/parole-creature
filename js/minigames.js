@@ -16,6 +16,7 @@ import { t, artIndex } from './content-loader.js';
 import { speakItem, speakLine, sfxTap } from './audio.js';
 import { canRecord, startRecording, playBlob } from './recorder.js';
 import { canRecognize, recognize, matchesTarget } from './speech.js';
+import { gameDialogue } from './dialogues.js';
 import { burstConfetti } from './effects.js';
 import { mascotSay } from './mascot.js';
 import { save, persist } from './state.js';
@@ -911,6 +912,7 @@ async function gameTrueFalse(api) {
 /* ------------------------------------------------------------------ */
 
 export const GAMES = {
+  dialogue: (api) => gameDialogue(api),
   sayit: gameSayIt,
   truefalse: gameTrueFalse,
   match: gameMatch,
@@ -923,5 +925,6 @@ export const GAMES = {
 
 /** Quanti item consuma un tipo di gioco in un singolo turno. */
 export function itemsPerStep(type) {
+  if (type === 'dialogue') return 0;
   return type === 'hunt' ? CONFIG.game.huntTargets : 1;
 }

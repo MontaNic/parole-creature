@@ -37,6 +37,7 @@ import { renderDen } from './js/den.js';
 import { bumpToday } from './js/history.js';
 import { planBonus, bubblePool, playBonus } from './js/bonus.js';
 import { checkBadges } from './js/badges.js';
+import { dialogueFor, wantsDialogue } from './js/dialogues.js';
 import { masteredCount } from './js/srs.js';
 import {
   showScreen, renderHome, renderAlbum, renderSummary,
@@ -215,7 +216,9 @@ function buildRound(opts) {
 
   return {
     world, pool, items: picked, reviewIds, showWritten, difficulty,
-    steps: buildSteps(world, picked, pool, difficulty)
+    steps: buildSteps(world, picked, pool, difficulty),
+    // Il dialogo dell'unita' chiude la partita: sempre le prime due volte, poi una su tre.
+    dialogue: (!opts.review && dialogueFor(world.id) && wantsDialogue((save.progress.worlds[world.id] || {}).plays || 0)) ? dialogueFor(world.id) : null
   };
 }
 
@@ -482,6 +485,10 @@ async function startRound(opts) {
   }
 
   if (!session.roundActive) return;
+  if (round.dialogue) {
+    await GAMES.dialogue({ host, dialogue: round.dialogue, fx, onRepeat: () => { save.stats.totalRepeats += 1; } });
+    if (!session.roundActive) return;
+  }
   await finishRound({ round, correct, total: totalItems, levelUp, missionJustDone, opts });
 }
 

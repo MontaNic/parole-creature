@@ -1248,10 +1248,53 @@ scheda dell'opzione: su iPad il riconoscimento passa dai server di Apple,
 ed e' l'unico caso in cui un suono esce dal dispositivo. Per questo e'
 spento finche' un genitore non lo accende.
 
+### 2. "Dialoghi"
+
+Uno per unita', 32 in tutto, tre scambi ciascuno: la creatura dell'unita'
+dice una battuta (voce modello, con la traduzione sotto), il bambino
+sceglie fra tre risposte (un altoparlante su ognuna la fa ascoltare
+prima), la creatura reagisce. Una risposta fuori posto riceve un "hmm,
+try again" e si attenua; nessun costo. Chiude la partita dell'unita':
+sempre le prime due volte, poi una su tre (`wantsDialogue`, testata).
+E' un albero pre-registrato, non un interlocutore, ma le formule
+diventano cose che si dicono a qualcuno: e' il traguardo "interagire con
+un compagno" delle Indicazioni. 544 tracce inglesi (creatura, tre
+risposte e reazione per scambio, due "hmm" per dialogo) e una battuta di
+Pepe. `js/dialogues.js`; il turno ha lo stesso contratto dei mini-giochi.
+Provato con click veri: risposta sbagliata attenuata e ritentabile,
+tre scambi, fine con festa. curriculum-test 107 -> 110.
+
+### 7. Il check del mese
+
+L'unica misura *esterna* che il gioco puo' offrire. Nell'area genitori,
+sotto i progressi: dieci parole a caso fra quelle "padroneggiate" (o, se
+sono meno di dieci, tutte), una alla volta. Sullo schermo la parola in
+italiano; il genitore la legge, il bambino deve dire l'inglese; il
+genitore segna "l'ha detta" o "no" e puo' far sentire il modello per
+confrontare. Alla fine il punteggio entra in `save.checks` e si vede la
+serie dei check fatti. Consigliato una volta al mese: la card lo dice
+quando sono passati 30 giorni. Se le padroneggiate dell'app non reggono
+al check, la soglia va alzata in `content.json` (`masteryBox`).
+`js/checkup.js`, funzioni pure testate (scelta a caso senza doppioni,
+scadenza a 30 giorni, riepilogo).
+
+### 6. Missioni fuori dallo schermo
+
+Otto missioni del giorno nuove, di tipo `home`, che si alternano alle
+otto di gioco (la scelta e' per giorno, quindi circa una su due): "chiedi
+a un adulto *How are you?* e ascolta la risposta", "conta le sedie in
+inglese", "di' *good night* prima di dormire". La card in home mostra il
+bottone "Un adulto conferma"; un secondo tocco di conferma ("Fatto
+davvero?") chiude la missione con la festa di sempre. Non e' una
+garanzia di trasferimento, ma il gioco smette di far finta che tutto
+succeda sullo schermo. `trackMissionEvent({ home: true })`, testato.
+
 ## Prossimi passi
 
-**Stato al 2026-09-08, sera**: anni 2 e 3 del curriculum completi e
-pubblicati (versione 3.0.0: 32 unita', 295 parole, 182 frasi, 281
+**Stato al 9 settembre 2026**: dal riconoscere al produrre (versione 3.3.0):
+"Dillo tu" in ogni unita', 32 dialoghi con le creature, il check del mese
+nell'area genitori, otto missioni a casa. Prima, l'8 sera: anni 2 e 3 del
+curriculum completi e pubblicati (versione 3.0.0: 32 unita', 295 parole, 182 frasi, 281
 illustrazioni, 605 tracce, due stagioni di storia, due giochi bonus).
 Prima, nel pomeriggio: anno 2 completo e pubblicato
 (versione 2.0.0: 20 unita', 167 parole, 110 frasi, 159 illustrazioni, 351
