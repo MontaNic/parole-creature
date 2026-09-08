@@ -22,7 +22,15 @@
       "sp-num-17",
       "sp-num-18",
       "sp-num-19",
-      "sp-num-20"
+      "sp-num-20",
+      "sp-num-30",
+      "sp-num-40",
+      "sp-num-50",
+      "sp-num-60",
+      "sp-num-70",
+      "sp-num-80",
+      "sp-num-90",
+      "sp-num-100"
     ],
     "colori": [
       "sp-color-red",
@@ -83,6 +91,10 @@
       "sp-clock-10",
       "sp-clock-11",
       "sp-clock-12"
+    ],
+    "frecce": [
+      "sp-arrow-left",
+      "sp-arrow-right"
     ]
   },
   "_kind_comment": "kind: 'creature' aggiunge al prompt le proporzioni da cucciolo; 'object' no; 'concept' e' il gruppo a rischio (vedi note).",
@@ -1274,6 +1286,234 @@
       "kind": "creature",
       "batch": 6,
       "prompt": "a cute living rubber stamp: a tall rectangular red stamp body standing upright on two short legs, with a round wooden handle on top like a knob hat, a big smiling face with two round eyes printed on the front of the stamp body, two stubby arms, no animal features"
+    },
+    {
+      "id": "sp-street",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a short piece of grey street seen in perspective with a white dashed line in the middle and a small green tree at each side"
+    },
+    {
+      "id": "sp-hospital",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a small white hospital building seen from the front with a big red cross above the door and sky blue windows"
+    },
+    {
+      "id": "sp-station",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a small train station building seen from the front, amber walls, a round clock with no numbers above the door, a short piece of track in front"
+    },
+    {
+      "id": "sp-library",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a small library building seen from the front, purple walls, a big window showing shelves of colourful books"
+    },
+    {
+      "id": "sp-supermarket",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a small supermarket seen from the front, green striped awning, a shopping cart in front of the glass door"
+    },
+    {
+      "id": "sp-behind",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, peeking out from behind a big sky blue wooden box, only the head and one paw visible above the box"
+    },
+    {
+      "id": "sp-next_to",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, sitting right beside a big sky blue wooden box, side by side, seen from the front"
+    },
+    {
+      "id": "sp-in_front_of",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, sitting in front of a big sky blue wooden box, the box partly hidden behind the puppy"
+    },
+    {
+      "id": "sp-money",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a small stack of green banknotes with a few gold coins on top, no numbers or letters on them"
+    },
+    {
+      "id": "sp-coin",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a single big gold coin seen from the front with a small star embossed in the middle, no numbers or letters"
+    },
+    {
+      "id": "sp-price",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a small white price tag with a hole and a red string, showing three plain grey bars instead of digits"
+    },
+    {
+      "id": "sp-toy",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a cute wind-up toy robot, sky blue with orange details and a small key on the back"
+    },
+    {
+      "id": "sp-sweets",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a small pile of wrapped candies in pink, yellow and sky blue wrappers with twisted ends"
+    },
+    {
+      "id": "sp-ticket",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a single amber paper ticket with perforated edges and a small star in the middle, no letters"
+    },
+    {
+      "id": "sp-headache",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a round pale face with closed eyes and a pained mouth, one hand on the forehead and three small red zigzag lines above the head"
+    },
+    {
+      "id": "sp-toothache",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a round pale face with a swollen cheek, a white bandage tied around the jaw and over the head, sad eyes"
+    },
+    {
+      "id": "sp-stomach_ache",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, sitting and holding its belly with both front paws, a pained expression, small green swirl lines around the belly"
+    },
+    {
+      "id": "sp-fever",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a round red face with half-closed eyes, a thermometer in the mouth and an ice bag on the head, small sweat drops"
+    },
+    {
+      "id": "sp-cough",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a round pale face coughing, mouth open in an O with the hand in front of it and three small grey puffs coming out"
+    },
+    {
+      "id": "sp-medicine",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a brown medicine bottle with a white cap and a plain label, and a small spoon of pink syrup beside it"
+    },
+    {
+      "id": "sp-bandage",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a rolled white bandage, partly unrolled, seen at an angle"
+    },
+    {
+      "id": "sp-plaster",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a single beige adhesive plaster with a lighter square pad in the middle, placed diagonally"
+    },
+    {
+      "id": "sp-thermometer",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a single white medical thermometer with a red column and small tick marks, no numbers, placed diagonally"
+    },
+    {
+      "id": "sp-rest",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, lying in a small bed under a purple blanket with a thermometer in the mouth, eyes closed, resting"
+    },
+    {
+      "id": "sp-mountain",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "three pointed mountains side by side, grey with white snow caps, the middle one taller"
+    },
+    {
+      "id": "sp-river",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a winding sky blue river seen from above between two green banks, with two small trees"
+    },
+    {
+      "id": "sp-lake",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a round sky blue lake seen from above with green shores, a small sailing boat on the water and reeds at one edge"
+    },
+    {
+      "id": "sp-forest",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a group of five round green trees of different heights standing close together"
+    },
+    {
+      "id": "sp-sea",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "three big sky blue waves with white foam crests, seen from the side, a small amber sun in the top corner"
+    },
+    {
+      "id": "sp-island",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a small round yellow sand island with one palm tree, surrounded by two sky blue waves"
+    },
+    {
+      "id": "sp-desert",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "two amber sand dunes side by side with a tall green cactus with two arms standing on the front dune, and a small amber sun floating above. Cut-out sticker composition: the elements float directly on the white background, NO sky, NO background rectangle, NO frame, NO card."
+    },
+    {
+      "id": "sp-flower",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a single big pink flower with five round petals, a yellow centre, a green stem and two leaves"
+    },
+    {
+      "id": "sp-rock",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a single big grey rounded rock with a few lighter grey spots and a small green tuft of grass at the base"
+    },
+    {
+      "id": "sp-cave",
+      "kind": "object",
+      "batch": 7,
+      "prompt": "a dark cave opening in a grey rock, an arched black entrance with small brown stalactites"
+    },
+    {
+      "id": "sp-semaforino",
+      "kind": "creature",
+      "batch": 7,
+      "prompt": "a cute traffic light creature standing upright on two short legs, a dark grey body with three round lights: red, amber and green, the green one is a smiling face"
+    },
+    {
+      "id": "sp-monetina",
+      "kind": "creature",
+      "batch": 7,
+      "prompt": "a cute round gold coin creature with big eyes and a happy smile, two short arms and two short legs with small shoes"
+    },
+    {
+      "id": "sp-cerottino",
+      "kind": "creature",
+      "batch": 7,
+      "prompt": "a cute beige adhesive plaster creature standing upright with two short legs, a smiling face on the central pad, two stubby arms"
+    },
+    {
+      "id": "sp-sassolino",
+      "kind": "creature",
+      "batch": 7,
+      "prompt": "a cute round grey pebble creature with big eyes and a smile, a small tuft of green moss on top of the head like hair, two tiny feet"
     }
   ]
 }

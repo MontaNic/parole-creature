@@ -1,7 +1,7 @@
 {
   "_comment": "Curriculum di 'Parole & Creature'. NON e' un elenco di parole per tema: e' un corso a unita', ognuna con un obiettivo linguistico esplicito, revisione sistematica delle unita' precedenti e una soglia di padronanza da superare per cambiare fase. Vedi PROGRESS.md, sezione 'Logica del curriculum'.",
   "schemaVersion": 2,
-  "contentVersion": "3.0.0",
+  "contentVersion": "3.1.0",
   "audioBasePath": "assets/audio/",
   "_ids_comment": "REGOLA: gli id di parole, frasi e unita' sono PERMANENTI. Il progresso del bambino e' indicizzato per id: rinominarli equivale a cancellare quello che ha imparato. Si aggiunge, non si rinomina.",
   "curriculum": {
@@ -312,6 +312,38 @@
       "pattern": "He is a doctor. / What do you want to be? I want to be a pilot.",
       "focus_it": "Dire il mestiere di qualcuno e cosa si vuole diventare.",
       "why_it": "'want to' e' fra le formule piu' frequenti dell'inglese parlato; i mestieri sono il pretesto classico delle Indicazioni per parlare degli altri."
+    },
+    {
+      "id": "st_directions",
+      "phase": 10,
+      "unit": 25,
+      "pattern": "Turn left! / Go straight on. / Where is the library? Next to the station.",
+      "focus_it": "Chiedere e dare indicazioni: turn left, turn right, go straight on, next to, behind, in front of.",
+      "why_it": "E' la funzione 'chiedere e dire dove' portata fuori casa: le stesse preposizioni di luogo, piu' i comandi per muoversi."
+    },
+    {
+      "id": "st_how_much",
+      "phase": 10,
+      "unit": 26,
+      "pattern": "How much is it? It's ten euros. / That's cheap!",
+      "focus_it": "Chiedere il prezzo e capirlo, con le decine.",
+      "why_it": "Comprare qualcosa e' il primo scambio vero che un bambino puo' fare in inglese; le decine arrivano dove servono, sui prezzi."
+    },
+    {
+      "id": "st_whats_the_matter",
+      "phase": 10,
+      "unit": 27,
+      "pattern": "What's the matter? I've got a headache. / Take this medicine. / Get well soon!",
+      "focus_it": "Dire come si sta quando si sta male e capire cosa dice il dottore.",
+      "why_it": "'I've got' torna dal ritratto con un altro significato: e' la stessa formula, e la ripetizione in contesti diversi la fissa."
+    },
+    {
+      "id": "st_there_is",
+      "phase": 10,
+      "unit": 28,
+      "pattern": "There is a river. / There are three mountains. / Is there a lake? Yes, there is.",
+      "focus_it": "Dire cosa c'e' in un posto: there is per uno, there are per tanti, e la domanda.",
+      "why_it": "'There is / there are' e' la struttura piu' usata per descrivere un luogo, e ripropone la regola uno/tanti della fase 2 su una forma nuova."
     }
   ],
   "words": [
@@ -1970,6 +2002,326 @@
       "phase": 9,
       "theme": "mestieri",
       "sprite": "sp-vet"
+    },
+    {
+      "id": "w_street",
+      "en": "street",
+      "it": "strada",
+      "phase": 10,
+      "theme": "citta",
+      "sprite": "sp-street"
+    },
+    {
+      "id": "w_hospital",
+      "en": "hospital",
+      "it": "ospedale",
+      "phase": 10,
+      "theme": "citta",
+      "sprite": "sp-hospital"
+    },
+    {
+      "id": "w_station",
+      "en": "station",
+      "it": "stazione",
+      "phase": 10,
+      "theme": "citta",
+      "sprite": "sp-station"
+    },
+    {
+      "id": "w_library",
+      "en": "library",
+      "it": "biblioteca",
+      "phase": 10,
+      "theme": "citta",
+      "sprite": "sp-library"
+    },
+    {
+      "id": "w_supermarket",
+      "en": "supermarket",
+      "it": "supermercato",
+      "phase": 10,
+      "theme": "citta",
+      "sprite": "sp-supermarket"
+    },
+    {
+      "id": "w_left",
+      "en": "left",
+      "it": "sinistra",
+      "phase": 10,
+      "theme": "citta",
+      "sprite": "sp-arrow-left"
+    },
+    {
+      "id": "w_right",
+      "en": "right",
+      "it": "destra",
+      "phase": 10,
+      "theme": "citta",
+      "sprite": "sp-arrow-right"
+    },
+    {
+      "id": "w_behind",
+      "en": "behind",
+      "it": "dietro",
+      "phase": 10,
+      "theme": "citta",
+      "sprite": "sp-behind"
+    },
+    {
+      "id": "w_next_to",
+      "en": "next to",
+      "it": "accanto a",
+      "phase": 10,
+      "theme": "citta",
+      "sprite": "sp-next_to"
+    },
+    {
+      "id": "w_in_front_of",
+      "en": "in front of",
+      "it": "davanti a",
+      "phase": 10,
+      "theme": "citta",
+      "sprite": "sp-in_front_of"
+    },
+    {
+      "id": "w_money",
+      "en": "money",
+      "it": "soldi",
+      "phase": 10,
+      "theme": "mercato",
+      "sprite": "sp-money"
+    },
+    {
+      "id": "w_coin",
+      "en": "coin",
+      "it": "moneta",
+      "phase": 10,
+      "theme": "mercato",
+      "sprite": "sp-coin"
+    },
+    {
+      "id": "w_price",
+      "en": "price",
+      "it": "prezzo",
+      "phase": 10,
+      "theme": "mercato",
+      "sprite": "sp-price"
+    },
+    {
+      "id": "w_toy",
+      "en": "toy",
+      "it": "giocattolo",
+      "phase": 10,
+      "theme": "mercato",
+      "sprite": "sp-toy"
+    },
+    {
+      "id": "w_sweets",
+      "en": "sweets",
+      "it": "caramelle",
+      "phase": 10,
+      "theme": "mercato",
+      "sprite": "sp-sweets"
+    },
+    {
+      "id": "w_ticket",
+      "en": "ticket",
+      "it": "biglietto",
+      "phase": 10,
+      "theme": "mercato",
+      "sprite": "sp-ticket"
+    },
+    {
+      "id": "w_thirty",
+      "en": "thirty",
+      "it": "trenta",
+      "phase": 10,
+      "theme": "mercato",
+      "sprite": "sp-num-30"
+    },
+    {
+      "id": "w_forty",
+      "en": "forty",
+      "it": "quaranta",
+      "phase": 10,
+      "theme": "mercato",
+      "sprite": "sp-num-40"
+    },
+    {
+      "id": "w_fifty",
+      "en": "fifty",
+      "it": "cinquanta",
+      "phase": 10,
+      "theme": "mercato",
+      "sprite": "sp-num-50"
+    },
+    {
+      "id": "w_hundred",
+      "en": "hundred",
+      "it": "cento",
+      "phase": 10,
+      "theme": "mercato",
+      "sprite": "sp-num-100"
+    },
+    {
+      "id": "w_headache",
+      "en": "headache",
+      "it": "mal di testa",
+      "phase": 10,
+      "theme": "salute",
+      "sprite": "sp-headache"
+    },
+    {
+      "id": "w_toothache",
+      "en": "toothache",
+      "it": "mal di denti",
+      "phase": 10,
+      "theme": "salute",
+      "sprite": "sp-toothache"
+    },
+    {
+      "id": "w_stomach_ache",
+      "en": "stomach ache",
+      "it": "mal di pancia",
+      "phase": 10,
+      "theme": "salute",
+      "sprite": "sp-stomach_ache"
+    },
+    {
+      "id": "w_fever",
+      "en": "fever",
+      "it": "febbre",
+      "phase": 10,
+      "theme": "salute",
+      "sprite": "sp-fever"
+    },
+    {
+      "id": "w_cough",
+      "en": "cough",
+      "it": "tosse",
+      "phase": 10,
+      "theme": "salute",
+      "sprite": "sp-cough"
+    },
+    {
+      "id": "w_medicine",
+      "en": "medicine",
+      "it": "medicina",
+      "phase": 10,
+      "theme": "salute",
+      "sprite": "sp-medicine"
+    },
+    {
+      "id": "w_bandage",
+      "en": "bandage",
+      "it": "benda",
+      "phase": 10,
+      "theme": "salute",
+      "sprite": "sp-bandage"
+    },
+    {
+      "id": "w_plaster",
+      "en": "plaster",
+      "it": "cerotto",
+      "phase": 10,
+      "theme": "salute",
+      "sprite": "sp-plaster"
+    },
+    {
+      "id": "w_thermometer",
+      "en": "thermometer",
+      "it": "termometro",
+      "phase": 10,
+      "theme": "salute",
+      "sprite": "sp-thermometer"
+    },
+    {
+      "id": "w_rest",
+      "en": "rest",
+      "it": "riposo",
+      "phase": 10,
+      "theme": "salute",
+      "sprite": "sp-rest"
+    },
+    {
+      "id": "w_mountain",
+      "en": "mountain",
+      "it": "montagna",
+      "phase": 10,
+      "theme": "natura",
+      "sprite": "sp-mountain"
+    },
+    {
+      "id": "w_river",
+      "en": "river",
+      "it": "fiume",
+      "phase": 10,
+      "theme": "natura",
+      "sprite": "sp-river"
+    },
+    {
+      "id": "w_lake",
+      "en": "lake",
+      "it": "lago",
+      "phase": 10,
+      "theme": "natura",
+      "sprite": "sp-lake"
+    },
+    {
+      "id": "w_forest",
+      "en": "forest",
+      "it": "foresta",
+      "phase": 10,
+      "theme": "natura",
+      "sprite": "sp-forest"
+    },
+    {
+      "id": "w_sea",
+      "en": "sea",
+      "it": "mare",
+      "phase": 10,
+      "theme": "natura",
+      "sprite": "sp-sea"
+    },
+    {
+      "id": "w_island",
+      "en": "island",
+      "it": "isola",
+      "phase": 10,
+      "theme": "natura",
+      "sprite": "sp-island"
+    },
+    {
+      "id": "w_desert",
+      "en": "desert",
+      "it": "deserto",
+      "phase": 10,
+      "theme": "natura",
+      "sprite": "sp-desert"
+    },
+    {
+      "id": "w_flower",
+      "en": "flower",
+      "it": "fiore",
+      "phase": 10,
+      "theme": "natura",
+      "sprite": "sp-flower"
+    },
+    {
+      "id": "w_rock",
+      "en": "rock",
+      "it": "roccia",
+      "phase": 10,
+      "theme": "natura",
+      "sprite": "sp-rock"
+    },
+    {
+      "id": "w_cave",
+      "en": "cave",
+      "it": "grotta",
+      "phase": 10,
+      "theme": "natura",
+      "sprite": "sp-cave"
     }
   ],
   "phrases": [
@@ -3608,6 +3960,311 @@
         "w_cook",
         "w_kitchen"
       ]
+    },
+    {
+      "id": "p_turn_left",
+      "en": "Turn left!",
+      "it": "Gira a sinistra!",
+      "phase": 10,
+      "theme": "citta",
+      "structure": "st_directions",
+      "sprite": "sp-arrow-left",
+      "wordIds": [
+        "w_left"
+      ]
+    },
+    {
+      "id": "p_turn_right",
+      "en": "Turn right!",
+      "it": "Gira a destra!",
+      "phase": 10,
+      "theme": "citta",
+      "structure": "st_directions",
+      "sprite": "sp-arrow-right",
+      "wordIds": [
+        "w_right"
+      ]
+    },
+    {
+      "id": "p_where_library",
+      "en": "Where is the library? Next to the station.",
+      "it": "Dov'è la biblioteca? Accanto alla stazione.",
+      "phase": 10,
+      "theme": "citta",
+      "structure": "st_directions",
+      "sprite": "sp-library",
+      "wordIds": [
+        "w_library",
+        "w_next_to",
+        "w_station"
+      ]
+    },
+    {
+      "id": "p_hospital_behind",
+      "en": "The hospital is behind the supermarket.",
+      "it": "L'ospedale è dietro il supermercato.",
+      "phase": 10,
+      "theme": "citta",
+      "structure": "st_directions",
+      "sprite": "sp-hospital",
+      "wordIds": [
+        "w_hospital",
+        "w_behind",
+        "w_supermarket"
+      ]
+    },
+    {
+      "id": "p_in_front_of_station",
+      "en": "The bus is in front of the station.",
+      "it": "L'autobus è davanti alla stazione.",
+      "phase": 10,
+      "theme": "citta",
+      "structure": "st_directions",
+      "sprite": "sp-station",
+      "wordIds": [
+        "w_bus",
+        "w_in_front_of",
+        "w_station"
+      ]
+    },
+    {
+      "id": "p_go_straight",
+      "en": "Go straight on!",
+      "it": "Vai dritto!",
+      "phase": 10,
+      "theme": "citta",
+      "structure": "st_directions",
+      "sprite": "sp-street",
+      "wordIds": [
+        "w_street"
+      ]
+    },
+    {
+      "id": "p_how_much_ten",
+      "en": "How much is it? It's ten euros.",
+      "it": "Quanto costa? Dieci euro.",
+      "phase": 10,
+      "theme": "mercato",
+      "structure": "st_how_much",
+      "sprite": "sp-price",
+      "wordIds": [
+        "w_price",
+        "w_ten"
+      ]
+    },
+    {
+      "id": "p_how_much_toy",
+      "en": "How much is the toy? Thirty euros.",
+      "it": "Quanto costa il giocattolo? Trenta euro.",
+      "phase": 10,
+      "theme": "mercato",
+      "structure": "st_how_much",
+      "sprite": "sp-toy",
+      "wordIds": [
+        "w_toy",
+        "w_thirty"
+      ]
+    },
+    {
+      "id": "p_thats_cheap",
+      "en": "That's cheap!",
+      "it": "È economico!",
+      "phase": 10,
+      "theme": "mercato",
+      "structure": "st_how_much",
+      "sprite": "sp-coin",
+      "wordIds": [
+        "w_coin"
+      ]
+    },
+    {
+      "id": "p_can_i_ticket",
+      "en": "Can I have a ticket, please?",
+      "it": "Posso avere un biglietto, per favore?",
+      "phase": 10,
+      "theme": "mercato",
+      "structure": "st_how_much",
+      "sprite": "sp-ticket",
+      "wordIds": [
+        "w_ticket"
+      ]
+    },
+    {
+      "id": "p_sweets_fifty",
+      "en": "Sweets: fifty cents.",
+      "it": "Caramelle: cinquanta centesimi.",
+      "phase": 10,
+      "theme": "mercato",
+      "structure": "st_how_much",
+      "sprite": "sp-sweets",
+      "wordIds": [
+        "w_sweets",
+        "w_fifty"
+      ]
+    },
+    {
+      "id": "p_hundred_coins",
+      "en": "I have a hundred coins!",
+      "it": "Ho cento monete!",
+      "phase": 10,
+      "theme": "mercato",
+      "structure": "st_how_much",
+      "sprite": "sp-num-100",
+      "wordIds": [
+        "w_hundred",
+        "w_coin"
+      ]
+    },
+    {
+      "id": "p_whats_the_matter",
+      "en": "What's the matter? I've got a headache.",
+      "it": "Cosa c'è? Ho mal di testa.",
+      "phase": 10,
+      "theme": "salute",
+      "structure": "st_whats_the_matter",
+      "sprite": "sp-headache",
+      "wordIds": [
+        "w_headache"
+      ]
+    },
+    {
+      "id": "p_ive_got_fever",
+      "en": "I've got a fever and a cough.",
+      "it": "Ho la febbre e la tosse.",
+      "phase": 10,
+      "theme": "salute",
+      "structure": "st_whats_the_matter",
+      "sprite": "sp-fever",
+      "wordIds": [
+        "w_fever",
+        "w_cough"
+      ]
+    },
+    {
+      "id": "p_take_medicine",
+      "en": "Take this medicine.",
+      "it": "Prendi questa medicina.",
+      "phase": 10,
+      "theme": "salute",
+      "structure": "st_whats_the_matter",
+      "sprite": "sp-medicine",
+      "wordIds": [
+        "w_medicine"
+      ]
+    },
+    {
+      "id": "p_get_well",
+      "en": "Get well soon!",
+      "it": "Guarisci presto!",
+      "phase": 10,
+      "theme": "salute",
+      "structure": "st_whats_the_matter",
+      "sprite": "sp-plaster",
+      "wordIds": [
+        "w_plaster"
+      ]
+    },
+    {
+      "id": "p_toothache_doctor",
+      "en": "I've got a toothache. Call the doctor!",
+      "it": "Ho mal di denti. Chiama il dottore!",
+      "phase": 10,
+      "theme": "salute",
+      "structure": "st_whats_the_matter",
+      "sprite": "sp-toothache",
+      "wordIds": [
+        "w_toothache",
+        "w_doctor"
+      ]
+    },
+    {
+      "id": "p_rest_bed",
+      "en": "Rest in bed!",
+      "it": "Riposa a letto!",
+      "phase": 10,
+      "theme": "salute",
+      "structure": "st_whats_the_matter",
+      "sprite": "sp-rest",
+      "wordIds": [
+        "w_rest",
+        "w_bed"
+      ]
+    },
+    {
+      "id": "p_there_is_river",
+      "en": "There is a river.",
+      "it": "C'è un fiume.",
+      "phase": 10,
+      "theme": "natura",
+      "structure": "st_there_is",
+      "sprite": "sp-river",
+      "wordIds": [
+        "w_river"
+      ]
+    },
+    {
+      "id": "p_there_are_mountains",
+      "en": "There are three mountains.",
+      "it": "Ci sono tre montagne.",
+      "phase": 10,
+      "theme": "natura",
+      "structure": "st_there_is",
+      "sprite": "sp-mountain",
+      "wordIds": [
+        "w_mountain",
+        "w_three"
+      ]
+    },
+    {
+      "id": "p_is_there_lake",
+      "en": "Is there a lake? Yes, there is.",
+      "it": "C'è un lago? Sì.",
+      "phase": 10,
+      "theme": "natura",
+      "structure": "st_there_is",
+      "sprite": "sp-lake",
+      "wordIds": [
+        "w_lake"
+      ]
+    },
+    {
+      "id": "p_no_flowers_desert",
+      "en": "There are no flowers in the desert.",
+      "it": "Non ci sono fiori nel deserto.",
+      "phase": 10,
+      "theme": "natura",
+      "structure": "st_there_is",
+      "sprite": "sp-desert",
+      "wordIds": [
+        "w_desert",
+        "w_flower"
+      ]
+    },
+    {
+      "id": "p_island_sea",
+      "en": "The island is in the sea.",
+      "it": "L'isola è nel mare.",
+      "phase": 10,
+      "theme": "natura",
+      "structure": "st_there_is",
+      "sprite": "sp-island",
+      "wordIds": [
+        "w_island",
+        "w_sea"
+      ]
+    },
+    {
+      "id": "p_cave_forest",
+      "en": "There is a cave in the forest.",
+      "it": "C'è una grotta nella foresta.",
+      "phase": 10,
+      "theme": "natura",
+      "structure": "st_there_is",
+      "sprite": "sp-cave",
+      "wordIds": [
+        "w_cave",
+        "w_forest"
+      ]
     }
   ],
   "worlds": [
@@ -4885,6 +5542,284 @@
         "truefalse"
       ],
       "reward": "c_timbrino"
+    },
+    {
+      "id": "world_city",
+      "unit": 25,
+      "order": 25,
+      "phase": 10,
+      "title_it": "La Città",
+      "objective_it": "La città e le direzioni: gira a sinistra, vai dritto, accanto a, dietro, davanti a.",
+      "canDo_it": "So chiedere e dare indicazioni in città.",
+      "structureIds": [
+        "st_directions"
+      ],
+      "sprite": "sp-arrow-right",
+      "color": "#4361ee",
+      "newItems": [
+        "w_street",
+        "w_hospital",
+        "w_station",
+        "w_library",
+        "w_supermarket",
+        "w_left",
+        "w_right",
+        "w_behind",
+        "w_next_to",
+        "w_in_front_of",
+        "p_turn_left",
+        "p_turn_right",
+        "p_where_library",
+        "p_hospital_behind",
+        "p_in_front_of_station",
+        "p_go_straight"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food",
+        "world_house",
+        "world_school",
+        "world_actions",
+        "world_weather",
+        "world_time",
+        "world_village",
+        "world_party",
+        "world_portrait",
+        "world_animals",
+        "world_sport",
+        "world_jobs"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_semaforino"
+    },
+    {
+      "id": "world_market",
+      "unit": 26,
+      "order": 26,
+      "phase": 10,
+      "title_it": "Il Mercato",
+      "objective_it": "Comprare: quanto costa, le decine, un biglietto per favore.",
+      "canDo_it": "So chiedere un prezzo e capirlo.",
+      "structureIds": [
+        "st_how_much"
+      ],
+      "sprite": "sp-coin",
+      "color": "#f9c74f",
+      "newItems": [
+        "w_money",
+        "w_coin",
+        "w_price",
+        "w_toy",
+        "w_sweets",
+        "w_ticket",
+        "w_thirty",
+        "w_forty",
+        "w_fifty",
+        "w_hundred",
+        "p_how_much_ten",
+        "p_how_much_toy",
+        "p_thats_cheap",
+        "p_can_i_ticket",
+        "p_sweets_fifty",
+        "p_hundred_coins"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food",
+        "world_house",
+        "world_school",
+        "world_actions",
+        "world_weather",
+        "world_time",
+        "world_village",
+        "world_party",
+        "world_portrait",
+        "world_animals",
+        "world_sport",
+        "world_jobs",
+        "world_city"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_monetina"
+    },
+    {
+      "id": "world_doctor",
+      "unit": 27,
+      "order": 27,
+      "phase": 10,
+      "title_it": "Dal Dottore",
+      "objective_it": "Dire come si sta quando si sta male e capire il dottore.",
+      "canDo_it": "So dire cosa mi fa male.",
+      "structureIds": [
+        "st_whats_the_matter"
+      ],
+      "sprite": "sp-plaster",
+      "color": "#f94144",
+      "newItems": [
+        "w_headache",
+        "w_toothache",
+        "w_stomach_ache",
+        "w_fever",
+        "w_cough",
+        "w_medicine",
+        "w_bandage",
+        "w_plaster",
+        "w_thermometer",
+        "w_rest",
+        "p_whats_the_matter",
+        "p_ive_got_fever",
+        "p_take_medicine",
+        "p_get_well",
+        "p_toothache_doctor",
+        "p_rest_bed"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food",
+        "world_house",
+        "world_school",
+        "world_actions",
+        "world_weather",
+        "world_time",
+        "world_village",
+        "world_party",
+        "world_portrait",
+        "world_animals",
+        "world_sport",
+        "world_jobs",
+        "world_city",
+        "world_market"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_cerottino"
+    },
+    {
+      "id": "world_nature",
+      "unit": 28,
+      "order": 28,
+      "phase": 10,
+      "title_it": "La Natura",
+      "objective_it": "Montagne, fiumi, mare: cosa c'è in un posto con there is / there are.",
+      "canDo_it": "So descrivere un paesaggio.",
+      "structureIds": [
+        "st_there_is"
+      ],
+      "sprite": "sp-mountain",
+      "color": "#43aa8b",
+      "newItems": [
+        "w_mountain",
+        "w_river",
+        "w_lake",
+        "w_forest",
+        "w_sea",
+        "w_island",
+        "w_desert",
+        "w_flower",
+        "w_rock",
+        "w_cave",
+        "p_there_is_river",
+        "p_there_are_mountains",
+        "p_is_there_lake",
+        "p_no_flowers_desert",
+        "p_island_sea",
+        "p_cave_forest"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food",
+        "world_house",
+        "world_school",
+        "world_actions",
+        "world_weather",
+        "world_time",
+        "world_village",
+        "world_party",
+        "world_portrait",
+        "world_animals",
+        "world_sport",
+        "world_jobs",
+        "world_city",
+        "world_market",
+        "world_doctor"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_sassolino"
     }
   ],
   "creatures": [
@@ -5166,6 +6101,46 @@
         "value": "world_jobs"
       },
       "fact_it": "Un timbro con la faccia. Ha provato tutti i mestieri, e li ha timbrati tutti."
+    },
+    {
+      "id": "c_semaforino",
+      "name_it": "Semaforino",
+      "sprite": "sp-semaforino",
+      "unlock": {
+        "type": "world",
+        "value": "world_city"
+      },
+      "fact_it": "Un semaforo con le gambe. Diventa verde solo se glielo chiedi in inglese."
+    },
+    {
+      "id": "c_monetina",
+      "name_it": "Monetina",
+      "sprite": "sp-monetina",
+      "unlock": {
+        "type": "world",
+        "value": "world_market"
+      },
+      "fact_it": "Una moneta d'oro con la faccia. Vale sempre esattamente quanto serve."
+    },
+    {
+      "id": "c_cerottino",
+      "name_it": "Cerottino",
+      "sprite": "sp-cerottino",
+      "unlock": {
+        "type": "world",
+        "value": "world_doctor"
+      },
+      "fact_it": "Un cerotto con le gambe. Arriva prima ancora che ti faccia male."
+    },
+    {
+      "id": "c_sassolino",
+      "name_it": "Sassolino",
+      "sprite": "sp-sassolino",
+      "unlock": {
+        "type": "world",
+        "value": "world_nature"
+      },
+      "fact_it": "Un sassolino rotondo con il muschio in testa. Ha visto tutte le montagne dell'isola."
     }
   ],
   "story": {

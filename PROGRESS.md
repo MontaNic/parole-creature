@@ -1084,6 +1084,28 @@ tracce, indice a 469. Le fasi 10 e 11 sono gia' scritte in bozza (parole,
 frasi, soggetti) e i loro simboli schematici — frecce, decine, dodici
 mesi, mezze ore — sono in `sprites.svg`.
 
+**Il rabbocco del service worker.** La prova offline del lotto 1 dava
+158/203 dopo 200 secondi e ha fatto guardare `sw.js`: un file fallito al
+precache (un 404 transitorio della CDN subito dopo un deploy, una
+connessione caduta) veniva contato e mai piu' ritentato in quella
+versione. Ora `topUp()` ricontrolla la lista all'attivazione e a ogni
+apertura del gioco e scarica solo i mancanti, in sottofondo. Provato in
+locale togliendo un PNG durante il precache e rimettendolo: alla
+riapertura successiva e' in cache. Con 200+ illustrazioni il primo avvio
+con rete resta lungo (3-4 minuti): dirlo al genitore.
+
+### Anno 3, lotto 2: la fase 10 "Nel mondo" (unita' 25-28)
+
+Fatto e pubblicato (contentVersion 3.1.0, app 2.2.0): 40 parole (4
+schematiche: decine e cento; frecce per left/right), 24 frasi, 4
+strutture (`st_directions`, `st_how_much`, `st_whats_the_matter`,
+`st_there_is`), 4 unita' (citta', mercato, dottore, natura) con
+Semaforino, Monetina, Cerottino, Sassolino. Le posizioni (behind, next
+to, in front of) sono Pepe e una cassa azzurra, tre volte: e' la
+differenza a insegnare la parola. Illustrazioni: 38 in un batch, il
+deserto rifatto come ritaglio; 241 PNG in precache. Audio: 64 tracce,
+indice a 533.
+
 ## Prossimi passi
 
 **Stato al 2026-09-08**: anno 2 del curriculum completo e pubblicato
