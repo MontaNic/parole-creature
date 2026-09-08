@@ -1,7 +1,7 @@
 {
   "_comment": "Curriculum di 'Parole & Creature'. NON e' un elenco di parole per tema: e' un corso a unita', ognuna con un obiettivo linguistico esplicito, revisione sistematica delle unita' precedenti e una soglia di padronanza da superare per cambiare fase. Vedi PROGRESS.md, sezione 'Logica del curriculum'.",
   "schemaVersion": 2,
-  "contentVersion": "2.2.0",
+  "contentVersion": "2.3.0",
   "audioBasePath": "assets/audio/",
   "_ids_comment": "REGOLA: gli id di parole, frasi e unita' sono PERMANENTI. Il progresso del bambino e' indicizzato per id: rinominarli equivale a cancellare quello che ha imparato. Si aggiunge, non si rinomina.",
   "curriculum": {
@@ -211,6 +211,54 @@
       "pattern": "I can jump. / Can you swim? Yes, I can. / Pepe is running.",
       "focus_it": "Dire cosa so fare con 'can', rispondere alla domanda, e descrivere un'azione in corso con 'is -ing'.",
       "why_it": "I verbi di movimento si imparano muovendosi (TPR): il bambino salta quando sente 'jump'. 'can' e '-ing' entrano come formule attaccate all'azione."
+    },
+    {
+      "id": "st_weather",
+      "phase": 8,
+      "unit": 17,
+      "pattern": "What's the weather like? It's sunny.",
+      "focus_it": "Chiedere e dire che tempo fa.",
+      "why_it": "E' la prima domanda di ogni mattina in una classe inglese (il 'weather chart'), e 'it's' + aggettivo e' una formula che il bambino ha gia' nell'orecchio da 'it's a red egg'."
+    },
+    {
+      "id": "st_today_is",
+      "phase": 8,
+      "unit": 17,
+      "pattern": "Today is Monday.",
+      "focus_it": "Dire che giorno e'. I sette giorni, con la maiuscola, letti sul foglio di calendario.",
+      "why_it": "Le Indicazioni citano i giorni della settimana fra i primi lessici; in inglese sono parole da leggere piu' che da disegnare, e la parola scritta qui e' sempre visibile."
+    },
+    {
+      "id": "st_what_time",
+      "phase": 8,
+      "unit": 18,
+      "pattern": "What time is it? It's three o'clock.",
+      "focus_it": "Chiedere e dire l'ora in punto, leggendo un orologio.",
+      "why_it": "Unisce i numeri gia' imparati a una domanda vera: l'orologio e' schematico come i numeri, e la risposta e' una formula con 'o'clock' come blocco."
+    },
+    {
+      "id": "st_routine",
+      "phase": 8,
+      "unit": 18,
+      "pattern": "I have breakfast in the morning. / At night I sleep.",
+      "focus_it": "Raccontare la giornata: i pasti e i momenti del giorno, con 'in the morning' e 'at night'.",
+      "why_it": "E' il primo racconto di se' nel tempo, una delle funzioni dell'A1: dire cosa faccio e quando."
+    },
+    {
+      "id": "st_lets_go",
+      "phase": 8,
+      "unit": 19,
+      "pattern": "Let's go to the park! / Where are you going? To the beach. / By bus.",
+      "focus_it": "Proporre di andare in un posto, chiedere dove si va, dire con che mezzo.",
+      "why_it": "'Let's' e 'to the' entrano come blocchi; i luoghi e i mezzi sono il lessico concreto che serve fuori casa."
+    },
+    {
+      "id": "st_how_old",
+      "phase": 8,
+      "unit": 20,
+      "pattern": "How old are you? I am seven. / Happy birthday! / When is your birthday? In summer.",
+      "focus_it": "Dire la propria eta', fare gli auguri, dire la stagione del compleanno. I numeri fino a venti.",
+      "why_it": "'How old are you?' e' la domanda che ogni bambino anglofono si sente fare per prima: chiude l'anno con un dialogo vero su di se'."
     }
   ],
   "words": [
@@ -1181,6 +1229,374 @@
       "phase": 7,
       "theme": "azioni",
       "sprite": "sp-climb"
+    },
+    {
+      "id": "w_sunny",
+      "en": "sunny",
+      "it": "soleggiato",
+      "phase": 8,
+      "theme": "tempo",
+      "sprite": "sp-sunny"
+    },
+    {
+      "id": "w_rainy",
+      "en": "rainy",
+      "it": "piovoso",
+      "phase": 8,
+      "theme": "tempo",
+      "sprite": "sp-rainy"
+    },
+    {
+      "id": "w_windy",
+      "en": "windy",
+      "it": "ventoso",
+      "phase": 8,
+      "theme": "tempo",
+      "sprite": "sp-windy"
+    },
+    {
+      "id": "w_cloudy",
+      "en": "cloudy",
+      "it": "nuvoloso",
+      "phase": 8,
+      "theme": "tempo",
+      "sprite": "sp-cloudy"
+    },
+    {
+      "id": "w_snowy",
+      "en": "snowy",
+      "it": "nevoso",
+      "phase": 8,
+      "theme": "tempo",
+      "sprite": "sp-snowy"
+    },
+    {
+      "id": "w_monday",
+      "en": "Monday",
+      "it": "lunedì",
+      "phase": 8,
+      "theme": "giorni",
+      "sprite": "sp-day-mon"
+    },
+    {
+      "id": "w_tuesday",
+      "en": "Tuesday",
+      "it": "martedì",
+      "phase": 8,
+      "theme": "giorni",
+      "sprite": "sp-day-tue"
+    },
+    {
+      "id": "w_wednesday",
+      "en": "Wednesday",
+      "it": "mercoledì",
+      "phase": 8,
+      "theme": "giorni",
+      "sprite": "sp-day-wed"
+    },
+    {
+      "id": "w_thursday",
+      "en": "Thursday",
+      "it": "giovedì",
+      "phase": 8,
+      "theme": "giorni",
+      "sprite": "sp-day-thu"
+    },
+    {
+      "id": "w_friday",
+      "en": "Friday",
+      "it": "venerdì",
+      "phase": 8,
+      "theme": "giorni",
+      "sprite": "sp-day-fri"
+    },
+    {
+      "id": "w_saturday",
+      "en": "Saturday",
+      "it": "sabato",
+      "phase": 8,
+      "theme": "giorni",
+      "sprite": "sp-day-sat"
+    },
+    {
+      "id": "w_sunday",
+      "en": "Sunday",
+      "it": "domenica",
+      "phase": 8,
+      "theme": "giorni",
+      "sprite": "sp-day-sun"
+    },
+    {
+      "id": "w_morning",
+      "en": "morning",
+      "it": "mattina",
+      "phase": 8,
+      "theme": "ore",
+      "sprite": "sp-morning"
+    },
+    {
+      "id": "w_afternoon",
+      "en": "afternoon",
+      "it": "pomeriggio",
+      "phase": 8,
+      "theme": "ore",
+      "sprite": "sp-afternoon"
+    },
+    {
+      "id": "w_evening",
+      "en": "evening",
+      "it": "sera",
+      "phase": 8,
+      "theme": "ore",
+      "sprite": "sp-evening"
+    },
+    {
+      "id": "w_night",
+      "en": "night",
+      "it": "notte",
+      "phase": 8,
+      "theme": "ore",
+      "sprite": "sp-night"
+    },
+    {
+      "id": "w_breakfast",
+      "en": "breakfast",
+      "it": "colazione",
+      "phase": 8,
+      "theme": "ore",
+      "sprite": "sp-breakfast"
+    },
+    {
+      "id": "w_lunch",
+      "en": "lunch",
+      "it": "pranzo",
+      "phase": 8,
+      "theme": "ore",
+      "sprite": "sp-lunch"
+    },
+    {
+      "id": "w_dinner",
+      "en": "dinner",
+      "it": "cena",
+      "phase": 8,
+      "theme": "ore",
+      "sprite": "sp-dinner"
+    },
+    {
+      "id": "w_eleven",
+      "en": "eleven",
+      "it": "undici",
+      "phase": 8,
+      "theme": "numeri",
+      "sprite": "sp-num-11"
+    },
+    {
+      "id": "w_twelve",
+      "en": "twelve",
+      "it": "dodici",
+      "phase": 8,
+      "theme": "numeri",
+      "sprite": "sp-num-12"
+    },
+    {
+      "id": "w_park",
+      "en": "park",
+      "it": "parco",
+      "phase": 8,
+      "theme": "villaggio",
+      "sprite": "sp-park"
+    },
+    {
+      "id": "w_shop",
+      "en": "shop",
+      "it": "negozio",
+      "phase": 8,
+      "theme": "villaggio",
+      "sprite": "sp-shop"
+    },
+    {
+      "id": "w_farm",
+      "en": "farm",
+      "it": "fattoria",
+      "phase": 8,
+      "theme": "villaggio",
+      "sprite": "sp-farm"
+    },
+    {
+      "id": "w_beach",
+      "en": "beach",
+      "it": "spiaggia",
+      "phase": 8,
+      "theme": "villaggio",
+      "sprite": "sp-beach"
+    },
+    {
+      "id": "w_car",
+      "en": "car",
+      "it": "macchina",
+      "phase": 8,
+      "theme": "villaggio",
+      "sprite": "sp-car"
+    },
+    {
+      "id": "w_bus",
+      "en": "bus",
+      "it": "autobus",
+      "phase": 8,
+      "theme": "villaggio",
+      "sprite": "sp-bus"
+    },
+    {
+      "id": "w_bike",
+      "en": "bike",
+      "it": "bicicletta",
+      "phase": 8,
+      "theme": "villaggio",
+      "sprite": "sp-bike"
+    },
+    {
+      "id": "w_boat",
+      "en": "boat",
+      "it": "barca",
+      "phase": 8,
+      "theme": "villaggio",
+      "sprite": "sp-boat"
+    },
+    {
+      "id": "w_train",
+      "en": "train",
+      "it": "treno",
+      "phase": 8,
+      "theme": "villaggio",
+      "sprite": "sp-train"
+    },
+    {
+      "id": "w_present",
+      "en": "present",
+      "it": "regalo",
+      "phase": 8,
+      "theme": "festa",
+      "sprite": "sp-present"
+    },
+    {
+      "id": "w_balloon",
+      "en": "balloon",
+      "it": "palloncino",
+      "phase": 8,
+      "theme": "festa",
+      "sprite": "sp-balloon"
+    },
+    {
+      "id": "w_candle",
+      "en": "candle",
+      "it": "candelina",
+      "phase": 8,
+      "theme": "festa",
+      "sprite": "sp-candle"
+    },
+    {
+      "id": "w_party",
+      "en": "party",
+      "it": "festa",
+      "phase": 8,
+      "theme": "festa",
+      "sprite": "sp-party"
+    },
+    {
+      "id": "w_spring",
+      "en": "spring",
+      "it": "primavera",
+      "phase": 8,
+      "theme": "festa",
+      "sprite": "sp-spring"
+    },
+    {
+      "id": "w_summer",
+      "en": "summer",
+      "it": "estate",
+      "phase": 8,
+      "theme": "festa",
+      "sprite": "sp-summer"
+    },
+    {
+      "id": "w_autumn",
+      "en": "autumn",
+      "it": "autunno",
+      "phase": 8,
+      "theme": "festa",
+      "sprite": "sp-autumn"
+    },
+    {
+      "id": "w_winter",
+      "en": "winter",
+      "it": "inverno",
+      "phase": 8,
+      "theme": "festa",
+      "sprite": "sp-winter"
+    },
+    {
+      "id": "w_thirteen",
+      "en": "thirteen",
+      "it": "tredici",
+      "phase": 8,
+      "theme": "numeri",
+      "sprite": "sp-num-13"
+    },
+    {
+      "id": "w_fourteen",
+      "en": "fourteen",
+      "it": "quattordici",
+      "phase": 8,
+      "theme": "numeri",
+      "sprite": "sp-num-14"
+    },
+    {
+      "id": "w_fifteen",
+      "en": "fifteen",
+      "it": "quindici",
+      "phase": 8,
+      "theme": "numeri",
+      "sprite": "sp-num-15"
+    },
+    {
+      "id": "w_sixteen",
+      "en": "sixteen",
+      "it": "sedici",
+      "phase": 8,
+      "theme": "numeri",
+      "sprite": "sp-num-16"
+    },
+    {
+      "id": "w_seventeen",
+      "en": "seventeen",
+      "it": "diciassette",
+      "phase": 8,
+      "theme": "numeri",
+      "sprite": "sp-num-17"
+    },
+    {
+      "id": "w_eighteen",
+      "en": "eighteen",
+      "it": "diciotto",
+      "phase": 8,
+      "theme": "numeri",
+      "sprite": "sp-num-18"
+    },
+    {
+      "id": "w_nineteen",
+      "en": "nineteen",
+      "it": "diciannove",
+      "phase": 8,
+      "theme": "numeri",
+      "sprite": "sp-num-19"
+    },
+    {
+      "id": "w_twenty",
+      "en": "twenty",
+      "it": "venti",
+      "phase": 8,
+      "theme": "numeri",
+      "sprite": "sp-num-20"
     }
   ],
   "phrases": [
@@ -2223,6 +2639,302 @@
       "wordIds": [
         "w_sleep"
       ]
+    },
+    {
+      "id": "p_weather_sunny",
+      "en": "What's the weather like? It's sunny.",
+      "it": "Che tempo fa? C'è il sole.",
+      "phase": 8,
+      "theme": "tempo",
+      "structure": "st_weather",
+      "sprite": "sp-sunny",
+      "wordIds": [
+        "w_sunny"
+      ]
+    },
+    {
+      "id": "p_weather_rainy",
+      "en": "It's rainy today.",
+      "it": "Oggi piove.",
+      "phase": 8,
+      "theme": "tempo",
+      "structure": "st_weather",
+      "sprite": "sp-rainy",
+      "wordIds": [
+        "w_rainy"
+      ]
+    },
+    {
+      "id": "p_weather_snowy",
+      "en": "It's cold and snowy.",
+      "it": "Fa freddo e nevica.",
+      "phase": 8,
+      "theme": "tempo",
+      "structure": "st_weather",
+      "sprite": "sp-snowy",
+      "wordIds": [
+        "w_snowy",
+        "w_cold"
+      ]
+    },
+    {
+      "id": "p_today_monday",
+      "en": "Today is Monday.",
+      "it": "Oggi è lunedì.",
+      "phase": 8,
+      "theme": "giorni",
+      "structure": "st_today_is",
+      "sprite": "sp-day-mon",
+      "wordIds": [
+        "w_monday"
+      ]
+    },
+    {
+      "id": "p_today_friday",
+      "en": "Today is Friday.",
+      "it": "Oggi è venerdì.",
+      "phase": 8,
+      "theme": "giorni",
+      "structure": "st_today_is",
+      "sprite": "sp-day-fri",
+      "wordIds": [
+        "w_friday"
+      ]
+    },
+    {
+      "id": "p_saturday_sunday",
+      "en": "Saturday and Sunday: no school!",
+      "it": "Sabato e domenica: niente scuola!",
+      "phase": 8,
+      "theme": "giorni",
+      "structure": "st_today_is",
+      "sprite": "sp-day-sat",
+      "wordIds": [
+        "w_saturday",
+        "w_sunday"
+      ]
+    },
+    {
+      "id": "p_time_three",
+      "en": "What time is it? It's three o'clock.",
+      "it": "Che ore sono? Sono le tre.",
+      "phase": 8,
+      "theme": "ore",
+      "structure": "st_what_time",
+      "sprite": "sp-clock-3",
+      "wordIds": [
+        "w_three"
+      ]
+    },
+    {
+      "id": "p_time_seven",
+      "en": "It's seven o'clock.",
+      "it": "Sono le sette.",
+      "phase": 8,
+      "theme": "ore",
+      "structure": "st_what_time",
+      "sprite": "sp-clock-7",
+      "wordIds": [
+        "w_seven"
+      ]
+    },
+    {
+      "id": "p_time_twelve",
+      "en": "It's twelve o'clock.",
+      "it": "Sono le dodici.",
+      "phase": 8,
+      "theme": "ore",
+      "structure": "st_what_time",
+      "sprite": "sp-clock-12",
+      "wordIds": [
+        "w_twelve"
+      ]
+    },
+    {
+      "id": "p_breakfast_morning",
+      "en": "I have breakfast in the morning.",
+      "it": "Faccio colazione la mattina.",
+      "phase": 8,
+      "theme": "ore",
+      "structure": "st_routine",
+      "sprite": "sp-breakfast",
+      "wordIds": [
+        "w_breakfast",
+        "w_morning"
+      ]
+    },
+    {
+      "id": "p_lunch_one",
+      "en": "I have lunch at one o'clock.",
+      "it": "Pranzo all'una.",
+      "phase": 8,
+      "theme": "ore",
+      "structure": "st_routine",
+      "sprite": "sp-lunch",
+      "wordIds": [
+        "w_lunch",
+        "w_one"
+      ]
+    },
+    {
+      "id": "p_night_sleep",
+      "en": "At night I sleep.",
+      "it": "Di notte dormo.",
+      "phase": 8,
+      "theme": "ore",
+      "structure": "st_routine",
+      "sprite": "sp-night",
+      "wordIds": [
+        "w_night",
+        "w_sleep"
+      ]
+    },
+    {
+      "id": "p_lets_go_park",
+      "en": "Let's go to the park!",
+      "it": "Andiamo al parco!",
+      "phase": 8,
+      "theme": "villaggio",
+      "structure": "st_lets_go",
+      "sprite": "sp-park",
+      "wordIds": [
+        "w_park"
+      ]
+    },
+    {
+      "id": "p_lets_go_beach",
+      "en": "Let's go to the beach!",
+      "it": "Andiamo in spiaggia!",
+      "phase": 8,
+      "theme": "villaggio",
+      "structure": "st_lets_go",
+      "sprite": "sp-beach",
+      "wordIds": [
+        "w_beach"
+      ]
+    },
+    {
+      "id": "p_where_going_farm",
+      "en": "Where are you going? To the farm.",
+      "it": "Dove vai? Alla fattoria.",
+      "phase": 8,
+      "theme": "villaggio",
+      "structure": "st_lets_go",
+      "sprite": "sp-farm",
+      "wordIds": [
+        "w_farm"
+      ]
+    },
+    {
+      "id": "p_by_bus",
+      "en": "I go to school by bus.",
+      "it": "Vado a scuola in autobus.",
+      "phase": 8,
+      "theme": "villaggio",
+      "structure": "st_lets_go",
+      "sprite": "sp-bus",
+      "wordIds": [
+        "w_bus",
+        "w_school"
+      ]
+    },
+    {
+      "id": "p_by_bike",
+      "en": "I go to the park by bike.",
+      "it": "Vado al parco in bicicletta.",
+      "phase": 8,
+      "theme": "villaggio",
+      "structure": "st_lets_go",
+      "sprite": "sp-bike",
+      "wordIds": [
+        "w_bike",
+        "w_park"
+      ]
+    },
+    {
+      "id": "p_by_train",
+      "en": "By train!",
+      "it": "In treno!",
+      "phase": 8,
+      "theme": "villaggio",
+      "structure": "st_lets_go",
+      "sprite": "sp-train",
+      "wordIds": [
+        "w_train"
+      ]
+    },
+    {
+      "id": "p_how_old_seven",
+      "en": "How old are you? I am seven.",
+      "it": "Quanti anni hai? Ho sette anni.",
+      "phase": 8,
+      "theme": "festa",
+      "structure": "st_how_old",
+      "sprite": "sp-num-7",
+      "wordIds": [
+        "w_seven"
+      ]
+    },
+    {
+      "id": "p_how_old_eight",
+      "en": "I am eight.",
+      "it": "Ho otto anni.",
+      "phase": 8,
+      "theme": "festa",
+      "structure": "st_how_old",
+      "sprite": "sp-num-8",
+      "wordIds": [
+        "w_eight"
+      ]
+    },
+    {
+      "id": "p_happy_birthday",
+      "en": "Happy birthday!",
+      "it": "Buon compleanno!",
+      "phase": 8,
+      "theme": "festa",
+      "structure": "st_how_old",
+      "sprite": "sp-candle",
+      "wordIds": [
+        "w_candle"
+      ]
+    },
+    {
+      "id": "p_birthday_summer",
+      "en": "When is your birthday? In summer.",
+      "it": "Quando è il tuo compleanno? In estate.",
+      "phase": 8,
+      "theme": "festa",
+      "structure": "st_how_old",
+      "sprite": "sp-summer",
+      "wordIds": [
+        "w_summer"
+      ]
+    },
+    {
+      "id": "p_present_for_you",
+      "en": "A present for you!",
+      "it": "Un regalo per te!",
+      "phase": 8,
+      "theme": "festa",
+      "structure": "st_how_old",
+      "sprite": "sp-present",
+      "wordIds": [
+        "w_present"
+      ]
+    },
+    {
+      "id": "p_twenty_balloons",
+      "en": "Twenty balloons!",
+      "it": "Venti palloncini!",
+      "phase": 8,
+      "theme": "festa",
+      "structure": "st_how_old",
+      "sprite": "sp-num-20",
+      "wordIds": [
+        "w_twenty",
+        "w_balloon"
+      ]
     }
   ],
   "worlds": [
@@ -2984,6 +3696,260 @@
         "truefalse"
       ],
       "reward": "c_saltello"
+    },
+    {
+      "id": "world_weather",
+      "unit": 17,
+      "order": 17,
+      "phase": 8,
+      "title_it": "Il Cielo Cambia",
+      "objective_it": "Che tempo fa e che giorno è: cinque tempi e i sette giorni della settimana, letti sul calendario.",
+      "canDo_it": "So dire che tempo fa e che giorno è.",
+      "structureIds": [
+        "st_weather",
+        "st_today_is"
+      ],
+      "sprite": "sp-sunny",
+      "color": "#5fa8d3",
+      "newItems": [
+        "w_sunny",
+        "w_rainy",
+        "w_windy",
+        "w_cloudy",
+        "w_snowy",
+        "w_monday",
+        "w_tuesday",
+        "w_wednesday",
+        "w_thursday",
+        "w_friday",
+        "w_saturday",
+        "w_sunday",
+        "p_weather_sunny",
+        "p_weather_rainy",
+        "p_weather_snowy",
+        "p_today_monday",
+        "p_today_friday",
+        "p_saturday_sunday"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food",
+        "world_house",
+        "world_school",
+        "world_actions"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_ventolino"
+    },
+    {
+      "id": "world_time",
+      "unit": 18,
+      "order": 18,
+      "phase": 8,
+      "title_it": "La Torre dell'Orologio",
+      "objective_it": "L'ora in punto sull'orologio, i momenti del giorno e i pasti: la mia giornata.",
+      "canDo_it": "So dire che ore sono e cosa faccio la mattina, a pranzo, di notte.",
+      "structureIds": [
+        "st_what_time",
+        "st_routine"
+      ],
+      "sprite": "sp-clock-3",
+      "color": "#9d4edd",
+      "newItems": [
+        "w_morning",
+        "w_afternoon",
+        "w_evening",
+        "w_night",
+        "w_breakfast",
+        "w_lunch",
+        "w_dinner",
+        "p_time_three",
+        "p_time_seven",
+        "p_time_twelve",
+        "p_breakfast_morning",
+        "p_lunch_one",
+        "p_night_sleep",
+        "w_eleven",
+        "w_twelve"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food",
+        "world_house",
+        "world_school",
+        "world_actions",
+        "world_weather"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_ticchetto"
+    },
+    {
+      "id": "world_village",
+      "unit": 19,
+      "order": 19,
+      "phase": 8,
+      "title_it": "Il Villaggio",
+      "objective_it": "Luoghi e mezzi: andiamo al parco, dove vai, in autobus.",
+      "canDo_it": "So proporre di andare in un posto e dire con che mezzo.",
+      "structureIds": [
+        "st_lets_go"
+      ],
+      "sprite": "sp-bus",
+      "color": "#ee9b00",
+      "newItems": [
+        "w_park",
+        "w_shop",
+        "w_farm",
+        "w_beach",
+        "w_car",
+        "w_bus",
+        "w_bike",
+        "w_boat",
+        "w_train",
+        "p_lets_go_park",
+        "p_lets_go_beach",
+        "p_where_going_farm",
+        "p_by_bus",
+        "p_by_bike",
+        "p_by_train"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food",
+        "world_house",
+        "world_school",
+        "world_actions",
+        "world_weather",
+        "world_time"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_rotolino"
+    },
+    {
+      "id": "world_party",
+      "unit": 20,
+      "order": 20,
+      "phase": 8,
+      "title_it": "La Festa Finale",
+      "objective_it": "Quanti anni hai, buon compleanno, le stagioni e i numeri fino a venti.",
+      "canDo_it": "So dire quanti anni ho e quando è il mio compleanno.",
+      "structureIds": [
+        "st_how_old"
+      ],
+      "sprite": "sp-balloon",
+      "color": "#ff70a6",
+      "newItems": [
+        "w_present",
+        "w_balloon",
+        "w_candle",
+        "w_party",
+        "w_spring",
+        "w_summer",
+        "w_autumn",
+        "w_winter",
+        "w_thirteen",
+        "w_fourteen",
+        "w_fifteen",
+        "w_sixteen",
+        "w_seventeen",
+        "w_eighteen",
+        "w_nineteen",
+        "w_twenty",
+        "p_how_old_seven",
+        "p_how_old_eight",
+        "p_happy_birthday",
+        "p_birthday_summer",
+        "p_present_for_you",
+        "p_twenty_balloons"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food",
+        "world_house",
+        "world_school",
+        "world_actions",
+        "world_weather",
+        "world_time",
+        "world_village"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_festino"
     }
   ],
   "creatures": [
@@ -3185,6 +4151,46 @@
         "value": "world_actions"
       },
       "fact_it": "Una rana atleta con la fascia in fronte. Non sta ferma un secondo."
+    },
+    {
+      "id": "c_ventolino",
+      "name_it": "Ventolino",
+      "sprite": "sp-ventolino",
+      "unlock": {
+        "type": "world",
+        "value": "world_weather"
+      },
+      "fact_it": "Un piccolo mulino a vento con le braccia. Gira sempre, anche senza vento."
+    },
+    {
+      "id": "c_ticchetto",
+      "name_it": "Ticchetto",
+      "sprite": "sp-ticchetto",
+      "unlock": {
+        "type": "world",
+        "value": "world_time"
+      },
+      "fact_it": "Una sveglia con le gambe. Suona solo quando c'è qualcosa di bello da fare."
+    },
+    {
+      "id": "c_rotolino",
+      "name_it": "Rotolino",
+      "sprite": "sp-rotolino",
+      "unlock": {
+        "type": "world",
+        "value": "world_village"
+      },
+      "fact_it": "Un carretto vivente con due ruote e un faro. Porta tutti dove vogliono andare."
+    },
+    {
+      "id": "c_festino",
+      "name_it": "Festino",
+      "sprite": "sp-festino",
+      "unlock": {
+        "type": "world",
+        "value": "world_party"
+      },
+      "fact_it": "Un palloncino con il cappellino da festa. Ha organizzato la festa finale dell'isola."
     }
   ],
   "story": {

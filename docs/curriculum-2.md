@@ -1,5 +1,8 @@
 # Curriculum, anno 2 — il modello di crescita didattica
 
+> Realizzato per intero l'8 settembre 2026 (versione 2.0.0), in tre lotti
+> con il check dopo ognuno. Differenze annotate in PROGRESS.md.
+
 Richiesta del 2026-09-07: "basiamoci su un modello simil ministeriale di
 crescita didattica: lo scopo e' che impari l'inglese come potrebbe
 impararlo un bambino in USA o Inghilterra, ma giocando".

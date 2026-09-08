@@ -12,7 +12,17 @@
       "sp-num-7",
       "sp-num-8",
       "sp-num-9",
-      "sp-num-10"
+      "sp-num-10",
+      "sp-num-11",
+      "sp-num-12",
+      "sp-num-13",
+      "sp-num-14",
+      "sp-num-15",
+      "sp-num-16",
+      "sp-num-17",
+      "sp-num-18",
+      "sp-num-19",
+      "sp-num-20"
     ],
     "colori": [
       "sp-color-red",
@@ -50,6 +60,29 @@
     "comparativi": [
       "sp-big",
       "sp-small"
+    ],
+    "giorni": [
+      "sp-day-mon",
+      "sp-day-tue",
+      "sp-day-wed",
+      "sp-day-thu",
+      "sp-day-fri",
+      "sp-day-sat",
+      "sp-day-sun"
+    ],
+    "orologi": [
+      "sp-clock-1",
+      "sp-clock-2",
+      "sp-clock-3",
+      "sp-clock-4",
+      "sp-clock-5",
+      "sp-clock-6",
+      "sp-clock-7",
+      "sp-clock-8",
+      "sp-clock-9",
+      "sp-clock-10",
+      "sp-clock-11",
+      "sp-clock-12"
     ]
   },
   "_kind_comment": "kind: 'creature' aggiunge al prompt le proporzioni da cucciolo; 'object' no; 'concept' e' il gruppo a rischio (vedi note).",
@@ -779,6 +812,204 @@
       "kind": "creature",
       "batch": 4,
       "prompt": "a cute green frog athlete sitting upright, big round eyes, an orange headband on the forehead, small white sneakers, energetic smile"
+    },
+    {
+      "id": "sp-sunny",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a big smiling amber sun with straight rays above a small green rounded hill"
+    },
+    {
+      "id": "sp-rainy",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a grey cloud with light blue rain drops falling from it and a small open orange umbrella below"
+    },
+    {
+      "id": "sp-windy",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a puffy light grey cloud with a friendly face blowing, with three curved wind lines and two green leaves flying away"
+    },
+    {
+      "id": "sp-cloudy",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "two overlapping puffy clouds, one white and one light grey, covering a small sliver of amber sun at the top"
+    },
+    {
+      "id": "sp-snowy",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a white cloud with light blue snowflakes falling and a small smiling snowman with an orange carrot nose below"
+    },
+    {
+      "id": "sp-morning",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a small rooster standing on a small green rounded hill, half of an amber sun with straight rays rising behind the hill Cut-out sticker composition: the elements float directly on the white background, NO sky, NO background rectangle, NO frame, NO card."
+    },
+    {
+      "id": "sp-afternoon",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a big amber sun with straight rays high above a small green rounded hill with one small round tree on it; only the sun, the hill and the tree Cut-out sticker composition: the elements float directly on the white background, NO sky, NO background rectangle, NO frame, NO card."
+    },
+    {
+      "id": "sp-evening",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "an orange sun half set behind a small purple rounded hill, with two small pink clouds beside the sun Cut-out sticker composition: the elements float directly on the white background, NO sky, NO background rectangle, NO frame, NO card."
+    },
+    {
+      "id": "sp-night",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a small sleeping cottage with one lit yellow window and a dark blue roof, a white crescent moon and three yellow stars floating above it Cut-out sticker composition: the elements float directly on the white background, NO sky, NO background rectangle, NO frame, NO card."
+    },
+    {
+      "id": "sp-breakfast",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a breakfast set seen from the front: a white bowl of cereal with milk and a spoon, a glass of orange juice beside it"
+    },
+    {
+      "id": "sp-lunch",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a lunch set seen from the front: a white plate with a sandwich cut in a triangle and an apple beside it"
+    },
+    {
+      "id": "sp-dinner",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a dinner set seen from above: a white round plate with orange spaghetti and a red tomato sauce, a fork and a knife at the sides"
+    },
+    {
+      "id": "sp-park",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a small park: a green wooden bench under a round green tree, a small red swing beside it"
+    },
+    {
+      "id": "sp-shop",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a small shop seen from the front, orange striped awning, a big window showing fruit, a brown door, no signs or letters"
+    },
+    {
+      "id": "sp-farm",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a small red barn with a white door and a grey roof, a wooden fence and a small pink pig in front"
+    },
+    {
+      "id": "sp-beach",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a striped orange beach umbrella planted in a small mound of yellow sand, a small red bucket beside it and two small sky blue waves in front Cut-out sticker composition: the elements float directly on the white background, NO sky, NO background rectangle, NO frame, NO card."
+    },
+    {
+      "id": "sp-car",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a small friendly red car seen from the side with two wheels, sky blue windows and round headlights"
+    },
+    {
+      "id": "sp-bus",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a yellow school bus seen from the side with sky blue windows, two wheels and a small round headlight"
+    },
+    {
+      "id": "sp-bike",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a green bicycle seen from the side with two big wheels, a saddle and handlebars, a small basket at the front"
+    },
+    {
+      "id": "sp-boat",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a small sky blue sailing boat seen from the side on two little waves, a white triangular sail with an orange stripe"
+    },
+    {
+      "id": "sp-train",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a small purple steam train engine seen from the side with three wheels, a round chimney with a white smoke puff"
+    },
+    {
+      "id": "sp-present",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a gift box seen from the front, sky blue with a big yellow ribbon and bow on top"
+    },
+    {
+      "id": "sp-balloon",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a single round pink balloon on a thin curly string, with a small white highlight"
+    },
+    {
+      "id": "sp-candle",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a single striped purple and white birthday candle with a small amber flame, standing on a small piece of white cream"
+    },
+    {
+      "id": "sp-party",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a pointed party hat in orange with yellow dots and a pompom on top, with colourful confetti pieces around it"
+    },
+    {
+      "id": "sp-spring",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a small round tree with light green leaves and pink blossoms, two small flowers in the grass below"
+    },
+    {
+      "id": "sp-summer",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "an ice cream cone with two scoops, one pink and one yellow, with a small amber sun in the top corner"
+    },
+    {
+      "id": "sp-autumn",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a small round tree with orange and amber leaves, three leaves falling to the ground"
+    },
+    {
+      "id": "sp-winter",
+      "kind": "object",
+      "batch": 5,
+      "prompt": "a small green pine tree covered with white snow, a red mitten hanging from a branch"
+    },
+    {
+      "id": "sp-ventolino",
+      "kind": "creature",
+      "batch": 5,
+      "prompt": "a cute small windmill creature standing upright, a white round body with four amber sails on top like a hat, two big eyes and a happy smile, two short stubby arms"
+    },
+    {
+      "id": "sp-ticchetto",
+      "kind": "creature",
+      "batch": 5,
+      "prompt": "a cute round alarm clock creature standing on two short legs with small shoes, a white clock face with two big eyes and a smile instead of numbers, two amber bells on top"
+    },
+    {
+      "id": "sp-rotolino",
+      "kind": "creature",
+      "batch": 5,
+      "prompt": "a cute small wooden cart creature seen from the side with two big round wheels, a friendly face on the front, a small round headlight, carrying two small green apples"
+    },
+    {
+      "id": "sp-festino",
+      "kind": "creature",
+      "batch": 5,
+      "prompt": "a cute round pink balloon creature with a big smile and two round eyes, wearing a small orange party hat, a short curly string below like a tail"
     }
   ]
 }

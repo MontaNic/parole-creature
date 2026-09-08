@@ -1032,9 +1032,28 @@ sette fogli di calendario con l'abbreviazione inglese in Andika, dodici
 orologi con l'ora in punto. Come i numeri 1-10: schematici, non
 illustrati.
 
+### Anno 2, lotto 3: la fase 8 "Il mio mondo" (unita' 17-20). Anno 2 completo
+
+Fatto e pubblicato (contentVersion 2.3.0, app 2.0.0): 46 parole (di cui
+17 schematiche: sette giorni, numeri 11-20), 24 frasi, 6 strutture
+(`st_weather`, `st_today_is`, `st_what_time`, `st_routine`,
+`st_lets_go`, `st_how_old`), 4 unita' con Ventolino, Ticchetto, Rotolino,
+Festino. Illustrazioni: 33 con Gemini; cinque scene (mattina, pomeriggio,
+sera, notte, spiaggia) erano uscite incorniciate come cartoline e sono
+state rifatte come ritagli, con l'istruzione esplicita "niente cielo,
+niente cornice"; 159 PNG in precache. Audio: 70 tracce inglesi, indice a
+351. Il calendario e gli orologi funzionano nei mini-giochi come i numeri.
+
+**Il gioco ora ha 20 unita', 167 parole e 110 frasi**: il sillabo di
+`docs/curriculum-2.md` e' realizzato per intero. Dalle prime otto unita'
+alla Festa Finale il percorso copre i campi lessicali e le funzioni delle
+Indicazioni nazionali per la primaria, fino all'ingresso nell'A1.
+
 ## Prossimi passi
 
-**Stato al 2026-09-07, sera**: fase 3 completa e pubblicata (versione
+**Stato al 2026-09-08**: anno 2 del curriculum completo e pubblicato
+(versione 2.0.0: 20 unita', 167 parole, 110 frasi, 159 illustrazioni, 351
+tracce), due giochi bonus. Prima, la sera del 7: fase 3 completa (versione
 1.6.0): icone PWA, storico e grafico, criteri di successo, distintivi,
 palette misurata per il daltonismo, piu' il primo gioco bonus "Bolle".
 Restano dalla roadmap: piu' contenuti (nuove unita': vorrebbero
