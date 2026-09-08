@@ -5,26 +5,34 @@
 
 ## Stato attuale
 
-**v1.1.0 — curriculum progressivo.**
-Mascotte: **Pepe**, una cucciola di Jack Russell. Interfaccia in italiano,
-contenuti in inglese.
+**v3.5.0 — "Pepe e la Leggenda delle Parole", progetto chiuso per ora
+(9 settembre 2026).** Nome di lavoro e repository: *Parole & Creature*.
+Online in HTTPS su https://montanic.github.io/parole-creature/ (GitHub
+Pages), offline dopo il primo avvio con rete.
 
-Rispetto alla v1.0.0, `content.json` non e' piu' un elenco di parole per tema:
-e' un corso a 8 unita', ognuna con un obiettivo linguistico dichiarato, con
-revisione sistematica delle unita' precedenti e una soglia di padronanza da
-superare per cambiare fase.
+| | |
+|---|---|
+| unita' | 32 in 9 fasi giocabili (piu' le fasi 4 e 5 dei genitori) |
+| parole / frasi | 295 / 182, tutte con audio |
+| illustrazioni | 282 PNG generati con Gemini, tutti in cache offline |
+| tracce audio | 1324 (1168 inglesi, 156 italiane), quattro voci, mai sintesi |
+| creature | 36 |
+| storia | 3 stagioni, 38 scene |
+| dialoghi | 32, uno per unita' |
+| libretti | 6, leggibili nel gioco con audio |
+| suoni | 24 in 4 lezioni, 24 fusioni |
+| mini-giochi | 8 (piu' il turno di dialogo) e 3 giochi bonus |
+| controlli automatici | 123 (curriculum-test) + smoke test + asset + palette + offline sul sito |
 
-**Audio generato**: 113 tracce ElevenLabs su tre voci, 2,4 MB. Il gioco parla
-con voci vere, non piu' con la sintesi del browser.
+Il percorso didattico segue le Indicazioni nazionali per la primaria fino a
+un A1 pieno con i primi mattoni dell'A2 (`docs/curriculum-2.md`,
+`docs/curriculum-3.md`); i rimedi ai limiti del "riconoscere senza
+produrre" sono in fondo a questo file. Per i genitori:
+`docs/guida-genitori.md`.
 
-**Design system applicato a tutte le schermate** (`design-system.css`,
-documentato in `design-system.md`, guida viva in `tools/design-preview.html`).
-
-**43 illustrazioni generate** con Gemini e in uso nel gioco. I 38 sprite
-restanti restano simboli SVG per scelta: numeri, colori, icone di interfaccia
-e plurali.
-
-Non ancora fatto: playtest reale con il bambino su tablet.
+Il prossimo dato utile non e' codice: il primo **check del mese**
+dall'area genitori, che dice se le parole "padroneggiate" esistono anche
+fuori dallo schermo.
 
 ## Dove gira
 
@@ -280,68 +288,98 @@ proxy/cloudflare-worker.js  proxy che custodisce la chiave ElevenLabs
 
 ## Funzionalita' implementate
 
-- [x] Curriculum a 8 unita' con obiettivo linguistico esplicito e strutture dichiarate
-- [x] Revisione sistematica delle unita' precedenti, distribuita dentro la partita
-- [x] Soglia di padronanza (80%) per il passaggio di fase, con padronanza non accumulabile in un giorno
-- [x] Mappa raggruppata per fasi, con barra di padronanza e tacca della soglia
-- [x] Interruttore genitori per scavalcare la soglia
-- [x] Onboarding senza testo da leggere (voce + icone, con tutorial giocato)
-- [x] Mascotte Pepe che parla, si anima e evolve in 4 stadi (livelli 1/4/8/13)
-- [x] Voce di Pepe a ogni errore, con tre battute a rotazione: mai un errore muto
-- [x] Voce narrante separata per i tre traguardi rari (mondo, creatura, fase)
-- [x] 6 mini-giochi: abbinamento, ascolta e ripeti, quiz audio, caccia alla parola,
-      trascina la parola, ricomponi la frase (solo su frasi fino a 6 parole)
-- [x] Modalita' ripasso libero, che punta agli item non ancora solidi
-- [x] Ripetizione spaziata (Leitner a 6 box)
-- [x] Nessun game over: l'errore riporta all'ascolto e si riprova
-- [x] 3 varianti a rotazione di suono + animazione per la risposta giusta
-- [x] Album creature: 12 creature, quelle non trovate in silhouette
-- [x] Missione del giorno (8 tipi) e streak giornaliera
-- [x] Limite di sessione gentile (default 10 min, mai bloccante)
-- [x] Area genitori con PIN, orari, giorni, fasi, temi, pausa vacanza
-- [x] Dashboard con avanzamento per fase e per unita', obiettivi e strutture
-- [x] Pannello mini-ebook con prompt di generazione pronto da copiare
-- [x] Export/import del salvataggio su file JSON
-- [x] Audio pre-generato con fallback su sintesi vocale del browser
-- [x] Funzionamento offline (service worker)
-- [x] Due suite di test (`tools/curriculum-test.html`, `tools/smoke-test.html`)
+**Il corso**
+- [x] 32 unita' in 9 fasi, ognuna con obiettivo linguistico, strutture dichiarate e ripasso sistematico di tutte le precedenti
+- [x] Soglia di padronanza (80%) per il passaggio di fase; padronanza = risposte giuste in giorni diversi (Leitner a 6 box)
+- [x] 8 mini-giochi: abbinamento, quiz, ascolta e ripeti (con microfono), caccia, trascina, ricomponi la frase, vero/falso, **Dillo tu** (produrre prima di ascoltare, conferma vocale opzionale)
+- [x] 32 dialoghi con le creature a fine unita' (tre scambi, risposte con la voce di bambino)
+- [x] "I suoni": 4 lezioni di phonics con la fusione
+- [x] 6 libretti (graded reader) leggibili con audio; "Prima del cartone" per i 6 audiovisivi consigliati
+- [x] Difficolta' progressiva dentro la partita, sfida finale, aiuto scritto dopo due errori, conferma scritta dopo la risposta giusta
+
+**La motivazione**
+- [x] Pepe: voce a ogni risposta, evoluzione in 4 stadi, mai un errore muto, nessun game over
+- [x] Storia in 3 stagioni (38 scene), rivedibile dall'album
+- [x] Album: 36 creature, 12 adesivi, 11 distintivi, mensola dei libretti, indice della storia
+- [x] Scrigni a sorpresa, 3 giochi bonus (Bolle, Spunta!, Il cestino), la tana da arredare
+- [x] Missione del giorno: 8 di gioco e 8 a casa (confermate da un adulto), streak
+- [x] Registrazione della voce senza voto, condivisione del riepilogo in famiglia
+
+**Per i genitori**
+- [x] Area con PIN: minuti, fasce orarie, giorni, fasi e temi in pausa, pausa vacanza, sblocco fasi
+- [x] Progressi per unita', storico degli ultimi 14 giorni, criteri di successo misurabili, il **check del mese**
+- [x] Volumi, microfono, condivisione, riconoscimento vocale (spento di default), verifica dell'offline, backup su file
+- [x] Guida di una pagina (`docs/guida-genitori.md`)
+
+**La base tecnica**
+- [x] Vanilla HTML/CSS/JS, nessun build step, nessun dato che esce dal dispositivo
+- [x] Audio pre-generato con ElevenLabs su quattro voci; la sintesi del browser non e' mai udibile
+- [x] Illustrazioni generate con Gemini in pipeline (prompt fisso, sfondo tolto, coppie confondibili misurate)
+- [x] Offline via service worker: shell all'installazione, illustrazioni a pezzi guidate dal worker, verificato sul sito
+- [x] PWA installabile con icone vere; design system con palette misurata per il daltonismo
+- [x] Test: curriculum-test (123 controlli), smoke test, check-assets, palette-check, cache-check-remote
 
 ## Contenuti didattici presenti
 
-**89 item totali** distribuiti su 8 unita': 51 parole e 38 frasi.
+**477 item** su 32 unita': 295 parole e 182 frasi. Le fasi 1-3 sono
+l'anno 1 (mondo fantasy), 6-8 l'anno 2 (io, ogni giorno, il mio mondo),
+9-11 l'anno 3 (descrivere, muoversi nel mondo, raccontare).
 
-| Fase | Unita' | Item | Struttura insegnata |
-|------|--------|------|---------------------|
-| 1 | Valle dei Draghi | 8 parole + 3 frasi | `What is it?` |
-| 1 | Giungla dei Dinosauri | 9 parole + 4 frasi | `a` / `an` |
-| 1 | Grotta dei Colori | 8 parole + 4 frasi | aggettivo prima del nome |
-| 1 | Montagna dei Numeri | 10 parole + 4 frasi | `How many?` |
-| 2 | Foresta delle Parole | 8 parole + 5 frasi | `this` / `these`, plurale -s |
-| 2 | Lago Magico | 8 parole + 6 frasi | `is` / `are` |
-| 3 | Ponte delle Frasi | 6 frasi | `I have` / `I can see` |
-| 3 | Torre dei Dialoghi | 6 frasi | domanda e risposta breve |
+| Fase | Unita' | Parole + frasi | Strutture |
+|------|--------|----------------|-----------|
+| 1 | 1. La Valle dei Draghi | 8 + 3 | What is it? — A dragon. |
+| 1 | 2. La Giungla dei Dinosauri | 9 + 4 | It's a tooth. / It's an egg. |
+| 1 | 3. La Grotta dei Colori | 8 + 4 | It's a red egg. |
+| 1 | 4. La Montagna dei Numeri | 10 + 4 | How many? — Three. |
+| 2 | 5. La Foresta delle Parole | 8 + 5 | This is a cat. / These are cats. |
+| 2 | 6. Il Lago Magico | 8 + 6 | The cat is small. / The cats are small. |
+| 3 | 7. Il Ponte delle Frasi | 0 + 6 | I have a sword. / I can see a monster. |
+| 3 | 8. La Torre dei Dialoghi | 0 + 6 | Is it red? — Yes, it is. / What is your name? |
+| 6 | 9. La Famiglia del Castello | 8 + 6 | This is my mum. / I have a sister. |
+| 6 | 10. Il Corpo del Gigante | 8 + 6 | Touch your nose! / I have two hands. |
+| 6 | 11. Il Guardaroba del Mago | 8 + 6 | Put on your hat! / I am wearing a red hat. |
+| 6 | 12. Le Emozioni delle Creature | 8 + 6 | How are you? I am hungry. / Are you tired? Yes, I am. No, I am not. |
+| 7 | 13. La Cucina del Castello | 10 + 6 | I like apples. / I don't like cheese. · Do you like pizza? Yes, I do.  |
+| 7 | 14. La Casa di Pepe | 9 + 6 | The cat is on the bed. / Where is the dog? Under the table. |
+| 7 | 15. La Scuola delle Creature | 9 + 6 | Can I have a pencil, please? / Here you are. / Open your book! |
+| 7 | 16. Il Bosco delle Azioni | 10 + 6 | I can jump. / Can you swim? Yes, I can. / Pepe is running. |
+| 8 | 17. Il Cielo Cambia | 12 + 6 | What's the weather like? It's sunny. · Today is Monday. |
+| 8 | 18. La Torre dell'Orologio | 9 + 6 | What time is it? It's three o'clock. · I have breakfast in the morning |
+| 8 | 19. Il Villaggio | 9 + 6 | Let's go to the park! / Where are you going? To the beach. / By bus. |
+| 8 | 20. La Festa Finale | 16 + 6 | How old are you? I am seven. / Happy birthday! / When is your birthday |
+| 9 | 21. Il Ritratto | 10 + 6 | She has got long hair. / He is tall. / I've got glasses. |
+| 9 | 22. La Fattoria e lo Zoo | 10 + 6 | The lion is big and strong. / The monkey can climb. / Can a duck swim? |
+| 9 | 23. Lo Sport e i Giochi | 10 + 6 | I like playing football. / My favourite sport is tennis. / Let's play  |
+| 9 | 24. I Mestieri | 10 + 6 | He is a doctor. / What do you want to be? I want to be a pilot. |
+| 10 | 25. La Città | 10 + 6 | Turn left! / Go straight on. / Where is the library? Next to the stati |
+| 10 | 26. Il Mercato | 10 + 6 | How much is it? It's ten euros. / That's cheap! |
+| 10 | 27. Dal Dottore | 10 + 6 | What's the matter? I've got a headache. / Take this medicine. / Get we |
+| 10 | 28. La Natura | 10 + 6 | There is a river. / There are three mountains. / Is there a lake? Yes, |
+| 11 | 29. La Mia Giornata | 10 + 6 | I get up at seven o'clock. / What time do you go to bed? At half past  |
+| 11 | 30. Cosa Stai Facendo? | 10 + 6 | What are you doing? I'm reading. / Is she cooking? Yes, she is. |
+| 11 | 31. I Mesi e le Feste | 18 + 6 | My birthday is in March. / Happy Christmas! / Trick or treat! |
+| 11 | 32. Ieri e Domani | 10 + 6 | Yesterday I was at the park. / We went to the sea. / Tomorrow I am goi |
 
-Lessico: creature fantasy, parti del corpo dei dinosauri, 8 colori, numeri 1-10,
-animali e natura, 8 aggettivi.
+Schematici in SVG (non illustrati): numeri 1-20 e decine, colori, giorni,
+mesi, ore in punto e mezze, frecce. Tutto il resto (282 soggetti) e'
+illustrato.
 
-**Creature dell'album (12)**: Pepe, Fiammino, Codasso, Prisma, Numo, Rametto,
-Sciazzo, Baluce, Torrek, Stellina (**premio per aver superato la fase 1**),
-Umbra (25 parole padroneggiate), Aladoro (7 giorni di streak).
+**Creature (36)**: una per unita' piu' Pepe e tre rare (Stellina per la
+fase 1 superata, Umbra per 25 parole padroneggiate, Aladoro per 7 giorni
+di fila).
 
-**Fase 4 — mini-ebook pianificati (6, nessuno ancora generato)**: allineati alle
-strutture delle unita' che li sbloccano, cosi' il libretto ripassa esattamente
-quello che il gioco ha appena insegnato.
+**Storia**: stagione 1 *L'isola dove le creature hanno perso le parole*
+(fasi 1-3), stagione 2 *La lettera* (6-8), stagione 3 *La mappa* (9-11).
 
-| # | Titolo | Si sblocca dopo | Strutture |
-|---|--------|-----------------|-----------|
-| 1 | Pepe and the Red Egg | Valle dei Draghi | `What is it?` |
-| 2 | The Dinosaur with One Horn | Giungla dei Dinosauri | `a`/`an` |
-| 3 | Colors in the Cave | Grotta dei Colori | aggettivo + nome |
-| 4 | Ten Little Stars | Montagna dei Numeri | `How many?` |
-| 5 | The Happy Knight | Foresta delle Parole | `this/these`, `is/are` |
-| 6 | Hello, Friend! | Ponte delle Frasi | `I have`, domande |
+**Dialoghi**: 32, tre scambi ciascuno, 480 righe inglesi.
 
-**Fase 5 — audiovisivi (6)**, riancorati alle fasi invece che a livelli generici.
+**Libretti (fase 4)**: Pepe and the Red Egg, The Dinosaur with One Horn, Colors in the Cave, Ten Little Stars, The Happy Knight, Hello, Friend!: scritti, 8 pagine
+ciascuno, con audio, leggibili nel gioco; le schede restano per Kindle.
+
+**Audiovisivi (fase 5)**: 6 cartoni e film, ognuno con dieci parole e tre
+frasi da fare prima.
+
+**I suoni**: 24 suoni in 4 lezioni (s a t p i n, m d g o c k, e u r h b f l, sh ch th ee oo), 24 fusioni.
 
 ## Decisioni tecniche prese
 
@@ -1345,42 +1383,23 @@ prossimo dato utile e' il primo check del mese.
 
 ## Prossimi passi
 
-**Stato al 9 settembre 2026**: dal riconoscere al produrre (versione 3.4.0):
-"Dillo tu" in ogni unita', 32 dialoghi con le creature (risposte con la voce
-di bambino), il check del mese nell'area genitori, otto missioni a casa,
-"Prima del cartone", e "I suoni": quattro lezioni di phonics con la fusione.
-Tutti e sette i rimedi al resoconto pro/contro sono fatti. Prima, l'8 sera: anni 2 e 3 del
-curriculum completi e pubblicati (versione 3.0.0: 32 unita', 295 parole, 182 frasi, 281
-illustrazioni, 605 tracce, due stagioni di storia, due giochi bonus).
-Prima, nel pomeriggio: anno 2 completo e pubblicato
-(versione 2.0.0: 20 unita', 167 parole, 110 frasi, 159 illustrazioni, 351
-tracce), due giochi bonus. Prima, la sera del 7: fase 3 completa (versione
-1.6.0): icone PWA, storico e grafico, criteri di successo, distintivi,
-palette misurata per il daltonismo, piu' il primo gioco bonus "Bolle".
-Restano dalla roadmap: piu' contenuti (nuove unita': vorrebbero
-illustrazioni e audio nuovi, e una scelta di temi), un secondo gioco bonus,
-multi-profilo (solo se servira'), invio automatico su Kindle (vorrebbe un
-server: fuori).
+Il progetto e' chiuso per ora (v3.5.0). Cio' che ha senso fare dopo, in
+ordine, e tutto dipende da un dato che non c'e' ancora:
 
-**Stato al 2026-09-07**: la fase 2 e' completa e pubblicata — storia a
-episodi, scrigni, registrazione della voce, condivisione in famiglia, tana
-(versione 1.5.0). Il prossimo passo non e' codice: e' un playtest vero.
-Da guardare: preme "Avanti" prima che il narratore finisca? Capisce che il
-tondo nell'album riapre la scena? Si registra da solo o va spinto? Torna
-nella tana senza che nessuno glielo dica? L'ordine dei prossimi interventi
-lo decide quello.
+1. **Il primo check del mese** (area genitori, fra 30 giorni): se le
+   "padroneggiate" reggono sotto 7 su 10, alzare `masteryBox` in
+   `content.json` o giocare piu' ripasso.
+2. **Playtest sulle novita'**: usa "Dillo tu" davvero o tocca subito
+   "Ascolta"? Nei dialoghi ascolta le risposte prima di scegliere? Le
+   lezioni dei suoni le rifa' da solo?
+3. **Se serve altro contenuto**: un anno 4 (A2: passato semplice vero,
+   comparativi, testi piu' lunghi), altri libretti per gli anni 2 e 3, una
+   stagione 4 della storia. La pipeline e' pronta (batch Gemini dal 10).
+4. **Riascolto a campione delle tracce** con la voce di bambino e dei
+   suoni: dove una non convince, si cancella e si rigenera.
 
-3. **Riascoltare le 113 tracce generate** e rigenerare quelle che non
-   convincono (`--force` dopo aver cancellato il file, oppure cambiare voce
-   in `.env` e rilanciare).
-4. **Playtest con il bambino su tablet**, osservando senza suggerire. Da guardare:
-   capisce l'onboarding da solo? nota la differenza fra `a` e `an`? la soglia di
-   fase lo motiva o lo blocca?
-5. **Testare su Safari iOS reale**: sblocco audio al primo tocco, drag&drop col
-   dito, safe area, aggiunta alla schermata Home.
-6. **Tarare la soglia dopo il playtest.** L'80% e' una scommessa ragionata, non
-   un dato: se la fase 1 dura troppo, si abbassa a 0.7 in `content.json` senza
-   toccare una riga di codice.
+Il diario completo, con le decisioni e i difetti trovati, e' nelle sezioni
+qui sopra.
 
 ## Idee future (non in v1)
 
