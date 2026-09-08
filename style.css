@@ -676,6 +676,22 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 .den-wall.is-on { border-color: #fff; box-shadow: 0 0 0 3px var(--amber); }
 #screen-den .mascot-corner { pointer-events: none; }
 
+/* ---------------- Libretti ---------------- */
+.book-stage { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 8px 20px calc(16px + var(--safe-bottom)); min-height: 0; max-width: 860px; width: 100%; margin: 0 auto; }
+.book-art { width: min(260px, 50vw, 34vh); background: var(--paper); border: var(--stroke) solid var(--ink); border-radius: var(--r-l); padding: 14px; box-shadow: var(--sh-card); }
+.book-art svg, .book-art img { width: 100%; height: auto; display: block; fill: none; }
+.book-text { display: flex; align-items: center; gap: 16px; max-width: 760px; }
+.book-text .audio-orb { width: 72px; height: 72px; flex: none; box-shadow: 0 5px 0 var(--amber-deep), var(--sh-float); }
+.book-line { margin: 0; font-family: var(--font-en); font-size: clamp(22px, 3.2vw, 30px); font-weight: 700; letter-spacing: .02em; line-height: 1.35; color: #fff; text-shadow: 0 2px 0 rgba(0,0,0,.35); }
+.book-nav { display: flex; gap: 14px; align-items: center; }
+.book-shelf { display: grid; gap: 12px; margin-top: 10px; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.book-cover { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; background: var(--paper); color: var(--ink); font: inherit; cursor: pointer; border: var(--stroke) solid var(--ink); border-radius: var(--r-l); padding: 12px 10px; box-shadow: var(--sh-card); }
+.book-cover-art { width: 70px; height: 70px; }
+.book-cover-art svg, .book-cover-art img { width: 100%; height: 100%; fill: none; }
+.book-cover-title { font-family: var(--font-en); font-size: 15px; }
+.book-cover.is-locked { background: var(--night-700); color: rgba(255,255,255,.7); border-color: var(--night-600); box-shadow: none; }
+.book-cover.is-locked .book-cover-art svg, .book-cover.is-locked .book-cover-art img { filter: brightness(0) invert(1); opacity: .22; }
+
 /* ---------------- Distintivi ---------------- */
 .badge-row { display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .badge-strip { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }

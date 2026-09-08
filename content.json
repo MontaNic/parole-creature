@@ -8537,7 +8537,7 @@
       "title": "Pepe and the Red Egg",
       "phase": 4,
       "unlockAfterWorld": "world_dragons",
-      "status": "da generare",
+      "status": "nel gioco",
       "targetWords": 60,
       "newWordsPerPage": 1,
       "structures": [
@@ -8550,7 +8550,41 @@
         "w_knight",
         "w_monster"
       ],
-      "synopsis_it": "Pepe trova un uovo davanti al castello e aspetta che si schiuda."
+      "synopsis_it": "Pepe trova un uovo davanti al castello e aspetta che si schiuda.",
+      "pages": [
+        {
+          "sprite": "sp-castle",
+          "en": "This is a castle. Pepe is at the castle."
+        },
+        {
+          "sprite": "sp-egg",
+          "en": "What is it? It is an egg. A red egg!"
+        },
+        {
+          "sprite": "sp-pepe",
+          "en": "Pepe looks at the egg. She waits. One, two, three..."
+        },
+        {
+          "sprite": "sp-knight",
+          "en": "A knight comes. \"What is it?\" \"It is an egg!\""
+        },
+        {
+          "sprite": "sp-monster",
+          "en": "A monster comes. \"What is it?\" \"It is an egg!\""
+        },
+        {
+          "sprite": "sp-eggs",
+          "en": "Crack! Crack! The egg opens."
+        },
+        {
+          "sprite": "sp-dragon",
+          "en": "What is it? It is a dragon! A baby dragon."
+        },
+        {
+          "sprite": "sp-flamup",
+          "en": "\"Hello, dragon!\" says Pepe. The dragon says: \"Hello, Pepe!\""
+        }
+      ]
     },
     {
       "id": "ebook_02",
@@ -8558,7 +8592,7 @@
       "title": "The Dinosaur with One Horn",
       "phase": 4,
       "unlockAfterWorld": "world_dinos",
-      "status": "da generare",
+      "status": "nel gioco",
       "targetWords": 70,
       "newWordsPerPage": 1,
       "structures": [
@@ -8573,7 +8607,41 @@
         "w_eye",
         "w_egg"
       ],
-      "synopsis_it": "Un dinosauro con un solo corno cerca il suo nido nella giungla."
+      "synopsis_it": "Un dinosauro con un solo corno cerca il suo nido nella giungla.",
+      "pages": [
+        {
+          "sprite": "sp-dinosaur",
+          "en": "This is a dinosaur. A small dinosaur with one horn."
+        },
+        {
+          "sprite": "sp-horn",
+          "en": "One horn. Not two. One!"
+        },
+        {
+          "sprite": "sp-nest",
+          "en": "\"Where is my nest?\" says the dinosaur."
+        },
+        {
+          "sprite": "sp-tail",
+          "en": "He looks with his eyes. He walks with his tail up."
+        },
+        {
+          "sprite": "sp-egg",
+          "en": "He sees an egg. \"Is it my nest?\" No. It is an egg."
+        },
+        {
+          "sprite": "sp-eye",
+          "en": "He sees a big eye. \"Is it my nest?\" No. It is a monster!"
+        },
+        {
+          "sprite": "sp-tree",
+          "en": "Under a tree, he sees a nest. A nest with three eggs."
+        },
+        {
+          "sprite": "sp-dinosaurs",
+          "en": "\"My nest!\" Three little dinosaurs say: \"Hello!\" The end."
+        }
+      ]
     },
     {
       "id": "ebook_03",
@@ -8581,7 +8649,7 @@
       "title": "Colors in the Cave",
       "phase": 4,
       "unlockAfterWorld": "world_colors",
-      "status": "da generare",
+      "status": "nel gioco",
       "targetWords": 80,
       "newWordsPerPage": 1,
       "structures": [
@@ -8597,7 +8665,41 @@
         "w_egg",
         "w_dragon"
       ],
-      "synopsis_it": "Prisma il camaleonte accende la grotta con un colore alla volta."
+      "synopsis_it": "Prisma il camaleonte accende la grotta con un colore alla volta.",
+      "pages": [
+        {
+          "sprite": "sp-prisma",
+          "en": "Prisma is a chameleon. Prisma lives in a cave."
+        },
+        {
+          "sprite": "sp-color-red",
+          "en": "The cave is dark. Prisma says: \"Red!\" Now the cave is red."
+        },
+        {
+          "sprite": "sp-color-blue",
+          "en": "\"Blue!\" Now the cave is blue. A blue cave!"
+        },
+        {
+          "sprite": "sp-color-green",
+          "en": "\"Green!\" A green cave. Green like a tree."
+        },
+        {
+          "sprite": "sp-color-yellow",
+          "en": "\"Yellow!\" A yellow cave. Yellow like the sun."
+        },
+        {
+          "sprite": "sp-egg",
+          "en": "In the cave there is an egg. What colour is the egg?"
+        },
+        {
+          "sprite": "sp-color-purple",
+          "en": "It is a purple egg! Prisma is purple too."
+        },
+        {
+          "sprite": "sp-dragon",
+          "en": "Crack! A purple dragon! \"Hello!\" says the dragon. \"What colour do you like?\""
+        }
+      ]
     },
     {
       "id": "ebook_04",
@@ -8605,7 +8707,7 @@
       "title": "Ten Little Stars",
       "phase": 4,
       "unlockAfterWorld": "world_numbers",
-      "status": "da generare",
+      "status": "nel gioco",
       "targetWords": 90,
       "newWordsPerPage": 1,
       "structures": [
@@ -8620,7 +8722,41 @@
         "w_star",
         "w_moon"
       ],
-      "synopsis_it": "Numo il gufo conta le stelle da uno a dieci prima di dormire."
+      "synopsis_it": "Numo il gufo conta le stelle da uno a dieci prima di dormire.",
+      "pages": [
+        {
+          "sprite": "sp-numo",
+          "en": "Numo is an owl. Numo cannot sleep."
+        },
+        {
+          "sprite": "sp-moon",
+          "en": "The moon is big and yellow. \"Hello, moon,\" says Numo."
+        },
+        {
+          "sprite": "sp-star",
+          "en": "One star. \"How many stars?\" \"One.\""
+        },
+        {
+          "sprite": "sp-num-2",
+          "en": "Two stars. \"How many stars?\" \"Two.\""
+        },
+        {
+          "sprite": "sp-num-3",
+          "en": "Three stars. Three little stars."
+        },
+        {
+          "sprite": "sp-stars",
+          "en": "Four, five, six, seven, eight, nine..."
+        },
+        {
+          "sprite": "sp-num-10",
+          "en": "Ten! Ten little stars. \"How many stars?\" \"Ten!\""
+        },
+        {
+          "sprite": "sp-sleep",
+          "en": "Numo is sleepy. The stars are small. The moon is big. Good night, Numo."
+        }
+      ]
     },
     {
       "id": "ebook_05",
@@ -8628,7 +8764,7 @@
       "title": "The Happy Knight",
       "phase": 4,
       "unlockAfterWorld": "world_forest",
-      "status": "da generare",
+      "status": "nel gioco",
       "targetWords": 110,
       "newWordsPerPage": 2,
       "structures": [
@@ -8644,7 +8780,41 @@
         "w_sun",
         "w_cat"
       ],
-      "synopsis_it": "Un cavaliere triste ritrova il sorriso grazie a un cane nella foresta."
+      "synopsis_it": "Un cavaliere triste ritrova il sorriso grazie a un cane nella foresta.",
+      "pages": [
+        {
+          "sprite": "sp-knight",
+          "en": "This is a knight. The knight is sad."
+        },
+        {
+          "sprite": "sp-sad",
+          "en": "\"Why are you sad?\" \"I am alone,\" says the knight."
+        },
+        {
+          "sprite": "sp-forest",
+          "en": "The knight walks in the forest. These are trees. The trees are big."
+        },
+        {
+          "sprite": "sp-dog",
+          "en": "A dog comes. This is a dog. The dog is small and happy."
+        },
+        {
+          "sprite": "sp-cat",
+          "en": "A cat comes. This is a cat. The cat is small and fast."
+        },
+        {
+          "sprite": "sp-cats",
+          "en": "Two cats! These are cats. The cats are happy."
+        },
+        {
+          "sprite": "sp-sun",
+          "en": "The sun is hot. The knight, the dog and the cats sit under a tree."
+        },
+        {
+          "sprite": "sp-happy",
+          "en": "Now the knight is not sad. The knight is happy. \"I am not alone!\""
+        }
+      ]
     },
     {
       "id": "ebook_06",
@@ -8652,7 +8822,7 @@
       "title": "Hello, Friend!",
       "phase": 4,
       "unlockAfterWorld": "world_bridge",
-      "status": "da generare",
+      "status": "nel gioco",
       "targetWords": 130,
       "newWordsPerPage": 2,
       "structures": [
@@ -8667,7 +8837,41 @@
         "p_i_monster",
         "p_thanks"
       ],
-      "synopsis_it": "Pepe attraversa il ponte e presenta se stesso a ogni creatura che incontra."
+      "synopsis_it": "Pepe attraversa il ponte e presenta se stesso a ogni creatura che incontra.",
+      "pages": [
+        {
+          "sprite": "sp-castle",
+          "en": "Pepe walks to the bridge. \"Hello! What is your name?\""
+        },
+        {
+          "sprite": "sp-flamup",
+          "en": "\"My name is Fiammino. How are you?\" \"I am happy!\""
+        },
+        {
+          "sprite": "sp-sword",
+          "en": "\"I have a sword,\" says the knight. \"What is your name?\" \"My name is Pepe.\""
+        },
+        {
+          "sprite": "sp-monster",
+          "en": "\"I can see a monster!\" \"Hello, monster. How are you?\" \"I am happy. Thank you!\""
+        },
+        {
+          "sprite": "sp-dragon",
+          "en": "\"I can see a dragon!\" \"What is your name?\" \"My name is Dragon.\""
+        },
+        {
+          "sprite": "sp-glimmer",
+          "en": "Baluce says: \"I have a star. I can see the tower!\""
+        },
+        {
+          "sprite": "sp-torrek",
+          "en": "At the tower: \"What is your name?\" \"My name is Torrek. How are you?\" \"I am happy!\""
+        },
+        {
+          "sprite": "sp-pepe",
+          "en": "Pepe has a sword, a star and eight friends. \"Thank you, friends! Goodbye!\""
+        }
+      ]
     }
   ],
   "mediaRecommendations": [
@@ -8707,5 +8911,6 @@
       "level_it": "Dopo la fase 3 — traguardo",
       "note": "Da tenere come premio quando le frasi della fase 3 sono solide."
     }
-  ]
+  ],
+  "_ebooks_comment": "I mini-ebook hanno le pagine dentro (pages: sprite + testo inglese) e si leggono nel gioco con audio; la scheda (targetWords, structures) resta per chi vuole rigenerarli per Kindle."
 }

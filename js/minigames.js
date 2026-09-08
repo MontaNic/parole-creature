@@ -13,7 +13,7 @@
 
 import { CONFIG } from './config.js';
 import { t, artIndex } from './content-loader.js';
-import { speakItem, sfxTap } from './audio.js';
+import { speakItem, speakLine, sfxTap } from './audio.js';
 import { canRecord, startRecording, playBlob } from './recorder.js';
 import { mascotSay } from './mascot.js';
 import { save, persist } from './state.js';
@@ -73,7 +73,8 @@ export function audioOrb(source, label) {
   btn.appendChild(spriteSvg('sp-icon-sound'));
   const play = async () => {
     btn.classList.add('is-playing');
-    await speakItem(typeof source === 'function' ? source() : source);
+    const it = typeof source === 'function' ? source() : source;
+    await (it && it._rel ? speakLine(it._rel, it.en, 'en-GB') : speakItem(it));
     btn.classList.remove('is-playing');
   };
   btn.addEventListener('click', play);

@@ -19,6 +19,7 @@ import { renderStoryStrip, chapterForCreature, isAvailable as chapterAvailable, 
 import { renderStickers } from './chests.js';
 import { canShare, shareSummary } from './share.js';
 import { renderBadges, renderNewBadges } from './badges.js';
+import { renderShelf, openBook } from './books.js';
 
 /* Fasi aperte a mano dal bambino, oltre a quella corrente. */
 const fasiAperte = new Set();
@@ -304,6 +305,15 @@ export function renderAlbum() {
     grid.parentElement.appendChild(stickers);
   }
   renderStickers(stickers);
+
+  // I libretti della fase 4, leggibili con audio.
+  let shelf = document.getElementById('album-books');
+  if (!shelf) {
+    shelf = el('div');
+    shelf.id = 'album-books';
+    grid.parentElement.appendChild(shelf);
+  }
+  renderShelf(shelf, book => openBook(book).then(renderAlbum));
 
   // I distintivi, in fondo.
   let badges = document.getElementById('album-badges');

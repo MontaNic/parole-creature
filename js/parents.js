@@ -412,7 +412,8 @@ function panelProgress() {
 /* ------------------------------------------------------------------ */
 
 const EBOOK_STATUS = {
-  todo: 'parents.ebooks_status_todo',
+  todo: 'parents.ebooks_status_ingame',
+  read: 'parents.ebooks_status_read',
   generated: 'parents.ebooks_status_generated',
   sent: 'parents.ebooks_status_sent'
 };

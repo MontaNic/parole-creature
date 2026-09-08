@@ -119,6 +119,16 @@
     "popped": "{n} bolle scoppiate",
     "skip": "Salta"
   },
+  "books": {
+    "title": "I miei libretti",
+    "subtitle": "Storie da leggere con l'audio. Si aprono completando le unità",
+    "page": "pagina {n} di {tot}",
+    "next": "Avanti",
+    "prev": "Indietro",
+    "the_end": "The end!",
+    "read_again": "Rileggi",
+    "locked": "Si apre completando un'unità"
+  },
   "share": {
     "button": "Condividi",
     "title": "Parole & Creature",
@@ -234,6 +244,8 @@
     "ebooks_status_todo": "Da generare",
     "ebooks_status_generated": "Generato",
     "ebooks_status_sent": "Inviato su Kindle",
+    "ebooks_status_ingame": "Leggibile nel gioco, con audio",
+    "ebooks_status_read": "Letto nel gioco",
     "ebooks_locked": "Si sblocca completando il mondo",
     "ebooks_copy_prompt": "Copia il prompt di generazione",
     "ebooks_prompt_copied": "Prompt copiato!",

@@ -41,6 +41,7 @@ import { denItems, placeItem, removeItem, isPlaced, clamp, setWall, WALLS } from
 import { bumpToday, lastDays, accuracyOf, successReport, prune } from './js/history.js';
 import { planBonus, BubbleWorld, bubblePool, MoleWorld, pickBonus, BasketWorld, BONUS_GAMES } from './js/bonus.js';
 import { checkBadges, BADGES } from './js/badges.js';
+import { books, bookUnlocked, pageAudio } from './js/books.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
   splitRound, unitItems, unitReviewItems, curriculumConfig, playablePhases
@@ -421,6 +422,18 @@ async function run() {
   check('le condizioni si valutano sul salvataggio',
     presi.join(',') === 'bd_first_chest,bd_first_round,bd_mastered_10,bd_mastered_25,bd_phase1_creatures,bd_story_done,bd_streak_3,bd_streak_7', presi.join(','));
   check('un distintivo preso non si riprende', checkBadges(s1, { mastered: 26, stickerCount: 12 }).length === 0 && Object.keys(s1.progress.badges).length === 8);
+
+  /* --- i libretti ---------------------------------------------------- */
+  resetSave();
+  const libri = books();
+  check('ci sono sei libretti con otto pagine ciascuno', libri.length === 6 && libri.every(b => b.pages.length === 8));
+  check('ogni libretto ha la lunghezza prevista (±40%)', libri.every(b => { const n = b.pages.reduce((a, p) => a + p.en.split(/\s+/).length, 0); return n >= b.targetWords * 0.6 && n <= b.targetWords * 1.4; }));
+  const lessicoLibri = new Set([...content.words.map(w => w.en.toLowerCase()), ...content.phrases.flatMap(p => p.en.toLowerCase().replace(/[!?.,:"]/g, '').split(/\s+/))]);
+  const extraLibri = ['a', 'an', 'the', 'is', 'it', 'at', 'she', 'he', 'his', 'says', 'say', 'looks', 'sees', 'walks', 'comes', 'waits', 'opens', 'lives', 'sit', 'up', 'not', 'with', 'in', 'to', 'of', 'like', 'now', 'too', 'my', 'your', 'i', 'am', 'are', 'you', 'why', 'alone', 'and', 'little', 'baby', 'crack', 'hello', 'goodbye', 'good', 'night', 'end', 'thank', 'friends', 'friend', 'colour', 'do', 'cannot', 'sleepy', 'dark', 'owl', 'chameleon', 'pepe', 'prisma', 'numo', 'fiammino', 'baluce', 'torrek', 'where', 'what', 'how', 'many', 'there', 'name', 'eight', 'stars', 'eggs', 'cats', 'trees', 'dinosaurs', 'eyes', 'has', 'have', 'can', 'see', 'bridge', 'tower', 'no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'nine', 'ten'];
+  const fuoriLibri = libri.flatMap(b => b.pages.flatMap(p => p.en.toLowerCase().replace(/[!?.,:"…]/g, '').replace(/\.\.\./g, ' ').split(/\s+/))).filter(w => w && !lessicoLibri.has(w) && !extraLibri.includes(w));
+  check("i libretti usano il lessico del gioco (piu' poche parole di servizio)", fuoriLibri.length === 0, [...new Set(fuoriLibri)].join(' '));
+  check('a inizio gioco nessun libretto e\' aperto', libri.every(b => !bookUnlocked(b)));
+  check('le tracce delle pagine hanno percorsi distinti', new Set(libri.flatMap(b => b.pages.map((p, n) => pageAudio(b, n)))).size === 48);
 
   resetSave();
 

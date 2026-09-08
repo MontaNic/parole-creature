@@ -156,6 +156,13 @@ async function buildJobList() {
     });
   }
 
+  // I libretti: una traccia per pagina, voce modello (e' inglese da leggere).
+  for (const b of content.miniEbooks || []) {
+    (b.pages || []).forEach((p, n) => {
+      jobs.push({ rel: `en/book.${b.id}.${n}.mp3`, text: p.en, role: 'english', kind: 'phrase' });
+    });
+  }
+
   return { jobs, content };
 }
 

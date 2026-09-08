@@ -1206,6 +1206,21 @@ manca ancora qualcosa. Tre prove ufficiali di fila sul sito: 281/281.
 `docs/guida-genitori.md`: una pagina per chi accompagna il bambino.
 README aggiornato ai numeri di oggi.
 
+### I libretti: i mini-ebook scritti e leggibili nel gioco (v3.2.0)
+
+La fase 4 era rimasta "da generare altrove": sei schede con titolo,
+sinossi, lessico e strutture, e un prompt da copiare. Ora i sei libretti
+sono **scritti** (8 pagine ciascuno, 62-104 parole, solo lessico del gioco
+piu' poche parole di servizio: un test lo verifica) e **leggibili nel
+gioco**: nell'album, sotto gli adesivi, una mensola di copertine; ogni
+pagina ha un'illustrazione del gioco, il testo in Andika e la sua traccia
+(48 tracce con la voce modello). Un libretto si apre completando l'unita'
+indicata nella scheda (`bookUnlocked`), e "The end!" lo segna letto
+(`save.ebooks[id].status = 'read'`, visibile nell'area genitori). Le
+schede restano per chi vuole rigenerarli per Kindle. E' la lettura che le
+Indicazioni chiedono: parole imparate a orecchio, ritrovate scritte in un
+testo continuo. curriculum-test 96 -> 101.
+
 ## Prossimi passi
 
 **Stato al 2026-09-08, sera**: anni 2 e 3 del curriculum completi e
