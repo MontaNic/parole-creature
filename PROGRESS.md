@@ -1173,6 +1173,24 @@ senza intercettare i tocchi. Il trascina-qui aveva anche uno sbordo suo
 (31px in orizzontale): le caselle ora sono limitate dall'altezza come le
 tessere della griglia. Dopo: zero sbordo in tutte e trenta le combinazioni.
 
+## Verso il prodotto finito (8 settembre, sera)
+
+Il genitore ha chiesto di arrivare a un prodotto "finito", in autonomia.
+Fatto in questo giro (versione 3.1.0):
+
+- **Fondo su PC a schermo intero**: era `background-attachment: fixed` sul
+  body, che dopo un ridimensionamento alcuni browser non ridipingono e
+  lasciano bordi scoperti. Il fondo notte ora sta sulla radice `html`, che
+  il browser dipinge sempre su tutta la finestra. Verificato a 2560x1080.
+- **La storia, stagione 3** "La mappa" (fasi 9-11): prologo quando si apre
+  la fase 9, dodici capitoli per le creature dell'anno 3, epilogo con
+  Pepe che sale sull'aereo dopo Valigetta. 54 tracce. In totale 38 scene
+  in tre stagioni.
+- **Il cestino**, terzo gioco bonus dalla classifica: le figure cadono, il
+  cestino si trascina col dito, si prende solo quella detta dalla voce; le
+  altre rimbalzano via senza costare nulla. `BasketWorld` puro e testato;
+  si alterna con Bolle e Spunta senza ripetersi. curriculum-test 91 -> 96.
+
 ## Prossimi passi
 
 **Stato al 2026-09-08, sera**: anni 2 e 3 del curriculum completi e

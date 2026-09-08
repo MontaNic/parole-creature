@@ -112,6 +112,8 @@
     "title": "Gioco bonus!",
     "bubbles_prompt": "Scoppia la bolla giusta!",
     "moles_prompt": "Tocca chi spunta!",
+    "basket_prompt": "Prendi quella giusta col cestino!",
+    "caught": "{n} prese al volo",
     "hits": "{n} prese",
     "done": "Fine!",
     "popped": "{n} bolle scoppiate",

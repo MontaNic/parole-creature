@@ -21,10 +21,21 @@ html, body {
   overscroll-behavior: none;
 }
 
+/*
+  Il fondo notte sta sulla radice, non sul body: il browser dipinge il fondo
+  della radice su tutta la finestra, sempre, anche quando la finestra viene
+  ridimensionata o messa a schermo intero. Con `fixed` sul body, su PC a
+  schermo intero restavano bordi scoperti dopo un ridimensionamento.
+*/
+html {
+  background: var(--night-900) radial-gradient(120% 90% at 50% 0%, #3a2d6e 0%, var(--night-800) 45%, var(--night-900) 100%) no-repeat;
+  background-size: 100% 100%;
+}
+
 body {
   /* La famiglia arriva da design-system.css (--font-ui). */
   color: var(--paper);
-  background: radial-gradient(120% 90% at 50% 0%, #3a2d6e 0%, var(--night-800) 45%, var(--night-900) 100%) fixed;
+  background: transparent;
   -webkit-user-select: none;
   user-select: none;
   touch-action: manipulation;

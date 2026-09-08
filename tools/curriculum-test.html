@@ -39,7 +39,7 @@ import { pickMimeType, canRecord } from './js/recorder.js';
 import { buildSummaryCard, canShare } from './js/share.js';
 import { denItems, placeItem, removeItem, isPlaced, clamp, setWall, WALLS } from './js/den.js';
 import { bumpToday, lastDays, accuracyOf, successReport, prune } from './js/history.js';
-import { planBonus, BubbleWorld, bubblePool, MoleWorld, pickBonus } from './js/bonus.js';
+import { planBonus, BubbleWorld, bubblePool, MoleWorld, pickBonus, BasketWorld, BONUS_GAMES } from './js/bonus.js';
 import { checkBadges, BADGES } from './js/badges.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
@@ -242,12 +242,12 @@ async function run() {
 
   /* --- la storia a episodi ---------------------------------------- */
   const capitoli = chapters();
-  check('la storia ha due stagioni: 2 prologhi, 20 capitoli, 2 epiloghi', capitoli.length === 24, String(capitoli.length));
+  check('la storia ha tre stagioni: 3 prologhi, 32 capitoli, 3 epiloghi', capitoli.length === 38, String(capitoli.length));
   check('gli id dei capitoli sono unici e permanenti (st_*)',
-    new Set(capitoli.map(c => c.id)).size === 24 && capitoli.every(c => /^st2?_[a-z]+$/.test(c.id)));
+    new Set(capitoli.map(c => c.id)).size === 38 && capitoli.every(c => /^st[23]?_[a-z]+$/.test(c.id)));
   const conCreatura = capitoli.filter(c => c.worldId);
   check('ogni capitolo di mondo punta a un mondo esistente e alla sua creatura premio',
-    conCreatura.length === 20 && conCreatura.every(c => {
+    conCreatura.length === 32 && conCreatura.every(c => {
       const w = content.worlds.find(x => x.id === c.worldId);
       return w && w.reward === c.creatureId && c.trigger.value === c.worldId;
     }));
@@ -260,7 +260,7 @@ async function run() {
   // Il lessico del gioco: le parole e tutte le parole delle frasi imparate.
   const lessico = new Set([...content.words.map(w => w.en.toLowerCase()), ...content.phrases.flatMap(p => p.en.toLowerCase().replace(/[!?.,]/g, '').split(/\s+/))]);
   const extra = ['hello', 'pepe', 'i', 'am', 'a', 'an', 'it\'s', 'my', 'and', 'how', 'many', 'this', 'is',
-    'these', 'are', 'the', 'have', 'can', 'see', 'what', 'your', 'name', 'torrek', 'you', 'stars', 'birds', 'family', 'ears', 'hands'];
+    'these', 'are', 'the', 'have', 'can', 'see', 'what', 'your', 'name', 'torrek', 'you', 'stars', 'birds', 'family', 'ears', 'hands', 'two'];
   const fuoriLessico = conCreatura.flatMap(c => c.lines.filter(l => l.who === 'creature')
     .flatMap(l => l.en.toLowerCase().replace(/[!?.,]/g, '').split(/\s+/)))
     .filter(w => w && !lessico.has(w) && !extra.includes(w));
@@ -277,6 +277,9 @@ async function run() {
   const dopoFesta = pendingAfterRound([festino]).map(c => c.id);
   check("trovare Festino fa scattare il suo capitolo e poi l'epilogo 2", dopoFesta.join(',') === 'st2_party,st2_epilogue', dopoFesta.join(','));
   check('aprire la fase 6 fa scattare il prologo della stagione 2', pendingAfterRound([], 6).map(c => c.id).join(',') === 'st2_prologue');
+  const valigetta = content.creatures.find(c => c.id === 'c_valigetta');
+  check("trovare Valigetta fa scattare il suo capitolo e poi l'epilogo 3", pendingAfterRound([valigetta]).map(c => c.id).join(',') === 'st3_travel,st3_epilogue');
+  check('aprire la fase 9 fa scattare il prologo della stagione 3', pendingAfterRound([], 9).map(c => c.id).join(',') === 'st3_prologue');
   check('a inizio gioco il prologo 2 non e\' disponibile ne\' in sospeso', !isAvailable(capitoli.find(c => c.id === 'st2_prologue')) && pendingAtStart().length === 1);
   check('ogni creatura della storia ha il suo capitolo', conCreatura.every(c => chapterForCreature(c.creatureId) === c));
   check('i percorsi audio della storia sono distinti',
@@ -391,7 +394,20 @@ async function run() {
   check('una figura spuntata si prende toccandola, non altrove', talpe.hit(cx, cy) === h1 && talpe.hit(5, 5) === null);
   h1.mole.up = 0.2;
   check('una figura ancora nel buco non si prende', talpe.hit(cx, h1.cy * 400 - r * 0.2) === null);
-  check('il gioco bonus non si ripete due volte di fila', pickBonus('bubbles', () => 0) === 'moles' && pickBonus('moles', () => 0) === 'bubbles');
+  check('il gioco bonus non si ripete due volte di fila', BONUS_GAMES.length === 3 && pickBonus('bubbles', () => 0) !== 'bubbles' && pickBonus('basket', () => 0.99) !== 'basket');
+
+  /* --- Il cestino --------------------------------------------------- */
+  const cesto = new BasketWorld({ w: 600, h: 400, items: sei, rng: () => 0.5 });
+  cesto.setTarget(sei[0]);
+  cesto.moveBasket(-100);
+  check('il cestino non esce dai bordi', cesto.basket.x === cesto.basket.w / 2);
+  const g = cesto.drop(); g.item = sei[0]; g.x = 300; cesto.moveBasket(300);
+  let cestoPresi = [];
+  for (let k = 0; k < 200 && !cestoPresi.length; k++) cestoPresi = cesto.step(0.05);
+  check('la figura giusta che cade nel cestino viene presa', cestoPresi.length === 1 && cestoPresi[0] === g);
+  const cattiva = cesto.drop(); cattiva.item = sei[1]; cattiva.x = 300; cattiva.y = 300;
+  let presi2 = []; for (let k = 0; k < 40; k++) presi2 = presi2.concat(cesto.step(0.05));
+  check('la figura sbagliata rimbalza via senza essere presa', presi2.length === 0 && cattiva.bounced === true);
 
   /* --- i distintivi ------------------------------------------------- */
   resetSave();

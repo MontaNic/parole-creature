@@ -7948,9 +7948,447 @@
             "it": "Che festa! E domani? Domani si ricomincia a giocare. Ci sono sempre parole nuove."
           }
         ]
+      },
+      {
+        "id": "st3_prologue",
+        "order": 30,
+        "number": null,
+        "season": 3,
+        "title_it": "La mappa",
+        "trigger": {
+          "type": "phase",
+          "value": 9
+        },
+        "creatureId": "c_pepe",
+        "worldId": null,
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Dopo la festa, Festino regalò a Pepe una mappa. C'era l'isola, e intorno c'era tutto il resto: il mondo."
+          },
+          {
+            "who": "narrator",
+            "it": "Per partire serviva un biglietto, e il biglietto lo dava chi conosceva la città grande e le sue parole."
+          },
+          {
+            "who": "pepe",
+            "it": "Il mondo! Va bene: imparo tutto quello che serve, e poi si parte!"
+          }
+        ]
+      },
+      {
+        "id": "st3_portrait",
+        "order": 31,
+        "number": 21,
+        "season": 3,
+        "title_it": "Il Ritratto",
+        "trigger": {
+          "type": "world",
+          "value": "world_portrait"
+        },
+        "creatureId": "c_specchietto",
+        "worldId": "world_portrait",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Specchietto sapeva mostrare tutti, ma non sapeva dire come erano fatti. Alto, basso, con gli occhiali, con la barba."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe glielo insegnò guardandosi dentro. E lo specchio, per la prima volta, parlò."
+          },
+          {
+            "who": "pepe",
+            "it": "Specchietto, guarda: io ho un orecchio nero e uno marrone! Dillo tu!"
+          },
+          {
+            "who": "creature",
+            "en": "She has got long hair. He is tall. I've got two ears!",
+            "it": "Lei ha i capelli lunghi. Lui è alto. Io ho due orecchie!"
+          }
+        ]
+      },
+      {
+        "id": "st3_animals",
+        "order": 32,
+        "number": 22,
+        "season": 3,
+        "title_it": "La Fattoria e lo Zoo",
+        "trigger": {
+          "type": "world",
+          "value": "world_animals"
+        },
+        "creatureId": "c_chicco",
+        "worldId": "world_animals",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Chicco il pulcino viveva in fattoria con dieci animali, ma non sapeva dire chi sapeva fare cosa."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe glielo chiese uno per uno. Can a duck swim? Yes, it can!"
+          },
+          {
+            "who": "pepe",
+            "it": "Chicco, la scimmia sa arrampicarsi! E la mucca sa volare? No!"
+          },
+          {
+            "who": "creature",
+            "en": "The lion is big and strong. Can a cow fly? No, it can't!",
+            "it": "Il leone è grande e forte. Una mucca sa volare? No!"
+          }
+        ]
+      },
+      {
+        "id": "st3_sport",
+        "order": 33,
+        "number": 23,
+        "season": 3,
+        "title_it": "Lo Sport e i Giochi",
+        "trigger": {
+          "type": "world",
+          "value": "world_sport"
+        },
+        "creatureId": "c_golino",
+        "worldId": "world_sport",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Golino cambiava sport preferito ogni giorno, e ogni giorno non sapeva come dirlo."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe giocò con lui a tutto: calcio, scacchi, aquilone. E imparò a dire cosa le piaceva."
+          },
+          {
+            "who": "pepe",
+            "it": "Golino, mi piace giocare a calcio! Il mio sport preferito? Correre!"
+          },
+          {
+            "who": "creature",
+            "en": "I like playing football. My favourite sport is tennis. Let's play!",
+            "it": "Mi piace giocare a calcio. Il mio sport preferito è il tennis. Giochiamo!"
+          }
+        ]
+      },
+      {
+        "id": "st3_jobs",
+        "order": 34,
+        "number": 24,
+        "season": 3,
+        "title_it": "I Mestieri",
+        "trigger": {
+          "type": "world",
+          "value": "world_jobs"
+        },
+        "creatureId": "c_timbrino",
+        "worldId": "world_jobs",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Timbrino aveva timbrato tutti i mestieri della città, ma nessuno gli aveva mai chiesto cosa volesse fare lui."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe glielo chiese. What do you want to be? E Timbrino ci pensò a lungo."
+          },
+          {
+            "who": "pepe",
+            "it": "Timbrino, io da grande voglio fare... la viaggiatrice!"
+          },
+          {
+            "who": "creature",
+            "en": "What do you want to be? I want to be a pilot!",
+            "it": "Cosa vuoi fare da grande? Voglio fare il pilota!"
+          }
+        ]
+      },
+      {
+        "id": "st3_city",
+        "order": 35,
+        "number": 25,
+        "season": 3,
+        "title_it": "La Città",
+        "trigger": {
+          "type": "world",
+          "value": "world_city"
+        },
+        "creatureId": "c_semaforino",
+        "worldId": "world_city",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Nella città grande Semaforino diventava verde e rosso, ma nessuno sapeva dove andare."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe imparò le direzioni. Turn left, go straight on. E la città smise di essere un labirinto."
+          },
+          {
+            "who": "pepe",
+            "it": "Semaforino, la biblioteca? Gira a sinistra, poi dritto!"
+          },
+          {
+            "who": "creature",
+            "en": "Turn left! Go straight on! The station is next to the library.",
+            "it": "Gira a sinistra! Vai dritto! La stazione è accanto alla biblioteca."
+          }
+        ]
+      },
+      {
+        "id": "st3_market",
+        "order": 36,
+        "number": 26,
+        "season": 3,
+        "title_it": "Il Mercato",
+        "trigger": {
+          "type": "world",
+          "value": "world_market"
+        },
+        "creatureId": "c_monetina",
+        "worldId": "world_market",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Al mercato Monetina valeva sempre quanto serviva, ma nessuno sapeva chiedere quanto costasse."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe imparò a chiedere. How much is it? E le decine, una alla volta."
+          },
+          {
+            "who": "pepe",
+            "it": "Monetina, quanto costa il biglietto per il mondo? Trenta? Cinquanta?"
+          },
+          {
+            "who": "creature",
+            "en": "How much is it? Fifty euros. That's cheap!",
+            "it": "Quanto costa? Cinquanta euro. È economico!"
+          }
+        ]
+      },
+      {
+        "id": "st3_doctor",
+        "order": 37,
+        "number": 27,
+        "season": 3,
+        "title_it": "Dal Dottore",
+        "trigger": {
+          "type": "world",
+          "value": "world_doctor"
+        },
+        "creatureId": "c_cerottino",
+        "worldId": "world_doctor",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Prima di partire Pepe si ammalò: mal di testa, febbre, tosse. Cerottino arrivò prima ancora che chiamasse."
+          },
+          {
+            "who": "narrator",
+            "it": "Il dottore le chiese cosa avesse, e lei seppe rispondere."
+          },
+          {
+            "who": "pepe",
+            "it": "Cerottino, ho mal di testa e la tosse. Che medicina prendo?"
+          },
+          {
+            "who": "creature",
+            "en": "What's the matter? I've got a headache. Take this medicine. Get well soon!",
+            "it": "Cosa c'è? Ho mal di testa. Prendi questa medicina. Guarisci presto!"
+          }
+        ]
+      },
+      {
+        "id": "st3_nature",
+        "order": 38,
+        "number": 28,
+        "season": 3,
+        "title_it": "La Natura",
+        "trigger": {
+          "type": "world",
+          "value": "world_nature"
+        },
+        "creatureId": "c_sassolino",
+        "worldId": "world_nature",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Guarita, Pepe salì con Sassolino sulla montagna più alta dell'isola. Da lassù si vedeva tutto."
+          },
+          {
+            "who": "narrator",
+            "it": "Un fiume, un lago, una foresta, e in fondo il mare. There is, there are: le parole per dire cosa c'è."
+          },
+          {
+            "who": "pepe",
+            "it": "Sassolino, c'è un fiume! Ci sono tre montagne! E là c'è il mare!"
+          },
+          {
+            "who": "creature",
+            "en": "There is a river. There are three mountains. Is there a lake? Yes, there is!",
+            "it": "C'è un fiume. Ci sono tre montagne. C'è un lago? Sì!"
+          }
+        ]
+      },
+      {
+        "id": "st3_routine",
+        "order": 39,
+        "number": 29,
+        "season": 3,
+        "title_it": "La Mia Giornata",
+        "trigger": {
+          "type": "world",
+          "value": "world_routine"
+        },
+        "creatureId": "c_pigiamino",
+        "worldId": "world_routine",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Pigiamino sapeva a che ora si fa tutto, e pretendeva che Pepe raccontasse la sua giornata dall'inizio."
+          },
+          {
+            "who": "narrator",
+            "it": "Mi alzo alle sette, mi lavo i denti, vado a scuola. Alle otto e mezza a letto."
+          },
+          {
+            "who": "pepe",
+            "it": "Pigiamino, mi alzo alle sette! E vado a letto... alle otto e mezza. Uffa."
+          },
+          {
+            "who": "creature",
+            "en": "I get up at seven o'clock. What time do you go to bed? At half past eight.",
+            "it": "Mi alzo alle sette. A che ora vai a letto? Alle otto e mezza."
+          }
+        ]
+      },
+      {
+        "id": "st3_doing",
+        "order": 40,
+        "number": 30,
+        "season": 3,
+        "title_it": "Cosa Stai Facendo?",
+        "trigger": {
+          "type": "world",
+          "value": "world_doing"
+        },
+        "creatureId": "c_riflesso",
+        "worldId": "world_doing",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Riflesso faceva tutto quello che faceva Pepe, un secondo dopo. Ma non sapeva dirlo."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe glielo chiese mentre lo faceva. What are you doing? I'm reading!"
+          },
+          {
+            "who": "pepe",
+            "it": "Riflesso, cosa stai facendo? Ah già: quello che faccio io!"
+          },
+          {
+            "who": "creature",
+            "en": "What are you doing? I'm reading. Is she cooking? Yes, she is!",
+            "it": "Cosa stai facendo? Sto leggendo. Lei sta cucinando? Sì!"
+          }
+        ]
+      },
+      {
+        "id": "st3_months",
+        "order": 41,
+        "number": 31,
+        "season": 3,
+        "title_it": "I Mesi e le Feste",
+        "trigger": {
+          "type": "world",
+          "value": "world_months"
+        },
+        "creatureId": "c_zucchetta",
+        "worldId": "world_months",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Zucchetta conosceva tutte le feste dell'anno, ma non i mesi in cui cadevano."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe sfogliò il calendario con lei: gennaio, febbraio, marzo. Natale a dicembre, Halloween a ottobre."
+          },
+          {
+            "who": "pepe",
+            "it": "Zucchetta, il mio compleanno è a... settembre! E il tuo, a ottobre?"
+          },
+          {
+            "who": "creature",
+            "en": "My birthday is in March. Christmas is in December. Trick or treat!",
+            "it": "Il mio compleanno è a marzo. Natale è a dicembre. Dolcetto o scherzetto!"
+          }
+        ]
+      },
+      {
+        "id": "st3_travel",
+        "order": 42,
+        "number": 32,
+        "season": 3,
+        "title_it": "Ieri e Domani",
+        "trigger": {
+          "type": "world",
+          "value": "world_travel"
+        },
+        "creatureId": "c_valigetta",
+        "worldId": "world_travel",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Valigetta era pronta da sempre. Mancava solo che Pepe sapesse dire dove era stata e dove sarebbe andata."
+          },
+          {
+            "who": "narrator",
+            "it": "Ieri ero al parco. Domani vado al mare. E dopodomani, il mondo."
+          },
+          {
+            "who": "pepe",
+            "it": "Valigetta, ieri ero sull'isola. Domani... si parte!"
+          },
+          {
+            "who": "creature",
+            "en": "Yesterday I was at the park. Tomorrow I am going to the beach. We are going on holiday!",
+            "it": "Ieri ero al parco. Domani vado in spiaggia. Andiamo in vacanza!"
+          }
+        ]
+      },
+      {
+        "id": "st3_epilogue",
+        "order": 43,
+        "number": null,
+        "season": 3,
+        "title_it": "Il biglietto",
+        "trigger": {
+          "type": "world",
+          "value": "world_travel"
+        },
+        "creatureId": null,
+        "worldId": null,
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Il biglietto arrivò con tutte le creature insieme, dalla Valle dei Draghi fino alla città grande. Pepe salì sull'aereo con la mappa in tasca."
+          },
+          {
+            "who": "narrator",
+            "it": "Aveva imparato a dire chi era, cosa le piaceva, dove andare, come stava, cosa aveva fatto e cosa avrebbe fatto. Cioè tutto quello che serve per cominciare."
+          },
+          {
+            "who": "pepe",
+            "it": "Ciao, isola! Ciao, creature! Torno presto, con parole nuove. Continuiamo a giocare?"
+          }
+        ]
       }
     ],
-    "_seasons_comment": "Stagione 1 (fasi 1-3): l'isola dove le creature hanno perso le parole. Stagione 2 (fasi 6-8): la lettera, il paese delle persone e la festa finale. Il prologo 2 scatta quando si apre la fase 6; l'epilogo 2 dopo Festino."
+    "_seasons_comment": "Stagione 1 (fasi 1-3): l'isola dove le creature hanno perso le parole. Stagione 2 (fasi 6-8): la lettera, il paese delle persone e la festa finale. Il prologo 2 scatta quando si apre la fase 6; l'epilogo 2 dopo Festino. Stagione 3 (fasi 9-11): la mappa, la città grande e il biglietto per il mondo. Il prologo 3 scatta quando si apre la fase 9; l'epilogo 3 dopo Valigetta."
   },
   "stickers": {
     "_comment": "Gli adesivi degli scrigni a sorpresa: parole da collezione, illustrazione e audio della parola. Gli id sk_* sono permanenti (save.progress.stickers).",

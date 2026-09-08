@@ -56,7 +56,7 @@ export function bubblePool(items, extra = []) {
 /* Quale gioco (puro)                                                  */
 /* ------------------------------------------------------------------ */
 
-export const BONUS_GAMES = ['bubbles', 'moles'];
+export const BONUS_GAMES = ['bubbles', 'moles', 'basket'];
 
 /** A caso fra i giochi, senza ripetere l'ultimo giocato. */
 export function pickBonus(last, rng = Math.random) {
@@ -375,6 +375,68 @@ export async function playBubbles(o) {
 
 
 /* ------------------------------------------------------------------ */
+/* Il cestino: il modello                                              */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Le figure cadono dall'alto; sotto c'e' un cestino che si trascina a
+ * destra e a sinistra. Si prende solo quella detta dalla voce: le altre
+ * rimbalzano via dal bordo del cestino senza costare nulla. E' il gioco
+ * col controllo continuo che manca a Bolle e Spunta.
+ */
+export class BasketWorld {
+  constructor({ w, h, items, rng = Math.random }) {
+    this.w = w; this.h = h; this.items = items; this.rng = rng;
+    this.falling = [];
+    this.basket = { x: w / 2, w: Math.max(120, Math.min(w * 0.26, 220)), h: 26 };
+    this.target = null;
+    this.clock = 0;
+    this.nextDrop = 0.5;
+    this.interval = 1.25;
+    this.speed = Math.max(90, h * 0.22);
+    this.sinceTarget = 0;
+    this.seq = 0;
+  }
+
+  radius() { return Math.max(34, Math.min(this.w, this.h) * 0.1); }
+
+  /** Lascia cadere una figura: il bersaglio entro due cadute, altrimenti a caso. */
+  drop() {
+    const r = this.radius();
+    const visibleTarget = this.falling.some(f => f.item === this.target);
+    let item;
+    if (this.target && !visibleTarget && (this.sinceTarget >= 1 || this.rng() < 0.45)) { item = this.target; this.sinceTarget = 0; }
+    else { const others = this.items.filter(it => it !== this.target); item = others[Math.floor(this.rng() * others.length)] || this.target; this.sinceTarget += 1; }
+    const f = { id: ++this.seq, item, x: r + this.rng() * Math.max(1, this.w - 2 * r), y: -r, r, vy: this.speed * (0.85 + this.rng() * 0.3), bounced: false };
+    this.falling.push(f);
+    return f;
+  }
+
+  moveBasket(x) { this.basket.x = Math.min(this.w - this.basket.w / 2, Math.max(this.basket.w / 2, x)); }
+
+  /** Avanza di dt secondi; restituisce le figure che sono entrate nel cestino. */
+  step(dt) {
+    this.clock += dt;
+    if (this.clock >= this.nextDrop) { this.drop(); this.nextDrop = this.clock + this.interval; this.interval = Math.max(0.8, this.interval * 0.985); }
+    const caught = [];
+    const top = this.h - this.basket.h - 10;
+    for (const f of this.falling) {
+      f.y += f.vy * dt;
+      const inX = Math.abs(f.x - this.basket.x) < this.basket.w / 2;
+      if (!f.bounced && f.y + f.r >= top && f.y < top + this.basket.h && inX) {
+        if (f.item === this.target) caught.push(f);
+        else { f.bounced = true; f.vy = -f.vy * 0.5; f.vx = (f.x < this.basket.x ? -1 : 1) * 120; }
+      }
+      if (f.bounced) { f.x += (f.vx || 0) * dt; f.vy += 500 * dt; }
+    }
+    this.falling = this.falling.filter(f => !caught.includes(f) && f.y - f.r < this.h + 40);
+    return caught;
+  }
+
+  setTarget(item) { this.target = item; this.sinceTarget = 0; }
+}
+
+/* ------------------------------------------------------------------ */
 /* Spunta!: il gioco sullo schermo                                     */
 /* ------------------------------------------------------------------ */
 
@@ -515,10 +577,137 @@ export async function playMoles(o) {
 }
 
 /* ------------------------------------------------------------------ */
+/* Il cestino: il gioco sullo schermo                                  */
+/* ------------------------------------------------------------------ */
+
+export async function playBasket(o) {
+  const items = o.items.slice(0, 6);
+  const seconds = o.seconds ?? CONFIG.bonus.seconds;
+  const rng = o.rng || Math.random;
+  const stage = document.getElementById('bonus-stage');
+  const canvas = document.getElementById('bonus-canvas');
+  const target = document.getElementById('bonus-target');
+  const scoreEl = document.getElementById('bonus-score');
+  const timeEl = document.getElementById('bonus-time');
+  const end = document.getElementById('bonus-end');
+  const skip = document.getElementById('bonus-skip');
+  const ctx = canvas.getContext('2d');
+  end.hidden = true; end.innerHTML = '';
+  scoreEl.textContent = '0';
+  timeEl.style.width = '100%';
+  showScreen('bonus');
+
+  const images = new Map(await Promise.all(items.map(async it => [it.sprite, await loadImage(it.sprite)])));
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const fit = () => {
+    const r = stage.getBoundingClientRect();
+    canvas.width = Math.floor(r.width * dpr); canvas.height = Math.floor(r.height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return r;
+  };
+  let rect = fit();
+  const world = new BasketWorld({ w: rect.width, h: rect.height, items, rng });
+  const onResize = () => { rect = fit(); world.w = rect.width; world.h = rect.height; };
+  window.addEventListener('resize', onResize);
+
+  let score = 0;
+  let current = null;
+  let finished = false;
+  const nextTarget = () => {
+    const scelte = items.filter(it => it !== current);
+    current = scelte[Math.floor(rng() * scelte.length)] || items[0];
+    world.setTarget(current);
+    target.innerHTML = '';
+    target.appendChild(audioOrb(current));
+    if (o.showWritten) target.appendChild(el('p', 'word-written', current.en));
+    else target.appendChild(el('p', 'game-prompt', t('bonus.basket_prompt')));
+    stopVoice(); speakItem(current);
+  };
+
+  const draw = () => {
+    ctx.clearRect(0, 0, rect.width, rect.height);
+    for (const f of world.falling) {
+      const img = images.get(f.item.sprite);
+      const d = f.r * 2;
+      if (img) ctx.drawImage(img, f.x - d / 2, f.y - d / 2, d, d);
+    }
+    // il cestino: una ciotola ambra col bordo scuro
+    const b = world.basket; const by = rect.height - b.h - 10;
+    ctx.beginPath();
+    ctx.moveTo(b.x - b.w / 2, by); ctx.lineTo(b.x + b.w / 2, by);
+    ctx.lineTo(b.x + b.w / 2 - 14, by + b.h + 12); ctx.lineTo(b.x - b.w / 2 + 14, by + b.h + 12); ctx.closePath();
+    ctx.fillStyle = '#FFB02E'; ctx.fill(); ctx.lineWidth = 4; ctx.strokeStyle = '#2B2140'; ctx.stroke();
+    ctx.beginPath(); ctx.ellipse(b.x, by, b.w / 2, 7, 0, 0, Math.PI * 2);
+    ctx.fillStyle = '#C9821A'; ctx.fill(); ctx.stroke();
+  };
+
+  const t0 = performance.now();
+  let last = t0;
+  let raf = 0;
+  const loop = (now) => {
+    if (finished) return;
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    const caught = world.step(dt);
+    for (const f of caught) {
+      score += 1; scoreEl.textContent = String(score);
+      sfxCorrect(score % 3);
+      const r = canvas.getBoundingClientRect();
+      burstConfetti(r.left + f.x, r.top + f.y);
+      nextTarget();
+    }
+    draw();
+    const left = Math.max(0, 1 - (now - t0) / (seconds * 1000));
+    timeEl.style.width = `${left * 100}%`;
+    if (left <= 0) { fine(); return; }
+    raf = requestAnimationFrame(loop);
+  };
+
+  // Il cestino segue il dito (o il mouse) finche' e' premuto, o anche solo il tocco.
+  const onMove = (ev) => {
+    if (finished) return;
+    const r = canvas.getBoundingClientRect();
+    world.moveBasket(ev.clientX - r.left);
+  };
+  const onDown = (ev) => { onMove(ev); canvas.setPointerCapture?.(ev.pointerId); };
+  canvas.addEventListener('pointerdown', onDown);
+  canvas.addEventListener('pointermove', onMove);
+
+  let risolvi;
+  const done = new Promise(res => { risolvi = res; });
+  const fine = () => {
+    if (finished) return;
+    finished = true;
+    cancelAnimationFrame(raf);
+    canvas.removeEventListener('pointerdown', onDown);
+    canvas.removeEventListener('pointermove', onMove);
+    window.removeEventListener('resize', onResize);
+    skip.onclick = null;
+    stopVoice();
+    save.stats.bonusPlayed = (save.stats.bonusPlayed || 0) + 1;
+    save.daily.bonusCount = (save.daily.bonusCount || 0) + 1;
+    persist(true);
+    end.innerHTML = '';
+    end.appendChild(el('p', 'h-title', t('bonus.done')));
+    end.appendChild(el('p', 'h-sub', t('bonus.caught').replace('{n}', score)));
+    const go = el('button', 'btn btn-lg', t('ui.continue_button'));
+    end.appendChild(go);
+    end.hidden = false;
+    mascotSay('bonus_end', {});
+    go.onclick = () => { sfxTap(); stopVoice(); risolvi({ popped: score }); };
+  };
+  skip.onclick = () => { sfxTap(); fine(); };
+
+  playBasket.world = world;
+  nextTarget();
+  raf = requestAnimationFrame(loop);
+  return done;
+}
+
+/* ------------------------------------------------------------------ */
 /* Il dispatcher: quale gioco bonus, e via                             */
 /* ------------------------------------------------------------------ */
 
-const GIOCHI = { bubbles: playBubbles, moles: playMoles };
+const GIOCHI = { bubbles: playBubbles, moles: playMoles, basket: playBasket };
 
 /** Sceglie un gioco bonus (mai lo stesso due volte di fila) e lo gioca. */
 export async function playBonus(o) {

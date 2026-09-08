@@ -42,8 +42,8 @@ trasforma l'attesa in ascolto: il bambino sente "castle" e cerca il
 castello fra le cose che spuntano. Costo basso: stesse immagini, stesso
 contratto, un canvas.
 
-Terzo, quando servira': **"Il cestino"**, per il controllo continuo che
-manca agli altri due. "Taglia!" e' il quarto: lo swipe e' bellissimo ma
+Terzo, fatto l'8 settembre: **"Il cestino"**, per il controllo continuo che
+manca agli altri due (`BasketWorld` in `js/bonus.js`). "Taglia!" e' il quarto: lo swipe e' bellissimo ma
 sull'iPad nell'app a schermo intero rischia di litigare con i gesti di
 sistema ai bordi.
 
