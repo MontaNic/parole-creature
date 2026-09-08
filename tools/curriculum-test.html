@@ -472,6 +472,10 @@ async function run() {
   check('una risposta giusta non chiude una missione a casa', trackMissionEvent({ correct: true }) === false && !save.daily.missionDone);
   check('la conferma di un adulto la chiude', trackMissionEvent({ home: true }) === true && save.daily.missionDone);
 
+  /* --- prima del cartone --------------------------------------------- */
+  check('ogni cartone ha dieci parole e tre frasi del gioco da fare prima',
+    content.media.every(m => m.prepWords?.length === 10 && m.prepPhrases?.length === 3 && [...m.prepWords, ...m.prepPhrases].every(id => getItem(id))));
+
   resetSave();
 
   const v = document.createElement('div');

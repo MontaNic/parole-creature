@@ -8967,37 +8967,145 @@
       "title": "Peppa Pig (inglese, sottotitoli italiani)",
       "phase": 5,
       "level_it": "Dopo la fase 1",
-      "note": "Episodi di 5 minuti, lessico quotidiano semplicissimo e molto ripetuto."
+      "note": "Episodi di 5 minuti, lessico quotidiano semplicissimo e molto ripetuto.",
+      "id": "media_peppa_pig",
+      "prepWords": [
+        "w_pig",
+        "w_mum",
+        "w_dad",
+        "w_brother",
+        "w_jump",
+        "w_rainy",
+        "w_house",
+        "w_friend",
+        "w_happy",
+        "w_play"
+      ],
+      "prepPhrases": [
+        "p_i_can_jump",
+        "p_my_mum",
+        "p_i_am_hungry"
+      ]
     },
     {
       "title": "Bluey (inglese, sottotitoli italiani)",
       "phase": 5,
       "level_it": "Dopo la fase 1",
-      "note": "Frasi brevi e situazioni familiari. Accento australiano chiaro."
+      "note": "Frasi brevi e situazioni familiari. Accento australiano chiaro.",
+      "id": "media_bluey",
+      "prepWords": [
+        "w_dog",
+        "w_dad",
+        "w_mum",
+        "w_sister",
+        "w_play",
+        "w_dance",
+        "w_garden",
+        "w_run",
+        "w_laughing",
+        "w_ball"
+      ],
+      "prepPhrases": [
+        "p_can_you_sing",
+        "p_lets_go_park",
+        "p_they_are_laughing"
+      ]
     },
     {
       "title": "Ben and Holly's Little Kingdom (inglese, sottotitoli italiani)",
       "phase": 5,
       "level_it": "Durante la fase 2 — tema magia",
-      "note": "Perfetto per chi ama fate e folletti: lessico fantasy semplice."
+      "note": "Perfetto per chi ama fate e folletti: lessico fantasy semplice.",
+      "id": "media_ben_and_hollys_little_ki",
+      "prepWords": [
+        "w_castle",
+        "w_wizard",
+        "w_tree",
+        "w_flower",
+        "w_cake",
+        "w_bird",
+        "w_small",
+        "w_big",
+        "w_fly",
+        "w_party"
+      ],
+      "prepPhrases": [
+        "p_i_can_swim",
+        "p_where_cat",
+        "p_how_much_ten"
+      ]
     },
     {
       "title": "Dragons: Rescue Riders (inglese, sottotitoli inglesi)",
       "phase": 5,
       "level_it": "Durante la fase 3 — tema draghi",
-      "note": "Draghi parlanti, frasi piu' lunghe. Passare ai sottotitoli inglesi qui."
+      "note": "Draghi parlanti, frasi piu' lunghe. Passare ai sottotitoli inglesi qui.",
+      "id": "media_dragons_rescue_riders",
+      "prepWords": [
+        "w_dragon",
+        "w_fly",
+        "w_egg",
+        "w_castle",
+        "w_sea",
+        "w_boat",
+        "w_fast",
+        "w_big",
+        "w_friend",
+        "w_hot"
+      ],
+      "prepPhrases": [
+        "p_can_you_fly",
+        "p_lion_strong",
+        "p_lets_go_beach"
+      ]
     },
     {
       "title": "Gigantosaurus (inglese, sottotitoli inglesi)",
       "phase": 5,
       "level_it": "Durante la fase 3 — tema dinosauri",
-      "note": "Dinosauri e avventura, ritmo dei dialoghi ancora gestibile."
+      "note": "Dinosauri e avventura, ritmo dei dialoghi ancora gestibile.",
+      "id": "media_gigantosaurus",
+      "prepWords": [
+        "w_dinosaur",
+        "w_big",
+        "w_small",
+        "w_run",
+        "w_scared",
+        "w_forest",
+        "w_egg",
+        "w_friend",
+        "w_fast",
+        "w_nest"
+      ],
+      "prepPhrases": [
+        "p_i_am_scared",
+        "p_pepe_running",
+        "p_there_is_river"
+      ]
     },
     {
       "title": "How to Train Your Dragon — film (inglese, sottotitoli inglesi)",
       "phase": 5,
       "level_it": "Dopo la fase 3 — traguardo",
-      "note": "Da tenere come premio quando le frasi della fase 3 sono solide."
+      "note": "Da tenere come premio quando le frasi della fase 3 sono solide.",
+      "id": "media_how_to_train_your_dragon",
+      "prepWords": [
+        "w_dragon",
+        "w_fly",
+        "w_sea",
+        "w_island",
+        "w_boat",
+        "w_fast",
+        "w_friend",
+        "w_night",
+        "w_mountain",
+        "w_hot"
+      ],
+      "prepPhrases": [
+        "p_can_you_fly",
+        "p_island_sea",
+        "p_there_are_mountains"
+      ]
     }
   ],
   "_ebooks_comment": "I mini-ebook hanno le pagine dentro (pages: sprite + testo inglese) e si leggono nel gioco con audio; la scheda (targetWords, structures) resta per chi vuole rigenerarli per Kindle.",

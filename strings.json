@@ -277,6 +277,8 @@
     "ebooks_locked": "Si sblocca completando il mondo",
     "ebooks_copy_prompt": "Copia il prompt di generazione",
     "ebooks_prompt_copied": "Prompt copiato!",
+    "media_prepare": "Prepara il bambino: le parole del cartone",
+    "media_prepare_hint": "Dieci parole del gioco che nel cartone si sentono davvero, e tre frasi. Da fare prima di guardarlo: dieci appigli invece del freddo.",
     "media_intro": "Suggerimenti audiovisivi in inglese, in ordine di difficolta' crescente.",
     "export": "Esporta salvataggio",
     "export_hint": "Scarica un file di backup dei progressi. Consigliato ogni tanto: se il browser cancella i dati del sito, senza backup i progressi vanno persi.",

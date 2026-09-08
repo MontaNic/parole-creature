@@ -1289,6 +1289,16 @@ davvero?") chiude la missione con la festa di sempre. Non e' una
 garanzia di trasferimento, ma il gioco smette di far finta che tutto
 succeda sullo schermo. `trackMissionEvent({ home: true })`, testato.
 
+### 3. "Prima del cartone"
+
+La fase 5 era un elenco di cartoni consigliati. Ora ogni cartone ha dieci
+parole del gioco che ci si sentono davvero e tre frasi, e nell'area
+genitori un bottone "Prepara il bambino" apre un passaggio di lettura
+(lo stesso lettore dei libretti: figura, parola in Andika, audio, avanti)
+da fare prima di guardare. Nessuna parola nuova, nessun audio nuovo: il
+punto e' che il bambino entri nel cartone con dieci appigli, non a
+freddo. Il lettore accetta pagine con un audio proprio (`rel`).
+
 ## Prossimi passi
 
 **Stato al 9 settembre 2026**: dal riconoscere al produrre (versione 3.3.0):

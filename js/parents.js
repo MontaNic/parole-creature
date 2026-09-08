@@ -27,6 +27,7 @@ import { applyVolumes, sfxTap, speakMascot } from './audio.js';
 import { lastDays, accuracyOf, successReport } from './history.js';
 import { masteredWordIds, pickCheckItems, daysSinceLastCheck, checkDue, saveCheck, itemLabel, CHECK_SIZE } from './checkup.js';
 import { speakItem } from './audio.js';
+import { openBook } from './books.js';
 
 function el(tag, cls, text) {
   const n = document.createElement(tag);
@@ -553,6 +554,17 @@ function panelMedia() {
     box.appendChild(el('h3', null, m.title));
     box.appendChild(el('div', 'hint', m.level_it || ''));
     box.appendChild(el('div', 'hint', m.note || ''));
+    if (m.prepWords?.length) {
+      const prep = el('button', 'btn btn-cool btn-parent-small', t('parents.media_prepare'));
+      prep.onclick = () => {
+        sfxTap();
+        const pages = [...m.prepWords, ...(m.prepPhrases || [])].map(getItem).filter(Boolean)
+          .map(it => ({ sprite: it.sprite, en: it.en, rel: `en/${it.id}.mp3` }));
+        openBook({ id: m.id, title: m.title.split(' (')[0], pages }).then(() => openParents(onExit));
+      };
+      box.appendChild(prep);
+      box.appendChild(el('div', 'hint', t('parents.media_prepare_hint')));
+    }
     p.appendChild(box);
   });
   return p;

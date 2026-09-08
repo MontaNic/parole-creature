@@ -78,21 +78,22 @@ export function openBook(book) {
       art.innerHTML = '';
       art.appendChild(spriteSvg(p.sprite));
       text.innerHTML = '';
-      const orb = audioOrb({ id: `book.${book.id}.${i}`, en: p.en, kind: 'phrase', _rel: pageAudio(book, i) });
+      const rel = p.rel || pageAudio(book, i);
+      const orb = audioOrb({ id: `book.${book.id}.${i}`, en: p.en, kind: 'phrase', _rel: rel });
       orb.classList.add('book-orb');
       text.appendChild(orb);
       text.appendChild(el('p', 'book-line', p.en));
       prev.hidden = i === 0;
       next.textContent = t(last ? 'books.the_end' : 'books.next');
       stopVoice();
-      await speakLine(pageAudio(book, i), p.en, 'en-GB');
+      await speakLine(rel, p.en, 'en-GB');
       if (my !== token) return;
     };
     prev.onclick = () => { sfxTap(); if (i > 0) { i -= 1; show(); } };
     next.onclick = () => {
       sfxTap();
       if (i < book.pages.length - 1) { i += 1; show(); return; }
-      markRead(book);
+      if (!String(book.id).startsWith('media_')) markRead(book);
       finish();
     };
     back.onclick = () => { sfxTap(); finish(); };
