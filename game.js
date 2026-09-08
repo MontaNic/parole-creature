@@ -628,7 +628,8 @@ function registerServiceWorker() {
     const r = ev.data && ev.data.rabbocco;
     if (!r) return;
     window.__rabbocco = { mancanti: r.mancanti, totale: r.totale, giri: window.__rabbocco.giri + 1 };
-    if (r.mancanti > 0 && document.visibilityState === 'visible') setTimeout(chiediRabbocco, 400);
+    // Il worker fa da solo tutti i giri; la pagina lo rilancia solo se e' rimasto qualcosa a fine corsa.
+    if (r.mancanti > 0 && document.visibilityState === 'visible') setTimeout(chiediRabbocco, 5000);
   });
   const chiediRabbocco = () => navigator.serviceWorker.ready
     .then(reg => (reg.active || reg.waiting || reg.installing)?.postMessage('rabbocca'))

@@ -19,7 +19,7 @@
  */
 importScripts('sw-art.js');
 
-const CACHE_VERSION = 'v1.8.9';
+const CACHE_VERSION = 'v1.9.0';
 const SHELL_CACHE = `dp-shell-${CACHE_VERSION}`;
 const AUDIO_CACHE = `dp-audio-${CACHE_VERSION}`;
 
@@ -176,11 +176,30 @@ function topUp() {
   return rabboccoInCorso;
 }
 
+/**
+ * Il rabbocco completo: un giro dopo l'altro finche' non manca nulla, entro
+ * un tetto di tempo. Sta dentro un solo evento del worker, cosi' non
+ * dipende dai timer della pagina, che il browser rallenta quando la scheda
+ * e' ferma o in secondo piano. Dopo ogni giro avvisa la pagina.
+ */
+async function topUpAll(client, tettoMs = 240000) {
+  const inizio = Date.now();
+  let esito = await topUp();
+  while (esito.mancanti > 0 && Date.now() - inizio < tettoMs) {
+    client?.postMessage({ rabbocco: esito });
+    await pausa(150);
+    const prima = esito.mancanti;
+    esito = await topUp();
+    // Se un giro non ha portato nulla (tutti falliti), una pausa prima del prossimo.
+    if (esito.mancanti >= prima) await pausa(3000);
+  }
+  client?.postMessage({ rabbocco: esito });
+  return esito;
+}
+
 self.addEventListener('message', (event) => {
   if (event.data === 'errori-precache') event.source?.postMessage({ erroriPrecache: self.__errori || [] });
-  if (event.data === 'rabbocca') {
-    event.waitUntil(topUp().then(esito => event.source?.postMessage({ rabbocco: esito })));
-  }
+  if (event.data === 'rabbocca') event.waitUntil(topUpAll(event.source));
 });
 
 self.addEventListener('activate', (event) => {
@@ -207,7 +226,7 @@ self.addEventListener('fetch', (event) => {
   }
 
   // A ogni apertura del gioco, un rabbocco in sottofondo: non blocca la pagina.
-  if (req.mode === 'navigate') event.waitUntil(topUp());
+  if (req.mode === 'navigate') event.waitUntil(topUpAll(null));
 
   event.respondWith(staleWhileRevalidate(req, SHELL_CACHE));
 });
