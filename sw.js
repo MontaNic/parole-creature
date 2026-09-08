@@ -19,7 +19,7 @@
  */
 importScripts('sw-art.js');
 
-const CACHE_VERSION = 'v1.8.8';
+const CACHE_VERSION = 'v1.8.9';
 const SHELL_CACHE = `dp-shell-${CACHE_VERSION}`;
 const AUDIO_CACHE = `dp-audio-${CACHE_VERSION}`;
 
@@ -78,26 +78,36 @@ const PARALLELE = 6;
 const TENTATIVI = 3;
 const pausa = (ms) => new Promise(r => setTimeout(r, ms));
 
-/** Un file, con tre tentativi: la CDN puo' rifiutare una raffica, la rete puo' cadere un attimo. */
+/** Una promessa con un limite di tempo: se scade, rifiuta. */
+function conTimeout(promessa, ms, cosa) {
+  let timer;
+  const limite = new Promise((_, rej) => { timer = setTimeout(() => rej(new Error(`timeout ${cosa}`)), ms); });
+  return Promise.race([promessa, limite]).finally(() => clearTimeout(timer));
+}
+
+/**
+ * Un file, con tre tentativi. Tutto il lavoro (fetch + scrittura in cache)
+ * ha un limite di tempo: sulla CDN un fetch, o la lettura del suo corpo,
+ * puo' restare appeso per sempre, e con Promise.all un solo file appeso
+ * bloccava l'intero rabbocco.
+ */
 async function aggiungi(cache, url) {
   let ultimo = null;
   for (let t = 1; t <= TENTATIVI; t++) {
-    // Un timeout per richiesta: sulla CDN qualche fetch dal worker resta
-    // appeso per sempre, e un solo fetch appeso bloccava tutto il rabbocco.
     const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 12000);
     try {
-      const res = await fetch(url, { signal: ctrl.signal });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      await cache.put(url, res);
+      await conTimeout((async () => {
+        const res = await fetch(url, { signal: ctrl.signal });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        await cache.put(url, res);
+      })(), 15000, url);
       return true;
     } catch (err) {
+      ctrl.abort();
       ultimo = err;
       self.__errori = self.__errori || [];
-      if (self.__errori.length < 40) self.__errori.push(`${url}: ${err && err.message}`);
+      if (self.__errori.length < 60) self.__errori.push(`${url}: ${err && err.message}`);
       await pausa(300 * t);
-    } finally {
-      clearTimeout(timer);
     }
   }
   console.warn('[sw] non cachato:', url, ultimo);
@@ -148,7 +158,13 @@ function topUp() {
       const presenti = new Set((await cache.keys()).map(r => r.url));
       const mancanti = voluti.filter(u => !presenti.has(new URL(u, self.location.href).href));
       if (!mancanti.length) return { mancanti: 0, totale: voluti.length };
-      const falliti = await inCoda(cache, mancanti.slice(0, LOTTO));
+      let falliti = 0;
+      try {
+        falliti = await conTimeout(inCoda(cache, mancanti.slice(0, LOTTO)), 60000, 'giro di rabbocco');
+      } catch (err) {
+        console.warn('[sw]', err.message);
+        falliti = LOTTO;   // non si sa quanti: si ricontera' al giro dopo
+      }
       return { mancanti: Math.max(0, mancanti.length - LOTTO) + falliti, totale: voluti.length };
     } catch (err) {
       console.warn('[sw] rabbocco fallito:', err);
@@ -161,6 +177,7 @@ function topUp() {
 }
 
 self.addEventListener('message', (event) => {
+  if (event.data === 'errori-precache') event.source?.postMessage({ erroriPrecache: self.__errori || [] });
   if (event.data === 'rabbocca') {
     event.waitUntil(topUp().then(esito => event.source?.postMessage({ rabbocco: esito })));
   }
