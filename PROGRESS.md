@@ -1020,6 +1020,12 @@ batch senza errori, 126 PNG in precache; la misura ha segnalato pizza
 matita: ora azzurro) e porta (marrone come Maestrino: ora azzurra).
 Audio: 62 tracce inglesi, indice a 281.
 
+Verificato offline sul sito: 126/126 illustrazioni in cache. Nota da
+harness: con 126 PNG (batch da 6) il precache non entra piu' nei 40 s che
+`cache-check-remote` aspettava, e la prova dava 90/126 senza che nulla
+fosse rotto. Ora aspetta 90 s di default (`--attesa` per cambiare); su
+iPad il primo avvio con rete va lasciato aperto un minuto abbondante.
+
 Preparati anche i simboli schematici per la fase 8 in `sprites.svg`:
 numeri 11-20 in cornici da dieci (blu i primi dieci, ambra gli altri),
 sette fogli di calendario con l'abbreviazione inglese in Andika, dodici

@@ -12,7 +12,7 @@
  * ferma a meta' facendo credere a un guasto che non c'e'. Qui il browser
  * vive in tempo reale e lo si guida con il protocollo DevTools.
  *
- * Uso:  node tools/cache-check-remote.mjs [url]     (default: il sito Pages)
+ * Uso:  node tools/cache-check-remote.mjs [url] [--attesa secondi]   (default: il sito Pages, 90 s)
  * Esce con codice 1 se il verdetto non e' PASS.
  */
 
@@ -21,10 +21,12 @@ import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
-const SITO = (process.argv[2] || 'https://montanic.github.io/parole-creature/').replace(/\/?$/, '/');
+const SITO = ((process.argv[2] && !process.argv[2].startsWith('--')) ? process.argv[2] : 'https://montanic.github.io/parole-creature/').replace(/\/?$/, '/');
 const CHROME = process.env.CHROME || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const PORT = 9333;
-const ATTESA_INSTALLAZIONE = 40_000;
+// L'attesa cresce con le illustrazioni: 126 PNG in batch da 6 non entrano in 40 s.
+const attesaArg = process.argv.indexOf('--attesa');
+const ATTESA_INSTALLAZIONE = attesaArg > 0 ? Number(process.argv[attesaArg + 1]) * 1000 : 90_000;
 
 const wait = ms => new Promise(r => setTimeout(r, ms));
 const profilo = mkdtempSync(path.join(tmpdir(), 'pc-cache-'));
