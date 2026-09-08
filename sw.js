@@ -19,7 +19,7 @@
  */
 importScripts('sw-art.js');
 
-const CACHE_VERSION = 'v1.8.0';
+const CACHE_VERSION = 'v1.8.1';
 const SHELL_CACHE = `dp-shell-${CACHE_VERSION}`;
 const AUDIO_CACHE = `dp-audio-${CACHE_VERSION}`;
 
@@ -105,6 +105,34 @@ async function precache() {
   console.log(`[sw] illustrazioni in cache: ${arte.length - falliti}/${arte.length}`);
 }
 
+/**
+ * Rabbocco: cio' che al precache e' fallito (un 404 transitorio della CDN
+ * subito dopo un deploy, una connessione caduta) verrebbe altrimenti
+ * ignorato fino alla versione successiva. Ogni attivazione e ogni apertura
+ * del gioco ricontrollano la lista e scaricano solo i mancanti.
+ */
+let rabboccoInCorso = null;
+function topUp() {
+  if (rabboccoInCorso) return rabboccoInCorso;
+  rabboccoInCorso = (async () => {
+    try {
+      const cache = await caches.open(SHELL_CACHE);
+      const voluti = [...SHELL_ASSETS, ...(self.ART_ASSETS || [])];
+      const presenti = new Set((await cache.keys()).map(r => r.url));
+      const mancanti = voluti.filter(u => !presenti.has(new URL(u, self.location.href).href));
+      if (mancanti.length) {
+        const falliti = await inCoda(cache, mancanti);
+        console.log(`[sw] rabbocco: ${mancanti.length - falliti}/${mancanti.length} recuperati`);
+      }
+    } catch (err) {
+      console.warn('[sw] rabbocco fallito:', err);
+    } finally {
+      rabboccoInCorso = null;
+    }
+  })();
+  return rabboccoInCorso;
+}
+
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
@@ -112,7 +140,7 @@ self.addEventListener('activate', (event) => {
         keys.filter(k => k !== SHELL_CACHE && k !== AUDIO_CACHE)
             .map(k => caches.delete(k))
       ))
-      .then(() => self.clients.claim())
+      .then(() => self.clients.claim()).then(() => topUp())
   );
 });
 
@@ -127,6 +155,9 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(cacheFirst(req, AUDIO_CACHE));
     return;
   }
+
+  // A ogni apertura del gioco, un rabbocco in sottofondo: non blocca la pagina.
+  if (req.mode === 'navigate') event.waitUntil(topUp());
 
   event.respondWith(staleWhileRevalidate(req, SHELL_CACHE));
 });
