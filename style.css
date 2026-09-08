@@ -330,6 +330,7 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
   la griglia. dvh segue la barra di Safari che appare e sparisce.
 */
 .play-area {
+  position: relative;
   flex: 1; overflow: hidden;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 14px; padding: 4px 16px 12px;
@@ -451,7 +452,13 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 
 /* Drag & drop */
 .dnd-stage { display: flex; flex-direction: column; align-items: center; gap: 18px; width: 100%; }
-.dnd-targets { display: grid; gap: 14px; grid-template-columns: repeat(2, 1fr); width: 100%; max-width: 560px; }
+.dnd-targets {
+  display: grid; gap: 14px; justify-content: center;
+  /* Due colonne; ogni casella larga quanto concede la larghezza ma mai piu'
+     di quanto concede l'altezza (prompt, gettone e margini ~330px, due
+     righe di caselle nel resto). In orizzontale su iPad conta l'altezza. */
+  grid-template-columns: repeat(2, min(270px, calc((min(100vw, 600px) - 32px - 14px) / 2), calc((var(--vh, 100vh) - 330px - 14px) / 2)));
+}
 .drop-target {
   aspect-ratio: 1 / 1; border-radius: var(--r-l);
   background: var(--paper); box-shadow: var(--sh-card);
@@ -839,6 +846,12 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
   padding: 8px 20px; margin: 0;
   box-shadow: var(--sh-card);
   text-shadow: none;
+  /* Fuori dal flusso: nel flusso spingeva la griglia, faceva sbordare l'area
+     (che non scrolla per costruzione) e finiva sopra l'ultimo bottone.
+     Sta in alto, sopra la consegna, dove non copre mai una scelta. */
+  position: absolute; top: 4px; left: 0; right: 0;
+  width: fit-content; max-width: calc(100% - 32px); margin: 0 auto;
+  z-index: 5; pointer-events: none;
 }
 /* La conferma e' verde: e' un premio, non un suggerimento. */
 .written-help.is-confirm { background: var(--leaf); color: #06301A; border-color: var(--ink); }

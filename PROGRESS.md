@@ -1158,6 +1158,21 @@ primi mattoni dell'A2. L'anno finisce con Pepe che parte per il mondo:
 una stagione 3 della storia avra' senso quando le fasi 9-11 saranno
 giocate.
 
+### Playtest dell'8 settembre: la conferma verde e lo scroll
+
+Segnalazione del genitore giocando dall'inizio: la conferma verde spesso
+si sovrapponeva al bottone verde, e a volte bisognava scorrere. Misurato
+con DevTools su dieci combinazioni gioco/item a tre dimensioni di iPad
+(orizzontale con barra di Safari 1180x740, orizzontale da Home 1180x820,
+verticale 820x1080): la conferma scritta e l'aiuto scritto stavano *nel
+flusso* dell'area di gioco, che non scrolla per costruzione, e la facevano
+sbordare (fino a 86px nel trascina-qui, 38px nel tocca-l'immagine): il
+contenuto centrato slittava e la conferma finiva sull'ultimo bottone.
+Ora i due riquadri sono **fuori dal flusso**, in alto sopra la consegna,
+senza intercettare i tocchi. Il trascina-qui aveva anche uno sbordo suo
+(31px in orizzontale): le caselle ora sono limitate dall'altezza come le
+tessere della griglia. Dopo: zero sbordo in tutte e trenta le combinazioni.
+
 ## Prossimi passi
 
 **Stato al 2026-09-08, sera**: anni 2 e 3 del curriculum completi e
