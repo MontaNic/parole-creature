@@ -167,7 +167,7 @@ async function buildJobList() {
   for (const dl of content.dialogues?.items || []) {
     dl.turns.forEach((tn, i) => {
       jobs.push({ rel: `en/dialog.${dl.id}.${i}.say.mp3`, text: tn.say.en, role: 'english', kind: 'phrase' });
-      tn.replies.forEach((r, k) => jobs.push({ rel: `en/dialog.${dl.id}.${i}.r${k}.mp3`, text: r.en, role: 'english', kind: 'phrase' }));
+      tn.replies.forEach((r, k) => jobs.push({ rel: `en/dialog.${dl.id}.${i}.r${k}.mp3`, text: r.en, role: 'child', kind: 'child' }));
       jobs.push({ rel: `en/dialog.${dl.id}.${i}.good.mp3`, text: tn.good.en, role: 'english', kind: 'phrase' });
     });
     dl.hm.forEach((h, k) => jobs.push({ rel: `en/dialog.${dl.id}.hm${k}.mp3`, text: h.en, role: 'english', kind: 'phrase' }));
@@ -205,12 +205,21 @@ const VOICE_ROLES = {
     fallback: 'XB0fDUnXU5powFXDhCwa',
     label: 'narratore epico (traguardi rari)',
     lang: 'it'
+  },
+  child: {
+    // La seconda voce inglese: un bambino. Dice le battute che il bambino
+    // sceglie nei dialoghi, cioe' "cio' che dico io": un pari, non il modello.
+    env: 'VOICE_ID_BAMBINO',
+    legacyEnv: 'VOICE_ID_ENGLISH_2',
+    fallback: '',
+    label: 'voce di bambino (le risposte dei dialoghi)',
+    lang: 'en'
   }
 };
 
 function voiceFor(env, role) {
   const r = VOICE_ROLES[role];
-  return env[r.env] || (r.legacyEnv && env[r.legacyEnv]) || r.fallback;
+  return env[r.env] || (r.legacyEnv && env[r.legacyEnv]) || r.fallback || voiceFor(env, 'english');
 }
 
 /** Vero se quella voce e' configurata davvero in .env. */
@@ -228,6 +237,8 @@ function voiceConfigured(env, role) {
 function voiceSettings(kind) {
   if (kind === 'word') return { stability: 0.70, similarity_boost: 0.85, style: 0.0, use_speaker_boost: true };
   if (kind === 'phrase') return { stability: 0.55, similarity_boost: 0.85, style: 0.1, use_speaker_boost: true };
+  // La voce di bambino: viva ma stabile, deve restare comprensibile.
+  if (kind === 'child') return { stability: 0.60, similarity_boost: 0.85, style: 0.15, use_speaker_boost: true };
   // Il narratore deve suonare solenne e uguale a se stesso ogni volta.
   if (kind === 'narrator') return { stability: 0.60, similarity_boost: 0.85, style: 0.35, use_speaker_boost: true };
   return { stability: 0.45, similarity_boost: 0.80, style: 0.25, use_speaker_boost: true };

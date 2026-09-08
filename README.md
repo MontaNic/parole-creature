@@ -96,7 +96,8 @@ Il gioco parla in due modi:
 2. **Sintesi vocale del browser** come ripiego, per le tracce mancanti.
 
 Il progetto include gia' **659 tracce generate**: 509 inglesi e 150
-italiane (Pepe e il narratore). Per rigenerarle o aggiungerne di nuove:
+italiane (Pepe e il narratore). Quattro voci: il modello inglese, la voce
+di bambino per le risposte dei dialoghi, Pepe, il narratore. Per rigenerarle o aggiungerne di nuove:
 
 ```bash
 cp .env.example .env       # poi compila .env (non viene mai committato)

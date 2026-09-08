@@ -1299,6 +1299,19 @@ da fare prima di guardare. Nessuna parola nuova, nessun audio nuovo: il
 punto e' che il bambino entri nel cartone con dieci appigli, non a
 freddo. Il lettore accetta pagine con un audio proprio (`rel`).
 
+### 5. La seconda voce: un bambino
+
+Il genitore ha aggiunto una voce ElevenLabs di bambino (`VOICE_ID_BAMBINO`
+in `.env`; lo script accetta anche `VOICE_ID_ENGLISH_2`). Dove va: sulle
+**risposte dei dialoghi**, cioe' le battute che il bambino sceglie di
+dire. E' il posto giusto per principio, non per varieta': la voce modello
+resta quella dell'inglese *da imparare* (parole, frasi, creature,
+libretti), la voce di bambino e' quella di *cio' che dico io*, un pari.
+Cosi' l'orecchio sente due accenti e due timbri, e capisce da chi
+arrivano. 288 tracce rigenerate; le altre 967 non si toccano. Ruolo
+`child` in `tools/generate-audio.mjs`, con un ripiego sulla voce modello se
+la chiave manca.
+
 ## Prossimi passi
 
 **Stato al 9 settembre 2026**: dal riconoscere al produrre (versione 3.3.0):
