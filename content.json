@@ -11929,5 +11929,625 @@
         ]
       }
     ]
+  },
+  "phonics": {
+    "_comment": "I suoni: phonics sintetico. Ogni suono ha un audio 'ancorato' (suono, suono, parola) e, dove la sintesi lo dice pulito, uno isolato. Le fusioni sono parole del gioco fatte solo di suoni gia' incontrati. Audio: en/sound.<id>.mp3 (ancorato), en/letter.<id>.mp3 (isolato, solo se 'isolated'), en/blend.<wordId>.mp3.",
+    "sounds": [
+      {
+        "id": "ph_s",
+        "grapheme": "s",
+        "isolated": "sss.",
+        "anchor": "s... s... sun.",
+        "wordIds": [
+          "w_sun",
+          "w_star",
+          "w_sword",
+          "w_sister",
+          "w_sad"
+        ]
+      },
+      {
+        "id": "ph_a",
+        "grapheme": "a",
+        "isolated": null,
+        "anchor": "a... a... apple.",
+        "wordIds": [
+          "w_apple",
+          "w_cat",
+          "w_hat",
+          "w_bag",
+          "w_dad"
+        ]
+      },
+      {
+        "id": "ph_t",
+        "grapheme": "t",
+        "isolated": "t.",
+        "anchor": "t... t... tree.",
+        "wordIds": [
+          "w_tree",
+          "w_ten",
+          "w_tooth",
+          "w_table",
+          "w_tent"
+        ]
+      },
+      {
+        "id": "ph_p",
+        "grapheme": "p",
+        "isolated": "p.",
+        "anchor": "p... p... pig.",
+        "wordIds": [
+          "w_pig",
+          "w_pizza",
+          "w_pen",
+          "w_park",
+          "w_pencil"
+        ]
+      },
+      {
+        "id": "ph_i",
+        "grapheme": "i",
+        "isolated": null,
+        "anchor": "i... i... in.",
+        "wordIds": [
+          "w_pig",
+          "w_fish",
+          "w_milk",
+          "w_six",
+          "w_kitchen"
+        ]
+      },
+      {
+        "id": "ph_n",
+        "grapheme": "n",
+        "isolated": "nnn.",
+        "anchor": "n... n... nest.",
+        "wordIds": [
+          "w_nest",
+          "w_nose",
+          "w_nine",
+          "w_night",
+          "w_nurse"
+        ]
+      },
+      {
+        "id": "ph_m",
+        "grapheme": "m",
+        "isolated": "mmm.",
+        "anchor": "m... m... moon.",
+        "wordIds": [
+          "w_moon",
+          "w_mum",
+          "w_monkey",
+          "w_milk",
+          "w_mouth"
+        ]
+      },
+      {
+        "id": "ph_d",
+        "grapheme": "d",
+        "isolated": "d.",
+        "anchor": "d... d... dog.",
+        "wordIds": [
+          "w_dog",
+          "w_dad",
+          "w_desk",
+          "w_door",
+          "w_duck"
+        ]
+      },
+      {
+        "id": "ph_g",
+        "grapheme": "g",
+        "isolated": "g.",
+        "anchor": "g... g... garden.",
+        "wordIds": [
+          "w_garden",
+          "w_egg",
+          "w_dog",
+          "w_pig",
+          "w_guitar"
+        ]
+      },
+      {
+        "id": "ph_o",
+        "grapheme": "o",
+        "isolated": null,
+        "anchor": "o... o... on.",
+        "wordIds": [
+          "w_dog",
+          "w_orange",
+          "w_socks",
+          "w_hot",
+          "w_doctor"
+        ]
+      },
+      {
+        "id": "ph_c",
+        "grapheme": "c",
+        "isolated": "k.",
+        "anchor": "c... c... cat.",
+        "wordIds": [
+          "w_cat",
+          "w_car",
+          "w_cake",
+          "w_castle",
+          "w_cow"
+        ]
+      },
+      {
+        "id": "ph_k",
+        "grapheme": "k",
+        "isolated": "k.",
+        "anchor": "k... k... kite.",
+        "wordIds": [
+          "w_kite",
+          "w_kitchen",
+          "w_book",
+          "w_bike",
+          "w_desk"
+        ]
+      },
+      {
+        "id": "ph_e",
+        "grapheme": "e",
+        "isolated": null,
+        "anchor": "e... e... egg.",
+        "wordIds": [
+          "w_egg",
+          "w_elephant",
+          "w_bed",
+          "w_pen",
+          "w_ten"
+        ]
+      },
+      {
+        "id": "ph_u",
+        "grapheme": "u",
+        "isolated": null,
+        "anchor": "u... u... up.",
+        "wordIds": [
+          "w_sun",
+          "w_bus",
+          "w_duck",
+          "w_mum",
+          "w_jump"
+        ]
+      },
+      {
+        "id": "ph_r",
+        "grapheme": "r",
+        "isolated": "rrr.",
+        "anchor": "r... r... red.",
+        "wordIds": [
+          "w_red",
+          "w_run",
+          "w_rainy",
+          "w_river",
+          "w_ruler"
+        ]
+      },
+      {
+        "id": "ph_h",
+        "grapheme": "h",
+        "isolated": "h.",
+        "anchor": "h... h... hat.",
+        "wordIds": [
+          "w_hat",
+          "w_hen",
+          "w_horse",
+          "w_house",
+          "w_hand"
+        ]
+      },
+      {
+        "id": "ph_b",
+        "grapheme": "b",
+        "isolated": "b.",
+        "anchor": "b... b... bed.",
+        "wordIds": [
+          "w_bed",
+          "w_bird",
+          "w_bus",
+          "w_boat",
+          "w_ball"
+        ]
+      },
+      {
+        "id": "ph_f",
+        "grapheme": "f",
+        "isolated": "fff.",
+        "anchor": "f... f... fish.",
+        "wordIds": [
+          "w_fish",
+          "w_farm",
+          "w_foot",
+          "w_football",
+          "w_flower"
+        ]
+      },
+      {
+        "id": "ph_l",
+        "grapheme": "l",
+        "isolated": "lll.",
+        "anchor": "l... l... lion.",
+        "wordIds": [
+          "w_lion",
+          "w_leg",
+          "w_lake",
+          "w_library",
+          "w_lunch"
+        ]
+      },
+      {
+        "id": "ph_sh",
+        "grapheme": "sh",
+        "isolated": "sh.",
+        "anchor": "sh... sh... shoes.",
+        "wordIds": [
+          "w_shoes",
+          "w_sheep",
+          "w_shop",
+          "w_fish",
+          "w_shield"
+        ]
+      },
+      {
+        "id": "ph_ch",
+        "grapheme": "ch",
+        "isolated": "ch.",
+        "anchor": "ch... ch... chair.",
+        "wordIds": [
+          "w_chair",
+          "w_cheese",
+          "w_chicken",
+          "w_chess",
+          "w_kitchen"
+        ]
+      },
+      {
+        "id": "ph_th",
+        "grapheme": "th",
+        "isolated": "th.",
+        "anchor": "th... th... three.",
+        "wordIds": [
+          "w_three",
+          "w_thirteen",
+          "w_mouth",
+          "w_tooth",
+          "w_bathroom"
+        ]
+      },
+      {
+        "id": "ph_ee",
+        "grapheme": "ee",
+        "isolated": "ee.",
+        "anchor": "ee... ee... tree.",
+        "wordIds": [
+          "w_tree",
+          "w_sheep",
+          "w_green",
+          "w_three",
+          "w_cheese"
+        ]
+      },
+      {
+        "id": "ph_oo",
+        "grapheme": "oo",
+        "isolated": "oo.",
+        "anchor": "oo... oo... moon.",
+        "wordIds": [
+          "w_moon",
+          "w_book",
+          "w_foot",
+          "w_school",
+          "w_afternoon"
+        ]
+      }
+    ],
+    "blends": [
+      {
+        "wordId": "w_sun",
+        "soundIds": [
+          "ph_s",
+          "ph_u",
+          "ph_n"
+        ],
+        "tts": "s... u... n. Sun!"
+      },
+      {
+        "wordId": "w_cat",
+        "soundIds": [
+          "ph_c",
+          "ph_a",
+          "ph_t"
+        ],
+        "tts": "c... a... t. Cat!"
+      },
+      {
+        "wordId": "w_pig",
+        "soundIds": [
+          "ph_p",
+          "ph_i",
+          "ph_g"
+        ],
+        "tts": "p... i... g. Pig!"
+      },
+      {
+        "wordId": "w_hat",
+        "soundIds": [
+          "ph_h",
+          "ph_a",
+          "ph_t"
+        ],
+        "tts": "h... a... t. Hat!"
+      },
+      {
+        "wordId": "w_dog",
+        "soundIds": [
+          "ph_d",
+          "ph_o",
+          "ph_g"
+        ],
+        "tts": "d... o... g. Dog!"
+      },
+      {
+        "wordId": "w_ten",
+        "soundIds": [
+          "ph_t",
+          "ph_e",
+          "ph_n"
+        ],
+        "tts": "t... e... n. Ten!"
+      },
+      {
+        "wordId": "w_bus",
+        "soundIds": [
+          "ph_b",
+          "ph_u",
+          "ph_s"
+        ],
+        "tts": "b... u... s. Bus!"
+      },
+      {
+        "wordId": "w_red",
+        "soundIds": [
+          "ph_r",
+          "ph_e",
+          "ph_d"
+        ],
+        "tts": "r... e... d. Red!"
+      },
+      {
+        "wordId": "w_hen",
+        "soundIds": [
+          "ph_h",
+          "ph_e",
+          "ph_n"
+        ],
+        "tts": "h... e... n. Hen!"
+      },
+      {
+        "wordId": "w_pen",
+        "soundIds": [
+          "ph_p",
+          "ph_e",
+          "ph_n"
+        ],
+        "tts": "p... e... n. Pen!"
+      },
+      {
+        "wordId": "w_bed",
+        "soundIds": [
+          "ph_b",
+          "ph_e",
+          "ph_d"
+        ],
+        "tts": "b... e... d. Bed!"
+      },
+      {
+        "wordId": "w_leg",
+        "soundIds": [
+          "ph_l",
+          "ph_e",
+          "ph_g"
+        ],
+        "tts": "l... e... g. Leg!"
+      },
+      {
+        "wordId": "w_mum",
+        "soundIds": [
+          "ph_m",
+          "ph_u",
+          "ph_m"
+        ],
+        "tts": "m... u... m. Mum!"
+      },
+      {
+        "wordId": "w_dad",
+        "soundIds": [
+          "ph_d",
+          "ph_a",
+          "ph_d"
+        ],
+        "tts": "d... a... d. Dad!"
+      },
+      {
+        "wordId": "w_hot",
+        "soundIds": [
+          "ph_h",
+          "ph_o",
+          "ph_t"
+        ],
+        "tts": "h... o... t. Hot!"
+      },
+      {
+        "wordId": "w_big",
+        "soundIds": [
+          "ph_b",
+          "ph_i",
+          "ph_g"
+        ],
+        "tts": "b... i... g. Big!"
+      },
+      {
+        "wordId": "w_sad",
+        "soundIds": [
+          "ph_s",
+          "ph_a",
+          "ph_d"
+        ],
+        "tts": "s... a... d. Sad!"
+      },
+      {
+        "wordId": "w_map",
+        "soundIds": [
+          "ph_m",
+          "ph_a",
+          "ph_p"
+        ],
+        "tts": "m... a... p. Map!"
+      },
+      {
+        "wordId": "w_fish",
+        "soundIds": [
+          "ph_f",
+          "ph_i",
+          "ph_sh"
+        ],
+        "tts": "f... i... sh. Fish!"
+      },
+      {
+        "wordId": "w_moon",
+        "soundIds": [
+          "ph_m",
+          "ph_oo",
+          "ph_n"
+        ],
+        "tts": "m... oo... n. Moon!"
+      },
+      {
+        "wordId": "w_tree",
+        "soundIds": [
+          "ph_t",
+          "ph_r",
+          "ph_ee"
+        ],
+        "tts": "t... r... ee. Tree!"
+      },
+      {
+        "wordId": "w_sheep",
+        "soundIds": [
+          "ph_sh",
+          "ph_ee",
+          "ph_p"
+        ],
+        "tts": "sh... ee... p. Sheep!"
+      },
+      {
+        "wordId": "w_foot",
+        "soundIds": [
+          "ph_f",
+          "ph_oo",
+          "ph_t"
+        ],
+        "tts": "f... oo... t. Foot!"
+      },
+      {
+        "wordId": "w_chess",
+        "soundIds": [
+          "ph_ch",
+          "ph_e",
+          "ph_s"
+        ],
+        "tts": "ch... e... ss. Chess!"
+      }
+    ],
+    "lessons": [
+      {
+        "id": "ph_l1",
+        "order": 1,
+        "title_it": "s a t p i n",
+        "soundIds": [
+          "ph_s",
+          "ph_a",
+          "ph_t",
+          "ph_p",
+          "ph_i",
+          "ph_n"
+        ],
+        "blendWords": []
+      },
+      {
+        "id": "ph_l2",
+        "order": 2,
+        "title_it": "m d g o c k",
+        "soundIds": [
+          "ph_m",
+          "ph_d",
+          "ph_g",
+          "ph_o",
+          "ph_c",
+          "ph_k"
+        ],
+        "blendWords": [
+          "w_cat",
+          "w_dog",
+          "w_dad",
+          "w_map",
+          "w_sad",
+          "w_pig"
+        ]
+      },
+      {
+        "id": "ph_l3",
+        "order": 3,
+        "title_it": "e u r h b f l",
+        "soundIds": [
+          "ph_e",
+          "ph_u",
+          "ph_r",
+          "ph_h",
+          "ph_b",
+          "ph_f",
+          "ph_l"
+        ],
+        "blendWords": [
+          "w_sun",
+          "w_hat",
+          "w_ten",
+          "w_bus",
+          "w_red",
+          "w_hen",
+          "w_pen",
+          "w_bed",
+          "w_leg",
+          "w_mum",
+          "w_hot",
+          "w_big"
+        ]
+      },
+      {
+        "id": "ph_l4",
+        "order": 4,
+        "title_it": "sh ch th ee oo",
+        "soundIds": [
+          "ph_sh",
+          "ph_ch",
+          "ph_th",
+          "ph_ee",
+          "ph_oo"
+        ],
+        "blendWords": [
+          "w_fish",
+          "w_moon",
+          "w_tree",
+          "w_sheep",
+          "w_foot",
+          "w_chess"
+        ]
+      }
+    ]
   }
 }

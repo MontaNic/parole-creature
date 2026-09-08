@@ -699,6 +699,37 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 .den-wall.is-on { border-color: #fff; box-shadow: 0 0 0 3px var(--amber); }
 #screen-den .mascot-corner { pointer-events: none; }
 
+/* ---------------- I suoni ---------------- */
+.phonics-card {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; font: inherit; color: inherit; cursor: pointer;
+  background: var(--night-700); border: 2px solid rgba(255,255,255,.14); border-radius: var(--r-l); padding: 12px 14px; margin: 10px 0 6px;
+}
+.phonics-card-letters { font-family: var(--font-en); font-weight: 700; font-size: 24px; letter-spacing: .08em; background: var(--paper); color: var(--ink); border: var(--stroke) solid var(--ink); border-radius: var(--r-m); padding: 6px 12px; flex: none; }
+.phonics-card-hint { font-size: 13px; color: var(--muted-night); }
+.phonics-dots { display: flex; gap: 6px; margin-top: 6px; }
+.phonics-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,.18); border: 2px solid rgba(255,255,255,.3); }
+.phonics-dot.is-done { background: var(--leaf); border-color: var(--ink); }
+.phonics-lessons { display: grid; gap: 14px; margin-top: 14px; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+.phonics-lesson { display: flex; flex-direction: column; align-items: center; gap: 6px; font: inherit; cursor: pointer; background: var(--paper); color: var(--ink); border: var(--stroke) solid var(--ink); border-radius: var(--r-l); padding: 16px 12px; box-shadow: var(--sh-card); }
+.phonics-lesson-letters { font-family: var(--font-en); font-weight: 700; font-size: 28px; letter-spacing: .1em; }
+.phonics-lesson-title { font-weight: 600; }
+.phonics-lesson.is-done { background: #E6F7EC; }
+.ph-stage { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; }
+.ph-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.ph-tile {
+  font: inherit; font-family: var(--font-en); font-weight: 700; font-size: clamp(34px, 6vw, 48px); letter-spacing: .04em;
+  min-width: 96px; min-height: 96px; padding: 0 22px; cursor: pointer;
+  background: var(--paper); color: var(--ink); border: var(--stroke) solid var(--ink); border-radius: var(--r-l); box-shadow: var(--sh-card);
+}
+.ph-tile.is-big { font-size: clamp(64px, 12vw, 110px); min-width: 150px; min-height: 150px; background: var(--amber); box-shadow: 0 8px 0 var(--amber-deep), var(--sh-float); }
+.ph-tile.is-playing { animation: orb-pulse .6s ease-in-out infinite; }
+.ph-tile.is-correct { box-shadow: 0 0 0 5px var(--ring-good), var(--sh-card); animation: bounce-ok .5s ease; }
+.ph-tile.is-wrong { box-shadow: var(--sh-card); outline: 5px dashed var(--ring-retry); outline-offset: -2px; animation: shake .4s ease; }
+.ph-tile.is-waiting { background: var(--paper-2); }
+.ph-tile.is-said { background: var(--leaf); color: #06301A; }
+.ph-art { width: min(160px, 40vw, 22vh); }
+.ph-reveal { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+
 /* ---------------- Libretti ---------------- */
 .book-stage { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 8px 20px calc(16px + var(--safe-bottom)); min-height: 0; max-width: 860px; width: 100%; margin: 0 auto; }
 .book-art { width: min(260px, 50vw, 34vh); background: var(--paper); border: var(--stroke) solid var(--ink); border-radius: var(--r-l); padding: 14px; box-shadow: var(--sh-card); }

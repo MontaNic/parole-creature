@@ -76,6 +76,9 @@ function defaultSave() {
     /** i check del mese fatti dal genitore: { day, n, ok, items: [{id, ok}] } */
     checks: [],
 
+    /** I suoni: lezione -> { done: quante volte } */
+    phonics: { lessons: {} },
+
     /** La tana: cose disposte nella stanza (x, y in % della stanza) e colore della parete. */
     den: { placed: {}, wall: 0 },
 

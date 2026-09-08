@@ -1312,11 +1312,30 @@ arrivano. 288 tracce rigenerate; le altre 967 non si toccano. Ruolo
 `child` in `tools/generate-audio.mjs`, con un ripiego sulla voce modello se
 la chiave manca.
 
+### 4. "I suoni" (phonics)
+
+Il genitore ha ascoltato le prove e i suoni reggono. Percorso parallelo,
+dalla home, in quattro lezioni sull'ordine classico del phonics sintetico
+inglese: *s a t p i n*, *m d g o c k*, *e u r h b f l*, *sh ch th ee oo*.
+Ogni suono e' ancorato a parole del gioco ("s... s... sun") e ha, dove la
+sintesi lo dice pulito, anche l'audio isolato; le vocali brevi solo
+ancorate, perche' isolate la sintesi le leggerebbe come nomi di lettera.
+Una lezione: i suoni uno per uno (grafema grande in Andika, figura,
+audio, tocca per risentire), "Quale suono?" (senti, scegli il grafema),
+"Con che suono inizia?" (grafema, scegli la figura), e la **fusione**:
+tre tessere da toccare in ordine, ognuna dice il suo suono, poi la parola
+intera con la figura ("c-a-t, cat"). Le fusioni sono 24 parole del gioco
+fatte solo di suoni gia' incontrati (un test lo verifica). Niente voto;
+una lezione finita si segna in `save.phonics`. E' il pezzo che rende
+leggibili parole mai viste, quello che la scuola italiana quasi non fa.
+
 ## Prossimi passi
 
-**Stato al 9 settembre 2026**: dal riconoscere al produrre (versione 3.3.0):
-"Dillo tu" in ogni unita', 32 dialoghi con le creature, il check del mese
-nell'area genitori, otto missioni a casa. Prima, l'8 sera: anni 2 e 3 del
+**Stato al 9 settembre 2026**: dal riconoscere al produrre (versione 3.4.0):
+"Dillo tu" in ogni unita', 32 dialoghi con le creature (risposte con la voce
+di bambino), il check del mese nell'area genitori, otto missioni a casa,
+"Prima del cartone", e "I suoni": quattro lezioni di phonics con la fusione.
+Tutti e sette i rimedi al resoconto pro/contro sono fatti. Prima, l'8 sera: anni 2 e 3 del
 curriculum completi e pubblicati (versione 3.0.0: 32 unita', 295 parole, 182 frasi, 281
 illustrazioni, 605 tracce, due stagioni di storia, due giochi bonus).
 Prima, nel pomeriggio: anno 2 completo e pubblicato

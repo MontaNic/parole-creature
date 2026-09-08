@@ -46,6 +46,7 @@ import { matchesTarget, normalize, canRecognize } from './js/speech.js';
 import { dialogueFor, wantsDialogue, lineAudio as dialogAudio } from './js/dialogues.js';
 import { pickCheckItems, checkDue, daysSinceLastCheck, saveCheck } from './js/checkup.js';
 import { trackMissionEvent, ensureTodayMission } from './js/missions.js';
+import { lessons as phLessons, soundById, blendOf, letterAudio, lessonDone } from './js/phonics.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
   splitRound, unitItems, unitReviewItems, curriculumConfig, playablePhases
@@ -475,6 +476,17 @@ async function run() {
   /* --- prima del cartone --------------------------------------------- */
   check('ogni cartone ha dieci parole e tre frasi del gioco da fare prima',
     content.media.every(m => m.prepWords?.length === 10 && m.prepPhrases?.length === 3 && [...m.prepWords, ...m.prepPhrases].every(id => getItem(id))));
+
+  /* --- i suoni ------------------------------------------------------- */
+  resetSave();
+  const lez = phLessons();
+  check('quattro lezioni di suoni, 24 suoni in tutto', lez.length === 4 && new Set(lez.flatMap(l => l.soundIds)).size === 24 && lez.flatMap(l => l.soundIds).every(id => soundById(id)));
+  check('ogni suono ha parole del gioco che lo contengono', content.phonics.sounds.every(s => s.wordIds.length >= 3 && s.wordIds.every(id => getItem(id))));
+  let visti = new Set(); let ok = true;
+  for (const l of lez) { l.soundIds.forEach(id => visti.add(id)); for (const w of l.blendWords) { const b = blendOf(w); if (!b || !b.soundIds.every(id => visti.has(id))) ok = false; } }
+  check('le fusioni usano solo suoni gia\' incontrati', ok && content.phonics.blends.length === 24);
+  check("le vocali brevi non hanno l'audio isolato (la sintesi le leggerebbe come nomi)", ['ph_a','ph_e','ph_i','ph_o','ph_u'].every(id => !soundById(id).isolated && letterAudio(soundById(id)).startsWith('en/sound.')));
+  check('a inizio gioco nessuna lezione e\' fatta', lez.every(l => lessonDone(l) === 0));
 
   resetSave();
 

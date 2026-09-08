@@ -63,6 +63,7 @@ export async function loadAll() {
   content.story = contentJson.story || null;
   content.stickers = contentJson.stickers || null;
   content.dialogues = (contentJson.dialogues && contentJson.dialogues.items) || [];
+  content.phonics = contentJson.phonics || { sounds: [], blends: [], lessons: [] };
   content.structures = contentJson.structures || [];
 
   content.byId.clear();

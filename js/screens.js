@@ -20,6 +20,7 @@ import { renderStickers } from './chests.js';
 import { canShare, shareSummary } from './share.js';
 import { renderBadges, renderNewBadges } from './badges.js';
 import { renderShelf, openBook } from './books.js';
+import { renderPhonicsCard } from './phonics.js';
 
 /* Fasi aperte a mano dal bambino, oltre a quella corrente. */
 const fasiAperte = new Set();
@@ -158,6 +159,8 @@ export function renderHome(handlers) {
   document.getElementById('btn-free-review').onclick = () => { sfxTap(); handlers.onReview(); };
   document.getElementById('btn-album').onclick = () => { sfxTap(); handlers.onAlbum(); };
   document.getElementById('btn-den').onclick = () => { sfxTap(); handlers.onDen?.(); };
+  document.getElementById('phonics-card').onclick = () => { sfxTap(); handlers.onPhonics?.(); };
+  renderPhonicsCard();
   document.getElementById('btn-parents').onclick = () => { sfxTap(); handlers.onParents(); };
 
   showScreen('home');

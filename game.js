@@ -38,6 +38,7 @@ import { bumpToday } from './js/history.js';
 import { planBonus, bubblePool, playBonus } from './js/bonus.js';
 import { checkBadges } from './js/badges.js';
 import { dialogueFor, wantsDialogue } from './js/dialogues.js';
+import { renderPhonics, runLesson } from './js/phonics.js';
 import { masteredCount } from './js/srs.js';
 import {
   showScreen, renderHome, renderAlbum, renderSummary,
@@ -132,6 +133,12 @@ function goHome(firstTime = false) {
     onReview: () => startRound({ review: true }),
     onAlbum: () => renderAlbum(),
     onDen: () => renderDen(),
+    onPhonics: () => renderPhonics(async (lesson) => {
+      session.roundActive = false;
+      renderMascot(document.getElementById('play-mascot'));
+      await runLesson(lesson);
+      goHome();
+    }),
     onParents: () => openParents(goHome)
   });
 

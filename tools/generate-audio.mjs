@@ -173,6 +173,14 @@ async function buildJobList() {
     dl.hm.forEach((h, k) => jobs.push({ rel: `en/dialog.${dl.id}.hm${k}.mp3`, text: h.en, role: 'english', kind: 'phrase' }));
   }
 
+  // I suoni: ancorato (suono, suono, parola), isolato dove pulito, fusioni. Voce modello.
+  const ph = content.phonics || {};
+  for (const sd of ph.sounds || []) {
+    jobs.push({ rel: `en/sound.${sd.id}.mp3`, text: sd.anchor, role: 'english', kind: 'word' });
+    if (sd.isolated) jobs.push({ rel: `en/letter.${sd.id}.mp3`, text: sd.isolated, role: 'english', kind: 'word' });
+  }
+  for (const b of ph.blends || []) jobs.push({ rel: `en/blend.${b.wordId}.mp3`, text: b.tts, role: 'english', kind: 'word' });
+
   return { jobs, content };
 }
 

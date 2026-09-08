@@ -132,6 +132,21 @@
     "popped": "{n} bolle scoppiate",
     "skip": "Salta"
   },
+  "phonics": {
+    "title": "I suoni",
+    "subtitle": "Le lettere e i loro suoni, per leggere parole mai viste",
+    "home_card": "I suoni",
+    "home_hint": "Quattro lezioni: dalle lettere ai suoni, dai suoni alle parole",
+    "lesson": "Lezione {n}",
+    "done_times": "fatta {n} volte",
+    "intro_prompt": "Ascolta il suono. Tocca per risentirlo",
+    "which_sound": "Quale suono hai sentito?",
+    "starts_with": "Quale parola inizia con questo suono?",
+    "blend_prompt": "Tocca i suoni in ordine, poi ascolta la parola",
+    "blend_which": "Quale parola è?",
+    "next": "Avanti",
+    "lesson_done": "Lezione finita!"
+  },
   "books": {
     "title": "I miei libretti",
     "subtitle": "Storie da leggere con l'audio. Si aprono completando le unità",
@@ -342,6 +357,9 @@
     "chest_stars": "Che fortuna! Stelle in regalo!",
     "record_done": "Ti ho sentito! Che bella voce inglese!",
     "sayit_go": "Adesso dillo tu, ad alta voce!",
+    "phonics_start": "Ogni lettera ha il suo suono. Ascolta bene!",
+    "phonics_blend": "Metti i suoni insieme: esce una parola!",
+    "phonics_done": "Hai fuso i suoni! Adesso sai leggere parole nuove.",
     "dialogue_start": "Adesso parla con la creatura: scegli tu cosa rispondere!",
     "sayit_heard": "Ti ho sentito! Proprio così.",
     "den_welcome": "Questa è la nostra tana! Mettici quello che vuoi.",

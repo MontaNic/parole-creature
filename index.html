@@ -120,6 +120,15 @@
         </div>
       </div>
 
+      <button class="phonics-card" id="phonics-card" type="button">
+        <div class="phonics-card-letters">s a t</div>
+        <div class="phonics-card-body">
+          <div class="mission-label" data-str="phonics.home_card"></div>
+          <div class="phonics-card-hint" data-str="phonics.home_hint"></div>
+          <div class="phonics-dots" id="phonics-dots"></div>
+        </div>
+      </button>
+
       <div class="worlds" id="worlds-grid"></div>
 
       <div class="home-footer">
@@ -191,6 +200,21 @@
       <div class="bonus-end" id="bonus-end" hidden></div>
     </div>
     <button class="btn-skip" id="bonus-skip" data-str="bonus.skip"></button>
+  </section>
+
+  <!-- ============ I SUONI (phonics) ============ -->
+  <section class="screen" id="screen-phonics">
+    <header class="topbar">
+      <button class="icon-btn" data-nav="home" aria-label="Indietro">
+        <svg class="ico"><use href="#sp-icon-back"></use></svg>
+      </button>
+      <h2 class="topbar-title" data-str="phonics.title"></h2>
+      <span class="topbar-spacer"></span>
+    </header>
+    <div class="album-scroll">
+      <p class="muted center tiny" data-str="phonics.subtitle"></p>
+      <div class="phonics-lessons" id="phonics-lessons"></div>
+    </div>
   </section>
 
   <!-- ============ LIBRETTO (mini-ebook) ============ -->
