@@ -1,7 +1,7 @@
 {
   "_comment": "Curriculum di 'Parole & Creature'. NON e' un elenco di parole per tema: e' un corso a unita', ognuna con un obiettivo linguistico esplicito, revisione sistematica delle unita' precedenti e una soglia di padronanza da superare per cambiare fase. Vedi PROGRESS.md, sezione 'Logica del curriculum'.",
   "schemaVersion": 2,
-  "contentVersion": "3.1.0",
+  "contentVersion": "3.2.0",
   "audioBasePath": "assets/audio/",
   "_ids_comment": "REGOLA: gli id di parole, frasi e unita' sono PERMANENTI. Il progresso del bambino e' indicizzato per id: rinominarli equivale a cancellare quello che ha imparato. Si aggiunge, non si rinomina.",
   "curriculum": {
@@ -344,6 +344,38 @@
       "pattern": "There is a river. / There are three mountains. / Is there a lake? Yes, there is.",
       "focus_it": "Dire cosa c'e' in un posto: there is per uno, there are per tanti, e la domanda.",
       "why_it": "'There is / there are' e' la struttura piu' usata per descrivere un luogo, e ripropone la regola uno/tanti della fase 2 su una forma nuova."
+    },
+    {
+      "id": "st_daily_routine",
+      "phase": 11,
+      "unit": 29,
+      "pattern": "I get up at seven o'clock. / What time do you go to bed? At half past eight.",
+      "focus_it": "Raccontare la giornata con le ore, comprese le mezze.",
+      "why_it": "E' il racconto di se' che le Indicazioni chiedono in quinta; le azioni sono formule intere (brush my teeth) e le ore tornano con 'half past'."
+    },
+    {
+      "id": "st_present_continuous",
+      "phase": 11,
+      "unit": 30,
+      "pattern": "What are you doing? I'm reading. / Is she cooking? Yes, she is.",
+      "focus_it": "Dire cosa si sta facendo adesso, e chiederlo.",
+      "why_it": "'I am -ing' era entrato con 'I am wearing' e 'Pepe is running': qui diventa la domanda e la risposta di ogni giorno."
+    },
+    {
+      "id": "st_months_festivals",
+      "phase": 11,
+      "unit": 31,
+      "pattern": "My birthday is in March. / Happy Christmas! / Trick or treat!",
+      "focus_it": "I dodici mesi, letti sul calendario, e le feste dei paesi anglofoni.",
+      "why_it": "Le Indicazioni chiedono di conoscere aspetti della cultura dei paesi di lingua inglese: Halloween, Natale e Pasqua sono i primi che un bambino incontra."
+    },
+    {
+      "id": "st_past_future",
+      "phase": 11,
+      "unit": 32,
+      "pattern": "Yesterday I was at the park. / We went to the sea. / Tomorrow I am going to the beach.",
+      "focus_it": "Un primo ieri e domani: was, went, going to, come formule.",
+      "why_it": "Non e' grammatica del passato: sono tre formule che aprono il racconto di cio' che e' successo e di cio' che succedera', e chiudono l'anno con Pepe che parte."
     }
   ],
   "words": [
@@ -2322,6 +2354,390 @@
       "phase": 10,
       "theme": "natura",
       "sprite": "sp-cave"
+    },
+    {
+      "id": "w_get_up",
+      "en": "get up",
+      "it": "alzarsi",
+      "phase": 11,
+      "theme": "giornata",
+      "sprite": "sp-get_up"
+    },
+    {
+      "id": "w_brush_teeth",
+      "en": "brush my teeth",
+      "it": "lavarsi i denti",
+      "phase": 11,
+      "theme": "giornata",
+      "sprite": "sp-brush_teeth"
+    },
+    {
+      "id": "w_wash_face",
+      "en": "wash my face",
+      "it": "lavarsi la faccia",
+      "phase": 11,
+      "theme": "giornata",
+      "sprite": "sp-wash_face"
+    },
+    {
+      "id": "w_get_dressed",
+      "en": "get dressed",
+      "it": "vestirsi",
+      "phase": 11,
+      "theme": "giornata",
+      "sprite": "sp-get_dressed"
+    },
+    {
+      "id": "w_go_to_school",
+      "en": "go to school",
+      "it": "andare a scuola",
+      "phase": 11,
+      "theme": "giornata",
+      "sprite": "sp-go_to_school"
+    },
+    {
+      "id": "w_play",
+      "en": "play",
+      "it": "giocare",
+      "phase": 11,
+      "theme": "giornata",
+      "sprite": "sp-play"
+    },
+    {
+      "id": "w_do_homework",
+      "en": "do my homework",
+      "it": "fare i compiti",
+      "phase": 11,
+      "theme": "giornata",
+      "sprite": "sp-do_homework"
+    },
+    {
+      "id": "w_watch_tv",
+      "en": "watch TV",
+      "it": "guardare la TV",
+      "phase": 11,
+      "theme": "giornata",
+      "sprite": "sp-watch_tv"
+    },
+    {
+      "id": "w_have_bath",
+      "en": "have a bath",
+      "it": "fare il bagno",
+      "phase": 11,
+      "theme": "giornata",
+      "sprite": "sp-have_bath"
+    },
+    {
+      "id": "w_go_to_bed",
+      "en": "go to bed",
+      "it": "andare a letto",
+      "phase": 11,
+      "theme": "giornata",
+      "sprite": "sp-go_to_bed"
+    },
+    {
+      "id": "w_reading",
+      "en": "reading",
+      "it": "leggere",
+      "phase": 11,
+      "theme": "facendo",
+      "sprite": "sp-reading"
+    },
+    {
+      "id": "w_writing",
+      "en": "writing",
+      "it": "scrivere",
+      "phase": 11,
+      "theme": "facendo",
+      "sprite": "sp-writing"
+    },
+    {
+      "id": "w_cooking",
+      "en": "cooking",
+      "it": "cucinare",
+      "phase": 11,
+      "theme": "facendo",
+      "sprite": "sp-cooking"
+    },
+    {
+      "id": "w_playing",
+      "en": "playing",
+      "it": "giocare",
+      "phase": 11,
+      "theme": "facendo",
+      "sprite": "sp-playing"
+    },
+    {
+      "id": "w_listening",
+      "en": "listening",
+      "it": "ascoltare",
+      "phase": 11,
+      "theme": "facendo",
+      "sprite": "sp-listening"
+    },
+    {
+      "id": "w_talking",
+      "en": "talking",
+      "it": "parlare",
+      "phase": 11,
+      "theme": "facendo",
+      "sprite": "sp-talking"
+    },
+    {
+      "id": "w_waiting",
+      "en": "waiting",
+      "it": "aspettare",
+      "phase": 11,
+      "theme": "facendo",
+      "sprite": "sp-waiting"
+    },
+    {
+      "id": "w_laughing",
+      "en": "laughing",
+      "it": "ridere",
+      "phase": 11,
+      "theme": "facendo",
+      "sprite": "sp-laughing"
+    },
+    {
+      "id": "w_painting",
+      "en": "painting",
+      "it": "dipingere",
+      "phase": 11,
+      "theme": "facendo",
+      "sprite": "sp-painting"
+    },
+    {
+      "id": "w_sleeping",
+      "en": "sleeping",
+      "it": "dormire",
+      "phase": 11,
+      "theme": "facendo",
+      "sprite": "sp-sleeping"
+    },
+    {
+      "id": "w_january",
+      "en": "January",
+      "it": "gennaio",
+      "phase": 11,
+      "theme": "mesi",
+      "sprite": "sp-month-jan"
+    },
+    {
+      "id": "w_february",
+      "en": "February",
+      "it": "febbraio",
+      "phase": 11,
+      "theme": "mesi",
+      "sprite": "sp-month-feb"
+    },
+    {
+      "id": "w_march",
+      "en": "March",
+      "it": "marzo",
+      "phase": 11,
+      "theme": "mesi",
+      "sprite": "sp-month-mar"
+    },
+    {
+      "id": "w_april",
+      "en": "April",
+      "it": "aprile",
+      "phase": 11,
+      "theme": "mesi",
+      "sprite": "sp-month-apr"
+    },
+    {
+      "id": "w_may",
+      "en": "May",
+      "it": "maggio",
+      "phase": 11,
+      "theme": "mesi",
+      "sprite": "sp-month-may"
+    },
+    {
+      "id": "w_june",
+      "en": "June",
+      "it": "giugno",
+      "phase": 11,
+      "theme": "mesi",
+      "sprite": "sp-month-jun"
+    },
+    {
+      "id": "w_july",
+      "en": "July",
+      "it": "luglio",
+      "phase": 11,
+      "theme": "mesi",
+      "sprite": "sp-month-jul"
+    },
+    {
+      "id": "w_august",
+      "en": "August",
+      "it": "agosto",
+      "phase": 11,
+      "theme": "mesi",
+      "sprite": "sp-month-aug"
+    },
+    {
+      "id": "w_september",
+      "en": "September",
+      "it": "settembre",
+      "phase": 11,
+      "theme": "mesi",
+      "sprite": "sp-month-sep"
+    },
+    {
+      "id": "w_october",
+      "en": "October",
+      "it": "ottobre",
+      "phase": 11,
+      "theme": "mesi",
+      "sprite": "sp-month-oct"
+    },
+    {
+      "id": "w_november",
+      "en": "November",
+      "it": "novembre",
+      "phase": 11,
+      "theme": "mesi",
+      "sprite": "sp-month-nov"
+    },
+    {
+      "id": "w_december",
+      "en": "December",
+      "it": "dicembre",
+      "phase": 11,
+      "theme": "mesi",
+      "sprite": "sp-month-dec"
+    },
+    {
+      "id": "w_halloween",
+      "en": "Halloween",
+      "it": "Halloween",
+      "phase": 11,
+      "theme": "feste",
+      "sprite": "sp-halloween"
+    },
+    {
+      "id": "w_christmas",
+      "en": "Christmas",
+      "it": "Natale",
+      "phase": 11,
+      "theme": "feste",
+      "sprite": "sp-christmas"
+    },
+    {
+      "id": "w_easter",
+      "en": "Easter",
+      "it": "Pasqua",
+      "phase": 11,
+      "theme": "feste",
+      "sprite": "sp-easter"
+    },
+    {
+      "id": "w_pumpkin",
+      "en": "pumpkin",
+      "it": "zucca",
+      "phase": 11,
+      "theme": "feste",
+      "sprite": "sp-pumpkin"
+    },
+    {
+      "id": "w_reindeer",
+      "en": "reindeer",
+      "it": "renna",
+      "phase": 11,
+      "theme": "feste",
+      "sprite": "sp-reindeer"
+    },
+    {
+      "id": "w_bunny",
+      "en": "bunny",
+      "it": "coniglietto",
+      "phase": 11,
+      "theme": "feste",
+      "sprite": "sp-bunny"
+    },
+    {
+      "id": "w_yesterday",
+      "en": "yesterday",
+      "it": "ieri",
+      "phase": 11,
+      "theme": "viaggio",
+      "sprite": "sp-yesterday"
+    },
+    {
+      "id": "w_tomorrow",
+      "en": "tomorrow",
+      "it": "domani",
+      "phase": 11,
+      "theme": "viaggio",
+      "sprite": "sp-tomorrow"
+    },
+    {
+      "id": "w_weekend",
+      "en": "weekend",
+      "it": "fine settimana",
+      "phase": 11,
+      "theme": "viaggio",
+      "sprite": "sp-weekend"
+    },
+    {
+      "id": "w_holiday",
+      "en": "holiday",
+      "it": "vacanza",
+      "phase": 11,
+      "theme": "viaggio",
+      "sprite": "sp-holiday"
+    },
+    {
+      "id": "w_plane",
+      "en": "plane",
+      "it": "aereo",
+      "phase": 11,
+      "theme": "viaggio",
+      "sprite": "sp-plane"
+    },
+    {
+      "id": "w_suitcase",
+      "en": "suitcase",
+      "it": "valigia",
+      "phase": 11,
+      "theme": "viaggio",
+      "sprite": "sp-suitcase"
+    },
+    {
+      "id": "w_map",
+      "en": "map",
+      "it": "mappa",
+      "phase": 11,
+      "theme": "viaggio",
+      "sprite": "sp-map"
+    },
+    {
+      "id": "w_camera",
+      "en": "camera",
+      "it": "macchina fotografica",
+      "phase": 11,
+      "theme": "viaggio",
+      "sprite": "sp-camera"
+    },
+    {
+      "id": "w_tent",
+      "en": "tent",
+      "it": "tenda",
+      "phase": 11,
+      "theme": "viaggio",
+      "sprite": "sp-tent"
+    },
+    {
+      "id": "w_hotel",
+      "en": "hotel",
+      "it": "albergo",
+      "phase": 11,
+      "theme": "viaggio",
+      "sprite": "sp-hotel"
     }
   ],
   "phrases": [
@@ -4265,6 +4681,313 @@
         "w_cave",
         "w_forest"
       ]
+    },
+    {
+      "id": "p_get_up_seven",
+      "en": "I get up at seven o'clock.",
+      "it": "Mi alzo alle sette.",
+      "phase": 11,
+      "theme": "giornata",
+      "structure": "st_daily_routine",
+      "sprite": "sp-clock-7",
+      "wordIds": [
+        "w_get_up",
+        "w_seven"
+      ]
+    },
+    {
+      "id": "p_brush_teeth_morning",
+      "en": "I brush my teeth in the morning.",
+      "it": "Mi lavo i denti la mattina.",
+      "phase": 11,
+      "theme": "giornata",
+      "structure": "st_daily_routine",
+      "sprite": "sp-brush_teeth",
+      "wordIds": [
+        "w_brush_teeth",
+        "w_morning"
+      ]
+    },
+    {
+      "id": "p_go_to_school_bus",
+      "en": "I go to school by bus.",
+      "it": "Vado a scuola in autobus.",
+      "phase": 11,
+      "theme": "giornata",
+      "structure": "st_daily_routine",
+      "sprite": "sp-go_to_school",
+      "wordIds": [
+        "w_go_to_school",
+        "w_bus"
+      ]
+    },
+    {
+      "id": "p_homework_afternoon",
+      "en": "I do my homework in the afternoon.",
+      "it": "Faccio i compiti il pomeriggio.",
+      "phase": 11,
+      "theme": "giornata",
+      "structure": "st_daily_routine",
+      "sprite": "sp-do_homework",
+      "wordIds": [
+        "w_do_homework",
+        "w_afternoon"
+      ]
+    },
+    {
+      "id": "p_go_to_bed_half_past",
+      "en": "What time do you go to bed? At half past eight.",
+      "it": "A che ora vai a letto? Alle otto e mezza.",
+      "phase": 11,
+      "theme": "giornata",
+      "structure": "st_daily_routine",
+      "sprite": "sp-clock-8-30",
+      "wordIds": [
+        "w_go_to_bed",
+        "w_eight"
+      ]
+    },
+    {
+      "id": "p_watch_tv_evening",
+      "en": "I watch TV in the evening.",
+      "it": "Guardo la TV la sera.",
+      "phase": 11,
+      "theme": "giornata",
+      "structure": "st_daily_routine",
+      "sprite": "sp-watch_tv",
+      "wordIds": [
+        "w_watch_tv",
+        "w_evening"
+      ]
+    },
+    {
+      "id": "p_what_doing_reading",
+      "en": "What are you doing? I'm reading.",
+      "it": "Cosa stai facendo? Sto leggendo.",
+      "phase": 11,
+      "theme": "facendo",
+      "structure": "st_present_continuous",
+      "sprite": "sp-reading",
+      "wordIds": [
+        "w_reading"
+      ]
+    },
+    {
+      "id": "p_is_she_cooking",
+      "en": "Is she cooking? Yes, she is.",
+      "it": "Lei sta cucinando? Sì.",
+      "phase": 11,
+      "theme": "facendo",
+      "structure": "st_present_continuous",
+      "sprite": "sp-cooking",
+      "wordIds": [
+        "w_cooking"
+      ]
+    },
+    {
+      "id": "p_im_writing",
+      "en": "I'm writing a letter.",
+      "it": "Sto scrivendo una lettera.",
+      "phase": 11,
+      "theme": "facendo",
+      "structure": "st_present_continuous",
+      "sprite": "sp-writing",
+      "wordIds": [
+        "w_writing"
+      ]
+    },
+    {
+      "id": "p_they_are_laughing",
+      "en": "They are laughing!",
+      "it": "Stanno ridendo!",
+      "phase": 11,
+      "theme": "facendo",
+      "structure": "st_present_continuous",
+      "sprite": "sp-laughing",
+      "wordIds": [
+        "w_laughing"
+      ]
+    },
+    {
+      "id": "p_is_he_sleeping",
+      "en": "Is he sleeping? No, he isn't. He's painting.",
+      "it": "Lui sta dormendo? No. Sta dipingendo.",
+      "phase": 11,
+      "theme": "facendo",
+      "structure": "st_present_continuous",
+      "sprite": "sp-painting",
+      "wordIds": [
+        "w_sleeping",
+        "w_painting"
+      ]
+    },
+    {
+      "id": "p_listening_music",
+      "en": "I'm listening to music.",
+      "it": "Sto ascoltando la musica.",
+      "phase": 11,
+      "theme": "facendo",
+      "structure": "st_present_continuous",
+      "sprite": "sp-listening",
+      "wordIds": [
+        "w_listening",
+        "w_music"
+      ]
+    },
+    {
+      "id": "p_birthday_march",
+      "en": "My birthday is in March.",
+      "it": "Il mio compleanno è a marzo.",
+      "phase": 11,
+      "theme": "mesi",
+      "structure": "st_months_festivals",
+      "sprite": "sp-month-mar",
+      "wordIds": [
+        "w_march"
+      ]
+    },
+    {
+      "id": "p_christmas_december",
+      "en": "Christmas is in December.",
+      "it": "Natale è a dicembre.",
+      "phase": 11,
+      "theme": "feste",
+      "structure": "st_months_festivals",
+      "sprite": "sp-month-dec",
+      "wordIds": [
+        "w_christmas",
+        "w_december"
+      ]
+    },
+    {
+      "id": "p_happy_christmas",
+      "en": "Happy Christmas!",
+      "it": "Buon Natale!",
+      "phase": 11,
+      "theme": "feste",
+      "structure": "st_months_festivals",
+      "sprite": "sp-christmas",
+      "wordIds": [
+        "w_christmas"
+      ]
+    },
+    {
+      "id": "p_trick_or_treat",
+      "en": "Trick or treat!",
+      "it": "Dolcetto o scherzetto!",
+      "phase": 11,
+      "theme": "feste",
+      "structure": "st_months_festivals",
+      "sprite": "sp-halloween",
+      "wordIds": [
+        "w_halloween"
+      ]
+    },
+    {
+      "id": "p_easter_bunny",
+      "en": "The Easter bunny brings eggs.",
+      "it": "Il coniglietto di Pasqua porta le uova.",
+      "phase": 11,
+      "theme": "feste",
+      "structure": "st_months_festivals",
+      "sprite": "sp-bunny",
+      "wordIds": [
+        "w_easter",
+        "w_bunny",
+        "w_egg"
+      ]
+    },
+    {
+      "id": "p_summer_july",
+      "en": "Summer holidays are in July and August.",
+      "it": "Le vacanze estive sono a luglio e agosto.",
+      "phase": 11,
+      "theme": "mesi",
+      "structure": "st_months_festivals",
+      "sprite": "sp-month-jul",
+      "wordIds": [
+        "w_july",
+        "w_august",
+        "w_summer"
+      ]
+    },
+    {
+      "id": "p_yesterday_park",
+      "en": "Yesterday I was at the park.",
+      "it": "Ieri ero al parco.",
+      "phase": 11,
+      "theme": "viaggio",
+      "structure": "st_past_future",
+      "sprite": "sp-yesterday",
+      "wordIds": [
+        "w_yesterday",
+        "w_park"
+      ]
+    },
+    {
+      "id": "p_went_sea",
+      "en": "We went to the sea.",
+      "it": "Siamo andati al mare.",
+      "phase": 11,
+      "theme": "viaggio",
+      "structure": "st_past_future",
+      "sprite": "sp-suitcase",
+      "wordIds": [
+        "w_suitcase",
+        "w_sea"
+      ]
+    },
+    {
+      "id": "p_tomorrow_beach",
+      "en": "Tomorrow I am going to the beach.",
+      "it": "Domani vado in spiaggia.",
+      "phase": 11,
+      "theme": "viaggio",
+      "structure": "st_past_future",
+      "sprite": "sp-tomorrow",
+      "wordIds": [
+        "w_tomorrow",
+        "w_beach"
+      ]
+    },
+    {
+      "id": "p_holiday_plane",
+      "en": "We are going on holiday by plane.",
+      "it": "Andiamo in vacanza in aereo.",
+      "phase": 11,
+      "theme": "viaggio",
+      "structure": "st_past_future",
+      "sprite": "sp-plane",
+      "wordIds": [
+        "w_holiday",
+        "w_plane"
+      ]
+    },
+    {
+      "id": "p_weekend_tent",
+      "en": "At the weekend we sleep in a tent.",
+      "it": "Nel fine settimana dormiamo in tenda.",
+      "phase": 11,
+      "theme": "viaggio",
+      "structure": "st_past_future",
+      "sprite": "sp-tent",
+      "wordIds": [
+        "w_weekend",
+        "w_tent"
+      ]
+    },
+    {
+      "id": "p_map_hotel",
+      "en": "Where is the hotel? Look at the map!",
+      "it": "Dov'è l'albergo? Guarda la mappa!",
+      "phase": 11,
+      "theme": "viaggio",
+      "structure": "st_past_future",
+      "sprite": "sp-map",
+      "wordIds": [
+        "w_hotel",
+        "w_map"
+      ]
     }
   ],
   "worlds": [
@@ -5820,6 +6543,308 @@
         "truefalse"
       ],
       "reward": "c_sassolino"
+    },
+    {
+      "id": "world_routine",
+      "unit": 29,
+      "order": 29,
+      "phase": 11,
+      "title_it": "La Mia Giornata",
+      "objective_it": "Raccontare la giornata: mi alzo, mi lavo i denti, vado a scuola, con le ore e le mezze.",
+      "canDo_it": "So raccontare la mia giornata con le ore.",
+      "structureIds": [
+        "st_daily_routine"
+      ],
+      "sprite": "sp-clock-7",
+      "color": "#4cc9f0",
+      "newItems": [
+        "w_get_up",
+        "w_brush_teeth",
+        "w_wash_face",
+        "w_get_dressed",
+        "w_go_to_school",
+        "w_play",
+        "w_do_homework",
+        "w_watch_tv",
+        "w_have_bath",
+        "w_go_to_bed",
+        "p_get_up_seven",
+        "p_brush_teeth_morning",
+        "p_go_to_school_bus",
+        "p_homework_afternoon",
+        "p_go_to_bed_half_past",
+        "p_watch_tv_evening"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food",
+        "world_house",
+        "world_school",
+        "world_actions",
+        "world_weather",
+        "world_time",
+        "world_village",
+        "world_party",
+        "world_portrait",
+        "world_animals",
+        "world_sport",
+        "world_jobs",
+        "world_city",
+        "world_market",
+        "world_doctor",
+        "world_nature"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_pigiamino"
+    },
+    {
+      "id": "world_doing",
+      "unit": 30,
+      "order": 30,
+      "phase": 11,
+      "title_it": "Cosa Stai Facendo?",
+      "objective_it": "Dire e chiedere cosa si sta facendo adesso: I'm reading, is she cooking?",
+      "canDo_it": "So dire cosa sto facendo.",
+      "structureIds": [
+        "st_present_continuous"
+      ],
+      "sprite": "sp-reading",
+      "color": "#7209b7",
+      "newItems": [
+        "w_reading",
+        "w_writing",
+        "w_cooking",
+        "w_playing",
+        "w_listening",
+        "w_talking",
+        "w_waiting",
+        "w_laughing",
+        "w_painting",
+        "w_sleeping",
+        "p_what_doing_reading",
+        "p_is_she_cooking",
+        "p_im_writing",
+        "p_they_are_laughing",
+        "p_is_he_sleeping",
+        "p_listening_music"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food",
+        "world_house",
+        "world_school",
+        "world_actions",
+        "world_weather",
+        "world_time",
+        "world_village",
+        "world_party",
+        "world_portrait",
+        "world_animals",
+        "world_sport",
+        "world_jobs",
+        "world_city",
+        "world_market",
+        "world_doctor",
+        "world_nature",
+        "world_routine"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_riflesso"
+    },
+    {
+      "id": "world_months",
+      "unit": 31,
+      "order": 31,
+      "phase": 11,
+      "title_it": "I Mesi e le Feste",
+      "objective_it": "I dodici mesi sul calendario e le feste dei paesi anglofoni: Halloween, Natale, Pasqua.",
+      "canDo_it": "So dire in che mese è il mio compleanno e fare gli auguri.",
+      "structureIds": [
+        "st_months_festivals"
+      ],
+      "sprite": "sp-halloween",
+      "color": "#f3722c",
+      "newItems": [
+        "w_january",
+        "w_february",
+        "w_march",
+        "w_april",
+        "w_may",
+        "w_june",
+        "w_july",
+        "w_august",
+        "w_september",
+        "w_october",
+        "w_november",
+        "w_december",
+        "w_halloween",
+        "w_christmas",
+        "w_easter",
+        "w_pumpkin",
+        "w_reindeer",
+        "w_bunny",
+        "p_birthday_march",
+        "p_christmas_december",
+        "p_happy_christmas",
+        "p_trick_or_treat",
+        "p_easter_bunny",
+        "p_summer_july"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food",
+        "world_house",
+        "world_school",
+        "world_actions",
+        "world_weather",
+        "world_time",
+        "world_village",
+        "world_party",
+        "world_portrait",
+        "world_animals",
+        "world_sport",
+        "world_jobs",
+        "world_city",
+        "world_market",
+        "world_doctor",
+        "world_nature",
+        "world_routine",
+        "world_doing"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_zucchetta"
+    },
+    {
+      "id": "world_travel",
+      "unit": 32,
+      "order": 32,
+      "phase": 11,
+      "title_it": "Ieri e Domani",
+      "objective_it": "Ieri, domani, le vacanze: was, went, going to, e Pepe che parte per il mondo.",
+      "canDo_it": "So dire cosa ho fatto ieri e cosa farò domani.",
+      "structureIds": [
+        "st_past_future"
+      ],
+      "sprite": "sp-suitcase",
+      "color": "#277da1",
+      "newItems": [
+        "w_yesterday",
+        "w_tomorrow",
+        "w_weekend",
+        "w_holiday",
+        "w_plane",
+        "w_suitcase",
+        "w_map",
+        "w_camera",
+        "w_tent",
+        "w_hotel",
+        "p_yesterday_park",
+        "p_went_sea",
+        "p_tomorrow_beach",
+        "p_holiday_plane",
+        "p_weekend_tent",
+        "p_map_hotel"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food",
+        "world_house",
+        "world_school",
+        "world_actions",
+        "world_weather",
+        "world_time",
+        "world_village",
+        "world_party",
+        "world_portrait",
+        "world_animals",
+        "world_sport",
+        "world_jobs",
+        "world_city",
+        "world_market",
+        "world_doctor",
+        "world_nature",
+        "world_routine",
+        "world_doing",
+        "world_months"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_valigetta"
     }
   ],
   "creatures": [
@@ -6141,6 +7166,46 @@
         "value": "world_nature"
       },
       "fact_it": "Un sassolino rotondo con il muschio in testa. Ha visto tutte le montagne dell'isola."
+    },
+    {
+      "id": "c_pigiamino",
+      "name_it": "Pigiamino",
+      "sprite": "sp-pigiamino",
+      "unlock": {
+        "type": "world",
+        "value": "world_routine"
+      },
+      "fact_it": "Un pigiama a righe con le gambe. Sa a che ora si fa tutto, e lo ricorda a tutti."
+    },
+    {
+      "id": "c_riflesso",
+      "name_it": "Riflesso",
+      "sprite": "sp-riflesso",
+      "unlock": {
+        "type": "world",
+        "value": "world_doing"
+      },
+      "fact_it": "Una creatura d'acqua che fa esattamente quello che fai tu, un secondo dopo."
+    },
+    {
+      "id": "c_zucchetta",
+      "name_it": "Zucchetta",
+      "sprite": "sp-zucchetta",
+      "unlock": {
+        "type": "world",
+        "value": "world_months"
+      },
+      "fact_it": "Una zucca sorridente con il cappello da festa. Conosce tutte le feste dell'anno."
+    },
+    {
+      "id": "c_valigetta",
+      "name_it": "Valigetta",
+      "sprite": "sp-valigetta",
+      "unlock": {
+        "type": "world",
+        "value": "world_travel"
+      },
+      "fact_it": "Una valigia con le ruote e gli occhi. È pronta a partire da sempre."
     }
   ],
   "story": {

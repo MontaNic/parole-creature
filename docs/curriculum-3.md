@@ -1,5 +1,8 @@
 # Curriculum, anno 3 — dall'A1 pieno in poi
 
+> Realizzato per intero l'8 settembre 2026 (versione 3.0.0), in tre lotti
+> con il check dopo ognuno. Differenze annotate in PROGRESS.md.
+
 Richiesta dell'8 settembre 2026: "procedi con fasi e poi anno 3". Stesso
 modello dell'anno 2 (`docs/curriculum-2.md`): i traguardi delle
 Indicazioni nazionali per la fine della primaria, e il modo in cui un

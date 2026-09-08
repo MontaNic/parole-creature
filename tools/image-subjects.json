@@ -80,21 +80,47 @@
     ],
     "orologi": [
       "sp-clock-1",
-      "sp-clock-2",
-      "sp-clock-3",
-      "sp-clock-4",
-      "sp-clock-5",
-      "sp-clock-6",
-      "sp-clock-7",
-      "sp-clock-8",
-      "sp-clock-9",
+      "sp-clock-1-30",
       "sp-clock-10",
+      "sp-clock-10-30",
       "sp-clock-11",
-      "sp-clock-12"
+      "sp-clock-11-30",
+      "sp-clock-12",
+      "sp-clock-12-30",
+      "sp-clock-2",
+      "sp-clock-2-30",
+      "sp-clock-3",
+      "sp-clock-3-30",
+      "sp-clock-4",
+      "sp-clock-4-30",
+      "sp-clock-5",
+      "sp-clock-5-30",
+      "sp-clock-6",
+      "sp-clock-6-30",
+      "sp-clock-7",
+      "sp-clock-7-30",
+      "sp-clock-8",
+      "sp-clock-8-30",
+      "sp-clock-9",
+      "sp-clock-9-30"
     ],
     "frecce": [
       "sp-arrow-left",
       "sp-arrow-right"
+    ],
+    "mesi": [
+      "sp-month-jan",
+      "sp-month-feb",
+      "sp-month-mar",
+      "sp-month-apr",
+      "sp-month-may",
+      "sp-month-jun",
+      "sp-month-jul",
+      "sp-month-aug",
+      "sp-month-sep",
+      "sp-month-oct",
+      "sp-month-nov",
+      "sp-month-dec"
     ]
   },
   "_kind_comment": "kind: 'creature' aggiunge al prompt le proporzioni da cucciolo; 'object' no; 'concept' e' il gruppo a rischio (vedi note).",
@@ -1514,6 +1540,246 @@
       "kind": "creature",
       "batch": 7,
       "prompt": "a cute round grey pebble creature with big eyes and a smile, a small tuft of green moss on top of the head like hair, two tiny feet"
+    },
+    {
+      "id": "sp-get_up",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, stretching and yawning while getting out of a small bed, one paw up, a small sun in the window behind"
+    },
+    {
+      "id": "sp-brush_teeth",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, brushing its teeth with a sky blue toothbrush, white foam on the mouth, standing on hind legs"
+    },
+    {
+      "id": "sp-wash_face",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, washing its face with both front paws at a small white sink with water drops"
+    },
+    {
+      "id": "sp-get_dressed",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, putting on a green T-shirt, the shirt half over the head, standing on hind legs"
+    },
+    {
+      "id": "sp-go_to_school",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, walking with a small orange school backpack on its back, seen from the side"
+    },
+    {
+      "id": "sp-play",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, playing with a red ball, jumping toward it, seen from the side"
+    },
+    {
+      "id": "sp-do_homework",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, sitting at a small desk writing in an open notebook with a yellow pencil"
+    },
+    {
+      "id": "sp-watch_tv",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, sitting on a small purple sofa watching a small television with a colourful screen"
+    },
+    {
+      "id": "sp-have_bath",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, sitting in a white bathtub full of foam bubbles, a yellow rubber duck floating"
+    },
+    {
+      "id": "sp-go_to_bed",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, climbing into a small bed with a purple blanket, a crescent moon in the window behind"
+    },
+    {
+      "id": "sp-reading",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, sitting and reading an open sky blue book held in the front paws"
+    },
+    {
+      "id": "sp-writing",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, writing on a sheet of paper with a big yellow pencil, tongue out in concentration"
+    },
+    {
+      "id": "sp-cooking",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, wearing a white chef hat and stirring a red pot with a wooden spoon, steam rising"
+    },
+    {
+      "id": "sp-playing",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, playing with colourful building blocks stacked in a small tower"
+    },
+    {
+      "id": "sp-listening",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, wearing big orange headphones with eyes closed and a happy smile, two music notes floating"
+    },
+    {
+      "id": "sp-talking",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, talking on a sky blue toy telephone held to the ear, mouth open"
+    },
+    {
+      "id": "sp-waiting",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, sitting patiently at a small bus stop sign, looking to the side, a small round clock above"
+    },
+    {
+      "id": "sp-laughing",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, laughing out loud with the head thrown back, eyes closed, mouth wide open, two small tears of joy"
+    },
+    {
+      "id": "sp-painting",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, painting on a small easel with a brush, colourful paint splashes on the canvas"
+    },
+    {
+      "id": "sp-sleeping",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, sleeping on its back on a small green cushion with all four paws up, eyes closed"
+    },
+    {
+      "id": "sp-halloween",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "a smiling orange jack-o-lantern pumpkin with triangular eyes and a wide toothy grin, a small black witch hat on top"
+    },
+    {
+      "id": "sp-christmas",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "a decorated green Christmas tree with colourful round baubles and a yellow star on top, two wrapped presents at the base"
+    },
+    {
+      "id": "sp-easter",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "three decorated Easter eggs in pink, sky blue and yellow with stripes and dots, in a small nest of green grass"
+    },
+    {
+      "id": "sp-pumpkin",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "a plain round orange pumpkin with a short green stem and vertical ridges, no face"
+    },
+    {
+      "id": "sp-reindeer",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "a cute brown reindeer standing, seen from the side, big antlers and a small red nose"
+    },
+    {
+      "id": "sp-bunny",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "a cute white bunny sitting, seen from the front, long ears, pink nose, holding a small orange carrot"
+    },
+    {
+      "id": "sp-yesterday",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "a calendar sheet with a curling top-left corner being torn off, showing a small left-pointing arrow instead of a number"
+    },
+    {
+      "id": "sp-tomorrow",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "a calendar sheet with a small sun rising in the top band and a small right-pointing arrow instead of a number"
+    },
+    {
+      "id": "sp-weekend",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "two calendar sheets side by side with pink top bands, a small amber sun above them, no letters"
+    },
+    {
+      "id": "sp-holiday",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "a striped beach chair with a small palm tree and a pair of sunglasses resting on the chair"
+    },
+    {
+      "id": "sp-plane",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "a small white passenger plane with sky blue wings and tail, seen from the side, flying slightly upward"
+    },
+    {
+      "id": "sp-suitcase",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "a rolling suitcase seen from the front, sky blue with an amber handle and two small wheels, a colourful sticker on it"
+    },
+    {
+      "id": "sp-map",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "a folded paper map partly open, with a sky blue river, a green forest area and a red cross marking a spot"
+    },
+    {
+      "id": "sp-camera",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "a small orange instant camera seen from the front with a round lens and a photo coming out of the slot"
+    },
+    {
+      "id": "sp-tent",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "a small orange camping tent with a triangular shape, a dark open entrance and two small pegs"
+    },
+    {
+      "id": "sp-hotel",
+      "kind": "object",
+      "batch": 8,
+      "prompt": "a small tall hotel building seen from the front, cream walls, many sky blue windows, a red awning over the door"
+    },
+    {
+      "id": "sp-pigiamino",
+      "kind": "creature",
+      "batch": 8,
+      "prompt": "a cute striped purple and white pyjama creature standing upright, a round sleepy face with big eyes, a small nightcap with a pompom"
+    },
+    {
+      "id": "sp-riflesso",
+      "kind": "creature",
+      "batch": 8,
+      "prompt": "a cute round drop of sky blue water creature with a shiny surface, big eyes and a smile, two small stubby arms"
+    },
+    {
+      "id": "sp-zucchetta",
+      "kind": "creature",
+      "batch": 8,
+      "prompt": "a cute round orange pumpkin creature with big eyes and a happy smile, wearing a small orange party hat, two short legs"
+    },
+    {
+      "id": "sp-valigetta",
+      "kind": "creature",
+      "batch": 8,
+      "prompt": "a cute small sky blue suitcase creature with two wheels as feet, big round eyes on the front and a smile, an amber handle on top"
     }
   ]
 }

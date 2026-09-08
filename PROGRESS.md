@@ -1138,9 +1138,32 @@ strutture, unita', creature e i 40 prompt del batch 8) e nelle 72 tracce
 gia' generate; si uniscono a content.json quando i crediti tornano, con
 lo stesso script di unione usato per la fase 10.
 
+### Anno 3, lotto 3: la fase 11 "Racconto" (unita' 29-32). Anno 3 completo
+
+Fatto e pubblicato (contentVersion 3.2.0, app 3.0.0) appena i crediti
+Gemini sono tornati: 48 parole (12 mesi schematici), 24 frasi, 4
+strutture (`st_daily_routine`, `st_present_continuous`,
+`st_months_festivals`, `st_past_future`), 4 unita' (giornata, cosa stai
+facendo, mesi e feste, ieri e domani) con Pigiamino, Riflesso, Zucchetta,
+Valigetta. Venti illustrazioni sono Pepe che fa qualcosa (si alza, si
+lava i denti, legge, dipinge...): la mascotte come soggetto regge anche
+qui. 40 in un batch senza rifacimenti; 281 PNG in precache. Audio: 72
+tracce, indice a 605.
+
+**Il gioco ora ha 32 unita', 295 parole e 182 frasi**: i sillabi degli
+anni 2 e 3 sono realizzati per intero. Dalla Valle dei Draghi a "Ieri e
+domani" il percorso copre i campi lessicali, le funzioni e i traguardi
+delle Indicazioni nazionali per la primaria, fino a un A1 pieno con i
+primi mattoni dell'A2. L'anno finisce con Pepe che parte per il mondo:
+una stagione 3 della storia avra' senso quando le fasi 9-11 saranno
+giocate.
+
 ## Prossimi passi
 
-**Stato al 2026-09-08**: anno 2 del curriculum completo e pubblicato
+**Stato al 2026-09-08, sera**: anni 2 e 3 del curriculum completi e
+pubblicati (versione 3.0.0: 32 unita', 295 parole, 182 frasi, 281
+illustrazioni, 605 tracce, due stagioni di storia, due giochi bonus).
+Prima, nel pomeriggio: anno 2 completo e pubblicato
 (versione 2.0.0: 20 unita', 167 parole, 110 frasi, 159 illustrazioni, 351
 tracce), due giochi bonus. Prima, la sera del 7: fase 3 completa (versione
 1.6.0): icone PWA, storico e grafico, criteri di successo, distintivi,
