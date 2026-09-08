@@ -1063,6 +1063,27 @@ strutture della sua unita'. In content.json i capitoli hanno `season` e
 `pendingAtStart`. L'epilogo mostra le creature della propria stagione.
 La striscia dell'album ora ha 24 tondi. curriculum-test 88 -> 91.
 
+## Anno 3 del curriculum (dall'8 settembre 2026)
+
+Sillabo in `docs/curriculum-3.md`: tre fasi (9 "Io e gli altri", 10 "Nel
+mondo", 11 "Racconto"), unita' 21-32, ~120 parole e ~70 frasi. Descrivere,
+muoversi nel mondo, raccontare: i traguardi di quarta e quinta. A lotti
+di una fase, con il check dopo ognuno, come l'anno 2.
+
+### Anno 3, lotto 1: la fase 9 "Io e gli altri" (unita' 21-24)
+
+Fatto e pubblicato (contentVersion 3.0.0, app 2.1.0): 40 parole, 24 frasi,
+4 strutture (`st_has_got`, `st_animal_can`, `st_like_playing`,
+`st_jobs`), 4 unita' (ritratto, animali, sport, mestieri) con Specchietto,
+Chicco, Golino, Timbrino; fasi 9-10-11 dichiarate. Il ritratto e' fatto di
+persone diverse, una per tratto (capelli lunghi, ricci, biondi, occhiali,
+barba, baffi, lentiggini, alto, basso): descrivere vuol dire distinguere.
+Illustrazioni: 44 in un batch (Timbrino rifatto: era uscito come un
+cagnolino col cappello, non un timbro); 203 PNG in precache. Audio: 64
+tracce, indice a 469. Le fasi 10 e 11 sono gia' scritte in bozza (parole,
+frasi, soggetti) e i loro simboli schematici — frecce, decine, dodici
+mesi, mezze ore — sono in `sprites.svg`.
+
 ## Prossimi passi
 
 **Stato al 2026-09-08**: anno 2 del curriculum completo e pubblicato

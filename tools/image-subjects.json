@@ -1010,6 +1010,270 @@
       "kind": "creature",
       "batch": 5,
       "prompt": "a cute round pink balloon creature with a big smile and two round eyes, wearing a small orange party hat, a short curly string below like a tail"
+    },
+    {
+      "id": "sp-long_hair",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a friendly cartoon girl seen from the front, bust portrait, very long straight dark brown hair down to the shoulders and beyond, sky blue T-shirt"
+    },
+    {
+      "id": "sp-short_hair",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a friendly cartoon boy seen from the front, bust portrait, very short dark brown hair, green T-shirt"
+    },
+    {
+      "id": "sp-curly_hair",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a friendly cartoon girl seen from the front, bust portrait, big curly brown hair like a round cloud, orange T-shirt"
+    },
+    {
+      "id": "sp-blond_hair",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a friendly cartoon boy seen from the front, bust portrait, straight blond yellow hair with a fringe, purple T-shirt"
+    },
+    {
+      "id": "sp-glasses",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a pair of round eyeglasses with sky blue frames and light grey lenses, seen from the front, nothing else"
+    },
+    {
+      "id": "sp-beard",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a friendly cartoon man seen from the front, bust portrait, a big full brown beard, bald head, amber sweater"
+    },
+    {
+      "id": "sp-moustache",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a friendly cartoon man seen from the front, bust portrait, a big curled black moustache, short black hair, sky blue shirt"
+    },
+    {
+      "id": "sp-freckles",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a friendly cartoon kid seen from the front, close portrait, red hair and many small brown freckles on the cheeks and nose, big smile"
+    },
+    {
+      "id": "sp-tall",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a very tall thin friendly cartoon man standing, full body, wearing a tall amber top hat and a long green coat, seen from the front"
+    },
+    {
+      "id": "sp-short",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a very short round friendly cartoon man standing, full body, wearing a small orange cap and sky blue overalls, seen from the front"
+    },
+    {
+      "id": "sp-cow",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a cute black and white spotted cow standing, seen from the side, a pink nose and small horns"
+    },
+    {
+      "id": "sp-sheep",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a cute fluffy white sheep standing, seen from the side, a black face and black legs"
+    },
+    {
+      "id": "sp-horse",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a cute brown horse standing, seen from the side, a dark brown mane and tail"
+    },
+    {
+      "id": "sp-pig",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a cute pink pig standing, seen from the side, a round snout and a curly tail"
+    },
+    {
+      "id": "sp-hen",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a cute brown hen standing, seen from the side, a red comb and a yellow beak"
+    },
+    {
+      "id": "sp-duck",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a cute white duck standing, seen from the side, an orange beak and orange feet"
+    },
+    {
+      "id": "sp-lion",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a cute lion sitting, seen from the front, an amber body and a big orange mane, a friendly smile"
+    },
+    {
+      "id": "sp-elephant",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a cute light grey elephant standing, seen from the side, big round ears and a curled trunk"
+    },
+    {
+      "id": "sp-monkey",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a cute brown monkey sitting, seen from the front, a lighter face and belly, a long curled tail, holding a yellow banana"
+    },
+    {
+      "id": "sp-giraffe",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a cute yellow giraffe with brown spots standing, seen from the side, a very long neck and two small horns"
+    },
+    {
+      "id": "sp-football",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a classic black and white football (soccer ball) with hexagon pattern, seen from the front"
+    },
+    {
+      "id": "sp-basketball",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "an orange basketball with black curved lines, seen from the front"
+    },
+    {
+      "id": "sp-tennis",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a tennis racket with a sky blue frame crossed by a yellow tennis ball, seen from the front"
+    },
+    {
+      "id": "sp-ball",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a bouncy beach ball with red, yellow and sky blue segments, seen from the front"
+    },
+    {
+      "id": "sp-drawing",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a sheet of white paper with a simple crayon drawing of a house and a sun on it, with three crayons (red, sky blue, green) beside it"
+    },
+    {
+      "id": "sp-music",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "three big purple music notes floating, with a pair of orange headphones below"
+    },
+    {
+      "id": "sp-guitar",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "an acoustic guitar seen from the front, brown wooden body, a round sound hole, six strings, tilted diagonally"
+    },
+    {
+      "id": "sp-chess",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a small chess board seen at an angle with a white king and a black knight standing on it"
+    },
+    {
+      "id": "sp-kite",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a diamond shaped kite, orange and yellow, with a long tail of small bows, flying diagonally"
+    },
+    {
+      "id": "sp-skateboard",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a skateboard seen from the side, green deck with orange wheels"
+    },
+    {
+      "id": "sp-doctor",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a friendly cartoon doctor seen from the front, bust portrait, white coat, a stethoscope around the neck, short dark hair"
+    },
+    {
+      "id": "sp-farmer",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a friendly cartoon farmer seen from the front, bust portrait, straw hat, green checked shirt, holding a pitchfork"
+    },
+    {
+      "id": "sp-cook",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a friendly cartoon cook seen from the front, bust portrait, tall white chef hat, white jacket, holding a wooden spoon"
+    },
+    {
+      "id": "sp-police",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a friendly cartoon police officer seen from the front, bust portrait, dark blue cap with a badge and dark blue uniform"
+    },
+    {
+      "id": "sp-firefighter",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a friendly cartoon firefighter seen from the front, bust portrait, red helmet and yellow jacket with reflective stripes"
+    },
+    {
+      "id": "sp-pilot",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a friendly cartoon pilot seen from the front, bust portrait, dark blue cap with wings badge, white shirt, aviator sunglasses lifted on the cap"
+    },
+    {
+      "id": "sp-nurse",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a friendly cartoon nurse seen from the front, bust portrait, sky blue scrubs and a small white cap with a red cross"
+    },
+    {
+      "id": "sp-singer",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a friendly cartoon singer seen from the front, bust portrait, holding a microphone, purple sparkly jacket, mouth open singing"
+    },
+    {
+      "id": "sp-builder",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a friendly cartoon builder seen from the front, bust portrait, yellow hard hat, orange vest, holding a trowel"
+    },
+    {
+      "id": "sp-vet",
+      "kind": "object",
+      "batch": 6,
+      "prompt": "a friendly cartoon vet seen from the front, bust portrait, green scrubs, holding a small orange kitten"
+    },
+    {
+      "id": "sp-specchietto",
+      "kind": "creature",
+      "batch": 6,
+      "prompt": "a cute living hand mirror standing upright on two short legs, an oval mirror face with big eyes and a smile, a purple frame, two stubby arms"
+    },
+    {
+      "id": "sp-chicco",
+      "kind": "creature",
+      "batch": 6,
+      "prompt": "a cute round yellow chick sitting upright, wearing a small straw hat, big round eyes and a tiny orange beak"
+    },
+    {
+      "id": "sp-golino",
+      "kind": "creature",
+      "batch": 6,
+      "prompt": "a cute round ball creature wearing a small green football jersey with a white stripe, big eyes and a happy smile, two stubby legs with tiny boots"
+    },
+    {
+      "id": "sp-timbrino",
+      "kind": "creature",
+      "batch": 6,
+      "prompt": "a cute living rubber stamp: a tall rectangular red stamp body standing upright on two short legs, with a round wooden handle on top like a knob hat, a big smiling face with two round eyes printed on the front of the stamp body, two stubby arms, no animal features"
     }
   ]
 }

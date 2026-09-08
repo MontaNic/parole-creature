@@ -1,7 +1,7 @@
 {
   "_comment": "Curriculum di 'Parole & Creature'. NON e' un elenco di parole per tema: e' un corso a unita', ognuna con un obiettivo linguistico esplicito, revisione sistematica delle unita' precedenti e una soglia di padronanza da superare per cambiare fase. Vedi PROGRESS.md, sezione 'Logica del curriculum'.",
   "schemaVersion": 2,
-  "contentVersion": "2.3.0",
+  "contentVersion": "3.0.0",
   "audioBasePath": "assets/audio/",
   "_ids_comment": "REGOLA: gli id di parole, frasi e unita' sono PERMANENTI. Il progresso del bambino e' indicizzato per id: rinominarli equivale a cancellare quello che ha imparato. Si aggiunge, non si rinomina.",
   "curriculum": {
@@ -72,6 +72,27 @@
       "title_it": "Il mio mondo",
       "goal_it": "Tempo e giorni, ore e routine, luoghi e mezzi, la festa: l'ingresso nell'A1.",
       "desc_it": "Domande e risposte brevi su tutto quello che è stato imparato.",
+      "showWrittenWord": true
+    },
+    {
+      "id": 9,
+      "title_it": "Io e gli altri",
+      "goal_it": "Descrivere le persone e gli animali, dire cosa piace fare e i mestieri: she, he, it, has got, favourite, want to.",
+      "desc_it": "Frasi di 5-7 parole, sempre con audio e testo.",
+      "showWrittenWord": true
+    },
+    {
+      "id": 10,
+      "title_it": "Nel mondo",
+      "goal_it": "Muoversi nel mondo: la città e le direzioni, comprare, dire come si sta dal dottore, la natura con there is / there are.",
+      "desc_it": "Domande e risposte per cavarsela fuori casa.",
+      "showWrittenWord": true
+    },
+    {
+      "id": 11,
+      "title_it": "Racconto",
+      "goal_it": "Raccontare: la giornata con le ore, cosa sto facendo, i mesi e le feste dei paesi anglofoni, ieri e domani.",
+      "desc_it": "Il primo racconto di sé nel tempo.",
       "showWrittenWord": true
     }
   ],
@@ -259,6 +280,38 @@
       "pattern": "How old are you? I am seven. / Happy birthday! / When is your birthday? In summer.",
       "focus_it": "Dire la propria eta', fare gli auguri, dire la stagione del compleanno. I numeri fino a venti.",
       "why_it": "'How old are you?' e' la domanda che ogni bambino anglofono si sente fare per prima: chiude l'anno con un dialogo vero su di se'."
+    },
+    {
+      "id": "st_has_got",
+      "phase": 9,
+      "unit": 21,
+      "pattern": "She has got long hair. / He is tall. / I've got glasses.",
+      "focus_it": "Descrivere una persona: 'has got' per i tratti, 'is' per gli aggettivi, e 'she' e 'he' per parlare degli altri.",
+      "why_it": "Descrivere e' il traguardo della classe quarta; 'has got' e' la forma britannica che il bambino sentira' nei cartoni e a scuola, e 'she/he' entrano per la prima volta come persone diverse da me e te."
+    },
+    {
+      "id": "st_animal_can",
+      "phase": 9,
+      "unit": 22,
+      "pattern": "The lion is big and strong. / The monkey can climb. / Can a duck swim? Yes, it can.",
+      "focus_it": "Descrivere un animale e dire cosa sa fare, con 'it'.",
+      "why_it": "Gli animali sono il lessico piu' amato a otto anni; qui portano 'it can', la terza persona di 'can', e 'and' fra due aggettivi."
+    },
+    {
+      "id": "st_like_playing",
+      "phase": 9,
+      "unit": 23,
+      "pattern": "I like playing football. / My favourite sport is tennis. / Let's play chess!",
+      "focus_it": "Dire cosa piace fare (like + -ing), qual e' il preferito, proporre un gioco.",
+      "why_it": "'I like' torna con un verbo: e' il ponte fra 'I like pizza' e 'I like playing'. 'favourite' e' una parola che un bambino usa ogni giorno."
+    },
+    {
+      "id": "st_jobs",
+      "phase": 9,
+      "unit": 24,
+      "pattern": "He is a doctor. / What do you want to be? I want to be a pilot.",
+      "focus_it": "Dire il mestiere di qualcuno e cosa si vuole diventare.",
+      "why_it": "'want to' e' fra le formule piu' frequenti dell'inglese parlato; i mestieri sono il pretesto classico delle Indicazioni per parlare degli altri."
     }
   ],
   "words": [
@@ -1597,6 +1650,326 @@
       "phase": 8,
       "theme": "numeri",
       "sprite": "sp-num-20"
+    },
+    {
+      "id": "w_long_hair",
+      "en": "long hair",
+      "it": "capelli lunghi",
+      "phase": 9,
+      "theme": "ritratto",
+      "sprite": "sp-long_hair"
+    },
+    {
+      "id": "w_short_hair",
+      "en": "short hair",
+      "it": "capelli corti",
+      "phase": 9,
+      "theme": "ritratto",
+      "sprite": "sp-short_hair"
+    },
+    {
+      "id": "w_curly_hair",
+      "en": "curly hair",
+      "it": "capelli ricci",
+      "phase": 9,
+      "theme": "ritratto",
+      "sprite": "sp-curly_hair"
+    },
+    {
+      "id": "w_blond_hair",
+      "en": "blond hair",
+      "it": "capelli biondi",
+      "phase": 9,
+      "theme": "ritratto",
+      "sprite": "sp-blond_hair"
+    },
+    {
+      "id": "w_glasses",
+      "en": "glasses",
+      "it": "occhiali",
+      "phase": 9,
+      "theme": "ritratto",
+      "sprite": "sp-glasses"
+    },
+    {
+      "id": "w_beard",
+      "en": "beard",
+      "it": "barba",
+      "phase": 9,
+      "theme": "ritratto",
+      "sprite": "sp-beard"
+    },
+    {
+      "id": "w_moustache",
+      "en": "moustache",
+      "it": "baffi",
+      "phase": 9,
+      "theme": "ritratto",
+      "sprite": "sp-moustache"
+    },
+    {
+      "id": "w_freckles",
+      "en": "freckles",
+      "it": "lentiggini",
+      "phase": 9,
+      "theme": "ritratto",
+      "sprite": "sp-freckles"
+    },
+    {
+      "id": "w_tall",
+      "en": "tall",
+      "it": "alto",
+      "phase": 9,
+      "theme": "ritratto",
+      "sprite": "sp-tall"
+    },
+    {
+      "id": "w_short",
+      "en": "short",
+      "it": "basso",
+      "phase": 9,
+      "theme": "ritratto",
+      "sprite": "sp-short"
+    },
+    {
+      "id": "w_cow",
+      "en": "cow",
+      "it": "mucca",
+      "phase": 9,
+      "theme": "animali",
+      "sprite": "sp-cow"
+    },
+    {
+      "id": "w_sheep",
+      "en": "sheep",
+      "it": "pecora",
+      "phase": 9,
+      "theme": "animali",
+      "sprite": "sp-sheep"
+    },
+    {
+      "id": "w_horse",
+      "en": "horse",
+      "it": "cavallo",
+      "phase": 9,
+      "theme": "animali",
+      "sprite": "sp-horse"
+    },
+    {
+      "id": "w_pig",
+      "en": "pig",
+      "it": "maiale",
+      "phase": 9,
+      "theme": "animali",
+      "sprite": "sp-pig"
+    },
+    {
+      "id": "w_hen",
+      "en": "hen",
+      "it": "gallina",
+      "phase": 9,
+      "theme": "animali",
+      "sprite": "sp-hen"
+    },
+    {
+      "id": "w_duck",
+      "en": "duck",
+      "it": "anatra",
+      "phase": 9,
+      "theme": "animali",
+      "sprite": "sp-duck"
+    },
+    {
+      "id": "w_lion",
+      "en": "lion",
+      "it": "leone",
+      "phase": 9,
+      "theme": "animali",
+      "sprite": "sp-lion"
+    },
+    {
+      "id": "w_elephant",
+      "en": "elephant",
+      "it": "elefante",
+      "phase": 9,
+      "theme": "animali",
+      "sprite": "sp-elephant"
+    },
+    {
+      "id": "w_monkey",
+      "en": "monkey",
+      "it": "scimmia",
+      "phase": 9,
+      "theme": "animali",
+      "sprite": "sp-monkey"
+    },
+    {
+      "id": "w_giraffe",
+      "en": "giraffe",
+      "it": "giraffa",
+      "phase": 9,
+      "theme": "animali",
+      "sprite": "sp-giraffe"
+    },
+    {
+      "id": "w_football",
+      "en": "football",
+      "it": "calcio",
+      "phase": 9,
+      "theme": "sport",
+      "sprite": "sp-football"
+    },
+    {
+      "id": "w_basketball",
+      "en": "basketball",
+      "it": "basket",
+      "phase": 9,
+      "theme": "sport",
+      "sprite": "sp-basketball"
+    },
+    {
+      "id": "w_tennis",
+      "en": "tennis",
+      "it": "tennis",
+      "phase": 9,
+      "theme": "sport",
+      "sprite": "sp-tennis"
+    },
+    {
+      "id": "w_ball",
+      "en": "ball",
+      "it": "palla",
+      "phase": 9,
+      "theme": "sport",
+      "sprite": "sp-ball"
+    },
+    {
+      "id": "w_drawing",
+      "en": "drawing",
+      "it": "disegno",
+      "phase": 9,
+      "theme": "sport",
+      "sprite": "sp-drawing"
+    },
+    {
+      "id": "w_music",
+      "en": "music",
+      "it": "musica",
+      "phase": 9,
+      "theme": "sport",
+      "sprite": "sp-music"
+    },
+    {
+      "id": "w_guitar",
+      "en": "guitar",
+      "it": "chitarra",
+      "phase": 9,
+      "theme": "sport",
+      "sprite": "sp-guitar"
+    },
+    {
+      "id": "w_chess",
+      "en": "chess",
+      "it": "scacchi",
+      "phase": 9,
+      "theme": "sport",
+      "sprite": "sp-chess"
+    },
+    {
+      "id": "w_kite",
+      "en": "kite",
+      "it": "aquilone",
+      "phase": 9,
+      "theme": "sport",
+      "sprite": "sp-kite"
+    },
+    {
+      "id": "w_skateboard",
+      "en": "skateboard",
+      "it": "skateboard",
+      "phase": 9,
+      "theme": "sport",
+      "sprite": "sp-skateboard"
+    },
+    {
+      "id": "w_doctor",
+      "en": "doctor",
+      "it": "dottore",
+      "phase": 9,
+      "theme": "mestieri",
+      "sprite": "sp-doctor"
+    },
+    {
+      "id": "w_farmer",
+      "en": "farmer",
+      "it": "contadino",
+      "phase": 9,
+      "theme": "mestieri",
+      "sprite": "sp-farmer"
+    },
+    {
+      "id": "w_cook",
+      "en": "cook",
+      "it": "cuoco",
+      "phase": 9,
+      "theme": "mestieri",
+      "sprite": "sp-cook"
+    },
+    {
+      "id": "w_police",
+      "en": "police officer",
+      "it": "poliziotto",
+      "phase": 9,
+      "theme": "mestieri",
+      "sprite": "sp-police"
+    },
+    {
+      "id": "w_firefighter",
+      "en": "firefighter",
+      "it": "pompiere",
+      "phase": 9,
+      "theme": "mestieri",
+      "sprite": "sp-firefighter"
+    },
+    {
+      "id": "w_pilot",
+      "en": "pilot",
+      "it": "pilota",
+      "phase": 9,
+      "theme": "mestieri",
+      "sprite": "sp-pilot"
+    },
+    {
+      "id": "w_nurse",
+      "en": "nurse",
+      "it": "infermiera",
+      "phase": 9,
+      "theme": "mestieri",
+      "sprite": "sp-nurse"
+    },
+    {
+      "id": "w_singer",
+      "en": "singer",
+      "it": "cantante",
+      "phase": 9,
+      "theme": "mestieri",
+      "sprite": "sp-singer"
+    },
+    {
+      "id": "w_builder",
+      "en": "builder",
+      "it": "muratore",
+      "phase": 9,
+      "theme": "mestieri",
+      "sprite": "sp-builder"
+    },
+    {
+      "id": "w_vet",
+      "en": "vet",
+      "it": "veterinario",
+      "phase": 9,
+      "theme": "mestieri",
+      "sprite": "sp-vet"
     }
   ],
   "phrases": [
@@ -2935,6 +3308,306 @@
         "w_twenty",
         "w_balloon"
       ]
+    },
+    {
+      "id": "p_she_long_hair",
+      "en": "She has got long hair.",
+      "it": "Lei ha i capelli lunghi.",
+      "phase": 9,
+      "theme": "ritratto",
+      "structure": "st_has_got",
+      "sprite": "sp-long_hair",
+      "wordIds": [
+        "w_long_hair"
+      ]
+    },
+    {
+      "id": "p_he_beard",
+      "en": "He has got a beard.",
+      "it": "Lui ha la barba.",
+      "phase": 9,
+      "theme": "ritratto",
+      "structure": "st_has_got",
+      "sprite": "sp-beard",
+      "wordIds": [
+        "w_beard"
+      ]
+    },
+    {
+      "id": "p_ive_got_glasses",
+      "en": "I've got glasses.",
+      "it": "Ho gli occhiali.",
+      "phase": 9,
+      "theme": "ritratto",
+      "structure": "st_has_got",
+      "sprite": "sp-glasses",
+      "wordIds": [
+        "w_glasses"
+      ]
+    },
+    {
+      "id": "p_he_is_tall",
+      "en": "He is tall.",
+      "it": "Lui è alto.",
+      "phase": 9,
+      "theme": "ritratto",
+      "structure": "st_has_got",
+      "sprite": "sp-tall",
+      "wordIds": [
+        "w_tall"
+      ]
+    },
+    {
+      "id": "p_she_curly",
+      "en": "She has got curly hair and freckles.",
+      "it": "Lei ha i capelli ricci e le lentiggini.",
+      "phase": 9,
+      "theme": "ritratto",
+      "structure": "st_has_got",
+      "sprite": "sp-curly_hair",
+      "wordIds": [
+        "w_curly_hair",
+        "w_freckles"
+      ]
+    },
+    {
+      "id": "p_my_dad_moustache",
+      "en": "My dad has got a moustache.",
+      "it": "Il mio papà ha i baffi.",
+      "phase": 9,
+      "theme": "ritratto",
+      "structure": "st_has_got",
+      "sprite": "sp-moustache",
+      "wordIds": [
+        "w_moustache",
+        "w_dad"
+      ]
+    },
+    {
+      "id": "p_lion_strong",
+      "en": "The lion is big and strong.",
+      "it": "Il leone è grande e forte.",
+      "phase": 9,
+      "theme": "animali",
+      "structure": "st_animal_can",
+      "sprite": "sp-lion",
+      "wordIds": [
+        "w_lion",
+        "w_big"
+      ]
+    },
+    {
+      "id": "p_monkey_climb",
+      "en": "The monkey can climb.",
+      "it": "La scimmia sa arrampicarsi.",
+      "phase": 9,
+      "theme": "animali",
+      "structure": "st_animal_can",
+      "sprite": "sp-monkey",
+      "wordIds": [
+        "w_monkey",
+        "w_climb"
+      ]
+    },
+    {
+      "id": "p_duck_swim",
+      "en": "Can a duck swim? Yes, it can.",
+      "it": "Un'anatra sa nuotare? Sì.",
+      "phase": 9,
+      "theme": "animali",
+      "structure": "st_animal_can",
+      "sprite": "sp-duck",
+      "wordIds": [
+        "w_duck",
+        "w_swim"
+      ]
+    },
+    {
+      "id": "p_cow_fly",
+      "en": "Can a cow fly? No, it can't.",
+      "it": "Una mucca sa volare? No.",
+      "phase": 9,
+      "theme": "animali",
+      "structure": "st_animal_can",
+      "sprite": "sp-cow",
+      "wordIds": [
+        "w_cow",
+        "w_fly"
+      ]
+    },
+    {
+      "id": "p_giraffe_tall",
+      "en": "The giraffe is tall.",
+      "it": "La giraffa è alta.",
+      "phase": 9,
+      "theme": "animali",
+      "structure": "st_animal_can",
+      "sprite": "sp-giraffe",
+      "wordIds": [
+        "w_giraffe",
+        "w_tall"
+      ]
+    },
+    {
+      "id": "p_pig_pink",
+      "en": "The pig is pink and small.",
+      "it": "Il maiale è rosa e piccolo.",
+      "phase": 9,
+      "theme": "animali",
+      "structure": "st_animal_can",
+      "sprite": "sp-pig",
+      "wordIds": [
+        "w_pig",
+        "w_small"
+      ]
+    },
+    {
+      "id": "p_like_playing_football",
+      "en": "I like playing football.",
+      "it": "Mi piace giocare a calcio.",
+      "phase": 9,
+      "theme": "sport",
+      "structure": "st_like_playing",
+      "sprite": "sp-football",
+      "wordIds": [
+        "w_football"
+      ]
+    },
+    {
+      "id": "p_favourite_tennis",
+      "en": "My favourite sport is tennis.",
+      "it": "Il mio sport preferito è il tennis.",
+      "phase": 9,
+      "theme": "sport",
+      "structure": "st_like_playing",
+      "sprite": "sp-tennis",
+      "wordIds": [
+        "w_tennis"
+      ]
+    },
+    {
+      "id": "p_lets_play_chess",
+      "en": "Let's play chess!",
+      "it": "Giochiamo a scacchi!",
+      "phase": 9,
+      "theme": "sport",
+      "structure": "st_like_playing",
+      "sprite": "sp-chess",
+      "wordIds": [
+        "w_chess"
+      ]
+    },
+    {
+      "id": "p_like_drawing",
+      "en": "I like drawing and music.",
+      "it": "Mi piacciono il disegno e la musica.",
+      "phase": 9,
+      "theme": "sport",
+      "structure": "st_like_playing",
+      "sprite": "sp-drawing",
+      "wordIds": [
+        "w_drawing",
+        "w_music"
+      ]
+    },
+    {
+      "id": "p_can_play_guitar",
+      "en": "I can play the guitar.",
+      "it": "So suonare la chitarra.",
+      "phase": 9,
+      "theme": "sport",
+      "structure": "st_like_playing",
+      "sprite": "sp-guitar",
+      "wordIds": [
+        "w_guitar"
+      ]
+    },
+    {
+      "id": "p_kite_windy",
+      "en": "Let's fly a kite! It's windy.",
+      "it": "Facciamo volare un aquilone! C'è vento.",
+      "phase": 9,
+      "theme": "sport",
+      "structure": "st_like_playing",
+      "sprite": "sp-kite",
+      "wordIds": [
+        "w_kite",
+        "w_windy"
+      ]
+    },
+    {
+      "id": "p_he_is_doctor",
+      "en": "He is a doctor.",
+      "it": "Lui è un dottore.",
+      "phase": 9,
+      "theme": "mestieri",
+      "structure": "st_jobs",
+      "sprite": "sp-doctor",
+      "wordIds": [
+        "w_doctor"
+      ]
+    },
+    {
+      "id": "p_she_is_pilot",
+      "en": "She is a pilot.",
+      "it": "Lei è una pilota.",
+      "phase": 9,
+      "theme": "mestieri",
+      "structure": "st_jobs",
+      "sprite": "sp-pilot",
+      "wordIds": [
+        "w_pilot"
+      ]
+    },
+    {
+      "id": "p_want_to_be_firefighter",
+      "en": "What do you want to be? I want to be a firefighter.",
+      "it": "Cosa vuoi fare da grande? Voglio fare il pompiere.",
+      "phase": 9,
+      "theme": "mestieri",
+      "structure": "st_jobs",
+      "sprite": "sp-firefighter",
+      "wordIds": [
+        "w_firefighter"
+      ]
+    },
+    {
+      "id": "p_want_to_be_vet",
+      "en": "I want to be a vet.",
+      "it": "Voglio fare il veterinario.",
+      "phase": 9,
+      "theme": "mestieri",
+      "structure": "st_jobs",
+      "sprite": "sp-vet",
+      "wordIds": [
+        "w_vet"
+      ]
+    },
+    {
+      "id": "p_farmer_farm",
+      "en": "A farmer works on a farm.",
+      "it": "Un contadino lavora in una fattoria.",
+      "phase": 9,
+      "theme": "mestieri",
+      "structure": "st_jobs",
+      "sprite": "sp-farmer",
+      "wordIds": [
+        "w_farmer",
+        "w_farm"
+      ]
+    },
+    {
+      "id": "p_cook_kitchen",
+      "en": "A cook works in a kitchen.",
+      "it": "Un cuoco lavora in cucina.",
+      "phase": 9,
+      "theme": "mestieri",
+      "structure": "st_jobs",
+      "sprite": "sp-cook",
+      "wordIds": [
+        "w_cook",
+        "w_kitchen"
+      ]
     }
   ],
   "worlds": [
@@ -3950,6 +4623,268 @@
         "truefalse"
       ],
       "reward": "c_festino"
+    },
+    {
+      "id": "world_portrait",
+      "unit": 21,
+      "order": 21,
+      "phase": 9,
+      "title_it": "Il Ritratto",
+      "objective_it": "Descrivere una persona: capelli, occhiali, barba, alto e basso, con 'has got' e 'she/he'.",
+      "canDo_it": "So descrivere come è fatta una persona.",
+      "structureIds": [
+        "st_has_got"
+      ],
+      "sprite": "sp-glasses",
+      "color": "#c77dff",
+      "newItems": [
+        "w_long_hair",
+        "w_short_hair",
+        "w_curly_hair",
+        "w_blond_hair",
+        "w_glasses",
+        "w_beard",
+        "w_moustache",
+        "w_freckles",
+        "w_tall",
+        "w_short",
+        "p_she_long_hair",
+        "p_he_beard",
+        "p_ive_got_glasses",
+        "p_he_is_tall",
+        "p_she_curly",
+        "p_my_dad_moustache"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food",
+        "world_house",
+        "world_school",
+        "world_actions",
+        "world_weather",
+        "world_time",
+        "world_village",
+        "world_party"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_specchietto"
+    },
+    {
+      "id": "world_animals",
+      "unit": 22,
+      "order": 22,
+      "phase": 9,
+      "title_it": "La Fattoria e lo Zoo",
+      "objective_it": "Dieci animali, com'è fatto ciascuno e cosa sa fare, con 'it'.",
+      "canDo_it": "So descrivere un animale e dire cosa sa fare.",
+      "structureIds": [
+        "st_animal_can"
+      ],
+      "sprite": "sp-lion",
+      "color": "#f4a261",
+      "newItems": [
+        "w_cow",
+        "w_sheep",
+        "w_horse",
+        "w_pig",
+        "w_hen",
+        "w_duck",
+        "w_lion",
+        "w_elephant",
+        "w_monkey",
+        "w_giraffe",
+        "p_lion_strong",
+        "p_monkey_climb",
+        "p_duck_swim",
+        "p_cow_fly",
+        "p_giraffe_tall",
+        "p_pig_pink"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food",
+        "world_house",
+        "world_school",
+        "world_actions",
+        "world_weather",
+        "world_time",
+        "world_village",
+        "world_party",
+        "world_portrait"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_chicco"
+    },
+    {
+      "id": "world_sport",
+      "unit": 23,
+      "order": 23,
+      "phase": 9,
+      "title_it": "Lo Sport e i Giochi",
+      "objective_it": "Sport e hobby: cosa mi piace fare, il mio preferito, giochiamo a...",
+      "canDo_it": "So dire quali sport e giochi mi piacciono.",
+      "structureIds": [
+        "st_like_playing"
+      ],
+      "sprite": "sp-football",
+      "color": "#2a9d8f",
+      "newItems": [
+        "w_football",
+        "w_basketball",
+        "w_tennis",
+        "w_ball",
+        "w_drawing",
+        "w_music",
+        "w_guitar",
+        "w_chess",
+        "w_kite",
+        "w_skateboard",
+        "p_like_playing_football",
+        "p_favourite_tennis",
+        "p_lets_play_chess",
+        "p_like_drawing",
+        "p_can_play_guitar",
+        "p_kite_windy"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food",
+        "world_house",
+        "world_school",
+        "world_actions",
+        "world_weather",
+        "world_time",
+        "world_village",
+        "world_party",
+        "world_portrait",
+        "world_animals"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_golino"
+    },
+    {
+      "id": "world_jobs",
+      "unit": 24,
+      "order": 24,
+      "phase": 9,
+      "title_it": "I Mestieri",
+      "objective_it": "Dieci mestieri: chi fa cosa, e cosa voglio fare da grande.",
+      "canDo_it": "So dire il mestiere di una persona e cosa voglio fare da grande.",
+      "structureIds": [
+        "st_jobs"
+      ],
+      "sprite": "sp-firefighter",
+      "color": "#e76f51",
+      "newItems": [
+        "w_doctor",
+        "w_farmer",
+        "w_cook",
+        "w_police",
+        "w_firefighter",
+        "w_pilot",
+        "w_nurse",
+        "w_singer",
+        "w_builder",
+        "w_vet",
+        "p_he_is_doctor",
+        "p_she_is_pilot",
+        "p_want_to_be_firefighter",
+        "p_want_to_be_vet",
+        "p_farmer_farm",
+        "p_cook_kitchen"
+      ],
+      "reviewFrom": [
+        "world_dragons",
+        "world_dinos",
+        "world_colors",
+        "world_numbers",
+        "world_forest",
+        "world_lake",
+        "world_bridge",
+        "world_tower",
+        "world_family",
+        "world_body",
+        "world_clothes",
+        "world_feelings",
+        "world_food",
+        "world_house",
+        "world_school",
+        "world_actions",
+        "world_weather",
+        "world_time",
+        "world_village",
+        "world_party",
+        "world_portrait",
+        "world_animals",
+        "world_sport"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse"
+      ],
+      "reward": "c_timbrino"
     }
   ],
   "creatures": [
@@ -4191,6 +5126,46 @@
         "value": "world_party"
       },
       "fact_it": "Un palloncino con il cappellino da festa. Ha organizzato la festa finale dell'isola."
+    },
+    {
+      "id": "c_specchietto",
+      "name_it": "Specchietto",
+      "sprite": "sp-specchietto",
+      "unlock": {
+        "type": "world",
+        "value": "world_portrait"
+      },
+      "fact_it": "Uno specchio con le gambe. Dice a tutti come sono fatti, e lo dice gentilmente."
+    },
+    {
+      "id": "c_chicco",
+      "name_it": "Chicco",
+      "sprite": "sp-chicco",
+      "unlock": {
+        "type": "world",
+        "value": "world_animals"
+      },
+      "fact_it": "Un pulcino con il cappello di paglia. Conosce tutti gli animali della fattoria per nome."
+    },
+    {
+      "id": "c_golino",
+      "name_it": "Golino",
+      "sprite": "sp-golino",
+      "unlock": {
+        "type": "world",
+        "value": "world_sport"
+      },
+      "fact_it": "Una pallina con la maglia da calcio. Il suo sport preferito cambia ogni giorno."
+    },
+    {
+      "id": "c_timbrino",
+      "name_it": "Timbrino",
+      "sprite": "sp-timbrino",
+      "unlock": {
+        "type": "world",
+        "value": "world_jobs"
+      },
+      "fact_it": "Un timbro con la faccia. Ha provato tutti i mestieri, e li ha timbrati tutti."
     }
   ],
   "story": {
