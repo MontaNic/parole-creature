@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-08T14:38:19.728Z",
+  "generatedAt": "2026-09-08T14:55:25.503Z",
   "files": [
     "en/book.ebook_01.0.mp3",
     "en/book.ebook_01.1.mp3",
@@ -583,6 +583,8 @@
     "it/mascot.retry_1.mp3",
     "it/mascot.retry_2.mp3",
     "it/mascot.retry_3.mp3",
+    "it/mascot.sayit_go.mp3",
+    "it/mascot.sayit_heard.mp3",
     "it/mascot.session_end.mp3",
     "it/mascot.streak_1.mp3",
     "it/mascot.streak_2.mp3",

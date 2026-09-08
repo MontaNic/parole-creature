@@ -623,6 +623,9 @@ function panelGeneral() {
   mic.appendChild(switchRow(t('parents.voice_recording'), save.settings.voiceRecording !== false, (on) => {
     save.settings.voiceRecording = on; persist(true);
   }, t('parents.voice_recording_hint')));
+  mic.appendChild(switchRow(t('parents.speech_check'), save.settings.speechCheck === true, (on) => {
+    save.settings.speechCheck = on; persist(true);
+  }, t('parents.speech_check_hint')));
   mic.appendChild(switchRow(t('parents.family_sharing'), save.settings.familySharing !== false, (on) => {
     save.settings.familySharing = on; persist(true);
   }, t('parents.family_sharing_hint')));

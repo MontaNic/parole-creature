@@ -112,6 +112,7 @@ function defaultSave() {
       themesDisabled: [],      // temi messi in pausa dai genitori
       voiceRecording: true,    // microfono in 'ascolta e ripeti'
       familySharing: true,     // 'Condividi' a fine partita
+      speechCheck: false,      // riconoscimento vocale in 'Dillo tu' (esce dal dispositivo: spento)
       vacation: false,
 
       /*

@@ -42,6 +42,7 @@ import { bumpToday, lastDays, accuracyOf, successReport, prune } from './js/hist
 import { planBonus, BubbleWorld, bubblePool, MoleWorld, pickBonus, BasketWorld, BONUS_GAMES } from './js/bonus.js';
 import { checkBadges, BADGES } from './js/badges.js';
 import { books, bookUnlocked, pageAudio } from './js/books.js';
+import { matchesTarget, normalize, canRecognize } from './js/speech.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
   splitRound, unitItems, unitReviewItems, curriculumConfig, playablePhases
@@ -434,6 +435,14 @@ async function run() {
   check("i libretti usano il lessico del gioco (piu' poche parole di servizio)", fuoriLibri.length === 0, [...new Set(fuoriLibri)].join(' '));
   check('a inizio gioco nessun libretto e\' aperto', libri.every(b => !bookUnlocked(b)));
   check('le tracce delle pagine hanno percorsi distinti', new Set(libri.flatMap(b => b.pages.map((p, n) => pageAudio(b, n)))).size === 48);
+
+  /* --- Dillo tu: la conferma morbida --------------------------------- */
+  check("la parola giusta fra le alternative sentite conferma", matchesTarget('dragon', ['a dragon', 'drag on']) && matchesTarget('dragon', ['the dragon!']));
+  check('una parola diversa non conferma', !matchesTarget('dragon', ['dinosaur', 'drink']));
+  check("per una frase bastano due terzi delle parole, in qualunque ordine", matchesTarget("It's a red egg.", ['it is a red egg', 'red egg it is']) && !matchesTarget("It's a red egg.", ['red']));
+  check("apostrofi e punteggiatura non contano", normalize("What's your name?") === 'what is your name');
+  check('il riconoscimento vocale e\' spento di default', canRecognize() === false);
+  check("'sayit' e' fra i giochi di ogni unita'", content.worlds.every(w => w.minigames.includes('sayit')));
 
   resetSave();
 

@@ -15,6 +15,8 @@ import { CONFIG } from './config.js';
 import { t, artIndex } from './content-loader.js';
 import { speakItem, speakLine, sfxTap } from './audio.js';
 import { canRecord, startRecording, playBlob } from './recorder.js';
+import { canRecognize, recognize, matchesTarget } from './speech.js';
+import { burstConfetti } from './effects.js';
 import { mascotSay } from './mascot.js';
 import { save, persist } from './state.js';
 import { shuffle, distractors, distinctBySprite } from './srs.js';
@@ -425,6 +427,121 @@ function recRow() {
 }
 
 /* ------------------------------------------------------------------ */
+/* 3b. Dillo tu: produrre prima di ascoltare                           */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Figura (e per le frasi la frase in italiano), nessuna scelta: il bambino
+ * deve dirlo ad alta voce PRIMA di sentire il modello. Poi ascolta (prima
+ * la sua registrazione se c'e', poi la voce modello) e si giudica da solo.
+ * "Uguale" vale una risposta giusta, "Quasi" un'esposizione. Con il
+ * riconoscimento vocale acceso dai genitori, Pepe conferma se ha sentito
+ * la parola giusta; se no, invita ad ascoltare e riprovare, senza costo.
+ */
+async function gameSayIt(api) {
+  const { host, items, report, fx, onRepeat } = api;
+  const item = items[0];
+  const isPhrase = item.kind === 'phrase';
+
+  host.innerHTML = '';
+  host.appendChild(el('p', 'game-prompt', t('games.sayit_prompt')));
+  const stage = el('div', 'repeat-stage');
+  const art = el('div', 'choice');
+  art.style.width = 'min(190px, 46vw, 24vh)';
+  art.style.pointerEvents = 'none';
+  art.appendChild(spriteSvg(item.sprite));
+  stage.appendChild(art);
+  if (isPhrase) stage.appendChild(el('p', 'word-hint-it sayit-hint', item.it));
+
+  const row = el('div', 'rec-row');
+  let blob = null;
+  let corrente = null;
+  let rec = null;
+  if (canRecord()) {
+    rec = el('button', 'btn btn-ghost btn-sm rec-btn');
+    rec.type = 'button';
+    const ic = spriteSvg('sp-icon-mic'); ic.classList.add('ico');
+    const label = el('span', null, t(canRecognize() ? 'games.sayit_speak' : 'games.record_start'));
+    rec.appendChild(ic); rec.appendChild(label);
+    rec.addEventListener('click', async () => {
+      sfxTap();
+      if (canRecognize()) {
+        // Conferma morbida: ascolta e confronta, mai bocciare.
+        rec.disabled = true; rec.classList.add('is-rec');
+        const heard = await recognize('en-GB', 5000);
+        rec.classList.remove('is-rec'); rec.disabled = false;
+        if (matchesTarget(item.en, heard)) {
+          burstConfetti(window.innerWidth / 2, window.innerHeight / 2);
+          toastLocal(host, t('games.sayit_heard').replace('{w}', item.en), true);
+          mascotSay('sayit_heard', { avatar: document.getElementById('play-mascot') });
+        } else {
+          toastLocal(host, t('games.sayit_unclear'), false);
+        }
+        return;
+      }
+      if (corrente) {
+        const r = corrente; corrente = null;
+        rec.classList.remove('is-rec'); label.textContent = t('games.record_start');
+        blob = await r.stop();
+        if (blob && blob.size) { save.stats.totalRecordings = (save.stats.totalRecordings || 0) + 1; persist(); }
+        return;
+      }
+      try {
+        corrente = await startRecording();
+        rec.classList.add('is-rec'); label.textContent = t('games.record_stop');
+      } catch { row.remove(); }
+    });
+    row.appendChild(rec);
+  }
+  const listen = el('button', 'btn btn-cool btn-lg', t('games.sayit_listen'));
+  listen.type = 'button';
+  row.appendChild(listen);
+  stage.appendChild(row);
+
+  const judge = el('div', 'rec-row');
+  judge.hidden = true;
+  const same = el('button', 'btn btn-good btn-lg', t('games.sayit_same'));
+  const almost = el('button', 'btn btn-ghost', t('games.sayit_almost'));
+  same.type = almost.type = 'button';
+  judge.appendChild(same); judge.appendChild(almost);
+  stage.appendChild(judge);
+  host.appendChild(stage);
+
+  await pause(250);
+  await mascotSay('sayit_go', { avatar: document.getElementById('play-mascot') });
+
+  return new Promise(resolve => {
+    listen.addEventListener('click', async () => {
+      sfxTap();
+      listen.disabled = true;
+      if (corrente) { const r = corrente; corrente = null; rec?.classList.remove('is-rec'); blob = await r.stop(); }
+      if (blob && blob.size) await playBlob(blob);   // prima tu
+      await speakItem(item);                          // poi il modello
+      listen.disabled = false;
+      judge.hidden = false;
+    });
+    const fine = async (uguale, ev) => {
+      same.disabled = almost.disabled = true;
+      onRepeat?.();
+      if (uguale) { fx.good(ev, true, item); report(item.id, true); }
+      else { mostraConferma(host, item); }
+      await pause(900);
+      resolve();
+    };
+    same.addEventListener('click', (ev) => fine(true, ev));
+    almost.addEventListener('click', (ev) => fine(false, ev));
+  });
+}
+
+/** Un messaggio dentro l'area di gioco, breve, non bloccante. */
+function toastLocal(host, text, good) {
+  host.querySelector('.sayit-toast')?.remove();
+  const n = el('p', `written-help sayit-toast anim-pop${good ? ' is-confirm' : ''}`, text);
+  host.appendChild(n);
+  setTimeout(() => n.remove(), 2200);
+}
+
+/* ------------------------------------------------------------------ */
 /* 4. Caccia alla parola                                               */
 /* ------------------------------------------------------------------ */
 
@@ -794,6 +911,7 @@ async function gameTrueFalse(api) {
 /* ------------------------------------------------------------------ */
 
 export const GAMES = {
+  sayit: gameSayIt,
   truefalse: gameTrueFalse,
   match: gameMatch,
   quiz: gameQuiz,

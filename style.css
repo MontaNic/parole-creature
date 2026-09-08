@@ -516,7 +516,9 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 
 /* Ascolta e ripeti */
 .repeat-stage { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-/* Microfono in "ascolta e ripeti" */
+/* Microfono in "ascolta e ripeti" e in "Dillo tu" */
+.sayit-hint { font-size: 20px; }
+.sayit-toast { top: auto; bottom: 8px; }
 .rec-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
 .rec-btn.is-rec { background: var(--ember); border-color: var(--ink); color: var(--ink); animation: rec-pulse 1s ease-in-out infinite; }
 @keyframes rec-pulse { 50% { transform: scale(1.05) } }

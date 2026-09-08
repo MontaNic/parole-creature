@@ -1221,6 +1221,33 @@ schede restano per chi vuole rigenerarli per Kindle. E' la lettura che le
 Indicazioni chiedono: parole imparate a orecchio, ritrovate scritte in un
 testo continuo. curriculum-test 96 -> 101.
 
+## Dal riconoscere al produrre (9 settembre 2026)
+
+Il resoconto onesto del prodotto finito diceva: quasi tutto chiede di
+riconoscere, poco di produrre. Sette rimedi possibili, in ordine; il
+genitore ha dato il via.
+
+### 1. "Dillo tu"
+
+Un tipo di turno nuovo, in tutte le unita': figura (e per le frasi la
+frase in italiano), nessuna scelta. Pepe dice "adesso dillo tu, ad alta
+voce" e il bambino deve *produrre* prima di sentire il modello. Poi
+"Ascolta": prima la sua registrazione se l'ha fatta, poi la voce modello,
+in fila; infine si giudica da solo, "Uguale!" o "Quasi". Nessun voto:
+"Uguale" conta come risposta giusta, "Quasi" come esposizione (come
+ripetere). La parola scritta arriva dopo l'ascolto, in verde, come sempre.
+
+Sopra, come opzione dei genitori spenta di default: la **conferma morbida**
+del riconoscimento vocale del browser (Web Speech, `js/speech.js`). Con il
+microfono acceso il bambino parla; se fra le alternative riconosciute c'e'
+la parola giusta, Pepe dice "ho sentito: dragon!" con coriandoli;
+altrimenti "non ho capito bene: ascolta e riprova", senza costo. Il
+confronto e' tollerante (`matchesTarget`, testato): confronta parole
+normalizzate, accetta la frase intera o la parola chiave. Va detto nella
+scheda dell'opzione: su iPad il riconoscimento passa dai server di Apple,
+ed e' l'unico caso in cui un suono esce dal dispositivo. Per questo e'
+spento finche' un genitore non lo accende.
+
 ## Prossimi passi
 
 **Stato al 2026-09-08, sera**: anni 2 e 3 del curriculum completi e

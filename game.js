@@ -256,8 +256,8 @@ function dedupeById(items) {
  * disegno, e sembrava incoerenza. Le frasi vanno dove la loro forma conta —
  * ascolto, quiz col testo, costruzione, vero o falso.
  */
-const GIOCHI_PER_PAROLA = ['match', 'hunt', 'quiz', 'truefalse', 'dragdrop', 'listen'];
-const GIOCHI_PER_FRASE  = ['listen', 'quiz', 'build', 'truefalse'];
+const GIOCHI_PER_PAROLA = ['match', 'hunt', 'quiz', 'truefalse', 'dragdrop', 'listen', 'sayit'];
+const GIOCHI_PER_FRASE  = ['listen', 'quiz', 'build', 'truefalse', 'sayit'];
 
 /**
  * Compone i passi della partita.

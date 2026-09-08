@@ -5023,7 +5023,8 @@
         "listen",
         "quiz",
         "hunt",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_flamup"
     },
@@ -5063,7 +5064,8 @@
         "listen",
         "quiz",
         "hunt",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_rocktail"
     },
@@ -5103,7 +5105,8 @@
         "quiz",
         "hunt",
         "listen",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_prisma"
     },
@@ -5146,7 +5149,8 @@
         "quiz",
         "hunt",
         "listen",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_numo"
     },
@@ -5189,7 +5193,8 @@
         "dragdrop",
         "quiz",
         "listen",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_barky"
     },
@@ -5234,7 +5239,8 @@
         "dragdrop",
         "quiz",
         "hunt",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_splashy"
     },
@@ -5272,7 +5278,8 @@
         "listen",
         "build",
         "quiz",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_glimmer"
     },
@@ -5311,7 +5318,8 @@
         "listen",
         "build",
         "quiz",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_torrek"
     },
@@ -5361,7 +5369,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_nonnetta"
     },
@@ -5412,7 +5421,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_gigione"
     },
@@ -5464,7 +5474,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_sartina"
     },
@@ -5517,7 +5528,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_nuvolo"
     },
@@ -5574,7 +5586,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_pasticcio"
     },
@@ -5630,7 +5643,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_chiavetta"
     },
@@ -5687,7 +5701,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_maestrino"
     },
@@ -5746,7 +5761,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_saltello"
     },
@@ -5809,7 +5825,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_ventolino"
     },
@@ -5870,7 +5887,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_ticchetto"
     },
@@ -5931,7 +5949,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_rotolino"
     },
@@ -6000,7 +6019,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_festino"
     },
@@ -6064,7 +6084,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_specchietto"
     },
@@ -6129,7 +6150,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_chicco"
     },
@@ -6195,7 +6217,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_golino"
     },
@@ -6262,7 +6285,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_timbrino"
     },
@@ -6330,7 +6354,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_semaforino"
     },
@@ -6399,7 +6424,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_monetina"
     },
@@ -6469,7 +6495,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_cerottino"
     },
@@ -6540,7 +6567,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_sassolino"
     },
@@ -6612,7 +6640,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_pigiamino"
     },
@@ -6685,7 +6714,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_riflesso"
     },
@@ -6767,7 +6797,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_zucchetta"
     },
@@ -6842,7 +6873,8 @@
         "hunt",
         "dragdrop",
         "build",
-        "truefalse"
+        "truefalse",
+        "sayit"
       ],
       "reward": "c_valigetta"
     }
