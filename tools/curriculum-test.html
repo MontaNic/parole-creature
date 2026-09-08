@@ -242,12 +242,12 @@ async function run() {
 
   /* --- la storia a episodi ---------------------------------------- */
   const capitoli = chapters();
-  check('la storia ha prologo, 8 capitoli ed epilogo', capitoli.length === 10, String(capitoli.length));
+  check('la storia ha due stagioni: 2 prologhi, 20 capitoli, 2 epiloghi', capitoli.length === 24, String(capitoli.length));
   check('gli id dei capitoli sono unici e permanenti (st_*)',
-    new Set(capitoli.map(c => c.id)).size === 10 && capitoli.every(c => /^st_[a-z]+$/.test(c.id)));
+    new Set(capitoli.map(c => c.id)).size === 24 && capitoli.every(c => /^st2?_[a-z]+$/.test(c.id)));
   const conCreatura = capitoli.filter(c => c.worldId);
   check('ogni capitolo di mondo punta a un mondo esistente e alla sua creatura premio',
-    conCreatura.length === 8 && conCreatura.every(c => {
+    conCreatura.length === 20 && conCreatura.every(c => {
       const w = content.worlds.find(x => x.id === c.worldId);
       return w && w.reward === c.creatureId && c.trigger.value === c.worldId;
     }));
@@ -257,9 +257,10 @@ async function run() {
   check('ogni creatura ritrovata dice una frase in inglese, con traduzione',
     conCreatura.every(c => c.lines.filter(l => l.who === 'creature' && l.en && l.it).length === 1)
     && capitoli.filter(c => !c.worldId).every(c => !c.lines.some(l => l.who === 'creature')));
-  const lessico = new Set(content.words.map(w => w.en.toLowerCase()));
+  // Il lessico del gioco: le parole e tutte le parole delle frasi imparate.
+  const lessico = new Set([...content.words.map(w => w.en.toLowerCase()), ...content.phrases.flatMap(p => p.en.toLowerCase().replace(/[!?.,]/g, '').split(/\s+/))]);
   const extra = ['hello', 'pepe', 'i', 'am', 'a', 'an', 'it\'s', 'my', 'and', 'how', 'many', 'this', 'is',
-    'these', 'are', 'the', 'have', 'can', 'see', 'what', 'your', 'name', 'torrek', 'you', 'stars', 'birds'];
+    'these', 'are', 'the', 'have', 'can', 'see', 'what', 'your', 'name', 'torrek', 'you', 'stars', 'birds', 'family', 'ears', 'hands'];
   const fuoriLessico = conCreatura.flatMap(c => c.lines.filter(l => l.who === 'creature')
     .flatMap(l => l.en.toLowerCase().replace(/[!?.,]/g, '').split(/\s+/)))
     .filter(w => w && !lessico.has(w) && !extra.includes(w));
@@ -272,6 +273,11 @@ async function run() {
   const dopoTorre = pendingAfterRound([torrek]).map(c => c.id);
   check("trovare Torrek fa scattare il suo capitolo e poi l'epilogo, in quest'ordine",
     dopoTorre.join(',') === 'st_tower,st_epilogue', dopoTorre.join(','));
+  const festino = content.creatures.find(c => c.id === 'c_festino');
+  const dopoFesta = pendingAfterRound([festino]).map(c => c.id);
+  check("trovare Festino fa scattare il suo capitolo e poi l'epilogo 2", dopoFesta.join(',') === 'st2_party,st2_epilogue', dopoFesta.join(','));
+  check('aprire la fase 6 fa scattare il prologo della stagione 2', pendingAfterRound([], 6).map(c => c.id).join(',') === 'st2_prologue');
+  check('a inizio gioco il prologo 2 non e\' disponibile ne\' in sospeso', !isAvailable(capitoli.find(c => c.id === 'st2_prologue')) && pendingAtStart().length === 1);
   check('ogni creatura della storia ha il suo capitolo', conCreatura.every(c => chapterForCreature(c.creatureId) === c));
   check('i percorsi audio della storia sono distinti',
     new Set(capitoli.flatMap(c => c.lines.map((l, n) => lineAudio(c, n)))).size === capitoli.reduce((a, c) => a + c.lines.length, 0));

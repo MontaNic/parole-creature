@@ -1049,6 +1049,20 @@ niente cornice"; 159 PNG in precache. Audio: 70 tracce inglesi, indice a
 alla Festa Finale il percorso copre i campi lessicali e le funzioni delle
 Indicazioni nazionali per la primaria, fino all'ingresso nell'A1.
 
+### La storia, stagione 2 (fasi 6-8)
+
+Le dodici creature dell'anno 2 hanno i loro capitoli: *La lettera*, un
+invito a una festa dall'altra parte dell'isola, nel paese delle persone.
+Prologo (scatta quando si apre la fase 6, o al primo avvio per chi l'ha
+gia' aperta), dodici capitoli (uno per unita', dopo il riepilogo che
+consegna la creatura), epilogo dopo Festino. 42 righe italiane e 12
+inglesi, tutte con la loro traccia; l'inglese di ogni creatura usa le
+strutture della sua unita'. In content.json i capitoli hanno `season` e
+`number` (il numero mostrato e' quello dell'unita'); il trigger nuovo
+`phase` e' gestito da `pendingAfterRound(newCreatures, phaseUnlocked)` e
+`pendingAtStart`. L'epilogo mostra le creature della propria stagione.
+La striscia dell'album ora ha 24 tondi. curriculum-test 88 -> 91.
+
 ## Prossimi passi
 
 **Stato al 2026-09-08**: anno 2 del curriculum completo e pubblicato

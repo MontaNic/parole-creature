@@ -4219,7 +4219,8 @@
             "who": "pepe",
             "it": "Che silenzio... Non preoccupatevi, creature! Impariamo le parole insieme, e la nebbia se ne andrà!"
           }
-        ]
+        ],
+        "season": 1
       },
       {
         "id": "st_dragons",
@@ -4249,7 +4250,8 @@
             "en": "Hello, Pepe! I am a dragon!",
             "it": "Ciao, Pepe! Io sono un drago!"
           }
-        ]
+        ],
+        "season": 1
       },
       {
         "id": "st_dinos",
@@ -4279,7 +4281,8 @@
             "en": "It's an egg! It's my egg!",
             "it": "È un uovo! È il mio uovo!"
           }
-        ]
+        ],
+        "season": 1
       },
       {
         "id": "st_colors",
@@ -4309,7 +4312,8 @@
             "en": "Red, blue, green and yellow! I am purple!",
             "it": "Rosso, blu, verde e giallo! Io sono viola!"
           }
-        ]
+        ],
+        "season": 1
       },
       {
         "id": "st_numbers",
@@ -4339,7 +4343,8 @@
             "en": "How many stars? One, two, three... ten! Ten stars!",
             "it": "Quante stelle? Una, due, tre... dieci! Dieci stelle!"
           }
-        ]
+        ],
+        "season": 1
       },
       {
         "id": "st_forest",
@@ -4369,7 +4374,8 @@
             "en": "This is a tree. These are birds!",
             "it": "Questo è un albero. Questi sono uccellini!"
           }
-        ]
+        ],
+        "season": 1
       },
       {
         "id": "st_lake",
@@ -4399,7 +4405,8 @@
             "en": "The fish is small. The dragon is big. I am fast!",
             "it": "Il pesce è piccolo. Il drago è grande. Io sono veloce!"
           }
-        ]
+        ],
+        "season": 1
       },
       {
         "id": "st_bridge",
@@ -4429,7 +4436,8 @@
             "en": "I have a star! I can see the castle!",
             "it": "Io ho una stella! Vedo il castello!"
           }
-        ]
+        ],
+        "season": 1
       },
       {
         "id": "st_tower",
@@ -4459,7 +4467,8 @@
             "en": "What is your name? My name is Torrek. How are you?",
             "it": "Come ti chiami? Il mio nome è Torrek. Come stai?"
           }
-        ]
+        ],
+        "season": 1
       },
       {
         "id": "st_epilogue",
@@ -4484,9 +4493,449 @@
             "who": "pepe",
             "it": "Ce l'abbiamo fatta! Ma le parole nuove non finiscono mai... Continuiamo a giocare?"
           }
+        ],
+        "season": 1
+      },
+      {
+        "id": "st2_prologue",
+        "order": 10,
+        "number": null,
+        "season": 2,
+        "title_it": "La lettera",
+        "trigger": {
+          "type": "phase",
+          "value": 6
+        },
+        "creatureId": "c_pepe",
+        "worldId": null,
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "La nebbia era sparita, ma sull'isola arrivò una lettera. Era un invito: una festa, alla fine dell'anno, dall'altra parte dell'isola."
+          },
+          {
+            "who": "narrator",
+            "it": "Per arrivarci Pepe doveva attraversare il paese dove vivono le persone, e imparare le loro parole."
+          },
+          {
+            "who": "pepe",
+            "it": "Una festa! Ma quanta strada... Andiamo, creature: una parola alla volta!"
+          }
+        ]
+      },
+      {
+        "id": "st2_family",
+        "order": 11,
+        "number": 9,
+        "season": 2,
+        "title_it": "La Famiglia del Castello",
+        "trigger": {
+          "type": "world",
+          "value": "world_family"
+        },
+        "creatureId": "c_nonnetta",
+        "worldId": "world_family",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Nel Castello viveva una famiglia grande, e la tartaruga Nonnetta conosceva tutti i nomi. Ma li aveva dimenticati, uno per uno."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe glieli ricordò: mamma, papà, fratello, sorella. E Nonnetta sorrise."
+          },
+          {
+            "who": "pepe",
+            "it": "Nonnetta, questa è la mia famiglia! Dilla anche tu."
+          },
+          {
+            "who": "creature",
+            "en": "This is my mum. This is my dad. I have a big family!",
+            "it": "Questa è la mia mamma. Questo è il mio papà. Ho una famiglia grande!"
+          }
+        ]
+      },
+      {
+        "id": "st2_body",
+        "order": 12,
+        "number": 10,
+        "season": 2,
+        "title_it": "Il Corpo del Gigante",
+        "trigger": {
+          "type": "world",
+          "value": "world_body"
+        },
+        "creatureId": "c_gigione",
+        "worldId": "world_body",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Gigione il gigante era piccolo come un cucciolo, ma non sapeva dove fossero il naso e le orecchie."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe glielo mostrò col suo corpo. Touch your nose! E Gigione lo toccò."
+          },
+          {
+            "who": "pepe",
+            "it": "Gigione, tocca il naso! Bravo! Adesso le orecchie!"
+          },
+          {
+            "who": "creature",
+            "en": "Touch your nose! Touch your ears! I have two hands!",
+            "it": "Tocca il naso! Tocca le orecchie! Ho due mani!"
+          }
+        ]
+      },
+      {
+        "id": "st2_clothes",
+        "order": 13,
+        "number": 11,
+        "season": 2,
+        "title_it": "Il Guardaroba del Mago",
+        "trigger": {
+          "type": "world",
+          "value": "world_clothes"
+        },
+        "creatureId": "c_sartina",
+        "worldId": "world_clothes",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Sartina cuciva un cappello al giorno, ma non sapeva dire a chi darlo."
+          },
+          {
+            "who": "narrator",
+            "it": "Con Pepe imparò i nomi dei vestiti, e li regalò tutti."
+          },
+          {
+            "who": "pepe",
+            "it": "Sartina, mettiti il cappello! È rosso, come piace a me!"
+          },
+          {
+            "who": "creature",
+            "en": "Put on your hat! I am wearing a red hat!",
+            "it": "Mettiti il cappello! Indosso un cappello rosso!"
+          }
+        ]
+      },
+      {
+        "id": "st2_feelings",
+        "order": 14,
+        "number": 12,
+        "season": 2,
+        "title_it": "Le Emozioni delle Creature",
+        "trigger": {
+          "type": "world",
+          "value": "world_feelings"
+        },
+        "creatureId": "c_nuvolo",
+        "worldId": "world_feelings",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Nuvolo cambiava faccia cento volte al giorno, e nessuno capiva come stesse."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe gli chiese: how are you? E Nuvolo, per la prima volta, rispose."
+          },
+          {
+            "who": "pepe",
+            "it": "Nuvolo, come stai oggi? Dimmelo in inglese!"
+          },
+          {
+            "who": "creature",
+            "en": "How are you? I am happy! Are you tired? No, I am not!",
+            "it": "Come stai? Sono felice! Sei stanco? No!"
+          }
+        ]
+      },
+      {
+        "id": "st2_food",
+        "order": 15,
+        "number": 13,
+        "season": 2,
+        "title_it": "La Cucina del Castello",
+        "trigger": {
+          "type": "world",
+          "value": "world_food"
+        },
+        "creatureId": "c_pasticcio",
+        "worldId": "world_food",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Nella cucina del castello Pasticcio cucinava per tutti, ma non chiedeva mai cosa piacesse."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe glielo insegnò, assaggiando. Do you like pizza? Yes, I do!"
+          },
+          {
+            "who": "pepe",
+            "it": "Pasticcio, mi piace la pizza! Il formaggio... no!"
+          },
+          {
+            "who": "creature",
+            "en": "Do you like pizza? Yes, I do! I like cake!",
+            "it": "Ti piace la pizza? Sì! Mi piace la torta!"
+          }
+        ]
+      },
+      {
+        "id": "st2_house",
+        "order": 16,
+        "number": 14,
+        "season": 2,
+        "title_it": "La Casa di Pepe",
+        "trigger": {
+          "type": "world",
+          "value": "world_house"
+        },
+        "creatureId": "c_chiavetta",
+        "worldId": "world_house",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Chiavetta apriva tutte le porte, ma dentro casa perdeva sempre il gatto."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe le insegnò a cercare: on, in, under. E il gatto era sul letto."
+          },
+          {
+            "who": "pepe",
+            "it": "Chiavetta, dov'è il gatto? Sul letto! Sotto il tavolo!"
+          },
+          {
+            "who": "creature",
+            "en": "Where is the cat? On the bed! Under the table!",
+            "it": "Dov'è il gatto? Sul letto! Sotto il tavolo!"
+          }
+        ]
+      },
+      {
+        "id": "st2_school",
+        "order": 17,
+        "number": 15,
+        "season": 2,
+        "title_it": "La Scuola delle Creature",
+        "trigger": {
+          "type": "world",
+          "value": "world_school"
+        },
+        "creatureId": "c_maestrino",
+        "worldId": "world_school",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Nella Scuola delle Creature Maestrino sapeva tutte le parole, ma le diceva così piano che nessuno le sentiva."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe chiese ad alta voce: can I have a pencil, please? E tutta la classe rispose."
+          },
+          {
+            "who": "pepe",
+            "it": "Maestrino, posso avere una matita, per favore? Grazie!"
+          },
+          {
+            "who": "creature",
+            "en": "Open your book! Can I have a pencil, please? Here you are!",
+            "it": "Apri il libro! Posso avere una matita, per favore? Ecco a te!"
+          }
+        ]
+      },
+      {
+        "id": "st2_actions",
+        "order": 18,
+        "number": 16,
+        "season": 2,
+        "title_it": "Il Bosco delle Azioni",
+        "trigger": {
+          "type": "world",
+          "value": "world_actions"
+        },
+        "creatureId": "c_saltello",
+        "worldId": "world_actions",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Saltello la rana non stava ferma un secondo, ma non sapeva dire cosa sapeva fare."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe corse e saltò con lei. I can jump! E tutto il bosco si mise a correre."
+          },
+          {
+            "who": "pepe",
+            "it": "Saltello, io so saltare! E tu? Sai nuotare?"
+          },
+          {
+            "who": "creature",
+            "en": "I can jump! I can swim! Can you fly? No, I can't!",
+            "it": "So saltare! So nuotare! Sai volare? No!"
+          }
+        ]
+      },
+      {
+        "id": "st2_weather",
+        "order": 19,
+        "number": 17,
+        "season": 2,
+        "title_it": "Il Cielo Cambia",
+        "trigger": {
+          "type": "world",
+          "value": "world_weather"
+        },
+        "creatureId": "c_ventolino",
+        "worldId": "world_weather",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Ventolino girava sempre, ma non sapeva mai che tempo facesse, né che giorno fosse."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe guardò il cielo e il calendario con lui. It's sunny. Today is Monday."
+          },
+          {
+            "who": "pepe",
+            "it": "Ventolino, che tempo fa oggi? E che giorno è?"
+          },
+          {
+            "who": "creature",
+            "en": "What's the weather like? It's windy! Today is Friday!",
+            "it": "Che tempo fa? C'è vento! Oggi è venerdì!"
+          }
+        ]
+      },
+      {
+        "id": "st2_time",
+        "order": 20,
+        "number": 18,
+        "season": 2,
+        "title_it": "La Torre dell'Orologio",
+        "trigger": {
+          "type": "world",
+          "value": "world_time"
+        },
+        "creatureId": "c_ticchetto",
+        "worldId": "world_time",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Ticchetto la sveglia suonava a caso, perché non sapeva leggere l'ora."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe le insegnò le ore in punto, e la colazione tornò al mattino."
+          },
+          {
+            "who": "pepe",
+            "it": "Ticchetto, che ore sono? Le sette! Ora della colazione!"
+          },
+          {
+            "who": "creature",
+            "en": "What time is it? It's seven o'clock! I have breakfast in the morning!",
+            "it": "Che ore sono? Sono le sette! Faccio colazione la mattina!"
+          }
+        ]
+      },
+      {
+        "id": "st2_village",
+        "order": 21,
+        "number": 19,
+        "season": 2,
+        "title_it": "Il Villaggio",
+        "trigger": {
+          "type": "world",
+          "value": "world_village"
+        },
+        "creatureId": "c_rotolino",
+        "worldId": "world_village",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Rotolino il carretto portava tutti dove volevano, ma nessuno sapeva dirgli dove."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe imparò i luoghi e i mezzi. Let's go to the park! E il carretto partì."
+          },
+          {
+            "who": "pepe",
+            "it": "Rotolino, andiamo alla festa! In autobus, in treno, in barca!"
+          },
+          {
+            "who": "creature",
+            "en": "Where are you going? To the party! By bus!",
+            "it": "Dove vai? Alla festa! In autobus!"
+          }
+        ]
+      },
+      {
+        "id": "st2_party",
+        "order": 22,
+        "number": 20,
+        "season": 2,
+        "title_it": "La Festa Finale",
+        "trigger": {
+          "type": "world",
+          "value": "world_party"
+        },
+        "creatureId": "c_festino",
+        "worldId": "world_party",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Alla fine dell'isola, Festino aveva preparato la festa. Mancava solo una cosa: sapere quanti anni avesse Pepe."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe rispose, e le candeline si accesero tutte insieme."
+          },
+          {
+            "who": "pepe",
+            "it": "Festino, ho... tanti anni! Buon compleanno a tutti!"
+          },
+          {
+            "who": "creature",
+            "en": "How old are you? I am seven! Happy birthday!",
+            "it": "Quanti anni hai? Ho sette anni! Buon compleanno!"
+          }
+        ]
+      },
+      {
+        "id": "st2_epilogue",
+        "order": 23,
+        "number": null,
+        "season": 2,
+        "title_it": "La festa",
+        "trigger": {
+          "type": "world",
+          "value": "world_party"
+        },
+        "creatureId": null,
+        "worldId": null,
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "E così tutte le creature dell'isola, quelle della nebbia e quelle del paese, fecero festa insieme, fino a sera."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe aveva imparato le parole di casa, di scuola, del cielo e del tempo. Le parole di ogni giorno."
+          },
+          {
+            "who": "pepe",
+            "it": "Che festa! E domani? Domani si ricomincia a giocare. Ci sono sempre parole nuove."
+          }
         ]
       }
-    ]
+    ],
+    "_seasons_comment": "Stagione 1 (fasi 1-3): l'isola dove le creature hanno perso le parole. Stagione 2 (fasi 6-8): la lettera, il paese delle persone e la festa finale. Il prologo 2 scatta quando si apre la fase 6; l'epilogo 2 dopo Festino."
   },
   "stickers": {
     "_comment": "Gli adesivi degli scrigni a sorpresa: parole da collezione, illustrazione e audio della parola. Gli id sk_* sono permanenti (save.progress.stickers).",

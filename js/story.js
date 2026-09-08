@@ -53,6 +53,11 @@ export function isAvailable(chapter) {
     const world = content.worlds.find(w => w.id === tr.value);
     return Boolean(world && save.progress.creatures[world.reward]);
   }
+  if (tr.type === 'phase') {
+    // La fase e' stata raggiunta (o una sua unita' ha gia' dato la creatura).
+    if (save.progress.phasesReached?.[tr.value]) return true;
+    return content.worlds.some(w => w.phase === tr.value && save.progress.creatures[w.reward]);
+  }
   return false;
 }
 
@@ -70,7 +75,9 @@ function markSeen(chapter) {
 
 /** Il prologo, se non e' mai stato visto. */
 export function pendingAtStart() {
-  return chapters().filter(c => c.trigger?.type === 'start' && !isSeen(c));
+  // Il prologo della stagione 1 sempre; quello di una stagione successiva
+  // se la sua fase e' gia' stata raggiunta (chi giocava prima dell'aggiornamento).
+  return chapters().filter(c => !isSeen(c) && (c.trigger?.type === 'start' || (c.trigger?.type === 'phase' && isAvailable(c))));
 }
 
 /**
@@ -79,11 +86,14 @@ export function pendingAtStart() {
  * Torrek e viene subito dopo il suo capitolo.
  * @param {Array<{unlock:{type:string,value:*}}>} newCreatures
  */
-export function pendingAfterRound(newCreatures) {
+export function pendingAfterRound(newCreatures, phaseUnlocked = null) {
   const worlds = new Set(
     (newCreatures || []).filter(c => c.unlock?.type === 'world').map(c => c.unlock.value)
   );
-  return chapters().filter(c => c.trigger?.type === 'world' && worlds.has(c.trigger.value) && !isSeen(c));
+  return chapters().filter(c => !isSeen(c) && (
+    (c.trigger?.type === 'world' && worlds.has(c.trigger.value)) ||
+    (c.trigger?.type === 'phase' && phaseUnlocked !== null && c.trigger.value === phaseUnlocked)
+  ));
 }
 
 /* ------------------------------------------------------------------ */
@@ -98,9 +108,11 @@ function el(tag, cls, text) {
 }
 
 function chapterLabel(chapter) {
-  if (chapter.trigger?.type === 'start') return `${t('story.prologue_label')} · ${chapter.title_it}`;
+  const isPrologue = chapter.trigger?.type === 'start' || chapter.trigger?.type === 'phase';
+  if (isPrologue) return `${t('story.prologue_label')} · ${chapter.title_it}`;
   if (!chapter.creatureId) return `${t('story.epilogue_label')} · ${chapter.title_it}`;
-  return `${t('story.chapter_label').replace('{n}', chapter.order)} · ${chapter.title_it}`;
+  // Il numero mostrato e' quello dell'unita' (number), non l'ordine interno.
+  return `${t('story.chapter_label').replace('{n}', chapter.number ?? chapter.order)} · ${chapter.title_it}`;
 }
 
 /**
@@ -130,6 +142,7 @@ export function playChapter(chapter) {
       creatureHost.classList.add('story-ensemble');
       for (const c of chapters()) {
         if (!c.creatureId || c.creatureId === 'c_pepe') continue;
+        if ((c.season || 1) !== (chapter.season || 1)) continue;   // le creature della stessa stagione
         const cr = content.creatures.find(x => x.id === c.creatureId);
         if (cr) creatureHost.appendChild(spriteSvg(cr.sprite));
       }

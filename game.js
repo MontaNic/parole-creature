@@ -519,7 +519,7 @@ async function finishRound({ round, correct, total, levelUp, missionJustDone, op
 
   // La creatura appena trovata ha un capitolo: si vede dopo il riepilogo con
   // la festa, al tocco che prosegue, prima di andare avanti.
-  const storia = pendingAfterRound(newCreatures);
+  const storia = pendingAfterRound(newCreatures, phaseUnlocked);
 
   // Il gioco bonus: dopo tre stelle, raro, breve. Dopo la storia, prima di
   // andare avanti. Le bolle vogliono parole con un PNG: se sono poche, niente.
