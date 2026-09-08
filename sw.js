@@ -19,7 +19,7 @@
  */
 importScripts('sw-art.js');
 
-const CACHE_VERSION = 'v1.8.2';
+const CACHE_VERSION = 'v1.8.3';
 const SHELL_CACHE = `dp-shell-${CACHE_VERSION}`;
 const AUDIO_CACHE = `dp-audio-${CACHE_VERSION}`;
 
@@ -75,18 +75,42 @@ const PARALLELE = 6;
  * scadono e diventano l'icona di immagine rotta.
  * Sei alla volta e' abbastanza per essere veloce e poco per dare fastidio.
  */
+const TENTATIVI = 3;
+const pausa = (ms) => new Promise(r => setTimeout(r, ms));
+
+/** Un file, con tre tentativi: la CDN puo' rifiutare una raffica, la rete puo' cadere un attimo. */
+async function aggiungi(cache, url) {
+  let ultimo = null;
+  for (let t = 1; t <= TENTATIVI; t++) {
+    try {
+      const res = await fetch(url, { cache: 'no-cache' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      await cache.put(url, res);
+      return true;
+    } catch (err) {
+      ultimo = err;
+      self.__errori = self.__errori || [];
+      if (self.__errori.length < 40) self.__errori.push(`${url}: ${err && err.message}`);
+      await pausa(300 * t);
+    }
+  }
+  console.warn('[sw] non cachato:', url, ultimo);
+  return false;
+}
+
 async function inCoda(cache, urls) {
   let falliti = 0;
   for (let i = 0; i < urls.length; i += PARALLELE) {
-    await Promise.all(urls.slice(i, i + PARALLELE).map(url =>
-      cache.add(url).catch(err => {
-        falliti++;
-        console.warn('[sw] non cachato:', url, err);
-      })
-    ));
+    const esiti = await Promise.all(urls.slice(i, i + PARALLELE).map(url => aggiungi(cache, url)));
+    falliti += esiti.filter(ok => !ok).length;
   }
   return falliti;
 }
+
+// Diagnostica: la pagina puo' chiedere al worker gli errori dell'ultimo precache.
+self.addEventListener('message', (event) => {
+  if (event.data === 'errori-precache') event.source?.postMessage({ erroriPrecache: self.__errori || [] });
+});
 
 async function precache() {
   const cache = await caches.open(SHELL_CACHE);
