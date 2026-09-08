@@ -121,6 +121,9 @@
       "sp-month-oct",
       "sp-month-nov",
       "sp-month-dec"
+    ],
+    "logo": [
+      "sp-logo"
     ]
   },
   "_kind_comment": "kind: 'creature' aggiunge al prompt le proporzioni da cucciolo; 'object' no; 'concept' e' il gruppo a rischio (vedi note).",
@@ -1780,6 +1783,12 @@
       "kind": "creature",
       "batch": 8,
       "prompt": "a cute small sky blue suitcase creature with two wheels as feet, big round eyes on the front and a smile, an amber handle on top"
+    },
+    {
+      "id": "sp-logo",
+      "kind": "creature",
+      "batch": 9,
+      "prompt": "a shield-shaped emblem for a game logo: the game mascot Pepe, a cute Jack Russell terrier puppy with mostly white fur, one black ear and one brown ear and a brown patch around one eye, sitting at the centre of a flat purple heraldic shield with an amber border, a small green dragon peeking from one side and a yellow star above her head, the shield fully inside the frame"
     }
   ]
 }

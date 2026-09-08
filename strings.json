@@ -4,9 +4,11 @@
   "lang": "it",
 
   "ui": {
-    "game_title": "Parole & Creature",
+    "game_title": "Pepe e la Leggenda delle Parole",
     "start_button": "Gioca",
     "tap_to_start": "Tocca per iniziare",
+    "logo_line1": "Pepe",
+    "logo_line2": "e la Leggenda delle Parole",
     "continue_button": "Continua",
     "back": "Indietro",
     "close": "Chiudi",
@@ -159,7 +161,7 @@
   },
   "share": {
     "button": "Condividi",
-    "title": "Parole & Creature",
+    "title": "Pepe e la Leggenda delle Parole",
     "played": "{name} ha giocato!",
     "played_anon": "Partita finita!",
     "found": "Ha trovato {creature}!",

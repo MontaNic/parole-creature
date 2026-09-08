@@ -518,6 +518,7 @@ export function runStartGate() {
     const via = () => { if (fatto) return; fatto = true; sfxTap(); resolve(); };
     document.getElementById('start-btn').addEventListener('click', via);
     host.addEventListener('click', via);
+    document.querySelector('.logo')?.addEventListener('click', via);
   });
 }
 

@@ -1,4 +1,6 @@
-# Parole & Creature
+# Pepe e la Leggenda delle Parole
+
+(nome di lavoro e repository: *Parole & Creature*)
 
 Gioco browser per imparare l'inglese, pensato su misura per un bambino di 7-9 anni:
 sessioni brevi, Pepe (una cucciola di Jack Russell) che guida a voce, creature

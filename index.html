@@ -8,11 +8,11 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Parole &amp; Creature</title>
+<title>Pepe e la Leggenda delle Parole</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="assets/img/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/icons/apple-touch-icon.png">
-<meta name="apple-mobile-web-app-title" content="Parole">
+<meta name="apple-mobile-web-app-title" content="Pepe">
 <!-- Token e componenti prima, layout delle schermate dopo. -->
 <link rel="stylesheet" href="design-system.css">
 <link rel="stylesheet" href="style.css">
@@ -35,8 +35,14 @@
   <!-- ============ INGRESSO: un tocco sblocca l'audio ============ -->
   <section class="screen" id="screen-start">
     <div class="center-stack pad">
-      <h1 class="h-title" data-str="ui.game_title">Parole &amp; Creature</h1>
-      <div class="start-mascot" id="start-mascot"></div>
+      <div class="logo">
+        <div class="logo-emblem"><img src="assets/img/art/sp-logo.png" alt=""></div>
+        <div class="logo-wordmark">
+          <span class="logo-line1" data-str="ui.logo_line1">Pepe</span>
+          <span class="logo-line2" data-str="ui.logo_line2">e la Leggenda delle Parole</span>
+        </div>
+      </div>
+      <div class="start-mascot" id="start-mascot" hidden></div>
       <button class="btn btn-lg" id="start-btn">
         <span data-str="ui.tap_to_start">Tocca per iniziare</span>
         <svg class="ico"><use href="#sp-icon-play"></use></svg>

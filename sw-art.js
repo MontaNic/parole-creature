@@ -147,6 +147,7 @@ self.ART_ASSETS = [
   'assets/img/art/sp-library.png',
   'assets/img/art/sp-lion.png',
   'assets/img/art/sp-listening.png',
+  'assets/img/art/sp-logo.png',
   'assets/img/art/sp-long_hair.png',
   'assets/img/art/sp-lunch.png',
   'assets/img/art/sp-maestrino.png',

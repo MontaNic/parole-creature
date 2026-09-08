@@ -1329,6 +1329,20 @@ fatte solo di suoni gia' incontrati (un test lo verifica). Niente voto;
 una lezione finita si segna in `save.phonics`. E' il pezzo che rende
 leggibili parole mai viste, quello che la scuola italiana quasi non fa.
 
+### Il titolo e il logo (chiusura)
+
+Il gioco si chiama **"Pepe e la Leggenda delle Parole"** (il repository e il
+nome di lavoro restano *Parole & Creature*). All'ingresso un logo:
+l'emblema generato con Gemini, uno scudo araldico viola con Pepe al
+centro, un draghetto e una stella, senza testo dentro; il nome e'
+composto in Fredoka sopra l'emblema, cosi' le lettere non le fa un
+modello di immagini. Due candidati generati (un tondo con l'isola e la
+torre, lo scudo): scelto lo scudo, l'altro eliminato. Nome anche nel
+manifest (icona Home: "Pepe") e nella carta condivisa.
+
+Il progetto e' considerato **finito per ora** (versione 3.5.0). Il
+prossimo dato utile e' il primo check del mese.
+
 ## Prossimi passi
 
 **Stato al 9 settembre 2026**: dal riconoscere al produrre (versione 3.4.0):
