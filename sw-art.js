@@ -56,6 +56,7 @@ self.ART_ASSETS = [
   'assets/img/art/sp-coin.png',
   'assets/img/art/sp-cold.png',
   'assets/img/art/sp-cook.png',
+  'assets/img/art/sp-cooking.png',
   'assets/img/art/sp-cough.png',
   'assets/img/art/sp-cow.png',
   'assets/img/art/sp-curly_hair.png',

@@ -19,7 +19,7 @@
  */
 importScripts('sw-art.js');
 
-const CACHE_VERSION = 'v1.8.3';
+const CACHE_VERSION = 'v1.8.4';
 const SHELL_CACHE = `dp-shell-${CACHE_VERSION}`;
 const AUDIO_CACHE = `dp-audio-${CACHE_VERSION}`;
 
@@ -83,7 +83,7 @@ async function aggiungi(cache, url) {
   let ultimo = null;
   for (let t = 1; t <= TENTATIVI; t++) {
     try {
-      const res = await fetch(url, { cache: 'no-cache' });
+      const res = await fetch(url);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       await cache.put(url, res);
       return true;
@@ -114,27 +114,24 @@ self.addEventListener('message', (event) => {
 
 async function precache() {
   const cache = await caches.open(SHELL_CACHE);
-
-  // Prima la shell: senza, il gioco non parte proprio.
+  // Solo la shell: senza, il gioco non parte proprio. E' poco e veloce, quindi
+  // l'installazione non puo' fallire per durata. Le illustrazioni arrivano
+  // subito dopo, a pezzi, con il rabbocco guidato dalla pagina.
   await inCoda(cache, SHELL_ASSETS);
-
-  /*
-   * Poi le illustrazioni, tutte, dalla lista generata in sw-art.js.
-   * Entrano in cache all'installazione e non al primo uso come gli audio: se
-   * manca un audio il gioco ripiega sulla sintesi vocale, se manca
-   * un'illustrazione la card resta vuota e la domanda diventa impossibile.
-   */
-  const arte = self.ART_ASSETS || [];
-  const falliti = await inCoda(cache, arte);
-  console.log(`[sw] illustrazioni in cache: ${arte.length - falliti}/${arte.length}`);
 }
 
 /**
- * Rabbocco: cio' che al precache e' fallito (un 404 transitorio della CDN
- * subito dopo un deploy, una connessione caduta) verrebbe altrimenti
- * ignorato fino alla versione successiva. Ogni attivazione e ogni apertura
- * del gioco ricontrollano la lista e scaricano solo i mancanti.
+ * Rabbocco a pezzi.
+ *
+ * Perche' non tutto nell'install: con 200+ illustrazioni l'evento di
+ * installazione durava troppo e Chrome lo abbatteva ("failed to install,
+ * unknown reason"), lasciando la cache a meta' e la registrazione nulla.
+ * Ora ogni chiamata scarica al massimo LOTTO file mancanti e risponde con
+ * quanti ne restano; la pagina la richiama finche' non restano zero. Ogni
+ * evento e' breve, ogni file ha tre tentativi, e un'apertura successiva
+ * riprende da dove si era arrivati.
  */
+const LOTTO = 24;
 let rabboccoInCorso = null;
 function topUp() {
   if (rabboccoInCorso) return rabboccoInCorso;
@@ -144,18 +141,24 @@ function topUp() {
       const voluti = [...SHELL_ASSETS, ...(self.ART_ASSETS || [])];
       const presenti = new Set((await cache.keys()).map(r => r.url));
       const mancanti = voluti.filter(u => !presenti.has(new URL(u, self.location.href).href));
-      if (mancanti.length) {
-        const falliti = await inCoda(cache, mancanti);
-        console.log(`[sw] rabbocco: ${mancanti.length - falliti}/${mancanti.length} recuperati`);
-      }
+      if (!mancanti.length) return { mancanti: 0, totale: voluti.length };
+      const falliti = await inCoda(cache, mancanti.slice(0, LOTTO));
+      return { mancanti: Math.max(0, mancanti.length - LOTTO) + falliti, totale: voluti.length };
     } catch (err) {
       console.warn('[sw] rabbocco fallito:', err);
+      return { mancanti: -1, totale: 0 };
     } finally {
       rabboccoInCorso = null;
     }
   })();
   return rabboccoInCorso;
 }
+
+self.addEventListener('message', (event) => {
+  if (event.data === 'rabbocca') {
+    event.waitUntil(topUp().then(esito => event.source?.postMessage({ rabbocco: esito })));
+  }
+});
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
@@ -164,7 +167,7 @@ self.addEventListener('activate', (event) => {
         keys.filter(k => k !== SHELL_CACHE && k !== AUDIO_CACHE)
             .map(k => caches.delete(k))
       ))
-      .then(() => self.clients.claim()).then(() => topUp())
+      .then(() => self.clients.claim())
   );
 });
 

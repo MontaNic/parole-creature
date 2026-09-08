@@ -616,6 +616,27 @@ function registerServiceWorker() {
   if (location.protocol === 'file:') return;   // niente SW aprendo il file a mano
   navigator.serviceWorker.register('sw.js').catch(err =>
     console.warn('[sw] registrazione fallita:', err));
+
+  /*
+   * Il rabbocco delle illustrazioni e' guidato da qui: la pagina chiede al
+   * worker un pezzo alla volta finche' non manca nulla. Cosi' nessun evento
+   * del worker dura a lungo, e se il bambino chiude prima si riprende alla
+   * prossima apertura. Stato leggibile da window.__rabbocco (per i test).
+   */
+  window.__rabbocco = { mancanti: null, totale: 0, giri: 0 };
+  navigator.serviceWorker.addEventListener('message', (ev) => {
+    const r = ev.data && ev.data.rabbocco;
+    if (!r) return;
+    window.__rabbocco = { mancanti: r.mancanti, totale: r.totale, giri: window.__rabbocco.giri + 1 };
+    if (r.mancanti > 0 && document.visibilityState === 'visible') setTimeout(chiediRabbocco, 400);
+  });
+  const chiediRabbocco = () => navigator.serviceWorker.ready
+    .then(reg => (reg.active || reg.waiting || reg.installing)?.postMessage('rabbocca'))
+    .catch(() => {});
+  navigator.serviceWorker.ready.then(() => chiediRabbocco());
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') chiediRabbocco();
+  });
 }
 
 /* ------------------------------------------------------------------ */
