@@ -1106,6 +1106,38 @@ differenza a insegnare la parola. Illustrazioni: 38 in un batch, il
 deserto rifatto come ritaglio; 241 PNG in precache. Audio: 64 tracce,
 indice a 533.
 
+### Il precache che non finiva: la causa vera (v1.8.5)
+
+Il lotto 2 dell'anno 3 ha portato la cache a 241 illustrazioni e la prova
+offline sul sito ha smesso di passare (158/203, poi 135/241, poi 54): la
+cache si fermava sempre a un prefisso alfabetico della lista. Con i
+lifecycle event del worker catturati via DevTools e' uscito l'errore:
+*"ServiceWorker failed to install: Operation has failed (unknown
+reason)"*. Erano due difetti sommati:
+
+1. **l'installazione durava troppo**: tutte le illustrazioni dentro
+   l'evento `install`, e con 200+ file Chrome abbatteva il worker a meta',
+   lasciando cache parziale e registrazione nulla (in locale, a 10 s, non
+   si vedeva mai);
+2. **un fetch dal worker restava appeso** sulla CDN, senza timeout, e
+   bloccava per sempre anche il rabbocco.
+
+Ora l'install scarica solo la shell (poco, veloce, non puo' fallire per
+durata); le illustrazioni arrivano **a pezzi da 24**, chiesti dalla pagina
+al worker con un messaggio finche' non manca nulla (`window.__rabbocco`
+per i test); ogni fetch ha un **timeout di 12 s** e tre tentativi. Sul
+sito: 273 voci in 30 secondi, worker attivo, mancanti 0. Se il bambino
+chiude prima, la prossima apertura riprende da dove era.
+
+Il tool `cache-check-remote` ora basta con `--attesa 60`.
+
+**Gemini**: i crediti prepagati sono finiti ("prepayment credits are
+depleted") sulle 39 illustrazioni della fase 11. Testo, unita' e audio
+della fase 11 sono pronti in `docs/lotti/fase-11.json` (parole, frasi,
+strutture, unita', creature e i 40 prompt del batch 8) e nelle 72 tracce
+gia' generate; si uniscono a content.json quando i crediti tornano, con
+lo stesso script di unione usato per la fase 10.
+
 ## Prossimi passi
 
 **Stato al 2026-09-08**: anno 2 del curriculum completo e pubblicato
