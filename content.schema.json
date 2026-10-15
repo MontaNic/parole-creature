@@ -103,9 +103,12 @@
   "dailyMissions": [
     {
       "id": "m_esempio",
-      "type": "correctAnswers | repeats | themeCorrect | lessons | reviewCorrect",
+      "type": "correctAnswers | repeats | themeCorrect | lessons | reviewCorrect | home | visit",
       "target": 5,
       "theme": "solo per themeCorrect",
+      "intro": "facoltativo: 1, 2, 3... le missioni dei primi giorni, in ordine",
+      "screen": "solo per visit (es. album)",
+      "afterWorld": "facoltativo, per home: si propone solo dopo aver giocato quell'unita'",
       "sprite": "sp-star",
       "text_it": "Testo mostrato al bambino"
     }

@@ -8503,6 +8503,31 @@
   ],
   "dailyMissions": [
     {
+      "id": "m_intro_round",
+      "intro": 1,
+      "type": "lessons",
+      "target": 1,
+      "sprite": "sp-castle",
+      "text_it": "Gioca la tua prima partita fino alla fine"
+    },
+    {
+      "id": "m_intro_repeat",
+      "intro": 2,
+      "type": "repeats",
+      "target": 3,
+      "sprite": "sp-icon-mic",
+      "text_it": "Ripeti 3 parole a Pepe ad alta voce"
+    },
+    {
+      "id": "m_intro_album",
+      "intro": 3,
+      "type": "visit",
+      "screen": "album",
+      "target": 1,
+      "sprite": "sp-icon-album",
+      "text_it": "Apri l'album e guarda le tue creature"
+    },
+    {
       "id": "m_words5",
       "type": "correctAnswers",
       "target": 5,
@@ -8564,6 +8589,7 @@
     {
       "id": "m_home_howareyou",
       "type": "home",
+      "afterWorld": "world_feelings",
       "target": 1,
       "sprite": "sp-happy",
       "text_it": "A casa: chiedi a un adulto \"How are you?\" e ascolta la risposta."
@@ -8571,6 +8597,7 @@
     {
       "id": "m_home_count",
       "type": "home",
+      "afterWorld": "world_numbers",
       "target": 1,
       "sprite": "sp-num-5",
       "text_it": "A casa: conta le sedie in inglese, ad alta voce."
@@ -8578,6 +8605,7 @@
     {
       "id": "m_home_goodnight",
       "type": "home",
+      "afterWorld": "world_tower",
       "target": 1,
       "sprite": "sp-night",
       "text_it": "Stasera: di' \"good night\" prima di dormire."
@@ -8585,6 +8613,7 @@
     {
       "id": "m_home_colours",
       "type": "home",
+      "afterWorld": "world_colors",
       "target": 1,
       "sprite": "sp-color-red",
       "text_it": "A casa: trova tre cose rosse e di' \"red\" per ognuna."
@@ -8592,6 +8621,7 @@
     {
       "id": "m_home_family",
       "type": "home",
+      "afterWorld": "world_family",
       "target": 1,
       "sprite": "sp-mum",
       "text_it": "A casa: presenta la tua famiglia in inglese: \"This is my mum...\""
@@ -8599,6 +8629,7 @@
     {
       "id": "m_home_food",
       "type": "home",
+      "afterWorld": "world_food",
       "target": 1,
       "sprite": "sp-apple",
       "text_it": "A tavola: di' cosa ti piace in inglese: \"I like...\""
@@ -8606,6 +8637,7 @@
     {
       "id": "m_home_body",
       "type": "home",
+      "afterWorld": "world_body",
       "target": 1,
       "sprite": "sp-hand",
       "text_it": "A casa: fai il gioco \"Touch your nose!\" con un adulto."
@@ -8613,6 +8645,7 @@
     {
       "id": "m_home_thankyou",
       "type": "home",
+      "afterWorld": "world_school",
       "target": 1,
       "sprite": "sp-present",
       "text_it": "Oggi: di' \"thank you\" e \"please\" almeno tre volte."
@@ -9127,6 +9160,7 @@
         ],
         "turns": [
           {
+            "show": {"sprite": "sp-dragon"},
             "say": {
               "en": "Hello! What is it?",
               "it": "Ciao! Che cos'è?"
@@ -9151,6 +9185,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-knight"},
             "say": {
               "en": "And what is it?",
               "it": "E questo cos'è?"
@@ -9175,6 +9210,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-castle"},
             "say": {
               "en": "Look! What is it?",
               "it": "Guarda! Che cos'è?"
@@ -9215,6 +9251,7 @@
         ],
         "turns": [
           {
+            "show": {"sprite": "sp-egg"},
             "say": {
               "en": "What is it? An egg or a nest?",
               "it": "Che cos'è? Un uovo o un nido?"
@@ -9239,6 +9276,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-tail"},
             "say": {
               "en": "What is it? A horn or a tail?",
               "it": "Che cos'è? Un corno o una coda?"
@@ -9263,6 +9301,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-eye"},
             "say": {
               "en": "And this? An eye?",
               "it": "E questo? Un occhio?"
@@ -9303,6 +9342,7 @@
         ],
         "turns": [
           {
+            "show": {"sprite": "sp-color-red"},
             "say": {
               "en": "What colour is the egg?",
               "it": "Di che colore è l'uovo?"
@@ -9327,6 +9367,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-dragon"},
             "say": {
               "en": "And the dragon? What colour?",
               "it": "E il drago? Di che colore?"
@@ -9391,6 +9432,7 @@
         ],
         "turns": [
           {
+            "show": {"sprite": "sp-star", "count": 3},
             "say": {
               "en": "How many stars?",
               "it": "Quante stelle?"
@@ -9415,6 +9457,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-egg", "count": 5},
             "say": {
               "en": "How many eggs?",
               "it": "Quante uova?"
@@ -9439,6 +9482,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-dragon", "count": 10},
             "say": {
               "en": "And how many dragons?",
               "it": "E quanti draghi?"
@@ -9479,6 +9523,7 @@
         ],
         "turns": [
           {
+            "show": {"sprite": "sp-tree"},
             "say": {
               "en": "Look! What is this?",
               "it": "Guarda! Cos'è questo?"
@@ -9503,6 +9548,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-cats"},
             "say": {
               "en": "And these?",
               "it": "E questi?"
@@ -9527,6 +9573,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-sun"},
             "say": {
               "en": "What is this, up in the sky?",
               "it": "Cos'è questo, su nel cielo?"
@@ -9567,6 +9614,7 @@
         ],
         "turns": [
           {
+            "show": {"sprite": "sp-dragon", "beside": "sp-cat"},
             "say": {
               "en": "Is the dragon big or small?",
               "it": "Il drago è grande o piccolo?"
@@ -9591,6 +9639,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-cats"},
             "say": {
               "en": "And the cats?",
               "it": "E i gatti?"
@@ -9615,6 +9664,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-fast"},
             "say": {
               "en": "Am I fast or slow?",
               "it": "Sono veloce o lento?"
@@ -9655,6 +9705,7 @@
         ],
         "turns": [
           {
+            "show": {"sprite": "sp-sword"},
             "say": {
               "en": "What do you have?",
               "it": "Cosa hai?"
@@ -9679,6 +9730,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-dragon"},
             "say": {
               "en": "What can you see?",
               "it": "Cosa vedi?"
@@ -9703,6 +9755,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-egg", "count": 2},
             "say": {
               "en": "How many eggs do you have?",
               "it": "Quante uova hai?"
@@ -9831,6 +9884,7 @@
         ],
         "turns": [
           {
+            "show": {"sprite": "sp-mum"},
             "say": {
               "en": "Who is this?",
               "it": "Chi è questa?"
@@ -9879,6 +9933,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-grandpa"},
             "say": {
               "en": "And who is this?",
               "it": "E chi è questo?"
@@ -9943,6 +9998,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-hand", "count": 2},
             "say": {
               "en": "How many hands do you have?",
               "it": "Quante mani hai?"
@@ -10031,6 +10087,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-tshirt"},
             "say": {
               "en": "What colour is your T-shirt?",
               "it": "Di che colore è la tua maglietta?"
@@ -10193,8 +10250,8 @@
                 "it": "Sì!"
               },
               {
-                "en": "No, I don't.",
-                "it": "No."
+                "en": "Yes, I am.",
+                "it": "Sì, lo sono."
               },
               {
                 "en": "I like cheese.",
@@ -10217,8 +10274,8 @@
                 "it": "Mi piacciono le mele."
               },
               {
-                "en": "I don't like apples.",
-                "it": "Non mi piacciono le mele."
+                "en": "It's an apple.",
+                "it": "È una mela."
               },
               {
                 "en": "Yes, I do.",
@@ -10271,6 +10328,7 @@
         ],
         "turns": [
           {
+            "show": {"sprite": "sp-cat", "on": "sp-bed"},
             "say": {
               "en": "Where is the cat?",
               "it": "Dov'è il gatto?"
@@ -10295,6 +10353,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-dog", "under": "sp-table"},
             "say": {
               "en": "Where is the dog?",
               "it": "Dov'è il cane?"
@@ -10319,6 +10378,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-fish", "in": "sp-kitchen"},
             "say": {
               "en": "And where is the fish?",
               "it": "E dov'è il pesce?"
@@ -10457,8 +10517,8 @@
                 "it": "Sì!"
               },
               {
-                "en": "No, I can't.",
-                "it": "No."
+                "en": "Yes, I do.",
+                "it": "Sì."
               },
               {
                 "en": "I can swim.",
@@ -10495,6 +10555,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-run"},
             "say": {
               "en": "What is Pepe doing?",
               "it": "Cosa sta facendo Pepe?"
@@ -10535,6 +10596,7 @@
         ],
         "turns": [
           {
+            "show": {"sprite": "sp-sunny"},
             "say": {
               "en": "What's the weather like?",
               "it": "Che tempo fa?"
@@ -10623,6 +10685,7 @@
         ],
         "turns": [
           {
+            "show": {"sprite": "sp-clock-7"},
             "say": {
               "en": "What time is it?",
               "it": "Che ore sono?"
@@ -10887,6 +10950,7 @@
         ],
         "turns": [
           {
+            "show": {"sprite": "sp-long_hair"},
             "say": {
               "en": "Who is she? Long hair or short hair?",
               "it": "Chi è lei? Capelli lunghi o corti?"
@@ -10911,6 +10975,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-tall"},
             "say": {
               "en": "And him? Tall or short?",
               "it": "E lui? Alto o basso?"
@@ -11073,12 +11138,12 @@
                 "it": "Mi piace giocare a calcio."
               },
               {
-                "en": "My favourite sport is tennis.",
-                "it": "Il mio sport preferito è il tennis."
+                "en": "Yes, I do.",
+                "it": "Sì."
               },
               {
-                "en": "I can play the guitar.",
-                "it": "So suonare la chitarra."
+                "en": "It's a ball.",
+                "it": "È una palla."
               }
             ],
             "good": {
@@ -11151,6 +11216,7 @@
         ],
         "turns": [
           {
+            "show": {"sprite": "sp-doctor"},
             "say": {
               "en": "Who is he?",
               "it": "Chi è lui?"
@@ -11239,6 +11305,7 @@
         ],
         "turns": [
           {
+            "show": {"sprite": "sp-library", "next": "sp-station"},
             "say": {
               "en": "Where is the library?",
               "it": "Dov'è la biblioteca?"
@@ -11287,6 +11354,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-arrow-right", "turn": -90},
             "say": {
               "en": "And then?",
               "it": "E poi?"
@@ -11503,6 +11571,7 @@
         ],
         "turns": [
           {
+            "show": {"sprite": "sp-river"},
             "say": {
               "en": "Is there a river?",
               "it": "C'è un fiume?"
@@ -11527,6 +11596,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-mountain", "count": 3},
             "say": {
               "en": "How many mountains are there?",
               "it": "Quante montagne ci sono?"
@@ -11615,6 +11685,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-brush_teeth"},
             "say": {
               "en": "What do you do in the morning?",
               "it": "Cosa fai la mattina?"
@@ -11703,6 +11774,7 @@
             }
           },
           {
+            "show": {"sprite": "sp-cooking"},
             "say": {
               "en": "Is she cooking?",
               "it": "Lei sta cucinando?"
@@ -11727,13 +11799,14 @@
             }
           },
           {
+            "show": {"sprite": "sp-painting"},
             "say": {
-              "en": "Is he sleeping?",
-              "it": "Lui sta dormendo?"
+              "en": "Is she sleeping?",
+              "it": "Lei sta dormendo?"
             },
             "replies": [
               {
-                "en": "No, he isn't. He's painting.",
+                "en": "No, she isn't. She's painting.",
                 "it": "No. Sta dipingendo."
               },
               {

@@ -174,12 +174,24 @@ export function shuffle(arr) {
  * lasciava passare due immagini identiche nella stessa griglia, con una sola
  * risposta contata come giusta. Il bambino non ha modo di indovinare, e
  * l'errore risulta suo.
+ *
+ * E si pesca solo fra item dello STESSO TIPO: una parola ha per alternative
+ * solo parole, una frase solo frasi. Mescolandoli, la stessa domanda poteva
+ * offrire "cat", "These are stars." e "dog", oppure far sentire "cat" con
+ * il gatto e i gatti fra le immagini — due risposte plausibili, una sola
+ * contata come giusta.
  */
 export function distractors(pool, exclude, howMany) {
-  const candidates = pool.filter(it =>
-    it.id !== exclude.id && it.sprite !== exclude.sprite);
+  const candidates = similar(pool, exclude);
   shuffle(candidates);
   return candidates.slice(0, howMany);
+}
+
+/** Gli item del pool che possono fare da alternativa a `target`. */
+export function similar(pool, target) {
+  return pool.filter(it =>
+    it.id !== target.id && it.sprite !== target.sprite &&
+    (!it.kind || !target.kind || it.kind === target.kind));
 }
 
 /** Sottoinsieme senza due item che mostrino la stessa illustrazione. */

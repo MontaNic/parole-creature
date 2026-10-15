@@ -16,6 +16,7 @@ import { t, artIndex, getItem } from './content-loader.js';
 import { save, persist } from './state.js';
 import { spriteSvg, audioOrb } from './minigames.js';
 import { speakItem, sfxCorrect, sfxTap, stopVoice } from './audio.js';
+import { dopoLaVoce, spiega } from './pace.js';
 import { burstConfetti } from './effects.js';
 import { mascotSay, renderMascot } from './mascot.js';
 import { showScreen } from './screens.js';
@@ -308,7 +309,7 @@ export async function playBubbles(o) {
     }
   };
 
-  const t0 = performance.now();
+  let t0 = performance.now();
   let last = t0;
   let raf = 0;
   const loop = (now) => {
@@ -361,15 +362,22 @@ export async function playBubbles(o) {
     const go = el('button', 'btn btn-lg', t('ui.continue_button'));
     end.appendChild(go);
     end.hidden = false;
-    mascotSay('bonus_end', {});
+    dopoLaVoce(go, mascotSay('bonus_end', {}));
     go.onclick = () => { sfxTap(); stopVoice(); risolvi({ popped: score }); };
   };
   skip.onclick = () => { sfxTap(); fine(); };
 
   // Espone il mondo per le prove automatiche (niente di sensibile).
   playBubbles.world = world;
-  nextTarget();
-  raf = requestAnimationFrame(loop);
+  // Pepe spiega il gioco (la prima volta nella sessione) PRIMA che parta il
+  // tempo: il conto alla rovescia comincia dopo la sua voce.
+  draw();
+  dopoLaVoce(canvas, spiega('howto_bubbles')).then(() => {
+    if (finished) return;
+    t0 = last = performance.now();
+    nextTarget();
+    raf = requestAnimationFrame(loop);
+  });
   return done;
 }
 
@@ -514,7 +522,7 @@ export async function playMoles(o) {
     }
   };
 
-  const t0 = performance.now();
+  let t0 = performance.now();
   let last = t0;
   let raf = 0;
   const loop = (now) => {
@@ -565,14 +573,21 @@ export async function playMoles(o) {
     const go = el('button', 'btn btn-lg', t('ui.continue_button'));
     end.appendChild(go);
     end.hidden = false;
-    mascotSay('bonus_end', {});
+    dopoLaVoce(go, mascotSay('bonus_end', {}));
     go.onclick = () => { sfxTap(); stopVoice(); risolvi({ popped: score }); };
   };
   skip.onclick = () => { sfxTap(); fine(); };
 
   playMoles.world = world;
-  nextTarget();
-  raf = requestAnimationFrame(loop);
+  // Pepe spiega il gioco (la prima volta nella sessione) PRIMA che parta il
+  // tempo: il conto alla rovescia comincia dopo la sua voce.
+  draw();
+  dopoLaVoce(canvas, spiega('howto_moles')).then(() => {
+    if (finished) return;
+    t0 = last = performance.now();
+    nextTarget();
+    raf = requestAnimationFrame(loop);
+  });
   return done;
 }
 
@@ -641,7 +656,7 @@ export async function playBasket(o) {
     ctx.fillStyle = '#C9821A'; ctx.fill(); ctx.stroke();
   };
 
-  const t0 = performance.now();
+  let t0 = performance.now();
   let last = t0;
   let raf = 0;
   const loop = (now) => {
@@ -692,14 +707,21 @@ export async function playBasket(o) {
     const go = el('button', 'btn btn-lg', t('ui.continue_button'));
     end.appendChild(go);
     end.hidden = false;
-    mascotSay('bonus_end', {});
+    dopoLaVoce(go, mascotSay('bonus_end', {}));
     go.onclick = () => { sfxTap(); stopVoice(); risolvi({ popped: score }); };
   };
   skip.onclick = () => { sfxTap(); fine(); };
 
   playBasket.world = world;
-  nextTarget();
-  raf = requestAnimationFrame(loop);
+  // Pepe spiega il gioco (la prima volta nella sessione) PRIMA che parta il
+  // tempo: il conto alla rovescia comincia dopo la sua voce.
+  draw();
+  dopoLaVoce(canvas, spiega('howto_basket')).then(() => {
+    if (finished) return;
+    t0 = last = performance.now();
+    nextTarget();
+    raf = requestAnimationFrame(loop);
+  });
   return done;
 }
 

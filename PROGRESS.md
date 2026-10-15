@@ -1381,9 +1381,68 @@ manifest (icona Home: "Pepe") e nella carta condivisa.
 Il progetto e' considerato **finito per ora** (versione 3.5.0). Il
 prossimo dato utile e' il primo check del mese.
 
+### Uniformita' e ritmo (versione 3.6.0, ottobre 2026)
+
+Due osservazioni giocando. **Uno**: per lo stesso drago il gioco a volte
+chiedeva "dragon", a volte "What is it? A dragon.". La causa: 168 frasi su
+182 usano il disegno di una parola, e i distrattori si pescavano da parole
+e frasi insieme (dal 27% al 43% dei candidati era di tipo diverso), con in
+piu' sette "trappole dei plurali" (si sente "cat", fra le immagini ci sono
+il gatto e i gatti). Regola nuova: **un disegno da solo e' una parola nuda**.
+I distrattori sono sempre dello stesso tipo del bersaglio, il vero o falso
+e' solo per le parole, i riempitivi della caccia sono parole, e quando il
+passo e' una frase il disegno ha la cornice rosa a fumetto (il colore dei
+dialoghi) con la traduzione sotto. Tre test nuovi; sul codice vecchio
+falliscono (7 trappole, 107.044 coppie miste).
+
+**Due**: il bambino toccava "Avanti" a raffica e si perdeva. Regola nuova
+(`js/pace.js`): **il ritmo lo detta il gioco**. Mentre una voce spiega o
+pronuncia cio' che serve per rispondere, i comandi restano fermi e poi si
+accendono con un rimbalzo: storia (il "Salta" resta solo rivedendola
+dall'album), libretti, suoni, onboarding, scrigno, fine dei bonus, e dentro
+i mini-giochi (le scelte dopo aver sentito la parola, ferme mentre Pepe
+incoraggia, "Fatto" dopo l'ascolto). Ogni voce si risolve comunque (tetto
+di durata, audio negato), quindi niente blocchi; un test lo verifica.
+
+Infine **Pepe legge le istruzioni** dei giochi (17 tracce nuove,
+`mascot.howto_*`), ma solo la prima volta che quel gioco compare nella
+sessione: dalla seconda resta la scritta. Nei bonus il tempo parte dopo la
+sua voce.
+
+Nella stessa versione, dalla prova sul tablet:
+
+- **Benvenuto**: subito dopo la presentazione Pepe diceva "Bentornato".
+  Ora la prima volta dice "Benvenuto sull'isola!" (`mascot.welcome_new`).
+- **Missioni**: il sorteggio per data ignorava i progressi, e il primo giorno
+  potevano uscire missioni impossibili (ripassare nell'unita' 1, i numeri
+  prima dell'unita' 4). Ora un nuovo giocatore ha tre missioni di avvio in
+  ordine (una partita intera, ripetere a Pepe, aprire l'album), poi si
+  sorteggia solo fra le fattibili; le missioni "a casa" arrivano dopo
+  l'unita' collegata (`afterWorld`). Chi gioca da piu' di cinque giorni non
+  riceve le intro.
+- **Volumi**: misurate le 1.342 tracce, andavano da -34.8 a -13.2 dB. Con
+  `tools/normalize-audio.mjs` (ffmpeg, guadagno per traccia + limitatore)
+  ora stanno fra -25.9 e -23.1 dB; `generate-audio.mjs` allinea da solo le
+  tracce nuove. ffmpeg sta in `~/.local/bin/ffmpeg` (build per Mac Intel di
+  evermeet.cx: Homebrew non supporta piu' Intel).
+- **Quiz della fase 1**: al posto delle barre bianche vuote, bolle sonore
+  colorate e sotto la zampa di Pepe per scegliere; la zampa si accende solo
+  dopo aver ascoltato la sua bolla.
+- **Dialoghi**: la creatura chiedeva "What is it?" senza mostrare niente.
+  Ora 40 turni hanno una figura (`show`: singola, ripetuta per i numeri,
+  sopra/sotto/dentro per "dov'e'", accanto per "next to"); un test verifica
+  che ogni domanda su qualcosa da vedere abbia la sua. Cinque risposte
+  "sbagliate ma vere" alle domande personali (pizza, saltare, sport) sono
+  diventate risposte che non rispondono; "Is he sleeping?" con Pepe e'
+  diventato "she".
+
+Idea in coda, discussa ma non fatta: **"La tastiera di Pepe"**, un angolo a
+parte (non una pausa) per imparare a scrivere con due mani sulla tastiera
+della custodia dell'iPad. Prima una sola lezione da provare con il bambino.
+
 ## Prossimi passi
 
-Il progetto e' chiuso per ora (v3.5.0). Cio' che ha senso fare dopo, in
+Il progetto e' chiuso per ora (v3.6.0). Cio' che ha senso fare dopo, in
 ordine, e tutto dipende da un dato che non c'e' ancora:
 
 1. **Il primo check del mese** (area genitori, fra 30 giorni): se le

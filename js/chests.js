@@ -12,6 +12,7 @@ import { content, t, getItem } from './content-loader.js';
 import { save, persist, addXp } from './state.js';
 import { spriteSvg } from './minigames.js';
 import { speakItem, stopVoice, sfxTap, sfxUnlock } from './audio.js';
+import { dopoLaVoce } from './pace.js';
 import { mascotSay } from './mascot.js';
 import { celebrate } from './effects.js';
 
@@ -75,7 +76,8 @@ export async function openChest(host, { mascotHost, rng = Math.random } = {}) {
   btn.appendChild(spriteSvg('sp-chest'));
   wrap.appendChild(btn);
   host.appendChild(wrap);
-  mascotSay('chest_found', { avatar: mascotHost });
+  // Lo scrigno si apre dopo che Pepe l'ha annunciato, non sopra la sua voce.
+  await dopoLaVoce(btn, mascotSay('chest_found', { avatar: mascotHost }));
 
   await tap(btn);
   stopVoice();

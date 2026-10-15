@@ -15,6 +15,7 @@ import { renderMascot } from './mascot.js';
 import { spriteSvg } from './minigames.js';
 import { speakLine, stopVoice, sfxTap } from './audio.js';
 import { showScreen } from './screens.js';
+import { dopoLaVoce } from './pace.js';
 
 /* ------------------------------------------------------------------ */
 /* Dati                                                                */
@@ -119,8 +120,13 @@ function chapterLabel(chapter) {
  * Mostra un capitolo e si risolve quando e' finito o saltato.
  * Le battute scorrono a tocco; chi parla si anima, chi ascolta si attenua;
  * il narratore e' una didascalia senza fumetto.
+ *
+ * "Avanti" si accende solo a battuta finita. "Salta" esiste solo quando la
+ * storia si RIVEDE dall'album: alla prima visione la si ascolta tutta, perche'
+ * e' li' che si capisce dove si e' e perche' si gioca.
+ * @param {{canSkip?: boolean}} opts
  */
-export function playChapter(chapter) {
+export function playChapter(chapter, { canSkip = false } = {}) {
   return new Promise(resolve => {
     stopVoice();
     const world = chapter.worldId ? content.worlds.find(w => w.id === chapter.worldId) : null;
@@ -155,6 +161,7 @@ export function playChapter(chapter) {
     const next = document.getElementById('story-next');
     const skip = document.getElementById('story-skip');
     skip.textContent = t('story.skip');
+    skip.hidden = !canSkip;
     showScreen('story');
 
     let i = -1;
@@ -194,15 +201,15 @@ export function playChapter(chapter) {
       creatureHost.classList.toggle('is-dim', line.who === 'pepe');
 
       const english = line.who === 'creature';
-      await speakLine(lineAudio(chapter, i), english ? line.en : line.it, english ? 'en-GB' : 'it-IT');
+      await dopoLaVoce(next, speakLine(lineAudio(chapter, i), english ? line.en : line.it, english ? 'en-GB' : 'it-IT'));
       if (my === token) {
         pepeSvg?.classList.remove('is-talking');
         creatureHost.classList.remove('is-speaking');
       }
     };
 
-    next.onclick = () => { sfxTap(); stopVoice(); show(); };
-    skip.onclick = () => { sfxTap(); finish(); };
+    next.onclick = () => { if (next.disabled) return; sfxTap(); show(); };
+    skip.onclick = canSkip ? () => { sfxTap(); finish(); } : null;
     show();
   });
 }

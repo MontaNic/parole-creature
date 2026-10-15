@@ -13,6 +13,7 @@ import {
 import { renderMascot, mascotSay, mascotCheer, encouragementKey } from './mascot.js';
 import { spriteSvg } from './minigames.js';
 import { speakItem, sfxTap, sfxUnlock } from './audio.js';
+import { dopoLaVoce } from './pace.js';
 import { celebrate } from './effects.js';
 import { ensureTodayMission, currentMission, missionRatio, trackMissionEvent } from './missions.js';
 import { renderStoryStrip, chapterForCreature, isAvailable as chapterAvailable, playChapter } from './story.js';
@@ -288,6 +289,11 @@ function unitCard(world, refs, handlers) {
 
 export function renderAlbum() {
   syncCreatures();
+  // Missione "apri l'album": si chiude qui, con la festa e la voce di Pepe.
+  if (trackMissionEvent({ visit: 'album' })) {
+    celebrate();
+    mascotSay('mission_done', {});
+  }
   const grid = document.getElementById('album-grid');
   grid.innerHTML = '';
 
@@ -309,7 +315,7 @@ export function renderAlbum() {
       if (!unlocked) return;
       // Una creatura trovata e' anche un capitolo: toccarla lo riapre.
       const chapter = chapterForCreature(c.id);
-      if (chapter && chapterAvailable(chapter)) playChapter(chapter).then(renderAlbum);
+      if (chapter && chapterAvailable(chapter)) playChapter(chapter, { canSkip: true }).then(renderAlbum);
       else mascotCheer(art);
     });
     grid.appendChild(card);
@@ -322,7 +328,7 @@ export function renderAlbum() {
     strip.id = 'album-story';
     grid.parentElement.insertBefore(strip, grid);
   }
-  renderStoryStrip(strip, chapter => playChapter(chapter).then(renderAlbum));
+  renderStoryStrip(strip, chapter => playChapter(chapter, { canSkip: true }).then(renderAlbum));
 
   // Gli adesivi degli scrigni, sotto le creature.
   let stickers = document.getElementById('album-stickers');
@@ -557,7 +563,7 @@ export function runOnboarding() {
       go.querySelector('svg').classList.add('ico');
       go.onclick = () => { sfxTap(); stepName(); };
       body.appendChild(go);
-      await mascotSay('welcome_first', { bubble, avatar: mascotHost });
+      await dopoLaVoce(go, mascotSay('welcome_first', { bubble, avatar: mascotHost }));
     }
 
     async function stepName() {
@@ -581,7 +587,7 @@ export function runOnboarding() {
       };
       body.appendChild(input);
       body.appendChild(ok);
-      await mascotSay('ask_name', { bubble, avatar: mascotHost });
+      await dopoLaVoce(ok, mascotSay('ask_name', { bubble, avatar: mascotHost }));
     }
 
     async function stepTutorial() {
@@ -609,7 +615,7 @@ export function runOnboarding() {
         if (!heard) {
           heard = true;
           grid.style.visibility = '';
-          mascotSay('tutorial_choose', { bubble, avatar: mascotHost });
+          dopoLaVoce(grid, mascotSay('tutorial_choose', { bubble, avatar: mascotHost }));
         }
       };
 
@@ -633,7 +639,7 @@ export function runOnboarding() {
         grid.appendChild(b);
       });
 
-      await mascotSay('tutorial_listen', { bubble, avatar: mascotHost });
+      await dopoLaVoce(orb, mascotSay('tutorial_listen', { bubble, avatar: mascotHost }));
     }
 
     function finish() {

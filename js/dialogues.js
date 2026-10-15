@@ -40,6 +40,53 @@ function el(tag, cls, text) {
   return n;
 }
 
+/**
+ * La figura che la creatura mostra mentre parla.
+ *
+ * I dialoghi sono scritti come se la creatura indicasse qualcosa ("What is
+ * it?", "How many eggs?", "Where is the cat?"), ma sullo schermo non c'era
+ * niente: il bambino doveva indovinare. Ora il turno puo' avere `show`:
+ *   { sprite }                  una figura
+ *   { sprite, count }           ripetuta: quante sono
+ *   { sprite, beside }          con un'altra piu' piccola accanto: grande o piccolo
+ *   { sprite, next }            accanto a un'altra, stessa misura: "next to"
+ *   { sprite, on|under|in }     sopra, sotto o dentro un'altra: dov'e'
+ *   { sprite, turn }            ruotata di tot gradi (la freccia "dritto")
+ */
+export function figura(show) {
+  const card = el('div', 'dlg-show anim-pop');
+  if (show.count) {
+    card.classList.add('is-count');
+    card.style.setProperty('--n', Math.min(show.count, 5));
+    for (let i = 0; i < show.count; i++) card.appendChild(spriteSvg(show.sprite));
+    return card;
+  }
+  const dove = show.on ? 'on' : show.under ? 'under' : show.in ? 'in' : null;
+  if (dove) {
+    card.classList.add('is-place', `is-${dove}`);
+    const base = spriteSvg(show[dove]); base.classList.add('dlg-base');
+    const chi = spriteSvg(show.sprite); chi.classList.add('dlg-subject');
+    card.append(base, chi);
+    return card;
+  }
+  if (show.next) {
+    card.classList.add('is-pair');
+    card.append(spriteSvg(show.sprite), spriteSvg(show.next));
+    return card;
+  }
+  if (show.beside) {
+    card.classList.add('is-pair');
+    const grande = spriteSvg(show.sprite); grande.classList.add('dlg-big');
+    const piccolo = spriteSvg(show.beside); piccolo.classList.add('dlg-small');
+    card.append(grande, piccolo);
+    return card;
+  }
+  const img = spriteSvg(show.sprite);
+  if (show.turn) img.style.transform = `rotate(${show.turn}deg)`;
+  card.appendChild(img);
+  return card;
+}
+
 /** Il turno di dialogo, con lo stesso contratto dei mini-giochi. */
 export async function gameDialogue(api) {
   const { host, dialogue, onRepeat } = api;
@@ -56,6 +103,8 @@ export async function gameDialogue(api) {
   const top = el('div', 'dlg-top');
   top.appendChild(who); top.appendChild(bubble);
   stage.appendChild(top);
+  const vetrina = el('div', 'dlg-vetrina');
+  stage.appendChild(vetrina);
   const replies = el('div', 'dlg-replies');
   stage.appendChild(replies);
   host.appendChild(stage);
@@ -73,6 +122,9 @@ export async function gameDialogue(api) {
   for (let ti = 0; ti < dialogue.turns.length; ti++) {
     const turn = dialogue.turns[ti];
     replies.innerHTML = '';
+    vetrina.innerHTML = '';
+    if (turn.show) vetrina.appendChild(figura(turn.show));
+    vetrina.hidden = !turn.show;
     await say(turn.say.en, turn.say.it, lineAudio(dialogue, ti, 'say'));
     const ordine = shuffle(turn.replies.map((r, k) => ({ r, k })));
     await new Promise(resolve => {

@@ -17,7 +17,7 @@ import {
   save, loadSave, persist, rolloverDay, registerPlayToday,
   addXp, checkAccessWindow
 } from './js/state.js';
-import { recordAnswer, pickRoundItems, shuffle } from './js/srs.js';
+import { recordAnswer, pickRoundItems, shuffle, similar } from './js/srs.js';
 import {
   splitRound, freeReviewPool, unitProgress, currentUnit,
   curriculumConfig, phaseProgress, playablePhases
@@ -101,6 +101,8 @@ async function boot() {
 
   if (!save.settings.onboardingDone) {
     await runOnboarding();
+    // Il bambino ha appena conosciuto Pepe: "Bentornato" sarebbe sbagliato.
+    session.justOnboarded = true;
   }
   // Il prologo della storia: una volta sola, subito dopo l'onboarding (o al
   // primo avvio dopo l'aggiornamento, per chi giocava gia').
@@ -150,8 +152,10 @@ async function greet(firstTime) {
   if (!refs) return;
   // Tornando sulla home Pepe alterna le due frasi di attesa: sentire sempre
   // la stessa, dieci volte al giorno, la fa diventare rumore.
-  const key = firstTime
-    ? (save.streak.current > 1 ? 'streak_kept' : 'welcome_back')
+  const nuovo = firstTime && session.justOnboarded;
+  session.justOnboarded = false;
+  const key = nuovo ? 'welcome_new'
+    : firstTime ? (save.streak.current > 1 ? 'streak_kept' : 'welcome_back')
     : (session.greetCount++ % 2 === 0 ? 'idle_1' : 'idle_2');
   await mascotSay(key, { bubble: refs.bubble, avatar: refs.mascotHost });
 }
@@ -264,10 +268,14 @@ function dedupeById(items) {
  * disegno del drago e' la stessa domanda di "dragon", solo piu' lunga: al
  * bambino arrivava a volte la parola e a volte la frase per lo stesso
  * disegno, e sembrava incoerenza. Le frasi vanno dove la loro forma conta —
- * ascolto, quiz col testo, costruzione, vero o falso.
+ * ascolto, quiz col testo, costruzione.
+ *
+ * Nemmeno il vero o falso: un disegno e una voce da verificare e' una domanda
+ * sulla PAROLA ("E' la parola giusta?"). Con le frasi il bambino vedeva il
+ * drago e sentiva "What is it? A knight." — la stessa domanda in due forme.
  */
 const GIOCHI_PER_PAROLA = ['match', 'hunt', 'quiz', 'truefalse', 'dragdrop', 'listen', 'sayit'];
-const GIOCHI_PER_FRASE  = ['listen', 'quiz', 'build', 'truefalse', 'sayit'];
+const GIOCHI_PER_FRASE  = ['listen', 'quiz', 'build', 'sayit'];
 
 /**
  * Compone i passi della partita.
@@ -314,7 +322,8 @@ function buildSteps(world, items, pool, baseDifficulty) {
         return parole >= 2 && parole <= cfg.maxBuildWords;
       }
       if (tp === 'hunt') return pool.length >= 4 && parolaDistinte(i, CONFIG.game.huntTargets).length === CONFIG.game.huntTargets;
-      if (tp === 'match' || tp === 'quiz' || tp === 'dragdrop' || tp === 'truefalse') return pool.length >= 2;
+      // Serve almeno un'alternativa dello stesso tipo (parola o frase).
+      if (tp === 'match' || tp === 'quiz' || tp === 'dragdrop' || tp === 'truefalse') return similar(pool, item).length >= 1;
       return true;
     });
     if (!candidati.length) candidati = ['listen'];
@@ -381,6 +390,9 @@ async function startRound(opts) {
   progressEl.style.width = '0%';
 
   let serie = 0;   // risposte giuste al primo colpo, di fila
+  // La battuta di Pepe per la serie non si aspetta dentro il gioco, ma il
+  // passo dopo si': altrimenti la parola nuova le taglierebbe la voce.
+  let battutaInCorso = null;
 
   // Lo scrigno a sorpresa: deciso adesso, in silenzio. Il bambino non lo sa.
   const chestAt = planChest(round.steps.length, {
@@ -411,7 +423,7 @@ async function startRound(opts) {
       serie = firstTry ? serie + 1 : 0;
       if (firstTry && serie > 0 && serie % 3 === 0) {
         celebrate();
-        mascotSay(encouragementKey('streak', serie / 3 - 1), { avatar: document.getElementById('play-mascot') });
+        battutaInCorso = mascotSay(encouragementKey('streak', serie / 3 - 1), { avatar: document.getElementById('play-mascot') });
       }
     },
     /**
@@ -463,6 +475,7 @@ async function startRound(opts) {
   for (const [i, step] of round.steps.entries()) {
     if (!session.roundActive) return;   // il bambino e' uscito con "indietro"
     const play = GAMES[step.type] || GAMES.match;
+    if (battutaInCorso) { await battutaInCorso; battutaInCorso = null; }
 
     // L'ultima domanda e' annunciata: dare una forma alla partita — inizio
     // facile, sfida in fondo — e' cio' che la distingue da una lista.

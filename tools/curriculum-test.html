@@ -29,7 +29,7 @@
  *   python3 -m http.server 8080
  *   apri http://localhost:8080/tools/curriculum-test.html
  */
-import { loadAll, content, getItem } from './js/content-loader.js';
+import { loadAll, content, getItem, artIndex } from './js/content-loader.js';
 import { save, resetSave, dayIndex } from './js/state.js';
 import { recordAnswer, isMastered, distractors, distinctBySprite } from './js/srs.js';
 import { serveAiutoScritto, SOGLIA_AIUTO } from './js/minigames.js';
@@ -45,7 +45,8 @@ import { books, bookUnlocked, pageAudio } from './js/books.js';
 import { matchesTarget, normalize, canRecognize } from './js/speech.js';
 import { dialogueFor, wantsDialogue, lineAudio as dialogAudio } from './js/dialogues.js';
 import { pickCheckItems, checkDue, daysSinceLastCheck, saveCheck } from './js/checkup.js';
-import { trackMissionEvent, ensureTodayMission } from './js/missions.js';
+import { trackMissionEvent, ensureTodayMission, isFeasible, introMissions } from './js/missions.js';
+import { dopoLaVoce } from './js/pace.js';
 import { lessons as phLessons, soundById, blendOf, letterAudio, lessonDone } from './js/phonics.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
@@ -224,6 +225,45 @@ async function run() {
   }
   check('nessun distrattore mostra la stessa immagine del bersaglio',
     collisioni === 0, `${collisioni} collisioni`);
+
+  // Parole con parole, frasi con frasi: niente "cat" contro "These are
+  // stars.", niente gatti al plurale come alternativa a "cat".
+  let tipoMisto = 0, plurali = 0;
+  for (const bersaglio of tuttiItem) {
+    for (const d of distractors(tuttiItem, bersaglio, 999)) {
+      if (d.kind !== bersaglio.kind) tipoMisto++;
+      if (bersaglio.kind === 'word' && d.sprite === bersaglio.sprite + 's') plurali++;
+    }
+  }
+  check('i distrattori sono sempre dello stesso tipo del bersaglio',
+    tipoMisto === 0, `${tipoMisto} misti`);
+  check('nessuna parola ha per alternativa il proprio plurale',
+    plurali === 0, `${plurali} trappole`);
+
+  /* --- Il ritmo: "Avanti" resta fermo finche' la voce parla ---------- */
+  {
+    const btn = document.createElement('button');
+    btn.className = 'btn';
+    const box = document.createElement('div');
+    document.body.append(btn, box);
+    let fine;
+    const voce = new Promise(r => { fine = r; });
+    const attesa = dopoLaVoce([btn, box], voce);
+    check('mentre la voce parla il pulsante e\' disabilitato',
+      btn.disabled && btn.classList.contains('is-hold'));
+    check('mentre la voce parla la griglia non riceve tocchi',
+      box.classList.contains('is-hold'));
+    fine();
+    await attesa;
+    check('a voce finita il pulsante si riaccende',
+      !btn.disabled && !btn.classList.contains('is-hold') && btn.classList.contains('is-ready'));
+    check('a voce finita la griglia torna a rispondere', !box.classList.contains('is-hold'));
+    // Una voce che fallisce non deve lasciare il bambino bloccato.
+    const rotta = dopoLaVoce(btn, Promise.reject(new Error('audio')));
+    await rotta.catch(() => {});
+    check('anche se la voce fallisce il pulsante si riaccende', !btn.disabled);
+    btn.remove(); box.remove();
+  }
 
   const conDoppioni = [...content.words, ...content.phrases].filter(
     (x, _i, a) => a.some(y => y.id !== x.id && y.sprite === x.sprite));
@@ -455,6 +495,21 @@ async function run() {
   const dl = dialogueFor('world_dragons');
   check('i percorsi audio dei dialoghi sono distinti', new Set([...dl.turns.flatMap((t, i) => ['say', 'r0', 'r1', 'r2', 'good'].map(k => dialogAudio(dl, i, k))), dialogAudio(dl, null, 'hm0'), dialogAudio(dl, null, 'hm1')]).size === 17);
 
+  /* --- i dialoghi mostrano cio' di cui parlano ---------------------- */
+  // Una domanda su qualcosa da vedere ("What is it?", "How many eggs?",
+  // "Where is the cat?") senza figura costringe a tirare a indovinare.
+  const DA_VEDERE = /what is it|what is this|and these\?|how many (stars|eggs|dragons|hands|mountains)|where is the|who is (this|she|he)|what colou?r is|and the dragon\?|what.s the weather|what time is it|big or small|tall or short|is (she|he) |is there|and then\?|what is pepe|and this\?|and the cats\?|fast or slow|what do you have|what can you see|what do you do in the morning/i;
+  const turni = content.dialogues.flatMap(d => d.turns.map((t, i) => ({ d: d.id, i, t })));
+  const senza = turni.filter(x => DA_VEDERE.test(x.t.say.en) && !x.t.show);
+  check('ogni domanda su qualcosa da vedere ha la sua figura', senza.length === 0,
+    senza.map(x => `${x.d}.${x.i}`).join(', '));
+  const sprite = (id) => artIndex.sprites.has(id) || document.getElementById(id);
+  const rotte = turni.filter(x => x.t.show).filter(x => {
+    const sh = x.t.show;
+    return ![sh.sprite, sh.beside, sh.next, sh.on, sh.under, sh.in].filter(Boolean).every(sprite);
+  });
+  check('ogni figura dei dialoghi esiste davvero', rotte.length === 0, rotte.map(x => `${x.d}.${x.i}`).join(', '));
+
   /* --- il check del mese ------------------------------------------- */
   resetSave();
   const scelte = pickCheckItems(['a','b','c','d','e','f','g','h','i','j','k','l'], 10, () => 0.3);
@@ -467,11 +522,41 @@ async function run() {
   /* --- missioni fuori dallo schermo -------------------------------- */
   resetSave();
   const casa = content.missions.filter(m => m.type === 'home');
-  check('otto missioni a casa su sedici', casa.length === 8 && content.missions.length === 16);
+  check('otto missioni a casa, tre di avvio, diciannove in tutto', casa.length === 8 && introMissions().length === 3 && content.missions.length === 19);
   ensureTodayMission();
   save.daily.missionId = casa[0].id; save.daily.missionProgress = 0; save.daily.missionDone = false;
   check('una risposta giusta non chiude una missione a casa', trackMissionEvent({ correct: true }) === false && !save.daily.missionDone);
   check('la conferma di un adulto la chiude', trackMissionEvent({ home: true }) === true && save.daily.missionDone);
+
+  /* --- missioni dei primi giorni e missioni fattibili -------------- */
+  resetSave();
+  save.daily.day = null;
+  check('il primo giorno la missione e\' la prima di avvio', ensureTodayMission()?.id === 'm_intro_round');
+  trackMissionEvent({ roundDone: true });
+  save.daily.day = null;
+  check('chiusa la prima, il giorno dopo arriva la seconda', ensureTodayMission()?.id === 'm_intro_repeat');
+  trackMissionEvent({ repeat: true }); trackMissionEvent({ repeat: true }); trackMissionEvent({ repeat: true });
+  save.daily.day = null;
+  const terza = ensureTodayMission();
+  check('la terza e\' aprire l\'album, e l\'album la chiude', terza?.id === 'm_intro_album' && trackMissionEvent({ visit: 'album' }) === true);
+  save.daily.day = null;
+  check('finite le tre, non tornano piu\'', !ensureTodayMission()?.intro);
+
+  resetSave();
+  save.stats.daysPlayed = 40;   // chi giocava gia': niente intro
+  save.daily.day = null;
+  check('chi gioca da tempo non riceve le missioni di avvio', !ensureTodayMission()?.intro);
+
+  // All'inizio (solo l'unita' 1 aperta, niente visto) nessuna missione impossibile.
+  resetSave();
+  const fattibili = content.missions.filter(m => isFeasible(m)).map(m => m.id);
+  const impossibili = ['m_review', 'm_numbers', 'm_colors', 'm_creature', 'm_home_family', 'm_home_count', 'm_home_howareyou'];
+  check('a inizio gioco non escono missioni impossibili',
+    impossibili.every(id => !fattibili.includes(id)), 'fattibili: ' + fattibili.join(', '));
+  check('a inizio gioco qualche missione fattibile c\'e\'',
+    ['m_words5', 'm_repeat5', 'm_lesson'].every(id => fattibili.includes(id)));
+  save.progress.worlds.world_family = { plays: 1 };
+  check('la missione sulla famiglia arriva dopo l\'unita\' della famiglia', isFeasible(content.missions.find(m => m.id === 'm_home_family')));
 
   /* --- prima del cartone --------------------------------------------- */
   check('ogni cartone ha dieci parole e tre frasi del gioco da fare prima',

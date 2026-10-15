@@ -49,6 +49,7 @@ import { existsSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { misura, correggi } from './normalize-audio.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const AUDIO_DIR = path.join(ROOT, 'assets', 'audio');
@@ -484,8 +485,13 @@ async function main() {
       const buf = useProxy ? await synthViaProxy(env, job) : await synthDirect(env, job);
       await mkdir(path.dirname(job.dest), { recursive: true });
       await writeFile(job.dest, buf);
+      // Ogni traccia nasce gia' al volume di tutte le altre (vedi
+      // normalize-audio.mjs). Senza ffmpeg resta com'e', con un avviso.
+      let livello = '';
+      try { correggi(job.dest, job.dest, misura(job.dest)); livello = ', volume allineato'; }
+      catch { livello = ', VOLUME NON ALLINEATO (ffmpeg?)'; }
       done += 1;
-      console.log(`  ok  ${job.rel}  (${(buf.length / 1024).toFixed(1)} kB)`);
+      console.log(`  ok  ${job.rel}  (${(buf.length / 1024).toFixed(1)} kB${livello})`);
     } catch (err) {
       failed += 1;
       console.warn(`  ko  ${job.rel}: ${err.message}`);

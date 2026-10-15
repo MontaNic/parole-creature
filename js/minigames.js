@@ -21,6 +21,14 @@ import { burstConfetti } from './effects.js';
 import { mascotSay } from './mascot.js';
 import { save, persist } from './state.js';
 import { shuffle, distractors, distinctBySprite } from './srs.js';
+import { dopoLaVoce, spiega } from './pace.js';
+
+/**
+ * Il ritmo dentro i mini-giochi (vedi pace.js): le scelte si accendono dopo
+ * aver sentito la parola, e restano ferme mentre Pepe incoraggia e la parola
+ * torna. Toccare a raffica non porta avanti: porta solo a non sentire.
+ */
+const fermo = (node, fn) => dopoLaVoce(node, fn());
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
@@ -97,6 +105,23 @@ function choiceCount(pool, level) {
 
 function pause(ms) {
   return new Promise(r => setTimeout(r, ms));
+}
+
+/**
+ * Il disegno del soggetto, fuori dalle scelte.
+ *
+ * Una parola e la frase che la insegna mostrano lo stesso disegno: il drago
+ * vale per "dragon" e per "What is it? A dragon.". Perche' il bambino capisca
+ * al volo quale delle due gli si chiede, la frase ha SEMPRE la cornice a
+ * fumetto (il rosa dei dialoghi) e la sua traduzione sotto. La parola nuda
+ * resta una tessera semplice.
+ */
+function soggetto(item, width) {
+  const art = el('div', 'choice' + (item.kind === 'phrase' ? ' is-phrase' : ''));
+  art.style.width = width;
+  art.style.pointerEvents = 'none';
+  art.appendChild(spriteSvg(item.sprite));
+  return art;
 }
 
 /* ------------------------------------------------------------------ */
@@ -183,8 +208,7 @@ async function gameMatch(api) {
   grid.style.setProperty('--rows', Math.ceil(options.length / cols));
   host.appendChild(grid);
 
-  await pause(250);
-  orb._play();
+  fermo(grid, async () => { await pause(250); await spiega('howto_match'); await orb._play(); });
 
   return new Promise(resolve => {
     let firstTry = true;
@@ -211,11 +235,13 @@ async function gameMatch(api) {
           errori += 1;
           btn.classList.add('is-wrong');
           btn.disabled = true;
-          await fx.bad();
-          btn.classList.remove('is-wrong');
-          btn.classList.add('is-dim');
-          mostraAiuto(host, item, showWritten, errori);
-          orb._play();
+          await fermo(grid, async () => {
+            await fx.bad();
+            btn.classList.remove('is-wrong');
+            btn.classList.add('is-dim');
+            mostraAiuto(host, item, showWritten, errori);
+            await orb._play();
+          });
         }
       });
       grid.appendChild(btn);
@@ -233,80 +259,120 @@ async function gameQuiz(api) {
   const isPhrase = item.kind === 'phrase';
 
   host.innerHTML = '';
-  host.appendChild(el('p', 'game-prompt',
-    isPhrase ? t('games.quiz_prompt_phrase') : t('games.quiz_prompt')));
+  // Senza testo scritto nessuna traccia parte da sola: la frase non si e'
+  // "sentita", si sceglie ascoltando le opzioni.
+  const prompt = !isPhrase
+    ? (showWritten ? 'games.quiz_prompt' : 'games.quiz_prompt_listen')
+    : (showWritten ? 'games.quiz_prompt_phrase' : 'games.quiz_prompt_phrase_listen');
+  host.appendChild(el('p', 'game-prompt', t(prompt)));
 
   // Si parte dall'immagine: il bambino sa gia' di cosa si parla.
-  const art = el('div', 'choice');
-  art.style.maxWidth = '190px';
-  art.style.width = '46vw';
-  art.style.pointerEvents = 'none';
-  art.appendChild(spriteSvg(item.sprite));
-  host.appendChild(art);
+  host.appendChild(soggetto(item, 'min(190px, 46vw)'));
+  if (isPhrase) host.appendChild(el('p', 'word-hint-it', item.it));
 
   const n = choiceCount(pool, difficulty);
   const options = shuffle([item, ...distractors(pool, item, n - 1)]);
-  const list = el('div', 'choice-list');
+  const list = el('div', showWritten ? 'choice-list' : 'sound-row');
   host.appendChild(list);
 
   return new Promise(resolve => {
     let firstTry = true;
     let errori = 0;
 
-    options.forEach(opt => {
-      const btn = el('button', 'choice-text');
-      btn.type = 'button';
+    let chiuso = false;   // risposta giusta data: niente piu' scelte
 
-      if (showWritten) {
-        // Fase 2-3: si legge la parola/frase, l'audio resta a richiesta.
-        btn.textContent = opt.en;
+    // Scegliere: uguale per le due forme (testo scritto o bolle sonore).
+    const scegli = async (opt, segno, ev) => {
+      if (chiuso) return;
+      if (opt.id === item.id) {
+        chiuso = true;
+        list.querySelectorAll('button').forEach(b => b.disabled = true);
+        segno.classList.add('is-correct');
+        await speakItem(item);
+        fx.good(ev, firstTry, item);
+        report(item.id, firstTry);
+        await pause(1000);
+        resolve();
       } else {
-        // Fase 1: nessun testo. Ogni scelta e' un altoparlante da ascoltare.
-        btn.appendChild(spriteSvg('sp-icon-sound'));
-        btn.querySelector('svg').classList.add('ico');
-        btn.setAttribute('aria-label', t('ui.tap_to_hear'));
-      }
-
-      let heard = showWritten;   // col testo scritto non serve ascoltare prima
-
-      btn.addEventListener('click', async (ev) => {
-        if (btn.disabled) return;
-        sfxTap();
-
-        if (!heard) {
-          // Primo tocco: ascolta. Secondo tocco: sceglie.
-          heard = true;
-          btn.classList.add('is-playing');
-          await speakItem(opt);
-          btn.classList.remove('is-playing');
-          return;
-        }
-
-        if (opt.id === item.id) {
-          list.querySelectorAll('button').forEach(b => b.disabled = true);
-          btn.classList.add('is-correct');
-          await speakItem(item);
-          fx.good(ev, firstTry, item);
-          report(item.id, firstTry);
-          await pause(1000);
-          resolve();
-        } else {
-          firstTry = false;
-          errori += 1;
-          btn.classList.add('is-wrong');
-          btn.disabled = true;
+        firstTry = false;
+        errori += 1;
+        segno.classList.add('is-wrong');
+        await fermo(list, async () => {
           await fx.bad();
+          segno.classList.remove('is-wrong');
+          segno.classList.add('is-dim');
           // L'aiuto va sotto l'immagine, non fra le scelte: e' un
           // suggerimento sul bersaglio, non una quinta opzione.
           mostraAiuto(host, item, showWritten, errori);
           await speakItem(item);
-        }
+        });
+      }
+    };
+
+    options.forEach((opt, k) => {
+      if (showWritten) {
+        // Fasi 2-3: si legge la parola/frase, l'audio resta a richiesta.
+        const btn = el('button', 'choice-text', opt.en);
+        btn.type = 'button';
+        btn.addEventListener('click', (ev) => {
+          if (btn.disabled) return;
+          sfxTap();
+          btn.disabled = true;
+          scegli(opt, btn, ev);
+        });
+        list.appendChild(btn);
+        return;
+      }
+
+      /*
+       * Fase 1: niente testo. Prima era una barra bianca enorme con un
+       * altoparlante minuscolo, e si toccava due volte (ascolta, poi
+       * scegli) senza che niente lo dicesse. Ora ogni scelta e' una BOLLA
+       * di un colore suo ("era quella blu") che fa sentire la parola, e
+       * sotto una ZAMPA di Pepe per sceglierla. La zampa si accende solo
+       * dopo aver ascoltato quella bolla: non si sceglie senza sentire.
+       */
+      const col = el('div', 'sound-opt');
+      const bolla = el('button', `sound-bubble c${k % 4}`);
+      bolla.type = 'button';
+      bolla.setAttribute('aria-label', t('ui.tap_to_hear'));
+      bolla.appendChild(spriteSvg('sp-icon-sound'));
+      const zampa = el('button', 'paw-btn');
+      zampa.type = 'button';
+      zampa.setAttribute('aria-label', t('games.quiz_choose'));
+      zampa.appendChild(spriteSvg('sp-icon-paw'));
+      zampa.disabled = true;
+      let sentita = false;
+
+      bolla.addEventListener('click', async () => {
+        if (bolla.disabled) return;
+        sfxTap();
+        bolla.classList.add('is-playing');
+        await dopoLaVoce(sentita ? [] : zampa, speakItem(opt));
+        bolla.classList.remove('is-playing');
+        if (!sentita) { sentita = true; bolla.classList.add('is-heard'); }
       });
-      list.appendChild(btn);
+      zampa.addEventListener('click', (ev) => {
+        if (zampa.disabled) return;
+        sfxTap();
+        zampa.disabled = true;
+        bolla.disabled = true;
+        scegli(opt, col, ev);
+      });
+      col.appendChild(bolla);
+      col.appendChild(zampa);
+      list.appendChild(col);
     });
 
     // Con il testo scritto conviene sentire subito la traccia giusta.
-    if (showWritten) setTimeout(() => speakItem(item), 300);
+    const howto = isPhrase
+      ? (showWritten ? 'howto_quiz_phrase' : 'howto_quiz_phrase_listen')
+      : (showWritten ? 'howto_quiz_read' : 'howto_quiz_listen');
+    fermo(list, async () => {
+      await pause(300);
+      await spiega(howto);
+      if (showWritten) await speakItem(item);
+    });
   });
 }
 
@@ -328,13 +394,9 @@ async function gameListen(api) {
   if (showWritten) {
     stage.appendChild(el('p', item.kind === 'phrase' ? 'phrase-written' : 'word-written', item.en));
   } else {
-    const art = el('div', 'choice');
     // Il terzo termine tiene tutta la colonna (orb, figura, microfono, Fatto)
     // dentro un iPad orizzontale con la barra di Safari.
-    art.style.width = 'min(190px, 46vw, 24vh)';
-    art.style.pointerEvents = 'none';
-    art.appendChild(spriteSvg(item.sprite));
-    stage.appendChild(art);
+    stage.appendChild(soggetto(item, 'min(190px, 46vw, 24vh)'));
   }
   stage.appendChild(el('p', 'word-hint-it', item.it));
 
@@ -347,8 +409,8 @@ async function gameListen(api) {
   stage.appendChild(done);
   host.appendChild(stage);
 
-  await pause(250);
-  orb._play();
+  // "Fatto" si accende solo dopo aver sentito il modello da ripetere.
+  fermo(done, async () => { await pause(250); await spiega('howto_listen'); await orb._play(); });
 
   return new Promise(resolve => {
     done.addEventListener('click', async (ev) => {
@@ -447,11 +509,7 @@ async function gameSayIt(api) {
   host.innerHTML = '';
   host.appendChild(el('p', 'game-prompt', t('games.sayit_prompt')));
   const stage = el('div', 'repeat-stage');
-  const art = el('div', 'choice');
-  art.style.width = 'min(190px, 46vw, 24vh)';
-  art.style.pointerEvents = 'none';
-  art.appendChild(spriteSvg(item.sprite));
-  stage.appendChild(art);
+  stage.appendChild(soggetto(item, 'min(190px, 46vw, 24vh)'));
   if (isPhrase) stage.appendChild(el('p', 'word-hint-it sayit-hint', item.it));
 
   const row = el('div', 'rec-row');
@@ -509,7 +567,7 @@ async function gameSayIt(api) {
   host.appendChild(stage);
 
   await pause(250);
-  await mascotSay('sayit_go', { avatar: document.getElementById('play-mascot') });
+  await dopoLaVoce(row, mascotSay('sayit_go', { avatar: document.getElementById('play-mascot') }));
 
   return new Promise(resolve => {
     listen.addEventListener('click', async () => {
@@ -556,8 +614,10 @@ async function gameHunt(api) {
   host.appendChild(el('p', 'game-prompt', t('games.hunt_prompt')));
 
   const extras = Math.max(0, 6 - targets.length);
+  // Anche i riempitivi sono parole: il disegno di una frase al plurale
+  // ("These are cats.") accanto al gatto renderebbe ambiguo "cat".
   const fillers = distinctBySprite(
-    pool.filter(p => !targets.some(tg => tg.sprite === p.sprite))
+    pool.filter(p => p.kind === 'word' && !targets.some(tg => tg.sprite === p.sprite))
   ).slice(0, extras);
   const options = shuffle([...targets, ...shuffle(fillers).slice(0, extras)]);
 
@@ -584,11 +644,12 @@ async function gameHunt(api) {
   const orb = audioOrb(() => targets[index]);
   host.appendChild(orb);
 
-  const announce = async () => {
+  const announce = (primo = false) => fermo(grid, async () => {
     await pause(300);
-    orb._play();
-  };
-  await announce();
+    if (primo) await spiega('howto_hunt');
+    await orb._play();
+  });
+  announce(true);
 
   return new Promise(resolve => {
     let finished = false;
@@ -626,10 +687,12 @@ async function gameHunt(api) {
         firstTry = false;
         errori += 1;
         btn.classList.add('is-wrong');
-        await fx.bad();
-        btn.classList.remove('is-wrong');
-        mostraAiuto(host, current, api.showWritten, errori);
-        orb._play();
+        await fermo(grid, async () => {
+          await fx.bad();
+          btn.classList.remove('is-wrong');
+          mostraAiuto(host, current, api.showWritten, errori);
+          await orb._play();
+        });
       }
     });
   });
@@ -666,7 +729,7 @@ async function gameDragDrop(api) {
   stage.appendChild(token);
   host.appendChild(stage);
 
-  setTimeout(() => speakItem(item), 300);
+  fermo(stage, async () => { await pause(300); await spiega('howto_dragdrop'); await speakItem(item); });
   token.addEventListener('dblclick', () => speakItem(item));
 
   return new Promise(resolve => {
@@ -691,9 +754,11 @@ async function gameDragDrop(api) {
       if (finished) return;
       firstTry = false;
       box?.classList.add('is-wrong');
-      await fx.bad();
-      box?.classList.remove('is-wrong');
-      speakItem(item);
+      await fermo(stage, async () => {
+        await fx.bad();
+        box?.classList.remove('is-wrong');
+        await speakItem(item);
+      });
     };
 
     // Trascinamento con Pointer Events: funziona con dito, penna e mouse.
@@ -776,8 +841,7 @@ async function gameBuild(api) {
   const order = shuffle(words.map((w, i) => ({ w, i })));
   const placed = [];
 
-  await pause(250);
-  orb._play();
+  fermo([line, bank], async () => { await pause(250); await spiega('howto_build'); await orb._play(); });
 
   return new Promise(resolve => {
     let firstTry = true;
@@ -820,13 +884,15 @@ async function gameBuild(api) {
       } else {
         firstTry = false;
         line.classList.add('is-wrong');
-        await fx.bad();
-        line.classList.remove('is-wrong');
-        // Si rimette tutto nel mazzo e si riascolta: nessuna penalita'.
-        line.innerHTML = '';
-        placed.length = 0;
-        bank.querySelectorAll('.build-chip').forEach(c => c.classList.remove('is-used'));
-        orb._play();
+        await fermo([line, bank], async () => {
+          await fx.bad();
+          line.classList.remove('is-wrong');
+          // Si rimette tutto nel mazzo e si riascolta: nessuna penalita'.
+          line.innerHTML = '';
+          placed.length = 0;
+          bank.querySelectorAll('.build-chip').forEach(c => c.classList.remove('is-used'));
+          await orb._play();
+        });
       }
     }
   });
@@ -877,8 +943,7 @@ async function gameTrueFalse(api) {
   riga.appendChild(si); riga.appendChild(no);
   host.appendChild(riga);
 
-  await pause(300);
-  orb._play();
+  fermo(riga, async () => { await pause(300); await spiega('howto_truefalse'); await orb._play(); });
 
   return new Promise(resolve => {
     let firstTry = true;
@@ -898,10 +963,12 @@ async function gameTrueFalse(api) {
         firstTry = false;
         errori += 1;
         btn.classList.add('is-wrong');
-        await fx.bad();
-        btn.classList.remove('is-wrong');
-        mostraAiuto(host, detto, showWritten, errori);
-        orb._play();
+        await fermo(riga, async () => {
+          await fx.bad();
+          btn.classList.remove('is-wrong');
+          mostraAiuto(host, detto, showWritten, errori);
+          await orb._play();
+        });
       }
     };
     si.addEventListener('click', ev => rispondi(true, si, ev));

@@ -13,6 +13,7 @@ import { save, persist } from './state.js';
 import { unitProgress } from './curriculum.js';
 import { spriteSvg, audioOrb } from './minigames.js';
 import { speakLine, stopVoice, sfxTap } from './audio.js';
+import { dopoLaVoce } from './pace.js';
 import { showScreen } from './screens.js';
 
 export function books() {
@@ -86,11 +87,13 @@ export function openBook(book) {
       prev.hidden = i === 0;
       next.textContent = t(last ? 'books.the_end' : 'books.next');
       stopVoice();
-      await speakLine(rel, p.en, 'en-GB');
+      // Si gira pagina solo quando la pagina e' stata letta.
+      await dopoLaVoce([prev, next], speakLine(rel, p.en, 'en-GB'));
       if (my !== token) return;
     };
-    prev.onclick = () => { sfxTap(); if (i > 0) { i -= 1; show(); } };
+    prev.onclick = () => { if (prev.disabled) return; sfxTap(); if (i > 0) { i -= 1; show(); } };
     next.onclick = () => {
+      if (next.disabled) return;
       sfxTap();
       if (i < book.pages.length - 1) { i += 1; show(); return; }
       if (!String(book.id).startsWith('media_')) markRead(book);

@@ -425,6 +425,25 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 .choice.is-wrong { box-shadow: var(--sh-card); outline: 5px dashed var(--ring-retry); outline-offset: -2px; animation: shake .4s ease; }
 .choice.is-dim { opacity: .35; }
 .choice.is-found { opacity: .45; box-shadow: 0 0 0 4px var(--ring-good); }
+/*
+  In attesa della voce (js/pace.js): i comandi ci sono ma non rispondono.
+  I pulsanti "Avanti" si vedono spenti; le griglie di scelta restano
+  com'erano, perche' attenuarle a ogni parola farebbe lampeggiare la partita.
+*/
+.is-hold { pointer-events: none; }
+.btn.is-hold, .audio-orb.is-hold { opacity: .4; filter: saturate(.35); }
+.is-ready { animation: ready-pop .45s var(--ease-pop); }
+@keyframes ready-pop { 0% { transform: scale(.92) } 60% { transform: scale(1.06) } 100% { transform: none } }
+
+/*
+  La tessera di una FRASE: cornice rosa (il colore dei dialoghi) e codina da
+  fumetto. Stesso disegno della parola, ma si vede subito che va detto tutto.
+*/
+.choice.is-phrase { border-color: var(--rose-deep); box-shadow: 0 0 0 4px var(--rose), var(--sh-card); }
+.choice.is-phrase::after {
+  content: ''; position: absolute; left: 22%; bottom: -17px;
+  border: 9px solid transparent; border-top: 12px solid var(--rose-deep);
+}
 @keyframes bounce-ok { 0%,100% { transform: none } 40% { transform: scale(1.08) } }
 @keyframes shake { 0%,100% { transform: none } 20% { transform: translateX(-8px) } 60% { transform: translateX(8px) } }
 
@@ -450,6 +469,41 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 
 /* Scelte testuali (quiz parola/frase) */
 .choice-list { display: grid; gap: 12px; width: 100%; max-width: 620px; }
+
+/*
+  Quiz della fase 1: bolle sonore colorate e, sotto, la zampa per scegliere.
+  Colori diversi perche' il bambino ricordi "quella blu" dopo averle
+  sentite tutte. La zampa e' spenta finche' la sua bolla non e' stata ascoltata.
+*/
+.sound-row { display: flex; gap: clamp(14px, 4vw, 28px); justify-content: center; flex-wrap: wrap; }
+.sound-opt { display: flex; flex-direction: column; align-items: center; gap: 12px; transition: opacity .2s; }
+.sound-bubble {
+  --c: var(--amber); --c-deep: var(--amber-deep);
+  width: min(108px, 24vw, 15dvh); aspect-ratio: 1 / 1; border-radius: 50%;
+  border: var(--stroke) solid var(--ink);
+  background: radial-gradient(ellipse 22% 16% at 34% 26%, rgba(255,255,255,.7), transparent 100%), var(--c);
+  box-shadow: 0 6px 0 var(--c-deep), var(--sh-float);
+  display: grid; place-items: center; cursor: pointer;
+  transition: transform .09s var(--ease-out);
+}
+.sound-bubble.c1 { --c: var(--sky);    --c-deep: var(--sky-deep); }
+.sound-bubble.c2 { --c: var(--violet); --c-deep: var(--violet-deep); }
+.sound-bubble.c3 { --c: var(--rose);   --c-deep: var(--rose-deep); }
+.sound-bubble svg { width: 48%; height: 48%; fill: none; stroke: var(--ink); stroke-width: 4; }
+.sound-bubble:active { transform: translateY(5px); box-shadow: 0 1px 0 var(--c-deep); }
+.sound-bubble.is-playing { animation: orb-pulse .6s ease-in-out infinite; }
+.paw-btn {
+  width: min(64px, 15vw); aspect-ratio: 1 / 1; border-radius: 50%;
+  border: var(--stroke) solid var(--ink); background: var(--paper);
+  box-shadow: var(--sh-card); display: grid; place-items: center; cursor: pointer;
+  transition: transform .09s var(--ease-out), opacity .2s;
+}
+.paw-btn svg { width: 64%; height: 64%; }
+.paw-btn:disabled { opacity: .3; filter: grayscale(1); cursor: default; }
+.sound-bubble.is-heard + .paw-btn:not(:disabled) { animation: ready-pop .45s var(--ease-pop); box-shadow: 0 0 0 4px var(--leaf), var(--sh-card); }
+.sound-opt.is-correct .sound-bubble { box-shadow: 0 0 0 6px var(--ring-good), 0 6px 0 var(--c-deep); animation: bounce-ok .5s ease; }
+.sound-opt.is-wrong { animation: shake .4s ease; }
+.sound-opt.is-dim { opacity: .35; }
 .choice-text {
   min-height: 70px;
   border: var(--stroke) solid var(--ink); border-radius: var(--r-m);
@@ -530,6 +584,31 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 .dlg-en { margin: 0; font-family: var(--font-en); font-size: clamp(20px, 2.6vw, 26px); font-weight: 700; letter-spacing: .02em; }
 .dlg-it { margin: 4px 0 0; font-size: 14px; color: var(--ink-soft); }
 .dlg-replies { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+
+/* La figura che la creatura mostra (js/dialogues.js, figura()). */
+.dlg-vetrina { display: flex; justify-content: center; width: 100%; }
+.dlg-show {
+  position: relative;
+  height: min(150px, 20dvh); min-width: min(150px, 20dvh); padding: 10px 14px;
+  background: var(--paper); border: var(--stroke) solid var(--ink); border-radius: var(--r-l);
+  box-shadow: 0 0 0 4px var(--rose), var(--sh-card);
+  display: flex; align-items: center; justify-content: center;
+}
+.dlg-show > svg, .dlg-show > img { height: 100%; width: auto; aspect-ratio: 1 / 1; fill: none; }
+.dlg-show.is-count {
+  display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: 4px;
+  height: auto; max-width: min(420px, 92vw);
+}
+.dlg-show.is-count > svg, .dlg-show.is-count > img { height: auto; width: min(64px, 15vw); }
+.dlg-show.is-pair { gap: 4px; align-items: flex-end; }
+.dlg-show.is-pair .dlg-small { height: 38%; }
+.dlg-show.is-place { width: min(170px, 24dvh); }
+.dlg-show.is-place .dlg-base { position: absolute; inset: 10px; height: calc(100% - 20px); width: calc(100% - 20px); }
+.dlg-show.is-place .dlg-subject { position: absolute; width: 46%; height: auto; left: 27%; }
+.dlg-show.is-on .dlg-subject    { top: -6%; }
+.dlg-show.is-under .dlg-base    { top: 2px; height: 72%; }
+.dlg-show.is-under .dlg-subject { bottom: 4px; width: 40%; left: 30%; }
+.dlg-show.is-in .dlg-subject    { top: 34%; width: 34%; left: 33%; }
 .dlg-reply { display: grid; grid-template-columns: 44px 1fr; grid-template-rows: auto auto; column-gap: 12px; align-items: center; text-align: left; padding: 8px 14px; }
 .dlg-orb { grid-row: 1 / 3; width: 40px; height: 40px; border-radius: 50%; background: var(--amber); border: 2px solid var(--ink); display: grid; place-items: center; }
 .dlg-orb svg { width: 60%; height: 60%; fill: none; stroke: var(--ink); stroke-width: 4; }

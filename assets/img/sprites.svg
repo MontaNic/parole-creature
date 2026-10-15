@@ -532,6 +532,7 @@
 <symbol id="sp-icon-share" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M26 44 v40 h48 v-40" fill="#ffffff"/><path d="M50 62 V14 M34 30 l16 -16 l16 16"/></g></symbol>
 <symbol id="sp-icon-den" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M14 50 L50 18 L86 50" /><path d="M24 44 v40 h52 v-40" fill="#ffffff"/><rect x="42" y="58" width="16" height="26" fill="#facc15"/></g></symbol>
 <symbol id="sp-icon-star" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M50 12 L61 38 L88 40 L67 58 L74 86 L50 70 L26 86 L33 58 L12 40 L39 38Z" fill="#facc15"/></g></symbol>
+<symbol id="sp-icon-paw" viewBox="0 0 100 100"><g class="o"><path d="M50 48 C35 48 23 61 23 73 C23 82 31 87 39 85 C44 84 46 81 50 81 C54 81 56 84 61 85 C69 87 77 82 77 73 C77 61 65 48 50 48Z" fill="#7a4a2a"/><ellipse cx="22" cy="40" rx="8" ry="10" fill="#7a4a2a"/><ellipse cx="39" cy="24" rx="8" ry="11" fill="#7a4a2a"/><ellipse cx="61" cy="24" rx="8" ry="11" fill="#7a4a2a"/><ellipse cx="78" cy="40" rx="8" ry="10" fill="#7a4a2a"/></g></symbol>
 
 <!-- ============ AGGIUNTE DEL CURRICULUM v2 ============ -->
 

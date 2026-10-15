@@ -12,6 +12,7 @@ import { save, persist } from './state.js';
 import { shuffle } from './srs.js';
 import { spriteSvg } from './minigames.js';
 import { speakLine, speakItem, stopVoice, sfxTap, sfxCorrect, sfxRetry } from './audio.js';
+import { dopoLaVoce, spiega } from './pace.js';
 import { mascotSay } from './mascot.js';
 import { celebrate, celebrateCorrect } from './effects.js';
 import { showScreen } from './screens.js';
@@ -150,7 +151,7 @@ async function introSound(host, s) {
   const play = async () => { big.classList.add('is-playing'); stopVoice(); await speakLine(soundAudio(s), s.anchor, 'en-GB'); big.classList.remove('is-playing'); };
   big.addEventListener('click', () => { sfxTap(); play(); });
   await pause(250);
-  await play();
+  await dopoLaVoce(next, (async () => { await spiega('howto_ph_intro'); await play(); })());
   await new Promise(res => { next.onclick = () => { sfxTap(); stopVoice(); res(); }; });
 }
 
@@ -174,7 +175,7 @@ async function whichSound(host, sounds, k, bene) {
   stage.appendChild(row);
   host.appendChild(stage);
   await pause(250);
-  play();
+  dopoLaVoce(row, (async () => { await spiega('howto_ph_which'); await play(); })());
   await new Promise(res => {
     for (const s of pick3(sounds, target)) {
       const b = tile(s.grapheme);
@@ -207,7 +208,10 @@ async function startsWith(host, sounds, k, bene) {
   stage.appendChild(grid);
   host.appendChild(stage);
   await pause(250);
-  stopVoice(); speakLine(letterAudio(target), target.isolated || target.anchor, 'en-GB');
+  dopoLaVoce(grid, (async () => {
+    await spiega('howto_ph_starts');
+    stopVoice(); await speakLine(letterAudio(target), target.isolated || target.anchor, 'en-GB');
+  })());
   await new Promise(res => {
     for (const w of shuffle([word, ...others])) {
       const b = el('button', 'choice');
@@ -272,6 +276,7 @@ export async function blendWord(host, wordId, bene) {
   const grid = el('div', 'choice-grid cols-3');
   grid.style.setProperty('--cols', 3); grid.style.setProperty('--rows', 1);
   reveal.appendChild(grid);
+  dopoLaVoce(grid, spiega('howto_ph_blend_which'));
   await new Promise(res => {
     for (const w of shuffle([word, ...shuffle(pool).slice(0, 2)])) {
       const b = el('button', 'choice'); b.type = 'button';
