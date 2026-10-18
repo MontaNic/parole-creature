@@ -12,6 +12,7 @@ import {
 } from './curriculum.js';
 import { renderMascot, mascotSay, mascotCheer, encouragementKey } from './mascot.js';
 import { spriteSvg } from './minigames.js';
+import { sbloccoGenitore } from './lock.js';
 import { speakItem, sfxTap, sfxUnlock } from './audio.js';
 import { dopoLaVoce } from './pace.js';
 import { celebrate } from './effects.js';
@@ -475,9 +476,13 @@ export async function renderSummary(result, handlers) {
 
     actions.appendChild(primario(t('ui.session_end_message'), 'sp-icon-home', () => handlers.onHome()));
 
-    const anyway = el('button', 'btn btn-ghost btn-parent-small', t('ui.continue_button'));
-    anyway.onclick = () => { sfxTap(); handlers.onContinueAnyway?.(); };
-    actions.appendChild(anyway);
+    // Per continuare serve il codice genitore (js/lock.js).
+    const genitore = el('button', 'btn btn-ghost btn-sm', t('lock.unlock_button'));
+    genitore.onclick = async () => {
+      sfxTap();
+      if (await sbloccoGenitore()) handlers.onContinueAnyway?.();
+    };
+    actions.appendChild(genitore);
   } else {
     const avanti = result.nextWorld
       ? primario(t('ui.next_world'), 'sp-icon-play', () => handlers.onNext())

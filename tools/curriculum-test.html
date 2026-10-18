@@ -30,7 +30,7 @@
  *   apri http://localhost:8080/tools/curriculum-test.html
  */
 import { loadAll, content, getItem, artIndex } from './js/content-loader.js';
-import { save, resetSave, dayIndex } from './js/state.js';
+import { save, resetSave, dayIndex, loadSave, checkPin, tempoFinito, sbloccaTempo } from './js/state.js';
 import { recordAnswer, isMastered, distractors, distinctBySprite } from './js/srs.js';
 import { serveAiutoScritto, SOGLIA_AIUTO } from './js/minigames.js';
 import { chapters, chapterForCreature, pendingAfterRound, pendingAtStart, isAvailable, lineAudio } from './js/story.js';
@@ -560,6 +560,32 @@ async function run() {
   save.daily.missionId = casa[0].id; save.daily.missionProgress = 0; save.daily.missionDone = false;
   check('una risposta giusta non chiude una missione a casa', trackMissionEvent({ correct: true }) === false && !save.daily.missionDone);
   check('la conferma di un adulto la chiude', trackMissionEvent({ home: true }) === true && save.daily.missionDone);
+
+  /* --- tempo di gioco e codice genitore (3.6.2) -------------------- */
+  resetSave();
+  check('il tempo di gioco di partenza e\' 30 minuti', save.settings.sessionMinutes === 30);
+  check('il codice genitore di partenza e\' 1357', await checkPin('1357') && !(await checkPin('0000')));
+  save.daily.minutesPlayed = 29.9;
+  check('a 29 minuti si gioca ancora', !tempoFinito());
+  save.daily.minutesPlayed = 30;
+  check('a 30 minuti il tempo e\' finito', tempoFinito());
+  sbloccaTempo();
+  check('lo sblocco del genitore ridà il tempo', !tempoFinito());
+  save.daily.minutesPlayed = 59.9;
+  check('lo sblocco vale altri 30 minuti, non di piu\'', !tempoFinito());
+  save.daily.minutesPlayed = 60;
+  check('finiti anche quelli, serve di nuovo il codice', tempoFinito());
+  // Un salvataggio vecchio (v2) con il vecchio default e un PIN gia' scelto.
+  const CHIAVE = 'draghetti_parole_save';
+  const salvatoPrima = localStorage.getItem(CHIAVE);
+  localStorage.setItem(CHIAVE, JSON.stringify({ schemaVersion: 2, settings: { sessionMinutes: 10, pinHash: 'vecchio' } }));
+  loadSave();
+  check('un salvataggio con il vecchio 10 passa a 30', save.settings.sessionMinutes === 30);
+  check('il PIN gia\' scelto diventa 1357 (scelta dei genitori)', await checkPin('1357'));
+  localStorage.setItem(CHIAVE, JSON.stringify({ schemaVersion: 2, settings: { sessionMinutes: 20 } }));
+  loadSave();
+  check('chi aveva scelto un altro tempo lo tiene', save.settings.sessionMinutes === 20);
+  if (salvatoPrima === null) localStorage.removeItem(CHIAVE); else localStorage.setItem(CHIAVE, salvatoPrima);
 
   /* --- missioni dei primi giorni e missioni fattibili -------------- */
   resetSave();

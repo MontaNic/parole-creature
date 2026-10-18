@@ -1463,6 +1463,26 @@ Nella stessa versione, dalla prova sul tablet:
   microfono cambia la modalita' audio). Ora tace mentre il microfono e'
   aperto e nel riascolto, e scende al 40% mentre parla una voce.
 
+### Tempo di gioco e codice genitore (versione 3.6.2)
+
+- **30 minuti** al giorno di default (prima 10). Chi aveva ancora il vecchio
+  10 passa a 30; chi aveva scelto un altro valore lo tiene (migrazione 2->3).
+- **Alla scadenza il gioco si ferma davvero.** Prima un piccolo "Continua"
+  lasciava andare avanti chiunque, e dalla home si ripartiva come niente
+  fosse. Ora Pepe saluta, il bottone grande e' "Ci vediamo domani!", e
+  "Un genitore sblocca" chiede il **codice genitore**; il blocco scatta
+  anche facendo partire una partita o una lezione dei suoni a tempo finito
+  (`js/lock.js`, `tempoFinito()` in state.js).
+- **Un solo codice, 1357 di partenza**, per l'area genitori e per lo
+  sblocco; per scelta dei genitori e' stato forzato a 1357 anche dove un
+  PIN c'era gia'. Si cambia dall'area genitori.
+- **Lo sblocco** aggiunge un altro blocco di minuti uguale a quello
+  impostato (in `save.daily.extraMinutes`, si azzera il giorno dopo), poi
+  il codice si richiede.
+- **Copia dei dati**: dopo lo sblocco il gioco propone di salvarla; sull'iPad
+  passa dal pannello di condivisione ("Salva su File"), dove il download di
+  un file nell'app aggiunta alla Home funziona male.
+
 Idea in coda, discussa ma non fatta: **"La tastiera di Pepe"**, un angolo a
 parte (non una pausa) per imparare a scrivere con due mani sulla tastiera
 della custodia dell'iPad. Prima una sola lezione da provare con il bambino.

@@ -300,7 +300,8 @@ function panelSettings() {
   mail.oninput = () => { save.settings.kindleEmail = mail.value.trim(); persist(); };
   p.appendChild(field(t('parents.kindle_email_label'), mail, t('parents.kindle_email_hint')));
 
-  // Cambio PIN
+  // Cambio PIN (il codice di partenza e' 1357)
+  p.appendChild(el('div', 'hint', t('parents.pin_default_hint')));
   const pinBtn = el('button', 'btn btn-ghost', t('parents.pin_change'));
   pinBtn.onclick = () => renderPinPad(t('parents.pin_setup_title'), t('parents.pin_setup_hint'), async (pin) => {
     await setPin(pin);

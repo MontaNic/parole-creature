@@ -132,6 +132,21 @@
     "bd_story_done": { "name": "La nebbia si alza", "desc": "Hai visto la fine della storia" },
     "bd_first_record": { "name": "La tua voce", "desc": "Ti sei registrato per la prima volta" }
   },
+  "lock": {
+    "title": "Il tempo di oggi e' finito",
+    "unlock_button": "Un genitore sblocca",
+    "pin_title": "Codice genitore",
+    "confirm_title": "Sbloccare il gioco?",
+    "confirm_text": "Si potra' giocare per altri {n} minuti, poi il gioco chiedera' di nuovo il codice.",
+    "confirm_yes": "Si', sblocca",
+    "cancel": "Annulla",
+    "backup_title": "Salvare una copia dei dati?",
+    "backup_text": "I progressi vivono solo su questo tablet. Una copia salvata in File permette di ritrovarli se si cancella Safari o si cambia tablet.",
+    "backup_yes": "Salva una copia",
+    "backup_no": "Non ora",
+    "backup_done": "Copia salvata.",
+    "go_on": "Continua a giocare"
+  },
   "bonus": {
     "title": "Gioco bonus!",
     "howto_title": "Come si gioca",
@@ -195,6 +210,7 @@
     "pin_enter_title": "Inserisci il PIN",
     "pin_wrong": "PIN errato",
     "pin_change": "Cambia PIN",
+    "pin_default_hint": "Il codice di partenza e' 1357: serve per entrare qui e per sbloccare il gioco quando il tempo del giorno e' finito. Cambialo con un codice che conosci solo tu.",
     "tab_settings": "Impostazioni",
     "tab_progress": "Progressi",
     "tab_ebooks": "Mini-ebook",
@@ -235,7 +251,7 @@
     "reset_step2": "Sicuro? Tocca ancora per cancellare",
     "reset_cancel": "Annulla",
     "session_minutes": "Minuti di gioco per sessione",
-    "session_minutes_hint": "Alla scadenza il gioco propone di smettere con un messaggio positivo, senza bloccare nulla di forza.",
+    "session_minutes_hint": "Alla scadenza Pepe saluta e il gioco si ferma: per continuare serve il codice genitore, che aggiunge altrettanti minuti e propone di salvare una copia dei dati.",
     "allowed_from": "Consentito dalle ore",
     "allowed_to": "fino alle ore",
     "allowed_days": "Giorni consentiti",

@@ -13,7 +13,7 @@ export const CONFIG = {
    * Servono a chi segnala un problema per dire "ce l'ho con questa".
    * Vanno alzate a mano a ogni rilascio: il progetto non ha un build step.
    */
-  appVersion: '3.6.1',
+  appVersion: '3.6.2',
   buildDate: '2026-09-07',
 
   /** Percorsi dei dati. */
@@ -50,7 +50,7 @@ export const CONFIG = {
     huntTargets: 3,              // quante immagini trovare nella caccia
     xpPerCorrect: 10,
     xpPerLevel: 100,             // xp necessari per salire di livello
-    defaultSessionMinutes: 10,
+    defaultSessionMinutes: 30,
     sessionWarnRatio: 0.8        // a che punto della sessione avvisare
   },
 

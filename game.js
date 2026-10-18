@@ -15,8 +15,9 @@ import {
 } from './js/content-loader.js';
 import {
   save, loadSave, persist, rolloverDay, registerPlayToday,
-  addXp, checkAccessWindow
+  addXp, checkAccessWindow, tempoFinito
 } from './js/state.js';
+import { chiediSblocco } from './js/lock.js';
 import { recordAnswer, pickRoundItems, shuffle, similar } from './js/srs.js';
 import {
   splitRound, freeReviewPool, unitProgress, currentUnit,
@@ -58,7 +59,7 @@ const session = {
   greetCount: 0,            // alterna le frasi di Pepe sulla home
   roundActive: false,
   homeRefs: null,
-  ignoreSessionLimit: false // il genitore/bambino ha scelto di continuare
+  // (il limite di tempo vive in save.daily: vedi tempoFinito() e js/lock.js)
 };
 
 /* ------------------------------------------------------------------ */
@@ -136,6 +137,7 @@ function goHome(firstTime = false) {
     onAlbum: () => renderAlbum(),
     onDen: () => renderDen(),
     onPhonics: () => renderPhonics(async (lesson) => {
+      if (tempoFinito() && !(await chiediSblocco())) { goHome(); return; }
       session.roundActive = false;
       renderMascot(document.getElementById('play-mascot'));
       await runLesson(lesson);
@@ -368,6 +370,8 @@ function buildSteps(world, items, pool, baseDifficulty) {
 /* ------------------------------------------------------------------ */
 
 async function startRound(opts) {
+  // Tempo di oggi finito: si gioca ancora solo se un genitore sblocca.
+  if (tempoFinito() && !(await chiediSblocco())) { goHome(); return; }
   const round = buildRound(opts);
   if (!round) { goHome(); return; }
 
@@ -574,8 +578,7 @@ async function finishRound({ round, correct, total, levelUp, missionJustDone, op
     toast(t('mascot.level_up'), true, 2000);
   }
 
-  const overLimit = !session.ignoreSessionLimit
-    && save.daily.minutesPlayed >= save.settings.sessionMinutes;
+  const overLimit = tempoFinito();
 
   // Unita' finita e la prossima aperta: il bottone grande porta li'.
   const prossimo = round.world.id !== '__review__' && unitProgress(round.world).completed
@@ -593,7 +596,8 @@ async function finishRound({ round, correct, total, levelUp, missionJustDone, op
       onHome: poi(() => goHome()),
       onAgain: poi(() => startRound(opts)),
       onNext: poi(() => startRound({ world: nextWorld })),
-      onContinueAnyway: poi(() => { session.ignoreSessionLimit = true; startRound(opts); })
+      // Il genitore ha gia' sbloccato dal riepilogo: si riparte.
+      onContinueAnyway: poi(() => startRound(opts))
     }
   );
 }

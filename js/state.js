@@ -19,7 +19,16 @@ import { CONFIG } from './config.js';
  * Il gioco si chiamava "Draghetti & Parole": il nome resta qui per questo.
  */
 const STORAGE_KEY = 'draghetti_parole_save';
-export const SAVE_SCHEMA_VERSION = 2;
+export const SAVE_SCHEMA_VERSION = 3;
+
+/*
+ * Il codice genitore di partenza: 1357. Serve per l'area genitori e per
+ * sbloccare il gioco quando il tempo del giorno e' finito; si cambia
+ * dall'area genitori. Qui c'e' solo il suo hash (lo stesso che calcola
+ * hashPin), cosi' il codice vale da subito anche senza un primo accesso.
+ */
+export const DEFAULT_PIN = '1357';
+export const DEFAULT_PIN_HASH = '1de90c081bedb06235ce8eb8409db0abfc704f6cded70c8066df490c5551657d';
 
 /* ------------------------------------------------------------------ */
 /* Utilita' di data                                                    */
@@ -108,7 +117,7 @@ function defaultSave() {
 
     settings: {
       /* Il PIN e' volutamente debole: serve solo a tenere fuori un bambino. */
-      pinHash: '',
+      pinHash: DEFAULT_PIN_HASH,
       pinPlain: '',            // usato solo se crypto.subtle non e' disponibile
       sessionMinutes: CONFIG.game.defaultSessionMinutes,
       allowedFrom: '',         // "16:00" oppure "" = nessun limite
@@ -174,6 +183,22 @@ const MIGRATIONS = {
     if (s.voiceVolume === undefined) s.voiceVolume = 100;
     delete s.music;
     delete s.sfx;
+    return save;
+  },
+
+  /*
+   * 2 -> 3: tempo di gioco e codice genitore (versione 3.6.2).
+   *
+   * Il default passa da 10 a 30 minuti: chi aveva ancora il vecchio 10 lo
+   * ritrova a 30, chi aveva scelto un altro valore lo tiene. Il codice
+   * genitore diventa 1357 per tutti, anche dove un PIN c'era gia': scelta
+   * esplicita dei genitori, per avere un solo codice noto da cui ripartire.
+   */
+  2: (save) => {
+    const s = save.settings || (save.settings = {});
+    if (s.sessionMinutes === undefined || s.sessionMinutes === 10) s.sessionMinutes = 30;
+    s.pinHash = DEFAULT_PIN_HASH;
+    s.pinPlain = '';
     return save;
   }
 };
@@ -276,22 +301,42 @@ export function resetSave() {
 /* Export / import su file                                             */
 /* ------------------------------------------------------------------ */
 
-export function exportSaveFile() {
+/**
+ * Salva una copia dei dati.
+ *
+ * Sull'iPad, nell'app aggiunta alla Home, il download di un file funziona
+ * male: si usa il pannello di condivisione di iOS ("Salva su File"). Dove
+ * non c'e', il download classico.
+ * @returns {Promise<boolean>} true se la copia e' partita (non annullata)
+ */
+export async function exportSaveFile() {
   const payload = {
     app: 'draghetti-parole',
     appVersion: CONFIG.appVersion,
     exportedAt: new Date().toISOString(),
     save
   };
+  const nome = `parole-creature-backup-${todayKey()}.json`;
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  try {
+    const file = new File([blob], nome, { type: 'application/json' });
+    if (navigator.canShare?.({ files: [file] })) {
+      await navigator.share({ files: [file], title: nome });
+      return true;
+    }
+  } catch (err) {
+    if (err?.name === 'AbortError') return false;   // il genitore ha annullato
+    // altrimenti si ripiega sul download
+  }
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `parole-creature-backup-${todayKey()}.json`;
+  a.download = nome;
   document.body.appendChild(a);
   a.click();
   a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 2000);
+  return true;
 }
 
 /**
@@ -334,6 +379,7 @@ export function rolloverDay() {
     missionProgress: 0,
     missionDone: false,
     minutesPlayed: 0,
+    extraMinutes: 0,
     sessionEnded: false,
     chestOpened: false,
     bonusCount: 0
@@ -406,13 +452,45 @@ export async function setPin(pin) {
 }
 
 export async function checkPin(pin) {
-  if (save.settings.pinHash) return (await hashPin(pin)) === save.settings.pinHash;
+  if (save.settings.pinHash) {
+    const h = await hashPin(pin);
+    // Senza crypto.subtle (http in rete locale) l'hash non si calcola: il
+    // codice di partenza si riconosce comunque.
+    if (!h) return save.settings.pinHash === DEFAULT_PIN_HASH && pin === DEFAULT_PIN;
+    return h === save.settings.pinHash;
+  }
   if (save.settings.pinPlain) return pin === save.settings.pinPlain;
   return true;   // nessun PIN impostato: primo accesso
 }
 
 export function hasPin() {
   return Boolean(save.settings.pinHash || save.settings.pinPlain);
+}
+
+/* ------------------------------------------------------------------ */
+/* Tempo di gioco del giorno                                           */
+/* ------------------------------------------------------------------ */
+
+/**
+ * I minuti concessi oggi: quelli impostati, piu' ogni sblocco del genitore
+ * (che ne aggiunge altrettanti). Vive in save.daily, quindi ricaricare la
+ * pagina non azzera il tempo e il giorno dopo si riparte da capo.
+ */
+export function minutiConcessi() {
+  return (save.settings.sessionMinutes || 30) + (save.daily.extraMinutes || 0);
+}
+
+/** Vero quando il tempo di oggi e' finito e serve il codice per continuare. */
+export function tempoFinito() {
+  return (save.daily.minutesPlayed || 0) >= minutiConcessi();
+}
+
+/** Il genitore ha sbloccato: un altro blocco di minuti, da adesso. */
+export function sbloccaTempo() {
+  // concessi = impostati + extra: con extra = minuti gia' giocati, da qui
+  // se ne hanno di nuovo esattamente quelli impostati.
+  save.daily.extraMinutes = save.daily.minutesPlayed || 0;
+  persist(true);
 }
 
 /* ------------------------------------------------------------------ */
