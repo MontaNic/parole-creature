@@ -127,6 +127,15 @@ export function speakLine(relPath, text, lang) {
 
 async function playVoice(relPath, text, lang) {
   stopVoice();   // una voce alla volta
+  abbassaMusica(true);
+  try {
+    await playVoiceInner(relPath, text, lang);
+  } finally {
+    abbassaMusica(false);
+  }
+}
+
+async function playVoiceInner(relPath, text, lang) {
   const hasFile = !audioIndex.loaded || audioIndex.files.has(relPath);
   if (hasFile) {
     try {
@@ -300,11 +309,45 @@ export function sfxLevelUp() {
 const MUSIC_NOTES = [261.6, 329.6, 392.0, 523.3, 392.0, 329.6];
 let musicStep = 0;
 
+/*
+ * La musica sotto le voci.
+ *
+ * Misurata, la musica e' 12 dB sotto le voci: di suo non copre niente. Ma
+ * suonava anche mentre il microfono era aperto: finiva dentro la
+ * registrazione (nel riascolto il bambino la sentiva doppia, sopra la sua
+ * voce) e su iPad l'apertura del microfono cambia la modalita' audio del
+ * sistema, e i volumi si spostano. Due regole:
+ *  - mentre parla una voce la musica scende al 40%;
+ *  - mentre il microfono e' aperto (e durante il riascolto) la musica tace.
+ */
+const DUCK = 0.4;
+let voci = 0;        // voci in corso (si possono accavallare per un istante)
+let fermate = 0;     // chi ha chiesto il silenzio (microfono, riascolto)
+
+function livelloMusica() {
+  return TETTO_MUSICA * musicVolume() * (voci > 0 ? DUCK : 1);
+}
+
+function abbassaMusica(on) {
+  voci = Math.max(0, voci + (on ? 1 : -1));
+  if (musicGain && ctx) musicGain.gain.setTargetAtTime(livelloMusica(), ctx.currentTime, 0.12);
+}
+
+/** Ferma la musica finche' non viene richiamata con false (microfono aperto). */
+export function holdMusic(on) {
+  fermate = Math.max(0, fermate + (on ? 1 : -1));
+  if (fermate > 0) stopMusic();
+  else if (musicVolume() > 0 && unlocked) startMusic();
+}
+
+/** Il contesto audio condiviso: serve all'indicatore della voce del microfono. */
+export function audioContext() { return getCtx(); }
+
 export function startMusic() {
   const c = getCtx();
-  if (!c || musicTimer || musicVolume() <= 0) return;
+  if (!c || musicTimer || musicVolume() <= 0 || fermate > 0) return;
   musicGain = c.createGain();
-  musicGain.gain.value = TETTO_MUSICA * musicVolume();
+  musicGain.gain.value = livelloMusica();
   musicGain.connect(c.destination);
 
   musicTimer = setInterval(() => {
@@ -342,5 +385,5 @@ export function applyVolumes() {
   const vol = musicVolume();
   if (vol <= 0) { stopMusic(); return; }
   if (!musicTimer) { startMusic(); return; }
-  if (musicGain) musicGain.gain.value = TETTO_MUSICA * vol;
+  if (musicGain) musicGain.gain.value = livelloMusica();
 }

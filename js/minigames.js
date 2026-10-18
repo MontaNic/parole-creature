@@ -13,8 +13,8 @@
 
 import { CONFIG } from './config.js';
 import { t, artIndex } from './content-loader.js';
-import { speakItem, speakLine, sfxTap } from './audio.js';
-import { canRecord, startRecording, playBlob } from './recorder.js';
+import { speakItem, speakLine, sfxTap, sfxRetry, holdMusic } from './audio.js';
+import { canRecord, registraTurno, playBlob } from './recorder.js';
 import { canRecognize, recognize, matchesTarget } from './speech.js';
 import { gameDialogue } from './dialogues.js';
 import { burstConfetti } from './effects.js';
@@ -377,9 +377,156 @@ async function gameQuiz(api) {
 }
 
 /* ------------------------------------------------------------------ */
+/* Il turno del bambino: dirlo davvero, prima di andare avanti          */
+/* ------------------------------------------------------------------ */
+
+let dettoRecord = false;   // Pepe commenta la prima voce sentita nella sessione
+let micAssente = false;    // microfono negato o muto: per questa sessione si va a tempo
+
+/**
+ * Il momento in cui il bambino parla.
+ *
+ * Al playtest "Ascolta e ripeti" e "Dillo tu" si potevano attraversare
+ * senza aprire bocca: "Fatto", "Ascolta", "Uguale", tre tocchi e via. Qui
+ * il gioco aspetta la voce:
+ *  - con il microfono: un grande bottone "Tocca e dillo"; mentre il bambino
+ *    parla un anello si muove col volume; la registrazione si ferma da sola
+ *    quando torna il silenzio. Se non c'e' stata voce si riprova, senza
+ *    rimprovero;
+ *  - con il riconoscimento acceso dai genitori: lo stesso bottone ascolta
+ *    le parole e conferma con dolcezza se sono quelle giuste;
+ *  - senza microfono (permesso negato, registrazione spenta dai genitori):
+ *    un "Tocca a te!" di tre secondi. Non dimostra niente, ma da' il tempo
+ *    e l'ordine giusti: prima si dice, poi si va avanti.
+ * Il microfono capisce che c'e' una voce, non che e' quella giusta.
+ *
+ * @returns {Promise<Blob|null>} la registrazione, se c'e'
+ */
+async function turnoDelBambino(stage, host, item) {
+  const box = el('div', 'turn-box');
+  stage.appendChild(box);
+  try {
+    if (canRecognize()) return await turnoRiconosciuto(box, host, item);
+    if (canRecord() && !micAssente) {
+      const blob = await turnoMicrofono(box, host);
+      if (blob !== undefined) return blob;
+      micAssente = true;
+      box.innerHTML = '';
+    }
+    await turnoContato(box);
+    return null;
+  } finally {
+    box.remove();
+  }
+}
+
+function bottoneMic(testo) {
+  const mic = el('button', 'mic-btn');
+  mic.type = 'button';
+  mic.appendChild(spriteSvg('sp-icon-mic'));
+  mic.appendChild(el('span', 'mic-label', testo));
+  return mic;
+}
+
+/** @returns {Promise<Blob|null|undefined>} undefined = microfono non disponibile */
+function turnoMicrofono(box, host) {
+  return new Promise(resolve => {
+    const mic = bottoneMic(t('games.turn_mic'));
+    box.appendChild(mic);
+    let attivo = false;
+    mic.addEventListener('click', async () => {
+      if (attivo) return;
+      attivo = true;
+      sfxTap();
+      mic.classList.add('is-rec');
+      mic.querySelector('.mic-label').textContent = t('games.turn_listening');
+      let turno;
+      try {
+        turno = await registraTurno({ onLevel: l => mic.style.setProperty('--lvl', l.toFixed(2)) });
+      } catch {
+        // Permesso negato o microfono assente: si passa al turno a tempo.
+        resolve(undefined);
+        return;
+      }
+      // Un secondo tocco ferma prima, se il bambino ha finito.
+      mic.onclick = () => turno.stop();
+      const { blob, voce } = await turno.done;
+      mic.onclick = null;
+      mic.classList.remove('is-rec');
+      mic.style.removeProperty('--lvl');
+      if (voce) {
+        save.stats.totalRecordings = (save.stats.totalRecordings || 0) + 1;
+        persist();
+        if (!dettoRecord) {
+          dettoRecord = true;
+          await mascotSay('record_done', { avatar: document.getElementById('play-mascot') });
+        }
+        resolve(blob);
+        return;
+      }
+      // Nessuna voce: si riprova, senza costo.
+      sfxRetry();
+      toastLocal(host, t('games.turn_not_heard'), false);
+      mic.querySelector('.mic-label').textContent = t('games.turn_mic');
+      attivo = false;
+    });
+  });
+}
+
+function turnoRiconosciuto(box, host, item) {
+  return new Promise(resolve => {
+    const mic = bottoneMic(t('games.sayit_speak'));
+    box.appendChild(mic);
+    let attivo = false;
+    mic.addEventListener('click', async () => {
+      if (attivo) return;
+      attivo = true;
+      sfxTap();
+      mic.classList.add('is-rec');
+      holdMusic(true);
+      const heard = await recognize('en-GB', 5000);
+      holdMusic(false);
+      mic.classList.remove('is-rec');
+      if (!heard || !heard.length) {
+        sfxRetry();
+        toastLocal(host, t('games.turn_not_heard'), false);
+        attivo = false;
+        return;
+      }
+      if (matchesTarget(item.en, heard)) {
+        burstConfetti(window.innerWidth / 2, window.innerHeight / 2);
+        toastLocal(host, t('games.sayit_heard').replace('{w}', item.en), true);
+        await mascotSay('sayit_heard', { avatar: document.getElementById('play-mascot') });
+      } else {
+        toastLocal(host, t('games.sayit_unclear'), false);
+      }
+      resolve(null);
+    });
+  });
+}
+
+/** Senza microfono: tre secondi "Tocca a te!", con il conto che scende. */
+async function turnoContato(box) {
+  const giro = el('div', 'turn-count');
+  const numero = el('b', null, '3');
+  giro.appendChild(numero);
+  giro.appendChild(el('span', null, t('games.turn_your_go')));
+  box.appendChild(giro);
+  for (const n of [3, 2, 1]) {
+    numero.textContent = String(n);
+    giro.classList.remove('tick'); void giro.offsetWidth; giro.classList.add('tick');
+    await pause(1000);
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /* 3. Ascolta e ripeti                                                 */
 /* ------------------------------------------------------------------ */
 
+/**
+ * Si sente il modello, si ripete al microfono (o nel turno a tempo), ci si
+ * riascolta, e solo allora "Fatto" si accende.
+ */
 async function gameListen(api) {
   const { host, items, showWritten, report, fx, onRepeat } = api;
   const item = items[0];
@@ -396,21 +543,28 @@ async function gameListen(api) {
   } else {
     // Il terzo termine tiene tutta la colonna (orb, figura, microfono, Fatto)
     // dentro un iPad orizzontale con la barra di Safari.
-    stage.appendChild(soggetto(item, 'min(190px, 46vw, 24vh)'));
+    stage.appendChild(soggetto(item, 'min(170px, 42vw, 20vh)'));
   }
   stage.appendChild(el('p', 'word-hint-it', item.it));
 
-  // Il microfono: registrarsi e riascoltarsi, senza voto. Compare solo dove
-  // puo' funzionare (HTTPS, MediaRecorder) e se i genitori lo vogliono.
-  if (canRecord()) stage.appendChild(recRow());
-
   const done = el('button', 'btn btn-good btn-lg', t('games.listen_done'));
   done.type = 'button';
-  stage.appendChild(done);
+  done.hidden = true;
   host.appendChild(stage);
 
-  // "Fatto" si accende solo dopo aver sentito il modello da ripetere.
-  fermo(done, async () => { await pause(250); await spiega('howto_listen'); await orb._play(); });
+  await pause(250);
+  await dopoLaVoce(orb, (async () => {
+    await spiega('howto_listen');
+    await orb._play();
+    await spiega('sayit_go');
+  })());
+
+  const blob = await turnoDelBambino(stage, host, item);
+  if (blob) await dopoLaVoce(orb, playBlob(blob));   // ci si riascolta
+
+  stage.appendChild(done);
+  done.hidden = false;
+  done.classList.add('is-ready');
 
   return new Promise(resolve => {
     done.addEventListener('click', async (ev) => {
@@ -425,81 +579,16 @@ async function gameListen(api) {
   });
 }
 
-let dettoRecord = false;   // Pepe commenta la prima registrazione della sessione
-
-function recRow() {
-  const row = el('div', 'rec-row');
-  const rec = el('button', 'btn btn-ghost btn-sm rec-btn');
-  rec.type = 'button';
-  const icona = spriteSvg('sp-icon-mic');
-  icona.classList.add('ico');
-  const label = el('span', null, t('games.record_start'));
-  rec.appendChild(icona);
-  rec.appendChild(label);
-  const again = el('button', 'btn btn-cool btn-sm rec-play');
-  again.type = 'button';
-  const ic2 = spriteSvg('sp-icon-play');
-  ic2.classList.add('ico');
-  again.appendChild(ic2);
-  again.appendChild(el('span', null, t('games.record_play')));
-  again.hidden = true;
-  row.appendChild(rec);
-  row.appendChild(again);
-
-  let corrente = null;   // registrazione in corso
-  let blob = null;       // l'ultima registrazione, solo in memoria
-
-  const riascolta = async () => {
-    rec.disabled = true; again.disabled = true;
-    await playBlob(blob);
-    rec.disabled = false; again.disabled = false;
-  };
-
-  rec.addEventListener('click', async () => {
-    sfxTap();
-    if (corrente) {
-      // Secondo tocco: ferma, poi si riascolta subito.
-      const r = corrente; corrente = null;
-      rec.classList.remove('is-rec');
-      label.textContent = t('games.record_start');
-      blob = await r.stop();
-      if (blob && blob.size) {
-        save.stats.totalRecordings = (save.stats.totalRecordings || 0) + 1;
-        persist();
-        again.hidden = false;
-        await riascolta();
-        if (!dettoRecord) {
-          dettoRecord = true;
-          mascotSay('record_done', { avatar: document.getElementById('play-mascot') });
-        }
-      }
-      return;
-    }
-    try {
-      corrente = await startRecording();
-      rec.classList.add('is-rec');
-      label.textContent = t('games.record_stop');
-    } catch {
-      // Permesso negato o microfono assente: il bottone sparisce, la
-      // partita continua come prima. Nessun errore da spiegare a 7 anni.
-      row.remove();
-    }
-  });
-  again.addEventListener('click', () => { sfxTap(); riascolta(); });
-  return row;
-}
-
 /* ------------------------------------------------------------------ */
 /* 3b. Dillo tu: produrre prima di ascoltare                           */
 /* ------------------------------------------------------------------ */
 
 /**
  * Figura (e per le frasi la frase in italiano), nessuna scelta: il bambino
- * deve dirlo ad alta voce PRIMA di sentire il modello. Poi ascolta (prima
- * la sua registrazione se c'e', poi la voce modello) e si giudica da solo.
- * "Uguale" vale una risposta giusta, "Quasi" un'esposizione. Con il
- * riconoscimento vocale acceso dai genitori, Pepe conferma se ha sentito
- * la parola giusta; se no, invita ad ascoltare e riprovare, senza costo.
+ * deve dirlo ad alta voce PRIMA di sentire il modello. Il gioco aspetta la
+ * sua voce (turnoDelBambino), poi fa sentire prima lui e poi il modello, e
+ * solo allora compaiono "Uguale" e "Quasi": "Uguale" vale una risposta
+ * giusta, "Quasi" un'esposizione.
  */
 async function gameSayIt(api) {
   const { host, items, report, fx, onRepeat } = api;
@@ -511,74 +600,38 @@ async function gameSayIt(api) {
   const stage = el('div', 'repeat-stage');
   stage.appendChild(soggetto(item, 'min(190px, 46vw, 24vh)'));
   if (isPhrase) stage.appendChild(el('p', 'word-hint-it sayit-hint', item.it));
+  host.appendChild(stage);
 
-  const row = el('div', 'rec-row');
-  let blob = null;
-  let corrente = null;
-  let rec = null;
-  if (canRecord()) {
-    rec = el('button', 'btn btn-ghost btn-sm rec-btn');
-    rec.type = 'button';
-    const ic = spriteSvg('sp-icon-mic'); ic.classList.add('ico');
-    const label = el('span', null, t(canRecognize() ? 'games.sayit_speak' : 'games.record_start'));
-    rec.appendChild(ic); rec.appendChild(label);
-    rec.addEventListener('click', async () => {
-      sfxTap();
-      if (canRecognize()) {
-        // Conferma morbida: ascolta e confronta, mai bocciare.
-        rec.disabled = true; rec.classList.add('is-rec');
-        const heard = await recognize('en-GB', 5000);
-        rec.classList.remove('is-rec'); rec.disabled = false;
-        if (matchesTarget(item.en, heard)) {
-          burstConfetti(window.innerWidth / 2, window.innerHeight / 2);
-          toastLocal(host, t('games.sayit_heard').replace('{w}', item.en), true);
-          mascotSay('sayit_heard', { avatar: document.getElementById('play-mascot') });
-        } else {
-          toastLocal(host, t('games.sayit_unclear'), false);
-        }
-        return;
-      }
-      if (corrente) {
-        const r = corrente; corrente = null;
-        rec.classList.remove('is-rec'); label.textContent = t('games.record_start');
-        blob = await r.stop();
-        if (blob && blob.size) { save.stats.totalRecordings = (save.stats.totalRecordings || 0) + 1; persist(); }
-        return;
-      }
-      try {
-        corrente = await startRecording();
-        rec.classList.add('is-rec'); label.textContent = t('games.record_stop');
-      } catch { row.remove(); }
-    });
-    row.appendChild(rec);
-  }
-  const listen = el('button', 'btn btn-cool btn-lg', t('games.sayit_listen'));
-  listen.type = 'button';
-  row.appendChild(listen);
-  stage.appendChild(row);
+  await pause(250);
+  await mascotSay('sayit_go', { avatar: document.getElementById('play-mascot') });
+
+  const blob = await turnoDelBambino(stage, host, item);
+
+  // Prima tu, poi il modello: il confronto si fa a orecchio.
+  const ascolta = el('div', 'turn-listen');
+  ascolta.appendChild(spriteSvg('sp-icon-sound'));
+  stage.appendChild(ascolta);
+  if (blob) await playBlob(blob);
+  ascolta.classList.add('is-playing');
+  await speakItem(item);
+  ascolta.classList.remove('is-playing');
 
   const judge = el('div', 'rec-row');
-  judge.hidden = true;
   const same = el('button', 'btn btn-good btn-lg', t('games.sayit_same'));
   const almost = el('button', 'btn btn-ghost', t('games.sayit_almost'));
   same.type = almost.type = 'button';
   judge.appendChild(same); judge.appendChild(almost);
   stage.appendChild(judge);
-  host.appendChild(stage);
-
-  await pause(250);
-  await dopoLaVoce(row, mascotSay('sayit_go', { avatar: document.getElementById('play-mascot') }));
+  // Si puo' risentire il confronto quante volte si vuole.
+  ascolta.addEventListener('click', async () => {
+    if (ascolta.classList.contains('is-playing')) return;
+    sfxTap();
+    ascolta.classList.add('is-playing');
+    await dopoLaVoce(judge, (async () => { if (blob) await playBlob(blob); await speakItem(item); })());
+    ascolta.classList.remove('is-playing');
+  });
 
   return new Promise(resolve => {
-    listen.addEventListener('click', async () => {
-      sfxTap();
-      listen.disabled = true;
-      if (corrente) { const r = corrente; corrente = null; rec?.classList.remove('is-rec'); blob = await r.stop(); }
-      if (blob && blob.size) await playBlob(blob);   // prima tu
-      await speakItem(item);                          // poi il modello
-      listen.disabled = false;
-      judge.hidden = false;
-    });
     const fine = async (uguale, ev) => {
       same.disabled = almost.disabled = true;
       onRepeat?.();

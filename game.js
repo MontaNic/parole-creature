@@ -577,15 +577,22 @@ async function finishRound({ round, correct, total, levelUp, missionJustDone, op
   const overLimit = !session.ignoreSessionLimit
     && save.daily.minutesPlayed >= save.settings.sessionMinutes;
 
+  // Unita' finita e la prossima aperta: il bottone grande porta li'.
+  const prossimo = round.world.id !== '__review__' && unitProgress(round.world).completed
+    ? currentUnit() : null;
+  const nextWorld = prossimo && prossimo.id !== round.world.id ? prossimo : null;
+
   await renderSummary(
     { correct, total, newCreatures, levelUp, phaseUnlocked,
       worldCompleted: worldJustCompleted,
+      nextWorld,
       world: round.world,
       newBadges,
       missionDone: missionJustDone, endSession: overLimit },
     {
       onHome: poi(() => goHome()),
       onAgain: poi(() => startRound(opts)),
+      onNext: poi(() => startRound({ world: nextWorld })),
       onContinueAnyway: poi(() => { session.ignoreSessionLimit = true; startRound(opts); })
     }
   );

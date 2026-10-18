@@ -1436,6 +1436,33 @@ Nella stessa versione, dalla prova sul tablet:
   diventate risposte che non rispondono; "Is he sleeping?" con Pepe e'
   diventato "she".
 
+### Seconda prova sul tablet (versione 3.6.1)
+
+- **Dire davvero, prima di andare avanti.** In "Ascolta e ripeti" e "Dillo
+  tu" si passava senza aprire bocca (registrarsi era facoltativo). Ora c'e'
+  il turno del bambino: un grande microfono "Tocca e dillo" con un anello
+  che si muove col volume; si ferma da solo quando torna il silenzio, e se
+  non ha sentito una voce (almeno ~250 ms sopra soglia) si riprova. Poi si
+  sente prima la propria voce e poi il modello, e solo allora "Fatto" o
+  "Uguale/Quasi". Senza microfono: "Tocca a te!" a tempo (3 secondi). Il
+  microfono capisce che c'e' una voce, non che e' quella giusta. Un tetto
+  di 8 secondi sull'apertura del microfono evita che una richiesta di
+  permesso in sospeso blocchi il gioco (il test di sfoglio lo ha trovato).
+- **Fine partita**: "Continua" e "Casa" affiancati confondevano, e
+  "Continua" rigiocava la stessa unita' anche appena completata. Ora un solo
+  bottone grande e verde: "Prossimo mondo" se l'unita' e' finita, altrimenti
+  "Gioca ancora"; "Casa" e' un tasto piccolo sotto.
+- **Bonus**: prima di ogni gioco una scheda "Come si gioca", letta da Pepe,
+  con "Ok, iniziamo!"; il tempo parte da li'.
+- **Cestino**: contava solo il centro della figura, e una figura che
+  sporgeva dal bordo rimbalzava via (circa 4 volte su 10 su iPad); e chi
+  arrivava sotto all'ultimo momento non la prendeva. Tolleranza al bordo
+  visibile e alla bocca del cestino; due test che sul codice vecchio falliscono.
+- **Musica**: misurata, sta 12 dB sotto le voci. Il problema era che
+  suonava col microfono aperto (finiva nella registrazione, e su iPad il
+  microfono cambia la modalita' audio). Ora tace mentre il microfono e'
+  aperto e nel riascolto, e scende al 40% mentre parla una voce.
+
 Idea in coda, discussa ma non fatta: **"La tastiera di Pepe"**, un angolo a
 parte (non una pausa) per imparare a scrivere con due mani sulla tastiera
 della custodia dell'iPad. Prima una sola lezione da provare con il bambino.

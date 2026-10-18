@@ -440,9 +440,32 @@ export async function renderSummary(result, handlers) {
     }
   }
 
-  const actions = el('div', 'row');
-  actions.style.justifyContent = 'center';
-  actions.style.maxWidth = '440px';
+  /*
+   * Dove andare adesso.
+   *
+   * Prima c'erano due bottoni affiancati, "Continua" e "Casa", e non era
+   * chiaro quale portasse avanti; in piu' "Continua" rigiocava sempre la
+   * stessa unita', anche appena completata. Ora c'e' UN bottone grande e
+   * verde con il triangolo "play": porta al mondo dopo se questo e' finito,
+   * altrimenti si gioca ancora qui. "Casa" e' un tasto piccolo, sotto.
+   */
+  const actions = el('div', 'summary-actions');
+  const primario = (testo, icona, onclick) => {
+    const b = el('button', 'btn btn-good btn-lg summary-go');
+    b.appendChild(el('span', null, testo));
+    const ic = spriteSvg(icona); ic.classList.add('ico');
+    b.appendChild(ic);
+    b.onclick = () => { sfxTap(); onclick(); };
+    return b;
+  };
+  const casa = (testo) => {
+    const b = el('button', 'btn btn-ghost btn-sm summary-home');
+    const ic = spriteSvg('sp-icon-home'); ic.classList.add('ico');
+    b.appendChild(ic);
+    b.appendChild(el('span', null, testo));
+    b.onclick = () => { sfxTap(); handlers.onHome(); };
+    return b;
+  };
 
   if (result.endSession) {
     // Limite di sessione raggiunto: si propone di smettere, senza obbligare.
@@ -450,20 +473,17 @@ export async function renderSummary(result, handlers) {
     const name = save.child.name ? `, ${save.child.name}` : '';
     await mascotSay('session_end', { bubble, avatar: mascotHost, vars: { name } });
 
-    const home = el('button', 'btn btn-lg', t('ui.session_end_message'));
-    home.onclick = () => { sfxTap(); handlers.onHome(); };
-    actions.appendChild(home);
+    actions.appendChild(primario(t('ui.session_end_message'), 'sp-icon-home', () => handlers.onHome()));
 
     const anyway = el('button', 'btn btn-ghost btn-parent-small', t('ui.continue_button'));
     anyway.onclick = () => { sfxTap(); handlers.onContinueAnyway?.(); };
     actions.appendChild(anyway);
   } else {
-    const again = el('button', 'btn btn-lg', t('ui.continue_button'));
-    again.onclick = () => { sfxTap(); handlers.onAgain(); };
-    const home = el('button', 'btn btn-ghost', t('ui.home'));
-    home.onclick = () => { sfxTap(); handlers.onHome(); };
-    actions.appendChild(again);
-    actions.appendChild(home);
+    const avanti = result.nextWorld
+      ? primario(t('ui.next_world'), 'sp-icon-play', () => handlers.onNext())
+      : primario(t('ui.play_again'), 'sp-icon-play', () => handlers.onAgain());
+    actions.appendChild(avanti);
+    actions.appendChild(casa(t('ui.home')));
   }
   body.appendChild(actions);
 

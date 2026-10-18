@@ -533,6 +533,9 @@
 <symbol id="sp-icon-den" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M14 50 L50 18 L86 50" /><path d="M24 44 v40 h52 v-40" fill="#ffffff"/><rect x="42" y="58" width="16" height="26" fill="#facc15"/></g></symbol>
 <symbol id="sp-icon-star" viewBox="0 0 100 100"><g class="o" fill="none"><path d="M50 12 L61 38 L88 40 L67 58 L74 86 L50 70 L26 86 L33 58 L12 40 L39 38Z" fill="#facc15"/></g></symbol>
 <symbol id="sp-icon-paw" viewBox="0 0 100 100"><g class="o"><path d="M50 48 C35 48 23 61 23 73 C23 82 31 87 39 85 C44 84 46 81 50 81 C54 81 56 84 61 85 C69 87 77 82 77 73 C77 61 65 48 50 48Z" fill="#7a4a2a"/><ellipse cx="22" cy="40" rx="8" ry="10" fill="#7a4a2a"/><ellipse cx="39" cy="24" rx="8" ry="11" fill="#7a4a2a"/><ellipse cx="61" cy="24" rx="8" ry="11" fill="#7a4a2a"/><ellipse cx="78" cy="40" rx="8" ry="10" fill="#7a4a2a"/></g></symbol>
+<symbol id="sp-bubble" viewBox="0 0 100 100"><g class="o"><circle cx="50" cy="52" r="36" fill="#bae6fd"/><path d="M30 40 c4 -10 12 -15 22 -16" fill="none" stroke="#fff" stroke-width="7"/><circle cx="68" cy="30" r="5" fill="#fff" stroke="none"/></g></symbol>
+<symbol id="sp-mole" viewBox="0 0 100 100"><g class="o"><ellipse cx="50" cy="80" rx="38" ry="11" fill="#5b3a29"/><path d="M28 80 V52 a22 22 0 0 1 44 0 V80Z" fill="#a78bfa"/><circle cx="42" cy="52" r="4" fill="#2b2140" stroke="none"/><circle cx="58" cy="52" r="4" fill="#2b2140" stroke="none"/><path d="M44 63 q6 5 12 0" fill="none"/></g></symbol>
+<symbol id="sp-basket" viewBox="0 0 100 100"><g class="o"><circle cx="50" cy="22" r="11" fill="#2fb865"/><path d="M14 56 H86 L76 86 H24Z" fill="#ffb02e"/><ellipse cx="50" cy="56" rx="36" ry="7" fill="#c9821a"/></g></symbol>
 
 <!-- ============ AGGIUNTE DEL CURRICULUM v2 ============ -->
 

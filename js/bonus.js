@@ -16,7 +16,7 @@ import { t, artIndex, getItem } from './content-loader.js';
 import { save, persist } from './state.js';
 import { spriteSvg, audioOrb } from './minigames.js';
 import { speakItem, sfxCorrect, sfxTap, stopVoice } from './audio.js';
-import { dopoLaVoce, spiega } from './pace.js';
+import { dopoLaVoce } from './pace.js';
 import { burstConfetti } from './effects.js';
 import { mascotSay, renderMascot } from './mascot.js';
 import { showScreen } from './screens.js';
@@ -369,10 +369,9 @@ export async function playBubbles(o) {
 
   // Espone il mondo per le prove automatiche (niente di sensibile).
   playBubbles.world = world;
-  // Pepe spiega il gioco (la prima volta nella sessione) PRIMA che parta il
-  // tempo: il conto alla rovescia comincia dopo la sua voce.
+  // Prima la scheda "come si gioca", poi il tempo: parte al tocco di "Ok".
   draw();
-  dopoLaVoce(canvas, spiega('howto_bubbles')).then(() => {
+  istruzioni(end, 'howto_bubbles', 'sp-bubble').then(() => {
     if (finished) return;
     t0 = last = performance.now();
     nextTarget();
@@ -430,8 +429,14 @@ export class BasketWorld {
     const top = this.h - this.basket.h - 10;
     for (const f of this.falling) {
       f.y += f.vy * dt;
-      const inX = Math.abs(f.x - this.basket.x) < this.basket.w / 2;
-      if (!f.bounced && f.y + f.r >= top && f.y < top + this.basket.h && inX) {
+      // Presa con la tolleranza di quello che si VEDE: prima contava solo il
+      // centro della figura, e una figura che sporgeva dal bordo ma era
+      // chiaramente dentro rimbalzava via (su iPad circa 4 volte su 10).
+      // E la bocca del cestino resta aperta finche' la figura non ci e'
+      // sparita dentro: arrivare sotto all'ultimo momento vale.
+      const inX = Math.abs(f.x - this.basket.x) < this.basket.w / 2 + f.r * 0.6;
+      const inY = f.y + f.r >= top && f.y < top + this.basket.h + f.r * 0.5;
+      if (!f.bounced && inY && inX) {
         if (f.item === this.target) caught.push(f);
         else { f.bounced = true; f.vy = -f.vy * 0.5; f.vx = (f.x < this.basket.x ? -1 : 1) * 120; }
       }
@@ -579,10 +584,9 @@ export async function playMoles(o) {
   skip.onclick = () => { sfxTap(); fine(); };
 
   playMoles.world = world;
-  // Pepe spiega il gioco (la prima volta nella sessione) PRIMA che parta il
-  // tempo: il conto alla rovescia comincia dopo la sua voce.
+  // Prima la scheda "come si gioca", poi il tempo: parte al tocco di "Ok".
   draw();
-  dopoLaVoce(canvas, spiega('howto_moles')).then(() => {
+  istruzioni(end, 'howto_moles', 'sp-mole').then(() => {
     if (finished) return;
     t0 = last = performance.now();
     nextTarget();
@@ -713,10 +717,9 @@ export async function playBasket(o) {
   skip.onclick = () => { sfxTap(); fine(); };
 
   playBasket.world = world;
-  // Pepe spiega il gioco (la prima volta nella sessione) PRIMA che parta il
-  // tempo: il conto alla rovescia comincia dopo la sua voce.
+  // Prima la scheda "come si gioca", poi il tempo: parte al tocco di "Ok".
   draw();
-  dopoLaVoce(canvas, spiega('howto_basket')).then(() => {
+  istruzioni(end, 'howto_basket', 'sp-basket').then(() => {
     if (finished) return;
     t0 = last = performance.now();
     nextTarget();
@@ -728,6 +731,39 @@ export async function playBasket(o) {
 /* ------------------------------------------------------------------ */
 /* Il dispatcher: quale gioco bonus, e via                             */
 /* ------------------------------------------------------------------ */
+
+/**
+ * La scheda "come si gioca", prima di ogni gioco bonus.
+ *
+ * Prima Pepe spiegava (solo la prima volta) e il tempo partiva da solo:
+ * chi non aveva capito si trovava dentro il gioco senza sapere cosa fare.
+ * Ora la spiegazione e' una scheda sopra il campo, letta da Pepe ogni volta
+ * (i bonus sono rari), e il gioco parte solo toccando "Ok, iniziamo!", che
+ * si accende a spiegazione finita. Il tempo comincia da li'.
+ * @returns {Promise<void>} al tocco di "Ok, iniziamo!"
+ */
+function istruzioni(end, key, icona) {
+  end.innerHTML = '';
+  end.classList.add('is-howto');
+  end.appendChild(el('p', 'h-title', t('bonus.howto_title')));
+  const fig = el('div', 'bonus-howto-art');
+  fig.appendChild(spriteSvg(icona));
+  end.appendChild(fig);
+  end.appendChild(el('p', 'bonus-howto-text', t(`mascot.${key}`)));
+  const ok = el('button', 'btn btn-good btn-lg', t('bonus.start_button'));
+  ok.type = 'button';
+  end.appendChild(ok);
+  end.hidden = false;
+  dopoLaVoce(ok, mascotSay(key, {}));
+  return new Promise(res => {
+    ok.onclick = () => {
+      if (ok.disabled) return;
+      sfxTap(); stopVoice();
+      end.hidden = true; end.classList.remove('is-howto'); end.innerHTML = '';
+      res();
+    };
+  });
+}
 
 const GIOCHI = { bubbles: playBubbles, moles: playMoles, basket: playBasket };
 

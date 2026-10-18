@@ -35,7 +35,7 @@ import { recordAnswer, isMastered, distractors, distinctBySprite } from './js/sr
 import { serveAiutoScritto, SOGLIA_AIUTO } from './js/minigames.js';
 import { chapters, chapterForCreature, pendingAfterRound, pendingAtStart, isAvailable, lineAudio } from './js/story.js';
 import { planChest, nextSticker, stickers } from './js/chests.js';
-import { pickMimeType, canRecord } from './js/recorder.js';
+import { pickMimeType, canRecord, haParlato, SOGLIA_VOCE } from './js/recorder.js';
 import { buildSummaryCard, canShare } from './js/share.js';
 import { denItems, placeItem, removeItem, isPlaced, clamp, setWall, WALLS } from './js/den.js';
 import { bumpToday, lastDays, accuracyOf, successReport, prune } from './js/history.js';
@@ -352,6 +352,13 @@ async function run() {
   /* --- la registrazione della voce ---------------------------------- */
   check('su Safari si registra in mp4', pickMimeType(m => m === 'audio/mp4') === 'audio/mp4');
   check('su Chrome si registra in webm/opus', pickMimeType(m => m.startsWith('audio/webm')) === 'audio/webm;codecs=opus');
+  // Il turno del bambino: serve una voce vera, non il silenzio o un colpo.
+  const silenzio = Array(60).fill(SOGLIA_VOCE / 4);
+  const colpo = [...silenzio.slice(0, 30), SOGLIA_VOCE * 3, SOGLIA_VOCE * 3, ...silenzio.slice(0, 28)];
+  const parola = [...silenzio.slice(0, 10), ...Array(12).fill(SOGLIA_VOCE * 2), ...silenzio.slice(0, 20)];
+  check('nel silenzio il turno non si chiude: il bambino non ha parlato', !haParlato(silenzio));
+  check('un colpo secco non vale come voce', !haParlato(colpo));
+  check('una parola detta (mezzo secondo di voce) vale', haParlato(parola));
   check('senza formati noti il tipo resta vuoto (il browser sceglie)', pickMimeType(() => false) === '');
   check('un isTypeSupported che esplode non blocca', pickMimeType(() => { throw new Error('x'); }) === '');
   resetSave();
@@ -454,6 +461,32 @@ async function run() {
   const cattiva = cesto.drop(); cattiva.item = sei[1]; cattiva.x = 300; cattiva.y = 300;
   let presi2 = []; for (let k = 0; k < 40; k++) presi2 = presi2.concat(cesto.step(0.05));
   check('la figura sbagliata rimbalza via senza essere presa', presi2.length === 0 && cattiva.bounced === true);
+
+  // Al playtest "a volte non si riesce a prendere": contava solo il centro.
+  const cestoNuovo = () => {
+    const w = new BasketWorld({ w: 768, h: 700, items: sei, rng: () => 0.5 });
+    w.nextDrop = 1e9;           // nessuna caduta automatica
+    w.setTarget(sei[0]);
+    w.moveBasket(384);
+    return w;
+  };
+  const bordo = cestoNuovo();
+  const fb = bordo.drop(); fb.item = sei[0];
+  fb.x = bordo.basket.x + bordo.basket.w / 2 + fb.r * 0.4;   // centro fuori, figura sul bordo
+  let presiBordo = []; for (let k = 0; k < 200 && !presiBordo.length; k++) presiBordo = bordo.step(0.05);
+  check('una figura che sporge dal bordo del cestino viene presa', presiBordo[0] === fb);
+  const tardi = cestoNuovo();
+  tardi.moveBasket(100);
+  const ft = tardi.drop(); ft.item = sei[0]; ft.x = 600;
+  const topCesto = tardi.h - tardi.basket.h - 10;
+  for (let k = 0; k < 5000 && ft.y < topCesto + tardi.basket.h; k++) tardi.step(0.01);
+  tardi.moveBasket(600);        // il cestino arriva sotto all'ultimo momento
+  let presiTardi = []; for (let k = 0; k < 20 && !presiTardi.length; k++) presiTardi = tardi.step(0.01);
+  check('arrivare sotto all\'ultimo momento vale', presiTardi[0] === ft);
+  const lontano = cestoNuovo();
+  const fl = lontano.drop(); fl.item = sei[0]; fl.x = lontano.basket.x + lontano.basket.w / 2 + fl.r * 1.2;
+  let presiLontano = []; for (let k = 0; k < 200; k++) presiLontano = presiLontano.concat(lontano.step(0.05));
+  check('una figura fuori dal cestino non viene presa', presiLontano.length === 0);
 
   /* --- i distintivi ------------------------------------------------- */
   resetSave();
