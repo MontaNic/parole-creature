@@ -1483,6 +1483,10 @@ Nella stessa versione, dalla prova sul tablet:
   passa dal pannello di condivisione ("Salva su File"), dove il download di
   un file nell'app aggiunta alla Home funziona male.
 
+**3.6.3**: l'etichetta "Non ti ho sentito: tocca e riprova" si stirava per
+tutta l'altezza dello schermo (due regole CSS la ancoravano in alto e in
+basso insieme). Ora e' una piccola etichetta in basso.
+
 Idea in coda, discussa ma non fatta: **"La tastiera di Pepe"**, un angolo a
 parte (non una pausa) per imparare a scrivere con due mani sulla tastiera
 della custodia dell'iPad. Prima una sola lezione da provare con il bambino.

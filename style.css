@@ -684,7 +684,17 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 
 /* Microfono in "ascolta e ripeti" e in "Dillo tu" */
 .sayit-hint { font-size: 20px; }
-.sayit-toast { top: auto; bottom: 8px; }
+/*
+  Il messaggio del turno ("Non ti ho sentito: tocca e riprova"): una piccola
+  etichetta in basso. Il selettore doppio serve: .written-help, piu' sotto nel
+  file, rimetteva top: 4px, e con bottom: 8px il riquadro si stirava per
+  tutta l'altezza dello schermo.
+*/
+.written-help.sayit-toast {
+  top: auto; bottom: 12px;
+  font-family: var(--font-ui); font-size: 17px; font-weight: 600; line-height: 1.3;
+  padding: 8px 16px; border-radius: var(--r-pill);
+}
 .rec-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
 .rec-btn.is-rec { background: var(--ember); border-color: var(--ink); color: var(--ink); animation: rec-pulse 1s ease-in-out infinite; }
 @keyframes rec-pulse { 50% { transform: scale(1.05) } }
