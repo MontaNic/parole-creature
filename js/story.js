@@ -189,7 +189,8 @@ export function playChapter(chapter, { canSkip = false } = {}) {
       lineBox.innerHTML = '';
       if (line.who === 'creature') {
         lineBox.appendChild(el('span', 'en', line.en));
-        lineBox.appendChild(el('span', 'it-sub', line.it));
+        // Il sottotitolo arriva quando la creatura ha finito di parlare.
+        lineBox.appendChild(el('span', 'it-sub tr-later', line.it));
       } else {
         lineBox.textContent = line.it;
       }
@@ -205,6 +206,7 @@ export function playChapter(chapter, { canSkip = false } = {}) {
       if (my === token) {
         pepeSvg?.classList.remove('is-talking');
         creatureHost.classList.remove('is-speaking');
+        lineBox.querySelector('.it-sub')?.classList.add('is-shown');
       }
     };
 

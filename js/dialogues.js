@@ -111,12 +111,22 @@ export async function gameDialogue(api) {
 
   await mascotSay('dialogue_start', { avatar: document.getElementById('play-mascot') });
 
+  /*
+   * Prima l'inglese, poi l'italiano. La traduzione della battuta compare a
+   * voce finita: si ascolta, e solo dopo si controlla di aver capito. Le
+   * risposte da scegliere non hanno la traduzione finche' il bambino non ha
+   * risposto: con l'italiano accanto si sceglieva leggendo l'italiano, senza
+   * capire l'inglese.
+   */
   const say = async (en, it, rel) => {
     enLine.textContent = en; itLine.textContent = it || '';
+    itLine.classList.add('tr-later');
+    itLine.classList.remove('is-shown');
     who.classList.add('is-speaking');
     stopVoice();
     await speakLine(rel, en, 'en-GB');
     who.classList.remove('is-speaking');
+    itLine.classList.add('is-shown');
   };
 
   for (let ti = 0; ti < dialogue.turns.length; ti++) {
@@ -135,7 +145,7 @@ export async function gameDialogue(api) {
         orb.appendChild(spriteSvg('sp-icon-sound'));
         btn.appendChild(orb);
         btn.appendChild(el('span', 'dlg-reply-en', r.en));
-        btn.appendChild(el('span', 'dlg-reply-it', r.it));
+        btn.appendChild(el('span', 'dlg-reply-it tr-later', r.it));
         // Il piccolo altoparlante fa solo ascoltare; il resto del bottone risponde.
         orb.addEventListener('click', (ev) => { ev.stopPropagation(); sfxTap(); stopVoice(); speakLine(lineAudio(dialogue, ti, `r${k}`), r.en, 'en-GB'); });
         btn.addEventListener('click', async (ev) => {
@@ -143,6 +153,8 @@ export async function gameDialogue(api) {
           [...replies.children].forEach(b => { b.disabled = true; });
           if (k === 0) {
             btn.classList.add('is-correct');
+            // Risposto: ora le traduzioni di tutte le risposte.
+            replies.querySelectorAll('.dlg-reply-it').forEach(x => x.classList.add('is-shown'));
             sfxCorrect(ti);
             burstConfetti(ev.clientX, ev.clientY);
             onRepeat?.();
@@ -151,6 +163,8 @@ export async function gameDialogue(api) {
             resolve();
           } else {
             btn.classList.add('is-wrong');
+            // La traduzione della risposta sbagliata: si capisce perche' non va.
+            btn.querySelector('.dlg-reply-it')?.classList.add('is-shown');
             const h = dialogue.hm[ti % dialogue.hm.length];
             await speakLine(lineAudio(dialogue, ti, `r${k}`), r.en, 'en-GB');
             await say(h.en, '', lineAudio(dialogue, null, `hm${ti % dialogue.hm.length}`));
@@ -159,6 +173,7 @@ export async function gameDialogue(api) {
             [...replies.children].forEach(b => { if (!b.classList.contains('is-dim')) b.disabled = false; });
             // La battuta della creatura torna a schermo per rileggerla.
             enLine.textContent = turn.say.en; itLine.textContent = turn.say.it;
+            itLine.classList.add('is-shown');
           }
         });
         replies.appendChild(btn);

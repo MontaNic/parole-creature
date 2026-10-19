@@ -1508,6 +1508,23 @@ smettere il bambino. Ora:
 Rischio da tenere d'occhio: se il bambino non apre mai la carta, il
 parlato si riduce. Da guardare nello storico (ripetizioni al giorno).
 
+### Prima l'inglese, poi l'italiano (versione 3.7.1)
+
+Le traduzioni c'erano sempre, a ogni livello, e quasi sempre insieme
+all'inglese, prima della risposta. Nei dialoghi era un difetto vero: ogni
+risposta da scegliere aveva la traduzione accanto, e si poteva scegliere
+leggendo l'italiano senza capire l'inglese. Regola nuova:
+
+- dove l'italiano DA' la risposta, arriva dopo: le risposte dei dialoghi
+  (traduzione sulla risposta sbagliata toccata, su tutte quando si indovina),
+  il quiz con frasi (nessuna traduzione prima);
+- dove aiuta a capire senza rivelare, arriva a voce finita: la battuta della
+  creatura nei dialoghi e nella storia, "Ascolta e ripeti";
+- l'etichetta verde dopo una risposta giusta mostra anche la traduzione
+  ("dragon / drago");
+- restano: "Dillo tu" con le frasi (l'italiano e' la consegna) e
+  "Ricomponi" (da' il senso, non l'ordine).
+
 Idea in coda, discussa ma non fatta: **"La tastiera di Pepe"**, un angolo a
 parte (non una pausa) per imparare a scrivere con due mani sulla tastiera
 della custodia dell'iPad. Prima una sola lezione da provare con il bambino.

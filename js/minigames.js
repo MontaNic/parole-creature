@@ -113,7 +113,8 @@ function pause(ms) {
  * Una parola e la frase che la insegna mostrano lo stesso disegno: il drago
  * vale per "dragon" e per "What is it? A dragon.". Perche' il bambino capisca
  * al volo quale delle due gli si chiede, la frase ha SEMPRE la cornice a
- * fumetto (il rosa dei dialoghi) e la sua traduzione sotto. La parola nuda
+ * fumetto (il rosa dei dialoghi). La traduzione no: arriva dopo la risposta
+ * (tranne in "Dillo tu", dove l'italiano e' la consegna). La parola nuda
  * resta una tessera semplice.
  */
 function soggetto(item, width) {
@@ -178,6 +179,8 @@ export function mostraConferma(host, item) {
   togliAiuto(host);
   const cls = item.kind === 'phrase' ? 'phrase-written' : 'word-written';
   const c = el('p', `${cls} written-help is-confirm anim-pop`, item.en);
+  // Dopo la risposta, e solo dopo, cosa vuol dire.
+  if (item.it) c.appendChild(el('span', 'confirm-it', item.it));
   host.appendChild(c);
 }
 
@@ -267,8 +270,8 @@ async function gameQuiz(api) {
   host.appendChild(el('p', 'game-prompt', t(prompt)));
 
   // Si parte dall'immagine: il bambino sa gia' di cosa si parla.
+  // Niente traduzione qui: arriva con la conferma, dopo la risposta.
   host.appendChild(soggetto(item, 'min(190px, 46vw)'));
-  if (isPhrase) host.appendChild(el('p', 'word-hint-it', item.it));
 
   const n = choiceCount(pool, difficulty);
   const options = shuffle([item, ...distractors(pool, item, n - 1)]);
@@ -562,7 +565,9 @@ async function gameListen(api) {
     // dentro un iPad orizzontale con la barra di Safari.
     stage.appendChild(soggetto(item, 'min(170px, 42vw, 20vh)'));
   }
-  stage.appendChild(el('p', 'word-hint-it', item.it));
+  // Prima si sente la parola, poi compare cosa vuol dire.
+  const traduzione = el('p', 'word-hint-it tr-later', item.it);
+  stage.appendChild(traduzione);
 
   const done = el('button', 'btn btn-good btn-lg', t('games.listen_done'));
   done.type = 'button';
@@ -573,6 +578,7 @@ async function gameListen(api) {
   await dopoLaVoce(orb, (async () => {
     await spiega('howto_listen');
     await orb._play();
+    traduzione.classList.add('is-shown');
     await spiega('sayit_go');
   })());
 

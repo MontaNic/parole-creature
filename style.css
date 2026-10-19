@@ -606,6 +606,18 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 .dlg-bubble::after { content: ""; position: absolute; left: -8px; top: 26px; border: 9px solid transparent; border-right-color: var(--paper); border-left: 0; }
 .dlg-en { margin: 0; font-family: var(--font-en); font-size: clamp(20px, 2.6vw, 26px); font-weight: 700; letter-spacing: .02em; }
 .dlg-it { margin: 4px 0 0; font-size: 14px; color: var(--ink-soft); }
+
+/*
+  Prima l'inglese, poi l'italiano: le traduzioni con .tr-later restano al loro
+  posto (niente salti di impaginazione) ma invisibili, e compaiono con
+  .is-shown a voce finita o dopo la risposta.
+*/
+.tr-later { visibility: hidden; opacity: 0; transition: opacity .35s ease; }
+.tr-later.is-shown { visibility: visible; opacity: 1; }
+.written-help .confirm-it {
+  display: block; margin-top: 2px; text-align: center;
+  font-family: var(--font-ui); font-size: 16px; font-weight: 600; letter-spacing: 0; opacity: .85;
+}
 .dlg-replies { display: flex; flex-direction: column; gap: 10px; width: 100%; }
 
 /* La figura che la creatura mostra (js/dialogues.js, figura()). */
