@@ -8516,7 +8516,7 @@
       "type": "repeats",
       "target": 3,
       "sprite": "sp-icon-mic",
-      "text_it": "Ripeti 3 parole a Pepe ad alta voce"
+      "text_it": "Parla con Pepe: ripeti 3 parole ad alta voce"
     },
     {
       "id": "m_intro_album",
@@ -8546,7 +8546,7 @@
       "type": "repeats",
       "target": 5,
       "sprite": "sp-pepe",
-      "text_it": "Ripeti 5 parole a Pepe"
+      "text_it": "Parla con Pepe: ripeti 5 parole"
     },
     {
       "id": "m_creature",

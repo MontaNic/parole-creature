@@ -134,6 +134,7 @@ function goHome(firstTime = false) {
   session.homeRefs = renderHome({
     onWorld: (world) => startRound({ world }),
     onReview: () => startRound({ review: true }),
+    onSpeak: () => startRound({ speak: true }),
     onAlbum: () => renderAlbum(),
     onDen: () => renderDen(),
     onPhonics: () => renderPhonics(async (lesson) => {
@@ -189,7 +190,20 @@ function buildRound(opts) {
   let reviewIds = new Set();
   let pool = [];
 
-  if (opts.review) {
+  if (opts.speak) {
+    // Parla con Pepe: cose gia' incontrate, con la precedenza a quelle
+    // ancora poco solide. Non conta per l'avanzamento delle unita'.
+    pool = freeReviewPool(settings);
+    if (!pool.length) return null;
+    world = {
+      id: '__speak__',
+      title_it: t('speak.home_card'),
+      phase: currentUnit(settings)?.phase || 1,
+      minigames: ['listen', 'sayit'],
+      color: '#f4628f'
+    };
+    picked = pickRoundItems(pool, Math.min(PAROLE_PER_PARLARE, pool.length));
+  } else if (opts.review) {
     // Ripasso libero: tutto quello che il bambino ha gia' incontrato, con la
     // precedenza a cio' che non e' ancora solido.
     pool = freeReviewPool(settings);
@@ -229,9 +243,9 @@ function buildRound(opts) {
 
   return {
     world, pool, items: picked, reviewIds, showWritten, difficulty,
-    steps: buildSteps(world, picked, pool, difficulty),
+    steps: opts.speak ? passiParlati(picked) : buildSteps(world, picked, pool, difficulty),
     // Il dialogo dell'unita' chiude la partita: sempre le prime due volte, poi una su tre.
-    dialogue: (!opts.review && dialogueFor(world.id) && wantsDialogue((save.progress.worlds[world.id] || {}).plays || 0)) ? dialogueFor(world.id) : null
+    dialogue: (!opts.review && !opts.speak && dialogueFor(world.id) && wantsDialogue((save.progress.worlds[world.id] || {}).plays || 0)) ? dialogueFor(world.id) : null
   };
 }
 
@@ -276,8 +290,31 @@ function dedupeById(items) {
  * sulla PAROLA ("E' la parola giusta?"). Con le frasi il bambino vedeva il
  * drago e sentiva "What is it? A knight." — la stessa domanda in due forme.
  */
-const GIOCHI_PER_PAROLA = ['match', 'hunt', 'quiz', 'truefalse', 'dragdrop', 'listen', 'sayit'];
-const GIOCHI_PER_FRASE  = ['listen', 'quiz', 'build', 'sayit'];
+/*
+ * E niente microfono nelle partite normali. "Ascolta e ripeti" e "Dillo tu"
+ * erano circa il 40% delle domande (3-4 su 8, meta' nelle unita' 7-8), e il
+ * microfono su iPad e' il punto piu' fragile del gioco: ogni "non ti ho
+ * sentito" ripetuto e' un motivo per smettere. Il parlato non sparisce: ha
+ * il suo giro apposta, "Parla con Pepe" (passiParlati), breve e riconoscibile.
+ */
+const GIOCHI_PER_PAROLA = ['match', 'hunt', 'quiz', 'truefalse', 'dragdrop'];
+const GIOCHI_PER_FRASE  = ['quiz', 'build'];
+
+/** Quante parole o frasi in un giro di "Parla con Pepe". */
+const PAROLE_PER_PARLARE = 5;
+
+/**
+ * Il giro di "Parla con Pepe": si alternano "Ascolta e ripeti" (prima il
+ * modello) e "Dillo tu" (prima il bambino), cominciando dal piu' facile.
+ */
+function passiParlati(items) {
+  return items.map((it, k) => ({
+    type: k % 2 ? 'sayit' : 'listen',
+    items: [it],
+    difficulty: 2,
+    isFinal: false
+  }));
+}
 
 /**
  * Compone i passi della partita.
@@ -530,7 +567,8 @@ async function finishRound({ round, correct, total, levelUp, missionJustDone, op
   // Statistiche dell'unita'. Interessa sapere se e' stata chiusa PROPRIO
   // ora: e' l'evento che merita l'annuncio, non il fatto di essere chiusa.
   let worldJustCompleted = false;
-  if (round.world.id !== '__review__') {
+  // Ripasso libero e "Parla con Pepe" non toccano l'avanzamento delle unita'.
+  if (!round.world.id.startsWith('__')) {
     const rec = save.progress.worlds[round.world.id] || { plays: 0, completed: false };
     const wasCompleted = Boolean(rec.completed);
     rec.plays = (rec.plays || 0) + 1;
@@ -581,7 +619,8 @@ async function finishRound({ round, correct, total, levelUp, missionJustDone, op
   const overLimit = tempoFinito();
 
   // Unita' finita e la prossima aperta: il bottone grande porta li'.
-  const prossimo = round.world.id !== '__review__' && unitProgress(round.world).completed
+  if (round.world.id === '__speak__') { save.daily.speakDone = true; persist(); }
+  const prossimo = !round.world.id.startsWith('__') && unitProgress(round.world).completed
     ? currentUnit() : null;
   const nextWorld = prossimo && prossimo.id !== round.world.id ? prossimo : null;
 

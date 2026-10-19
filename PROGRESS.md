@@ -1487,6 +1487,27 @@ Nella stessa versione, dalla prova sul tablet:
 tutta l'altezza dello schermo (due regole CSS la ancoravano in alto e in
 basso insieme). Ora e' una piccola etichetta in basso.
 
+### Il parlato ha il suo giro: "Parla con Pepe" (versione 3.7.0)
+
+Misurato: "Ascolta e ripeti" e "Dillo tu" erano circa il 40% delle domande
+(3-4 su 8 a partita, meta' nelle unita' 7-8). Il microfono su iPad e' il
+punto piu' fragile, e i "non ti ho sentito" ripetuti rischiavano di far
+smettere il bambino. Ora:
+
+- **le partite normali non usano il microfono**: solo giochi a tocco (e il
+  dialogo, dove si risponde toccando);
+- **"Parla con Pepe"**, una carta nella home: 5 parole o frasi gia'
+  incontrate, alternando "Ascolta e ripeti" e "Dillo tu"; non tocca
+  l'avanzamento delle unita'. La carta resta evidenziata ("Oggi!") finche'
+  quel giorno non e' stata fatta: il parlato non deve sparire solo perche'
+  e' facoltativo;
+- **al massimo 2 tentativi** al microfono: poi il gioco passa da solo a
+  "Tocca a te!" a tempo;
+- le missioni sul ripetere portano li' ("Parla con Pepe: ripeti 3 parole").
+
+Rischio da tenere d'occhio: se il bambino non apre mai la carta, il
+parlato si riduce. Da guardare nello storico (ripetizioni al giorno).
+
 Idea in coda, discussa ma non fatta: **"La tastiera di Pepe"**, un angolo a
 parte (non una pausa) per imparare a scrivere con due mani sulla tastiera
 della custodia dell'iPad. Prima una sola lezione da provare con il bambino.

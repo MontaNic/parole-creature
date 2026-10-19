@@ -868,6 +868,19 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 }
 .phonics-card-letters { font-family: var(--font-en); font-weight: 700; font-size: 24px; letter-spacing: .08em; background: var(--paper); color: var(--ink); border: var(--stroke) solid var(--ink); border-radius: var(--r-m); padding: 6px 12px; flex: none; }
 .phonics-card-hint { font-size: 13px; color: var(--muted-night); }
+.speak-card { position: relative; margin-top: 0; }
+.speak-card-icon {
+  flex: none; width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--rose); border: var(--stroke) solid var(--ink);
+}
+.speak-card-icon .ico { width: 28px; height: 28px; fill: none; }
+.speak-badge {
+  margin-left: auto; flex: none; padding: 4px 12px; border-radius: var(--r-pill);
+  background: var(--amber); color: var(--ink); font-weight: 700; font-size: 14px;
+  border: 2px solid var(--ink); display: none;
+}
+.speak-card.is-todo { border-color: var(--rose); box-shadow: 0 0 0 3px rgba(244, 98, 143, .35); }
+.speak-card.is-todo .speak-badge { display: inline-block; animation: ready-pop .5s var(--ease-pop); }
 .phonics-dots { display: flex; gap: 6px; margin-top: 6px; }
 .phonics-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,.18); border: 2px solid rgba(255,255,255,.3); }
 .phonics-dot.is-done { background: var(--leaf); border-color: var(--ink); }

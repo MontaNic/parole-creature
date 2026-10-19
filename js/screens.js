@@ -162,6 +162,10 @@ export function renderHome(handlers) {
   document.getElementById('btn-album').onclick = () => { sfxTap(); handlers.onAlbum(); };
   document.getElementById('btn-den').onclick = () => { sfxTap(); handlers.onDen?.(); };
   document.getElementById('phonics-card').onclick = () => { sfxTap(); handlers.onPhonics?.(); };
+  // "Parla con Pepe" resta in evidenza finche' oggi non e' stato fatto.
+  const parla = document.getElementById('speak-card');
+  parla.onclick = () => { sfxTap(); handlers.onSpeak?.(); };
+  parla.classList.toggle('is-todo', !save.daily.speakDone);
   renderPhonicsCard();
   document.getElementById('btn-parents').onclick = () => { sfxTap(); handlers.onParents(); };
 

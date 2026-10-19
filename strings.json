@@ -132,6 +132,11 @@
     "bd_story_done": { "name": "La nebbia si alza", "desc": "Hai visto la fine della storia" },
     "bd_first_record": { "name": "La tua voce", "desc": "Ti sei registrato per la prima volta" }
   },
+  "speak": {
+    "home_card": "Parla con Pepe",
+    "home_hint": "Ascolta e ripeti ad alta voce: 5 parole, due minuti",
+    "today": "Oggi!"
+  },
   "lock": {
     "title": "Il tempo di oggi e' finito",
     "unlock_button": "Un genitore sblocca",

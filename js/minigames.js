@@ -428,12 +428,22 @@ function bottoneMic(testo) {
   return mic;
 }
 
+/**
+ * Tentativi al microfono prima di arrendersi. Due "non ti ho sentito" sono
+ * gia' abbastanza per un bambino: al terzo si passa da soli al turno a
+ * tempo, senza insistere. Il microfono su iPad sbaglia anche quando il
+ * bambino parla, e riprovare all'infinito e' il modo piu' rapido per
+ * fargli chiudere il gioco.
+ */
+const TENTATIVI_MIC = 2;
+
 /** @returns {Promise<Blob|null|undefined>} undefined = microfono non disponibile */
 function turnoMicrofono(box, host) {
   return new Promise(resolve => {
     const mic = bottoneMic(t('games.turn_mic'));
     box.appendChild(mic);
     let attivo = false;
+    let falliti = 0;
     mic.addEventListener('click', async () => {
       if (attivo) return;
       attivo = true;
@@ -464,7 +474,14 @@ function turnoMicrofono(box, host) {
         resolve(blob);
         return;
       }
-      // Nessuna voce: si riprova, senza costo.
+      // Nessuna voce: si riprova, senza costo, ma non all'infinito.
+      falliti += 1;
+      if (falliti >= TENTATIVI_MIC) {
+        mic.remove();
+        await turnoContato(box);
+        resolve(null);
+        return;
+      }
       sfxRetry();
       toastLocal(host, t('games.turn_not_heard'), false);
       mic.querySelector('.mic-label').textContent = t('games.turn_mic');
