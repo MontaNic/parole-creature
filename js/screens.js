@@ -13,6 +13,7 @@ import {
 import { renderMascot, mascotSay, mascotCheer, encouragementKey } from './mascot.js';
 import { spriteSvg } from './minigames.js';
 import { sbloccoGenitore } from './lock.js';
+import { rendiToccabile } from './pepe-touch.js';
 import { speakItem, sfxTap, sfxUnlock } from './audio.js';
 import { dopoLaVoce } from './pace.js';
 import { celebrate } from './effects.js';
@@ -94,6 +95,7 @@ export function renderHome(handlers) {
   const mascotHost = document.getElementById('home-mascot');
   renderMascot(mascotHost);
   const bubble = document.getElementById('home-speech');
+  rendiToccabile(mascotHost, { bubble });
 
   // Missione del giorno
   ensureTodayMission();
@@ -388,6 +390,7 @@ export async function renderSummary(result, handlers) {
   const bubble = el('div', 'speech no-tail');
   bubble.style.maxWidth = '520px';
   body.appendChild(bubble);
+  rendiToccabile(mascotHost, { bubble });
 
   // Stelle: 1 sempre, 2 da meta' risposte, 3 se quasi tutte giuste
   const ratio = result.total ? result.correct / result.total : 0;

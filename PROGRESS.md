@@ -1525,6 +1525,19 @@ leggendo l'italiano senza capire l'inglese. Regola nuova:
 - restano: "Dillo tu" con le frasi (l'italiano e' la consegna) e
   "Ricomponi" (da' il senso, non l'ordine).
 
+### Toccare Pepe (versione 3.8.0)
+
+Nella home e nel riepilogo (mai durante le domande) Pepe reagisce al tocco
+(`js/pepe-touch.js`): una mossa breve a ogni tocco (salto, dondolio,
+giravolta, testa inclinata, coccola con i cuori), ogni tanto una frase
+breve nel fumetto (10 tracce nuove, `mascot.touch_*`; "Sono molto
+carina!", scelta dai genitori, esce circa una volta su due), solletico con
+5 tocchi veloci, pisolino con una raffica vera (20 tocchi in 15 s).
+**Pepe non parla mai sopra se stessa**: con una sua battuta in corso, i
+tocchi fanno solo le mosse. Verificato con riproduzione simulata (40 tocchi:
+0 sovrapposizioni, 0 interruzioni). La prima idea, una parola inglese "a
+sorpresa", e' stata tolta su richiesta dei genitori.
+
 Idea in coda, discussa ma non fatta: **"La tastiera di Pepe"**, un angolo a
 parte (non una pausa) per imparare a scrivere con due mani sulla tastiera
 della custodia dell'iPad. Prima una sola lezione da provare con il bambino.

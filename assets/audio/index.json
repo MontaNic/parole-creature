@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-15T11:32:41.327Z",
+  "generatedAt": "2026-10-19T09:01:44.685Z",
   "files": [
     "en/blend.w_bed.mp3",
     "en/blend.w_big.mp3",
@@ -1222,6 +1222,16 @@
     "it/mascot.streak_2.mp3",
     "it/mascot.streak_3.mp3",
     "it/mascot.streak_kept.mp3",
+    "it/mascot.touch_1.mp3",
+    "it/mascot.touch_2.mp3",
+    "it/mascot.touch_3.mp3",
+    "it/mascot.touch_4.mp3",
+    "it/mascot.touch_5.mp3",
+    "it/mascot.touch_6.mp3",
+    "it/mascot.touch_7.mp3",
+    "it/mascot.touch_8.mp3",
+    "it/mascot.touch_nap.mp3",
+    "it/mascot.touch_tickle.mp3",
     "it/mascot.tutorial_choose.mp3",
     "it/mascot.tutorial_done.mp3",
     "it/mascot.tutorial_listen.mp3",

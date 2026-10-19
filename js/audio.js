@@ -290,6 +290,11 @@ export function sfxTap() {
   tone({ freq: 700, dur: .06, type: 'triangle', gain: .1 });
 }
 
+/** Il "boing" delle mosse di Pepe quando lo si tocca. */
+export function sfxBoing() {
+  tone({ freq: 260, dur: .22, type: 'sine', slideTo: 520, gain: .14 });
+}
+
 export function sfxUnlock() {
   [523, 659, 784, 1046].forEach((f, i) =>
     tone({ freq: f, dur: .3, delay: i * 0.11, type: 'triangle', gain: .16 })

@@ -47,6 +47,7 @@ import { dialogueFor, wantsDialogue, lineAudio as dialogAudio } from './js/dialo
 import { pickCheckItems, checkDue, daysSinceLastCheck, saveCheck } from './js/checkup.js';
 import { trackMissionEvent, ensureTodayMission, isFeasible, introMissions } from './js/missions.js';
 import { dopoLaVoce } from './js/pace.js';
+import { cosaFa, FRASI, scegliFrase, FRASE_PREFERITA } from './js/pepe-touch.js';
 import { lessons as phLessons, soundById, blendOf, letterAudio, lessonDone } from './js/phonics.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
@@ -560,6 +561,29 @@ async function run() {
   save.daily.missionId = casa[0].id; save.daily.missionProgress = 0; save.daily.missionDone = false;
   check('una risposta giusta non chiude una missione a casa', trackMissionEvent({ correct: true }) === false && !save.daily.missionDone);
   check('la conferma di un adulto la chiude', trackMissionEvent({ home: true }) === true && save.daily.missionDone);
+
+  /* --- toccare Pepe ------------------------------------------------- */
+  const adesso = 100000;
+  const rngMai = () => 0.99, rngSempre = () => 0;
+  check('il primo tocco fa una mossa, non una frase', cosaFa([adesso], { ora: adesso, daUltimaFrase: 1, parlando: false, rng: rngSempre }) === 'move');
+  check('dopo qualche tocco Pepe dice una frase', cosaFa([adesso], { ora: adesso, daUltimaFrase: 3, parlando: false, rng: rngSempre }) === 'talk');
+  check('Pepe non parla mai sopra se stessa', cosaFa([adesso], { ora: adesso, daUltimaFrase: 3, parlando: true, rng: rngSempre }) === 'move');
+  {
+    const strsP = await (await fetch('strings.json')).json();
+    let preferite = 0, ultimaF = '', doppie = 0;
+    for (let k = 0; k < 1000; k++) { const fr = scegliFrase(ultimaF); if (fr === ultimaF) doppie++; if (fr === FRASE_PREFERITA) preferite++; ultimaF = fr; }
+    check('la frase preferita esce circa una volta su due', preferite > 300 && preferite < 550, preferite + ' su 1000');
+    check('nessuna frase due volte di fila', doppie === 0);
+    check('ogni frase da tocco ha il suo testo', [...FRASI, 'touch_tickle', 'touch_nap'].every(k => strsP.mascot?.[k]));
+  }
+  const tocchiVeloci = [adesso - 1600, adesso - 1200, adesso - 800, adesso - 400, adesso];
+  check('cinque tocchi veloci: il solletico',cosaFa(tocchiVeloci, { ora: adesso, daUltimaFrase: 1, parlando: false, rng: rngMai }) === 'tickle');
+  const tocchiRaffica = Array.from({ length: 20 }, (_, i) => adesso - i * 600);
+  check('troppi tocchi di fila: il pisolino', cosaFa(tocchiRaffica, { ora: adesso, daUltimaFrase: 1, parlando: false, rng: rngMai }) === 'nap');
+  const tocchiLenti = [adesso - 9000, adesso - 6000, adesso - 3000, adesso];
+  const unoAlSecondo = Array.from({ length: 15 }, (_, i) => adesso - i * 1000);
+  check('un tocco al secondo non fa addormentare Pepe', cosaFa(unoAlSecondo, { ora: adesso, daUltimaFrase: 1, parlando: false, rng: rngMai }) === 'move');
+  check('tocchi tranquilli non fanno solletico o pisolino',cosaFa(tocchiLenti, { ora: adesso, daUltimaFrase: 1, parlando: false, rng: rngMai }) === 'move');
 
   /* --- tempo di gioco e codice genitore (3.6.2) -------------------- */
   resetSave();
