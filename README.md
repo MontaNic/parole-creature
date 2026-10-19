@@ -7,10 +7,23 @@ sessioni brevi, Pepe (una cucciola di Jack Russell) che guida a voce, creature
 originali da collezionare, una storia a episodi. Interfaccia in italiano,
 contenuti didattici in inglese.
 
-**Cosa contiene** (versione 3.1.0): 32 unita' in 9 fasi, 295 parole e
-182 frasi con audio, 281 illustrazioni, 36 creature, una storia in
-tre stagioni (38 scene), 7 mini-giochi e 3 giochi bonus, scrigni, adesivi,
-distintivi, la tana, registrazione della voce, condivisione in famiglia.
+**Cosa contiene** (versione 3.8.0): 32 unita' in 9 fasi, 295 parole e
+182 frasi con audio (1.352 tracce), 282 illustrazioni, 36 creature, una
+storia in tre stagioni (38 scene), 32 dialoghi, 6 libretti, 4 lezioni sui
+suoni delle lettere, mini-giochi a tocco e 3 giochi bonus, "Parla con Pepe"
+per ripetere ad alta voce, scrigni, adesivi, distintivi, la tana,
+condivisione in famiglia, tempo di gioco con codice genitore.
+
+Alcune regole che reggono tutto il gioco (il perche' sta in `PROGRESS.md`):
+
+- **il ritmo lo detta il gioco**: mentre una voce spiega o pronuncia, i
+  comandi per andare avanti restano fermi (`js/pace.js`);
+- **un disegno da solo e' una parola nuda**; le frasi hanno la cornice rosa
+  e le alternative sono sempre dello stesso tipo della risposta;
+- **prima l'inglese, poi l'italiano**: la traduzione arriva dopo la
+  risposta, o a voce finita dove aiuta a capire senza rivelarla;
+- **niente microfono nelle partite normali**: il parlato ha il suo giro,
+  "Parla con Pepe", con al massimo due tentativi al microfono.
 Il percorso didattico segue le Indicazioni nazionali per la primaria fino a
 un A1 pieno: `docs/curriculum-2.md` e `docs/curriculum-3.md`.
 
@@ -60,16 +73,24 @@ js/audio.js              voce, effetti sonori, musica
 js/srs.js                ripetizione spaziata (Leitner)
 js/mascot.js             Pepe: disegno, evoluzione, battute
 js/effects.js            coriandoli, stelle, messaggi
-js/minigames.js          i 7 mini-giochi
+js/minigames.js          i mini-giochi e il turno del bambino al microfono
+js/pace.js               il ritmo: comandi fermi finche' la voce parla; istruzioni di Pepe
+js/dialogues.js          i dialoghi con le creature (con la figura di cui si parla)
+js/phonics.js            "I suoni": lettere, suoni e fusione
+js/books.js              i libretti illustrati
 js/story.js              la storia a episodi (tre stagioni)
 js/chests.js             scrigni a sorpresa e adesivi
 js/bonus.js              i giochi bonus: Bolle, Spunta!, Il cestino
 js/badges.js             i distintivi
 js/den.js                la tana
-js/recorder.js           registrazione della voce
+js/recorder.js           registrazione della voce, rilevamento della voce
+js/speech.js             riconoscimento vocale (facoltativo, dai genitori)
 js/share.js              condivisione in famiglia
 js/history.js            storico giornaliero e criteri di successo
-js/missions.js           missione del giorno
+js/missions.js           missione del giorno (missioni di avvio, poi solo fattibili)
+js/checkup.js            il check del mese
+js/lock.js               tempo di gioco finito: codice genitore, sblocco, backup
+js/pepe-touch.js         Pepe che reagisce quando lo si tocca
 js/screens.js            home a blocchi di fase, album, riepilogo, onboarding
 js/parents.js            area genitori protetta da PIN
 content.json             il curriculum: unita', strutture, parole, frasi, creature
@@ -78,7 +99,8 @@ assets/img/sprites.svg   icone e simboli schematici (sprite SVG unico)
 assets/img/art/          le illustrazioni PNG generate (+ index.json)
 assets/audio/            audio pre-generati (+ index.json)
 sw.js                    cache offline
-tools/generate-audio.mjs generazione offline degli audio
+tools/generate-audio.mjs generazione offline degli audio (allinea anche il volume)
+tools/normalize-audio.mjs  porta tutte le tracce allo stesso volume (serve ffmpeg)
 tools/curriculum-test.html  test delle regole didattiche e dei moduli
 tools/smoke-test.html    test di sfoglio automatico
 tools/check-assets.mjs   integrita' degli asset e della cache
@@ -97,9 +119,8 @@ Il gioco parla in due modi:
    all'API mentre il bambino gioca.
 2. **Sintesi vocale del browser** come ripiego, per le tracce mancanti.
 
-Il progetto include gia' **659 tracce generate**: 509 inglesi e 150
-italiane (Pepe e il narratore). Quattro voci: il modello inglese, la voce
-di bambino per le risposte dei dialoghi, Pepe, il narratore. Per rigenerarle o aggiungerne di nuove:
+Il progetto include gia' **1.352 tracce generate**: 1.168 inglesi e 184
+italiane. Per rigenerarle o aggiungerne di nuove:
 
 ```bash
 cp .env.example .env       # poi compila .env (non viene mai committato)
@@ -112,14 +133,29 @@ node tools/generate-audio.mjs --plan             # riepilogo per voce, senza gen
 node tools/generate-audio.mjs --force --only it/ # rigenera solo l'italiano
 ```
 
-**Tre voci, tre ruoli.** In `.env`:
+**Quattro voci, quattro ruoli.** In `.env`:
 
-- `VOICE_ID_ENGLISH` — il modello di pronuncia: dice tutte le parole e le frasi
-  inglesi del curriculum. E' la voce che il bambino deve imitare. (89 tracce)
-- `VOICE_ID_PEPE` — la mascotte quando parla in prima persona: accoglienza,
-  istruzioni, incoraggiamenti, saluti. (21 tracce)
-- `VOICE_ID_NARRATOR` — voce epica in terza persona, riservata ai tre traguardi
-  rari: mondo superato, nuova creatura, fase completata. (3 tracce)
+- `VOICE_ID_ENGLISH` — il modello di pronuncia: parole, frasi, battute
+  inglesi delle creature, libretti, suoni. E' la voce che il bambino deve
+  imitare. (880 tracce)
+- `VOICE_ID_BAMBINO` — una voce di bambino per le risposte dei dialoghi:
+  chi risponde e' "il bambino", non il modello. (288 tracce)
+- `VOICE_ID_PEPE` — la mascotte in prima persona: accoglienza, istruzioni
+  dei giochi, incoraggiamenti, saluti, le frasi quando la si tocca. (105 tracce)
+- `VOICE_ID_NARRATOR` — voce in terza persona: il racconto della storia e i
+  traguardi rari (mondo superato, nuova creatura, fase completata). (79 tracce)
+
+**Lo stesso volume per tutte.** Le voci arrivano da ElevenLabs con livelli
+molto diversi (misurati: oltre 21 dB di scarto). `tools/normalize-audio.mjs`
+le porta tutte a -24 dB (sulle parti con voce), e `generate-audio.mjs` lo
+fa da solo per ogni traccia nuova. Serve ffmpeg: su un Mac Intel, dove
+Homebrew non si installa piu', va bene la build statica di evermeet.cx in
+`~/.local/bin/ffmpeg` (o il percorso in `FFMPEG`).
+
+```bash
+node tools/normalize-audio.mjs --report   # misura e basta
+node tools/normalize-audio.mjs            # corregge le tracce fuori tolleranza
+```
 
 Chi dice cosa e' dichiarato in `strings.mascotVoices`. Se sposti una battuta al
 narratore, **riscrivi il testo in terza persona**: la voce epica che dice
@@ -141,7 +177,7 @@ anche con repository pubblico:
 
 ## Il curriculum
 
-`content.json` non e' un elenco di parole: e' un corso a 8 unita', ognuna con un
+`content.json` non e' un elenco di parole: e' un corso a 32 unita' in 9 fasi, ognuna con un
 obiettivo linguistico dichiarato (non "colori" ma "il colore va prima del nome"),
 con revisione sistematica delle unita' precedenti in ogni partita e una soglia
 di padronanza dell'80% per passare di fase.
@@ -171,9 +207,15 @@ Poi `node tools/generate-audio.mjs` per la voce inglese, e
 
 ## Area genitori
 
-Si apre dall'icona in alto a destra ed e' protetta da un PIN di 4 cifre.
-**Il PIN non e' una misura di sicurezza informatica**: serve solo a impedire che
-un bambino ci entri per sbaglio. Chi conosce gli strumenti del browser lo aggira.
+Si apre dall'icona in alto a destra ed e' protetta da un codice di 4 cifre:
+**1357 di partenza**, da cambiare con uno che conoscono solo i genitori.
+**Il codice non e' una misura di sicurezza informatica**: serve solo a impedire
+che un bambino ci entri per sbaglio. Chi conosce gli strumenti del browser lo aggira.
+
+**Tempo di gioco.** Il default e' 30 minuti al giorno. Alla scadenza Pepe
+saluta e il gioco si ferma; per continuare serve lo stesso codice, che
+aggiunge altrettanti minuti e propone di salvare una copia dei dati (su
+iPad dal pannello di condivisione, "Salva su File").
 
 Da li' si impostano: durata della sessione, fasce orarie e giorni consentiti,
 fasi didattiche e temi attivi, pausa vacanza, musica ed effetti, email

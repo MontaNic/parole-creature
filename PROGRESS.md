@@ -5,8 +5,10 @@
 
 ## Stato attuale
 
-**v3.5.0 — "Pepe e la Leggenda delle Parole", progetto chiuso per ora
-(9 settembre 2026).** Nome di lavoro e repository: *Parole & Creature*.
+**v3.8.0 — "Pepe e la Leggenda delle Parole", in uso (19 ottobre 2026).**
+Chiuso a settembre con la 3.5.0, riaperto a ottobre per le correzioni nate
+dalle prove sul tablet (versioni 3.6.0-3.8.0, in fondo a questo file).
+Nome di lavoro e repository: *Parole & Creature*.
 Online in HTTPS su https://montanic.github.io/parole-creature/ (GitHub
 Pages), offline dopo il primo avvio con rete.
 
@@ -15,14 +17,15 @@ Pages), offline dopo il primo avvio con rete.
 | unita' | 32 in 9 fasi giocabili (piu' le fasi 4 e 5 dei genitori) |
 | parole / frasi | 295 / 182, tutte con audio |
 | illustrazioni | 282 PNG generati con Gemini, tutti in cache offline |
-| tracce audio | 1324 (1168 inglesi, 156 italiane), quattro voci, mai sintesi |
+| tracce audio | 1352 (1168 inglesi, 184 italiane), quattro voci, mai sintesi, tutte allo stesso volume (-24 dB) |
 | creature | 36 |
 | storia | 3 stagioni, 38 scene |
 | dialoghi | 32, uno per unita' |
 | libretti | 6, leggibili nel gioco con audio |
 | suoni | 24 in 4 lezioni, 24 fusioni |
-| mini-giochi | 8 (piu' il turno di dialogo) e 3 giochi bonus |
-| controlli automatici | 123 (curriculum-test) + smoke test + asset + palette + offline sul sito |
+| mini-giochi | 6 a tocco nelle partite, "Ascolta e ripeti" e "Dillo tu" nel giro "Parla con Pepe", il dialogo, 3 giochi bonus |
+| tempo di gioco | 30 minuti al giorno, poi codice genitore (1357 di partenza) |
+| controlli automatici | 166 (curriculum-test) + smoke test + asset + palette + offline sul sito |
 
 Il percorso didattico segue le Indicazioni nazionali per la primaria fino a
 un A1 pieno con i primi mattoni dell'A2 (`docs/curriculum-2.md`,
@@ -30,9 +33,10 @@ un A1 pieno con i primi mattoni dell'A2 (`docs/curriculum-2.md`,
 produrre" sono in fondo a questo file. Per i genitori:
 `docs/guida-genitori.md`.
 
-Il prossimo dato utile non e' codice: il primo **check del mese**
-dall'area genitori, che dice se le parole "padroneggiate" esistono anche
-fuori dallo schermo.
+I prossimi dati utili non sono codice: le **prove sul tablet** delle novita'
+di ottobre (microfono in "Parla con Pepe", il cestino, il blocco del tempo,
+le reazioni di Pepe) e il primo **check del mese** dall'area genitori, che
+dice se le parole "padroneggiate" esistono anche fuori dallo schermo.
 
 ## Dove gira
 
@@ -186,13 +190,19 @@ E soprattutto: la mappa mostra la barra di padronanza della fase **con una tacca
 all'80%**, e Pepe dice quante parole mancano. Un traguardo visibile e' un
 obiettivo; un cancello muto e' una frustrazione.
 
-### Le tre voci
+### Le quattro voci
+
+Numeri aggiornati a ottobre 2026 (all'inizio erano tre voci e 113 tracce).
 
 | Voce (`.env`) | Ruolo | Tracce | Caratteri | Sintesi |
 |---|---|---|---|---|
-| `VOICE_ID_ENGLISH` | **modello di pronuncia**: tutto il contenuto didattico inglese | 89 (51 parole + 38 frasi) | 893 | `stability 0.70/0.55` |
-| `VOICE_ID_PEPE` | **la compagna**: Pepe in prima persona — accoglienza, istruzioni, incoraggiamenti | 21 | 755 | `stability 0.45, style 0.25` |
-| `VOICE_ID_NARRATOR` | **il narratore**: annunci epici in terza persona, solo per i traguardi rari | 3 | 162 | `stability 0.60, style 0.35` |
+| `VOICE_ID_ENGLISH` | **modello di pronuncia**: tutto il contenuto didattico inglese, battute delle creature, libretti, suoni | 880 | 15.783 | `stability 0.70/0.55` |
+| `VOICE_ID_BAMBINO` | **il bambino**: le risposte dei dialoghi | 288 | 4.295 | `stability 0.60, style 0.15` |
+| `VOICE_ID_PEPE` | **la compagna**: Pepe in prima persona — accoglienza, istruzioni dei giochi, incoraggiamenti, frasi al tocco | 105 | 4.801 | `stability 0.45, style 0.25` |
+| `VOICE_ID_NARRATOR` | **il narratore**: il racconto della storia e i traguardi rari, in terza persona | 79 | 6.975 | `stability 0.60, style 0.35` |
+
+Tutte le tracce sono portate allo stesso volume (`tools/normalize-audio.mjs`,
+anche dentro `generate-audio.mjs`): misurate, andavano da -34.8 a -13.2 dB.
 
 Le separazioni non sono estetiche, e sono due, con due ragioni diverse.
 
@@ -266,21 +276,32 @@ js/audio.js              mp3 pre-generati -> SpeechSynthesis, SFX e musica sinte
 js/srs.js                ripetizione spaziata (Leitner, promozione a cadenza giornaliera)
 js/mascot.js             Pepe: disegno SVG, evoluzione, battute vocali
 js/effects.js            coriandoli / stelle / bolle su canvas + toast
-js/minigames.js          i 6 mini-giochi
-js/missions.js           missione del giorno (deterministica dalla data)
+js/minigames.js          i mini-giochi e il turno del bambino al microfono
+js/pace.js               il ritmo: comandi fermi mentre la voce parla; istruzioni di Pepe
+js/dialogues.js          i dialoghi con le creature, con la figura di cui si parla
+js/phonics.js            "I suoni": lettere, suoni, fusione
+js/books.js              i libretti illustrati
+js/story.js              la storia a episodi
+js/chests.js, bonus.js, badges.js, den.js   scrigni, giochi bonus, distintivi, tana
+js/recorder.js, speech.js   registrazione e rilevamento della voce; riconoscimento (facoltativo)
+js/share.js, history.js, checkup.js   condivisione, storico, check del mese
+js/missions.js           missione del giorno (missioni di avvio, poi solo fattibili)
+js/lock.js               tempo finito: codice genitore, sblocco, copia dei dati
+js/pepe-touch.js         Pepe che reagisce al tocco
 js/screens.js            home a blocchi di fase, album, riepilogo, onboarding, blocco
-js/parents.js            area genitori con PIN e 5 pannelli
+js/parents.js            area genitori con codice e pannelli
 content.json             il curriculum (unita', strutture, lessico, frasi, ricompense)
 strings.json             testi UI in italiano
-assets/img/art/          43 illustrazioni generate (+ index.json)
-assets/img/sprites.svg   81 simboli; 38 ancora in uso (numeri, colori, icone, plurali)
+assets/img/art/          282 illustrazioni generate (+ index.json)
+assets/img/sprites.svg   153 simboli (numeri, colori, icone, plurali)
 assets/audio/index.json  elenco degli mp3 realmente presenti
 sw.js                    cache offline
 sw-art.js                GENERATO: elenco delle illustrazioni da pre-cachare
 tools/check-assets.mjs   integrita' degli asset grafici (6 controlli, senza browser)
 tools/generate-images.mjs generazione offline delle illustrazioni
 tools/remove-bg.py       sfondo, ritaglio, plurali, indice, lista di precache
-tools/generate-audio.mjs generazione offline degli audio
+tools/generate-audio.mjs generazione offline degli audio (allinea il volume)
+tools/normalize-audio.mjs  stesso volume per tutte le tracce (ffmpeg)
 tools/curriculum-test.html  test delle regole didattiche
 tools/smoke-test.html    test di sfoglio automatico
 proxy/cloudflare-worker.js  proxy che custodisce la chiave ElevenLabs
@@ -291,8 +312,9 @@ proxy/cloudflare-worker.js  proxy che custodisce la chiave ElevenLabs
 **Il corso**
 - [x] 32 unita' in 9 fasi, ognuna con obiettivo linguistico, strutture dichiarate e ripasso sistematico di tutte le precedenti
 - [x] Soglia di padronanza (80%) per il passaggio di fase; padronanza = risposte giuste in giorni diversi (Leitner a 6 box)
-- [x] 8 mini-giochi: abbinamento, quiz, ascolta e ripeti (con microfono), caccia, trascina, ricomponi la frase, vero/falso, **Dillo tu** (produrre prima di ascoltare, conferma vocale opzionale)
-- [x] 32 dialoghi con le creature a fine unita' (tre scambi, risposte con la voce di bambino)
+- [x] Partite con 6 giochi a tocco: abbinamento, quiz (bolle sonore in fase 1), caccia, trascina, ricomponi la frase, vero/falso; un disegno da solo e' sempre una parola nuda
+- [x] **Parla con Pepe**: giro apposta di 5 parole con "Ascolta e ripeti" e "Dillo tu", il gioco aspetta la voce del bambino (al massimo 2 tentativi al microfono)
+- [x] 32 dialoghi con le creature a fine unita' (tre scambi, risposte con la voce di bambino, la figura di cui si parla, traduzione solo dopo la risposta)
 - [x] "I suoni": 4 lezioni di phonics con la fusione
 - [x] 6 libretti (graded reader) leggibili con audio; "Prima del cartone" per i 6 audiovisivi consigliati
 - [x] Difficolta' progressiva dentro la partita, sfida finale, aiuto scritto dopo due errori, conferma scritta dopo la risposta giusta
@@ -302,11 +324,13 @@ proxy/cloudflare-worker.js  proxy che custodisce la chiave ElevenLabs
 - [x] Storia in 3 stagioni (38 scene), rivedibile dall'album
 - [x] Album: 36 creature, 12 adesivi, 11 distintivi, mensola dei libretti, indice della storia
 - [x] Scrigni a sorpresa, 3 giochi bonus (Bolle, Spunta!, Il cestino), la tana da arredare
-- [x] Missione del giorno: 8 di gioco e 8 a casa (confermate da un adulto), streak
+- [x] Missione del giorno: 3 di avvio per chi comincia, 8 di gioco e 8 a casa (confermate da un adulto), solo se fattibili; streak
+- [x] Pepe legge le istruzioni dei giochi (la prima volta per sessione), reagisce al tocco, saluta con "Benvenuto" al primo accesso
 - [x] Registrazione della voce senza voto, condivisione del riepilogo in famiglia
 
 **Per i genitori**
-- [x] Area con PIN: minuti, fasce orarie, giorni, fasi e temi in pausa, pausa vacanza, sblocco fasi
+- [x] Area con codice genitore (1357 di partenza): minuti, fasce orarie, giorni, fasi e temi in pausa, pausa vacanza, sblocco fasi
+- [x] Tempo di gioco (30 minuti di default): alla scadenza il gioco si ferma, il codice sblocca altrettanti minuti e propone la copia dei dati
 - [x] Progressi per unita', storico degli ultimi 14 giorni, criteri di successo misurabili, il **check del mese**
 - [x] Volumi, microfono, condivisione, riconoscimento vocale (spento di default), verifica dell'offline, backup su file
 - [x] Guida di una pagina (`docs/guida-genitori.md`)
@@ -317,7 +341,8 @@ proxy/cloudflare-worker.js  proxy che custodisce la chiave ElevenLabs
 - [x] Illustrazioni generate con Gemini in pipeline (prompt fisso, sfondo tolto, coppie confondibili misurate)
 - [x] Offline via service worker: shell all'installazione, illustrazioni a pezzi guidate dal worker, verificato sul sito
 - [x] PWA installabile con icone vere; design system con palette misurata per il daltonismo
-- [x] Test: curriculum-test (123 controlli), smoke test, check-assets, palette-check, cache-check-remote
+- [x] Il ritmo lo detta il gioco: comandi fermi mentre una voce spiega; musica sotto le voci e muta col microfono aperto
+- [x] Test: curriculum-test (166 controlli), smoke test, check-assets, palette-check, cache-check-remote
 
 ## Contenuti didattici presenti
 
@@ -562,6 +587,20 @@ frasi da fare prima.
   (2) `playFile` in `js/audio.js` non aveva timeout: se `ended` non fosse mai
   arrivato, il mini-gioco sarebbe rimasto appeso in attesa. Ora c'e' un tetto
   massimo basato sulla durata della traccia.
+- **2026-09-09** — **v3.5.0**: titolo e logo. Progetto chiuso per ora.
+  (Le versioni da 1.2 a 3.5 sono raccontate nelle sezioni piu' sotto.)
+- **2026-10-15** — **v3.6.0**, uniformita' e ritmo: parole e frasi senza
+  ambiguita', comandi fermi mentre la voce parla, istruzioni lette da Pepe,
+  benvenuto, missioni di avvio, volumi allineati, bolle sonore nel quiz,
+  figure nei dialoghi. Dettagli in "Uniformita' e ritmo".
+- **2026-10-18** — **v3.6.1**: turno del bambino al microfono, un solo
+  bottone a fine partita ("Prossimo mondo"), scheda "Come si gioca" nei
+  bonus, cestino che prende davvero, musica muta col microfono.
+  **v3.6.2**: 30 minuti, codice genitore 1357, blocco vero alla scadenza,
+  copia dei dati. **v3.6.3**: etichetta "Non ti ho sentito" a misura.
+- **2026-10-19** — **v3.7.0**: niente microfono nelle partite, nasce "Parla
+  con Pepe". **v3.7.1**: prima l'inglese, poi l'italiano. **v3.8.0**:
+  toccare Pepe.
 
 ## Design system
 
@@ -1544,34 +1583,40 @@ della custodia dell'iPad. Prima una sola lezione da provare con il bambino.
 
 ## Prossimi passi
 
-Il progetto e' chiuso per ora (v3.6.0). Cio' che ha senso fare dopo, in
-ordine, e tutto dipende da un dato che non c'e' ancora:
+Il gioco e' in uso (v3.8.0). Cio' che ha senso fare dopo, in ordine:
 
-1. **Il primo check del mese** (area genitori, fra 30 giorni): se le
-   "padroneggiate" reggono sotto 7 su 10, alzare `masteryBox` in
-   `content.json` o giocare piu' ripasso.
-2. **Playtest sulle novita'**: usa "Dillo tu" davvero o tocca subito
-   "Ascolta"? Nei dialoghi ascolta le risposte prima di scegliere? Le
-   lezioni dei suoni le rifa' da solo?
-3. **Se serve altro contenuto**: un anno 4 (A2: passato semplice vero,
+1. **Prove sul tablet delle novita' di ottobre**, che da qui non si possono
+   verificare: il microfono in "Parla con Pepe" (sente la voce di Pietro?
+   scatta col rumore della stanza?), il cestino, il blocco del tempo e il
+   "Salva su File" dentro l'app aggiunta alla Home, la musica col microfono,
+   le reazioni di Pepe al tocco.
+2. **Il parlato non deve sparire**: guardare nello storico se "Parla con
+   Pepe" viene aperto davvero. Se no, proporlo dal riepilogo o legarlo a una
+   missione piu' spesso.
+3. **Il primo check del mese** (area genitori): se le "padroneggiate"
+   reggono sotto 7 su 10, alzare `masteryBox` in `content.json` o giocare
+   piu' ripasso.
+4. **Difetti noti, piccoli**: nel dialogo della casa la figura "in the
+   kitchen" e' poco chiara (la cucina e' disegnata come un fornello).
+5. **In coda: "La tastiera di Pepe"**, un angolo a parte per scrivere con
+   due mani sulla tastiera della custodia dell'iPad. Prima una sola lezione
+   da provare con il bambino.
+6. **Se serve altro contenuto**: un anno 4 (A2: passato semplice vero,
    comparativi, testi piu' lunghi), altri libretti per gli anni 2 e 3, una
    stagione 4 della storia. La pipeline e' pronta (batch Gemini dal 10).
-4. **Riascolto a campione delle tracce** con la voce di bambino e dei
-   suoni: dove una non convince, si cancella e si rigenera.
 
 Il diario completo, con le decisioni e i difetti trovati, e' nelle sezioni
 qui sopra.
 
-## Idee future (non in v1)
+## Idee future
 
-- PWA installabile, icone PNG, prompt di installazione.
-- Grafici dei progressi nel tempo nella dashboard genitori.
-- Badge/achievement per il lungo periodo.
+Fatte nel frattempo: PWA installabile con icone, storico dei progressi nella
+dashboard genitori, distintivi, palette verificata per il daltonismo,
+criteri di successo misurabili. Restano:
+
 - Multi-profilo per piu' bambini.
 - Invio automatico dei mini-ebook a Send-to-Kindle.
 - Riconoscimento vocale per la pronuncia, quando sara' affidabile sulle voci dei bambini.
-- Palette verificata per il daltonismo.
-- Criteri di successo misurabili (uso quotidiano per 2 settimane, N parole acquisite).
 
 ### Fase 2 — disegno in `docs/fase-2.md`
 
