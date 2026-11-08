@@ -5,9 +5,9 @@
 
 ## Stato attuale
 
-**v3.8.0 — "Pepe e la Leggenda delle Parole", in uso (19 ottobre 2026).**
+**v3.9.0 — "Pepe e la Leggenda delle Parole", in uso (8 novembre 2026).**
 Chiuso a settembre con la 3.5.0, riaperto a ottobre per le correzioni nate
-dalle prove sul tablet (versioni 3.6.0-3.8.0, in fondo a questo file).
+dalle prove sul tablet (versioni 3.6.0-3.9.0, in fondo a questo file).
 Nome di lavoro e repository: *Parole & Creature*.
 Online in HTTPS su https://montanic.github.io/parole-creature/ (GitHub
 Pages), offline dopo il primo avvio con rete.
@@ -1580,6 +1580,27 @@ sorpresa", e' stata tolta su richiesta dei genitori.
 Idea in coda, discussa ma non fatta: **"La tastiera di Pepe"**, un angolo a
 parte (non una pausa) per imparare a scrivere con due mani sulla tastiera
 della custodia dell'iPad. Prima una sola lezione da provare con il bambino.
+
+### Fine partita che porta avanti, ripasso a fine mondo (versione 3.9.0)
+
+Dal tablet: a fine partita il bottone grande diceva "Gioca ancora" e
+rigiocava lo stesso mondo; per un bambino era un giro infinito, e per
+andare avanti bisognava passare dal piccolo "Casa". In piu', entrando in un
+mondo nuovo (es. i colori), un terzo delle domande era sui mondi vecchi.
+
+- **Il bottone grande porta sempre avanti**: "Avanti" (altre parole nuove
+  dello stesso mondo, con una barra `fatte/totali` che mostra quanto manca),
+  "Ripasso del mondo" appena un mondo e' finito, "Prossimo mondo" dopo.
+  Sotto, piccoli e affiancati, **"Ripeti"** (la stessa partita, con le stesse
+  parole) e **"Casa"**.
+- **Niente ripasso mentre si impara un mondo** (`splitRound`): tutte le
+  domande sono sul mondo nuovo, che si chiude in 2 partite invece di 3+.
+  Solo i mondi con meno parole delle domande completano con il ripasso.
+- **"Ripasso del mondo"** (`worldReviewSplit`): a mondo appena finito, una
+  partita meta' sul mondo chiuso e meta' sui mondi precedenti. Non conta
+  per l'avanzamento. A mondo gia' finito e rigiocato, il ripasso torna
+  mescolato come prima (35%).
+- curriculum-test: 168 controlli, tutti verdi; smoke test senza errori.
 
 ## Prossimi passi
 

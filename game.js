@@ -20,7 +20,7 @@ import {
 import { chiediSblocco } from './js/lock.js';
 import { recordAnswer, pickRoundItems, shuffle, similar } from './js/srs.js';
 import {
-  splitRound, freeReviewPool, unitProgress, currentUnit,
+  splitRound, worldReviewSplit, freeReviewPool, unitProgress, currentUnit,
   curriculumConfig, phaseProgress, playablePhases
 } from './js/curriculum.js';
 import {
@@ -217,6 +217,31 @@ function buildRound(opts) {
     };
     picked = pickRoundItems(pool, Math.min(total, Math.max(5, pool.length)));
     picked.forEach(it => reviewIds.add(it.id));
+  } else if (opts.repeat) {
+    // "Ripeti": la stessa partita di prima, con le stesse parole.
+    picked = opts.repeat.items.slice();
+    pool = opts.repeat.pool.slice();
+    world = opts.repeat.world;
+    picked.forEach(it => { if (opts.repeat.reviewIds.has(it.id)) reviewIds.add(it.id); });
+  } else if (opts.worldReview) {
+    // Ripasso del mondo appena finito, insieme ai mondi precedenti. Non
+    // conta per l'avanzamento delle unita' (id con il doppio trattino).
+    const base = opts.worldReview;
+    const split = worldReviewSplit(base, total, settings);
+    if (!split.newItems.length && !split.reviewItems.length) return null;
+    const fresh = pickRoundItems(split.newItems, split.newCount);
+    const review = split.reviewCount > 0 ? pickRoundItems(split.reviewItems, split.reviewCount) : [];
+    review.forEach(it => reviewIds.add(it.id));
+    picked = interleave(shuffle(fresh), review);
+    pool = dedupeById([...split.newItems, ...split.reviewItems]);
+    world = {
+      id: '__worldreview__',
+      reviewOf: base.id,
+      title_it: `${t('ui.world_review')}: ${base.title_it}`,
+      phase: base.phase,
+      minigames: base.minigames,
+      color: base.color
+    };
   } else {
     const split = splitRound(world, total, settings);
     if (!split.newItems.length && !split.reviewItems.length) return null;
@@ -238,14 +263,14 @@ function buildRound(opts) {
   const phase = getPhase(world.phase);
   const showWritten = Boolean(phase?.showWrittenWord);
 
-  const pr = opts.review ? { ratio: 1, plays: 3 } : unitProgress(world, settings);
+  const pr = (opts.review || world.id.startsWith('__')) ? { ratio: 1, plays: 3 } : unitProgress(world, settings);
   const difficulty = pr.ratio > 0.6 ? 3 : pr.plays > 0 ? 2 : 1;
 
   return {
     world, pool, items: picked, reviewIds, showWritten, difficulty,
-    steps: opts.speak ? passiParlati(picked) : buildSteps(world, picked, pool, difficulty),
+    steps: (opts.speak || world.id === '__speak__') ? passiParlati(picked) : buildSteps(world, picked, pool, difficulty),
     // Il dialogo dell'unita' chiude la partita: sempre le prime due volte, poi una su tre.
-    dialogue: (!opts.review && !opts.speak && dialogueFor(world.id) && wantsDialogue((save.progress.worlds[world.id] || {}).plays || 0)) ? dialogueFor(world.id) : null
+    dialogue: (!opts.review && !opts.speak && !opts.worldReview && !opts.repeat && dialogueFor(world.id) && wantsDialogue((save.progress.worlds[world.id] || {}).plays || 0)) ? dialogueFor(world.id) : null
   };
 }
 
@@ -618,23 +643,49 @@ async function finishRound({ round, correct, total, levelUp, missionJustDone, op
 
   const overLimit = tempoFinito();
 
-  // Unita' finita e la prossima aperta: il bottone grande porta li'.
   if (round.world.id === '__speak__') { save.daily.speakDone = true; persist(); }
-  const prossimo = !round.world.id.startsWith('__') && unitProgress(round.world).completed
-    ? currentUnit() : null;
-  const nextWorld = prossimo && prossimo.id !== round.world.id ? prossimo : null;
+
+  /*
+   * Il bottone grande porta SEMPRE avanti, mai indietro:
+   *  - mondo appena finito          -> "Ripasso del mondo" (questo + i vecchi)
+   *  - dopo il ripasso, o mondo gia' finito e il prossimo aperto
+   *                                 -> "Prossimo mondo"
+   *  - mondo ancora da finire       -> "Avanti": altre parole nuove dello
+   *                                    stesso mondo, non la stessa partita
+   * "Ripeti" (la stessa identica partita) e "Casa" sono piccoli, sotto.
+   */
+  const baseWorld = round.world.id === '__worldreview__'
+    ? content.worldById.get(round.world.reviewOf)
+    : (round.world.id.startsWith('__') ? null : round.world);
+  const baseProgress = baseWorld ? unitProgress(baseWorld) : null;
+  const prossimo = baseProgress?.completed ? currentUnit() : null;
+  const nextWorld = prossimo && prossimo.id !== baseWorld.id ? prossimo : null;
+  const proponiRipasso = worldJustCompleted && splitRound(round.world, 8).reviewItems.length > 0;
+
+  let primary;
+  if (proponiRipasso) primary = 'world_review';
+  else if (nextWorld) primary = 'next_world';
+  else primary = 'continue';
 
   await renderSummary(
     { correct, total, newCreatures, levelUp, phaseUnlocked,
       worldCompleted: worldJustCompleted,
       nextWorld,
+      primary,
+      worldProgress: baseProgress && !baseProgress.completed ? baseProgress : null,
       world: round.world,
       newBadges,
       missionDone: missionJustDone, endSession: overLimit },
     {
       onHome: poi(() => goHome()),
-      onAgain: poi(() => startRound(opts)),
+      onAgain: poi(() => startRound({ repeat: { items: round.items, pool: round.pool, world: round.world, reviewIds: round.reviewIds } })),
       onNext: poi(() => startRound({ world: nextWorld })),
+      onWorldReview: poi(() => startRound({ worldReview: round.world })),
+      // "Avanti" senza un mondo dopo: si continua dove si e', con parole nuove.
+      onContinue: poi(() => startRound(
+        baseWorld ? { world: baseWorld }
+          : round.world.id === '__speak__' ? { speak: true }
+          : { review: true })),
       // Il genitore ha gia' sbloccato dal riepilogo: si riparte.
       onContinueAnyway: poi(() => startRound(opts))
     }

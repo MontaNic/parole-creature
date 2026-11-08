@@ -212,6 +212,17 @@ export function splitRound(world, total, settings = save.settings) {
     return { newItems: fresh, reviewItems: [], newCount: Math.min(total, fresh.length || total), reviewCount: 0 };
   }
 
+  // Mondo ancora da finire: la partita e' tutta sul mondo nuovo. Il ripasso
+  // delle unita' precedenti arriva alla fine, con il "Ripasso del mondo"
+  // (vedi worldReviewSplit). Prima un terzo delle domande era su mondi
+  // vecchi anche al primo ingresso, e il mondo nuovo sembrava non arrivare
+  // mai. Solo se il mondo ha meno parole delle domande, il resto e' ripasso.
+  if (!unitProgress(world, settings).completed) {
+    const newCount = Math.min(total, fresh.length);
+    const reviewCount = fresh.length ? Math.min(total - newCount, review.length) : Math.min(total, review.length);
+    return { newItems: fresh, reviewItems: review, newCount, reviewCount };
+  }
+
   let reviewCount = Math.max(cfg.minReviewItems, Math.round(total * weight));
   reviewCount = Math.min(reviewCount, review.length, total - 1);
   let newCount = total - reviewCount;
@@ -223,6 +234,20 @@ export function splitRound(world, total, settings = save.settings) {
     reviewCount = Math.min(total - newCount, review.length);
   }
 
+  return { newItems: fresh, reviewItems: review, newCount, reviewCount };
+}
+
+/**
+ * Il "Ripasso del mondo": la partita proposta appena un mondo e' finito.
+ * Meta' domande sul mondo appena chiuso, meta' sui mondi precedenti, cosi'
+ * le parole vecchie restano fresche senza rubare spazio a quelle nuove.
+ */
+export function worldReviewSplit(world, total, settings = save.settings) {
+  const fresh = unitItems(world, settings);
+  const review = unitReviewItems(world, settings);
+  let reviewCount = Math.min(review.length, Math.floor(total / 2));
+  let newCount = Math.min(fresh.length, total - reviewCount);
+  reviewCount = Math.min(review.length, total - newCount);
   return { newItems: fresh, reviewItems: review, newCount, reviewCount };
 }
 

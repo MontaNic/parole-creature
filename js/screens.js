@@ -451,12 +451,27 @@ export async function renderSummary(result, handlers) {
   /*
    * Dove andare adesso.
    *
-   * Prima c'erano due bottoni affiancati, "Continua" e "Casa", e non era
-   * chiaro quale portasse avanti; in piu' "Continua" rigiocava sempre la
-   * stessa unita', anche appena completata. Ora c'e' UN bottone grande e
-   * verde con il triangolo "play": porta al mondo dopo se questo e' finito,
-   * altrimenti si gioca ancora qui. "Casa" e' un tasto piccolo, sotto.
+   * Il bottone grande e verde porta SEMPRE avanti: al ripasso del mondo
+   * appena finito, al mondo dopo, oppure ad altre parole nuove dello stesso
+   * mondo. Prima, a mondo non finito, diceva "Gioca ancora" e sembrava di
+   * rifare lo stesso livello all'infinito, mentre per andare avanti bisognava
+   * passare dal piccolo "Casa". Ora "Ripeti" (la stessa partita, identica)
+   * e "Casa" sono due tasti piccoli affiancati, sotto.
    */
+  if (result.worldProgress && !result.endSession) {
+    // Quanta strada manca per finire il mondo: una barra, leggibile anche
+    // da chi non legge ancora.
+    const p = result.worldProgress;
+    const wrap = el('div', 'summary-world-progress');
+    wrap.appendChild(el('span', 'summary-world-label', `${p.done}/${p.total}`));
+    const bar = el('div', 'summary-world-bar');
+    const fill = el('div', 'summary-world-fill');
+    fill.style.width = `${Math.round(100 * p.done / Math.max(1, p.total))}%`;
+    bar.appendChild(fill);
+    wrap.appendChild(bar);
+    body.appendChild(wrap);
+  }
+
   const actions = el('div', 'summary-actions');
   const primario = (testo, icona, onclick) => {
     const b = el('button', 'btn btn-good btn-lg summary-go');
@@ -466,12 +481,12 @@ export async function renderSummary(result, handlers) {
     b.onclick = () => { sfxTap(); onclick(); };
     return b;
   };
-  const casa = (testo) => {
+  const piccolo = (testo, icona, onclick) => {
     const b = el('button', 'btn btn-ghost btn-sm summary-home');
-    const ic = spriteSvg('sp-icon-home'); ic.classList.add('ico');
+    const ic = spriteSvg(icona); ic.classList.add('ico');
     b.appendChild(ic);
     b.appendChild(el('span', null, testo));
-    b.onclick = () => { sfxTap(); handlers.onHome(); };
+    b.onclick = () => { sfxTap(); onclick(); };
     return b;
   };
 
@@ -491,11 +506,20 @@ export async function renderSummary(result, handlers) {
     };
     actions.appendChild(genitore);
   } else {
-    const avanti = result.nextWorld
-      ? primario(t('ui.next_world'), 'sp-icon-play', () => handlers.onNext())
-      : primario(t('ui.play_again'), 'sp-icon-play', () => handlers.onAgain());
+    let avanti;
+    if (result.primary === 'world_review') {
+      avanti = primario(t('ui.world_review'), 'sp-icon-play', () => handlers.onWorldReview());
+    } else if (result.primary === 'next_world') {
+      avanti = primario(t('ui.next_world'), 'sp-icon-play', () => handlers.onNext());
+    } else {
+      avanti = primario(t('ui.next'), 'sp-icon-play', () => handlers.onContinue());
+    }
     actions.appendChild(avanti);
-    actions.appendChild(casa(t('ui.home')));
+
+    const riga = el('div', 'summary-small-row');
+    riga.appendChild(piccolo(t('ui.repeat'), 'sp-icon-replay', () => handlers.onAgain()));
+    riga.appendChild(piccolo(t('ui.home'), 'sp-icon-home', () => handlers.onHome()));
+    actions.appendChild(riga);
   }
   body.appendChild(actions);
 
