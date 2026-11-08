@@ -19,7 +19,7 @@ import { CONFIG } from './config.js';
  * Il gioco si chiamava "Draghetti & Parole": il nome resta qui per questo.
  */
 const STORAGE_KEY = 'draghetti_parole_save';
-export const SAVE_SCHEMA_VERSION = 3;
+export const SAVE_SCHEMA_VERSION = 4;
 
 /*
  * Il codice genitore di partenza: 1357. Serve per l'area genitori e per
@@ -126,7 +126,7 @@ function defaultSave() {
       phasesEnabled: { 1: true, 2: true, 3: true, 4: true, 5: true },
       themesDisabled: [],      // temi messi in pausa dai genitori
       voiceRecording: true,    // microfono in 'ascolta e ripeti'
-      familySharing: true,     // 'Condividi' a fine partita
+      familySharing: false,    // 'Condividi' a fine partita: lo accende un genitore
       speechCheck: false,      // riconoscimento vocale in 'Dillo tu' (esce dal dispositivo: spento)
       vacation: false,
 
@@ -199,6 +199,20 @@ const MIGRATIONS = {
     if (s.sessionMinutes === undefined || s.sessionMinutes === 10) s.sessionMinutes = 30;
     s.pinHash = DEFAULT_PIN_HASH;
     s.pinPlain = '';
+    return save;
+  },
+
+  /*
+   * 3 -> 4: "Condividi" spento di serie (versione 3.9.2).
+   *
+   * Era acceso di serie, e sull'iPad il bambino poteva aprire il foglio di
+   * condivisione e mandare l'immagine a un contatto. Si spegne per tutti:
+   * prima nessuno poteva averlo acceso apposta, era gia' acceso. Un
+   * genitore che lo vuole lo riaccende dall'area genitori.
+   */
+  3: (save) => {
+    const s = save.settings || (save.settings = {});
+    s.familySharing = false;
     return save;
   }
 };

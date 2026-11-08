@@ -12,7 +12,8 @@ const W = 1200, H = 630;
 
 /** Il bottone compare solo dove il browser sa condividere un file. */
 export function canShare() {
-  if (save.settings?.familySharing === false) return false;
+  // Spento di serie: compare solo se un genitore l'ha acceso.
+  if (save.settings?.familySharing !== true) return false;
   if (typeof navigator === 'undefined' || !navigator.share || !navigator.canShare) return false;
   try {
     const probe = new File([new Uint8Array([137, 80, 78, 71])], 'p.png', { type: 'image/png' });

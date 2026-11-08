@@ -5,9 +5,9 @@
 
 ## Stato attuale
 
-**v3.9.1 — "Pepe e la Leggenda delle Parole", in uso (8 novembre 2026).**
+**v3.9.2 — "Pepe e la Leggenda delle Parole", in uso (8 novembre 2026).**
 Chiuso a settembre con la 3.5.0, riaperto a ottobre per le correzioni nate
-dalle prove sul tablet (versioni 3.6.0-3.9.1, in fondo a questo file).
+dalle prove sul tablet (versioni 3.6.0-3.9.2, in fondo a questo file).
 Nome di lavoro e repository: *Parole & Creature*.
 Online in HTTPS su https://montanic.github.io/parole-creature/ (GitHub
 Pages), offline dopo il primo avvio con rete.
@@ -1609,6 +1609,15 @@ salvato resta valido) si aggiungono red, orange, yellow, green, blue,
 purple, white, black. Toccando uno dei nuovi, si sente il nome in inglese
 (gli audio del mondo dei colori, nessuna sintesi). La tavolozza e' scesa
 sotto il titolo, in una fila che scorre sul telefono, con bottoni da 44 px.
+
+### "Condividi" spento di serie (versione 3.9.2)
+
+Dalla valutazione dell'8 novembre: sull'iPad il bottone "Condividi" del
+riepilogo apriva il foglio di condivisione al bambino, che poteva mandare
+l'immagine a un contatto. Ora e' spento di serie e lo accende un genitore
+dall'area genitori. Migrazione del salvataggio 3 -> 4: spento per tutti (era
+acceso di serie, nessuno poteva averlo scelto), il resto del salvataggio
+resta com'era. curriculum-test: 170 controlli.
 
 ## Prossimi passi
 

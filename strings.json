@@ -274,7 +274,7 @@
     "speech_check": "Riconoscimento vocale (conferma morbida)",
     "speech_check_hint": "In \"Dillo tu\" il browser prova a capire la parola detta e Pepe conferma se è quella giusta. Mai una bocciatura. Attenzione: su iPad il riconoscimento passa dai server di Apple, è l'unico caso in cui un suono esce dal dispositivo. Per questo è spento finché non lo accendi tu.",
     "family_sharing": "Condivisione in famiglia",
-    "family_sharing_hint": "A fine partita compare \"Condividi\": il riepilogo diventa un'immagine da mandare con le app del dispositivo. Nessun server: passa solo dal foglio di condivisione. Spegnilo se preferisci che il bambino non abbia quel bottone.",
+    "family_sharing_hint": "A fine partita compare \"Condividi\": il riepilogo diventa un'immagine da mandare con le app del dispositivo. Nessun server: passa solo dal foglio di condivisione. E' spento di serie: accendilo solo se vuoi che il bambino abbia quel bottone.",
     "voice_recording": "Registrazione della voce",
     "voice_recording_hint": "Nel gioco \"ascolta e ripeti\" il bambino può registrarsi e riascoltarsi. Nulla viene salvato né inviato: la registrazione sparisce alla domanda successiva.",
     "unlock_all_phases": "Sblocca tutte le fasi",

@@ -391,6 +391,7 @@ async function run() {
     carta.width === 1200 && carta.height === 630 && carta.toDataURL('image/png').startsWith('data:image/png'));
   const vuota = await buildSummaryCard({ correct: 0, total: 0, newCreatures: [], world: null });
   check('la carta regge anche una partita vuota (ripasso, nessuna creatura)', vuota.width === 1200);
+  check("'Condividi' e' spento di serie", save.settings.familySharing === false && canShare() === false);
   save.settings.familySharing = false;
   check("l'interruttore dei genitori spegne 'Condividi'", canShare() === false);
 

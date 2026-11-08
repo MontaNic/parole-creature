@@ -7,7 +7,7 @@ sessioni brevi, Pepe (una cucciola di Jack Russell) che guida a voce, creature
 originali da collezionare, una storia a episodi. Interfaccia in italiano,
 contenuti didattici in inglese.
 
-**Cosa contiene** (versione 3.9.1): 32 unita' in 9 fasi, 295 parole e
+**Cosa contiene** (versione 3.9.2): 32 unita' in 9 fasi, 295 parole e
 182 frasi con audio (1.352 tracce), 282 illustrazioni, 36 creature, una
 storia in tre stagioni (38 scene), 32 dialoghi, 6 libretti, 4 lezioni sui
 suoni delle lettere, mini-giochi a tocco e 3 giochi bonus, "Parla con Pepe"
