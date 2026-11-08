@@ -1,0 +1,44 @@
+# Controlli automatici su ogni pull request e su main.
+#
+# Bloccanti: le regole del gioco (curriculum-test, nel browser) e
+# l'integrita' di immagini, audio e cache offline (check-assets).
+# Solo segnale: lo smoke test, che tocca bottoni a caso e dipende dai tempi
+# dell'audio; se fallisce lo si guarda, ma non ferma il merge.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # check-assets confronta CACHE_VERSION con la storia git
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Playwright e Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1
+          npx playwright install --with-deps chromium
+
+      - name: Asset e cache offline
+        run: node tools/check-assets.mjs
+
+      - name: Regole del gioco (curriculum-test)
+        run: node tools/run-browser-test.mjs tools/curriculum-test.html 180
+
+      - name: Smoke test (solo segnale)
+        continue-on-error: true
+        run: node tools/run-browser-test.mjs tools/smoke-test.html 240
