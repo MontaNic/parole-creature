@@ -407,7 +407,9 @@ async function run() {
   removeItem('c_pepe');
   check('riporre toglie dalla stanza', !isPlaced('c_pepe') && isPlaced('c_flamup'));
   setWall(WALLS.length + 1);
-  check('il colore della parete gira sui quattro', save.den.wall === 1);
+  check('il colore della parete gira su tutti i colori', save.den.wall === 1);
+  check('la parete ha il rosso, e ogni colore con parola ha la sua parola',
+    WALLS.some(w => w.word === 'w_red') && WALLS.every(w => !w.word || getItem(w.word)));
 
   /* --- lo storico giornaliero ---------------------------------------- */
   resetSave();

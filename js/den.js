@@ -15,7 +15,26 @@ import { renderMascot, mascotSay, mascotCheer } from './mascot.js';
 import { showScreen } from './screens.js';
 
 /** Colori di parete: quattro, dal design system (notte, foresta, lago, ambra). */
-export const WALLS = ['#443A72', '#2F6B4F', '#1F6E7A', '#8A5A2B'];
+/*
+ * I colori della parete. I primi quattro sono quelli di sempre (l'indice
+ * salvato resta valido); gli altri sono i colori del mondo dei colori e,
+ * toccati, dicono il loro nome in inglese: si impara anche arredando.
+ * Toni pieni ma non accecanti, perche' le cose appese restino leggibili.
+ */
+export const WALLS = [
+  { color: '#443A72' },
+  { color: '#2F6B4F' },
+  { color: '#1F6E7A' },
+  { color: '#8A5A2B' },
+  { color: '#C93B3B', word: 'w_red' },
+  { color: '#E07A2E', word: 'w_orange' },
+  { color: '#E8C547', word: 'w_yellow' },
+  { color: '#4BA35A', word: 'w_green' },
+  { color: '#3A78C9', word: 'w_blue' },
+  { color: '#8A4FC2', word: 'w_purple' },
+  { color: '#F2EEE4', word: 'w_white' },
+  { color: '#2A2A33', word: 'w_black' }
+];
 const MIN = 6, MAX = 94;   // margine in % perche' una cosa non sparisca oltre il bordo
 
 /* ------------------------------------------------------------------ */
@@ -96,18 +115,22 @@ export function renderDen() {
   for (const id of Object.keys(d.placed)) if (!byId.has(id)) delete d.placed[id];
 
   const paint = () => {
-    room.style.setProperty('--wall', WALLS[d.wall] || WALLS[0]);
+    room.style.setProperty('--wall', (WALLS[d.wall] || WALLS[0]).color);
     walls.querySelectorAll('button').forEach((b, i) => b.classList.toggle('is-on', i === d.wall));
   };
 
   /* --- parete --- */
   walls.innerHTML = '';
-  WALLS.forEach((colore, i) => {
+  WALLS.forEach((w, i) => {
     const b = el('button', 'den-wall');
     b.type = 'button';
-    b.style.background = colore;
-    b.setAttribute('aria-label', `${t('den.wall')} ${i + 1}`);
-    b.onclick = () => { sfxTap(); setWall(i); paint(); };
+    b.style.background = w.color;
+    const parola = w.word ? getItem(w.word) : null;
+    b.setAttribute('aria-label', parola ? parola.en : `${t('den.wall')} ${i + 1}`);
+    b.onclick = () => {
+      sfxTap(); setWall(i); paint();
+      if (parola) { stopVoice(); speakItem(parola); }
+    };
     walls.appendChild(b);
   });
 
