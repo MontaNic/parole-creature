@@ -1619,6 +1619,16 @@ dall'area genitori. Migrazione del salvataggio 3 -> 4: spento per tutti (era
 acceso di serie, nessuno poteva averlo scelto), il resto del salvataggio
 resta com'era. curriculum-test: 170 controlli.
 
+### CI su GitHub Actions
+
+Prima i test giravano solo a mano. Ora `.github/workflows/ci.yml` gira su
+ogni pull request e su main: **bloccanti** `check-assets` e `curriculum-test`
+(nel browser, con `tools/run-browser-test.mjs`, che legge il `#verdict`
+della pagina); lo smoke test e' **solo segnale** (`continue-on-error`),
+perche' tocca a caso e dipende dai tempi dell'audio. Regola: si unisce solo
+con la CI verde. In locale:
+`node tools/run-browser-test.mjs tools/curriculum-test.html`.
+
 ## Prossimi passi
 
 Il gioco e' in uso (v3.8.0). Cio' che ha senso fare dopo, in ordine:
