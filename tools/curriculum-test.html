@@ -51,7 +51,7 @@ import { cosaFa, FRASI, scegliFrase, FRASE_PREFERITA } from './js/pepe-touch.js'
 import { lessons as phLessons, soundById, blendOf, letterAudio, lessonDone } from './js/phonics.js';
 import {
   phaseProgress, isPhaseUnlocked, isUnitUnlocked, unitProgress,
-  splitRound, unitItems, unitReviewItems, curriculumConfig, playablePhases
+  splitRound, worldReviewSplit, unitItems, unitReviewItems, curriculumConfig, playablePhases
 } from './js/curriculum.js';
 
 const out = document.getElementById('out');
@@ -170,8 +170,21 @@ async function run() {
   resetSave();
   const u2 = content.worlds[1];
   unitItems(content.worlds[0]).forEach(it => forceBox(it.id, 1));   // unita' 1 "vista"
+  // Mentre si impara un mondo nuovo, la partita e' tutta sul mondo nuovo.
+  const imparo = splitRound(u2, 8);
+  check("mondo da finire: niente ripasso, tutte domande nuove",
+    imparo.reviewCount === 0 && imparo.newCount === Math.min(8, unitItems(u2).length),
+    `nuovi=${imparo.newCount} ripasso=${imparo.reviewCount}`);
+
+  // Il ripasso torna a mondo finito, e nel "Ripasso del mondo" e' meta' e meta'.
+  const rip = worldReviewSplit(u2, 8);
+  check("il ripasso del mondo e' meta' mondo appena finito, meta' mondi vecchi",
+    rip.newCount === 4 && rip.reviewCount === 4,
+    `nuovi=${rip.newCount} ripasso=${rip.reviewCount}`);
+
+  unitItems(u2).forEach(it => forceBox(it.id, 1));                   // unita' 2 finita
   const split = splitRound(u2, 8);
-  check("la partita dell'unita' 2 include domande di ripasso",
+  check("a mondo finito la partita include domande di ripasso",
     split.reviewCount >= cfg.minReviewItems,
     `nuovi=${split.newCount} ripasso=${split.reviewCount}`);
 

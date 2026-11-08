@@ -447,6 +447,11 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 .summary-go .ico { width: 34px; height: 34px; }
 .summary-home { background: var(--paper); color: var(--ink); gap: 8px; }
 .summary-home .ico { width: 24px; height: 24px; }
+.summary-small-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.summary-world-progress { display: flex; align-items: center; gap: 10px; width: 100%; max-width: 440px; }
+.summary-world-label { font-weight: 700; min-width: 3.5em; text-align: right; }
+.summary-world-bar { flex: 1; height: 14px; border-radius: 999px; background: rgba(255, 255, 255, .18); overflow: hidden; }
+.summary-world-fill { height: 100%; border-radius: 999px; background: var(--success); transition: width .6s ease; }
 
 /*
   In attesa della voce (js/pace.js): i comandi ci sono ma non rispondono.
