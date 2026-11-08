@@ -909,8 +909,9 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
   background: var(--paper); border: var(--stroke) solid var(--ink); box-shadow: var(--sh-card); cursor: pointer;
 }
 .den-tray-item svg, .den-tray-item img { width: 100%; height: 100%; fill: none; }
-.den-walls { display: flex; gap: 8px; }
-.den-wall { width: 34px; height: 34px; border-radius: 50%; border: 3px solid rgba(255,255,255,.35); cursor: pointer; }
+.den-walls { display: flex; gap: 10px; flex: none; overflow-x: auto; padding: 4px 4px 6px; justify-content: safe center; scrollbar-width: none; }
+.den-walls::-webkit-scrollbar { display: none; }
+.den-wall { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 3px solid rgba(255,255,255,.35); cursor: pointer; }
 .den-wall.is-on { border-color: #fff; box-shadow: 0 0 0 3px var(--amber); }
 #screen-den .mascot-corner { pointer-events: none; }
 

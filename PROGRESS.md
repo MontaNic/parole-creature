@@ -5,9 +5,9 @@
 
 ## Stato attuale
 
-**v3.9.0 — "Pepe e la Leggenda delle Parole", in uso (8 novembre 2026).**
+**v3.9.1 — "Pepe e la Leggenda delle Parole", in uso (8 novembre 2026).**
 Chiuso a settembre con la 3.5.0, riaperto a ottobre per le correzioni nate
-dalle prove sul tablet (versioni 3.6.0-3.9.0, in fondo a questo file).
+dalle prove sul tablet (versioni 3.6.0-3.9.1, in fondo a questo file).
 Nome di lavoro e repository: *Parole & Creature*.
 Online in HTTPS su https://montanic.github.io/parole-creature/ (GitHub
 Pages), offline dopo il primo avvio con rete.
@@ -1601,6 +1601,14 @@ mondo nuovo (es. i colori), un terzo delle domande era sui mondi vecchi.
   per l'avanzamento. A mondo gia' finito e rigiocato, il ripasso torna
   mescolato come prima (35%).
 - curriculum-test: 168 controlli, tutti verdi; smoke test senza errori.
+
+### La tana a colori, che parlano inglese (versione 3.9.1)
+
+La parete della tana passa da 4 a 12 colori: ai quattro di sempre (l'indice
+salvato resta valido) si aggiungono red, orange, yellow, green, blue,
+purple, white, black. Toccando uno dei nuovi, si sente il nome in inglese
+(gli audio del mondo dei colori, nessuna sintesi). La tavolozza e' scesa
+sotto il titolo, in una fila che scorre sul telefono, con bottoni da 44 px.
 
 ## Prossimi passi
 
