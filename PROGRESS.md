@@ -1753,7 +1753,7 @@ da uno all'altro con esporta/importa).
 
 ### Nella tana le creature salutano in inglese (versione 3.10.1)
 
-Per Pietro la tana e' una parte importante del gioco. Toccando una creatura nella stanza, oltre al
+Per il bambino la tana e' una parte importante del gioco. Toccando una creatura nella stanza, oltre al
 saltello, ora dice la sua battuta inglese della storia, gia' registrata con
 la voce modello (Fiammino: "Hello, Pepe! I am a dragon!"); un'onda sonora
 sopra la testa mostra chi parla. Pepe dice "My name is Pepe.". Le tre
