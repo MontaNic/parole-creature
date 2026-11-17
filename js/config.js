@@ -13,8 +13,8 @@ export const CONFIG = {
    * Servono a chi segnala un problema per dire "ce l'ho con questa".
    * Vanno alzate a mano a ogni rilascio: il progetto non ha un build step.
    */
-  appVersion: '3.9.2',
-  buildDate: '2026-09-07',
+  appVersion: '3.10.0',
+  buildDate: '2026-11-17',
 
   /** Percorsi dei dati. */
   contentUrl: 'content.json',

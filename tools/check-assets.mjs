@@ -125,6 +125,17 @@ disallineati.length
        disallineati.map(([p, s]) => `${s} e ${p}`).join(', '))
   : ok('ogni plurale e disegnato come il suo singolare');
 
+/* --- 7. ogni modulo del gioco e' nella cache offline --------------- */
+
+{
+  const sw = leggi('sw.js');
+  const moduli = readdirSync(path.join(ROOT, 'js')).filter(f => f.endsWith('.js')).map(f => `js/${f}`);
+  const mancanti = moduli.filter(m => !sw.includes(`'${m}'`));
+  mancanti.length
+    ? ko(`${mancanti.length} moduli fuori dalla cache offline del service worker`, mancanti.join(' '))
+    : ok(`tutti i ${moduli.length} moduli sono nella cache offline`);
+}
+
 /* --- 6. la cache e' stata invalidata dopo l'ultima modifica -------- */
 
 try {

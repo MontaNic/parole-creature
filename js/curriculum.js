@@ -161,6 +161,8 @@ export function isPhaseUnlocked(phase, settings = save.settings) {
  */
 export function isUnitUnlocked(world, settings = save.settings) {
   if (!isPhaseUnlocked(world.phase, settings)) return false;
+  // Un mondo gia' giocato resta aperto, anche se l'ordine dei mondi cambia.
+  if ((save.progress.worlds[world.id]?.plays || 0) > 0) return true;
   const siblings = playableUnits(settings).filter(w => w.phase === world.phase);
   const idx = siblings.findIndex(w => w.id === world.id);
   if (idx <= 0) return true;

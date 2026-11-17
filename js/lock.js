@@ -160,3 +160,25 @@ export async function sbloccoGenitore() {
   pannello.chiudi();
   return esito;
 }
+
+/**
+ * Solo il codice genitore, senza sbloccare il tempo: serve per decisioni da
+ * adulto che non c'entrano con i minuti (per esempio giocare nel browser
+ * invece che nel gioco installato).
+ * @param {string} titolo
+ * @returns {Promise<boolean>}
+ */
+export function soloCodiceGenitore(titolo) {
+  const pannello = apriPannello();
+  const { scheda } = pannello;
+  return new Promise(resolve => {
+    const fine = (ok) => { pannello.chiudi(); resolve(ok); };
+    scheda.appendChild(el('h2', 'h-title', titolo || t('lock.pin_title')));
+    scheda.appendChild(tastierino(async (pin) => {
+      if (!(await checkPin(pin))) return false;
+      fine(true);
+      return true;
+    }));
+    scheda.appendChild(bottone(t('lock.cancel'), 'btn-ghost', () => fine(false)));
+  });
+}

@@ -56,7 +56,14 @@ try {
   page.on('pageerror', e => erroriPagina.push(e.message));
   await page.goto(`${base}/${pagina}`);
   const verdetto = page.locator('#verdict').filter({ hasText: /PASS|FAIL/ });
-  await verdetto.first().waitFor({ timeout: timeoutMs });
+  // Un errore che ferma la pagina (per esempio di sintassi) non scrive mai
+  // il verdetto: invece di aspettare fino al timeout, si fallisce subito.
+  const errore = new Promise((_, reject) => {
+    const via = (msg) => setTimeout(() => reject(new Error(`errore nella pagina: ${msg}`)), 5000);
+    if (erroriPagina.length) via(erroriPagina[0]);     // gia' successo durante il caricamento
+    page.on('pageerror', e => via(e.message));
+  });
+  await Promise.race([verdetto.first().waitFor({ timeout: timeoutMs }), errore]);
   const testo = (await verdetto.first().innerText()).trim();
 
   // I controlli falliti (classe .ko) e le righe dei risultati, per il log.
