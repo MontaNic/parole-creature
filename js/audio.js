@@ -45,8 +45,25 @@ const SILENZIO = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhY
 /** Vero dopo il primo gesto dell'utente: da li' in poi play() e' consentito. */
 export function isAudioUnlocked() { return unlocked; }
 
-/** Cache degli elementi <audio> gia' creati, per non riscaricare i file. */
-const audioCache = new Map();
+/*
+ * UN SOLO lettore per tutte le voci.
+ *
+ * Su iPad Safari un elemento <audio> puo' partire senza un tocco solo se e'
+ * gia' stato avviato almeno una volta dentro un tocco. Prima ogni file aveva
+ * il suo elemento: una parola mai sentita, chiesta fuori da un tocco (nel
+ * gioco del cestino, quando la figura cade dentro), veniva rifiutata e il
+ * gioco restava muto. Ora c'e' un lettore unico, avviato al primo tocco
+ * (initAudioUnlock): da li' in poi puo' dire qualunque traccia, in
+ * qualunque momento. Le voci sono comunque una alla volta.
+ */
+let lettore = null;
+function lettoreVoce() {
+  if (!lettore) {
+    lettore = new Audio();
+    lettore.preload = 'auto';
+  }
+  return lettore;
+}
 
 /**
  * Come interrompere la traccia in corso. Due voci sovrapposte, in un gioco
@@ -70,10 +87,12 @@ export function initAudioUnlock() {
       const u = new SpeechSynthesisUtterance('');
       speechSynthesis.speak(u);
     } catch { /* ignorato */ }
-    // Un <audio> riprodotto dentro il gesto sblocca anche gli altri <audio>
-    // su iOS, che fuori da un tocco rifiuta play() elemento per elemento.
+    // Il lettore delle voci si avvia qui, dentro il gesto, con un istante di
+    // silenzio: su iOS da questo momento potra' parlare anche fuori da un
+    // tocco (vedi lettoreVoce).
     try {
-      const a = new Audio(SILENZIO);
+      const a = lettoreVoce();
+      a.src = SILENZIO;
       a.volume = 0;
       const p = a.play();
       if (p && typeof p.catch === 'function') p.catch(() => {});
@@ -154,12 +173,11 @@ async function playVoiceInner(relPath, text, lang) {
 
 function playFile(url) {
   return new Promise((resolve, reject) => {
-    let el = audioCache.get(url);
-    if (!el) {
-      el = new Audio(url);
-      el.preload = 'auto';
-      audioCache.set(url, el);
-    }
+    const el = lettoreVoce();
+    // Indirizzo assoluto: el.src lo restituisce cosi', e il confronto evita
+    // di ricaricare la stessa traccia ripetuta (il pulsante "riascolta").
+    const assoluto = new URL(url, location.href).href;
+    if (el.src !== assoluto) el.src = assoluto;
 
     let timer = null;
     const cleanup = () => {
@@ -167,6 +185,7 @@ function playFile(url) {
       if (stopCurrent === stopper) stopCurrent = null;
       el.removeEventListener('ended', onEnd);
       el.removeEventListener('error', onErr);
+      el.removeEventListener('loadedmetadata', onMeta);
     };
     const onEnd = () => { cleanup(); resolve(); };
     const onErr = (err) => {
@@ -191,6 +210,14 @@ function playFile(url) {
       ? (el.duration + 1) * 1000
       : 12000;
     timer = setTimeout(onEnd, ceiling);
+    // Traccia nuova: la durata vera si sa quando e' caricata. Il limite si
+    // ricalcola allora, cosi' una riga lunga della storia non viene tagliata.
+    const onMeta = () => {
+      if (stopCurrent !== stopper || !(el.duration > 0)) return;
+      clearTimeout(timer);
+      timer = setTimeout(onEnd, (el.duration - el.currentTime + 1) * 1000);
+    };
+    el.addEventListener('loadedmetadata', onMeta, { once: true });
 
     el.currentTime = 0;
     el.volume = voiceVolume();
@@ -242,9 +269,7 @@ export function stopVoice() {
   const stopper = stopCurrent;
   stopCurrent = null;
   if (stopper) stopper();
-  for (const el of audioCache.values()) {
-    if (!el.paused) { el.pause(); el.currentTime = 0; }
-  }
+  if (lettore && !lettore.paused) { lettore.pause(); lettore.currentTime = 0; }
 }
 
 /* ------------------------------------------------------------------ */

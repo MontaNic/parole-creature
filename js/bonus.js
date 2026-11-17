@@ -16,6 +16,14 @@ import { t, artIndex, getItem } from './content-loader.js';
 import { save, persist } from './state.js';
 import { spriteSvg, audioOrb } from './minigames.js';
 import { speakItem, sfxCorrect, sfxTap, stopVoice } from './audio.js';
+
+/*
+ * Se il bambino non prende la figura giusta entro qualche secondo, la parola
+ * si ripete da sola: chi non legge ancora non ha altro modo di ricordare
+ * cosa sta cercando (il pulsante per risentirla c'e', ma a 7 anni nella foga
+ * del gioco non lo si tocca).
+ */
+export const RIPETI_DOPO_MS = 7000;
 import { dopoLaVoce } from './pace.js';
 import { burstConfetti } from './effects.js';
 import { mascotSay, renderMascot } from './mascot.js';
@@ -274,7 +282,8 @@ export async function playBubbles(o) {
   let current = null;
   let finished = false;
   let orb = null;
-  const say = (it) => { stopVoice(); speakItem(it); };
+  let detta = 0;   // quando la parola da prendere e' stata detta l'ultima volta
+  const say = (it) => { stopVoice(); speakItem(it); detta = performance.now(); };
   const nextTarget = () => {
     const alive = world.bubbles.map(b => b.item);
     const scelte = alive.filter(it => it !== current);
@@ -317,6 +326,7 @@ export async function playBubbles(o) {
     const dt = Math.min(0.05, (now - last) / 1000); last = now;
     world.step(dt);
     draw();
+    if (current && now - detta > RIPETI_DOPO_MS) { detta = now; stopVoice(); speakItem(current); }
     const left = Math.max(0, 1 - (now - t0) / (seconds * 1000));
     timeEl.style.width = `${left * 100}%`;
     if (left <= 0) { fine(); return; }
@@ -485,6 +495,7 @@ export async function playMoles(o) {
 
   let score = 0;
   let current = null;
+  let detta = 0;
   let finished = false;
   const nextTarget = () => {
     const scelte = items.filter(it => it !== current);
@@ -494,7 +505,7 @@ export async function playMoles(o) {
     target.appendChild(audioOrb(current));
     if (o.showWritten) target.appendChild(el('p', 'word-written', current.en));
     else target.appendChild(el('p', 'game-prompt', t('bonus.moles_prompt')));
-    stopVoice(); speakItem(current);
+    stopVoice(); speakItem(current); detta = performance.now();
   };
 
   const draw = () => {
@@ -535,6 +546,7 @@ export async function playMoles(o) {
     const dt = Math.min(0.05, (now - last) / 1000); last = now;
     world.step(dt);
     draw();
+    if (current && now - detta > RIPETI_DOPO_MS) { detta = now; stopVoice(); speakItem(current); }
     const left = Math.max(0, 1 - (now - t0) / (seconds * 1000));
     timeEl.style.width = `${left * 100}%`;
     if (left <= 0) { fine(); return; }
@@ -631,6 +643,7 @@ export async function playBasket(o) {
 
   let score = 0;
   let current = null;
+  let detta = 0;
   let finished = false;
   const nextTarget = () => {
     const scelte = items.filter(it => it !== current);
@@ -640,7 +653,7 @@ export async function playBasket(o) {
     target.appendChild(audioOrb(current));
     if (o.showWritten) target.appendChild(el('p', 'word-written', current.en));
     else target.appendChild(el('p', 'game-prompt', t('bonus.basket_prompt')));
-    stopVoice(); speakItem(current);
+    stopVoice(); speakItem(current); detta = performance.now();
   };
 
   const draw = () => {
@@ -675,6 +688,7 @@ export async function playBasket(o) {
       nextTarget();
     }
     draw();
+    if (current && now - detta > RIPETI_DOPO_MS) { detta = now; stopVoice(); speakItem(current); }
     const left = Math.max(0, 1 - (now - t0) / (seconds * 1000));
     timeEl.style.width = `${left * 100}%`;
     if (left <= 0) { fine(); return; }
