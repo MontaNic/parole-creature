@@ -10,6 +10,7 @@
 import { CONFIG } from './config.js';
 import { content, t, getItem } from './content-loader.js';
 import { save, persist, addXp } from './state.js';
+import { hasBeenSeen } from './srs.js';
 import { spriteSvg } from './minigames.js';
 import { speakItem, stopVoice, sfxTap, sfxUnlock } from './audio.js';
 import { dopoLaVoce } from './pace.js';
@@ -44,7 +45,11 @@ export function nextSticker(rng = Math.random) {
   const have = save.progress.stickers || {};
   const left = stickers().filter(s => !have[s.id]);
   if (!left.length) return null;
-  return left[Math.floor(rng() * left.length)];
+  // Di preferenza l'adesivo di una parola gia' incontrata: nella tana, al
+  // tocco, dice il suo nome in inglese, ed e' bello riconoscerlo.
+  const note = left.filter(s => hasBeenSeen(s.wordId));
+  const da = note.length ? note : left;
+  return da[Math.floor(rng() * da.length)];
 }
 
 /* ------------------------------------------------------------------ */

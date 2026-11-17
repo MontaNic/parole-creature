@@ -365,6 +365,14 @@ async function run() {
     [...posti].every(p => p >= 1 && p <= 6) && posti.size > 1, [...posti].sort().join(','));
   resetSave();
   check('a inizio gioco c\'e\' un adesivo da trovare', Boolean(nextSticker(sempre)));
+  {
+    const conParola = stickers().find(st => getItem(st.wordId));
+    forceBox(conParola.wordId, 1);
+    let sempreLei = true;
+    for (let k = 0; k < 20; k++) if (nextSticker(() => k / 20)?.id !== conParola.id) sempreLei = false;
+    check("lo scrigno sceglie l'adesivo di una parola gia' incontrata", sempreLei);
+    delete save.progress.srs[conParola.wordId];
+  }
   for (const a of adesivi) save.progress.stickers[a.id] = 'x';
   check('finiti gli adesivi, nextSticker restituisce null', nextSticker(sempre) === null);
 
@@ -734,11 +742,17 @@ async function run() {
   check('nei giochi a scelta ci sono solo parole',
     p1.filter(st => st.type !== 'listen').every(st => st.items.every(it => it.kind === 'word')));
   const primeFrasi = p1.filter(st => st.items[0].kind === 'phrase');
-  check("in fase 1 le frasi sono 'Ascolta e ripeti', senza microfono",
+  check("in fase 1 una frase mai sentita e' 'Ascolta e ripeti', senza microfono",
     primeFrasi.length > 0 && primeFrasi.every(st => st.type === 'listen' && st.noMic));
   check('il passaggio alle frasi e\' segnato una volta sola, sulla prima frase',
     p1.filter(st => st.phrasesStart).length === 1 && p1.find(st => st.phrasesStart) === primeFrasi[0]);
   check('la sfida finale resta sulle parole', p1.filter(st => st.isFinal).length === 1 && p1.find(st => st.isFinal).items[0].kind === 'word');
+  // Gia' sentite: si riconoscono (verifica vera, conta per la padronanza).
+  unitItems(content.worldById.get('world_dragons')).forEach(it => forceBox(it.id, 1));
+  const p1b = passiDi('world_dragons', false).filter(st => st.items[0].kind === 'phrase');
+  check("in fase 1 una frase gia' sentita si riconosce (quiz), non si ripete soltanto",
+    p1b.length > 0 && p1b.every(st => st.type === 'quiz'), p1b.map(st => st.type).join(','));
+  resetSave();
   const p2 = passiDi('world_lake', true);
   check('dalla fase 2 le frasi tornano nei giochi a scelta, sempre dopo le parole',
     ordineGiusto(p2) && p2.some(st => st.items[0].kind === 'phrase' && st.type !== 'listen'));

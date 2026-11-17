@@ -1723,11 +1723,22 @@ disegno: una volta "dragon", quella dopo "What is it? A dragon.", e nella
 frase la stessa voce fa domanda e risposta. Caotico. Ora (`js/steps.js`):
 i giochi a scelta fanno sentire solo la parola; le frasi arrivano dopo,
 tutte insieme, annunciate da un cartello "Adesso le frasi!" che Pepe dice a
-voce (`mascot.phrases_now`, traccia nuova). In fase 1 le frasi sono
-"Ascolta e ripeti" **senza microfono** (turno a tempo 3-2-1): il microfono
-resta solo in "Parla con Pepe", come deciso in passato. Dalla fase 2 le
+voce (`mascot.phrases_now`, traccia nuova). In fase 1 una frase mai sentita
+e' "Ascolta e ripeti" **senza microfono** (turno a tempo 3-2-1: il microfono
+resta solo in "Parla con Pepe", come deciso in passato); dalla volta dopo si
+**riconosce** (le frasi nelle bolle, si sceglie quella del disegno). Senza
+questo, ripetere bastava a "padroneggiare" le frasi e il cancello di fase,
+che chiede padronanza dimostrata, si sarebbe indebolito. Dalla fase 2 le
 frasi tornano nei giochi a scelta, sempre in fondo. La sfida finale resta
 sulle parole.
+
+### Adesivi delle parole gia' incontrate (versione 3.10.0)
+
+La tana resta com'era (creature, adesivi, posizioni, 12 pareti). Un ritocco:
+lo scrigno sceglie di preferenza l'adesivo di una parola gia' incontrata
+(`nextSticker`), cosi' nella tana, al tocco, il bambino riconosce la parola
+inglese che sente. Prima era a caso fra tutti, e con il nuovo ordine i primi
+adesivi sarebbero stati spada e scudo, parole che ora arrivano dopo.
 
 ### Il gioco su iPad si usa installato (versione 3.10.0)
 

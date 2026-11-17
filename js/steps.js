@@ -5,7 +5,7 @@
  */
 
 import { CONFIG } from './config.js';
-import { shuffle, similar } from './srs.js';
+import { shuffle, similar, hasBeenSeen } from './srs.js';
 import { curriculumConfig } from './curriculum.js';
 
 /*
@@ -152,7 +152,15 @@ function stepsFrasi(world, items, pool, showWritten) {
   for (const item of items) {
     let candidati;
     if (!showWritten) {
-      candidati = ['listen'];     // "Ascolta e ripeti", senza microfono
+      /*
+       * Fase di solo ascolto. La prima volta la frase si scopre con
+       * "Ascolta e ripeti" (senza microfono). Dalla volta dopo si
+       * riconosce: le frasi nelle bolle, si sceglie quella del disegno.
+       * Cosi' la padronanza delle frasi, che conta per aprire la fase dopo,
+       * resta una verifica vera e non solo una ripetizione.
+       */
+      const riconosci = hasBeenSeen(item.id) && disponibili.has('quiz') && similar(pool, item).length >= 1;
+      candidati = [riconosci ? 'quiz' : 'listen'];
     } else {
       candidati = GIOCHI_PER_FRASE.filter(tp => disponibili.has(tp)).filter(tp => {
         if (tp === 'build') {
