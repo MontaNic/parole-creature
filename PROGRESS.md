@@ -5,9 +5,9 @@
 
 ## Stato attuale
 
-**v3.11.0 — "Pepe e la Leggenda delle Parole", in uso (17 novembre 2026).**
+**v3.11.1 — "Pepe e la Leggenda delle Parole", in uso (18 novembre 2026).**
 Chiuso a settembre con la 3.5.0, riaperto a ottobre per le correzioni nate
-dalle prove sul tablet (versioni 3.6.0-3.11.0, in fondo a questo file).
+dalle prove sul tablet (versioni 3.6.0-3.11.1, in fondo a questo file).
 Nome di lavoro e repository: *Parole & Creature*.
 Online in HTTPS su https://montanic.github.io/parole-creature/ (GitHub
 Pages), offline dopo il primo avvio con rete.
@@ -1775,6 +1775,27 @@ e colori e numeri, che hanno simboli e non disegni, non ne hanno. Nessun
 regalo e' gia' un adesivo. Arrivano anche a chi aveva gia' finito i mondi.
 
 Scuola delle Creature → bag, Foresta delle Parole → tree, Famiglia del Castello → baby, Valle dei Draghi → knight, Giungla dei Dinosauri → dinosaur, Guardaroba del Mago → hat, Cucina del Castello → cake, Casa di Pepe → bed, Cielo Cambia → rainy, Villaggio → bike, Festa Finale → balloon, Fattoria e lo Zoo → elephant, Mesi e le Feste → pumpkin, Sport e i Giochi → kite, Mestieri → firefighter, Mercato → toy, Natura → flower, e Domani → tent.
+
+### La voce non resta muta fuori da un tocco (versione 3.11.1)
+
+Dal tablet: nel gioco bonus del cestino la parola da prendere non si
+sentiva. Causa: ogni traccia aveva il suo elemento `<audio>`, e su iPad
+Safari un elemento mai avviato dentro un tocco viene rifiutato. Nel cestino
+la parola nuova parte quando la figura cade dentro, mentre il dito
+trascina: nessun tocco, quindi silenzio (il gioco, giustamente, non ripiega
+sulla sintesi). Era l'unico gioco a chiedere una parola nuova fuori da un
+tocco; bolle e talpe la chiedono subito dopo il tocco giusto.
+
+Correzione alla radice, in `js/audio.js`: **un solo lettore per tutte le
+voci**, avviato al primo tocco con un istante di silenzio; da li' puo' dire
+qualunque traccia in qualunque momento. Il limite di sicurezza si ricalcola
+sulla durata vera appena la traccia e' caricata (la riga piu' lunga della
+storia, 11,7 s, arriva in fondo). In piu', nei tre giochi bonus la parola da
+prendere **si ripete da sola ogni 7 secondi** se non e' ancora stata presa:
+chi non legge non ha altro modo di ricordarla.
+
+Non verificabile qui su Safari (il browser dei test e' Chromium): la prova
+vera e' sul tablet.
 
 ## Prossimi passi
 
