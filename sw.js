@@ -19,7 +19,7 @@
  */
 importScripts('sw-art.js');
 
-const CACHE_VERSION = 'v1.13.2';
+const CACHE_VERSION = 'v1.14.2';
 const SHELL_CACHE = `dp-shell-${CACHE_VERSION}`;
 const AUDIO_CACHE = `dp-audio-${CACHE_VERSION}`;
 
@@ -44,18 +44,38 @@ const SHELL_ASSETS = [
   'assets/img/icons/icon-192.png',
   'assets/img/icons/icon-512.png',
   'assets/img/icons/icon-512-maskable.png',
-  'js/config.js',
-  'js/state.js',
-  'js/content-loader.js',
+  // Tutti i moduli: se ne manca uno, dopo un aggiornamento senza rete il
+  // gioco non parte (lo controlla tools/check-assets.mjs).
   'js/audio.js',
-  'js/srs.js',
+  'js/badges.js',
+  'js/bonus.js',
+  'js/books.js',
+  'js/checkup.js',
+  'js/chests.js',
+  'js/config.js',
+  'js/content-loader.js',
   'js/curriculum.js',
-  'js/mascot.js',
+  'js/den.js',
+  'js/dialogues.js',
   'js/effects.js',
+  'js/history.js',
+  'js/install-gate.js',
+  'js/lock.js',
+  'js/mascot.js',
   'js/minigames.js',
   'js/missions.js',
+  'js/pace.js',
+  'js/parents.js',
+  'js/pepe-touch.js',
+  'js/phonics.js',
+  'js/recorder.js',
   'js/screens.js',
-  'js/parents.js'
+  'js/share.js',
+  'js/speech.js',
+  'js/srs.js',
+  'js/state.js',
+  'js/steps.js',
+  'js/story.js'
 ];
 
 self.addEventListener('install', (event) => {

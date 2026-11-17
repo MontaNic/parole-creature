@@ -33,7 +33,7 @@
     {
       "id": 3,
       "title_it": "Frasi e mini-dialoghi",
-      "goal_it": "Passare dal riconoscere al costruire: mettere insieme una frase di 4-6 parole e reggere un piccolo scambio di domanda e risposta.",
+      "goal_it": "Passare dal riconoscere al costruire: frasi di 4-6 parole, piccoli scambi di domanda e risposta, dire cosa so fare (I can), descrivere persone e animali, l'ora e i mesi.",
       "desc_it": "Frasi cortissime e mini-dialoghi, sempre con audio.",
       "showWrittenWord": true
     },
@@ -55,41 +55,20 @@
     },
     {
       "id": 6,
-      "title_it": "Io e i miei",
-      "goal_it": "Parlare di sé: chi c'è in famiglia, il corpo e le istruzioni da eseguire, i vestiti, come sto. Le parole ad alta frequenza (my, have, am, are) entrano dentro formule usate cento volte.",
-      "desc_it": "La parola scritta è sempre mostrata: leggere parole già imparate a orecchio è l'obiettivo di questo anno.",
-      "showWrittenWord": true
-    },
-    {
-      "id": 7,
-      "title_it": "Ogni giorno",
-      "goal_it": "Il quotidiano: cibo e gusti (I like / I don't like), casa e posizioni (on, in, under), scuola e comandi di classe, azioni (I can jump).",
-      "desc_it": "Frasi di 4-6 parole, sempre con audio e testo.",
-      "showWrittenWord": true
-    },
-    {
-      "id": 8,
-      "title_it": "Il mio mondo",
-      "goal_it": "Tempo e giorni, ore e routine, luoghi e mezzi, la festa: l'ingresso nell'A1.",
-      "desc_it": "Domande e risposte brevi su tutto quello che è stato imparato.",
-      "showWrittenWord": true
-    },
-    {
-      "id": 9,
       "title_it": "Io e gli altri",
-      "goal_it": "Descrivere le persone e gli animali, dire cosa piace fare e i mestieri: she, he, it, has got, favourite, want to.",
+      "goal_it": "Dire cosa piace fare e i mestieri: like + -ing, want to, favourite.",
       "desc_it": "Frasi di 5-7 parole, sempre con audio e testo.",
       "showWrittenWord": true
     },
     {
-      "id": 10,
+      "id": 7,
       "title_it": "Nel mondo",
-      "goal_it": "Muoversi nel mondo: la città e le direzioni, comprare, dire come si sta dal dottore, la natura con there is / there are.",
+      "goal_it": "Muoversi nel mondo: la citta' e le direzioni, comprare, dire come si sta dal dottore, la natura con there is / there are.",
       "desc_it": "Domande e risposte per cavarsela fuori casa.",
       "showWrittenWord": true
     },
     {
-      "id": 11,
+      "id": 8,
       "title_it": "Racconto",
       "goal_it": "Raccontare: la giornata con le ore, cosa sto facendo, i mesi e le feste dei paesi anglofoni, ieri e domani.",
       "desc_it": "Il primo racconto di sé nel tempo.",
@@ -100,15 +79,15 @@
     {
       "id": "st_what_is_it",
       "phase": 1,
-      "unit": 1,
+      "unit": 6,
       "pattern": "What is it? — A dragon.",
       "focus_it": "Capire la domanda che introduce ogni esercizio e rispondere con il nome.",
       "why_it": "E' la formula che il bambino sentira' centinaia di volte nel gioco: impararla subito come blocco unico rende trasparente tutto il resto."
     },
     {
       "id": "st_a_an",
-      "phase": 1,
-      "unit": 2,
+      "phase": 2,
+      "unit": 8,
       "pattern": "It's a tooth. / It's an egg.",
       "focus_it": "L'articolo cambia davanti a vocale: a / an.",
       "why_it": "In italiano l'articolo non si comporta cosi'. Va sentito presto e spesso, molto prima di poterlo spiegare."
@@ -116,7 +95,7 @@
     {
       "id": "st_adj_noun",
       "phase": 1,
-      "unit": 3,
+      "unit": 1,
       "pattern": "It's a red egg.",
       "focus_it": "In inglese il colore va PRIMA del nome.",
       "why_it": "E' l'errore piu' frequente e piu' duraturo degli italiani ('a dragon red'). Si previene facendolo ascoltare come formula, non correggendolo dopo."
@@ -124,15 +103,15 @@
     {
       "id": "st_how_many",
       "phase": 1,
-      "unit": 4,
+      "unit": 2,
       "pattern": "How many? — Three.",
       "focus_it": "Contare da uno a dieci rispondendo a una domanda.",
       "why_it": "I numeri restano isolati se non hanno una domanda che li chiama."
     },
     {
       "id": "st_this_these",
-      "phase": 2,
-      "unit": 5,
+      "phase": 1,
+      "unit": 4,
       "pattern": "This is a cat. / These are cats.",
       "focus_it": "This / these e la -s del plurale.",
       "why_it": "La -s finale in inglese parlato e' quasi impercettibile per un orecchio italiano: si introduce quando la parola scritta la rende visibile."
@@ -140,7 +119,7 @@
     {
       "id": "st_be_sing_plur",
       "phase": 2,
-      "unit": 6,
+      "unit": 12,
       "pattern": "The cat is small. / The cats are small.",
       "focus_it": "is per uno, are per piu' di uno.",
       "why_it": "Prima vera regola grammaticale del corso: arriva solo dopo che singolare e plurale sono gia' familiari all'occhio."
@@ -148,7 +127,7 @@
     {
       "id": "st_i_have_see",
       "phase": 3,
-      "unit": 7,
+      "unit": 17,
       "pattern": "I have a sword. / I can see a monster.",
       "focus_it": "Frasi con soggetto 'io': dire cosa si ha e cosa si vede.",
       "why_it": "Il primo passo dal riconoscere al dire qualcosa di proprio."
@@ -156,222 +135,222 @@
     {
       "id": "st_questions",
       "phase": 3,
-      "unit": 8,
+      "unit": 18,
       "pattern": "Is it red? — Yes, it is. / What is your name?",
       "focus_it": "Fare una domanda e dare una risposta breve.",
       "why_it": "Chiude il cerchio: il bambino usa la stessa struttura con cui il gioco lo interroga dall'unita' 1."
     },
     {
       "id": "st_this_is_my",
-      "phase": 6,
-      "unit": 9,
+      "phase": 1,
+      "unit": 5,
       "pattern": "This is my mum. / I have a sister.",
       "focus_it": "Presentare i propri cari: 'this is my' per indicare, 'I have a' per dire chi c'e' in famiglia.",
       "why_it": "E' la prima cosa che un bambino dice di se' in qualunque lingua: chi sono i miei. 'my' e 'have' sono fra le parole piu' frequenti dell'inglese e da qui in poi tornano ovunque."
     },
     {
       "id": "st_touch_your",
-      "phase": 6,
-      "unit": 10,
+      "phase": 2,
+      "unit": 7,
       "pattern": "Touch your nose! / I have two hands.",
       "focus_it": "Capire un'istruzione col corpo (Total Physical Response) e contare le parti del corpo: two hands, two feet.",
       "why_it": "Le Indicazioni chiedono di capire istruzioni; il corpo e' il modo con cui un bambino anglofono le impara davvero, muovendosi. 'feet' e' il primo plurale irregolare, sentito e basta."
     },
     {
       "id": "st_put_on",
-      "phase": 6,
-      "unit": 11,
+      "phase": 2,
+      "unit": 9,
       "pattern": "Put on your hat! / I am wearing a red hat.",
       "focus_it": "Un comando quotidiano (put on) e la prima frase al presente progressivo (I am wearing), con il colore prima del nome come gia' imparato.",
       "why_it": "Vestirsi e' un rito di ogni mattina: la lingua che ci sta attaccata si ricorda da sola. 'I am -ing' entra come formula, senza spiegazioni."
     },
     {
       "id": "st_feelings",
-      "phase": 6,
-      "unit": 12,
+      "phase": 2,
+      "unit": 13,
       "pattern": "How are you? I am hungry. / Are you tired? Yes, I am. No, I am not.",
       "focus_it": "Dire come si sta e rispondere si'/no a una domanda con are you.",
       "why_it": "'How are you?' era gia' nella Torre con 'happy': qui la risposta si allarga a otto stati e arriva la risposta breve negativa, che chiude il cerchio delle domande si'/no."
     },
     {
       "id": "st_i_like",
-      "phase": 7,
-      "unit": 13,
+      "phase": 2,
+      "unit": 10,
       "pattern": "I like apples. / I don't like cheese.",
       "focus_it": "Dire cosa piace e cosa no: 'I like' e la prima negazione con 'don't'.",
       "why_it": "E' la funzione che le Indicazioni chiamano 'esprimere preferenze', e per un bambino e' la frase piu' utile che esista. 'don't' entra come blocco, senza analisi."
     },
     {
       "id": "st_do_you_like",
-      "phase": 7,
-      "unit": 13,
+      "phase": 2,
+      "unit": 10,
       "pattern": "Do you like pizza? Yes, I do. / No, I don't.",
       "focus_it": "Chiedere se piace e rispondere con la risposta breve: yes, I do / no, I don't.",
       "why_it": "Dopo 'Are you tired? Yes, I am' arriva la seconda famiglia di risposte brevi, con 'do'. Sentirle insieme e' cio' che le fa distinguere."
     },
     {
       "id": "st_on_in_under",
-      "phase": 7,
-      "unit": 14,
+      "phase": 2,
+      "unit": 11,
       "pattern": "The cat is on the bed. / Where is the dog? Under the table.",
       "focus_it": "Dire dov'e' una cosa con on, in, under, e chiedere 'Where is...?'.",
       "why_it": "Le tre preposizioni di luogo sono fra le parole piu' frequenti dell'inglese e si imparano solo con oggetti veri in posti veri: la casa e' il posto giusto."
     },
     {
       "id": "st_can_i_have",
-      "phase": 7,
-      "unit": 15,
+      "phase": 1,
+      "unit": 3,
       "pattern": "Can I have a pencil, please? / Here you are. / Open your book!",
       "focus_it": "Chiedere una cosa con gentilezza, darla, e capire i comandi di classe.",
       "why_it": "E' l'inglese che serve a scuola davvero: chiedere, ringraziare, eseguire. 'please' e 'here you are' sono formule intere."
     },
     {
       "id": "st_i_can",
-      "phase": 7,
-      "unit": 16,
+      "phase": 3,
+      "unit": 19,
       "pattern": "I can jump. / Can you swim? Yes, I can. / Pepe is running.",
       "focus_it": "Dire cosa so fare con 'can', rispondere alla domanda, e descrivere un'azione in corso con 'is -ing'.",
       "why_it": "I verbi di movimento si imparano muovendosi (TPR): il bambino salta quando sente 'jump'. 'can' e '-ing' entrano come formule attaccate all'azione."
     },
     {
       "id": "st_weather",
-      "phase": 8,
-      "unit": 17,
+      "phase": 2,
+      "unit": 14,
       "pattern": "What's the weather like? It's sunny.",
       "focus_it": "Chiedere e dire che tempo fa.",
       "why_it": "E' la prima domanda di ogni mattina in una classe inglese (il 'weather chart'), e 'it's' + aggettivo e' una formula che il bambino ha gia' nell'orecchio da 'it's a red egg'."
     },
     {
       "id": "st_today_is",
-      "phase": 8,
-      "unit": 17,
+      "phase": 2,
+      "unit": 14,
       "pattern": "Today is Monday.",
       "focus_it": "Dire che giorno e'. I sette giorni, con la maiuscola, letti sul foglio di calendario.",
       "why_it": "Le Indicazioni citano i giorni della settimana fra i primi lessici; in inglese sono parole da leggere piu' che da disegnare, e la parola scritta qui e' sempre visibile."
     },
     {
       "id": "st_what_time",
-      "phase": 8,
-      "unit": 18,
+      "phase": 3,
+      "unit": 22,
       "pattern": "What time is it? It's three o'clock.",
       "focus_it": "Chiedere e dire l'ora in punto, leggendo un orologio.",
       "why_it": "Unisce i numeri gia' imparati a una domanda vera: l'orologio e' schematico come i numeri, e la risposta e' una formula con 'o'clock' come blocco."
     },
     {
       "id": "st_routine",
-      "phase": 8,
-      "unit": 18,
+      "phase": 3,
+      "unit": 22,
       "pattern": "I have breakfast in the morning. / At night I sleep.",
       "focus_it": "Raccontare la giornata: i pasti e i momenti del giorno, con 'in the morning' e 'at night'.",
       "why_it": "E' il primo racconto di se' nel tempo, una delle funzioni dell'A1: dire cosa faccio e quando."
     },
     {
       "id": "st_lets_go",
-      "phase": 8,
-      "unit": 19,
+      "phase": 2,
+      "unit": 15,
       "pattern": "Let's go to the park! / Where are you going? To the beach. / By bus.",
       "focus_it": "Proporre di andare in un posto, chiedere dove si va, dire con che mezzo.",
       "why_it": "'Let's' e 'to the' entrano come blocchi; i luoghi e i mezzi sono il lessico concreto che serve fuori casa."
     },
     {
       "id": "st_how_old",
-      "phase": 8,
-      "unit": 20,
+      "phase": 2,
+      "unit": 16,
       "pattern": "How old are you? I am seven. / Happy birthday! / When is your birthday? In summer.",
       "focus_it": "Dire la propria eta', fare gli auguri, dire la stagione del compleanno. I numeri fino a venti.",
       "why_it": "'How old are you?' e' la domanda che ogni bambino anglofono si sente fare per prima: chiude l'anno con un dialogo vero su di se'."
     },
     {
       "id": "st_has_got",
-      "phase": 9,
-      "unit": 21,
+      "phase": 3,
+      "unit": 20,
       "pattern": "She has got long hair. / He is tall. / I've got glasses.",
       "focus_it": "Descrivere una persona: 'has got' per i tratti, 'is' per gli aggettivi, e 'she' e 'he' per parlare degli altri.",
       "why_it": "Descrivere e' il traguardo della classe quarta; 'has got' e' la forma britannica che il bambino sentira' nei cartoni e a scuola, e 'she/he' entrano per la prima volta come persone diverse da me e te."
     },
     {
       "id": "st_animal_can",
-      "phase": 9,
-      "unit": 22,
+      "phase": 3,
+      "unit": 21,
       "pattern": "The lion is big and strong. / The monkey can climb. / Can a duck swim? Yes, it can.",
       "focus_it": "Descrivere un animale e dire cosa sa fare, con 'it'.",
       "why_it": "Gli animali sono il lessico piu' amato a otto anni; qui portano 'it can', la terza persona di 'can', e 'and' fra due aggettivi."
     },
     {
       "id": "st_like_playing",
-      "phase": 9,
-      "unit": 23,
+      "phase": 6,
+      "unit": 24,
       "pattern": "I like playing football. / My favourite sport is tennis. / Let's play chess!",
       "focus_it": "Dire cosa piace fare (like + -ing), qual e' il preferito, proporre un gioco.",
       "why_it": "'I like' torna con un verbo: e' il ponte fra 'I like pizza' e 'I like playing'. 'favourite' e' una parola che un bambino usa ogni giorno."
     },
     {
       "id": "st_jobs",
-      "phase": 9,
-      "unit": 24,
+      "phase": 6,
+      "unit": 25,
       "pattern": "He is a doctor. / What do you want to be? I want to be a pilot.",
       "focus_it": "Dire il mestiere di qualcuno e cosa si vuole diventare.",
       "why_it": "'want to' e' fra le formule piu' frequenti dell'inglese parlato; i mestieri sono il pretesto classico delle Indicazioni per parlare degli altri."
     },
     {
       "id": "st_directions",
-      "phase": 10,
-      "unit": 25,
+      "phase": 7,
+      "unit": 26,
       "pattern": "Turn left! / Go straight on. / Where is the library? Next to the station.",
       "focus_it": "Chiedere e dare indicazioni: turn left, turn right, go straight on, next to, behind, in front of.",
       "why_it": "E' la funzione 'chiedere e dire dove' portata fuori casa: le stesse preposizioni di luogo, piu' i comandi per muoversi."
     },
     {
       "id": "st_how_much",
-      "phase": 10,
-      "unit": 26,
+      "phase": 7,
+      "unit": 27,
       "pattern": "How much is it? It's ten euros. / That's cheap!",
       "focus_it": "Chiedere il prezzo e capirlo, con le decine.",
       "why_it": "Comprare qualcosa e' il primo scambio vero che un bambino puo' fare in inglese; le decine arrivano dove servono, sui prezzi."
     },
     {
       "id": "st_whats_the_matter",
-      "phase": 10,
-      "unit": 27,
+      "phase": 7,
+      "unit": 28,
       "pattern": "What's the matter? I've got a headache. / Take this medicine. / Get well soon!",
       "focus_it": "Dire come si sta quando si sta male e capire cosa dice il dottore.",
       "why_it": "'I've got' torna dal ritratto con un altro significato: e' la stessa formula, e la ripetizione in contesti diversi la fissa."
     },
     {
       "id": "st_there_is",
-      "phase": 10,
-      "unit": 28,
+      "phase": 7,
+      "unit": 29,
       "pattern": "There is a river. / There are three mountains. / Is there a lake? Yes, there is.",
       "focus_it": "Dire cosa c'e' in un posto: there is per uno, there are per tanti, e la domanda.",
       "why_it": "'There is / there are' e' la struttura piu' usata per descrivere un luogo, e ripropone la regola uno/tanti della fase 2 su una forma nuova."
     },
     {
       "id": "st_daily_routine",
-      "phase": 11,
-      "unit": 29,
+      "phase": 8,
+      "unit": 30,
       "pattern": "I get up at seven o'clock. / What time do you go to bed? At half past eight.",
       "focus_it": "Raccontare la giornata con le ore, comprese le mezze.",
       "why_it": "E' il racconto di se' che le Indicazioni chiedono in quinta; le azioni sono formule intere (brush my teeth) e le ore tornano con 'half past'."
     },
     {
       "id": "st_present_continuous",
-      "phase": 11,
-      "unit": 30,
+      "phase": 8,
+      "unit": 31,
       "pattern": "What are you doing? I'm reading. / Is she cooking? Yes, she is.",
       "focus_it": "Dire cosa si sta facendo adesso, e chiederlo.",
       "why_it": "'I am -ing' era entrato con 'I am wearing' e 'Pepe is running': qui diventa la domanda e la risposta di ogni giorno."
     },
     {
       "id": "st_months_festivals",
-      "phase": 11,
-      "unit": 31,
+      "phase": 3,
+      "unit": 23,
       "pattern": "My birthday is in March. / Happy Christmas! / Trick or treat!",
       "focus_it": "I dodici mesi, letti sul calendario, e le feste dei paesi anglofoni.",
       "why_it": "Le Indicazioni chiedono di conoscere aspetti della cultura dei paesi di lingua inglese: Halloween, Natale e Pasqua sono i primi che un bambino incontra."
     },
     {
       "id": "st_past_future",
-      "phase": 11,
+      "phase": 8,
       "unit": 32,
       "pattern": "Yesterday I was at the park. / We went to the sea. / Tomorrow I am going to the beach.",
       "focus_it": "Un primo ieri e domani: was, went, going to, come formule.",
@@ -4992,87 +4971,9 @@
   ],
   "worlds": [
     {
-      "id": "world_dragons",
+      "id": "world_colors",
       "unit": 1,
       "order": 1,
-      "phase": 1,
-      "title_it": "La Valle dei Draghi",
-      "objective_it": "Nominare 8 creature e oggetti fantasy, e riconoscere la domanda What is it?",
-      "canDo_it": "So indicare il drago, il cavaliere e il castello quando li sento nominare.",
-      "structureIds": [
-        "st_what_is_it"
-      ],
-      "sprite": "sp-castle",
-      "color": "#ff7a4d",
-      "newItems": [
-        "w_dragon",
-        "w_monster",
-        "w_knight",
-        "w_wizard",
-        "w_castle",
-        "w_sword",
-        "w_shield",
-        "w_egg",
-        "p_q_dragon",
-        "p_q_knight",
-        "p_q_castle"
-      ],
-      "reviewFrom": [],
-      "minigames": [
-        "match",
-        "listen",
-        "quiz",
-        "hunt",
-        "truefalse",
-        "sayit"
-      ],
-      "reward": "c_flamup"
-    },
-    {
-      "id": "world_dinos",
-      "unit": 2,
-      "order": 2,
-      "phase": 1,
-      "title_it": "La Giungla dei Dinosauri",
-      "objective_it": "Le parti del corpo dei dinosauri, e l'articolo che cambia: a tooth ma an egg.",
-      "canDo_it": "So dire It's a... e It's an... senza sbagliare l'articolo.",
-      "structureIds": [
-        "st_a_an"
-      ],
-      "sprite": "sp-dinosaur",
-      "color": "#3fbf7f",
-      "newItems": [
-        "w_dinosaur",
-        "w_tail",
-        "w_wing",
-        "w_horn",
-        "w_tooth",
-        "w_claw",
-        "w_bone",
-        "w_nest",
-        "w_eye",
-        "p_an_egg",
-        "p_an_eye",
-        "p_a_tooth",
-        "p_a_nest"
-      ],
-      "reviewFrom": [
-        "world_dragons"
-      ],
-      "minigames": [
-        "match",
-        "listen",
-        "quiz",
-        "hunt",
-        "truefalse",
-        "sayit"
-      ],
-      "reward": "c_rocktail"
-    },
-    {
-      "id": "world_colors",
-      "unit": 3,
-      "order": 3,
       "phase": 1,
       "title_it": "La Grotta dei Colori",
       "objective_it": "Gli 8 colori e l'ordine inglese: il colore va prima del nome (a red egg, non a egg red).",
@@ -5096,10 +4997,7 @@
         "p_adj_green",
         "p_adj_yellow"
       ],
-      "reviewFrom": [
-        "world_dragons",
-        "world_dinos"
-      ],
+      "reviewFrom": [],
       "minigames": [
         "match",
         "quiz",
@@ -5112,8 +5010,8 @@
     },
     {
       "id": "world_numbers",
-      "unit": 4,
-      "order": 4,
+      "unit": 2,
+      "order": 2,
       "phase": 1,
       "title_it": "La Montagna dei Numeri",
       "objective_it": "Contare da uno a dieci rispondendo alla domanda How many?",
@@ -5140,8 +5038,6 @@
         "p_hm_ten"
       ],
       "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
         "world_colors"
       ],
       "minigames": [
@@ -5155,10 +5051,56 @@
       "reward": "c_numo"
     },
     {
+      "id": "world_school",
+      "unit": 3,
+      "order": 3,
+      "phase": 1,
+      "title_it": "La Scuola delle Creature",
+      "objective_it": "Le cose di scuola, chiedere una cosa per favore, darla, e i comandi di classe.",
+      "canDo_it": "So chiedere una cosa in classe con gentilezza.",
+      "structureIds": [
+        "st_can_i_have"
+      ],
+      "sprite": "sp-book",
+      "color": "#f6bd60",
+      "newItems": [
+        "w_book",
+        "w_pen",
+        "w_pencil",
+        "w_bag",
+        "w_desk",
+        "w_teacher",
+        "w_school",
+        "w_ruler",
+        "w_scissors",
+        "p_open_book",
+        "p_can_i_pencil",
+        "p_here_you_are",
+        "p_can_i_ruler",
+        "p_my_bag",
+        "p_sit_down"
+      ],
+      "reviewFrom": [
+        "world_colors",
+        "world_numbers"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse",
+        "sayit"
+      ],
+      "reward": "c_maestrino"
+    },
+    {
       "id": "world_forest",
-      "unit": 5,
-      "order": 5,
-      "phase": 2,
+      "unit": 4,
+      "order": 4,
+      "phase": 1,
       "title_it": "La Foresta delle Parole",
       "objective_it": "Animali e natura, con la prima forma scritta: this is a cat / these are cats e la -s del plurale.",
       "canDo_it": "So vedere la differenza fra una parola singolare e una plurale.",
@@ -5183,10 +5125,9 @@
         "p_these_stars"
       ],
       "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
         "world_colors",
-        "world_numbers"
+        "world_numbers",
+        "world_school"
       ],
       "minigames": [
         "match",
@@ -5199,135 +5140,10 @@
       "reward": "c_barky"
     },
     {
-      "id": "world_lake",
-      "unit": 6,
-      "order": 6,
-      "phase": 2,
-      "title_it": "Il Lago Magico",
-      "objective_it": "Gli aggettivi e la prima regola vera: is per uno, are per piu' di uno.",
-      "canDo_it": "So scegliere fra is e are guardando se la cosa e' una o tante.",
-      "structureIds": [
-        "st_be_sing_plur"
-      ],
-      "sprite": "sp-fish",
-      "color": "#12b6c9",
-      "newItems": [
-        "w_big",
-        "w_small",
-        "w_happy",
-        "w_sad",
-        "w_hot",
-        "w_cold",
-        "w_fast",
-        "w_slow",
-        "p_be_dragon",
-        "p_be_dragons",
-        "p_be_cat",
-        "p_be_cats",
-        "p_be_dog",
-        "p_be_dinos"
-      ],
-      "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
-        "world_colors",
-        "world_numbers",
-        "world_forest"
-      ],
-      "minigames": [
-        "match",
-        "dragdrop",
-        "quiz",
-        "hunt",
-        "truefalse",
-        "sayit"
-      ],
-      "reward": "c_splashy"
-    },
-    {
-      "id": "world_bridge",
-      "unit": 7,
-      "order": 7,
-      "phase": 3,
-      "title_it": "Il Ponte delle Frasi",
-      "objective_it": "Costruire frasi intere con soggetto io: I have... e I can see...",
-      "canDo_it": "So rimettere in ordine una frase di cinque parole e leggerla.",
-      "structureIds": [
-        "st_i_have_see"
-      ],
-      "sprite": "sp-sword",
-      "color": "#f2b134",
-      "newItems": [
-        "p_i_sword",
-        "p_i_monster",
-        "p_i_eggs",
-        "p_i_red_egg",
-        "p_i_shield",
-        "p_i_stars"
-      ],
-      "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
-        "world_colors",
-        "world_numbers",
-        "world_forest",
-        "world_lake"
-      ],
-      "reviewWeight": 0.45,
-      "minigames": [
-        "listen",
-        "build",
-        "quiz",
-        "truefalse",
-        "sayit"
-      ],
-      "reward": "c_glimmer"
-    },
-    {
-      "id": "world_tower",
-      "unit": 8,
-      "order": 8,
-      "phase": 3,
-      "title_it": "La Torre dei Dialoghi",
-      "objective_it": "Fare una domanda e dare una risposta breve: Is it red? Yes, it is.",
-      "canDo_it": "So rispondere quando qualcuno mi chiede come mi chiamo o come sto.",
-      "structureIds": [
-        "st_questions"
-      ],
-      "sprite": "sp-wizard",
-      "color": "#e4638f",
-      "newItems": [
-        "p_ask_name",
-        "p_my_name",
-        "p_ask_how",
-        "p_ask_red",
-        "p_ask_blue",
-        "p_thanks"
-      ],
-      "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
-        "world_colors",
-        "world_numbers",
-        "world_forest",
-        "world_lake",
-        "world_bridge"
-      ],
-      "reviewWeight": 0.45,
-      "minigames": [
-        "listen",
-        "build",
-        "quiz",
-        "truefalse",
-        "sayit"
-      ],
-      "reward": "c_torrek"
-    },
-    {
       "id": "world_family",
-      "unit": 9,
-      "order": 9,
-      "phase": 6,
+      "unit": 5,
+      "order": 5,
+      "phase": 1,
       "title_it": "La Famiglia del Castello",
       "objective_it": "Presentare i propri cari: otto persone della famiglia, con 'this is my' e 'I have a'.",
       "canDo_it": "So dire chi c'è nella mia famiglia.",
@@ -5353,14 +5169,10 @@
         "p_my_friend"
       ],
       "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
         "world_colors",
         "world_numbers",
-        "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower"
+        "world_school",
+        "world_forest"
       ],
       "minigames": [
         "match",
@@ -5375,10 +5187,53 @@
       "reward": "c_nonnetta"
     },
     {
+      "id": "world_dragons",
+      "unit": 6,
+      "order": 6,
+      "phase": 1,
+      "title_it": "La Valle dei Draghi",
+      "objective_it": "Nominare 8 creature e oggetti fantasy, e riconoscere la domanda What is it?",
+      "canDo_it": "So indicare il drago, il cavaliere e il castello quando li sento nominare.",
+      "structureIds": [
+        "st_what_is_it"
+      ],
+      "sprite": "sp-castle",
+      "color": "#ff7a4d",
+      "newItems": [
+        "w_dragon",
+        "w_monster",
+        "w_knight",
+        "w_wizard",
+        "w_castle",
+        "w_sword",
+        "w_shield",
+        "w_egg",
+        "p_q_dragon",
+        "p_q_knight",
+        "p_q_castle"
+      ],
+      "reviewFrom": [
+        "world_colors",
+        "world_numbers",
+        "world_school",
+        "world_forest",
+        "world_family"
+      ],
+      "minigames": [
+        "match",
+        "listen",
+        "quiz",
+        "hunt",
+        "truefalse",
+        "sayit"
+      ],
+      "reward": "c_flamup"
+    },
+    {
       "id": "world_body",
-      "unit": 10,
-      "order": 10,
-      "phase": 6,
+      "unit": 7,
+      "order": 7,
+      "phase": 2,
       "title_it": "Il Corpo del Gigante",
       "objective_it": "Le parti del corpo e le istruzioni da eseguire col corpo: touch your nose, open your mouth, I have two hands.",
       "canDo_it": "So eseguire un comando in inglese col mio corpo.",
@@ -5404,15 +5259,12 @@
         "p_open_mouth"
       ],
       "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
         "world_colors",
         "world_numbers",
+        "world_school",
         "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
-        "world_family"
+        "world_family",
+        "world_dragons"
       ],
       "minigames": [
         "match",
@@ -5427,10 +5279,57 @@
       "reward": "c_gigione"
     },
     {
+      "id": "world_dinos",
+      "unit": 8,
+      "order": 8,
+      "phase": 2,
+      "title_it": "La Giungla dei Dinosauri",
+      "objective_it": "Le parti del corpo dei dinosauri, e l'articolo che cambia: a tooth ma an egg.",
+      "canDo_it": "So dire It's a... e It's an... senza sbagliare l'articolo.",
+      "structureIds": [
+        "st_a_an"
+      ],
+      "sprite": "sp-dinosaur",
+      "color": "#3fbf7f",
+      "newItems": [
+        "w_dinosaur",
+        "w_tail",
+        "w_wing",
+        "w_horn",
+        "w_tooth",
+        "w_claw",
+        "w_bone",
+        "w_nest",
+        "w_eye",
+        "p_an_egg",
+        "p_an_eye",
+        "p_a_tooth",
+        "p_a_nest"
+      ],
+      "reviewFrom": [
+        "world_colors",
+        "world_numbers",
+        "world_school",
+        "world_forest",
+        "world_family",
+        "world_dragons",
+        "world_body"
+      ],
+      "minigames": [
+        "match",
+        "listen",
+        "quiz",
+        "hunt",
+        "truefalse",
+        "sayit"
+      ],
+      "reward": "c_rocktail"
+    },
+    {
       "id": "world_clothes",
-      "unit": 11,
-      "order": 11,
-      "phase": 6,
+      "unit": 9,
+      "order": 9,
+      "phase": 2,
       "title_it": "Il Guardaroba del Mago",
       "objective_it": "Otto vestiti, il comando 'put on' e la prima frase al presente progressivo: I am wearing a red hat.",
       "canDo_it": "So dire cosa indosso, col suo colore.",
@@ -5456,16 +5355,14 @@
         "p_wear_socks"
       ],
       "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
         "world_colors",
         "world_numbers",
+        "world_school",
         "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
         "world_family",
-        "world_body"
+        "world_dragons",
+        "world_body",
+        "world_dinos"
       ],
       "minigames": [
         "match",
@@ -5480,64 +5377,10 @@
       "reward": "c_sartina"
     },
     {
-      "id": "world_feelings",
-      "unit": 12,
-      "order": 12,
-      "phase": 6,
-      "title_it": "Le Emozioni delle Creature",
-      "objective_it": "Otto modi di stare: rispondere a 'How are you?' e dire sì o no a 'Are you tired?'.",
-      "canDo_it": "So dire come sto e rispondere sì o no.",
-      "structureIds": [
-        "st_feelings"
-      ],
-      "sprite": "sp-surprised",
-      "color": "#f2cc8f",
-      "newItems": [
-        "w_angry",
-        "w_scared",
-        "w_tired",
-        "w_hungry",
-        "w_thirsty",
-        "w_sick",
-        "w_bored",
-        "w_surprised",
-        "p_i_am_hungry",
-        "p_i_am_tired",
-        "p_i_am_scared",
-        "p_are_you_tired_yes",
-        "p_are_you_angry_no",
-        "p_are_you_sick"
-      ],
-      "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
-        "world_colors",
-        "world_numbers",
-        "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
-        "world_family",
-        "world_body",
-        "world_clothes"
-      ],
-      "minigames": [
-        "match",
-        "quiz",
-        "listen",
-        "hunt",
-        "dragdrop",
-        "build",
-        "truefalse",
-        "sayit"
-      ],
-      "reward": "c_nuvolo"
-    },
-    {
       "id": "world_food",
-      "unit": 13,
-      "order": 13,
-      "phase": 7,
+      "unit": 10,
+      "order": 10,
+      "phase": 2,
       "title_it": "La Cucina del Castello",
       "objective_it": "Dieci cibi e le preferenze: I like, I don't like, e la domanda Do you like...? con la risposta breve.",
       "canDo_it": "So dire cosa mi piace mangiare e cosa no.",
@@ -5566,18 +5409,15 @@
         "p_do_you_like_milk"
       ],
       "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
         "world_colors",
         "world_numbers",
+        "world_school",
         "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
         "world_family",
+        "world_dragons",
         "world_body",
-        "world_clothes",
-        "world_feelings"
+        "world_dinos",
+        "world_clothes"
       ],
       "minigames": [
         "match",
@@ -5593,9 +5433,9 @@
     },
     {
       "id": "world_house",
-      "unit": 14,
-      "order": 14,
-      "phase": 7,
+      "unit": 11,
+      "order": 11,
+      "phase": 2,
       "title_it": "La Casa di Pepe",
       "objective_it": "La casa e le posizioni: on, in, under, e la domanda Where is...?",
       "canDo_it": "So dire dov'è una cosa in casa.",
@@ -5622,18 +5462,15 @@
         "p_open_door"
       ],
       "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
         "world_colors",
         "world_numbers",
+        "world_school",
         "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
         "world_family",
+        "world_dragons",
         "world_body",
+        "world_dinos",
         "world_clothes",
-        "world_feelings",
         "world_food"
       ],
       "minigames": [
@@ -5649,110 +5486,99 @@
       "reward": "c_chiavetta"
     },
     {
-      "id": "world_school",
-      "unit": 15,
-      "order": 15,
-      "phase": 7,
-      "title_it": "La Scuola delle Creature",
-      "objective_it": "Le cose di scuola, chiedere una cosa per favore, darla, e i comandi di classe.",
-      "canDo_it": "So chiedere una cosa in classe con gentilezza.",
+      "id": "world_lake",
+      "unit": 12,
+      "order": 12,
+      "phase": 2,
+      "title_it": "Il Lago Magico",
+      "objective_it": "Gli aggettivi e la prima regola vera: is per uno, are per piu' di uno.",
+      "canDo_it": "So scegliere fra is e are guardando se la cosa e' una o tante.",
       "structureIds": [
-        "st_can_i_have"
+        "st_be_sing_plur"
       ],
-      "sprite": "sp-book",
-      "color": "#f6bd60",
+      "sprite": "sp-fish",
+      "color": "#12b6c9",
       "newItems": [
-        "w_book",
-        "w_pen",
-        "w_pencil",
-        "w_bag",
-        "w_desk",
-        "w_teacher",
-        "w_school",
-        "w_ruler",
-        "w_scissors",
-        "p_open_book",
-        "p_can_i_pencil",
-        "p_here_you_are",
-        "p_can_i_ruler",
-        "p_my_bag",
-        "p_sit_down"
+        "w_big",
+        "w_small",
+        "w_happy",
+        "w_sad",
+        "w_hot",
+        "w_cold",
+        "w_fast",
+        "w_slow",
+        "p_be_dragon",
+        "p_be_dragons",
+        "p_be_cat",
+        "p_be_cats",
+        "p_be_dog",
+        "p_be_dinos"
       ],
       "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
         "world_colors",
         "world_numbers",
+        "world_school",
         "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
         "world_family",
+        "world_dragons",
         "world_body",
+        "world_dinos",
         "world_clothes",
-        "world_feelings",
         "world_food",
         "world_house"
       ],
       "minigames": [
         "match",
-        "quiz",
-        "listen",
-        "hunt",
         "dragdrop",
-        "build",
+        "quiz",
+        "hunt",
         "truefalse",
         "sayit"
       ],
-      "reward": "c_maestrino"
+      "reward": "c_splashy"
     },
     {
-      "id": "world_actions",
-      "unit": 16,
-      "order": 16,
-      "phase": 7,
-      "title_it": "Il Bosco delle Azioni",
-      "objective_it": "Dieci azioni col corpo: I can jump, Can you swim?, e Pepe is running.",
-      "canDo_it": "So dire cosa so fare e cosa sta facendo Pepe.",
+      "id": "world_feelings",
+      "unit": 13,
+      "order": 13,
+      "phase": 2,
+      "title_it": "Le Emozioni delle Creature",
+      "objective_it": "Otto modi di stare: rispondere a 'How are you?' e dire sì o no a 'Are you tired?'.",
+      "canDo_it": "So dire come sto e rispondere sì o no.",
       "structureIds": [
-        "st_i_can"
+        "st_feelings"
       ],
-      "sprite": "sp-jump",
-      "color": "#90be6d",
+      "sprite": "sp-surprised",
+      "color": "#f2cc8f",
       "newItems": [
-        "w_run",
-        "w_jump",
-        "w_swim",
-        "w_fly",
-        "w_sing",
-        "w_dance",
-        "w_sleep",
-        "w_eat",
-        "w_drink",
-        "w_climb",
-        "p_i_can_jump",
-        "p_i_can_swim",
-        "p_can_you_fly",
-        "p_can_you_sing",
-        "p_pepe_running",
-        "p_pepe_sleeping"
+        "w_angry",
+        "w_scared",
+        "w_tired",
+        "w_hungry",
+        "w_thirsty",
+        "w_sick",
+        "w_bored",
+        "w_surprised",
+        "p_i_am_hungry",
+        "p_i_am_tired",
+        "p_i_am_scared",
+        "p_are_you_tired_yes",
+        "p_are_you_angry_no",
+        "p_are_you_sick"
       ],
       "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
         "world_colors",
         "world_numbers",
+        "world_school",
         "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
         "world_family",
+        "world_dragons",
         "world_body",
+        "world_dinos",
         "world_clothes",
-        "world_feelings",
         "world_food",
         "world_house",
-        "world_school"
+        "world_lake"
       ],
       "minigames": [
         "match",
@@ -5764,13 +5590,13 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_saltello"
+      "reward": "c_nuvolo"
     },
     {
       "id": "world_weather",
-      "unit": 17,
-      "order": 17,
-      "phase": 8,
+      "unit": 14,
+      "order": 14,
+      "phase": 2,
       "title_it": "Il Cielo Cambia",
       "objective_it": "Che tempo fa e che giorno è: cinque tempi e i sette giorni della settimana, letti sul calendario.",
       "canDo_it": "So dire che tempo fa e che giorno è.",
@@ -5801,22 +5627,19 @@
         "p_saturday_sunday"
       ],
       "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
         "world_colors",
         "world_numbers",
+        "world_school",
         "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
         "world_family",
+        "world_dragons",
         "world_body",
+        "world_dinos",
         "world_clothes",
-        "world_feelings",
         "world_food",
         "world_house",
-        "world_school",
-        "world_actions"
+        "world_lake",
+        "world_feelings"
       ],
       "minigames": [
         "match",
@@ -5831,72 +5654,10 @@
       "reward": "c_ventolino"
     },
     {
-      "id": "world_time",
-      "unit": 18,
-      "order": 18,
-      "phase": 8,
-      "title_it": "La Torre dell'Orologio",
-      "objective_it": "L'ora in punto sull'orologio, i momenti del giorno e i pasti: la mia giornata.",
-      "canDo_it": "So dire che ore sono e cosa faccio la mattina, a pranzo, di notte.",
-      "structureIds": [
-        "st_what_time",
-        "st_routine"
-      ],
-      "sprite": "sp-clock-3",
-      "color": "#9d4edd",
-      "newItems": [
-        "w_morning",
-        "w_afternoon",
-        "w_evening",
-        "w_night",
-        "w_breakfast",
-        "w_lunch",
-        "w_dinner",
-        "p_time_three",
-        "p_time_seven",
-        "p_time_twelve",
-        "p_breakfast_morning",
-        "p_lunch_one",
-        "p_night_sleep",
-        "w_eleven",
-        "w_twelve"
-      ],
-      "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
-        "world_colors",
-        "world_numbers",
-        "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
-        "world_family",
-        "world_body",
-        "world_clothes",
-        "world_feelings",
-        "world_food",
-        "world_house",
-        "world_school",
-        "world_actions",
-        "world_weather"
-      ],
-      "minigames": [
-        "match",
-        "quiz",
-        "listen",
-        "hunt",
-        "dragdrop",
-        "build",
-        "truefalse",
-        "sayit"
-      ],
-      "reward": "c_ticchetto"
-    },
-    {
       "id": "world_village",
-      "unit": 19,
-      "order": 19,
-      "phase": 8,
+      "unit": 15,
+      "order": 15,
+      "phase": 2,
       "title_it": "Il Villaggio",
       "objective_it": "Luoghi e mezzi: andiamo al parco, dove vai, in autobus.",
       "canDo_it": "So proporre di andare in un posto e dire con che mezzo.",
@@ -5923,24 +5684,20 @@
         "p_by_train"
       ],
       "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
         "world_colors",
         "world_numbers",
+        "world_school",
         "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
         "world_family",
+        "world_dragons",
         "world_body",
+        "world_dinos",
         "world_clothes",
-        "world_feelings",
         "world_food",
         "world_house",
-        "world_school",
-        "world_actions",
-        "world_weather",
-        "world_time"
+        "world_lake",
+        "world_feelings",
+        "world_weather"
       ],
       "minigames": [
         "match",
@@ -5956,9 +5713,9 @@
     },
     {
       "id": "world_party",
-      "unit": 20,
-      "order": 20,
-      "phase": 8,
+      "unit": 16,
+      "order": 16,
+      "phase": 2,
       "title_it": "La Festa Finale",
       "objective_it": "Quanti anni hai, buon compleanno, le stagioni e i numeri fino a venti.",
       "canDo_it": "So dire quanti anni ho e quando è il mio compleanno.",
@@ -5992,24 +5749,20 @@
         "p_twenty_balloons"
       ],
       "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
         "world_colors",
         "world_numbers",
+        "world_school",
         "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
         "world_family",
+        "world_dragons",
         "world_body",
+        "world_dinos",
         "world_clothes",
-        "world_feelings",
         "world_food",
         "world_house",
-        "world_school",
-        "world_actions",
+        "world_lake",
+        "world_feelings",
         "world_weather",
-        "world_time",
         "world_village"
       ],
       "minigames": [
@@ -6025,10 +5778,172 @@
       "reward": "c_festino"
     },
     {
+      "id": "world_bridge",
+      "unit": 17,
+      "order": 17,
+      "phase": 3,
+      "title_it": "Il Ponte delle Frasi",
+      "objective_it": "Costruire frasi intere con soggetto io: I have... e I can see...",
+      "canDo_it": "So rimettere in ordine una frase di cinque parole e leggerla.",
+      "structureIds": [
+        "st_i_have_see"
+      ],
+      "sprite": "sp-sword",
+      "color": "#f2b134",
+      "newItems": [
+        "p_i_sword",
+        "p_i_monster",
+        "p_i_eggs",
+        "p_i_red_egg",
+        "p_i_shield",
+        "p_i_stars"
+      ],
+      "reviewFrom": [
+        "world_colors",
+        "world_numbers",
+        "world_school",
+        "world_forest",
+        "world_family",
+        "world_dragons",
+        "world_body",
+        "world_dinos",
+        "world_clothes",
+        "world_food",
+        "world_house",
+        "world_lake",
+        "world_feelings",
+        "world_weather",
+        "world_village",
+        "world_party"
+      ],
+      "reviewWeight": 0.45,
+      "minigames": [
+        "listen",
+        "build",
+        "quiz",
+        "truefalse",
+        "sayit"
+      ],
+      "reward": "c_glimmer"
+    },
+    {
+      "id": "world_tower",
+      "unit": 18,
+      "order": 18,
+      "phase": 3,
+      "title_it": "La Torre dei Dialoghi",
+      "objective_it": "Fare una domanda e dare una risposta breve: Is it red? Yes, it is.",
+      "canDo_it": "So rispondere quando qualcuno mi chiede come mi chiamo o come sto.",
+      "structureIds": [
+        "st_questions"
+      ],
+      "sprite": "sp-wizard",
+      "color": "#e4638f",
+      "newItems": [
+        "p_ask_name",
+        "p_my_name",
+        "p_ask_how",
+        "p_ask_red",
+        "p_ask_blue",
+        "p_thanks"
+      ],
+      "reviewFrom": [
+        "world_colors",
+        "world_numbers",
+        "world_school",
+        "world_forest",
+        "world_family",
+        "world_dragons",
+        "world_body",
+        "world_dinos",
+        "world_clothes",
+        "world_food",
+        "world_house",
+        "world_lake",
+        "world_feelings",
+        "world_weather",
+        "world_village",
+        "world_party",
+        "world_bridge"
+      ],
+      "reviewWeight": 0.45,
+      "minigames": [
+        "listen",
+        "build",
+        "quiz",
+        "truefalse",
+        "sayit"
+      ],
+      "reward": "c_torrek"
+    },
+    {
+      "id": "world_actions",
+      "unit": 19,
+      "order": 19,
+      "phase": 3,
+      "title_it": "Il Bosco delle Azioni",
+      "objective_it": "Dieci azioni col corpo: I can jump, Can you swim?, e Pepe is running.",
+      "canDo_it": "So dire cosa so fare e cosa sta facendo Pepe.",
+      "structureIds": [
+        "st_i_can"
+      ],
+      "sprite": "sp-jump",
+      "color": "#90be6d",
+      "newItems": [
+        "w_run",
+        "w_jump",
+        "w_swim",
+        "w_fly",
+        "w_sing",
+        "w_dance",
+        "w_sleep",
+        "w_eat",
+        "w_drink",
+        "w_climb",
+        "p_i_can_jump",
+        "p_i_can_swim",
+        "p_can_you_fly",
+        "p_can_you_sing",
+        "p_pepe_running",
+        "p_pepe_sleeping"
+      ],
+      "reviewFrom": [
+        "world_colors",
+        "world_numbers",
+        "world_school",
+        "world_forest",
+        "world_family",
+        "world_dragons",
+        "world_body",
+        "world_dinos",
+        "world_clothes",
+        "world_food",
+        "world_house",
+        "world_lake",
+        "world_feelings",
+        "world_weather",
+        "world_village",
+        "world_party",
+        "world_bridge",
+        "world_tower"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse",
+        "sayit"
+      ],
+      "reward": "c_saltello"
+    },
+    {
       "id": "world_portrait",
-      "unit": 21,
-      "order": 21,
-      "phase": 9,
+      "unit": 20,
+      "order": 20,
+      "phase": 3,
       "title_it": "Il Ritratto",
       "objective_it": "Descrivere una persona: capelli, occhiali, barba, alto e basso, con 'has got' e 'she/he'.",
       "canDo_it": "So descrivere come è fatta una persona.",
@@ -6056,26 +5971,25 @@
         "p_my_dad_moustache"
       ],
       "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
         "world_colors",
         "world_numbers",
+        "world_school",
         "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
         "world_family",
+        "world_dragons",
         "world_body",
+        "world_dinos",
         "world_clothes",
-        "world_feelings",
         "world_food",
         "world_house",
-        "world_school",
-        "world_actions",
+        "world_lake",
+        "world_feelings",
         "world_weather",
-        "world_time",
         "world_village",
-        "world_party"
+        "world_party",
+        "world_bridge",
+        "world_tower",
+        "world_actions"
       ],
       "minigames": [
         "match",
@@ -6091,9 +6005,9 @@
     },
     {
       "id": "world_animals",
-      "unit": 22,
-      "order": 22,
-      "phase": 9,
+      "unit": 21,
+      "order": 21,
+      "phase": 3,
       "title_it": "La Fattoria e lo Zoo",
       "objective_it": "Dieci animali, com'è fatto ciascuno e cosa sa fare, con 'it'.",
       "canDo_it": "So descrivere un animale e dire cosa sa fare.",
@@ -6121,26 +6035,25 @@
         "p_pig_pink"
       ],
       "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
         "world_colors",
         "world_numbers",
+        "world_school",
         "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
         "world_family",
+        "world_dragons",
         "world_body",
+        "world_dinos",
         "world_clothes",
-        "world_feelings",
         "world_food",
         "world_house",
-        "world_school",
-        "world_actions",
+        "world_lake",
+        "world_feelings",
         "world_weather",
-        "world_time",
         "world_village",
         "world_party",
+        "world_bridge",
+        "world_tower",
+        "world_actions",
         "world_portrait"
       ],
       "minigames": [
@@ -6156,57 +6069,56 @@
       "reward": "c_chicco"
     },
     {
-      "id": "world_sport",
-      "unit": 23,
-      "order": 23,
-      "phase": 9,
-      "title_it": "Lo Sport e i Giochi",
-      "objective_it": "Sport e hobby: cosa mi piace fare, il mio preferito, giochiamo a...",
-      "canDo_it": "So dire quali sport e giochi mi piacciono.",
+      "id": "world_time",
+      "unit": 22,
+      "order": 22,
+      "phase": 3,
+      "title_it": "La Torre dell'Orologio",
+      "objective_it": "L'ora in punto sull'orologio, i momenti del giorno e i pasti: la mia giornata.",
+      "canDo_it": "So dire che ore sono e cosa faccio la mattina, a pranzo, di notte.",
       "structureIds": [
-        "st_like_playing"
+        "st_what_time",
+        "st_routine"
       ],
-      "sprite": "sp-football",
-      "color": "#2a9d8f",
+      "sprite": "sp-clock-3",
+      "color": "#9d4edd",
       "newItems": [
-        "w_football",
-        "w_basketball",
-        "w_tennis",
-        "w_ball",
-        "w_drawing",
-        "w_music",
-        "w_guitar",
-        "w_chess",
-        "w_kite",
-        "w_skateboard",
-        "p_like_playing_football",
-        "p_favourite_tennis",
-        "p_lets_play_chess",
-        "p_like_drawing",
-        "p_can_play_guitar",
-        "p_kite_windy"
+        "w_morning",
+        "w_afternoon",
+        "w_evening",
+        "w_night",
+        "w_breakfast",
+        "w_lunch",
+        "w_dinner",
+        "p_time_three",
+        "p_time_seven",
+        "p_time_twelve",
+        "p_breakfast_morning",
+        "p_lunch_one",
+        "p_night_sleep",
+        "w_eleven",
+        "w_twelve"
       ],
       "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
         "world_colors",
         "world_numbers",
+        "world_school",
         "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
         "world_family",
+        "world_dragons",
         "world_body",
+        "world_dinos",
         "world_clothes",
-        "world_feelings",
         "world_food",
         "world_house",
-        "world_school",
-        "world_actions",
+        "world_lake",
+        "world_feelings",
         "world_weather",
-        "world_time",
         "world_village",
         "world_party",
+        "world_bridge",
+        "world_tower",
+        "world_actions",
         "world_portrait",
         "world_animals"
       ],
@@ -6220,510 +6132,13 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_golino"
-    },
-    {
-      "id": "world_jobs",
-      "unit": 24,
-      "order": 24,
-      "phase": 9,
-      "title_it": "I Mestieri",
-      "objective_it": "Dieci mestieri: chi fa cosa, e cosa voglio fare da grande.",
-      "canDo_it": "So dire il mestiere di una persona e cosa voglio fare da grande.",
-      "structureIds": [
-        "st_jobs"
-      ],
-      "sprite": "sp-firefighter",
-      "color": "#e76f51",
-      "newItems": [
-        "w_doctor",
-        "w_farmer",
-        "w_cook",
-        "w_police",
-        "w_firefighter",
-        "w_pilot",
-        "w_nurse",
-        "w_singer",
-        "w_builder",
-        "w_vet",
-        "p_he_is_doctor",
-        "p_she_is_pilot",
-        "p_want_to_be_firefighter",
-        "p_want_to_be_vet",
-        "p_farmer_farm",
-        "p_cook_kitchen"
-      ],
-      "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
-        "world_colors",
-        "world_numbers",
-        "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
-        "world_family",
-        "world_body",
-        "world_clothes",
-        "world_feelings",
-        "world_food",
-        "world_house",
-        "world_school",
-        "world_actions",
-        "world_weather",
-        "world_time",
-        "world_village",
-        "world_party",
-        "world_portrait",
-        "world_animals",
-        "world_sport"
-      ],
-      "minigames": [
-        "match",
-        "quiz",
-        "listen",
-        "hunt",
-        "dragdrop",
-        "build",
-        "truefalse",
-        "sayit"
-      ],
-      "reward": "c_timbrino"
-    },
-    {
-      "id": "world_city",
-      "unit": 25,
-      "order": 25,
-      "phase": 10,
-      "title_it": "La Città",
-      "objective_it": "La città e le direzioni: gira a sinistra, vai dritto, accanto a, dietro, davanti a.",
-      "canDo_it": "So chiedere e dare indicazioni in città.",
-      "structureIds": [
-        "st_directions"
-      ],
-      "sprite": "sp-arrow-right",
-      "color": "#4361ee",
-      "newItems": [
-        "w_street",
-        "w_hospital",
-        "w_station",
-        "w_library",
-        "w_supermarket",
-        "w_left",
-        "w_right",
-        "w_behind",
-        "w_next_to",
-        "w_in_front_of",
-        "p_turn_left",
-        "p_turn_right",
-        "p_where_library",
-        "p_hospital_behind",
-        "p_in_front_of_station",
-        "p_go_straight"
-      ],
-      "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
-        "world_colors",
-        "world_numbers",
-        "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
-        "world_family",
-        "world_body",
-        "world_clothes",
-        "world_feelings",
-        "world_food",
-        "world_house",
-        "world_school",
-        "world_actions",
-        "world_weather",
-        "world_time",
-        "world_village",
-        "world_party",
-        "world_portrait",
-        "world_animals",
-        "world_sport",
-        "world_jobs"
-      ],
-      "minigames": [
-        "match",
-        "quiz",
-        "listen",
-        "hunt",
-        "dragdrop",
-        "build",
-        "truefalse",
-        "sayit"
-      ],
-      "reward": "c_semaforino"
-    },
-    {
-      "id": "world_market",
-      "unit": 26,
-      "order": 26,
-      "phase": 10,
-      "title_it": "Il Mercato",
-      "objective_it": "Comprare: quanto costa, le decine, un biglietto per favore.",
-      "canDo_it": "So chiedere un prezzo e capirlo.",
-      "structureIds": [
-        "st_how_much"
-      ],
-      "sprite": "sp-coin",
-      "color": "#f9c74f",
-      "newItems": [
-        "w_money",
-        "w_coin",
-        "w_price",
-        "w_toy",
-        "w_sweets",
-        "w_ticket",
-        "w_thirty",
-        "w_forty",
-        "w_fifty",
-        "w_hundred",
-        "p_how_much_ten",
-        "p_how_much_toy",
-        "p_thats_cheap",
-        "p_can_i_ticket",
-        "p_sweets_fifty",
-        "p_hundred_coins"
-      ],
-      "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
-        "world_colors",
-        "world_numbers",
-        "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
-        "world_family",
-        "world_body",
-        "world_clothes",
-        "world_feelings",
-        "world_food",
-        "world_house",
-        "world_school",
-        "world_actions",
-        "world_weather",
-        "world_time",
-        "world_village",
-        "world_party",
-        "world_portrait",
-        "world_animals",
-        "world_sport",
-        "world_jobs",
-        "world_city"
-      ],
-      "minigames": [
-        "match",
-        "quiz",
-        "listen",
-        "hunt",
-        "dragdrop",
-        "build",
-        "truefalse",
-        "sayit"
-      ],
-      "reward": "c_monetina"
-    },
-    {
-      "id": "world_doctor",
-      "unit": 27,
-      "order": 27,
-      "phase": 10,
-      "title_it": "Dal Dottore",
-      "objective_it": "Dire come si sta quando si sta male e capire il dottore.",
-      "canDo_it": "So dire cosa mi fa male.",
-      "structureIds": [
-        "st_whats_the_matter"
-      ],
-      "sprite": "sp-plaster",
-      "color": "#f94144",
-      "newItems": [
-        "w_headache",
-        "w_toothache",
-        "w_stomach_ache",
-        "w_fever",
-        "w_cough",
-        "w_medicine",
-        "w_bandage",
-        "w_plaster",
-        "w_thermometer",
-        "w_rest",
-        "p_whats_the_matter",
-        "p_ive_got_fever",
-        "p_take_medicine",
-        "p_get_well",
-        "p_toothache_doctor",
-        "p_rest_bed"
-      ],
-      "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
-        "world_colors",
-        "world_numbers",
-        "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
-        "world_family",
-        "world_body",
-        "world_clothes",
-        "world_feelings",
-        "world_food",
-        "world_house",
-        "world_school",
-        "world_actions",
-        "world_weather",
-        "world_time",
-        "world_village",
-        "world_party",
-        "world_portrait",
-        "world_animals",
-        "world_sport",
-        "world_jobs",
-        "world_city",
-        "world_market"
-      ],
-      "minigames": [
-        "match",
-        "quiz",
-        "listen",
-        "hunt",
-        "dragdrop",
-        "build",
-        "truefalse",
-        "sayit"
-      ],
-      "reward": "c_cerottino"
-    },
-    {
-      "id": "world_nature",
-      "unit": 28,
-      "order": 28,
-      "phase": 10,
-      "title_it": "La Natura",
-      "objective_it": "Montagne, fiumi, mare: cosa c'è in un posto con there is / there are.",
-      "canDo_it": "So descrivere un paesaggio.",
-      "structureIds": [
-        "st_there_is"
-      ],
-      "sprite": "sp-mountain",
-      "color": "#43aa8b",
-      "newItems": [
-        "w_mountain",
-        "w_river",
-        "w_lake",
-        "w_forest",
-        "w_sea",
-        "w_island",
-        "w_desert",
-        "w_flower",
-        "w_rock",
-        "w_cave",
-        "p_there_is_river",
-        "p_there_are_mountains",
-        "p_is_there_lake",
-        "p_no_flowers_desert",
-        "p_island_sea",
-        "p_cave_forest"
-      ],
-      "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
-        "world_colors",
-        "world_numbers",
-        "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
-        "world_family",
-        "world_body",
-        "world_clothes",
-        "world_feelings",
-        "world_food",
-        "world_house",
-        "world_school",
-        "world_actions",
-        "world_weather",
-        "world_time",
-        "world_village",
-        "world_party",
-        "world_portrait",
-        "world_animals",
-        "world_sport",
-        "world_jobs",
-        "world_city",
-        "world_market",
-        "world_doctor"
-      ],
-      "minigames": [
-        "match",
-        "quiz",
-        "listen",
-        "hunt",
-        "dragdrop",
-        "build",
-        "truefalse",
-        "sayit"
-      ],
-      "reward": "c_sassolino"
-    },
-    {
-      "id": "world_routine",
-      "unit": 29,
-      "order": 29,
-      "phase": 11,
-      "title_it": "La Mia Giornata",
-      "objective_it": "Raccontare la giornata: mi alzo, mi lavo i denti, vado a scuola, con le ore e le mezze.",
-      "canDo_it": "So raccontare la mia giornata con le ore.",
-      "structureIds": [
-        "st_daily_routine"
-      ],
-      "sprite": "sp-clock-7",
-      "color": "#4cc9f0",
-      "newItems": [
-        "w_get_up",
-        "w_brush_teeth",
-        "w_wash_face",
-        "w_get_dressed",
-        "w_go_to_school",
-        "w_play",
-        "w_do_homework",
-        "w_watch_tv",
-        "w_have_bath",
-        "w_go_to_bed",
-        "p_get_up_seven",
-        "p_brush_teeth_morning",
-        "p_go_to_school_bus",
-        "p_homework_afternoon",
-        "p_go_to_bed_half_past",
-        "p_watch_tv_evening"
-      ],
-      "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
-        "world_colors",
-        "world_numbers",
-        "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
-        "world_family",
-        "world_body",
-        "world_clothes",
-        "world_feelings",
-        "world_food",
-        "world_house",
-        "world_school",
-        "world_actions",
-        "world_weather",
-        "world_time",
-        "world_village",
-        "world_party",
-        "world_portrait",
-        "world_animals",
-        "world_sport",
-        "world_jobs",
-        "world_city",
-        "world_market",
-        "world_doctor",
-        "world_nature"
-      ],
-      "minigames": [
-        "match",
-        "quiz",
-        "listen",
-        "hunt",
-        "dragdrop",
-        "build",
-        "truefalse",
-        "sayit"
-      ],
-      "reward": "c_pigiamino"
-    },
-    {
-      "id": "world_doing",
-      "unit": 30,
-      "order": 30,
-      "phase": 11,
-      "title_it": "Cosa Stai Facendo?",
-      "objective_it": "Dire e chiedere cosa si sta facendo adesso: I'm reading, is she cooking?",
-      "canDo_it": "So dire cosa sto facendo.",
-      "structureIds": [
-        "st_present_continuous"
-      ],
-      "sprite": "sp-reading",
-      "color": "#7209b7",
-      "newItems": [
-        "w_reading",
-        "w_writing",
-        "w_cooking",
-        "w_playing",
-        "w_listening",
-        "w_talking",
-        "w_waiting",
-        "w_laughing",
-        "w_painting",
-        "w_sleeping",
-        "p_what_doing_reading",
-        "p_is_she_cooking",
-        "p_im_writing",
-        "p_they_are_laughing",
-        "p_is_he_sleeping",
-        "p_listening_music"
-      ],
-      "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
-        "world_colors",
-        "world_numbers",
-        "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
-        "world_family",
-        "world_body",
-        "world_clothes",
-        "world_feelings",
-        "world_food",
-        "world_house",
-        "world_school",
-        "world_actions",
-        "world_weather",
-        "world_time",
-        "world_village",
-        "world_party",
-        "world_portrait",
-        "world_animals",
-        "world_sport",
-        "world_jobs",
-        "world_city",
-        "world_market",
-        "world_doctor",
-        "world_nature",
-        "world_routine"
-      ],
-      "minigames": [
-        "match",
-        "quiz",
-        "listen",
-        "hunt",
-        "dragdrop",
-        "build",
-        "truefalse",
-        "sayit"
-      ],
-      "reward": "c_riflesso"
+      "reward": "c_ticchetto"
     },
     {
       "id": "world_months",
-      "unit": 31,
-      "order": 31,
-      "phase": 11,
+      "unit": 23,
+      "order": 23,
+      "phase": 3,
       "title_it": "I Mesi e le Feste",
       "objective_it": "I dodici mesi sul calendario e le feste dei paesi anglofoni: Halloween, Natale, Pasqua.",
       "canDo_it": "So dire in che mese è il mio compleanno e fare gli auguri.",
@@ -6759,36 +6174,28 @@
         "p_summer_july"
       ],
       "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
         "world_colors",
         "world_numbers",
+        "world_school",
         "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
         "world_family",
+        "world_dragons",
         "world_body",
+        "world_dinos",
         "world_clothes",
-        "world_feelings",
         "world_food",
         "world_house",
-        "world_school",
-        "world_actions",
+        "world_lake",
+        "world_feelings",
         "world_weather",
-        "world_time",
         "world_village",
         "world_party",
+        "world_bridge",
+        "world_tower",
+        "world_actions",
         "world_portrait",
         "world_animals",
-        "world_sport",
-        "world_jobs",
-        "world_city",
-        "world_market",
-        "world_doctor",
-        "world_nature",
-        "world_routine",
-        "world_doing"
+        "world_time"
       ],
       "minigames": [
         "match",
@@ -6803,10 +6210,582 @@
       "reward": "c_zucchetta"
     },
     {
+      "id": "world_sport",
+      "unit": 24,
+      "order": 24,
+      "phase": 6,
+      "title_it": "Lo Sport e i Giochi",
+      "objective_it": "Sport e hobby: cosa mi piace fare, il mio preferito, giochiamo a...",
+      "canDo_it": "So dire quali sport e giochi mi piacciono.",
+      "structureIds": [
+        "st_like_playing"
+      ],
+      "sprite": "sp-football",
+      "color": "#2a9d8f",
+      "newItems": [
+        "w_football",
+        "w_basketball",
+        "w_tennis",
+        "w_ball",
+        "w_drawing",
+        "w_music",
+        "w_guitar",
+        "w_chess",
+        "w_kite",
+        "w_skateboard",
+        "p_like_playing_football",
+        "p_favourite_tennis",
+        "p_lets_play_chess",
+        "p_like_drawing",
+        "p_can_play_guitar",
+        "p_kite_windy"
+      ],
+      "reviewFrom": [
+        "world_colors",
+        "world_numbers",
+        "world_school",
+        "world_forest",
+        "world_family",
+        "world_dragons",
+        "world_body",
+        "world_dinos",
+        "world_clothes",
+        "world_food",
+        "world_house",
+        "world_lake",
+        "world_feelings",
+        "world_weather",
+        "world_village",
+        "world_party",
+        "world_bridge",
+        "world_tower",
+        "world_actions",
+        "world_portrait",
+        "world_animals",
+        "world_time",
+        "world_months"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse",
+        "sayit"
+      ],
+      "reward": "c_golino"
+    },
+    {
+      "id": "world_jobs",
+      "unit": 25,
+      "order": 25,
+      "phase": 6,
+      "title_it": "I Mestieri",
+      "objective_it": "Dieci mestieri: chi fa cosa, e cosa voglio fare da grande.",
+      "canDo_it": "So dire il mestiere di una persona e cosa voglio fare da grande.",
+      "structureIds": [
+        "st_jobs"
+      ],
+      "sprite": "sp-firefighter",
+      "color": "#e76f51",
+      "newItems": [
+        "w_doctor",
+        "w_farmer",
+        "w_cook",
+        "w_police",
+        "w_firefighter",
+        "w_pilot",
+        "w_nurse",
+        "w_singer",
+        "w_builder",
+        "w_vet",
+        "p_he_is_doctor",
+        "p_she_is_pilot",
+        "p_want_to_be_firefighter",
+        "p_want_to_be_vet",
+        "p_farmer_farm",
+        "p_cook_kitchen"
+      ],
+      "reviewFrom": [
+        "world_colors",
+        "world_numbers",
+        "world_school",
+        "world_forest",
+        "world_family",
+        "world_dragons",
+        "world_body",
+        "world_dinos",
+        "world_clothes",
+        "world_food",
+        "world_house",
+        "world_lake",
+        "world_feelings",
+        "world_weather",
+        "world_village",
+        "world_party",
+        "world_bridge",
+        "world_tower",
+        "world_actions",
+        "world_portrait",
+        "world_animals",
+        "world_time",
+        "world_months",
+        "world_sport"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse",
+        "sayit"
+      ],
+      "reward": "c_timbrino"
+    },
+    {
+      "id": "world_city",
+      "unit": 26,
+      "order": 26,
+      "phase": 7,
+      "title_it": "La Città",
+      "objective_it": "La città e le direzioni: gira a sinistra, vai dritto, accanto a, dietro, davanti a.",
+      "canDo_it": "So chiedere e dare indicazioni in città.",
+      "structureIds": [
+        "st_directions"
+      ],
+      "sprite": "sp-arrow-right",
+      "color": "#4361ee",
+      "newItems": [
+        "w_street",
+        "w_hospital",
+        "w_station",
+        "w_library",
+        "w_supermarket",
+        "w_left",
+        "w_right",
+        "w_behind",
+        "w_next_to",
+        "w_in_front_of",
+        "p_turn_left",
+        "p_turn_right",
+        "p_where_library",
+        "p_hospital_behind",
+        "p_in_front_of_station",
+        "p_go_straight"
+      ],
+      "reviewFrom": [
+        "world_colors",
+        "world_numbers",
+        "world_school",
+        "world_forest",
+        "world_family",
+        "world_dragons",
+        "world_body",
+        "world_dinos",
+        "world_clothes",
+        "world_food",
+        "world_house",
+        "world_lake",
+        "world_feelings",
+        "world_weather",
+        "world_village",
+        "world_party",
+        "world_bridge",
+        "world_tower",
+        "world_actions",
+        "world_portrait",
+        "world_animals",
+        "world_time",
+        "world_months",
+        "world_sport",
+        "world_jobs"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse",
+        "sayit"
+      ],
+      "reward": "c_semaforino"
+    },
+    {
+      "id": "world_market",
+      "unit": 27,
+      "order": 27,
+      "phase": 7,
+      "title_it": "Il Mercato",
+      "objective_it": "Comprare: quanto costa, le decine, un biglietto per favore.",
+      "canDo_it": "So chiedere un prezzo e capirlo.",
+      "structureIds": [
+        "st_how_much"
+      ],
+      "sprite": "sp-coin",
+      "color": "#f9c74f",
+      "newItems": [
+        "w_money",
+        "w_coin",
+        "w_price",
+        "w_toy",
+        "w_sweets",
+        "w_ticket",
+        "w_thirty",
+        "w_forty",
+        "w_fifty",
+        "w_hundred",
+        "p_how_much_ten",
+        "p_how_much_toy",
+        "p_thats_cheap",
+        "p_can_i_ticket",
+        "p_sweets_fifty",
+        "p_hundred_coins"
+      ],
+      "reviewFrom": [
+        "world_colors",
+        "world_numbers",
+        "world_school",
+        "world_forest",
+        "world_family",
+        "world_dragons",
+        "world_body",
+        "world_dinos",
+        "world_clothes",
+        "world_food",
+        "world_house",
+        "world_lake",
+        "world_feelings",
+        "world_weather",
+        "world_village",
+        "world_party",
+        "world_bridge",
+        "world_tower",
+        "world_actions",
+        "world_portrait",
+        "world_animals",
+        "world_time",
+        "world_months",
+        "world_sport",
+        "world_jobs",
+        "world_city"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse",
+        "sayit"
+      ],
+      "reward": "c_monetina"
+    },
+    {
+      "id": "world_doctor",
+      "unit": 28,
+      "order": 28,
+      "phase": 7,
+      "title_it": "Dal Dottore",
+      "objective_it": "Dire come si sta quando si sta male e capire il dottore.",
+      "canDo_it": "So dire cosa mi fa male.",
+      "structureIds": [
+        "st_whats_the_matter"
+      ],
+      "sprite": "sp-plaster",
+      "color": "#f94144",
+      "newItems": [
+        "w_headache",
+        "w_toothache",
+        "w_stomach_ache",
+        "w_fever",
+        "w_cough",
+        "w_medicine",
+        "w_bandage",
+        "w_plaster",
+        "w_thermometer",
+        "w_rest",
+        "p_whats_the_matter",
+        "p_ive_got_fever",
+        "p_take_medicine",
+        "p_get_well",
+        "p_toothache_doctor",
+        "p_rest_bed"
+      ],
+      "reviewFrom": [
+        "world_colors",
+        "world_numbers",
+        "world_school",
+        "world_forest",
+        "world_family",
+        "world_dragons",
+        "world_body",
+        "world_dinos",
+        "world_clothes",
+        "world_food",
+        "world_house",
+        "world_lake",
+        "world_feelings",
+        "world_weather",
+        "world_village",
+        "world_party",
+        "world_bridge",
+        "world_tower",
+        "world_actions",
+        "world_portrait",
+        "world_animals",
+        "world_time",
+        "world_months",
+        "world_sport",
+        "world_jobs",
+        "world_city",
+        "world_market"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse",
+        "sayit"
+      ],
+      "reward": "c_cerottino"
+    },
+    {
+      "id": "world_nature",
+      "unit": 29,
+      "order": 29,
+      "phase": 7,
+      "title_it": "La Natura",
+      "objective_it": "Montagne, fiumi, mare: cosa c'è in un posto con there is / there are.",
+      "canDo_it": "So descrivere un paesaggio.",
+      "structureIds": [
+        "st_there_is"
+      ],
+      "sprite": "sp-mountain",
+      "color": "#43aa8b",
+      "newItems": [
+        "w_mountain",
+        "w_river",
+        "w_lake",
+        "w_forest",
+        "w_sea",
+        "w_island",
+        "w_desert",
+        "w_flower",
+        "w_rock",
+        "w_cave",
+        "p_there_is_river",
+        "p_there_are_mountains",
+        "p_is_there_lake",
+        "p_no_flowers_desert",
+        "p_island_sea",
+        "p_cave_forest"
+      ],
+      "reviewFrom": [
+        "world_colors",
+        "world_numbers",
+        "world_school",
+        "world_forest",
+        "world_family",
+        "world_dragons",
+        "world_body",
+        "world_dinos",
+        "world_clothes",
+        "world_food",
+        "world_house",
+        "world_lake",
+        "world_feelings",
+        "world_weather",
+        "world_village",
+        "world_party",
+        "world_bridge",
+        "world_tower",
+        "world_actions",
+        "world_portrait",
+        "world_animals",
+        "world_time",
+        "world_months",
+        "world_sport",
+        "world_jobs",
+        "world_city",
+        "world_market",
+        "world_doctor"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse",
+        "sayit"
+      ],
+      "reward": "c_sassolino"
+    },
+    {
+      "id": "world_routine",
+      "unit": 30,
+      "order": 30,
+      "phase": 8,
+      "title_it": "La Mia Giornata",
+      "objective_it": "Raccontare la giornata: mi alzo, mi lavo i denti, vado a scuola, con le ore e le mezze.",
+      "canDo_it": "So raccontare la mia giornata con le ore.",
+      "structureIds": [
+        "st_daily_routine"
+      ],
+      "sprite": "sp-clock-7",
+      "color": "#4cc9f0",
+      "newItems": [
+        "w_get_up",
+        "w_brush_teeth",
+        "w_wash_face",
+        "w_get_dressed",
+        "w_go_to_school",
+        "w_play",
+        "w_do_homework",
+        "w_watch_tv",
+        "w_have_bath",
+        "w_go_to_bed",
+        "p_get_up_seven",
+        "p_brush_teeth_morning",
+        "p_go_to_school_bus",
+        "p_homework_afternoon",
+        "p_go_to_bed_half_past",
+        "p_watch_tv_evening"
+      ],
+      "reviewFrom": [
+        "world_colors",
+        "world_numbers",
+        "world_school",
+        "world_forest",
+        "world_family",
+        "world_dragons",
+        "world_body",
+        "world_dinos",
+        "world_clothes",
+        "world_food",
+        "world_house",
+        "world_lake",
+        "world_feelings",
+        "world_weather",
+        "world_village",
+        "world_party",
+        "world_bridge",
+        "world_tower",
+        "world_actions",
+        "world_portrait",
+        "world_animals",
+        "world_time",
+        "world_months",
+        "world_sport",
+        "world_jobs",
+        "world_city",
+        "world_market",
+        "world_doctor",
+        "world_nature"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse",
+        "sayit"
+      ],
+      "reward": "c_pigiamino"
+    },
+    {
+      "id": "world_doing",
+      "unit": 31,
+      "order": 31,
+      "phase": 8,
+      "title_it": "Cosa Stai Facendo?",
+      "objective_it": "Dire e chiedere cosa si sta facendo adesso: I'm reading, is she cooking?",
+      "canDo_it": "So dire cosa sto facendo.",
+      "structureIds": [
+        "st_present_continuous"
+      ],
+      "sprite": "sp-reading",
+      "color": "#7209b7",
+      "newItems": [
+        "w_reading",
+        "w_writing",
+        "w_cooking",
+        "w_playing",
+        "w_listening",
+        "w_talking",
+        "w_waiting",
+        "w_laughing",
+        "w_painting",
+        "w_sleeping",
+        "p_what_doing_reading",
+        "p_is_she_cooking",
+        "p_im_writing",
+        "p_they_are_laughing",
+        "p_is_he_sleeping",
+        "p_listening_music"
+      ],
+      "reviewFrom": [
+        "world_colors",
+        "world_numbers",
+        "world_school",
+        "world_forest",
+        "world_family",
+        "world_dragons",
+        "world_body",
+        "world_dinos",
+        "world_clothes",
+        "world_food",
+        "world_house",
+        "world_lake",
+        "world_feelings",
+        "world_weather",
+        "world_village",
+        "world_party",
+        "world_bridge",
+        "world_tower",
+        "world_actions",
+        "world_portrait",
+        "world_animals",
+        "world_time",
+        "world_months",
+        "world_sport",
+        "world_jobs",
+        "world_city",
+        "world_market",
+        "world_doctor",
+        "world_nature",
+        "world_routine"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse",
+        "sayit"
+      ],
+      "reward": "c_riflesso"
+    },
+    {
       "id": "world_travel",
       "unit": 32,
       "order": 32,
-      "phase": 11,
+      "phase": 8,
       "title_it": "Ieri e Domani",
       "objective_it": "Ieri, domani, le vacanze: was, went, going to, e Pepe che parte per il mondo.",
       "canDo_it": "So dire cosa ho fatto ieri e cosa farò domani.",
@@ -6834,28 +6813,29 @@
         "p_map_hotel"
       ],
       "reviewFrom": [
-        "world_dragons",
-        "world_dinos",
         "world_colors",
         "world_numbers",
+        "world_school",
         "world_forest",
-        "world_lake",
-        "world_bridge",
-        "world_tower",
         "world_family",
+        "world_dragons",
         "world_body",
+        "world_dinos",
         "world_clothes",
-        "world_feelings",
         "world_food",
         "world_house",
-        "world_school",
-        "world_actions",
+        "world_lake",
+        "world_feelings",
         "world_weather",
-        "world_time",
         "world_village",
         "world_party",
+        "world_bridge",
+        "world_tower",
+        "world_actions",
         "world_portrait",
         "world_animals",
+        "world_time",
+        "world_months",
         "world_sport",
         "world_jobs",
         "world_city",
@@ -6863,8 +6843,7 @@
         "world_doctor",
         "world_nature",
         "world_routine",
-        "world_doing",
-        "world_months"
+        "world_doing"
       ],
       "minigames": [
         "match",
@@ -7246,7 +7225,7 @@
     "chapters": [
       {
         "id": "st_prologue",
-        "order": 0,
+        "order": 1,
         "title_it": "La Nebbia Muta",
         "trigger": {
           "type": "start"
@@ -7270,70 +7249,8 @@
         "season": 1
       },
       {
-        "id": "st_dragons",
-        "order": 1,
-        "title_it": "La Valle dei Draghi",
-        "trigger": {
-          "type": "world",
-          "value": "world_dragons"
-        },
-        "creatureId": "c_flamup",
-        "worldId": "world_dragons",
-        "lines": [
-          {
-            "who": "narrator",
-            "it": "Nella Valle dei Draghi il fuoco si era spento. Fiammino, il draghetto, non ricordava più nemmeno il proprio nome."
-          },
-          {
-            "who": "narrator",
-            "it": "Ma ogni parola imparata nella valle era una scintilla. E le scintille, si sa, fanno il fuoco."
-          },
-          {
-            "who": "pepe",
-            "it": "Fiammino, guarda cosa abbiamo imparato! Prova a dirlo anche tu!"
-          },
-          {
-            "who": "creature",
-            "en": "Hello, Pepe! I am a dragon!",
-            "it": "Ciao, Pepe! Io sono un drago!"
-          }
-        ],
-        "season": 1
-      },
-      {
-        "id": "st_dinos",
-        "order": 2,
-        "title_it": "La Giungla dei Dinosauri",
-        "trigger": {
-          "type": "world",
-          "value": "world_dinos"
-        },
-        "creatureId": "c_rocktail",
-        "worldId": "world_dinos",
-        "lines": [
-          {
-            "who": "narrator",
-            "it": "Nella Giungla dei Dinosauri un uovo stava per schiudersi. Ma Codasso, il piccolo dinosauro, non sapeva come chiamarlo."
-          },
-          {
-            "who": "narrator",
-            "it": "Pepe glielo insegnò, una parola alla volta. E l'uovo si aprì."
-          },
-          {
-            "who": "pepe",
-            "it": "È un uovo, Codasso! Dai, dillo con me!"
-          },
-          {
-            "who": "creature",
-            "en": "It's an egg! It's my egg!",
-            "it": "È un uovo! È il mio uovo!"
-          }
-        ],
-        "season": 1
-      },
-      {
         "id": "st_colors",
-        "order": 3,
+        "order": 2,
         "title_it": "La Grotta dei Colori",
         "trigger": {
           "type": "world",
@@ -7364,7 +7281,7 @@
       },
       {
         "id": "st_numbers",
-        "order": 4,
+        "order": 3,
         "title_it": "La Montagna dei Numeri",
         "trigger": {
           "type": "world",
@@ -7392,6 +7309,38 @@
           }
         ],
         "season": 1
+      },
+      {
+        "id": "st2_school",
+        "order": 4,
+        "number": 15,
+        "season": 1,
+        "title_it": "La Scuola delle Creature",
+        "trigger": {
+          "type": "world",
+          "value": "world_school"
+        },
+        "creatureId": "c_maestrino",
+        "worldId": "world_school",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Nella Scuola delle Creature Maestrino sapeva tutte le parole, ma le diceva così piano che nessuno le sentiva."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe chiese ad alta voce: can I have a pencil, please? E tutta la classe rispose."
+          },
+          {
+            "who": "pepe",
+            "it": "Maestrino, posso avere una matita, per favore? Grazie!"
+          },
+          {
+            "who": "creature",
+            "en": "Open your book! Can I have a pencil, please? Here you are!",
+            "it": "Apri il libro! Posso avere una matita, per favore? Ecco a te!"
+          }
+        ]
       },
       {
         "id": "st_forest",
@@ -7425,156 +7374,10 @@
         "season": 1
       },
       {
-        "id": "st_lake",
-        "order": 6,
-        "title_it": "Il Lago Magico",
-        "trigger": {
-          "type": "world",
-          "value": "world_lake"
-        },
-        "creatureId": "c_splashy",
-        "worldId": "world_lake",
-        "lines": [
-          {
-            "who": "narrator",
-            "it": "Il Lago Magico era piatto e muto. Sciazzo non sapeva più dire se una cosa era grande o piccola."
-          },
-          {
-            "who": "narrator",
-            "it": "Una parola per uno, un'altra per tanti: la regola più difficile dell'isola. Sciazzo la imparò con un tuffo."
-          },
-          {
-            "who": "pepe",
-            "it": "Sciazzo, il drago è grande e il pesce è... piccolo! Dillo anche tu!"
-          },
-          {
-            "who": "creature",
-            "en": "The fish is small. The dragon is big. I am fast!",
-            "it": "Il pesce è piccolo. Il drago è grande. Io sono veloce!"
-          }
-        ],
-        "season": 1
-      },
-      {
-        "id": "st_bridge",
-        "order": 7,
-        "title_it": "Il Ponte delle Frasi",
-        "trigger": {
-          "type": "world",
-          "value": "world_bridge"
-        },
-        "creatureId": "c_glimmer",
-        "worldId": "world_bridge",
-        "lines": [
-          {
-            "who": "narrator",
-            "it": "Il Ponte delle Frasi era spezzato: mancava una parola a ogni asse. Baluce faceva luce, ma non poteva attraversarlo."
-          },
-          {
-            "who": "narrator",
-            "it": "Pepe costruì le frasi intere, una tavola alla volta. E il ponte tenne."
-          },
-          {
-            "who": "pepe",
-            "it": "Baluce, guarda! Io ho una spada, e vedo... il castello! Ci siamo quasi!"
-          },
-          {
-            "who": "creature",
-            "en": "I have a star! I can see the castle!",
-            "it": "Io ho una stella! Vedo il castello!"
-          }
-        ],
-        "season": 1
-      },
-      {
-        "id": "st_tower",
-        "order": 8,
-        "title_it": "La Torre dei Dialoghi",
-        "trigger": {
-          "type": "world",
-          "value": "world_tower"
-        },
-        "creatureId": "c_torrek",
-        "worldId": "world_tower",
-        "lines": [
-          {
-            "who": "narrator",
-            "it": "In cima alla Torre dei Dialoghi viveva Torrek, il guardiano. Faceva domande a cui nessuno rispondeva più."
-          },
-          {
-            "who": "narrator",
-            "it": "Pepe salì fino in cima e rispose. Per la prima volta, in tutta l'isola, due voci parlarono insieme."
-          },
-          {
-            "who": "pepe",
-            "it": "Torrek, chiedimi tutto quello che vuoi! Adesso so rispondere!"
-          },
-          {
-            "who": "creature",
-            "en": "What is your name? My name is Torrek. How are you?",
-            "it": "Come ti chiami? Il mio nome è Torrek. Come stai?"
-          }
-        ],
-        "season": 1
-      },
-      {
-        "id": "st_epilogue",
-        "order": 9,
-        "title_it": "La nebbia si alza",
-        "trigger": {
-          "type": "world",
-          "value": "world_tower"
-        },
-        "creatureId": null,
-        "worldId": null,
-        "lines": [
-          {
-            "who": "narrator",
-            "it": "E allora tutte le creature parlarono insieme, dalla valle fino alla torre. La Nebbia Muta si alzò, e sparì nel mare."
-          },
-          {
-            "who": "narrator",
-            "it": "L'isola aveva ritrovato le parole. E una cucciola aveva trovato otto amici."
-          },
-          {
-            "who": "pepe",
-            "it": "Ce l'abbiamo fatta! Ma le parole nuove non finiscono mai... Continuiamo a giocare?"
-          }
-        ],
-        "season": 1
-      },
-      {
-        "id": "st2_prologue",
-        "order": 10,
-        "number": null,
-        "season": 2,
-        "title_it": "La lettera",
-        "trigger": {
-          "type": "phase",
-          "value": 6
-        },
-        "creatureId": "c_pepe",
-        "worldId": null,
-        "lines": [
-          {
-            "who": "narrator",
-            "it": "La nebbia era sparita, ma sull'isola arrivò una lettera. Era un invito: una festa, alla fine dell'anno, dall'altra parte dell'isola."
-          },
-          {
-            "who": "narrator",
-            "it": "Per arrivarci Pepe doveva attraversare il paese dove vivono le persone, e imparare le loro parole."
-          },
-          {
-            "who": "pepe",
-            "it": "Una festa! Ma quanta strada... Andiamo, creature: una parola alla volta!"
-          }
-        ]
-      },
-      {
         "id": "st2_family",
-        "order": 11,
+        "order": 6,
         "number": 9,
-        "season": 2,
+        "season": 1,
         "title_it": "La Famiglia del Castello",
         "trigger": {
           "type": "world",
@@ -7603,8 +7406,92 @@
         ]
       },
       {
+        "id": "st_dragons",
+        "order": 7,
+        "title_it": "La Valle dei Draghi",
+        "trigger": {
+          "type": "world",
+          "value": "world_dragons"
+        },
+        "creatureId": "c_flamup",
+        "worldId": "world_dragons",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Nella Valle dei Draghi il fuoco si era spento. Fiammino, il draghetto, non ricordava più nemmeno il proprio nome."
+          },
+          {
+            "who": "narrator",
+            "it": "Ma ogni parola imparata nella valle era una scintilla. E le scintille, si sa, fanno il fuoco."
+          },
+          {
+            "who": "pepe",
+            "it": "Fiammino, guarda cosa abbiamo imparato! Prova a dirlo anche tu!"
+          },
+          {
+            "who": "creature",
+            "en": "Hello, Pepe! I am a dragon!",
+            "it": "Ciao, Pepe! Io sono un drago!"
+          }
+        ],
+        "season": 1
+      },
+      {
+        "id": "st_epilogue",
+        "order": 8,
+        "title_it": "La nebbia si alza",
+        "trigger": {
+          "type": "world",
+          "value": "world_dragons"
+        },
+        "creatureId": null,
+        "worldId": null,
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "E allora tutte le creature parlarono insieme, dalla Grotta dei Colori fino alla Valle dei Draghi. La Nebbia Muta si alzò, e sparì nel mare."
+          },
+          {
+            "who": "narrator",
+            "it": "L'isola aveva ritrovato le parole. E una cucciola aveva trovato sei amici."
+          },
+          {
+            "who": "pepe",
+            "it": "Ce l'abbiamo fatta! Ma le parole nuove non finiscono mai... Continuiamo a giocare?"
+          }
+        ],
+        "season": 1
+      },
+      {
+        "id": "st2_prologue",
+        "order": 9,
+        "number": null,
+        "season": 2,
+        "title_it": "La lettera",
+        "trigger": {
+          "type": "phase",
+          "value": 2
+        },
+        "creatureId": "c_pepe",
+        "worldId": null,
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "La nebbia era sparita, ma sull'isola arrivò una lettera. Era un invito: una festa, alla fine dell'anno, dall'altra parte dell'isola."
+          },
+          {
+            "who": "narrator",
+            "it": "Per arrivarci Pepe doveva attraversare il paese dove vivono le persone, e imparare le loro parole."
+          },
+          {
+            "who": "pepe",
+            "it": "Una festa! Ma quanta strada... Andiamo, creature: una parola alla volta!"
+          }
+        ]
+      },
+      {
         "id": "st2_body",
-        "order": 12,
+        "order": 10,
         "number": 10,
         "season": 2,
         "title_it": "Il Corpo del Gigante",
@@ -7635,8 +7522,39 @@
         ]
       },
       {
+        "id": "st_dinos",
+        "order": 11,
+        "title_it": "La Giungla dei Dinosauri",
+        "trigger": {
+          "type": "world",
+          "value": "world_dinos"
+        },
+        "creatureId": "c_rocktail",
+        "worldId": "world_dinos",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Nella Giungla dei Dinosauri un uovo stava per schiudersi. Ma Codasso, il piccolo dinosauro, non sapeva come chiamarlo."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe glielo insegnò, una parola alla volta. E l'uovo si aprì."
+          },
+          {
+            "who": "pepe",
+            "it": "È un uovo, Codasso! Dai, dillo con me!"
+          },
+          {
+            "who": "creature",
+            "en": "It's an egg! It's my egg!",
+            "it": "È un uovo! È il mio uovo!"
+          }
+        ],
+        "season": 2
+      },
+      {
         "id": "st2_clothes",
-        "order": 13,
+        "order": 12,
         "number": 11,
         "season": 2,
         "title_it": "Il Guardaroba del Mago",
@@ -7667,40 +7585,8 @@
         ]
       },
       {
-        "id": "st2_feelings",
-        "order": 14,
-        "number": 12,
-        "season": 2,
-        "title_it": "Le Emozioni delle Creature",
-        "trigger": {
-          "type": "world",
-          "value": "world_feelings"
-        },
-        "creatureId": "c_nuvolo",
-        "worldId": "world_feelings",
-        "lines": [
-          {
-            "who": "narrator",
-            "it": "Nuvolo cambiava faccia cento volte al giorno, e nessuno capiva come stesse."
-          },
-          {
-            "who": "narrator",
-            "it": "Pepe gli chiese: how are you? E Nuvolo, per la prima volta, rispose."
-          },
-          {
-            "who": "pepe",
-            "it": "Nuvolo, come stai oggi? Dimmelo in inglese!"
-          },
-          {
-            "who": "creature",
-            "en": "How are you? I am happy! Are you tired? No, I am not!",
-            "it": "Come stai? Sono felice! Sei stanco? No!"
-          }
-        ]
-      },
-      {
         "id": "st2_food",
-        "order": 15,
+        "order": 13,
         "number": 13,
         "season": 2,
         "title_it": "La Cucina del Castello",
@@ -7732,7 +7618,7 @@
       },
       {
         "id": "st2_house",
-        "order": 16,
+        "order": 14,
         "number": 14,
         "season": 2,
         "title_it": "La Casa di Pepe",
@@ -7763,72 +7649,71 @@
         ]
       },
       {
-        "id": "st2_school",
-        "order": 17,
-        "number": 15,
-        "season": 2,
-        "title_it": "La Scuola delle Creature",
+        "id": "st_lake",
+        "order": 15,
+        "title_it": "Il Lago Magico",
         "trigger": {
           "type": "world",
-          "value": "world_school"
+          "value": "world_lake"
         },
-        "creatureId": "c_maestrino",
-        "worldId": "world_school",
+        "creatureId": "c_splashy",
+        "worldId": "world_lake",
         "lines": [
           {
             "who": "narrator",
-            "it": "Nella Scuola delle Creature Maestrino sapeva tutte le parole, ma le diceva così piano che nessuno le sentiva."
+            "it": "Il Lago Magico era piatto e muto. Sciazzo non sapeva più dire se una cosa era grande o piccola."
           },
           {
             "who": "narrator",
-            "it": "Pepe chiese ad alta voce: can I have a pencil, please? E tutta la classe rispose."
+            "it": "Una parola per uno, un'altra per tanti: la regola più difficile dell'isola. Sciazzo la imparò con un tuffo."
           },
           {
             "who": "pepe",
-            "it": "Maestrino, posso avere una matita, per favore? Grazie!"
+            "it": "Sciazzo, il drago è grande e il pesce è... piccolo! Dillo anche tu!"
           },
           {
             "who": "creature",
-            "en": "Open your book! Can I have a pencil, please? Here you are!",
-            "it": "Apri il libro! Posso avere una matita, per favore? Ecco a te!"
+            "en": "The fish is small. The dragon is big. I am fast!",
+            "it": "Il pesce è piccolo. Il drago è grande. Io sono veloce!"
           }
-        ]
+        ],
+        "season": 2
       },
       {
-        "id": "st2_actions",
-        "order": 18,
-        "number": 16,
+        "id": "st2_feelings",
+        "order": 16,
+        "number": 12,
         "season": 2,
-        "title_it": "Il Bosco delle Azioni",
+        "title_it": "Le Emozioni delle Creature",
         "trigger": {
           "type": "world",
-          "value": "world_actions"
+          "value": "world_feelings"
         },
-        "creatureId": "c_saltello",
-        "worldId": "world_actions",
+        "creatureId": "c_nuvolo",
+        "worldId": "world_feelings",
         "lines": [
           {
             "who": "narrator",
-            "it": "Saltello la rana non stava ferma un secondo, ma non sapeva dire cosa sapeva fare."
+            "it": "Nuvolo cambiava faccia cento volte al giorno, e nessuno capiva come stesse."
           },
           {
             "who": "narrator",
-            "it": "Pepe corse e saltò con lei. I can jump! E tutto il bosco si mise a correre."
+            "it": "Pepe gli chiese: how are you? E Nuvolo, per la prima volta, rispose."
           },
           {
             "who": "pepe",
-            "it": "Saltello, io so saltare! E tu? Sai nuotare?"
+            "it": "Nuvolo, come stai oggi? Dimmelo in inglese!"
           },
           {
             "who": "creature",
-            "en": "I can jump! I can swim! Can you fly? No, I can't!",
-            "it": "So saltare! So nuotare! Sai volare? No!"
+            "en": "How are you? I am happy! Are you tired? No, I am not!",
+            "it": "Come stai? Sono felice! Sei stanco? No!"
           }
         ]
       },
       {
         "id": "st2_weather",
-        "order": 19,
+        "order": 17,
         "number": 17,
         "season": 2,
         "title_it": "Il Cielo Cambia",
@@ -7859,40 +7744,8 @@
         ]
       },
       {
-        "id": "st2_time",
-        "order": 20,
-        "number": 18,
-        "season": 2,
-        "title_it": "La Torre dell'Orologio",
-        "trigger": {
-          "type": "world",
-          "value": "world_time"
-        },
-        "creatureId": "c_ticchetto",
-        "worldId": "world_time",
-        "lines": [
-          {
-            "who": "narrator",
-            "it": "Ticchetto la sveglia suonava a caso, perché non sapeva leggere l'ora."
-          },
-          {
-            "who": "narrator",
-            "it": "Pepe le insegnò le ore in punto, e la colazione tornò al mattino."
-          },
-          {
-            "who": "pepe",
-            "it": "Ticchetto, che ore sono? Le sette! Ora della colazione!"
-          },
-          {
-            "who": "creature",
-            "en": "What time is it? It's seven o'clock! I have breakfast in the morning!",
-            "it": "Che ore sono? Sono le sette! Faccio colazione la mattina!"
-          }
-        ]
-      },
-      {
         "id": "st2_village",
-        "order": 21,
+        "order": 18,
         "number": 19,
         "season": 2,
         "title_it": "Il Villaggio",
@@ -7924,7 +7777,7 @@
       },
       {
         "id": "st2_party",
-        "order": 22,
+        "order": 19,
         "number": 20,
         "season": 2,
         "title_it": "La Festa Finale",
@@ -7956,7 +7809,7 @@
       },
       {
         "id": "st2_epilogue",
-        "order": 23,
+        "order": 20,
         "number": null,
         "season": 2,
         "title_it": "La festa",
@@ -7973,7 +7826,7 @@
           },
           {
             "who": "narrator",
-            "it": "Pepe aveva imparato le parole di casa, di scuola, del cielo e del tempo. Le parole di ogni giorno."
+            "it": "Pepe aveva imparato le parole del corpo, dei vestiti, della cucina, della casa e del cielo. Le parole di ogni giorno."
           },
           {
             "who": "pepe",
@@ -7983,13 +7836,13 @@
       },
       {
         "id": "st3_prologue",
-        "order": 30,
+        "order": 21,
         "number": null,
         "season": 3,
         "title_it": "La mappa",
         "trigger": {
           "type": "phase",
-          "value": 9
+          "value": 3
         },
         "creatureId": "c_pepe",
         "worldId": null,
@@ -8009,8 +7862,102 @@
         ]
       },
       {
+        "id": "st_bridge",
+        "order": 22,
+        "title_it": "Il Ponte delle Frasi",
+        "trigger": {
+          "type": "world",
+          "value": "world_bridge"
+        },
+        "creatureId": "c_glimmer",
+        "worldId": "world_bridge",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Il Ponte delle Frasi era spezzato: mancava una parola a ogni asse. Baluce faceva luce, ma non poteva attraversarlo."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe costruì le frasi intere, una tavola alla volta. E il ponte tenne."
+          },
+          {
+            "who": "pepe",
+            "it": "Baluce, guarda! Io ho una spada, e vedo... il castello! Ci siamo quasi!"
+          },
+          {
+            "who": "creature",
+            "en": "I have a star! I can see the castle!",
+            "it": "Io ho una stella! Vedo il castello!"
+          }
+        ],
+        "season": 3
+      },
+      {
+        "id": "st_tower",
+        "order": 23,
+        "title_it": "La Torre dei Dialoghi",
+        "trigger": {
+          "type": "world",
+          "value": "world_tower"
+        },
+        "creatureId": "c_torrek",
+        "worldId": "world_tower",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "In cima alla Torre dei Dialoghi viveva Torrek, il guardiano. Faceva domande a tutti, ma nessuno sapeva rispondergli."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe salì fino in cima e rispose. Una domanda, una risposta, e poi un'altra ancora: era il primo vero dialogo di Pepe."
+          },
+          {
+            "who": "pepe",
+            "it": "Torrek, chiedimi tutto quello che vuoi! Adesso so rispondere!"
+          },
+          {
+            "who": "creature",
+            "en": "What is your name? My name is Torrek. How are you?",
+            "it": "Come ti chiami? Il mio nome è Torrek. Come stai?"
+          }
+        ],
+        "season": 3
+      },
+      {
+        "id": "st2_actions",
+        "order": 24,
+        "number": 16,
+        "season": 3,
+        "title_it": "Il Bosco delle Azioni",
+        "trigger": {
+          "type": "world",
+          "value": "world_actions"
+        },
+        "creatureId": "c_saltello",
+        "worldId": "world_actions",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Saltello la rana non stava ferma un secondo, ma non sapeva dire cosa sapeva fare."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe corse e saltò con lei. I can jump! E tutto il bosco si mise a correre."
+          },
+          {
+            "who": "pepe",
+            "it": "Saltello, io so saltare! E tu? Sai nuotare?"
+          },
+          {
+            "who": "creature",
+            "en": "I can jump! I can swim! Can you fly? No, I can't!",
+            "it": "So saltare! So nuotare! Sai volare? No!"
+          }
+        ]
+      },
+      {
         "id": "st3_portrait",
-        "order": 31,
+        "order": 25,
         "number": 21,
         "season": 3,
         "title_it": "Il Ritratto",
@@ -8042,7 +7989,7 @@
       },
       {
         "id": "st3_animals",
-        "order": 32,
+        "order": 26,
         "number": 22,
         "season": 3,
         "title_it": "La Fattoria e lo Zoo",
@@ -8073,8 +8020,72 @@
         ]
       },
       {
+        "id": "st2_time",
+        "order": 27,
+        "number": 18,
+        "season": 3,
+        "title_it": "La Torre dell'Orologio",
+        "trigger": {
+          "type": "world",
+          "value": "world_time"
+        },
+        "creatureId": "c_ticchetto",
+        "worldId": "world_time",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Ticchetto la sveglia suonava a caso, perché non sapeva leggere l'ora."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe le insegnò le ore in punto, e la colazione tornò al mattino."
+          },
+          {
+            "who": "pepe",
+            "it": "Ticchetto, che ore sono? Le sette! Ora della colazione!"
+          },
+          {
+            "who": "creature",
+            "en": "What time is it? It's seven o'clock! I have breakfast in the morning!",
+            "it": "Che ore sono? Sono le sette! Faccio colazione la mattina!"
+          }
+        ]
+      },
+      {
+        "id": "st3_months",
+        "order": 28,
+        "number": 31,
+        "season": 3,
+        "title_it": "I Mesi e le Feste",
+        "trigger": {
+          "type": "world",
+          "value": "world_months"
+        },
+        "creatureId": "c_zucchetta",
+        "worldId": "world_months",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Zucchetta conosceva tutte le feste dell'anno, ma non i mesi in cui cadevano."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe sfogliò il calendario con lei: gennaio, febbraio, marzo. Natale a dicembre, Halloween a ottobre."
+          },
+          {
+            "who": "pepe",
+            "it": "Zucchetta, il mio compleanno è a... settembre! E il tuo, a ottobre?"
+          },
+          {
+            "who": "creature",
+            "en": "My birthday is in March. Christmas is in December. Trick or treat!",
+            "it": "Il mio compleanno è a marzo. Natale è a dicembre. Dolcetto o scherzetto!"
+          }
+        ]
+      },
+      {
         "id": "st3_sport",
-        "order": 33,
+        "order": 29,
         "number": 23,
         "season": 3,
         "title_it": "Lo Sport e i Giochi",
@@ -8106,7 +8117,7 @@
       },
       {
         "id": "st3_jobs",
-        "order": 34,
+        "order": 30,
         "number": 24,
         "season": 3,
         "title_it": "I Mestieri",
@@ -8138,7 +8149,7 @@
       },
       {
         "id": "st3_city",
-        "order": 35,
+        "order": 31,
         "number": 25,
         "season": 3,
         "title_it": "La Città",
@@ -8170,7 +8181,7 @@
       },
       {
         "id": "st3_market",
-        "order": 36,
+        "order": 32,
         "number": 26,
         "season": 3,
         "title_it": "Il Mercato",
@@ -8202,7 +8213,7 @@
       },
       {
         "id": "st3_doctor",
-        "order": 37,
+        "order": 33,
         "number": 27,
         "season": 3,
         "title_it": "Dal Dottore",
@@ -8234,7 +8245,7 @@
       },
       {
         "id": "st3_nature",
-        "order": 38,
+        "order": 34,
         "number": 28,
         "season": 3,
         "title_it": "La Natura",
@@ -8266,7 +8277,7 @@
       },
       {
         "id": "st3_routine",
-        "order": 39,
+        "order": 35,
         "number": 29,
         "season": 3,
         "title_it": "La Mia Giornata",
@@ -8298,7 +8309,7 @@
       },
       {
         "id": "st3_doing",
-        "order": 40,
+        "order": 36,
         "number": 30,
         "season": 3,
         "title_it": "Cosa Stai Facendo?",
@@ -8329,40 +8340,8 @@
         ]
       },
       {
-        "id": "st3_months",
-        "order": 41,
-        "number": 31,
-        "season": 3,
-        "title_it": "I Mesi e le Feste",
-        "trigger": {
-          "type": "world",
-          "value": "world_months"
-        },
-        "creatureId": "c_zucchetta",
-        "worldId": "world_months",
-        "lines": [
-          {
-            "who": "narrator",
-            "it": "Zucchetta conosceva tutte le feste dell'anno, ma non i mesi in cui cadevano."
-          },
-          {
-            "who": "narrator",
-            "it": "Pepe sfogliò il calendario con lei: gennaio, febbraio, marzo. Natale a dicembre, Halloween a ottobre."
-          },
-          {
-            "who": "pepe",
-            "it": "Zucchetta, il mio compleanno è a... settembre! E il tuo, a ottobre?"
-          },
-          {
-            "who": "creature",
-            "en": "My birthday is in March. Christmas is in December. Trick or treat!",
-            "it": "Il mio compleanno è a marzo. Natale è a dicembre. Dolcetto o scherzetto!"
-          }
-        ]
-      },
-      {
         "id": "st3_travel",
-        "order": 42,
+        "order": 37,
         "number": 32,
         "season": 3,
         "title_it": "Ieri e Domani",
@@ -8394,7 +8373,7 @@
       },
       {
         "id": "st3_epilogue",
-        "order": 43,
+        "order": 38,
         "number": null,
         "season": 3,
         "title_it": "Il biglietto",
@@ -8420,7 +8399,7 @@
         ]
       }
     ],
-    "_seasons_comment": "Stagione 1 (fasi 1-3): l'isola dove le creature hanno perso le parole. Stagione 2 (fasi 6-8): la lettera, il paese delle persone e la festa finale. Il prologo 2 scatta quando si apre la fase 6; l'epilogo 2 dopo Festino. Stagione 3 (fasi 9-11): la mappa, la città grande e il biglietto per il mondo. Il prologo 3 scatta quando si apre la fase 9; l'epilogo 3 dopo Valigetta."
+    "_seasons_comment": "Stagione 1 (fase 1, classe 1a): l'isola dove le creature hanno perso le parole; l'epilogo dopo la Valle dei Draghi. Stagione 2 (fase 2, classe 2a): la lettera, il paese delle persone e la festa finale; il prologo scatta quando si apre la fase 2, l'epilogo dopo Festino. Stagione 3 (fase 3 e seguenti): la mappa, la citta' grande e il biglietto per il mondo; il prologo scatta con la fase 3, l'epilogo dopo Valigetta."
   },
   "stickers": {
     "_comment": "Gli adesivi degli scrigni a sorpresa: parole da collezione, illustrazione e audio della parola. Gli id sk_* sono permanenti (save.progress.stickers).",
@@ -8769,7 +8748,7 @@
       "order": 3,
       "title": "Colors in the Cave",
       "phase": 4,
-      "unlockAfterWorld": "world_colors",
+      "unlockAfterWorld": "world_dragons",
       "status": "nel gioco",
       "targetWords": 80,
       "newWordsPerPage": 1,
@@ -8827,7 +8806,7 @@
       "order": 4,
       "title": "Ten Little Stars",
       "phase": 4,
-      "unlockAfterWorld": "world_numbers",
+      "unlockAfterWorld": "world_forest",
       "status": "nel gioco",
       "targetWords": 90,
       "newWordsPerPage": 1,
@@ -8884,7 +8863,7 @@
       "order": 5,
       "title": "The Happy Knight",
       "phase": 4,
-      "unlockAfterWorld": "world_forest",
+      "unlockAfterWorld": "world_dragons",
       "status": "nel gioco",
       "targetWords": 110,
       "newWordsPerPage": 2,
@@ -9432,7 +9411,10 @@
         ],
         "turns": [
           {
-            "show": {"sprite": "sp-star", "count": 3},
+            "show": {
+              "sprite": "sp-star",
+              "count": 3
+            },
             "say": {
               "en": "How many stars?",
               "it": "Quante stelle?"
@@ -9457,7 +9439,10 @@
             }
           },
           {
-            "show": {"sprite": "sp-egg", "count": 5},
+            "show": {
+              "sprite": "sp-egg",
+              "count": 5
+            },
             "say": {
               "en": "How many eggs?",
               "it": "Quante uova?"
@@ -9482,7 +9467,10 @@
             }
           },
           {
-            "show": {"sprite": "sp-dragon", "count": 10},
+            "show": {
+              "sprite": "sp-dragon",
+              "count": 10
+            },
             "say": {
               "en": "And how many dragons?",
               "it": "E quanti draghi?"
@@ -9614,7 +9602,10 @@
         ],
         "turns": [
           {
-            "show": {"sprite": "sp-dragon", "beside": "sp-cat"},
+            "show": {
+              "sprite": "sp-dragon",
+              "beside": "sp-cat"
+            },
             "say": {
               "en": "Is the dragon big or small?",
               "it": "Il drago è grande o piccolo?"
@@ -9755,7 +9746,10 @@
             }
           },
           {
-            "show": {"sprite": "sp-egg", "count": 2},
+            "show": {
+              "sprite": "sp-egg",
+              "count": 2
+            },
             "say": {
               "en": "How many eggs do you have?",
               "it": "Quante uova hai?"
@@ -9998,7 +9992,10 @@
             }
           },
           {
-            "show": {"sprite": "sp-hand", "count": 2},
+            "show": {
+              "sprite": "sp-hand",
+              "count": 2
+            },
             "say": {
               "en": "How many hands do you have?",
               "it": "Quante mani hai?"
@@ -10328,7 +10325,10 @@
         ],
         "turns": [
           {
-            "show": {"sprite": "sp-cat", "on": "sp-bed"},
+            "show": {
+              "sprite": "sp-cat",
+              "on": "sp-bed"
+            },
             "say": {
               "en": "Where is the cat?",
               "it": "Dov'è il gatto?"
@@ -10353,7 +10353,10 @@
             }
           },
           {
-            "show": {"sprite": "sp-dog", "under": "sp-table"},
+            "show": {
+              "sprite": "sp-dog",
+              "under": "sp-table"
+            },
             "say": {
               "en": "Where is the dog?",
               "it": "Dov'è il cane?"
@@ -10378,7 +10381,10 @@
             }
           },
           {
-            "show": {"sprite": "sp-fish", "in": "sp-kitchen"},
+            "show": {
+              "sprite": "sp-fish",
+              "in": "sp-kitchen"
+            },
             "say": {
               "en": "And where is the fish?",
               "it": "E dov'è il pesce?"
@@ -11305,7 +11311,10 @@
         ],
         "turns": [
           {
-            "show": {"sprite": "sp-library", "next": "sp-station"},
+            "show": {
+              "sprite": "sp-library",
+              "next": "sp-station"
+            },
             "say": {
               "en": "Where is the library?",
               "it": "Dov'è la biblioteca?"
@@ -11354,7 +11363,10 @@
             }
           },
           {
-            "show": {"sprite": "sp-arrow-right", "turn": -90},
+            "show": {
+              "sprite": "sp-arrow-right",
+              "turn": -90
+            },
             "say": {
               "en": "And then?",
               "it": "E poi?"
@@ -11596,7 +11608,10 @@
             }
           },
           {
-            "show": {"sprite": "sp-mountain", "count": 3},
+            "show": {
+              "sprite": "sp-mountain",
+              "count": 3
+            },
             "say": {
               "en": "How many mountains are there?",
               "it": "Quante montagne ci sono?"

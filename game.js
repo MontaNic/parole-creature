@@ -15,23 +15,25 @@ import {
 } from './js/content-loader.js';
 import {
   save, loadSave, persist, rolloverDay, registerPlayToday,
-  addXp, checkAccessWindow, tempoFinito
+  addXp, checkAccessWindow, tempoFinito, chiediDatiPersistenti
 } from './js/state.js';
 import { chiediSblocco } from './js/lock.js';
+import { runInstallGate } from './js/install-gate.js';
 import { recordAnswer, pickRoundItems, shuffle, similar } from './js/srs.js';
 import {
   splitRound, worldReviewSplit, freeReviewPool, unitProgress, currentUnit,
   curriculumConfig, phaseProgress, playablePhases
 } from './js/curriculum.js';
 import {
-  initAudioUnlock, sfxCorrect, sfxRetry, stopVoice, startMusic, musicVolume,
+  initAudioUnlock, sfxCorrect, sfxRetry, sfxTap, stopVoice, startMusic, musicVolume,
   isAudioUnlocked
 } from './js/audio.js';
 import { initEffects, celebrateCorrect, celebrate, toast } from './js/effects.js';
 import {
   renderMascot, mascotSay, mascotCheer, stageChangedAt, encouragementKey
 } from './js/mascot.js';
-import { GAMES, mostraConferma } from './js/minigames.js';
+import { GAMES, mostraConferma, spriteSvg } from './js/minigames.js';
+import { buildSteps, passiParlati, PAROLE_PER_PARLARE } from './js/steps.js';
 import { pendingAtStart, pendingAfterRound, playChapters } from './js/story.js';
 import { planChest, openChest } from './js/chests.js';
 import { renderDen } from './js/den.js';
@@ -84,6 +86,10 @@ async function boot() {
   // Il worker va registrato PRIMA di aspettare il tocco: non ha bisogno di
   // un gesto, e la cache offline deve riempirsi anche se nessuno tocca.
   registerServiceWorker();
+  chiediDatiPersistenti();
+  // Su iPad e iPhone il gioco si usa installato sulla Home: e' cio' che
+  // protegge i progressi (vedi js/install-gate.js).
+  await runInstallGate();
   // Nessuna voce prima di un tocco: senza, il browser rifiuta play() e Pepe
   // parlerebbe con la voce sintetica del sistema. Se un gesto c'e' gia'
   // stato durante il caricamento, la schermata non serve.
@@ -268,7 +274,7 @@ function buildRound(opts) {
 
   return {
     world, pool, items: picked, reviewIds, showWritten, difficulty,
-    steps: (opts.speak || world.id === '__speak__') ? passiParlati(picked) : buildSteps(world, picked, pool, difficulty),
+    steps: (opts.speak || world.id === '__speak__') ? passiParlati(picked) : buildSteps(world, picked, pool, difficulty, showWritten),
     // Il dialogo dell'unita' chiude la partita: sempre le prime due volte, poi una su tre.
     dialogue: (!opts.review && !opts.speak && !opts.worldReview && !opts.repeat && dialogueFor(world.id) && wantsDialogue((save.progress.worlds[world.id] || {}).plays || 0)) ? dialogueFor(world.id) : null
   };
@@ -300,131 +306,6 @@ function interleave(fresh, review) {
 
 function dedupeById(items) {
   return [...new Map(items.map(it => [it.id, it])).values()];
-}
-
-/*
- * Quale gioco puo' ospitare quale item.
- *
- * Le frasi NON entrano nei giochi a immagini. "What is it? A dragon." con il
- * disegno del drago e' la stessa domanda di "dragon", solo piu' lunga: al
- * bambino arrivava a volte la parola e a volte la frase per lo stesso
- * disegno, e sembrava incoerenza. Le frasi vanno dove la loro forma conta —
- * ascolto, quiz col testo, costruzione.
- *
- * Nemmeno il vero o falso: un disegno e una voce da verificare e' una domanda
- * sulla PAROLA ("E' la parola giusta?"). Con le frasi il bambino vedeva il
- * drago e sentiva "What is it? A knight." — la stessa domanda in due forme.
- */
-/*
- * E niente microfono nelle partite normali. "Ascolta e ripeti" e "Dillo tu"
- * erano circa il 40% delle domande (3-4 su 8, meta' nelle unita' 7-8), e il
- * microfono su iPad e' il punto piu' fragile del gioco: ogni "non ti ho
- * sentito" ripetuto e' un motivo per smettere. Il parlato non sparisce: ha
- * il suo giro apposta, "Parla con Pepe" (passiParlati), breve e riconoscibile.
- */
-const GIOCHI_PER_PAROLA = ['match', 'hunt', 'quiz', 'truefalse', 'dragdrop'];
-const GIOCHI_PER_FRASE  = ['quiz', 'build'];
-
-/** Quante parole o frasi in un giro di "Parla con Pepe". */
-const PAROLE_PER_PARLARE = 5;
-
-/**
- * Il giro di "Parla con Pepe": si alternano "Ascolta e ripeti" (prima il
- * modello) e "Dillo tu" (prima il bambino), cominciando dal piu' facile.
- */
-function passiParlati(items) {
-  return items.map((it, k) => ({
-    type: k % 2 ? 'sayit' : 'listen',
-    items: [it],
-    difficulty: 2,
-    isFinal: false
-  }));
-}
-
-/**
- * Compone i passi della partita.
- *
- * Tre principi, tutti nati dal playtest:
- *
- *  1. Ogni item va in un gioco che sa distinguerlo (vedi sopra).
- *  2. L'ordine dei giochi e' mescolato e non ripete mai lo stesso due volte
- *     di fila. Prima ciclava sempre nella stessa sequenza: ogni partita era
- *     uguale alla precedente, e si sentiva.
- *  3. La difficolta' sale DENTRO la partita — le prime domande sono facili,
- *     l'ultima e' la sfida finale con il massimo delle scelte — e sale anche
- *     con la padronanza dell'unita'. Prima era un solo numero per tutta la
- *     partita, e nel primo round di ogni unita' erano due scelte fisse dalla
- *     prima domanda all'ultima.
- */
-function buildSteps(world, items, pool, baseDifficulty) {
-  const cfg = curriculumConfig();
-  const disponibili = new Set(world.minigames || ['match']);
-  const steps = [];
-  let i = 0;
-  let precedente = null;
-
-  const parolaDistinte = (da, n) => {
-    // Le prossime n PAROLE con illustrazioni diverse, saltando le frasi.
-    const out = [];
-    const viste = new Set();
-    for (let k = da; k < items.length && out.length < n; k++) {
-      const it = items[k];
-      if (it.kind !== 'word' || viste.has(it.sprite)) continue;
-      viste.add(it.sprite);
-      out.push(it);
-    }
-    return out;
-  };
-
-  while (i < items.length) {
-    const item = items[i];
-    const base = item.kind === 'phrase' ? GIOCHI_PER_FRASE : GIOCHI_PER_PAROLA;
-
-    let candidati = base.filter(tp => disponibili.has(tp)).filter(tp => {
-      if (tp === 'build') {
-        const parole = item.en.split(/\s+/).length;
-        return parole >= 2 && parole <= cfg.maxBuildWords;
-      }
-      if (tp === 'hunt') return pool.length >= 4 && parolaDistinte(i, CONFIG.game.huntTargets).length === CONFIG.game.huntTargets;
-      // Serve almeno un'alternativa dello stesso tipo (parola o frase).
-      if (tp === 'match' || tp === 'quiz' || tp === 'dragdrop' || tp === 'truefalse') return similar(pool, item).length >= 1;
-      return true;
-    });
-    if (!candidati.length) candidati = ['listen'];
-
-    // Mai lo stesso gioco due volte di fila, se c'e' alternativa.
-    const diversi = candidati.filter(tp => tp !== precedente);
-    const type = shuffle(diversi.length ? diversi : candidati)[0];
-
-    let presi;
-    if (type === 'hunt') {
-      presi = parolaDistinte(i, CONFIG.game.huntTargets);
-      // Le parole della caccia possono non essere contigue: si tolgono dal
-      // resto per non riproporle.
-      const ids = new Set(presi.map(x => x.id));
-      const resto = items.slice(i).filter(x => !ids.has(x.id));
-      items = [...items.slice(0, i), ...presi, ...resto];
-      i += presi.length;
-    } else {
-      presi = [item];
-      i += 1;
-    }
-
-    steps.push({ type, items: presi });
-    precedente = type;
-  }
-
-  // Difficolta' a salire: il primo terzo un gradino sotto la base, l'ultimo
-  // un gradino sopra, e l'ultima domanda e' sempre la piu' difficile.
-  const n = steps.length;
-  steps.forEach((st, k) => {
-    const pos = n > 1 ? k / (n - 1) : 1;
-    let d = baseDifficulty + (pos < 0.34 ? -1 : pos > 0.66 ? 1 : 0);
-    st.isFinal = k === n - 1;
-    if (st.isFinal) d = 3;
-    st.difficulty = Math.max(1, Math.min(3, d));
-  });
-  return steps;
 }
 
 /* ------------------------------------------------------------------ */
@@ -543,6 +424,9 @@ async function startRound(opts) {
     const play = GAMES[step.type] || GAMES.match;
     if (battutaInCorso) { await battutaInCorso; battutaInCorso = null; }
 
+    // Le frasi arrivano tutte insieme, dopo le parole, e si annunciano.
+    if (step.phrasesStart) await annunciaFrasi(host);
+
     // L'ultima domanda e' annunciata: dare una forma alla partita — inizio
     // facile, sfida in fondo — e' cio' che la distingue da una lista.
     if (step.isFinal && round.steps.length > 2) {
@@ -556,6 +440,7 @@ async function startRound(opts) {
       showWritten: round.showWritten,
       difficulty: step.difficulty,
       isFinal: step.isFinal,
+      senzaMicrofono: Boolean(step.noMic),
       report,
       fx,
       onRepeat: () => {
@@ -576,6 +461,29 @@ async function startRound(opts) {
     if (!session.roundActive) return;
   }
   await finishRound({ round, correct, total: totalItems, levelUp, missionJustDone, opts });
+}
+
+/**
+ * Il cambio di tempo fra parole e frasi: un cartello con il fumetto (lo
+ * stesso rosa delle frasi nei giochi) e Pepe che lo dice a voce, perche'
+ * un bambino che non legge ancora capisca che adesso cambia gioco.
+ */
+async function annunciaFrasi(host) {
+  host.innerHTML = '';
+  const card = document.createElement('div');
+  card.className = 'phrases-banner';
+  const ico = spriteSvg('sp-icon-sound');
+  ico.classList.add('ico');
+  card.appendChild(ico);
+  const tx = document.createElement('span');
+  tx.textContent = t('games.phrases_now');
+  card.appendChild(tx);
+  host.appendChild(card);
+  sfxTap();
+  await Promise.all([
+    mascotSay('phrases_now', { avatar: document.getElementById('play-mascot') }),
+    new Promise(r => setTimeout(r, 1400))
+  ]);
 }
 
 function pointOf(ev) {
@@ -775,4 +683,4 @@ boot();
 // Utile in console durante lo sviluppo e per il playtest con il bambino.
 // `save` e' una live binding del modulo: si legge con una funzione, non
 // copiandola, altrimenti si fotografa lo stato del boot.
-window.__gioco = { getSave: () => save, content, shuffle, startRound, goHome };
+window.__gioco = { getSave: () => save, content, shuffle, startRound, goHome, buildRound };

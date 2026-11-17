@@ -5,16 +5,16 @@
 
 ## Stato attuale
 
-**v3.9.2 — "Pepe e la Leggenda delle Parole", in uso (8 novembre 2026).**
+**v3.10.0 — "Pepe e la Leggenda delle Parole", in uso (17 novembre 2026).**
 Chiuso a settembre con la 3.5.0, riaperto a ottobre per le correzioni nate
-dalle prove sul tablet (versioni 3.6.0-3.9.2, in fondo a questo file).
+dalle prove sul tablet (versioni 3.6.0-3.10.0, in fondo a questo file).
 Nome di lavoro e repository: *Parole & Creature*.
 Online in HTTPS su https://montanic.github.io/parole-creature/ (GitHub
 Pages), offline dopo il primo avvio con rete.
 
 | | |
 |---|---|
-| unita' | 32 in 9 fasi giocabili (piu' le fasi 4 e 5 dei genitori) |
+| unita' | 32 in 6 fasi giocabili, nell'ordine della scuola (piu' le fasi 4 e 5 dei genitori) |
 | parole / frasi | 295 / 182, tutte con audio |
 | illustrazioni | 282 PNG generati con Gemini, tutti in cache offline |
 | tracce audio | 1352 (1168 inglesi, 184 italiane), quattro voci, mai sintesi, tutte allo stesso volume (-24 dB) |
@@ -90,6 +90,10 @@ si apriva il successivo, indipendentemente da quanto fosse rimasto.
 Il curriculum v1.1.0 cambia tre cose.
 
 ## 1. Ogni unita' ha un obiettivo linguistico, non un tema
+
+> **Dalla 3.10.0 l'ordine delle unita' e' cambiato** (sequenza scolastica tipica,
+> vedi "I mondi nell'ordine della scuola" in fondo). La tabella qui sotto
+> racconta il ragionamento originale sulle strutture, che resta valido.
 
 Ogni unita' insegna una **struttura** oltre al lessico, dichiarata in
 `content.json` sotto `structures` e collegata all'unita' con `structureIds`.
@@ -345,6 +349,9 @@ proxy/cloudflare-worker.js  proxy che custodisce la chiave ElevenLabs
 - [x] Test: curriculum-test (166 controlli), smoke test, check-assets, palette-check, cache-check-remote
 
 ## Contenuti didattici presenti
+
+> Ordine e fasi aggiornati nella 3.10.0: la tabella attuale e' in "I mondi
+> nell'ordine della scuola", in fondo.
 
 **477 item** su 32 unita': 295 parole e 182 frasi. Le fasi 1-3 sono
 l'anno 1 (mondo fantasy), 6-8 l'anno 2 (io, ogni giorno, il mio mondo),
@@ -1628,6 +1635,121 @@ della pagina); lo smoke test e' **solo segnale** (`continue-on-error`),
 perche' tocca a caso e dipende dai tempi dell'audio. Regola: si unisce solo
 con la CI verde. In locale:
 `node tools/run-browser-test.mjs tools/curriculum-test.html`.
+
+### I mondi nell'ordine della scuola (versione 3.10.0)
+
+Dalla valutazione del 17 novembre: si partiva da draghi e dinosauri (shield,
+wizard, claw, horn: parole rare e difficili) e cose da prima elementare come
+gli oggetti di scuola arrivavano in fase 7. Ora i 32 mondi seguono la
+sequenza tipica dei libri della primaria, senza un libro preciso: nessun
+contenuto nuovo, solo l'ordine e le fasi.
+
+- **Fase 1 = classe 1a, solo ascolto**: colori, numeri, scuola, animali e
+  natura, famiglia, e per ultimi i draghi (il tema del gioco resta subito).
+- **Fase 2 = classe 2a, arriva la parola scritta**: corpo, dinosauri,
+  vestiti, cibo, casa, grande/piccolo, emozioni, giorni e meteo, villaggio e
+  mezzi, festa (numeri fino a 20 e stagioni).
+- **Fase 3 = classe 3a, frasi e dialoghi**: ponte, torre, azioni (I can),
+  ritratto, animali, l'ora, mesi e feste.
+- **Fasi 6-8** (le vecchie 9-11): sport e mestieri; citta',
+  mercato, dottore, natura; giornata, -ing, ieri e domani. Le vecchie 6-8,
+  svuotate, non esistono piu'.
+
+Controlli fatti con uno script e ora fissati nei test: nessuna frase delle
+classi 1a e 2a usa parole di una classe successiva (per questo dinosauri
+dopo il corpo e prima del lago, ritratto prima degli animali, villaggio
+prima dei mestieri). Il villaggio sta in seconda anche per la storia:
+Rotolino porta Pepe "alla festa", quindi viene prima della Festa Finale. Resta una sola anticipazione dentro la stessa classe,
+voluta: "It's a red egg" nei colori, prima dei draghi, solo ascolto.
+
+Cosa e' cambiato attorno:
+
+- **Storia**: le stagioni seguono le classi. Fine della stagione 1 dopo la
+  Valle dei Draghi ("sei amici"), prologo 2 all'apertura della fase 2,
+  prologo 3 con la fase 3. Cinque frasi del narratore riscritte e
+  rigenerate (stessa voce, volume allineato): `st_epilogue` 0 e 1,
+  `st2_epilogue` 1, e `st_tower` 0 e 1, perche' la Torre diceva "per la
+  prima volta, in tutta l'isola, due voci parlarono insieme" quando ormai la
+  nebbia e' sparita da due stagioni.
+- **Libretti**: 03 e 05 si aprono dopo i draghi, 04 dopo la foresta, perche'
+  usano parole che ora arrivano li'.
+- **Distintivo "La prima squadra"**: le creature della fase 1 si leggono dai
+  contenuti, non da una lista fissa.
+- **Salvataggio 4 -> 5**: le chiavi per fase (fasi spente dai genitori, fasi
+  raggiunte) passano da 9-11 a 6-8. Un mondo gia' giocato resta aperto anche
+  se ora viene dopo uno non finito.
+- La fase 1 passa da circa 45 a 79 item: la soglia dell'80% per aprire la
+  fase 2 arriva piu' tardi. Voluto (e' un anno di scuola), ma da osservare.
+
+| Fase | Unita' | Parole + frasi |
+|------|--------|----------------|
+| 1 | 1. La Grotta dei Colori | 8 + 4 |
+| 1 | 2. La Montagna dei Numeri | 10 + 4 |
+| 1 | 3. La Scuola delle Creature | 9 + 6 |
+| 1 | 4. La Foresta delle Parole | 8 + 5 |
+| 1 | 5. La Famiglia del Castello | 8 + 6 |
+| 1 | 6. La Valle dei Draghi | 8 + 3 |
+| 2 | 7. Il Corpo del Gigante | 8 + 6 |
+| 2 | 8. La Giungla dei Dinosauri | 9 + 4 |
+| 2 | 9. Il Guardaroba del Mago | 8 + 6 |
+| 2 | 10. La Cucina del Castello | 10 + 6 |
+| 2 | 11. La Casa di Pepe | 9 + 6 |
+| 2 | 12. Il Lago Magico | 8 + 6 |
+| 2 | 13. Le Emozioni delle Creature | 8 + 6 |
+| 2 | 14. Il Cielo Cambia | 12 + 6 |
+| 2 | 15. Il Villaggio | 9 + 6 |
+| 2 | 16. La Festa Finale | 16 + 6 |
+| 3 | 17. Il Ponte delle Frasi | 0 + 6 |
+| 3 | 18. La Torre dei Dialoghi | 0 + 6 |
+| 3 | 19. Il Bosco delle Azioni | 10 + 6 |
+| 3 | 20. Il Ritratto | 10 + 6 |
+| 3 | 21. La Fattoria e lo Zoo | 10 + 6 |
+| 3 | 22. La Torre dell'Orologio | 9 + 6 |
+| 3 | 23. I Mesi e le Feste | 18 + 6 |
+| 6 | 24. Lo Sport e i Giochi | 10 + 6 |
+| 6 | 25. I Mestieri | 10 + 6 |
+| 7 | 26. La Città | 10 + 6 |
+| 7 | 27. Il Mercato | 10 + 6 |
+| 7 | 28. Dal Dottore | 10 + 6 |
+| 7 | 29. La Natura | 10 + 6 |
+| 8 | 30. La Mia Giornata | 10 + 6 |
+| 8 | 31. Cosa Stai Facendo? | 10 + 6 |
+| 8 | 32. Ieri e Domani | 10 + 6 |
+
+### Prima le parole, poi le frasi (versione 3.10.0)
+
+Parole e frasi della stessa partita erano mescolate a caso con lo stesso
+disegno: una volta "dragon", quella dopo "What is it? A dragon.", e nella
+frase la stessa voce fa domanda e risposta. Caotico. Ora (`js/steps.js`):
+i giochi a scelta fanno sentire solo la parola; le frasi arrivano dopo,
+tutte insieme, annunciate da un cartello "Adesso le frasi!" che Pepe dice a
+voce (`mascot.phrases_now`, traccia nuova). In fase 1 una frase mai sentita
+e' "Ascolta e ripeti" **senza microfono** (turno a tempo 3-2-1: il microfono
+resta solo in "Parla con Pepe", come deciso in passato); dalla volta dopo si
+**riconosce** (le frasi nelle bolle, si sceglie quella del disegno). Senza
+questo, ripetere bastava a "padroneggiare" le frasi e il cancello di fase,
+che chiede padronanza dimostrata, si sarebbe indebolito. Dalla fase 2 le
+frasi tornano nei giochi a scelta, sempre in fondo. La sfida finale resta
+sulle parole.
+
+### Adesivi delle parole gia' incontrate (versione 3.10.0)
+
+La tana resta com'era (creature, adesivi, posizioni, 12 pareti). Un ritocco:
+lo scrigno sceglie di preferenza l'adesivo di una parola gia' incontrata
+(`nextSticker`), cosi' nella tana, al tocco, il bambino riconosce la parola
+inglese che sente. Prima era a caso fra tutti, e con il nuovo ordine i primi
+adesivi sarebbero stati spada e scudo, parole che ora arrivano dopo.
+
+### Il gioco su iPad si usa installato (versione 3.10.0)
+
+In Safari, un sito non aperto per 7 giorni puo' perdere i dati; un gioco
+aggiunto alla Home no. Su iPad e iPhone in Safari ora compare "Installa il
+gioco" con i passaggi (`js/install-gate.js`); un genitore con il codice
+puo' giocare nel browser per quella visita. Computer, Android e test: nessun
+blocco. In piu': `navigator.storage.persist()` all'avvio, data dell'ultima
+copia dei dati e promemoria in cima all'area genitori dopo 14 giorni.
+Attenzione: gioco installato e Safari hanno salvataggi separati (si passa
+da uno all'altro con esporta/importa).
 
 ## Prossimi passi
 

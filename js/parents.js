@@ -16,7 +16,7 @@ import {
 } from './content-loader.js';
 import {
   save, persist, setPin, checkPin, hasPin,
-  exportSaveFile, importSaveFile, resetSave
+  exportSaveFile, importSaveFile, resetSave, giorniDallUltimaCopia, GIORNI_TRA_COPIE
 } from './state.js';
 import { masteredCount, seenCount, overallAccuracy, hardestItems } from './srs.js';
 import { showScreen } from './screens.js';
@@ -156,6 +156,13 @@ function renderDashboard() {
     };
     tabs.appendChild(b);
   });
+
+  // Copia dei dati in ritardo: lo si dice appena entrati, prima delle schede.
+  // E' l'unico momento in cui di sicuro c'e' un adulto davanti al tablet.
+  const giorni = giorniDallUltimaCopia();
+  if (giorni >= GIORNI_TRA_COPIE && save.stats?.totalRounds > 0) {
+    body.appendChild(backupReminder(giorni, () => renderDashboard()));
+  }
 
   body.appendChild(tabs);
   body.appendChild(panelHost);
@@ -810,14 +817,38 @@ function mostraEsitoOffline(host, r) {
 /* Pannello: dati e backup                                             */
 /* ------------------------------------------------------------------ */
 
+/** Il promemoria in cima all'area genitori quando la copia e' vecchia. */
+function backupReminder(giorni, dopo) {
+  const box = el('div', 'card-box backup-reminder');
+  box.appendChild(el('h3', null, t('parents.backup_reminder_title')));
+  box.appendChild(el('div', 'hint', giorni === Infinity
+    ? t('parents.backup_reminder_never')
+    : t('parents.backup_reminder_days').replace('{n}', String(giorni))));
+  box.appendChild(el('div', 'hint', t('parents.backup_reminder_hint')));
+  const b = el('button', 'btn btn-good', t('lock.backup_yes'));
+  b.onclick = async () => { b.disabled = true; if (await exportSaveFile()) dopo(); else b.disabled = false; };
+  box.appendChild(b);
+  return box;
+}
+
+function quandoUltimaCopia() {
+  const g = giorniDallUltimaCopia();
+  const quando = g === Infinity ? t('parents.backup_last_never')
+    : g === 0 ? t('parents.backup_last_today')
+    : t('parents.backup_last_days').replace('{n}', String(g));
+  return t('parents.backup_last').replace('{when}', quando);
+}
+
 function panelData() {
   const p = el('div', 'panel');
 
   const box = el('div', 'card-box');
   box.appendChild(el('h3', null, t('parents.export')));
   box.appendChild(el('div', 'hint', t('parents.export_hint')));
+  const ultima = el('div', 'hint', quandoUltimaCopia());
+  box.appendChild(ultima);
   const exp = el('button', 'btn btn-parent-small', t('parents.export'));
-  exp.onclick = () => exportSaveFile();
+  exp.onclick = async () => { if (await exportSaveFile()) ultima.textContent = quandoUltimaCopia(); };
   box.appendChild(exp);
   p.appendChild(box);
 

@@ -19,7 +19,7 @@ import { CONFIG } from './config.js';
  * Il gioco si chiamava "Draghetti & Parole": il nome resta qui per questo.
  */
 const STORAGE_KEY = 'draghetti_parole_save';
-export const SAVE_SCHEMA_VERSION = 4;
+export const SAVE_SCHEMA_VERSION = 5;
 
 /*
  * Il codice genitore di partenza: 1357. Serve per l'area genitori e per
@@ -127,6 +127,7 @@ function defaultSave() {
       themesDisabled: [],      // temi messi in pausa dai genitori
       voiceRecording: true,    // microfono in 'ascolta e ripeti'
       familySharing: false,    // 'Condividi' a fine partita: lo accende un genitore
+      lastBackupAt: '',        // ISO dell'ultima copia dei dati salvata
       speechCheck: false,      // riconoscimento vocale in 'Dillo tu' (esce dal dispositivo: spento)
       vacation: false,
 
@@ -213,6 +214,30 @@ const MIGRATIONS = {
   3: (save) => {
     const s = save.settings || (save.settings = {});
     s.familySharing = false;
+    return save;
+  },
+
+  /*
+   * 4 -> 5: mondi nell'ordine della scuola (versione 3.10.0).
+   *
+   * Le fasi 6, 7 e 8 di prima sono state svuotate (i loro mondi sono
+   * scesi nelle classi 1a-3a) e le 9, 10, 11 sono diventate 6, 7, 8. Si
+   * rinumerano le chiavi salvate per fase: quali fasi i genitori hanno
+   * spento e quali sono gia' state raggiunte.
+   */
+  4: (save) => {
+    const rinumera = (obj) => {
+      if (!obj || typeof obj !== 'object') return obj;
+      const out = {};
+      for (const [k, v] of Object.entries(obj)) {
+        const n = Number(k);
+        if (n >= 6 && n <= 8) continue;              // fasi che non esistono piu'
+        out[n >= 9 && n <= 11 ? n - 3 : k] = v;
+      }
+      return out;
+    };
+    if (save.settings) save.settings.phasesEnabled = rinumera(save.settings.phasesEnabled);
+    if (save.progress) save.progress.phasesReached = rinumera(save.progress.phasesReached);
     return save;
   }
 };
@@ -332,11 +357,12 @@ export async function exportSaveFile() {
   };
   const nome = `parole-creature-backup-${todayKey()}.json`;
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const fatto = () => { save.settings.lastBackupAt = new Date().toISOString(); persist(true); return true; };
   try {
     const file = new File([blob], nome, { type: 'application/json' });
     if (navigator.canShare?.({ files: [file] })) {
       await navigator.share({ files: [file], title: nome });
-      return true;
+      return fatto();
     }
   } catch (err) {
     if (err?.name === 'AbortError') return false;   // il genitore ha annullato
@@ -350,7 +376,32 @@ export async function exportSaveFile() {
   a.click();
   a.remove();
   setTimeout(() => URL.revokeObjectURL(url), 2000);
-  return true;
+  return fatto();
+}
+
+/** Giorni dall'ultima copia dei dati; Infinity se non ce n'e' mai stata una. */
+export function giorniDallUltimaCopia(now = new Date()) {
+  const d = save.settings?.lastBackupAt ? new Date(save.settings.lastBackupAt) : null;
+  if (!d || Number.isNaN(d.getTime())) return Infinity;
+  return Math.floor((now - d) / 86400000);
+}
+
+/** Ogni quanti giorni ricordare ai genitori di salvare una copia. */
+export const GIORNI_TRA_COPIE = 14;
+
+/**
+ * Chiede al browser di non cancellare i dati del sito quando gli serve
+ * spazio. Safari e Chrome decidono da soli se concederlo (di solito si',
+ * per un gioco installato sulla Home); non compare nessuna richiesta.
+ */
+export async function chiediDatiPersistenti() {
+  try {
+    if (!navigator.storage?.persist) return false;
+    if (await navigator.storage.persisted?.()) return true;
+    return await navigator.storage.persist();
+  } catch {
+    return false;
+  }
 }
 
 /**

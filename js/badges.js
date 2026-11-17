@@ -19,7 +19,12 @@ export const BADGES = [
   { id: 'bd_mastered_25', sprite: 'sp-icon-star', when: (s, c) => c.mastered >= 25 },
   { id: 'bd_mastered_50', sprite: 'sp-icon-star', when: (s, c) => c.mastered >= 50 },
   { id: 'bd_phase1_creatures', sprite: 'sp-icon-album',
-    when: (s) => ['c_flamup', 'c_rocktail', 'c_prisma', 'c_numo'].every(id => s.progress.creatures[id]) },
+    // Le creature dei mondi della fase 1, lette dai contenuti: cosi' resta
+    // giusto anche se l'ordine dei mondi cambia.
+    when: (s) => {
+      const premi = content.worlds.filter(w => w.phase === 1 && w.reward).map(w => w.reward);
+      return premi.length > 0 && premi.every(id => s.progress.creatures[id]);
+    } },
   { id: 'bd_first_chest', sprite: 'sp-chest-open', when: (s) => (s.stats.chestsOpened || 0) >= 1 },
   { id: 'bd_all_stickers', sprite: 'sp-icon-mission',
     when: (s, c) => c.stickerCount > 0 && Object.keys(s.progress.stickers || {}).length >= c.stickerCount },

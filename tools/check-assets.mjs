@@ -125,6 +125,46 @@ disallineati.length
        disallineati.map(([p, s]) => `${s} e ${p}`).join(', '))
   : ok('ogni plurale e disegnato come il suo singolare');
 
+/* --- 7. ogni modulo del gioco e' nella cache offline --------------- */
+
+{
+  const sw = leggi('sw.js');
+  const moduli = readdirSync(path.join(ROOT, 'js')).filter(f => f.endsWith('.js')).map(f => `js/${f}`);
+  const mancanti = moduli.filter(m => !sw.includes(`'${m}'`));
+  mancanti.length
+    ? ko(`${mancanti.length} moduli fuori dalla cache offline del service worker`, mancanti.join(' '))
+    : ok(`tutti i ${moduli.length} moduli sono nella cache offline`);
+}
+
+/* --- 8. ogni voce del gioco ha il suo audio vero --------------------- */
+
+// Se manca un file, il gioco ripiega sulla sintesi del browser: un'altra
+// voce, che tradisce Pepe e il modello di pronuncia. Si controllano le
+// tracce che il gioco chiede di sicuro: parole, frasi, battute di Pepe e
+// del narratore, righe della storia (stesse regole di generate-audio.mjs).
+{
+  const content = json('content.json');
+  const strings = json('strings.json');
+  const audio = (rel) => existsSync(path.join(ROOT, 'assets', 'audio', rel));
+  const attese = [];
+  for (const w of content.words || []) attese.push(`en/${w.id}.mp3`);
+  for (const p of content.phrases || []) attese.push(`en/${p.id}.mp3`);
+  for (const [key, text] of Object.entries(strings.mascot || {})) {
+    if (key === 'name' || typeof text !== 'string') continue;
+    if (text.includes('{') && !strings.mascotSpoken?.[key]) continue;
+    attese.push(`it/mascot.${key}.mp3`);
+  }
+  for (const ch of content.story?.chapters || []) {
+    (ch.lines || []).forEach((line, n) => attese.push(line.who === 'creature'
+      ? `en/story.${ch.id}.mp3` : `it/story.${ch.id}.${n}.mp3`));
+  }
+  const mancanti = [...new Set(attese)].filter(r => !audio(r));
+  mancanti.length
+    ? ko(`${mancanti.length} voci senza audio (si sentirebbe la sintesi del browser)`,
+         mancanti.slice(0, 6).join(' ') + (mancanti.length > 6 ? ' …' : ''))
+    : ok(`tutte le ${new Set(attese).size} voci di parole, frasi, Pepe e storia hanno il loro audio`);
+}
+
 /* --- 6. la cache e' stata invalidata dopo l'ultima modifica -------- */
 
 try {

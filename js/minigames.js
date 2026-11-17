@@ -548,7 +548,7 @@ async function turnoContato(box) {
  * riascolta, e solo allora "Fatto" si accende.
  */
 async function gameListen(api) {
-  const { host, items, showWritten, report, fx, onRepeat } = api;
+  const { host, items, showWritten, report, fx, onRepeat, senzaMicrofono } = api;
   const item = items[0];
 
   host.innerHTML = '';
@@ -582,7 +582,18 @@ async function gameListen(api) {
     await spiega('sayit_go');
   })());
 
-  const blob = await turnoDelBambino(stage, host, item);
+  // Dentro le partite normali niente microfono (e' il punto fragile su
+  // iPad): il bambino ripete nel turno a tempo. Il microfono resta in
+  // "Parla con Pepe".
+  let blob = null;
+  if (senzaMicrofono) {
+    const box = el('div', 'turn-box');
+    stage.appendChild(box);
+    await turnoContato(box);
+    box.remove();
+  } else {
+    blob = await turnoDelBambino(stage, host, item);
+  }
   if (blob) await dopoLaVoce(orb, playBlob(blob));   // ci si riascolta
 
   stage.appendChild(done);

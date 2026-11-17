@@ -441,6 +441,32 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
 .lock-pin { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
 .lock-card .btn-lg { width: 100%; }
 
+/* Il cartello fra parole e frasi (game.js, annunciaFrasi): il rosa delle frasi. */
+.phrases-banner {
+  margin: auto; display: flex; align-items: center; gap: 14px; padding: 22px 30px;
+  font-size: 28px; font-weight: 800; color: var(--ink); background: var(--paper);
+  border: var(--stroke) solid var(--ink); border-radius: 28px 28px 28px 6px;
+  box-shadow: 0 0 0 6px var(--rose), var(--sh-card); animation: pop-in .35s ease;
+}
+.phrases-banner .ico { width: 40px; height: 40px; fill: none; }
+
+/* Installare il gioco sulla Home (js/install-gate.js): sotto il codice genitore. */
+.install-gate {
+  position: fixed; inset: 0; z-index: 55; overflow-y: auto; display: grid; place-items: center;
+  padding: calc(16px + env(safe-area-inset-top)) 18px calc(16px + env(safe-area-inset-bottom));
+  background: radial-gradient(ellipse at 50% 0%, #3a2d78 0%, #1a1440 70%);
+}
+.install-card { display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; width: 100%; max-width: 480px; color: var(--on-night); }
+.install-card .h-title { margin: 0; }
+.install-mascot { width: min(150px, 38vw); }
+.install-text { margin: 0; font-size: 19px; line-height: 1.4; }
+.install-steps { text-align: left; margin: 0; padding: 14px 18px 14px 40px; font-size: 18px; line-height: 1.5; background: var(--night-700); border-radius: var(--r-l); border: 2px solid rgba(255,255,255,.14); width: 100%; box-sizing: border-box; }
+.install-steps li + li { margin-top: 8px; }
+.install-note { margin: 0; font-size: 15px; line-height: 1.4; color: var(--muted-night); }
+
+/* Promemoria della copia dei dati, in cima all'area genitori. */
+.backup-reminder { border-color: var(--amber); }
+
 /* Fine partita: un solo bottone grande per andare avanti, "Casa" piccolo sotto. */
 .summary-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; max-width: 440px; }
 .summary-go { width: 100%; min-height: 76px; font-size: 24px; gap: 12px; }
