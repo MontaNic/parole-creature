@@ -465,8 +465,8 @@ async function startRound(opts) {
 
 /**
  * Il cambio di tempo fra parole e frasi: un cartello con il fumetto (lo
- * stesso rosa delle frasi nei giochi), breve, senza voce nuova. Le
- * istruzioni a voce le danno i giochi delle frasi, come sempre.
+ * stesso rosa delle frasi nei giochi) e Pepe che lo dice a voce, perche'
+ * un bambino che non legge ancora capisca che adesso cambia gioco.
  */
 async function annunciaFrasi(host) {
   host.innerHTML = '';
@@ -480,7 +480,10 @@ async function annunciaFrasi(host) {
   card.appendChild(tx);
   host.appendChild(card);
   sfxTap();
-  await new Promise(r => setTimeout(r, 1600));
+  await Promise.all([
+    mascotSay('phrases_now', { avatar: document.getElementById('play-mascot') }),
+    new Promise(r => setTimeout(r, 1400))
+  ]);
 }
 
 function pointOf(ev) {

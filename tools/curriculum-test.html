@@ -686,6 +686,8 @@ async function run() {
   const mondiFase1 = content.worlds.filter(w => w.phase === 1).map(w => w.id);
   check('in prima: colori, numeri, scuola, animali, famiglia e per ultimi i draghi',
     mondiFase1.join(',') === 'world_colors,world_numbers,world_school,world_forest,world_family,world_dragons', mondiFase1.join(','));
+  check('il villaggio viene prima della festa (Rotolino porta Pepe alla festa)',
+    ord.indexOf('world_village') < ord.indexOf('world_party') && content.worldById.get('world_village').phase === 2);
   check('le fasi giocabili sono 1, 2, 3, 6, 7, 8 (nessuna fase vuota)',
     playablePhases().join(',') === '1,2,3,6,7,8', playablePhases().join(','));
   check('ogni mondo ripassa tutti i mondi prima di lui',

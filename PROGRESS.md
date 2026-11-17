@@ -1647,26 +1647,30 @@ contenuto nuovo, solo l'ordine e le fasi.
 - **Fase 1 = classe 1a, solo ascolto**: colori, numeri, scuola, animali e
   natura, famiglia, e per ultimi i draghi (il tema del gioco resta subito).
 - **Fase 2 = classe 2a, arriva la parola scritta**: corpo, dinosauri,
-  vestiti, cibo, casa, grande/piccolo, emozioni, giorni e meteo, festa
-  (numeri fino a 20 e stagioni).
+  vestiti, cibo, casa, grande/piccolo, emozioni, giorni e meteo, villaggio e
+  mezzi, festa (numeri fino a 20 e stagioni).
 - **Fase 3 = classe 3a, frasi e dialoghi**: ponte, torre, azioni (I can),
   ritratto, animali, l'ora, mesi e feste.
-- **Fasi 6-8** (le vecchie 9-11): villaggio, sport, mestieri; citta',
+- **Fasi 6-8** (le vecchie 9-11): sport e mestieri; citta',
   mercato, dottore, natura; giornata, -ing, ieri e domani. Le vecchie 6-8,
   svuotate, non esistono piu'.
 
 Controlli fatti con uno script e ora fissati nei test: nessuna frase delle
 classi 1a e 2a usa parole di una classe successiva (per questo dinosauri
 dopo il corpo e prima del lago, ritratto prima degli animali, villaggio
-prima dei mestieri). Resta una sola anticipazione dentro la stessa classe,
+prima dei mestieri). Il villaggio sta in seconda anche per la storia:
+Rotolino porta Pepe "alla festa", quindi viene prima della Festa Finale. Resta una sola anticipazione dentro la stessa classe,
 voluta: "It's a red egg" nei colori, prima dei draghi, solo ascolto.
 
 Cosa e' cambiato attorno:
 
 - **Storia**: le stagioni seguono le classi. Fine della stagione 1 dopo la
   Valle dei Draghi ("sei amici"), prologo 2 all'apertura della fase 2,
-  prologo 3 con la fase 3. Tre frasi del narratore riscritte e rigenerate
-  (stessa voce, volume allineato): `st_epilogue` 0 e 1, `st2_epilogue` 1.
+  prologo 3 con la fase 3. Cinque frasi del narratore riscritte e
+  rigenerate (stessa voce, volume allineato): `st_epilogue` 0 e 1,
+  `st2_epilogue` 1, e `st_tower` 0 e 1, perche' la Torre diceva "per la
+  prima volta, in tutta l'isola, due voci parlarono insieme" quando ormai la
+  nebbia e' sparita da due stagioni.
 - **Libretti**: 03 e 05 si aprono dopo i draghi, 04 dopo la foresta, perche'
   usano parole che ora arrivano li'.
 - **Distintivo "La prima squadra"**: le creature della fase 1 si leggono dai
@@ -1693,15 +1697,15 @@ Cosa e' cambiato attorno:
 | 2 | 12. Il Lago Magico | 8 + 6 |
 | 2 | 13. Le Emozioni delle Creature | 8 + 6 |
 | 2 | 14. Il Cielo Cambia | 12 + 6 |
-| 2 | 15. La Festa Finale | 16 + 6 |
-| 3 | 16. Il Ponte delle Frasi | 0 + 6 |
-| 3 | 17. La Torre dei Dialoghi | 0 + 6 |
-| 3 | 18. Il Bosco delle Azioni | 10 + 6 |
-| 3 | 19. Il Ritratto | 10 + 6 |
-| 3 | 20. La Fattoria e lo Zoo | 10 + 6 |
-| 3 | 21. La Torre dell'Orologio | 9 + 6 |
-| 3 | 22. I Mesi e le Feste | 18 + 6 |
-| 6 | 23. Il Villaggio | 9 + 6 |
+| 2 | 15. Il Villaggio | 9 + 6 |
+| 2 | 16. La Festa Finale | 16 + 6 |
+| 3 | 17. Il Ponte delle Frasi | 0 + 6 |
+| 3 | 18. La Torre dei Dialoghi | 0 + 6 |
+| 3 | 19. Il Bosco delle Azioni | 10 + 6 |
+| 3 | 20. Il Ritratto | 10 + 6 |
+| 3 | 21. La Fattoria e lo Zoo | 10 + 6 |
+| 3 | 22. La Torre dell'Orologio | 9 + 6 |
+| 3 | 23. I Mesi e le Feste | 18 + 6 |
 | 6 | 24. Lo Sport e i Giochi | 10 + 6 |
 | 6 | 25. I Mestieri | 10 + 6 |
 | 7 | 26. La Città | 10 + 6 |
@@ -1718,8 +1722,8 @@ Parole e frasi della stessa partita erano mescolate a caso con lo stesso
 disegno: una volta "dragon", quella dopo "What is it? A dragon.", e nella
 frase la stessa voce fa domanda e risposta. Caotico. Ora (`js/steps.js`):
 i giochi a scelta fanno sentire solo la parola; le frasi arrivano dopo,
-tutte insieme, annunciate da un cartello "Adesso le frasi!" (nessuna voce
-nuova: le istruzioni a voce le danno i giochi). In fase 1 le frasi sono
+tutte insieme, annunciate da un cartello "Adesso le frasi!" che Pepe dice a
+voce (`mascot.phrases_now`, traccia nuova). In fase 1 le frasi sono
 "Ascolta e ripeti" **senza microfono** (turno a tempo 3-2-1): il microfono
 resta solo in "Parla con Pepe", come deciso in passato. Dalla fase 2 le
 frasi tornano nei giochi a scelta, sempre in fondo. La sfida finale resta

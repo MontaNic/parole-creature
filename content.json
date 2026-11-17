@@ -56,7 +56,7 @@
     {
       "id": 6,
       "title_it": "Io e gli altri",
-      "goal_it": "Il villaggio e i mezzi, cosa piace fare e i mestieri: let's go, like + -ing, want to, favourite.",
+      "goal_it": "Dire cosa piace fare e i mestieri: like + -ing, want to, favourite.",
       "desc_it": "Frasi di 5-7 parole, sempre con audio e testo.",
       "showWrittenWord": true
     },
@@ -127,7 +127,7 @@
     {
       "id": "st_i_have_see",
       "phase": 3,
-      "unit": 16,
+      "unit": 17,
       "pattern": "I have a sword. / I can see a monster.",
       "focus_it": "Frasi con soggetto 'io': dire cosa si ha e cosa si vede.",
       "why_it": "Il primo passo dal riconoscere al dire qualcosa di proprio."
@@ -135,7 +135,7 @@
     {
       "id": "st_questions",
       "phase": 3,
-      "unit": 17,
+      "unit": 18,
       "pattern": "Is it red? — Yes, it is. / What is your name?",
       "focus_it": "Fare una domanda e dare una risposta breve.",
       "why_it": "Chiude il cerchio: il bambino usa la stessa struttura con cui il gioco lo interroga dall'unita' 1."
@@ -207,7 +207,7 @@
     {
       "id": "st_i_can",
       "phase": 3,
-      "unit": 18,
+      "unit": 19,
       "pattern": "I can jump. / Can you swim? Yes, I can. / Pepe is running.",
       "focus_it": "Dire cosa so fare con 'can', rispondere alla domanda, e descrivere un'azione in corso con 'is -ing'.",
       "why_it": "I verbi di movimento si imparano muovendosi (TPR): il bambino salta quando sente 'jump'. 'can' e '-ing' entrano come formule attaccate all'azione."
@@ -231,7 +231,7 @@
     {
       "id": "st_what_time",
       "phase": 3,
-      "unit": 21,
+      "unit": 22,
       "pattern": "What time is it? It's three o'clock.",
       "focus_it": "Chiedere e dire l'ora in punto, leggendo un orologio.",
       "why_it": "Unisce i numeri gia' imparati a una domanda vera: l'orologio e' schematico come i numeri, e la risposta e' una formula con 'o'clock' come blocco."
@@ -239,15 +239,15 @@
     {
       "id": "st_routine",
       "phase": 3,
-      "unit": 21,
+      "unit": 22,
       "pattern": "I have breakfast in the morning. / At night I sleep.",
       "focus_it": "Raccontare la giornata: i pasti e i momenti del giorno, con 'in the morning' e 'at night'.",
       "why_it": "E' il primo racconto di se' nel tempo, una delle funzioni dell'A1: dire cosa faccio e quando."
     },
     {
       "id": "st_lets_go",
-      "phase": 6,
-      "unit": 23,
+      "phase": 2,
+      "unit": 15,
       "pattern": "Let's go to the park! / Where are you going? To the beach. / By bus.",
       "focus_it": "Proporre di andare in un posto, chiedere dove si va, dire con che mezzo.",
       "why_it": "'Let's' e 'to the' entrano come blocchi; i luoghi e i mezzi sono il lessico concreto che serve fuori casa."
@@ -255,7 +255,7 @@
     {
       "id": "st_how_old",
       "phase": 2,
-      "unit": 15,
+      "unit": 16,
       "pattern": "How old are you? I am seven. / Happy birthday! / When is your birthday? In summer.",
       "focus_it": "Dire la propria eta', fare gli auguri, dire la stagione del compleanno. I numeri fino a venti.",
       "why_it": "'How old are you?' e' la domanda che ogni bambino anglofono si sente fare per prima: chiude l'anno con un dialogo vero su di se'."
@@ -263,7 +263,7 @@
     {
       "id": "st_has_got",
       "phase": 3,
-      "unit": 19,
+      "unit": 20,
       "pattern": "She has got long hair. / He is tall. / I've got glasses.",
       "focus_it": "Descrivere una persona: 'has got' per i tratti, 'is' per gli aggettivi, e 'she' e 'he' per parlare degli altri.",
       "why_it": "Descrivere e' il traguardo della classe quarta; 'has got' e' la forma britannica che il bambino sentira' nei cartoni e a scuola, e 'she/he' entrano per la prima volta come persone diverse da me e te."
@@ -271,7 +271,7 @@
     {
       "id": "st_animal_can",
       "phase": 3,
-      "unit": 20,
+      "unit": 21,
       "pattern": "The lion is big and strong. / The monkey can climb. / Can a duck swim? Yes, it can.",
       "focus_it": "Descrivere un animale e dire cosa sa fare, con 'it'.",
       "why_it": "Gli animali sono il lessico piu' amato a otto anni; qui portano 'it can', la terza persona di 'can', e 'and' fra due aggettivi."
@@ -343,7 +343,7 @@
     {
       "id": "st_months_festivals",
       "phase": 3,
-      "unit": 22,
+      "unit": 23,
       "pattern": "My birthday is in March. / Happy Christmas! / Trick or treat!",
       "focus_it": "I dodici mesi, letti sul calendario, e le feste dei paesi anglofoni.",
       "why_it": "Le Indicazioni chiedono di conoscere aspetti della cultura dei paesi di lingua inglese: Halloween, Natale e Pasqua sono i primi che un bambino incontra."
@@ -5654,9 +5654,67 @@
       "reward": "c_ventolino"
     },
     {
-      "id": "world_party",
+      "id": "world_village",
       "unit": 15,
       "order": 15,
+      "phase": 2,
+      "title_it": "Il Villaggio",
+      "objective_it": "Luoghi e mezzi: andiamo al parco, dove vai, in autobus.",
+      "canDo_it": "So proporre di andare in un posto e dire con che mezzo.",
+      "structureIds": [
+        "st_lets_go"
+      ],
+      "sprite": "sp-bus",
+      "color": "#ee9b00",
+      "newItems": [
+        "w_park",
+        "w_shop",
+        "w_farm",
+        "w_beach",
+        "w_car",
+        "w_bus",
+        "w_bike",
+        "w_boat",
+        "w_train",
+        "p_lets_go_park",
+        "p_lets_go_beach",
+        "p_where_going_farm",
+        "p_by_bus",
+        "p_by_bike",
+        "p_by_train"
+      ],
+      "reviewFrom": [
+        "world_colors",
+        "world_numbers",
+        "world_school",
+        "world_forest",
+        "world_family",
+        "world_dragons",
+        "world_body",
+        "world_dinos",
+        "world_clothes",
+        "world_food",
+        "world_house",
+        "world_lake",
+        "world_feelings",
+        "world_weather"
+      ],
+      "minigames": [
+        "match",
+        "quiz",
+        "listen",
+        "hunt",
+        "dragdrop",
+        "build",
+        "truefalse",
+        "sayit"
+      ],
+      "reward": "c_rotolino"
+    },
+    {
+      "id": "world_party",
+      "unit": 16,
+      "order": 16,
       "phase": 2,
       "title_it": "La Festa Finale",
       "objective_it": "Quanti anni hai, buon compleanno, le stagioni e i numeri fino a venti.",
@@ -5704,7 +5762,8 @@
         "world_house",
         "world_lake",
         "world_feelings",
-        "world_weather"
+        "world_weather",
+        "world_village"
       ],
       "minigames": [
         "match",
@@ -5720,8 +5779,8 @@
     },
     {
       "id": "world_bridge",
-      "unit": 16,
-      "order": 16,
+      "unit": 17,
+      "order": 17,
       "phase": 3,
       "title_it": "Il Ponte delle Frasi",
       "objective_it": "Costruire frasi intere con soggetto io: I have... e I can see...",
@@ -5754,6 +5813,7 @@
         "world_lake",
         "world_feelings",
         "world_weather",
+        "world_village",
         "world_party"
       ],
       "reviewWeight": 0.45,
@@ -5768,8 +5828,8 @@
     },
     {
       "id": "world_tower",
-      "unit": 17,
-      "order": 17,
+      "unit": 18,
+      "order": 18,
       "phase": 3,
       "title_it": "La Torre dei Dialoghi",
       "objective_it": "Fare una domanda e dare una risposta breve: Is it red? Yes, it is.",
@@ -5802,6 +5862,7 @@
         "world_lake",
         "world_feelings",
         "world_weather",
+        "world_village",
         "world_party",
         "world_bridge"
       ],
@@ -5817,8 +5878,8 @@
     },
     {
       "id": "world_actions",
-      "unit": 18,
-      "order": 18,
+      "unit": 19,
+      "order": 19,
       "phase": 3,
       "title_it": "Il Bosco delle Azioni",
       "objective_it": "Dieci azioni col corpo: I can jump, Can you swim?, e Pepe is running.",
@@ -5861,6 +5922,7 @@
         "world_lake",
         "world_feelings",
         "world_weather",
+        "world_village",
         "world_party",
         "world_bridge",
         "world_tower"
@@ -5879,8 +5941,8 @@
     },
     {
       "id": "world_portrait",
-      "unit": 19,
-      "order": 19,
+      "unit": 20,
+      "order": 20,
       "phase": 3,
       "title_it": "Il Ritratto",
       "objective_it": "Descrivere una persona: capelli, occhiali, barba, alto e basso, con 'has got' e 'she/he'.",
@@ -5923,6 +5985,7 @@
         "world_lake",
         "world_feelings",
         "world_weather",
+        "world_village",
         "world_party",
         "world_bridge",
         "world_tower",
@@ -5942,8 +6005,8 @@
     },
     {
       "id": "world_animals",
-      "unit": 20,
-      "order": 20,
+      "unit": 21,
+      "order": 21,
       "phase": 3,
       "title_it": "La Fattoria e lo Zoo",
       "objective_it": "Dieci animali, com'è fatto ciascuno e cosa sa fare, con 'it'.",
@@ -5986,6 +6049,7 @@
         "world_lake",
         "world_feelings",
         "world_weather",
+        "world_village",
         "world_party",
         "world_bridge",
         "world_tower",
@@ -6006,8 +6070,8 @@
     },
     {
       "id": "world_time",
-      "unit": 21,
-      "order": 21,
+      "unit": 22,
+      "order": 22,
       "phase": 3,
       "title_it": "La Torre dell'Orologio",
       "objective_it": "L'ora in punto sull'orologio, i momenti del giorno e i pasti: la mia giornata.",
@@ -6050,6 +6114,7 @@
         "world_lake",
         "world_feelings",
         "world_weather",
+        "world_village",
         "world_party",
         "world_bridge",
         "world_tower",
@@ -6071,8 +6136,8 @@
     },
     {
       "id": "world_months",
-      "unit": 22,
-      "order": 22,
+      "unit": 23,
+      "order": 23,
       "phase": 3,
       "title_it": "I Mesi e le Feste",
       "objective_it": "I dodici mesi sul calendario e le feste dei paesi anglofoni: Halloween, Natale, Pasqua.",
@@ -6123,6 +6188,7 @@
         "world_lake",
         "world_feelings",
         "world_weather",
+        "world_village",
         "world_party",
         "world_bridge",
         "world_tower",
@@ -6142,72 +6208,6 @@
         "sayit"
       ],
       "reward": "c_zucchetta"
-    },
-    {
-      "id": "world_village",
-      "unit": 23,
-      "order": 23,
-      "phase": 6,
-      "title_it": "Il Villaggio",
-      "objective_it": "Luoghi e mezzi: andiamo al parco, dove vai, in autobus.",
-      "canDo_it": "So proporre di andare in un posto e dire con che mezzo.",
-      "structureIds": [
-        "st_lets_go"
-      ],
-      "sprite": "sp-bus",
-      "color": "#ee9b00",
-      "newItems": [
-        "w_park",
-        "w_shop",
-        "w_farm",
-        "w_beach",
-        "w_car",
-        "w_bus",
-        "w_bike",
-        "w_boat",
-        "w_train",
-        "p_lets_go_park",
-        "p_lets_go_beach",
-        "p_where_going_farm",
-        "p_by_bus",
-        "p_by_bike",
-        "p_by_train"
-      ],
-      "reviewFrom": [
-        "world_colors",
-        "world_numbers",
-        "world_school",
-        "world_forest",
-        "world_family",
-        "world_dragons",
-        "world_body",
-        "world_dinos",
-        "world_clothes",
-        "world_food",
-        "world_house",
-        "world_lake",
-        "world_feelings",
-        "world_weather",
-        "world_party",
-        "world_bridge",
-        "world_tower",
-        "world_actions",
-        "world_portrait",
-        "world_animals",
-        "world_time",
-        "world_months"
-      ],
-      "minigames": [
-        "match",
-        "quiz",
-        "listen",
-        "hunt",
-        "dragdrop",
-        "build",
-        "truefalse",
-        "sayit"
-      ],
-      "reward": "c_rotolino"
     },
     {
       "id": "world_sport",
@@ -6255,6 +6255,7 @@
         "world_lake",
         "world_feelings",
         "world_weather",
+        "world_village",
         "world_party",
         "world_bridge",
         "world_tower",
@@ -6262,8 +6263,7 @@
         "world_portrait",
         "world_animals",
         "world_time",
-        "world_months",
-        "world_village"
+        "world_months"
       ],
       "minigames": [
         "match",
@@ -6323,6 +6323,7 @@
         "world_lake",
         "world_feelings",
         "world_weather",
+        "world_village",
         "world_party",
         "world_bridge",
         "world_tower",
@@ -6331,7 +6332,6 @@
         "world_animals",
         "world_time",
         "world_months",
-        "world_village",
         "world_sport"
       ],
       "minigames": [
@@ -6392,6 +6392,7 @@
         "world_lake",
         "world_feelings",
         "world_weather",
+        "world_village",
         "world_party",
         "world_bridge",
         "world_tower",
@@ -6400,7 +6401,6 @@
         "world_animals",
         "world_time",
         "world_months",
-        "world_village",
         "world_sport",
         "world_jobs"
       ],
@@ -6462,6 +6462,7 @@
         "world_lake",
         "world_feelings",
         "world_weather",
+        "world_village",
         "world_party",
         "world_bridge",
         "world_tower",
@@ -6470,7 +6471,6 @@
         "world_animals",
         "world_time",
         "world_months",
-        "world_village",
         "world_sport",
         "world_jobs",
         "world_city"
@@ -6533,6 +6533,7 @@
         "world_lake",
         "world_feelings",
         "world_weather",
+        "world_village",
         "world_party",
         "world_bridge",
         "world_tower",
@@ -6541,7 +6542,6 @@
         "world_animals",
         "world_time",
         "world_months",
-        "world_village",
         "world_sport",
         "world_jobs",
         "world_city",
@@ -6605,6 +6605,7 @@
         "world_lake",
         "world_feelings",
         "world_weather",
+        "world_village",
         "world_party",
         "world_bridge",
         "world_tower",
@@ -6613,7 +6614,6 @@
         "world_animals",
         "world_time",
         "world_months",
-        "world_village",
         "world_sport",
         "world_jobs",
         "world_city",
@@ -6678,6 +6678,7 @@
         "world_lake",
         "world_feelings",
         "world_weather",
+        "world_village",
         "world_party",
         "world_bridge",
         "world_tower",
@@ -6686,7 +6687,6 @@
         "world_animals",
         "world_time",
         "world_months",
-        "world_village",
         "world_sport",
         "world_jobs",
         "world_city",
@@ -6752,6 +6752,7 @@
         "world_lake",
         "world_feelings",
         "world_weather",
+        "world_village",
         "world_party",
         "world_bridge",
         "world_tower",
@@ -6760,7 +6761,6 @@
         "world_animals",
         "world_time",
         "world_months",
-        "world_village",
         "world_sport",
         "world_jobs",
         "world_city",
@@ -6827,6 +6827,7 @@
         "world_lake",
         "world_feelings",
         "world_weather",
+        "world_village",
         "world_party",
         "world_bridge",
         "world_tower",
@@ -6835,7 +6836,6 @@
         "world_animals",
         "world_time",
         "world_months",
-        "world_village",
         "world_sport",
         "world_jobs",
         "world_city",
@@ -7744,8 +7744,40 @@
         ]
       },
       {
-        "id": "st2_party",
+        "id": "st2_village",
         "order": 18,
+        "number": 19,
+        "season": 2,
+        "title_it": "Il Villaggio",
+        "trigger": {
+          "type": "world",
+          "value": "world_village"
+        },
+        "creatureId": "c_rotolino",
+        "worldId": "world_village",
+        "lines": [
+          {
+            "who": "narrator",
+            "it": "Rotolino il carretto portava tutti dove volevano, ma nessuno sapeva dirgli dove."
+          },
+          {
+            "who": "narrator",
+            "it": "Pepe imparò i luoghi e i mezzi. Let's go to the park! E il carretto partì."
+          },
+          {
+            "who": "pepe",
+            "it": "Rotolino, andiamo alla festa! In autobus, in treno, in barca!"
+          },
+          {
+            "who": "creature",
+            "en": "Where are you going? To the party! By bus!",
+            "it": "Dove vai? Alla festa! In autobus!"
+          }
+        ]
+      },
+      {
+        "id": "st2_party",
+        "order": 19,
         "number": 20,
         "season": 2,
         "title_it": "La Festa Finale",
@@ -7777,7 +7809,7 @@
       },
       {
         "id": "st2_epilogue",
-        "order": 19,
+        "order": 20,
         "number": null,
         "season": 2,
         "title_it": "La festa",
@@ -7804,7 +7836,7 @@
       },
       {
         "id": "st3_prologue",
-        "order": 20,
+        "order": 21,
         "number": null,
         "season": 3,
         "title_it": "La mappa",
@@ -7831,7 +7863,7 @@
       },
       {
         "id": "st_bridge",
-        "order": 21,
+        "order": 22,
         "title_it": "Il Ponte delle Frasi",
         "trigger": {
           "type": "world",
@@ -7862,7 +7894,7 @@
       },
       {
         "id": "st_tower",
-        "order": 22,
+        "order": 23,
         "title_it": "La Torre dei Dialoghi",
         "trigger": {
           "type": "world",
@@ -7873,11 +7905,11 @@
         "lines": [
           {
             "who": "narrator",
-            "it": "In cima alla Torre dei Dialoghi viveva Torrek, il guardiano. Faceva domande a cui nessuno rispondeva più."
+            "it": "In cima alla Torre dei Dialoghi viveva Torrek, il guardiano. Faceva domande a tutti, ma nessuno sapeva rispondergli."
           },
           {
             "who": "narrator",
-            "it": "Pepe salì fino in cima e rispose. Per la prima volta, in tutta l'isola, due voci parlarono insieme."
+            "it": "Pepe salì fino in cima e rispose. Una domanda, una risposta, e poi un'altra ancora: era il primo vero dialogo di Pepe."
           },
           {
             "who": "pepe",
@@ -7893,7 +7925,7 @@
       },
       {
         "id": "st2_actions",
-        "order": 23,
+        "order": 24,
         "number": 16,
         "season": 3,
         "title_it": "Il Bosco delle Azioni",
@@ -7925,7 +7957,7 @@
       },
       {
         "id": "st3_portrait",
-        "order": 24,
+        "order": 25,
         "number": 21,
         "season": 3,
         "title_it": "Il Ritratto",
@@ -7957,7 +7989,7 @@
       },
       {
         "id": "st3_animals",
-        "order": 25,
+        "order": 26,
         "number": 22,
         "season": 3,
         "title_it": "La Fattoria e lo Zoo",
@@ -7989,7 +8021,7 @@
       },
       {
         "id": "st2_time",
-        "order": 26,
+        "order": 27,
         "number": 18,
         "season": 3,
         "title_it": "La Torre dell'Orologio",
@@ -8021,7 +8053,7 @@
       },
       {
         "id": "st3_months",
-        "order": 27,
+        "order": 28,
         "number": 31,
         "season": 3,
         "title_it": "I Mesi e le Feste",
@@ -8048,38 +8080,6 @@
             "who": "creature",
             "en": "My birthday is in March. Christmas is in December. Trick or treat!",
             "it": "Il mio compleanno è a marzo. Natale è a dicembre. Dolcetto o scherzetto!"
-          }
-        ]
-      },
-      {
-        "id": "st2_village",
-        "order": 28,
-        "number": 19,
-        "season": 3,
-        "title_it": "Il Villaggio",
-        "trigger": {
-          "type": "world",
-          "value": "world_village"
-        },
-        "creatureId": "c_rotolino",
-        "worldId": "world_village",
-        "lines": [
-          {
-            "who": "narrator",
-            "it": "Rotolino il carretto portava tutti dove volevano, ma nessuno sapeva dirgli dove."
-          },
-          {
-            "who": "narrator",
-            "it": "Pepe imparò i luoghi e i mezzi. Let's go to the park! E il carretto partì."
-          },
-          {
-            "who": "pepe",
-            "it": "Rotolino, andiamo alla festa! In autobus, in treno, in barca!"
-          },
-          {
-            "who": "creature",
-            "en": "Where are you going? To the party! By bus!",
-            "it": "Dove vai? Alla festa! In autobus!"
           }
         ]
       },
