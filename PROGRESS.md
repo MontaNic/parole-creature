@@ -5,9 +5,9 @@
 
 ## Stato attuale
 
-**v3.10.1 — "Pepe e la Leggenda delle Parole", in uso (17 novembre 2026).**
+**v3.11.0 — "Pepe e la Leggenda delle Parole", in uso (17 novembre 2026).**
 Chiuso a settembre con la 3.5.0, riaperto a ottobre per le correzioni nate
-dalle prove sul tablet (versioni 3.6.0-3.10.1, in fondo a questo file).
+dalle prove sul tablet (versioni 3.6.0-3.11.0, in fondo a questo file).
 Nome di lavoro e repository: *Parole & Creature*.
 Online in HTTPS su https://montanic.github.io/parole-creature/ (GitHub
 Pages), offline dopo il primo avvio con rete.
@@ -1759,6 +1759,22 @@ la voce modello (Fiammino: "Hello, Pepe! I am a dragon!"); un'onda sonora
 sopra la testa mostra chi parla. Pepe dice "My name is Pepe.". Le tre
 creature speciali, senza capitolo, saltellano soltanto. Nessun audio nuovo:
 `battutaCreatura` in `js/den.js`, con test.
+
+### Un regalo per la tana a ogni mondo finito (versione 3.11.0)
+
+Finito un mondo, oltre alla creatura arriva un **regalo per la tana**: un
+oggetto di quel mondo, con la sua illustrazione gia' esistente, piu' grande
+di un adesivo, che al tocco dice il suo nome in inglese. Nel riepilogo sta
+accanto alla creatura (affiancati, cosi' su iPad orizzontale i bottoni
+restano sullo schermo); Pepe lo annuncia ("E per la tana c'e' un regalo
+nuovo!", traccia nuova con la sua voce) e poi si sente la parola.
+
+18 mondi su 32 hanno un regalo (`denGift` in content.json): quelli fatti di
+aggettivi, emozioni, azioni o frasi (lago, emozioni, azioni, ponte, torre...)
+e colori e numeri, che hanno simboli e non disegni, non ne hanno. Nessun
+regalo e' gia' un adesivo. Arrivano anche a chi aveva gia' finito i mondi.
+
+Scuola delle Creature → bag, Foresta delle Parole → tree, Famiglia del Castello → baby, Valle dei Draghi → knight, Giungla dei Dinosauri → dinosaur, Guardaroba del Mago → hat, Cucina del Castello → cake, Casa di Pepe → bed, Cielo Cambia → rainy, Villaggio → bike, Festa Finale → balloon, Fattoria e lo Zoo → elephant, Mesi e le Feste → pumpkin, Sport e i Giochi → kite, Mestieri → firefighter, Mercato → toy, Natura → flower, e Domani → tent.
 
 ## Prossimi passi
 

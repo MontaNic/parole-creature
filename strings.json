@@ -116,6 +116,7 @@
     "hint": "Tocca una cosa qui sotto per metterla nella tana, poi trascinala dove vuoi",
     "tray": "Le tue cose",
     "tray_empty": "Hai messo tutto nella tana!",
+    "gift_label": "Per la tana",
     "put_back": "Riponi",
     "wall": "Parete"
   },
@@ -417,6 +418,7 @@
     "dialogue_start": "Adesso parla con la creatura: scegli tu cosa rispondere!",
     "sayit_heard": "Ti ho sentito! Proprio così.",
     "den_welcome": "Questa è la nostra tana! Mettici quello che vuoi.",
+    "den_gift": "E per la tana c'è un regalo nuovo!",
     "bonus_start": "Te lo sei meritato! Un gioco bonus!",
     "bonus_end": "Che scoppiettio! Torniamo alle parole.",
     "badge_new": "Un distintivo nuovo! Guardalo nell'album.",

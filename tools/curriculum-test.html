@@ -37,7 +37,7 @@ import { chapters, chapterForCreature, pendingAfterRound, pendingAtStart, isAvai
 import { planChest, nextSticker, stickers } from './js/chests.js';
 import { pickMimeType, canRecord, haParlato, SOGLIA_VOCE } from './js/recorder.js';
 import { buildSummaryCard, canShare } from './js/share.js';
-import { denItems, placeItem, removeItem, isPlaced, clamp, setWall, WALLS, battutaCreatura } from './js/den.js';
+import { denItems, placeItem, removeItem, isPlaced, clamp, setWall, WALLS, battutaCreatura, denGifts, giftOf } from './js/den.js';
 import { bumpToday, lastDays, accuracyOf, successReport, prune } from './js/history.js';
 import { planBonus, BubbleWorld, bubblePool, MoleWorld, pickBonus, BasketWorld, BONUS_GAMES } from './js/bonus.js';
 import { checkBadges, BADGES } from './js/badges.js';
@@ -430,6 +430,24 @@ async function run() {
     check('la battuta e\' quella della sua storia, con il suo audio',
       fiammino?.rel === 'en/story.st_dragons.mp3' && /dragon/i.test(fiammino.text), JSON.stringify(fiammino));
     check('Pepe dice "My name is Pepe."', battutaCreatura('c_pepe')?.rel === 'en/p_my_name.mp3');
+  }
+  {
+    const doni = denGifts();
+    check('ci sono i regali per la tana, uno per mondo, tutti diversi',
+      doni.length >= 15 && new Set(doni.map(g => g.word.id)).size === doni.length && new Set(doni.map(g => g.worldId)).size === doni.length,
+      String(doni.length));
+    check("ogni regalo e' una parola del suo mondo, con il disegno vero",
+      doni.every(g => (content.worldById.get(g.worldId).newItems || []).includes(g.word.id) && artIndex.sprites.has(g.sprite)),
+      doni.filter(g => !artIndex.sprites.has(g.sprite)).map(g => g.sprite).join(','));
+    const adesivi = new Set(stickers().map(st => st.wordId));
+    check('nessun regalo e\' gia\' un adesivo', doni.every(g => !adesivi.has(g.word.id)));
+    resetSave();
+    const primaDelMondo = denItems().some(i => i.kind === 'gift');
+    save.progress.worlds.world_school = { plays: 2, completed: true };
+    const zaino = denItems().find(i => i.kind === 'gift');
+    check('il regalo arriva solo a mondo finito', !primaDelMondo && zaino?.id === 'gift_world_school' && zaino.word.en === 'bag');
+    check('giftOf trova il regalo del mondo, e i mondi senza regalo non ne hanno', giftOf('world_school')?.word.id === 'w_bag' && giftOf('world_lake') === null);
+    resetSave();
   }
   check('la parete ha il rosso, e ogni colore con parola ha la sua parola',
     WALLS.some(w => w.word === 'w_red') && WALLS.every(w => !w.word || getItem(w.word)));

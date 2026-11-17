@@ -24,6 +24,7 @@ import { canShare, shareSummary } from './share.js';
 import { renderBadges, renderNewBadges } from './badges.js';
 import { renderShelf, openBook } from './books.js';
 import { renderPhonicsCard } from './phonics.js';
+import { giftOf } from './den.js';
 
 /* Fasi aperte a mano dal bambino, oltre a quella corrente. */
 const fasiAperte = new Set();
@@ -417,11 +418,26 @@ export async function renderSummary(result, handlers) {
   if (bigMoment) { sfxUnlock(); celebrate(); }
   if (result.phaseUnlocked) body.appendChild(el('p', 'h-title', t('ui.phase_unlocked')));
 
-  for (const c of result.newCreatures) {
-    const wrap = el('div', 'reward-creature');
-    wrap.appendChild(spriteSvg(c.sprite));
-    body.appendChild(wrap);
-    body.appendChild(el('p', 'h-sub', c.name_it));
+  // Creature nuove e, a mondo appena finito, il regalo per la tana: in fila,
+  // affiancati, perche' i bottoni per andare avanti restino sullo schermo.
+  const regalo = result.worldCompleted && result.world ? giftOf(result.world.id) : null;
+  if (result.newCreatures.length || regalo) {
+    const fila = el('div', 'reward-row');
+    for (const c of result.newCreatures) {
+      const col = el('div', 'reward-col');
+      const wrap = el('div', 'reward-creature');
+      wrap.appendChild(spriteSvg(c.sprite));
+      col.append(wrap, el('p', 'h-sub', c.name_it));
+      fila.appendChild(col);
+    }
+    if (regalo) {
+      const col = el('div', 'reward-col');
+      const box = el('div', 'reward-gift');
+      box.appendChild(spriteSvg(regalo.sprite));
+      col.append(box, el('p', 'h-sub', t('den.gift_label')));
+      fila.appendChild(col);
+    }
+    body.appendChild(fila);
   }
 
   if (result.newBadges?.length) body.appendChild(renderNewBadges(result.newBadges));
@@ -434,9 +450,17 @@ export async function renderSummary(result, handlers) {
 
   if (result.newCreatures.length) {
     await mascotSay('new_creature', { bubble, avatar: mascotHost });
-  } else if (result.newBadges?.length) {
+  }
+  if (regalo) {
+    // Pepe lo annuncia, poi il regalo dice il suo nome in inglese.
+    await mascotSay('den_gift', { bubble, avatar: mascotHost });
+    await speakItem(regalo.word);
+  }
+  // Il resto si dice solo se non c'erano gia' creatura o regalo da annunciare.
+  const giaAnnunciato = result.newCreatures.length > 0 || Boolean(regalo);
+  if (!giaAnnunciato && result.newBadges?.length) {
     await mascotSay('badge_new', { bubble, avatar: mascotHost });
-  } else if (!bigMoment) {
+  } else if (!giaAnnunciato && !bigMoment) {
     if (result.missionDone) {
       celebrate();
       await mascotSay('mission_done', { bubble, avatar: mascotHost });

@@ -49,12 +49,30 @@ export function denItems() {
       items.push({ id: c.id, kind: 'creature', sprite: c.sprite, name: c.name_it, creature: c });
     }
   }
+  // I regali dei mondi finiti: un oggetto di quel mondo, piu' grande di un
+  // adesivo, che al tocco dice il suo nome in inglese.
+  for (const g of denGifts()) {
+    if (save.progress.worlds?.[g.worldId]?.completed) items.push(g);
+  }
   for (const s of content.stickers?.items || []) {
     if (!save.progress.stickers?.[s.id]) continue;
     const w = getItem(s.wordId);
     if (w) items.push({ id: s.id, kind: 'sticker', sprite: w.sprite, name: w.en, word: w });
   }
   return items;
+}
+
+/** I regali per la tana, uno per i mondi che ne hanno uno (content.json, denGift). */
+export function denGifts() {
+  return content.worlds.filter(w => w.denGift).map(w => {
+    const word = getItem(w.denGift);
+    return word ? { id: `gift_${w.id}`, kind: 'gift', sprite: word.sprite, name: word.en, word, worldId: w.id } : null;
+  }).filter(Boolean);
+}
+
+/** Il regalo di un mondo, se ne ha uno. */
+export function giftOf(worldId) {
+  return denGifts().find(g => g.worldId === worldId) || null;
 }
 
 export const clamp = (v) => Math.min(MAX, Math.max(MIN, v));
@@ -242,7 +260,7 @@ export function renderDen() {
       placeItem(it.id, d.placed[it.id].x, d.placed[it.id].y);
       drawRoom();
       const fresh = room.querySelector(`[data-id="${it.id}"]`);
-      if (it.kind === 'sticker') { stopVoice(); speakItem(it.word); return; }
+      if (it.kind === 'sticker' || it.kind === 'gift') { stopVoice(); speakItem(it.word); return; }
       mascotCheer(fresh);
       // La creatura saluta in inglese, con la sua frase della storia.
       const b = battutaCreatura(it.id);
