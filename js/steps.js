@@ -79,13 +79,17 @@ export function buildSteps(world, items, pool, baseDifficulty, showWritten = tru
   const steps = stepsParole(world, parole, pool);
   // La rampa di difficolta' e la sfida finale stanno sulle parole; se la
   // partita e' di sole frasi (i mondi delle frasi), stanno sulle frasi.
-  const passiFrasi = stepsFrasi(world, frasi, pool, showWritten, steps.length ? null : steps);
+  const passiFrasi = stepsFrasi(world, frasi, pool, showWritten);
   rampa(steps.length ? steps : passiFrasi, baseDifficulty);
   if (steps.length) {
     passiFrasi.forEach(st => { st.difficulty = 2; st.isFinal = false; });
     if (passiFrasi.length) passiFrasi[0].phrasesStart = true;
   }
-  return [...steps, ...passiFrasi];
+  const tutti = [...steps, ...passiFrasi];
+  // Nelle partite normali mai il microfono (vedi sopra): anche quando una
+  // parola, per mancanza di alternative, finisce in "Ascolta e ripeti".
+  tutti.forEach(st => { if (st.type === 'listen') st.noMic = true; });
+  return tutti;
 }
 
 /** Passi per le parole: giochi mescolati, mai lo stesso due volte di fila. */
