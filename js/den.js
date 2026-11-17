@@ -10,7 +10,7 @@
 import { content, t, getItem } from './content-loader.js';
 import { save, persist } from './state.js';
 import { spriteSvg } from './minigames.js';
-import { speakItem, sfxTap, stopVoice } from './audio.js';
+import { speakItem, speakLine, sfxTap, stopVoice } from './audio.js';
 import { renderMascot, mascotSay, mascotCheer } from './mascot.js';
 import { showScreen } from './screens.js';
 
@@ -58,6 +58,25 @@ export function denItems() {
 }
 
 export const clamp = (v) => Math.min(MAX, Math.max(MIN, v));
+
+/**
+ * Cosa dice una creatura quando la si tocca nella tana: la sua battuta
+ * inglese della storia, gia' registrata con la voce modello (la stessa che
+ * il bambino ha sentito nel suo capitolo). Pepe dice "My name is Pepe.".
+ * Le creature senza capitolo (i premi speciali) non dicono nulla.
+ * @returns {{rel:string, text:string}|null}
+ */
+export function battutaCreatura(creatureId) {
+  if (creatureId === 'c_pepe') {
+    const io = getItem('p_my_name');
+    return io ? { rel: `en/${io.id}.mp3`, text: io.en } : null;
+  }
+  const cap = (content.story?.chapters || []).find(ch => ch.creatureId === creatureId &&
+    (ch.lines || []).some(l => l.who === 'creature'));
+  if (!cap) return null;
+  const riga = cap.lines.find(l => l.who === 'creature');
+  return { rel: `en/story.${cap.id}.mp3`, text: riga.en };
+}
 
 function den() {
   if (!save.den) save.den = { placed: {}, wall: 0 };
@@ -223,8 +242,15 @@ export function renderDen() {
       placeItem(it.id, d.placed[it.id].x, d.placed[it.id].y);
       drawRoom();
       const fresh = room.querySelector(`[data-id="${it.id}"]`);
-      if (it.kind === 'sticker') speakItem(it.word);
-      else mascotCheer(fresh);
+      if (it.kind === 'sticker') { stopVoice(); speakItem(it.word); return; }
+      mascotCheer(fresh);
+      // La creatura saluta in inglese, con la sua frase della storia.
+      const b = battutaCreatura(it.id);
+      if (b) {
+        stopVoice();
+        fresh?.classList.add('is-talking');
+        speakLine(b.rel, b.text, 'en-GB').finally(() => fresh?.classList.remove('is-talking'));
+      }
     };
     node.addEventListener('pointerup', finish);
     node.addEventListener('pointercancel', () => { start = null; tray.classList.remove('is-target'); drawRoom(); });

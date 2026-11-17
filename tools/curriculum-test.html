@@ -37,7 +37,7 @@ import { chapters, chapterForCreature, pendingAfterRound, pendingAtStart, isAvai
 import { planChest, nextSticker, stickers } from './js/chests.js';
 import { pickMimeType, canRecord, haParlato, SOGLIA_VOCE } from './js/recorder.js';
 import { buildSummaryCard, canShare } from './js/share.js';
-import { denItems, placeItem, removeItem, isPlaced, clamp, setWall, WALLS } from './js/den.js';
+import { denItems, placeItem, removeItem, isPlaced, clamp, setWall, WALLS, battutaCreatura } from './js/den.js';
 import { bumpToday, lastDays, accuracyOf, successReport, prune } from './js/history.js';
 import { planBonus, BubbleWorld, bubblePool, MoleWorld, pickBonus, BasketWorld, BONUS_GAMES } from './js/bonus.js';
 import { checkBadges, BADGES } from './js/badges.js';
@@ -422,6 +422,15 @@ async function run() {
   check('riporre toglie dalla stanza', !isPlaced('c_pepe') && isPlaced('c_flamup'));
   setWall(WALLS.length + 1);
   check('il colore della parete gira su tutti i colori', save.den.wall === 1);
+  {
+    const premi = content.worlds.map(w => w.reward).filter(Boolean);
+    const senza = premi.filter(id => !battutaCreatura(id));
+    check('nella tana ogni creatura dei mondi saluta in inglese', senza.length === 0, senza.join(','));
+    const fiammino = battutaCreatura('c_flamup');
+    check('la battuta e\' quella della sua storia, con il suo audio',
+      fiammino?.rel === 'en/story.st_dragons.mp3' && /dragon/i.test(fiammino.text), JSON.stringify(fiammino));
+    check('Pepe dice "My name is Pepe."', battutaCreatura('c_pepe')?.rel === 'en/p_my_name.mp3');
+  }
   check('la parete ha il rosso, e ogni colore con parola ha la sua parola',
     WALLS.some(w => w.word === 'w_red') && WALLS.every(w => !w.word || getItem(w.word)));
 

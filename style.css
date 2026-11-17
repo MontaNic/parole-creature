@@ -923,6 +923,14 @@ svg.ico, .icon-btn svg, .icon-btn img { fill: none; }
   filter: drop-shadow(0 6px 4px rgba(0,0,0,.25));
 }
 .den-item.is-sticker { width: 11%; }
+/* Una creatura che parla nella tana: un'onda sonora sopra la testa. */
+.den-item.is-talking::after {
+  content: ""; position: absolute; left: 50%; top: -14%; width: 34%; aspect-ratio: 1;
+  transform: translateX(-50%); border-radius: 50%;
+  border: 4px solid var(--amber); opacity: 0;
+  animation: den-onda 1s ease-out infinite;
+}
+@keyframes den-onda { from { opacity: .9; transform: translateX(-50%) scale(.4); } to { opacity: 0; transform: translateX(-50%) scale(1.5); } }
 .den-item svg, .den-item img { width: 100%; height: auto; display: block; fill: none; pointer-events: none; }
 .den-tray {
   display: flex; gap: 10px; overflow-x: auto; flex: none; min-height: 84px; align-items: center;

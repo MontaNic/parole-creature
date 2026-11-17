@@ -5,9 +5,9 @@
 
 ## Stato attuale
 
-**v3.10.0 — "Pepe e la Leggenda delle Parole", in uso (17 novembre 2026).**
+**v3.10.1 — "Pepe e la Leggenda delle Parole", in uso (17 novembre 2026).**
 Chiuso a settembre con la 3.5.0, riaperto a ottobre per le correzioni nate
-dalle prove sul tablet (versioni 3.6.0-3.10.0, in fondo a questo file).
+dalle prove sul tablet (versioni 3.6.0-3.10.1, in fondo a questo file).
 Nome di lavoro e repository: *Parole & Creature*.
 Online in HTTPS su https://montanic.github.io/parole-creature/ (GitHub
 Pages), offline dopo il primo avvio con rete.
@@ -1750,6 +1750,15 @@ blocco. In piu': `navigator.storage.persist()` all'avvio, data dell'ultima
 copia dei dati e promemoria in cima all'area genitori dopo 14 giorni.
 Attenzione: gioco installato e Safari hanno salvataggi separati (si passa
 da uno all'altro con esporta/importa).
+
+### Nella tana le creature salutano in inglese (versione 3.10.1)
+
+Per Pietro la tana e' una parte importante del gioco. Toccando una creatura nella stanza, oltre al
+saltello, ora dice la sua battuta inglese della storia, gia' registrata con
+la voce modello (Fiammino: "Hello, Pepe! I am a dragon!"); un'onda sonora
+sopra la testa mostra chi parla. Pepe dice "My name is Pepe.". Le tre
+creature speciali, senza capitolo, saltellano soltanto. Nessun audio nuovo:
+`battutaCreatura` in `js/den.js`, con test.
 
 ## Prossimi passi
 
