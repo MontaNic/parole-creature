@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T04:20:59.256Z",
+  "generatedAt": "2026-11-17T04:23:43.697Z",
   "files": [
     "en/blend.w_bed.mp3",
     "en/blend.w_big.mp3",
@@ -1211,6 +1211,7 @@
     "it/mascot.phonics_blend.mp3",
     "it/mascot.phonics_done.mp3",
     "it/mascot.phonics_start.mp3",
+    "it/mascot.phrases_now.mp3",
     "it/mascot.record_done.mp3",
     "it/mascot.retry_1.mp3",
     "it/mascot.retry_2.mp3",
