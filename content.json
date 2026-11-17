@@ -5094,7 +5094,8 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_maestrino"
+      "reward": "c_maestrino",
+      "denGift": "w_bag"
     },
     {
       "id": "world_forest",
@@ -5137,7 +5138,8 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_barky"
+      "reward": "c_barky",
+      "denGift": "w_tree"
     },
     {
       "id": "world_family",
@@ -5184,7 +5186,8 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_nonnetta"
+      "reward": "c_nonnetta",
+      "denGift": "w_baby"
     },
     {
       "id": "world_dragons",
@@ -5227,7 +5230,8 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_flamup"
+      "reward": "c_flamup",
+      "denGift": "w_knight"
     },
     {
       "id": "world_body",
@@ -5323,7 +5327,8 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_rocktail"
+      "reward": "c_rocktail",
+      "denGift": "w_dinosaur"
     },
     {
       "id": "world_clothes",
@@ -5374,7 +5379,8 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_sartina"
+      "reward": "c_sartina",
+      "denGift": "w_hat"
     },
     {
       "id": "world_food",
@@ -5429,7 +5435,8 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_pasticcio"
+      "reward": "c_pasticcio",
+      "denGift": "w_cake"
     },
     {
       "id": "world_house",
@@ -5483,7 +5490,8 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_chiavetta"
+      "reward": "c_chiavetta",
+      "denGift": "w_bed"
     },
     {
       "id": "world_lake",
@@ -5651,7 +5659,8 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_ventolino"
+      "reward": "c_ventolino",
+      "denGift": "w_rainy"
     },
     {
       "id": "world_village",
@@ -5709,7 +5718,8 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_rotolino"
+      "reward": "c_rotolino",
+      "denGift": "w_bike"
     },
     {
       "id": "world_party",
@@ -5775,7 +5785,8 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_festino"
+      "reward": "c_festino",
+      "denGift": "w_balloon"
     },
     {
       "id": "world_bridge",
@@ -6066,7 +6077,8 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_chicco"
+      "reward": "c_chicco",
+      "denGift": "w_elephant"
     },
     {
       "id": "world_time",
@@ -6207,7 +6219,8 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_zucchetta"
+      "reward": "c_zucchetta",
+      "denGift": "w_pumpkin"
     },
     {
       "id": "world_sport",
@@ -6275,7 +6288,8 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_golino"
+      "reward": "c_golino",
+      "denGift": "w_kite"
     },
     {
       "id": "world_jobs",
@@ -6344,7 +6358,8 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_timbrino"
+      "reward": "c_timbrino",
+      "denGift": "w_firefighter"
     },
     {
       "id": "world_city",
@@ -6485,7 +6500,8 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_monetina"
+      "reward": "c_monetina",
+      "denGift": "w_toy"
     },
     {
       "id": "world_doctor",
@@ -6630,7 +6646,8 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_sassolino"
+      "reward": "c_sassolino",
+      "denGift": "w_flower"
     },
     {
       "id": "world_routine",
@@ -6855,7 +6872,8 @@
         "truefalse",
         "sayit"
       ],
-      "reward": "c_valigetta"
+      "reward": "c_valigetta",
+      "denGift": "w_tent"
     }
   ],
   "creatures": [
